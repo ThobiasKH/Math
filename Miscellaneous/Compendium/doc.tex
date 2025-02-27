@@ -4,6 +4,10 @@
 \usepackage{enumitem}
 \linespread{1.3}   
 
+\hfuzz=100pt
+\hbadness=10000
+\vbadness=10000
+
 \title{My Mathematical Journey}
 \author{Thobias K Høivik}
 \date{\today}
@@ -25,6 +29,7 @@ In 10th grade we were tasked to hold a short informal presentation before the te
 My inclination for more abstract mathematics showed itself when, where the others had opted to explain how to find the amount of planks needed for a triangular floor with an area A, I had chosen to tell my own version of Hilbert's Hotel using a warehouse as a surrogate.
 The teacher gave me an average grade and told me that it was not relevant to the subject and hinted that I should be happy to recieve such a generous result, or at least that's how I percieved it.
 
+\break
 \section{High School (2018--2021)}
 \begin{itemize}
     \item Learned basic calculus, including differentiation and integration up to integration by parts.
@@ -45,6 +50,7 @@ The teacher gave me an average grade and told me that it was not relevant to the
 \subsection*{3D Renderer on the CPU}
 My studies in linear algebra resulted in two 3D rendering engines written from scratch, in JavaScript and later Java.
 
+\break
 \section{University and Discrete Mathematics (2024)}
 \subsection{First Semester (Spring 2024)}
 \begin{itemize}
@@ -69,7 +75,7 @@ Thus, \( a \in B \cup (C \cap A) \), completing the proof. \(\square\)
 
 \subsection*{Return of Hilbert's Hotel}
 I spent a lot of time jumping forward in my discrete math book, by Susanna S. Epp, and looking at what was next.
-During one of these times I came across a problem.
+During one of these times I came across a familiar problem.
 Prove that \( |\mathbb{N}| = |\mathbb{Z}| \)
 Two sets have the same cardinality if there exists a bijection (a one-to-one and onto function) between them. We define a function \( f: \mathbb{N} \to \mathbb{Z} \) as follows:
 \[
@@ -90,8 +96,6 @@ For any integer \( z \in \mathbb{Z} \), we need to find some \( n \in \mathbb{N}
 2. If \( z < 0 \), we choose \( n = -2z - 1 \). Then, \( f(n) = f(-2z - 1) = -\frac{(-2z - 1) + 1}{2} = -\frac{-2z}{2} = z \).
 Thus, \( f \) is surjective.
 Since \( f \) is both injective and surjective, it is a bijection, proving that \( |\mathbb{N}| = |\mathbb{Z}| \). \(\square\)
-\break
-When I realized the implications of this proof I thought back to    
 
 \subsection{Winter Break (December 2024)}
 \begin{itemize}
@@ -103,6 +107,7 @@ When I realized the implications of this proof I thought back to
     \end{itemize}
 \end{itemize}
 
+\break
 \subsection{Second Semester (Spring 2025)}
 \begin{itemize}
     \item Developed a connection with my Algorithms professor (PhD in topology and complexity theory).
@@ -114,6 +119,24 @@ When I realized the implications of this proof I thought back to
     \end{itemize}
     \item Started exploring Combinatorics, fascinated by formula derivations.
 \end{itemize}
+\subsection*{First Proof in Abstract Algebra}
+Prove that \( \mathbb{R} - \{1\} \) under the operation \(\star\) 
+with \(a,b \in \mathbb{R} - \{1\} \rightarrow a \star b = a+b-ab\)
+forms a group.
+\begin{align*} 
+  1) \quad & a,b \in \mathbb{R} - \{1\} \rightarrow a \neq 1 \neq b & \\
+     & \text{Now let's assume } \star \text{ is not a binary operation on } \mathbb{R} - \{1\} & \\
+     & a \star b = 1 \leftrightarrow a+b-ab = 1 \leftrightarrow a+b = 1 + ab&\\
+     & \text{Take the partial derivative with respect to } a \text{ on both sides to get} &\\
+     & \frac{\partial}{\partial{a}} [a+b] = \frac{\partial}{\partial{a}} [1 + ab]  & \\
+     & 1 = b \text{ which contradicts } b \neq 1 & \\
+     & \text{Conversely, } & \\
+     & \frac{\partial}{\partial{b}} [a+b] = \frac{\partial}{\partial{a}}[1+ab] & \\
+     & 1 = a & \\
+     & \therefore a \star b = 1 \leftrightarrow a = 1 \lor b = 1 & \\
+     & \text{Thus } a,b \in \mathbb{R} - \{1\} \text{ give } a \star b \neq 1 \text{,} &\\
+     & \text{furthermore } a \star b \in \mathbb{R} - \{1\}& \\
+\end{align*}
 
 \section{Long Term Goals}
 \begin{itemize}
