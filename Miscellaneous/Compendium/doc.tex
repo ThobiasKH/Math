@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\linespread{1.3}   
+
+\title{My Mathematical Journey}
+\author{Thobias K Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Early Curiosity (2008)}
+At the age of 4, I became interested in counting. I found numbers fascinating and enjoyed simple arithmetic.
+
+\section{Primary and Middle School (2010--2018)}
+\begin{itemize}
+    \item Standard Norwegian curriculum.
+    \item Basic algebra, equations, and problem-solving techniques.
+\end{itemize}
+\subsection*{10th Grade Oral Examination}
+In 10th grade we were tasked to hold a short informal presentation before the teacher explaining some problem and how to solve it mathematically. 
+My inclination for more abstract mathematics showed itself when, where the others had opted to explain how to find the amount of planks needed for a triangular floor with an area A, I had chosen to tell my own version of Hilbert's Hotel using a warehouse as a surrogate.
+The teacher gave me an average grade and told me that it was not relevant to the subject and hinted that I should be happy to recieve such a generous result, or at least that's how I percieved it.
+
+\section{High School (2018--2021)}
+\begin{itemize}
+    \item Learned basic calculus, including differentiation and integration up to integration by parts.
+    \item Had some probability and statistics which I found horribly boring and I believe I encountered trigonometry.
+    \item No formal linear algebra coursework at this stage.
+\end{itemize}
+
+\section[Programming and Linear Algebra (2022--2023)]{Programming and \\ Linear Algebra (2022--2023)}
+\begin{itemize}
+    \item Developed a strong interest in programming.
+    \item Learned fundamental linear algebra concepts:
+    \begin{itemize}
+        \item Vectors and their properties
+        \item Dot and cross products
+        \item Matrix operations
+    \end{itemize}
+\end{itemize}
+\subsection*{3D Renderer on the CPU}
+My studies in linear algebra resulted in two 3D rendering engines written from scratch, in JavaScript and later Java.
+
+\section{University and Discrete Mathematics (2024)}
+\subsection{First Semester (Spring 2024)}
+\begin{itemize}
+    \item Began my Bachelor’s in IT (Machine Learning Engineering).
+    \item Took Discrete Mathematics 1, which deepened my interest in mathematics.
+\end{itemize}
+
+\subsection*{First Proof}
+I can't remember it exactly, and I remember having "proofs" in high-school, but I regard these sorts of problems in set-theory to be the first proofs I ever did.
+Let \( A, B, C \) be sets. Prove that if \( a \in A \) and \( a \in C \), then \( a \in B \cup (C \cap A) \).
+We are given that:
+\begin{enumerate}
+    \item \( a \in A \)
+    \item \( a \in C \)
+\end{enumerate}
+We need to show that \( a \in B \cup (C \cap A) \).
+\begin{itemize}
+    \item Since \( a \in C \) and \( a \in A \), by the definition of intersection, we conclude that \( a \in C \cap A \).
+    \item By the definition of union, since \( a \in C \cap A \), it follows that \( a \in B \cup (C \cap A) \), regardless of whether \( a \in B \).
+\end{itemize}
+Thus, \( a \in B \cup (C \cap A) \), completing the proof. \(\square\)
+
+\subsection*{Return of Hilbert's Hotel}
+I spent a lot of time jumping forward in my discrete math book, by Susanna S. Epp, and looking at what was next.
+During one of these times I came across a problem.
+Prove that \( |\mathbb{N}| = |\mathbb{Z}| \)
+Two sets have the same cardinality if there exists a bijection (a one-to-one and onto function) between them. We define a function \( f: \mathbb{N} \to \mathbb{Z} \) as follows:
+\[
+f(n) =
+\begin{cases} 
+\frac{n}{2}, & \text{if } n \text{ is even} \\ 
+-\frac{n+1}{2}, & \text{if } n \text{ is odd} 
+\end{cases}
+\]
+Injectivity:
+Suppose \( f(n_1) = f(n_2) \). We consider two cases:
+1. If both \( n_1 \) and \( n_2 \) are even, then \( f(n_1) = \frac{n_1}{2} \) and \( f(n_2) = \frac{n_2}{2} \), which implies \( \frac{n_1}{2} = \frac{n_2}{2} \), so \( n_1 = n_2 \).
+2. If both \( n_1 \) and \( n_2 \) are odd, then \( f(n_1) = -\frac{n_1+1}{2} \) and \( f(n_2) = -\frac{n_2+1}{2} \), which implies \( \frac{n_1+1}{2} = \frac{n_2+1}{2} \), so \( n_1 = n_2 \).
+Thus, \( f \) is injective.
+Surjectivity:
+For any integer \( z \in \mathbb{Z} \), we need to find some \( n \in \mathbb{N} \) such that \( f(n) = z \).
+1. If \( z \geq 0 \), we choose \( n = 2z \). Then, \( f(n) = f(2z) = \frac{2z}{2} = z \).
+2. If \( z < 0 \), we choose \( n = -2z - 1 \). Then, \( f(n) = f(-2z - 1) = -\frac{(-2z - 1) + 1}{2} = -\frac{-2z}{2} = z \).
+Thus, \( f \) is surjective.
+Since \( f \) is both injective and surjective, it is a bijection, proving that \( |\mathbb{N}| = |\mathbb{Z}| \). \(\square\)
+\break
+When I realized the implications of this proof I thought back to    
+
+\subsection{Winter Break (December 2024)}
+\begin{itemize}
+    \item Completed a Calculus II Udemy course in 4 days.
+    \item Explored Real Analysis, learning about:
+    \begin{itemize}
+        \item Limits and their formal definition
+        \item Convergence proofs
+    \end{itemize}
+\end{itemize}
+
+\subsection{Second Semester (Spring 2025)}
+\begin{itemize}
+    \item Developed a connection with my Algorithms professor (PhD in topology and complexity theory).
+    \item Introduced to Abstract Algebra, covering:
+    \begin{itemize}
+        \item Isomorphisms
+        \item Cosets and Kernels
+        \item Beginning of Rings and Fields
+    \end{itemize}
+    \item Started exploring Combinatorics, fascinated by formula derivations.
+\end{itemize}
+
+\section{Long Term Goals}
+\begin{itemize}
+  \item Take extra courses in mathematics during my undergraduate studies to gain a broad skillset in mathematics, and such that I may qualify to further programs in mathematics. 
+  \item Educate myself further in mathematics and theoretical computer science and hopefully find myself in the priveleged position of being able to dedicate my life to researching these two areas and their ever-growing intersection.
+\end{itemize}
+
+\end{document}
