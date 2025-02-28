@@ -115,28 +115,42 @@ Since \( f \) is both injective and surjective, it is a bijection, proving that 
     \begin{itemize}
         \item Isomorphisms
         \item Cosets and Kernels
-        \item Beginning of Rings and Fields
+        \item Groups, Rings and Fields
     \end{itemize}
     \item Started exploring Combinatorics, fascinated by formula derivations.
 \end{itemize}
 \subsection*{First Proof in Abstract Algebra}
-Prove that \( \mathbb{R} - \{1\} \) under the operation \(\star\) 
-with \(a,b \in \mathbb{R} - \{1\} \rightarrow a \star b = a+b-ab\)
+Prove that \( \mathbb{R} - \{1\} \) under the operation \(\star\), 
+with \(a,b \in \mathbb{R} - \{1\} \Rightarrow a \star b = a+b-ab\),
 forms a group.
 \begin{align*} 
-  1) \quad & a,b \in \mathbb{R} - \{1\} \rightarrow a \neq 1 \neq b & \\
-     & \text{Now let's assume } \star \text{ is not a binary operation on } \mathbb{R} - \{1\} & \\
-     & a \star b = 1 \leftrightarrow a+b-ab = 1 \leftrightarrow a+b = 1 + ab&\\
+  1) \quad & a,b \in \mathbb{R} - \{1\} \Rightarrow a \neq 1 \neq b & \\
+           & \text{Now let's assume } \star \text{ is not a binary operation on } \mathbb{R} - \{1\} \text{,}   & \\
+           & \text{meaning we can get } a \star b = 1 \notin \mathbb{R} - \{1\} & \\
+     & a \star b = 1 \Leftrightarrow a+b-ab = 1 \Leftrightarrow a+b = 1 + ab&\\
      & \text{Take the partial derivative with respect to } a \text{ on both sides to get} &\\
      & \frac{\partial}{\partial{a}} [a+b] = \frac{\partial}{\partial{a}} [1 + ab]  & \\
-     & 1 = b \text{ which contradicts } b \neq 1 & \\
+     & \text{yielding } 1 = b \text{ which contradicts } b \neq 1 & \\
      & \text{Conversely, } & \\
      & \frac{\partial}{\partial{b}} [a+b] = \frac{\partial}{\partial{a}}[1+ab] & \\
      & 1 = a & \\
-     & \therefore a \star b = 1 \leftrightarrow a = 1 \lor b = 1 & \\
-     & \text{Thus } a,b \in \mathbb{R} - \{1\} \text{ give } a \star b \neq 1 \text{,} &\\
+     & \therefore a \star b = 1 \Leftrightarrow a = 1 \lor b = 1 & \\
+     & \text{Thus } a,b \in \mathbb{R} - \{1\} \text{ gives } a \star b \neq 1 \text{,} &\\
      & \text{furthermore } a \star b \in \mathbb{R} - \{1\}& \\
+  2) \quad  & (a \star b) \star c = (a+b - ab) \star c = (a+b-ab) + c - (a+b-ab) \cdot c & \\
+     & = a + b + c - ab - ac - bc + abc = a + (b + c - bc) - a \cdot (b + c -bc) & \\
+     & = a \star (b \star c) \text{, } \therefore \star \text{ is associative on } \mathbb{R} - \{1\} & \\
+  3) \quad & \text{Let the identity } e = 0 \text{, } a \star e = a+0 - a \cdot 0 = a & \\
+  4) \quad & \text{For this to be a group we need that } \forall a \in \mathbb{R} - \{1\} & \\
+           & \exists a^{-1} \text{ such that } a \star a^{-1} = e = 0 & \\
+           & \text{Let } x = a^{-1} \text{, } a \star x = a+x-ax & \\
+           & a+x-ax = 0 & \\
+           & x - ax = -a & \\
+           & x (1-a) = -a & \\
+           & x = - \frac{a}{1-a} = a^{-1} \because 1-a \neq 0 +\forall a \in \mathbb{R} - \{1\} \quad \square & \\
 \end{align*}
+Thus, we have shown closure, associativity, the existence of an identity and inverses, making \( \mathbb{R} - \{1\}\) a group under \( \star \).
+Note that this is just how I proved it the first time I did it, not a perfect way of proving it. In fact I believe it may be faulty to use partial derivatives in my argument.
 
 \section{Long Term Goals}
 \begin{itemize}
