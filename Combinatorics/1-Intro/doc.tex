@@ -79,8 +79,33 @@ In algebraic and enumerative combinatorics, one often works with specific proble
     \item Applying group theory to count invariant objects.
 \end{itemize}
 
-\section{Conclusion}
-The first week of an algebraic/enumerative combinatorics class typically introduces basic counting principles, combinatorial objects like permutations and combinations, and begins with the concept of generating functions. In the coming weeks, we will explore more advanced topics like recurrence relations, partitions, and applications of group theory in combinatorics.
+\section{A fun problem}
+The lecturer introduced a problem at the start of the lecture which we were to find 4 formulas for. 
+Given a \(2 \times n \) rectangle, \(n \in \mathbb{N}\), how many ways can we tile it with \(2 \times 1\) rectangles.
+\begin{enumerate}
+  \item Explicit formula 
+  \item Recursive formula 
+  \item Formula for generating function
+  \item Asymptotic formula
+\end{enumerate}
+
+\subsection{Explicit formula}
+Here we were simply given the formula: 
+
+\begin{gather*}
+  T_n = \binom{n}{0} + \binom{n-1}{1} + \binom{n-2}{2} 
+    + \dots + \binom{\lfloor \frac{n}{2} \rfloor}{\lfloor \frac{n}{2} \rfloor}  \\
+  = \sum_{k = 0}^{\lfloor \frac{n}{2} \rfloor} \binom{n-k}{k}
+\end{gather*}
+
+\noindent Which reveals to us that the question we were posed is the same thing as asking how many ways can we sum up to \(n\) using only 1 and 2.
+
+\subsection{Recursive formula}
+\begin{gather*}
+  T_n = T_{n-1} + T_{n-2} \text{, } T_0 = 0 \land T_1 = 0 
+\end{gather*}
+Observe that this turns out to be the formula for the $n^{\text{th}}$ fibbonacci number.
+This means that the number of ways to tile the rectangle is the same as numbers of ways to sum up to $n$ using only $1\text{s and } 2\text{s}$, which is the same as getting the $n^{\text{th}}$ fibbonacci number. 
+These are all the same question we're asking, just made more and more familiar.
 
 \end{document}
-
