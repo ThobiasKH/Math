@@ -1,0 +1,258 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsfonts, geometry}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Combinatorics (Course by: Federico Ardila)}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Multisets}
+A multiset is a set with possibly repeated elements.
+
+\noindent 
+\(\{1,2,2,2,4,5,5,7\} =: \{1^1, 2^3, 4^1, 5^2, 7^1\}\) is a multiset, for instance.
+
+\noindent
+For multisets we count repetitions so the cardinality here would be 8 rather than 5.
+
+\noindent 
+\( (\binom{S}{k}) \) is the multisets of size k on S, 
+\( (\binom{n}{k} = |(\binom{S}{k})|) \). \((\binom{n}{k})\) could be called 
+"n multi choose k".
+
+\subsection*{Proposition}
+\( (\binom{n}{k}) = \binom{n+k-1}{k} \)
+
+\noindent
+\textbf{Proof: }
+
+\noindent 
+If k multiset S on \([n]\) has \(a_i\) parts equal to i then if I add up 
+\(a_1 + a_2 + \cdots \ a_n = k\), making it a weak n-composition of k 
+(since 0s are allowed). \( \quad \square \)
+
+\section{Multisets and GFs}
+The multivariant generating function for multisets on 
+\([n]\) is given by 
+\begin{gather*} 
+  \displaystyle\sum_{v: [n] \rightarrow \mathbb N}
+  x_1^{v(1)} x_2^{v(2)} \cdots x_n^{v(n)} \\
+  =
+  (1+x_1+x_1^2+\cdots)(1+x_2+x_2^2+\cdots)\cdots(1+x_n+x_n^2+\cdots) \\
+  = 
+  \frac{1}{1-x_1} \cdots \frac{1}{1-x_n}
+\end{gather*}
+
+\noindent 
+Let \(x_1 = x_2 = \cdots = x_n = x\) 
+
+\begin{gather*} 
+  \displaystyle\sum_{v:[n]\rightarrow \mathbb N}
+  x^{v(1) + v(2) + \cdots + v(n)}
+  = (\frac{1}{1-x})^n \\
+  = \displaystyle\sum_{\text{Multisets on} [n]} x^{|Multiset|}
+  = (1-x)^n \\ 
+  = \displaystyle\sum_{k=0} (\binom{n}{k})x^k
+  = \displaystyle\sum_{k=0}\binom{-n}{k}(-1)^k x^k
+\end {gather*}
+
+\noindent 
+The binomial theorem states \((1+x)^\alpha = \sum_{k=0} \binom{\alpha}{k}x^k\),
+\(\binom{\alpha}{k} := \frac{\alpha(\alpha - 1) \cdots (\alpha-k+1)}{k!} \)
+because if \(\alpha\) is an integer it works and if it is real it still makes sense.
+Doing a taylor expansion will show why the 
+binomial theorem holds for \(\alpha \in \mathbb R\) so we don't have to worry 
+about \(\binom{-n}{k} = (-1)^k (\binom{n}{k})\).
+This is an example for what we call a "combinatorial resipositry theorem". 
+What this shows us that even though it sounds nonsensical to ask how many 
+k-subsets of a set sized -n exist, it still means something in combinatorics.
+
+\section{Multinomial coefficients}
+The multinomial coefficient \(\binom{n}{a_1, a_2, \cdots, a_k}\)
+is the number of ways of splitting a set of size n into a set of size 
+\(a_1, a_2, \cdots, a_k \). 
+
+\subsection*{Example}
+\(\binom{n}{k, n-k} = \binom{n}{k}\)
+
+\subsection*{Proposition}
+The number of permutations of a multiset 
+\(\{1^{a_1}, 2^{a_2}, \cdots, k^{a_k}\}\) of size n is 
+\(\binom{n}{a_1, \cdots, a_k}\)
+
+\noindent 
+\textbf{Proof:}
+
+\noindent 
+To make a permutation of size n I must choose $a_1$ positions for 1 to go,  
+$a_2$ positions for 2 to go and so on. Split \([n]\) into sets | where the 1s go, 
+2s go, etc. \(\quad \square\)
+
+\subsection*{Proposition}
+\(
+\binom{n}{a_1,\cdots,a_k} = \frac{n!}{a_1! a_2! \cdots a_k!}
+\)
+
+\noindent
+\textbf{Proof:}
+
+\noindent 
+The multinomial coefficient \(\binom{n}{a_1,\cdots, a_k}\) represents the number of ways to partition a set of \(n\) elements into \(k\) subsets of sizes \(a_1, a_2, \dots, a_k\), where each subset contains identical elements. Alternatively, it also counts the number of distinct permutations of a multiset with elements occurring with frequencies \(a_1, a_2, \dots, a_k\).
+
+\noindent
+We proceed by considering the step-by-step placement of the elements:
+
+\noindent 
+1. First, choose \(a_1\) positions for the first type of element (e.g., the ones). Since the order among these elements does not matter, the number of ways to do this is:
+   \[
+   \binom{n}{a_1} = \frac{n!}{a_1!(n - a_1)!}.
+   \]
+
+\noindent 
+2. Next, from the remaining \(n - a_1\) positions, choose \(a_2\) positions for the second type of element. Again, the order among these elements does not matter, so we have:
+   \[
+   \binom{n - a_1}{a_2} = \frac{(n - a_1)!}{a_2!(n - a_1 - a_2)!}.
+   \]
+
+   \noindent 
+3. This process continues for all \(k\) types of elements until all positions are filled. The last group of elements is automatically placed, leaving us with:
+
+   \[
+   \binom{n - a_1 - \dots - a_{k-1}}{a_k} = \frac{(n - a_1 - \dots - a_{k-1})!}{a_k!(n - a_1 - \dots - a_k)!}.
+   \]
+
+\noindent
+Multiplying all these binomial coefficients together, we obtain:
+
+\[
+\binom{n}{a_1} \binom{n - a_1}{a_2} \binom{n - a_1 - a_2}{a_3} \dots \binom{n - a_1 - \dots - a_{k-1}}{a_k}.
+\]
+
+\noindent
+Expanding each binomial coefficient in factorial form, we get:
+
+\[
+\frac{n!}{a_1!(n - a_1)!} \cdot \frac{(n - a_1)!}{a_2!(n - a_1 - a_2)!} \cdots \frac{(n - a_1 - \dots - a_{k-1})!}{a_k!(n - a_1 - \dots - a_k)!}.
+\]
+
+\noindent
+Observing that all intermediate factorial terms cancel out, we are left with:
+
+\[
+\frac{n!}{a_1! a_2! \cdots a_k!}.
+\]
+
+\noindent
+Thus, we have shown that:
+
+\[
+\binom{n}{a_1,\cdots,a_k} = \frac{n!}{a_1! a_2! \cdots a_k!}.
+\]
+
+\noindent
+\(\square\)
+
+\subsection*{Example}
+How many distinct ways can we rearrange the letters in the word \texttt{MISSISSIPPI}?
+
+\noindent
+\textbf{Solution:}  
+Since some letters repeat, we cannot simply use the factorial formula for permutations of distinct objects. Instead, we must account for repeated letters using the multiset method.
+
+\noindent 
+\textbf{Step 1: Identifying the Frequencies}  
+The word \texttt{MISSISSIPPI} consists of 11 letters with the following frequencies:
+\[
+M: 1, \quad I: 4, \quad S: 4, \quad P: 2.
+\]
+Since some letters are identical, the number of unique rearrangements is given by the multinomial coefficient:
+\[
+\frac{11!}{1! 4! 4! 2!}.
+\]
+
+\noindent
+\textbf{Step 2: Computing the Multinomial Coefficient}  
+\begin{gather*}
+11! = 39916800, \\
+4! = 24, \quad 2! = 2, \quad 1! = 1, \\
+4! 4! 2! 1! = (24 \cdot 24 \cdot 2 \cdot 1) = 1152, \\
+\frac{39916800}{1152} = 34650.
+\end{gather*}
+
+\noindent
+Thus, the number of distinct ways to rearrange the letters in \texttt{MISSISSIPPI} is 
+\[
+\mathbf{34650}.
+\]
+
+\subsection*{Multinomial Theorem} 
+\[
+(x_1+\cdots+x_k)^n = 
+\displaystyle\sum_{a_1,\cdots,a_k} \binom{n}{a_1\cdots a_k}x_1^{a_1}\cdots x_k^{a_k}
+\]
+
+\subsection*{Proposition}
+In a box of size \(a_1 \times a_2 \times \cdots \times a_k\),
+the number of shortes lattice paths 
+from one corner to the opposite corner is 
+\(\binom{a_1+a_2+\cdots +a_k}{a_1, a_2 \cdots, a_k}\). 
+
+\noindent 
+\textbf{Proof:}
+
+\noindent 
+A shortest lattice path from one corner \((0,0,\dots,0)\) to the opposite corner \((a_1, a_2, \dots, a_k)\) consists of exactly \(a_1 + a_2 + \dots + a_k\) total steps, where:
+- \(a_1\) steps move in the first coordinate direction,
+- \(a_2\) steps move in the second coordinate direction,
+- \(\dots\),
+- \(a_k\) steps move in the \(k\)th coordinate direction.
+
+\noindent
+Each shortest path is uniquely determined by the sequence of moves taken. Since we must choose \(a_1\) of the \(a_1 + a_2 + \dots + a_k\) total steps to move in the first direction, then \(a_2\) steps to move in the second direction, and so on, the number of such sequences is given by the multinomial coefficient:
+
+\[
+\binom{a_1 + a_2 + \dots + a_k}{a_1, a_2, \dots, a_k} = \frac{(a_1 + a_2 + \dots + a_k)!}{a_1! a_2! \dots a_k!}.
+\]
+
+\noindent
+Thus, the number of shortest lattice paths is exactly \(\binom{a_1+a_2+\cdots +a_k}{a_1, a_2, \dots, a_k}\). \(\quad \square\)
+
+\section{Combinatorial Identities}
+\(\binom{n}{k} = \binom{n}{n-k}\), which is easy to prove algebraically. 
+Combinatorially we ask why is the number of k-subsets of n equal to the number 
+of (n-k)-subsets of n? Well there must exist a bijection between k-subsets and 
+(n-k)-subsets which is to take the k-subset's complement which would be the 
+(n-k)-subset. 
+\(\binom{[n]}{k} \leftrightarrow \binom{[n]}{n-k} \Leftrightarrow 
+A \leftrightarrow [n]-A\) in other words.
+
+\noindent 
+\(\binom{n+1}{k+1} = \binom{n}{k+1}+\binom{n}{k}\). 
+Combinatorially we say we want to count (k+1) subsets of [n+1]. 
+If n+1 is not n: \(\binom{n}{k+1}\). If n+1 is n: \(\binom{n}{k}\). Since either 
+happens we add them.
+
+\noindent
+\textbf{Pascal's Triangle}
+
+\noindent 
+In row 1 there is one element; 1. In the second there are two 1s and so on. 
+In each row n the first element is \(\binom{n}{0} = 1\) then n choose 2, and so 
+on until you reach the middle element then go backwards until you get n choose 
+0 again. The previous identity is why Pascal's Triangle works, 
+making it a nice visual for the identity.
+
+\subsection*{}
+\(\binom{m+n}{k} = \displaystyle\sum_{i=0}^{k} \binom{m}{i} \binom{n}{k-i}\). 
+Count the subsets of a set of m blue and n red elements, or some other distinction.
+If my subset has i blue elements it has k-i red elements 
+\(\rightarrow \binom{m}{i}\binom{n}{k-i}\). I could be any value so we add over all 
+possible values of i, giving us the sum. 
+ 
+\end{document}
