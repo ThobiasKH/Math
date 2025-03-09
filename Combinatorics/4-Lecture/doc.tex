@@ -1,0 +1,55 @@
+
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\usepackage{tikz}
+\usetikzlibrary{graphs, arrows.meta}
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Enumerative Combinatorics (Lecture 4)}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Counting Permutations by Cycle Type}
+
+In this lecture, we explore the enumeration of permutations based on their cycle structure.
+
+\subsection{Cycle Type}
+
+The \textbf{cycle type} of a permutation is a partition of \( n \) that describes the lengths of its disjoint cycles. For example, the permutation \( (1\,2)(3\,4\,5) \) has cycle type \( (2,3) \).
+
+\subsection{Counting Permutations with a Given Cycle Type}
+
+To count the number of permutations with a specific cycle type \( \lambda = (\lambda_1, \lambda_2, \ldots, \lambda_k) \), where \( \lambda_i \) are the lengths of the cycles, we use the formula:
+
+\[
+\frac{n!}{z_\lambda}
+\]
+where \( z_\lambda = \prod_{i=1}^k m_i! \lambda_i^{m_i} \) and \( m_i \) is the number of parts of \( \lambda \) equal to \( i \).
+
+\section{Records in Permutations}
+
+A \textbf{record} in a permutation \( \pi = (\pi_1, \pi_2, \ldots, \pi_n) \) is an element \( \pi_i \) that is larger than all previous elements \( \pi_1, \pi_2, \ldots, \pi_{i-1} \).
+
+\subsection{Counting Records}
+
+The expected number of records in a random permutation of \( n \) elements is \( \sum_{i=1}^n \frac{1}{i} \), which approximates \( \ln(n) + \gamma \) for large \( n \), where \( \gamma \) is the Euler-Mascheroni constant.
+
+\section{Inversions in Permutations}
+
+An \textbf{inversion} in a permutation \( \pi = (\pi_1, \pi_2, \ldots, \pi_n) \) is a pair \( (i, j) \) such that \( i < j \) and \( \pi_i > \pi_j \).
+
+\subsection{Counting Inversions}
+
+The number of inversions in a permutation is a measure of its "sortedness." A permutation with zero inversions is the identity permutation, while the maximum number of inversions is \( \binom{n}{2} \), corresponding to the reverse permutation.
+
+\end{document}
