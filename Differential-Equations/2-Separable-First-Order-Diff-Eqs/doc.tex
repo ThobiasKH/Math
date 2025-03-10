@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Professor Dave's Differential Equations}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Separable First-Order Differential Equations}
+This is the simplest type of differential equation. 
+Separable differential equations can be written in the form 
+\[ 
+    g(y)dy = f(x)dx
+\]
+where y is a function of x, and f and g are general functions.
+\[ 
+    \frac{dy}{dx} = \frac{f(x)}{g(y)} \Rightarrow g(y)dy = f(x)dx
+\]
+\[ 
+    \displaystyle\int g(y)dy = \displaystyle\int f(x)dx
+\]
+
+\subsection*{Example} 
+Consider the differential equation 
+\[ 
+    \frac{dy}{dx} = \frac{1 + \sin x}{15y^4}
+\]
+cross multiply to get
+\[ 
+    15y^4 dy = (1+\sin x) dx
+\]
+\[ 
+    \displaystyle\int15y^4 dy = \displaystyle\int(1+\sin x) dx
+\]
+\[ 
+    3y^5 + C_1 = x - \cos x + C_2  
+\]
+\[ 
+    3y^5 = x - \cos x + C, \quad C = C_2 - C_1
+\]
+an implicit general solution of the differential equation. 
+The explicit general solution would be 
+\[ 
+    \boxed {y = \sqrt[5]{\frac{x-\cos x + C}{3}}}
+\]
+Assume now that we are given the boundary conditions \(x = 0 \land y(0)=0\).
+\[ 
+    3(0)^5 = 0 - \cos 0 + C \Rightarrow 0 = -1 + C \Rightarrow C = 1
+\]
+\[ 
+    \boxed {y = \sqrt[5]{\frac{x-\cos x + 1}{3}}}
+\]
+If we were given the boundary condition earlier we could instead 
+\[ 
+    \displaystyle\int_{0}^{y}15y^4 dy = \displaystyle\int_{0}^{x} (1 + \sin x)dx
+\]
+where the lower bound is the boundary of the variable in the upper bound. 
+This works well when boundary conditions are simple. 
+ 
+\subsection*{Example} 
+We are given the DE 
+\[ 
+    \frac{dy}{dx} = \frac{2x}{y(1+x^2)} \text{, } y = 0 \text{ when } x = 1
+\]
+\begin{gather*}
+    y dy = \frac{2x}{1+x^2} dx \\ 
+    \displaystyle\int_{0}^{y} y dy = \displaystyle\int_1^x \frac{2x}{1+x^2} dx \\ 
+    \text{Let } u = 1+x^2 \Rightarrow du = 2xdx \\ 
+    \Rightarrow \displaystyle\int_{2}^{1+x^2} \frac{du}{u} = \ln(1+x^2)-\ln 2 \\
+    \frac{y^2}{2} = \ln \frac{1+x^2}{2} \\ 
+    \boxed {y^2 = 2\ln \frac{1+x^2}{2} }
+\end{gather*}
+
+
+\end{document}
