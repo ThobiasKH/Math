@@ -18,10 +18,10 @@ def create_structure(subject, lecture_name):
 
     tex_file = os.path.join(lecture_dir, "doc.tex")
 
-    template_file = os.path.join(os.getcwd(), "templatex.tex")
+    template_file = os.path.join(os.getcwd(), "template.tex")
 
     if not os.path.exists(template_file):
-        print("Error: templatex.tex not found in the root directory.")
+        print("Error: template.tex not found in the root directory.")
         return
 
     if not os.path.exists(tex_file):
