@@ -1,0 +1,185 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Real Analysis | Set Theory Revision and Least Upper Bound Property (Course: MIT 18.100A)}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Cardinalities}
+\begin{theorem}[Cantor's Theorem]
+    If A is a set, then \(|A| < |P(A)|\).
+\end{theorem}
+\begin{proof}
+    Let A be a set. Define \(f: A \to P(A)\) by \(f(x) = \{x\}\). 
+    We can see that \(f\) is injective:
+    \begin{gather*}
+        f(x) = y(x) \\ 
+        \{x\} = \{y\} \\ 
+        x = y
+    \end{gather*}
+    thus \(f\) is injective which implies 
+    \[ \boxed{|A| \leq |P(A)|}\] 
+    Now we shall show that \(|A| \neq |P(A)|\). 
+    By contradiction suppose \(|A| = |P(A)|\). 
+    Then \(\exists\) bijective function \(g: A \to P(A)\). 
+    Define a subset \(B \subset A\) by 
+    \(B = \{x\in A : x \not\in g(x)\}\). 
+    Then by the definition of the powerset we have 
+    \(B \in P(A)\). Since \(g\) is surjective,  
+    \(\exists b \in A\) such that \(g(b)=B\). 
+    
+    \noindent 
+    Case 1: 
+    \begin{gather*}
+        b\in g(b) = B \Rightarrow b \in B \\ 
+        \Rightarrow b \not\in g(b)
+    \end{gather*}
+    
+    \noindent 
+    Case 2: 
+    \begin{gather*}
+        b \not \in g(b) \Rightarrow b \in B \\ 
+        b \in g(b)
+    \end{gather*}
+
+    \noindent
+    Thus we have arrived at a contradiction 
+    \(b \in g(b) \Leftrightarrow b \not \in g(b)\) 
+    by our assumption and so it cannot be true. 
+    Thus 
+    \[ 
+        \boxed{|A| \neq |P(A)|}
+    \]
+    \begin{gather*}
+        |A| \leq |P(A)| \land |A| \neq |P(A)| \\
+        \Rightarrow \boxed{|A| < |P(A)|}
+    \end{gather*}
+    
+\end{proof}
+
+\section*{The Reals and Order Relations}
+We will now restate the definition of the real numbers, slightly 
+differently from before, as a theorem rather than a definition.
+\begin{theorem}[Real Numbers]
+    There exists a unique ordered field
+    containing \(\mathbb Q\) with the least upper bound property, 
+    which we denote by \(\mathbb R\).
+\end{theorem}
+
+\noindent 
+We shall not go through the process of proving this theorem at this 
+time, but rather explore the properties of \(\mathbb R\).
+
+\subsection*{Ordered Sets}
+\begin{definition}[Ordered Set]
+    An ordered set is a set S with a relation \(<\) 
+    such that 
+    \begin{enumerate}
+        \item \(\forall x,y \in S : x=y \lor x < y \lor y < x\)
+        \item If \(x < y\) and \(y < z\) then \(x < z\), i.e 
+            the relation is transitive.
+    \end{enumerate}
+\end{definition}
+
+\noindent 
+\textbf{Examples:}
+
+\noindent 
+For \(m,n \in \mathbb Z\), \(m < n\) if \(m-n \in \mathbb Z\).
+
+\noindent 
+For \(q,r \in \mathbb Q\), \(q < r\) if 
+\(\exists m,n \in \mathbb N \text{ s.t } r-q = \frac{m}{n}\).
+
+\noindent 
+\textbf{Non-Example:}
+
+\noindent 
+Let S be a subset \(S = P(\mathbb N)\). 
+We define the relation \(R\), where \((A,B) \in R\) 
+if \(A \subset B\). Clearly this is transitive, but
+property one is not satisfied because, for example
+\(\{0\} \neq \{1\}\), and neither \((\{0\}, \{1\}) \not\in R\) nor
+\((\{1\}, \{0\}) \not\in R\).
+
+\section*{Bounds}
+Recall the concepts of bounds, supremum and infimum. 
+
+\noindent 
+\textbf{Examples:}
+
+\noindent
+Let \(S = \mathbb Z, E = \{-1,0,2\} \subset S\). 
+Examples of upper- and lower bounds would be \(2,3,4,\dots\), 
+and \(\dots, -2,-1\), respectively.  
+The supremum \(sup(E)\) would be 2 and the infimum \(inf(E)\) would be -1.
+
+\noindent 
+Let \(S = \mathbb Q\) and \(E = \{q \in \mathbb Q : 0 \leq q \leq 1\}\). 
+Upper bounds: \(1, \frac{3}{2}, \frac{5}{3}, \dots\), and lower bounds: 
+\(0, -1, -\frac{2}{3}, \dots\). Supremum \(sup(E) = 1\) and infimum \(inf(E) = 0\).
+
+\subsection*{Least Upper Bound Property}
+\begin{definition}
+    An ordered set S has the least upper bound property if every nonempty 
+    \(E \subset S\) which is bounded above has a supremum in S. 
+\end{definition} 
+
+\noindent 
+A trivial example of this is \(S = \{0\}\) where every nonzero subset is the set itself 
+and so every supremum lies in S.
+ 
+\noindent 
+\textbf{Example:} 
+
+\noindent 
+\(S = \{-1,-2,-3,\dots\}\) with the regular ordering relation found in the integers. 
+If \(E \subset S\), \(E\) nonempty then \(-E = \{-x : x \in E\} \subset \mathbb N\). 
+By the well-ordering property of the natural numbers, there exists \(m \in -E\) 
+such that \(\forall x \in E : m \leq -x\) \(\Rightarrow -m \in E\) and 
+\(\forall x \in E : x\leq -m \Rightarrow -m\) is the supremum of \(E\).
+
+\noindent 
+\begin{proposition}
+    \(\mathbb Q\) does not have the least upper bound property.
+\end{proposition} 
+\begin{proof}
+    Consider the set 
+    \[
+        E = \{ q \in \mathbb{Q} \mid q > 0 \text{ and } q^2 < 2 \}.
+    \]
+    The set \(E\) is nonempty since, for example, \( q = 1 \) 
+    belongs to \( E \). Moreover, \( E \) is bounded above in \( \mathbb{Q} \) 
+    by any rational number greater than \( \sqrt{2} \), such as \( r = 2 \).
+
+    \noindent 
+    We claim that \( E \) has no least upper bound in \( \mathbb{Q} \). 
+    First, observe that for all \( q \in E \), we have \( q < \sqrt{2} \), 
+    so any least upper bound of \( E \) in \( \mathbb{R} \) must be 
+    \( \sup(E) = \sqrt{2} \). However, since 
+    \( \sqrt{2} \not\in \mathbb{Q} \), \( \sup(E) \) cannot be a rational number.
+
+    \noindent 
+    Suppose for contradiction that \( E \) has a least upper bound \( s \in \mathbb{Q} \).
+    Then \( s \geq q \) for all \( q \in E \), 
+    and for any \( \mathcal E > 0 \), 
+    there exists some \( q \in E \) with \( s - \epsilon < q \). 
+    If \( s = \sup(E) \), then we must have \( s^2 = 2 \). 
+    However, no rational number satisfies this equation, contradicting our 
+    assumption that \( s \) is rational. Thus, \( E \) has no least upper bound 
+    in \( \mathbb{Q} \), proving that \( \mathbb{Q} \) does not satisfy the
+    least upper bound property.
+\end{proof}
+
+\end{document}
