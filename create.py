@@ -27,6 +27,7 @@ def create_structure(subject, lecture_name):
     if not os.path.exists(tex_file):
         shutil.copy(template_file, tex_file)
         print(f"Created file: {tex_file} using {template_file}")
+        os.system(f"kitty --detach nvim {tex_file}")
     else:
         print(f"File already exists: {tex_file}")
 
