@@ -25,13 +25,13 @@
 \geometry{top=1in, bottom=1in, left=1in, right=1in}
 
 \title{Mat104 Oblig3}
-\author{TKH}
+\author{Thobias Høivik, Gunnar Salbu, Birk Tangen, \\  
+Holly Storøy, Knut Rokne, Glenn Boine}
 \date{March 3 2025}
 
 \begin{document}
 
 \maketitle
-
 \section*{Oppgave 1}
 \(f(x) = \sqrt{x+4}, \quad D_f = [-4, 0] \).
 \subsection*{a) }
@@ -40,10 +40,10 @@
         axis lines = middle,
         xlabel = $x$,
         ylabel = {$f(x) = \sqrt{x + 4}$},
-        domain=-4:0, % Set the domain where the function is defined
+        domain=-4:0,
         samples=100,
         enlargelimits,
-        grid=both % Adds a grid to the plot
+        grid=both 
     ]
         \addplot {sqrt(x + 4)};
     \end{axis}
@@ -82,16 +82,17 @@ For å finne en tangentlinje parallell med denne, må vi løse
 f'(x_0) = \frac{1}{2}.
 \]
 Løser \( \frac{1}{2\sqrt{x_0+4}} = \frac{1}{2} \):
-\[
-\sqrt{x_0+4} = 1 \quad \Rightarrow \quad x_0 + 4 = 1 \quad \Rightarrow \quad x_0 = -3.
-\]
+\begin{gather*}
+    \sqrt{x_0+4} = 1 \quad \Rightarrow \quad x_0 + 4 = 1 
+    \\ \Rightarrow \quad \boxed{x_0 = -3}
+\end{gather*}
 Beregner \( y_0 \):
 \[
-y_0 = f(-3) = \sqrt{-3+4} = 1.
+    \boxed{y_0 = f(-3) = \sqrt{-3+4} = 1}
 \]
 Tangentlinjen er:
 \[
-y - 1 = \frac{1}{2}(x + 3).
+y - 1 = \frac{1}{2}(x + 3)
 \]
 Omskriving gir:
 \[
@@ -130,7 +131,9 @@ Omskriving gir:
   \text{ to ganger oppe og nede for oppnå svaret.} \\
   \lim_{x\to\infty}\frac{2}{e^x+2} = \boxed{0} \\ 
   e^x \text{ går mot uendelig så uttrykket går mot 0} \\
-  \text{Viss vi ikke ville brukt l'Hopital kunne vi tatt } \div x^2 \text{ oppe og nede.}
+  \text{Viss vi ikke ville brukt l'Hopital kunne vi tatt } \div x^2 
+  \\ \text{ oppe og nede 
+  og så eventuellt argumentert at } x^2 < e^x, \quad \forall x \geq 0 
 \end{gather*}
 
 \break
@@ -179,7 +182,7 @@ La \(X = \{x_0, x_1, x_2, x_3, x_4\}\). Vi kan da tilnærme integralet
 \begin{gather*}
   \displaystyle\int_{a}^{b}f(x)dx \approx 
   \frac{h}{2} [f(x_0) 
-  + (\displaystyle\sum_{i = 1}^{|X| - 1} f(x_i)) +
+  + 2(\displaystyle\sum_{i = 1}^{|X| - 1} f(x_i)) +
   f(x_4) ] \\ 
   \boxed{A \approx \frac{\pi}{32}[4+2f(x_1)+2f(x_2)+2f(x_3)+x_4] \approx 3.5}
 \end{gather*}
