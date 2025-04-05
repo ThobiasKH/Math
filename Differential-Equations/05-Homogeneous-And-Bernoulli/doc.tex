@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Professor Dave's Differential Equations  Homogeneous Differential Equations and Bernoulli Differential Equations}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Homogeneous Functions}
+\begin{definition}    
+    A function \(f(a,b)\) is said to be homogeneous if 
+    scaling the arguments by some parameter \(t\)
+    results in f being scaled by some exponent of 
+    \(t\): \(f(ta,tb) = t^nf(a,b)\). 
+\end{definition}
+
+\noindent 
+\textbf{Example:}
+\(f(a,b)=a^2+ab\) is homogeneous because 
+\(f(ta,tb) = (ta)^2 + (ta)(tb) = t^2a^2+t^2ab = t^2f(a,b)\).
+\begin{definition}
+    The order of the homogeneous function is the constant exponent \(n\)
+    which \(t\) is raised to: \(f(ta,tb) = t^nf(a,b)\).
+\end{definition}
+
+\noindent 
+So in the example above the order is \(2\).
+
+\section*{Homogeneous Differential Equations}
+\[ 
+    f(x,y)dx = g(x,y)dy
+\]
+\(f,g\) are homogeneous of the same order. 
+When we encounter homogeneous differential equation like this 
+we can use a substitution \(y = ux\) or \(u = y/x\). Functions 
+that can be written in terms of \(\frac{dy}{dx} = f(\frac{y}{x})\)
+are also in this form.
+
+\noindent 
+\textbf{Example:} 
+\[ 
+    \frac{dy}{dx} = \frac{x^2 + y^2}{xy}
+\]
+This function is non separable nor linear nor is it exact.
+By cross-multiplying we get 
+\[ 
+    (x^2 + y^2)dx = (xy) dy
+\]
+Now we have a function in the form 
+\[ 
+    f(x,y) dx = g(x,y) dy 
+\]
+and since 
+\[ 
+    f(tx,ty) = ((tx)^2 + (ty)^2) = t^2(x^2 + y^2)   
+\]
+\[ 
+    g(tx,ty) = (txty)dy = t^2(xy)dy 
+\]
+They are both homogeneous functions of order 2. 
+Thus we have a homogeneous differential equation.
+We could also manipulate the original expression as such: 
+\[ 
+    \frac{dy}{dx} = \frac{x^2+y^2}{xy} = \frac{x}{y}+\frac{y}{x} 
+    = \left(\frac{y}{x}\right)^{-1} + \frac{y}{x} =
+    f\left(\frac{y}{x}\right)
+\]
+to show that the function is a homogeneous differential equation.
+We solve this differential equation by using the homogeneous 
+substitution \(y = ux\).
+\begin{gather*}
+    \frac{dy}{dx} = \frac{x^2 + y^2}{xy} \\
+    y = ux \\ 
+    \frac{dy}{dx} = \frac{d}{dx}ux = x \cdot \frac{du}{dx} 
+    + \frac{dx}{dx} \cdot u =
+    x\frac{du}{dx} + u \\ 
+    x\frac{du}{dx} + u = \frac{x^2 + (ux)^2}{x(ux)}
+    = \frac{1}{u} + u \\ 
+    x\frac{du}{dx} = \frac{1}{u} \\ 
+    \frac{du}{dx} = \frac{1}{ux}
+\end{gather*}
+giving us a separable differential equation with \(u\) as the dependent 
+variable, instead of \(y\).
+\begin{gather*}
+    (u)du = \frac{1}{x}dx \Rightarrow \displaystyle\int (u) du 
+    = \displaystyle\int \frac{1}{x}dx \\ 
+    \Rightarrow \frac{1}{2}u^2 + C_1 = \ln|x|+C_2 \\ 
+    \frac{1}{2}u^2 = \ln|x| + C 
+    = \ln|x| + \ln|e^C| = \ln|x| + \ln|k| = \ln|kx| \\ 
+    u^2 = 2\ln|kx| \\ 
+    y = ux \Leftrightarrow u = \frac{y}{x} \\ 
+    \left(\frac{y}{x}\right)^2 = 2\ln|kx| \\ 
+    y^2 = 2x^2\ln|kx|
+\end{gather*}
+
+\break
+\section*{Bernoulli Differential Equations}
+While homogeneous differential equations can be reduced to separable 
+differential equations (via substitution), Bernoulli differential 
+equations can be reduced to linear differential equations (via 
+substituion).
+Bernoulli differential equations can be written in the form:
+\[ 
+    \frac{dy}{dx} + P(x)y = Q(x)y^n
+\]
+where \(P,Q\) are functions and \(n\) is constant (making this a 
+nonlinear DE).
+The appropriate substitution for these types of differential 
+equations is to let \(u = y^{1-n}\). 
+
+\noindent 
+\textbf{Example:}
+\[ 
+    \frac{dy}{dx} + x^5y = x^5y^7
+\]
+\[ 
+    u=y^{1-n} = y^{-6} \Rightarrow y = u^{-1/6}
+\]
+if we differentiate both sides of the substitution with respect to x 
+we get 
+\begin{gather*}
+    y = u^{-1/6} \\ 
+    \frac{dy}{dx} = -\frac{1}{6} u^{-7/6} 
+    \frac{du}{dx} \text{ /via chain- and power rule} 
+\end{gather*}
+We can then put this into our equation 
+\begin{gather*}
+    -\frac{1}{6}u^{-7/6}\frac{du}{dx} + x^5u^{-1/6} = 
+    x^5u^{-7/6} \\ 
+    \cdot -6u^{7/6} \\ 
+    \frac{du}{dx}-6x^5u = -6x^5
+\end{gather*}
+yielding a linear differential equation.
+\begin{gather*}
+    \mu(x) = e^{\int -6x^5\,dx }= e^{-x^6} \\ 
+    \mu(x)\frac{du}{dx} - 6x^5u \cdot \mu(x) = -6x^5 \mu(x) \\
+    \frac{d}{dx}(u\cdot \mu(x)) = -6x^5 \mu(x) \\
+    \int \frac{d}{dx}(u \cdot \mu(x))\,dx = \int -6x^5 \mu(x)\,dx \\
+    u \cdot \mu(x) = \int -6x^5 e^{-x^6} \, dx \\
+    \text{Let } w = -x^6 \Rightarrow dw = -6x^5\,dx \\
+    u \cdot e^{-x^6} = \int e^w \, dw = e^w + C = e^{-x^6} + C \\
+    u(x) = 1 + C e^{x^6} \\ 
+    y^{-6} = 1 + Ce^{x^6} \\ 
+    y = \left( 1 + Ce^{x^6} \right)^{-1/6}
+\end{gather*}
+
+\end{document}
