@@ -151,16 +151,26 @@ for increasing n.
 \begin{proof}
     Suppose, by contradiction, that \(\{X_n\}\) converges to \(x\) and \(y\) 
     where \(x \neq y\). 
-    Then \(\forall \mathcal E > 0, \exists M \in \mathbb N\) such that 
-    \(\forall n \geq \mathbb N, |X_n - x| < \mathcal E \land |X_n - y| < \mathcal E\). 
+    Then \(\forall \mathcal E > 0, \exists N_x \in \mathbb N\) such that 
+    \(\forall n_x \geq N_x : |X_{n_x} - x| < \mathcal E \) and 
+    \(\forall \mathcal E > 0, \exists N_y \in \mathbb N\) such that 
+    \(\forall n_y \geq N_y : |X_{n_y} - y| < \mathcal E \).
+    Then if we choose \(N = \max\{N_x, N_y\}\) we get that 
+    \( 
+        \forall \mathcal E > 0, \exists N \in \mathbb N
+    \) 
+    such that 
+    \(\forall n > N : |X_n - x| < \mathcal E \land |X_n - y| < \mathcal E\).
     
     \noindent 
     Then 
     \begin{gather*}
         |X_n-x| - |X_n - y| < \mathcal E - \mathcal E = 0\\ 
-        |X_n-x| \leq |X_n| + |-x| = |X_n| + |x| \\ 
+        |X_n-x| \leq |X_n| + |-x| = |X_n| + |x| \\
+        \text{via the triangle inequality} \\ 
         |X_n-x| - |X_n - y| \leq (|X_n| + |x|) - (|X_n| + |y|) < 0\\
-        \Rightarrow |x| - |y| \leq |x - y| < 0 
+        \Rightarrow |x| - |y| \leq |x - y| < 0 \\ 
+        \text{via the reverse triangle inequality}
     \end{gather*}
     Which is not possible as the absolute value returns non-negative numbers. 
     Thus our assumption that \(x \neq y\) was false, meaning that a sequence converges 
