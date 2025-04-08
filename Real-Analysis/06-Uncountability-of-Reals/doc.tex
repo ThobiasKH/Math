@@ -149,34 +149,47 @@ for increasing n.
     If \(\{X_n\}\) converges to \(x\) and \(y\), then \(x = y\).
 \end{theorem}
 \begin{proof}
-    Suppose, by contradiction, that \(\{X_n\}\) converges to \(x\) and \(y\) 
-    where \(x \neq y\). 
-    Then \(\forall \mathcal E > 0, \exists N_x \in \mathbb N\) such that 
-    \(\forall n_x \geq N_x : |X_{n_x} - x| < \mathcal E \) and 
-    \(\forall \mathcal E > 0, \exists N_y \in \mathbb N\) such that 
-    \(\forall n_y \geq N_y : |X_{n_y} - y| < \mathcal E \).
-    Then if we choose \(N = \max\{N_x, N_y\}\) we get that 
-    \( 
-        \forall \mathcal E > 0, \exists N \in \mathbb N
-    \) 
-    such that 
-    \(\forall n > N : |X_n - x| < \mathcal E \land |X_n - y| < \mathcal E\).
-    
-    \noindent 
-    Then 
-    \begin{gather*}
-        |X_n-x| - |X_n - y| < \mathcal E - \mathcal E = 0\\ 
-        |X_n-x| \leq |X_n| + |-x| = |X_n| + |x| \\
-        \text{via the triangle inequality} \\ 
-        |X_n-x| - |X_n - y| \leq (|X_n| + |x|) - (|X_n| + |y|) < 0\\
-        \Rightarrow |x| - |y| \leq |x - y| < 0 \\ 
-        \text{via the reverse triangle inequality}
-    \end{gather*}
-    Which is not possible as the absolute value returns non-negative numbers. 
-    Thus our assumption that \(x \neq y\) was false, meaning that a sequence converges 
-    to one number only.
-        
-    
+    Let \((a_n)\) be a sequence such that:
+    \[
+        a_n \to x \quad \text{and} \quad a_n \to y
+    \]
+    By the definition of convergence, for any \(\epsilon > 0\), there exists a positive integer \(N_1\) such that for all \(n \geq N_1\):
+
+    \[
+        |a_n - x| < \epsilon
+    \]
+
+    \noindent
+    Similarly, since \(a_n \to y\), for the same \(\epsilon > 0\), there exists a positive integer \(N_2\) such that for all \(n \geq N_2\):
+
+    \[
+        |a_n - y| < \epsilon
+    \]
+\noindent 
+    Let \(N = \max(N_1, N_2)\). Then, for all \(n \geq N\), we have both:
+
+    \[
+        |a_n - x| < \epsilon \quad \text{and} \quad |a_n - y| < \epsilon
+    \]
+    Now, using the triangle inequality, we obtain:
+    \[
+        |x - y| = |(x - a_n) + (a_n - y)| \leq |x - a_n| + |a_n - y|
+    \]
+    For \(n \geq N\), we know:
+    \[
+        |x - y| \leq |x - a_n| + |a_n - y| < \epsilon + \epsilon = 2\epsilon
+    \]
+    Since \(\epsilon\) is arbitrary, we can make \(\epsilon\) as small as we want. Thus, for any \(\epsilon > 0\), we have:
+    \[
+        |x - y| \leq 2\epsilon
+    \]
+    Taking the limit as \(\epsilon \to 0\), we get:
+    \[
+        |x - y| = 0
+    \]
+    Therefore, \(x = y\).
+
+
 \end{proof}
 
 
