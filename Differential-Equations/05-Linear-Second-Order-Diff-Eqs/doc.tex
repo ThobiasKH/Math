@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Professor Dave's Differential Equations \\ Linear Second-Order Differential Equations \\ Homogeneous Case}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Second-Order Differential Equations}
+\[ 
+    \frac{d^2y}{dx^2} + \frac{dy}{dx} = x 
+\]
+Second-order differential equations are differential equations with a second derivative 
+in them. They are very commonm in physics. For instance: 
+\[ 
+    F = ma \Leftrightarrow m\frac{d^2x}{dt^2} = \displaystyle\sum F
+\]
+
+\section*{Linear Homogeneous Second-Order Differential Equations}
+General form: 
+\[ 
+    \frac{d^2y}{dx^2} + P(x)\frac{dy}{dx} + Q(x)y = 0
+\]
+Constant coefficients case: 
+\[ 
+    a\frac{d^2y}{dx^2} + b\frac{dy}{dx} + cy = 0
+\]
+Characteristic/auxiliary equation: 
+\[ 
+    a\lambda^2 + b\lambda + c = 0
+\]
+where we can solve for \(\lambda\) using the quadratic equation.
+Ansatz solution: 
+\[ 
+    e^{\lambda x}
+\]
+\noindent 
+\textbf{Superposition principle: }
+
+\noindent 
+Given linearly independent solutions: \(y_ 1\) and \(y_2\) 
+yields a general solution: \(y = Ay_1 + By_2\)
+
+\noindent 
+Now, if we return to our characteristic roots \(\lambda_1, \lambda_2\) we have the following
+possibilities: 
+\begin{enumerate}
+    \item Values of lambda are real and distinct:
+        \noindent 
+        Ansatz solutions: \[e^{\lambda_1 x}, e^{\lambda_2 x}\] (linearly independent)
+        \(\Rightarrow\) general solution: \[y = Ae^{\lambda_1x} + Be^{\lambda_2x}\]
+
+    \item Values of lambda are complex conjugates; \(\lambda_{1,2} = \alpha \pm \beta i\). 
+        Then 
+        \[ 
+            y = e^{\alpha x}\cos\beta x + e^{\alpha x}\sin \beta x
+        \]
+        yielding, via the superposition principle, the general solution: 
+        \[ 
+            y = e^{\alpha x}(A\cos \beta X + B \sin \beta x)
+        \]
+
+    \item Lambda is a single repeated real root. 
+        \[ 
+            y = Ae^{\lambda x} + B x e^{\lambda x} = e^{\lambda x} (A + Bx)
+        \]
+\end{enumerate}
+\subsection*{Boundary conditions}
+\textbf{Initial value problem:} values of \(y,dy/dx,y'\) at \(x\). 
+
+\noindent 
+\textbf{Boundary value problem:} two different values of y at two different values 
+of x.
+
+\section*{Application of Second-Order Differential Equations}
+Suppose we have a trolley with mass \(m\) \(kg\) moving on frictionless horizontal rails. 
+Attatched to the side the trolley is a spring with stiffness \(k\) \(N/m\), connecting the trolley to a wall, 
+as well as a dashpot with a damping rate of \(c\) \((N\cdot s)/m\). 
+We know the following laws hold in this system: 
+\begin{gather*}
+    F = -kx \text{ /Hooke's law} \\ 
+    F = -cv = -c\frac{dx}{dt} \text{ /Dashpot} \\ 
+    \displaystyle\sum F = ma = m\frac{d^2x}{dt^2} \text{ /Newton's second law}
+\end{gather*}
+The spring- and dashpot forces constitute the net force on the system so we know 
+that 
+\[ 
+    \displaystyle\sum F = -kx - c\frac{dx}{dt}
+\]
+\[ 
+    ma - \displaystyle\sum F = 0 
+\]
+\[ 
+    m\frac{d^2x}{dt^2} + c\frac{dx}{dt} - kx = 0
+\] 
+
+\end{document}
