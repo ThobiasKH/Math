@@ -1,0 +1,271 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Real Analysis | Convergent Sequences (Course: MIT 18.100A)}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\begin{definition}
+    \(\{x_n\}\) converges to \(x\) if \(\forall \epsilon > 0, \exists M\in \mathbb N\)
+    such that \(\forall n \geq M : |x_n - x| < \epsilon\).
+\end{definition}
+\noindent
+\textbf{Notation:} \(\displaystyle\lim_{x \to \infty} x_n\) or \(x_n \to x\).
+
+\noindent 
+To find the definition of a non-convergent sequence we can negate the definition: 
+\begin{definition}
+    A sequence \(\{x_n\}\) does not converge to x if 
+    \(\exists \epsilon > 0\) such that \(\forall M \in \mathbb N, \exists n \geq M\) 
+    such that \(|x_n - x| \geq \epsilon\).
+\end{definition}
+\noindent 
+\textbf{Examples:}
+
+\noindent 
+\(\displaystyle\lim_{x\to\infty} \frac{1}{n^2+30n+1} = 0\). 
+\begin{proof}
+    We aim to prove that \(\displaystyle\lim_{x\to\infty} \frac{1}{n^2 + 30n + 1} = 0\). 
+    We do this by finding an expression for \(M\) in terms of \(\epsilon\) to satisfy 
+    the definition of convergence. 
+    First note that \[\frac{1}{n^2} > \frac{1}{n^2 + 30n + 1}, \forall n \in \mathbb N \setminus \{0\}\] 
+    We can prove this claim via induction:
+    
+    \noindent 
+    \textbf{Base case: n = 1} 
+    \[ 
+        \frac{1}{1} > \frac{1}{1+30+1}
+    \]
+    Suppose, for our inductive hypothesis, that  
+    \[
+        \frac{1}{n^2} > \frac{1}{n^2 + 30n + 1} 
+    \]
+    Then, for \(k = n+1\) 
+    \[ 
+        \text{LHS: }\frac{1}{k^2} = \frac{1}{n^2 + 2n + 1} 
+    \]
+    \[ 
+        \text{RHS: }\frac{1}{k^2 + 30k + 1} = \frac{1}{n^2 + 2n + 1 + 30n + 31}
+        = \frac{1}{n^2 + 32n + 32}
+    \]
+    Suppose, for a contradiction, 
+    \begin{gather*}
+        \frac{1}{n^2+2n+1} < \frac{1}{n^2 + 32n + 32} \\ 
+        \text{multiply by } -1 \\ 
+        n^2 + 2n + 1 > n^2 + 32n + 32 \\
+        0 > 32n + 31 
+    \end{gather*}
+    which is obviously not true since \(n \geq 1\). 
+    Thus our assumption was false and therefore, 
+    by the principles of mathematical induction, 
+    \[ 
+        \frac{1}{n^2} > \frac{1}{n^2 +30n +1}, \forall n \in \mathbb N\setminus\{0\}
+    \]
+    
+    \noindent 
+    Now to prove that the sequence converges let \(\epsilon > 0\) and choose 
+    \(M > \frac{1}{\sqrt{\epsilon}}\) via Archimedes' principle. 
+    Then, using Archimedes' principle again, 
+    we can choose any natural number \(n > M\) which will have the following property: 
+    \[ 
+        n > M \Rightarrow n > \frac{1}{\sqrt{\epsilon}}
+    \]
+    \begin{gather*}
+        \Rightarrow n^2 > \frac{1}{\epsilon} \\ 
+        \Rightarrow \epsilon n^2 > 1 \\ 
+        \Rightarrow \epsilon > \frac{1}{n^2} > \frac{1}{n^2 + 30n + 1} 
+        = |\frac{1}{n^2 + 30n + 1}| \\ 
+        \Rightarrow \frac{1}{n^2 + 30n + 1} < \epsilon
+    \end{gather*}
+    In other words we have shown that 
+    \[ 
+        \forall \epsilon > 0,  \exists M \in \mathbb N \text{ s.t } \forall n \geq M : 
+        |\frac{1}{n^2+30n+1}| < \epsilon
+    \]
+    Thus \((n^2 + 30n + 1)^{-1}\) converges to 0.  
+\end{proof}
+
+\begin{theorem}
+    If \(\{x_n\}\) is convergent then 
+    \(\{x_n\}\) is bounded.
+    
+\end{theorem}
+\begin{proof}
+     Suppose \(x_n \to x\). Then \(\exists M \in \mathbb N\) such that 
+     \(\forall n \geq M, |x_n - x| < 1\). Which implies \(\forall n \geq M\):
+     \[ 
+        |x_n| = |x_n - x + x| \leq |x_n - x| + |x| = 1 + |x| 
+     \]
+     Define \(B = |x_1| + |x_2| + \dots + |x_{M-1}| + 1 + |x|\) to be 
+     the bound of \(\{x_n\}\). 
+     Then \(\forall n \in \mathbb N\), 
+     \[ 
+        |x_n| \leq B
+     \]
+     Thus \(\{x_n\}\) is bounded by \(B = 1 + |x| + \displaystyle\sum_{k=1}^{M-1} |x_k|\).
+\end{proof}
+
+\begin{definition}
+    A sequence \(\{x_n\}\) is \textbf{monotone increasing} if \(\forall n \in \mathbb N: 
+    x_n \leq x_{n+1}\).
+    I.e \(x_1 \leq x_2 \leq x_3 \leq \dots\) 
+
+    \noindent
+    A sequence \(\{x_n\}\) is \textbf{monotone decreasing} if \(\forall n \in 
+    \mathbb M: x_n \geq x_{n+1}\).
+
+    \noindent 
+    If a sequence satisfies one of these conditions we say it is \textbf{monotone} 
+    or \textbf{monotonic}.
+    
+\end{definition}
+\begin{theorem}
+    A monotonic sequence \(\{x_n\}\) is convergent \textbf{if and only if} it is bounded.
+\end{theorem}
+\begin{proof}
+    Let \(\{x_n\}\) be a convergent sequence, converging to \(x\). 
+    We already know that any convergent series is bounded by 
+    \[ 
+        B = x_1 + x_2 + \dots x_{M-1} + 1 + |x| = 1 + |x| + 
+        \displaystyle\sum_{k=1}^{M-1}|x_k| 
+    \]
+    so it must hold for convergent monotonic sequences also. 
+
+    \noindent 
+    Now to prove that any bounded monotonic sequence, there are two cases to consider.
+
+    \noindent 
+    \textbf{Case 1: Monotone Increasing} 
+
+    \noindent 
+    \(\{x_n\} \leq \{x_{n+1}\}\) and \(\exists B \geq 0 : |x_n| \leq B\).
+    Let \(x = \sup\{x_n : n \in \mathbb N\}\) which must exist since the set 
+    of terms in the sequence is non-empty and bounded by \(B\).
+    Let \(\epsilon > 0\). Since \(x = \sup\{x_n\}\) there exists a natural number 
+    \(M\) such that \(x - \epsilon < x_M \leq x\).
+    Since the sequence is increasing we know that 
+    \(\forall n \geq M : x_n \geq x_M > x- \epsilon\) and \(x_n \leq x\). 
+    Which implies 
+    \[ 
+        |x_n - x| < \epsilon
+    \]
+
+    \noindent 
+    \textbf{Case 2: Monotone Decreasing}
+
+    \noindent 
+    By using a symmetric argument and picking \(x = \inf\{x_n\}\) we reach 
+    the same conclusion.
+    
+    
+\end{proof}
+\begin{theorem}
+
+    \noindent
+    \begin{enumerate}
+        \item  If \(C \in (0,1)\) then \(\displaystyle\lim_{x\to\infty} C^n = 0\). 
+        \item If \(C > 1\) then \(\{C^n\}\) is unbounded. 
+    \end{enumerate}
+    
+    
+\end{theorem}
+\begin{proof}[Proof of \#2]
+    We need to show that \(\forall B \geq 0, \exists n \in \mathbb N : c^n > B\).
+    Let \(n \in \mathbb N\) such that \[n > \frac{B}{C-1}\]
+    \begin{gather*}
+        C^n = (1 + (C-1))^n \geq 1 + n(C-1) \geq n(C-1) > \frac{B}{C-1}C-1 = B\\ 
+        C^n > B
+    \end{gather*}
+\end{proof}
+\begin{proof}[Proof of \#1]
+    Clearly if \(C \in (0,1)\) then \(\{C^n\}\) is bounded by 1. 
+    If we can then show that \(\{C^n\}\) is monotone decreasing, then we know 
+    it must be convergent to \(L\).
+    We prove the claim via induction. 
+
+    \noindent 
+    We start with our base case
+    \[ 
+        0 < c^2 < c
+    \]
+    Suppose \(0 < C^{m+1} < C^m\). 
+    Then 
+    \[
+        0 < C^{m+2} < C^{m+1} < C^m
+    \]
+    So \(\{C^n\}\) is monotone decreasing and bounded which implies it converges to \(L\).
+    Now we'll show \(L=0\).
+    Let \(\epsilon > 0\). Then \(\exists M \in \mathbb M\) such that \(\forall n \geq M\)
+    \(|C^n - L| < (1 - c) \epsilon/2\). 
+    Then  
+    \[ 
+        (1-C)|L| = |L - CL| \leq |L - C^{M+1} + C^{M+1} - cL| \leq |L - C^{M+1}| + 
+        C|C^M + 1|
+    \]
+    \[ 
+        < \frac{\epsilon}{2}(1-C) + C\frac{\epsilon}{2}(1-C) < \epsilon(1-C)
+    \]
+    Thus 
+    \[ 
+        |L| < \epsilon \Rightarrow |L| = 0 \Rightarrow L = 0
+    \]
+    
+\end{proof}
+
+\section*{Subsequences}
+\begin{definition}
+    Let \(\{x_n\}\) be a sequence, and let \(\{n_k\}\) be a sequence of natural numbers 
+    such that \(n_1 < n_2 < n_3 < \dots\) (strictly decreasing).
+    The sequence \(\{x_{n_k}\}\) is called a subsequence of \(\{x_n\}\).
+        
+    
+\end{definition}
+
+\noindent 
+\textbf{Example:}
+
+\noindent 
+\(1,2,3,4,5,6,\dots\) is a sequence with 
+\(1,3,5,7,9,\dots\) being a subsequence of the odd entries.
+\(1,1,1,1,\dots\) would be a \textbf{non-example}, since \(n_k\) 
+is not strictly increasing.
+
+\begin{theorem}
+    If \(\{x_n\}\) converges to \(x\) and \(\{x_{n_k}\}\) is a subsequence 
+    then 
+    \[
+        \displaystyle\lim_{k\to\infty} x_{n_k} = x
+    \]
+        
+    
+\end{theorem}
+\begin{proof}
+    Since \(1 \leq n_1 < n_2 < n_3 < \dots \Rightarrow \forall 
+    k \in \mathbb N : n_k \geq k\). 
+    Let \(\epsilon > 0\). Since \(x_n \to x\), \(\exists M_0 \in \mathbb N\) such that 
+    \(\forall n > M_0, |x_n - x| < \epsilon\).
+    Choose \(M = M_0\). 
+    If \(k \geq M \Rightarrow n_k \geq M = M_0 \Rightarrow |x_{n_k} - x| < \epsilon\)
+        
+    
+\end{proof}
+
+
+
+
+
+
+
+
+\end{document}
