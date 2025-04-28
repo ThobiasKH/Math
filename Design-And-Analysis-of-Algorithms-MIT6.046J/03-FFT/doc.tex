@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Design and Analysis of Algorithms \\ 
+Fast Fourier Transform (Course: MIT-6.046J)}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Fast Fourier Transform}
+\begin{definition}
+    A polynomial of degree \(n-1\) can be written as 
+    \[A(x) = a_0 + a_1x + a_2x^2 + \cdots + a_{n-1}x^{n-1} 
+    = \displaystyle\sum_{k = 0}^{n-1} a_{k}x^{k}, a_k \in \mathbb R \]
+    \[ 
+        = \langle a_0, a_1, a_2, \dots, a_{n-1} \rangle
+    \]
+    \[ 
+        = \{(x_k, A(x_k)) \quad|\quad k = 1,2,\dots,n-1\}
+    \]
+    \[ 
+        = c(x-r_0)(x-r_1)\cdots(x-r_{n-1})
+    \]
+
+\end{definition}
+
+\subsection*{Operations on polynomials}
+\begin{enumerate}
+    \item Evaluation: \(A(x) \text{ \& } x_0 \rightarrow A(x_0)?\)
+        \\ Horner's Rule: \(A(x) = a_0 + x(a_1 + x(a_2 + \cdots x(a_{n-1})))\)
+        \(\Rightarrow \mathcal O (n)\)
+    \item Add: \(A(x) \text{ \& } B(x) \rightarrow C(x) = A(x) + B(x), \forall x\) 
+        \\ \(c_k = a_k + b_k \Rightarrow \mathcal O(n)\)
+    \item Multiplication: \(A(x) \text{ \& } B(x) 
+        \rightarrow C(x) = A(x) \cdot B(x), \forall x\)
+        \[ 
+            c_k = \displaystyle\sum_{k}^{j=0}a_j b_{k-j}
+        \]
+        \[ 
+            C(x) = \displaystyle\sum^{n-1}_{k=0}\displaystyle\sum^{k}_{j=0}a_jb_{k-j}
+        \]
+        \(\Rightarrow \mathcal O(n^2)\) which is very bad.
+\end{enumerate}
+
+\subsection*{Convolution}
+Suppose we have a vector representing a wave where each entry in the vector represents 
+the amplitude at that frequency. We then want to take a gaussian distribution and shift 
+it along each possible frequency of the wave and take the dot product of the wave 
+and gaussiang distribution to "smooth out" the wave.
+This is more or less finding \(c_k\) for all \(k\). In other words it's finding 
+\(C(x)\) which we know is \(\mathcal O(n^2)\) (very bad).
+
+\end{document}
