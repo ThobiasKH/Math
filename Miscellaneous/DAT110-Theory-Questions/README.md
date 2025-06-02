@@ -8,23 +8,13 @@ Enabling a network of networks comprised of a heterogenous collection of network
 </details>
 
 **Q: In the basic Internet network model, where are applications residing?**
-
+1) In the network edge 
+2) Typically run as processes on different computers and communicating over a network 
+3) More reliable and more scalable than conventional applications
 <details>
 <summary>Answer</summary>
-
-In the network edge
-</details>
-
-<details>
-<summary>Answer</summary>
-
-Typically run as processes on different computers and communicating over a network
-</details>
-
-<details>
-<summary>Answer</summary>
-
-More reliable and more scalable than conventional applications
+2 is correct
+ 
 </details>
 
 **Q: Transmission delay and propagation delay at a node(host or packet switch) are related?**
@@ -45,11 +35,9 @@ A relation between amount of bits received per time unit for transmission on the
 
 **Q: Which of the following situations may lead to loss of datagrams / packets in a packet-switched network?**
 
-<details>
-<summary>Answer</summary>
 
-1.There may be some intereference on a communication link causing some of the transmitted bits to be changed. 2.Some buffers may overflow because too many packets arrive for a transmission on a communication link.
-</details>
+1) There may be some intereference on a communication link causing some of the transmitted bits to be changed. 
+2) Some buffers may overflow because too many packets arrive for a transmission on a communication link.
 
 **Q: Which of the following is not a layer in the TCP/IP protocol stack?**
 
