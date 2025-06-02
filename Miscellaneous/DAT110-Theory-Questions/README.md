@@ -579,6 +579,7 @@ Processes can use the order of occurence of events rather than their absolute ti
 
 **Q: Given two events a and z, with Lamport clocks C(a) and C(z) and their vector clocks V(a) and V(z). What condition is necessary to conclude that event a happened before event z?**
 
+2. If a is the sending of a message, and b is the receipt of that message. Then a->b and C(a) < C(b)
 <details>
 <summary>Answer</summary>
 
@@ -1062,6 +1063,8 @@ In the ChordDHT, we define an address space of 2128 using MD5 hash algorithm. Fi
 
 **Q: 9.What type of sequential consistency protocol was implemented in Project 3?**
 
+7. Explain briefly how processes and files are given names (identifiers) in the ChordDHT system.
+8.The findSuccessor() method is used to lookup a key (file or process). What two methods are helper methods needed for findSuccessor() to work correctly? Briefly explain the purposes of these methods.
 <details>
 <summary>Answer</summary>
 
@@ -1104,6 +1107,9 @@ The setup()-function is executed upon start/boot of the device and is typically 
 
 **Q: 4.Which hardware component of an IoT device is responsible for executing the software/program embedded on the device?**
 
+1.Explain briefly what characterises an IoT device.
+2.Specify which sensors and which actuators that were being used on the access control IoT device in project 4.
+3.Explain briefly the main purpose of the setup()-function and the loop()-function in an Arduino program.
 <details>
 <summary>Answer</summary>
 
@@ -1130,6 +1136,9 @@ The first 8 bits is used to specify the number of payload bytes containing data 
 
 **Q: 3.The Java socket API and the TCP transport service was used in the implementation. What two elements are being used to identify a socket (communication endpoint) at the transport layer of the TCP/IP protocol stack?**
 
+5.The cloud service implemented in the project using the Spark/Java framework made it possible for the access control device to send an HTTP DELETE request with the URL /accessdevice/log/ to delete all entries in the access log. Explain how you would extend the cloud service such that it would be possible to delete a specific entry in the access log. Socket Programming and RPC middleware (Oblig 1)
+1.List the three protocol layers that were implemented in the project and explain briefly how they are related.
+2.The messages exchanged in task 1 of the project has a fixed length of 128 bytes. Briefly explain the purpose of the first 8 bits in the messages and why they are needed.
 <details>
 <summary>Answer</summary>
 
@@ -1152,6 +1161,7 @@ Main components of the broker were Messaging Server (implementing the underlying
 
 **Q: 2. The publish-subscribe messaging middleware was implemented on top of a messaging layer. What was the service provided by this messaging layer?**
 
+1.List the main components that were implemented in the Broker and explain briefly their purpose.
 <details>
 <summary>Answer</summary>
 
@@ -1181,6 +1191,7 @@ The broker must be changed so that in the WaitConnect method it creates a new di
 ## Oppgave 7 (5%)
 **Q: 1.What is the purpose of using multithreading and callback mechanisms in RPC design?**
 
+4. Some of the software components in the publish-subscribe middleware were implemented using the Stopable-thread abstraction. Explain briefly how a Stopablethread works and what kind of task it can be used for. Sketch briefly how the broker could be extended such that it is possible to process multiple client sessions in parallel, i.e., exploit that the server may have multiple cores
 <details>
 <summary>Answer</summary>
 
@@ -1209,6 +1220,8 @@ In multi-threaded server request from client is passed to separate thread to pro
 
 **Q: 5. What are the various types of distribution transparency?**
 
+3. Describe briefly what distribution transparency mean in distributed system design.
+4.Explain briefly the main use of multi-threading in server design.
 <details>
 <summary>Answer</summary>
 
@@ -1223,6 +1236,7 @@ The traditional RPC is a synchronous, blocking communication model where the sen
 
 **Q: 7.Describe briefly the difference between stateful and stateless servers?**
 
+6. Explain briefly the difference between traditional remote procedure call (RPC) communication model and message-oriented communication model.
 <details>
 <summary>Answer</summary>
 
