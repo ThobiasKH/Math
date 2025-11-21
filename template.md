@@ -1,3 +1,26 @@
+---
+pandoc_:
+  - output: .pdf
+  - pdf-engine: xelatex
+header-includes:
+  - \usepackage{amsmath, amssymb, amsthm, mathtools}
+  - \usepackage[paperwidth=7.5in, paperheight=10in, left=0.8in, right=0.8in, top=1in, bottom=1in]{geometry}
+  - \usepackage{fontspec}
+  - \usepackage{setspace}
+  - \setmainfont{JetBrains Mono}
+  - \setstretch{1.4}
+  - \usepackage{xcolor}
+  - \pagecolor[rgb]{0.15, 0.15, 0.15}
+  - \color[rgb]{0.9,0.9,0.9}
+  - \makeatletter
+  - \renewcommand{\hrulefill}{\color{gray}\leaders\hrule height 0.4pt\hfill\kern0pt}
+  - \makeatother
+  - \usepackage{hyperref}
+  - \makeatletter
+  - \renewcommand{\hrule}{\color{gray}\rule{\paperwidth}{0.4pt}}
+  - \makeatother
+---
+
 # Mega Super Awesome Ultimate 3D Notes
 **Author:** Thobias K. Høivik  
 **Date:** Fall Semester 2025 B.C.
@@ -35,10 +58,8 @@ $$
 
 **Proof**
 
-Choose a basis for $\ker T$ and extend it to a basis of $V$. The images of the additional basis vectors form a basis of $\operatorname{im} T$. Counting dimensions gives the formula.
-
-<p align="right">□</p>
-
+Choose a basis for $\ker T$ and extend it to a basis of $V$. The images of the additional basis vectors form a basis of $\operatorname{im} T$. 
+Counting dimensions gives the formula. 
 
 ---
 
@@ -94,7 +115,6 @@ $$
 
 Expanding and simplifying gives the inequality.
 
-<p align="right">□</p>
 
 
 ---
@@ -120,7 +140,6 @@ The union of any collection of open sets is open.
 
 Follows directly from the definition of a topology: $\bigcup_{\alpha} U_\alpha \in \tau$.
 
-<p align="right">□</p>
 
 
 ---
@@ -157,7 +176,6 @@ $$
 \mathbb{P}(|\overline{X}_n - \mu| \ge \epsilon) \le \frac{\sigma^2}{n \epsilon^2} \to 0
 $$
 
-<p align="right">□</p>
 
 
 ---
