@@ -267,3 +267,119 @@ $$ 
         1 & -1
     \end{bmatrix}
 $$ 
+
+--- 
+
+## Oppgave 18 
+
+La $(U, \langle \cdot, \cdot \rangle)$ være et indreproduktrom, 
+og la $T \in \mathcal L(U)$. 
+
+Definer 
+
+$$ 
+    \langle u, v \rangle_T := \langle Tu, Tv \rangle, \forall u,v \in U    
+$$ 
+
+Bevis at $\langle \cdot, \cdot \rangle_T$ er et inreprodukt på $U$ 
+viss og bare viss $T$ er injektiv. 
+
+**Bevis.** 
+
+Anta at $T$ er en veldefinert injektiv lineær operator på $U$. 
+
+Vi må sjekke følgende kriterier: 
+
+1. $\langle x,x \rangle \geq 0$, med likhet viss og bare viss $x = 0$.
+2. $\langle \alpha x, y\rangle = \alpha \langle x,y \rangle$. 
+3. $\langle x + y, z\rangle = \langle x, z \rangle + \langle y, z \rangle$.
+
+Anta at $\langle u,u \rangle_T = 0$.
+
+$$
+    \langle u, u \rangle_T = 0 = \langle Tu, Tu \rangle
+$$
+
+Siden $\langle \cdot, \cdot \rangle$ er veldefinert har vi at 
+$Tu = 0$. Siden $T$ er injektiv har vi at $\ker T = \{0\}$ så 
+$u = 0$. 
+
+Betrakt nå $\langle \alpha u, v \rangle_T$. 
+
+$$
+\begin{align*}
+    \langle \alpha u, v \rangle_T &= \langle T(\alpha u), Tv \rangle \\ 
+                                  &= \langle \alpha Tu, Tv \rangle \\ 
+                                  &= \alpha \langle Tu, Tv \rangle \\ 
+                                  &= \alpha \langle u, v \rangle_T
+\end{align*}
+$$
+
+Sist ser vi på $\langle u + w, v \rangle_T$.
+
+$$
+\begin{align*}
+    \langle u + w, v \rangle_T &= \langle T(u+w), Tv \rangle \\ 
+                               &= \langle Tu + Tw, Tv \rangle \\ 
+                               &= \langle Tu , Tv \rangle + 
+                                  \langle Tw , Tv \rangle \\ 
+                               &= \langle u, v \rangle_T + 
+                                  \langle w, v \rangle_T
+\end{align*}
+$$
+
+Anta nå at $\langle u, v \rangle_T$ er veldefinert. 
+Da har vi at $\langle u, u \rangle_T = \langle Tu, Tu \rangle = 0$ 
+viss og bare viss 
+$u = 0$.  
+
+Siden $\langle \cdot, \cdot \rangle$ er veldefinert er det da tilfellet at 
+$Tu = 0$ viss og bare viss $u = 0$ dermed har vi at $\ker T = \{0\}$
+så $T$ er injektiv. 
+
+--- 
+
+## Oppgave 19 
+
+La $U$ være et vektorrom, og anta at $S, T \in \mathcal L(U)$ slik at 
+$\text{im} S \subseteq \ker T$. Vis at $(ST)^2 = 0$. 
+
+**Bevis.**
+
+$\text{im} S \subseteq \ker T$ så $T(Su) = 0, \forall u \in U$. 
+La $v = Tu$, der $u$ er et vilkårlig element fra $U$.
+$$
+\begin{align*}
+    (ST)^2 u &= STSTu \\ 
+             &= ST(Sv) \\ 
+             &= S(0) \\ 
+             &= 0 S(x) \text{ for en } x \in U \\ 
+             &= 0
+\end{align*}
+$$
+$u \in U$ var valgt vilkårlig så $(ST)^2u = 0$ for alle $u \in U$ dermed 
+er $(ST)^2 = 0$.
+
+---
+
+## Oppgave 22 
+
+La $\ell^1(\mathbb{R})$ være det reelle vektorrommet 
+
+$$ 
+    \ell^1(\mathbb{R}) := \{(a_1, a_2, \ldots) : a_1, a_2, 
+    \ldots \in \mathbb{R}, \sum_{k=1}^\infty |a_k| < \infty\}
+$$ 
+
+og definer de to normene 
+$$ 
+    ||a||_1 := \sum_{k=1}^\infty |a_k|, \quad 
+    ||a||_\infty := \sup_{k \in \mathbb{N}} |a_k|
+$$ 
+
+for $a = (a_1, a_2, \ldots) \in \ell^1(\mathbb{R})$. 
+Er normene ekvivalente?
+
+**Bevis.**
+
+Normene er ikke ekvivalente da de ikke induserer samme topologi.
