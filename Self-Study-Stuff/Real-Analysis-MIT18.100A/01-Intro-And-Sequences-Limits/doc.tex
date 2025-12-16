@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Real Analysis | First Lecture (Course By: The Bright Side of Mathematics) } 
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Introduction to Real Analysis}
+\begin{definition}[Axioms of The Reals]
+
+    A non-empty set \(\mathbb R\) together with operations 
+    \(+,\times\) and ordering \(\leq\) is called 
+    the real numbers if it satisfies: 
+    \begin{itemize}
+        \item (A) \((\mathbb R, +)\) is an abelian group with additive identity 0.
+        \item (M) \((\mathbb R, \cdot)\) is an abelian group with multiplicative identity 1.
+        \item (D) Distributive law: \(x \cdot (y+z) = x\cdot y + x\cdot z\).
+        \item (O) \(\leq\) is a total order, compatible with \(+\) and \(\cdot\),
+            Archimedian property .
+        \item (C) Every Cauchy sequence is a convergent sequence.
+\end{itemize}
+\end{definition}
+
+\noindent 
+Notice that properties A, M and D makes \(\mathbb R\) a field.
+
+\begin{definition}[The Absolute Value Function]
+    Let \(x \in \mathbb R\). Then the absolute value of x is: 
+    \[ 
+        |x| = 
+        \begin{cases}
+            x  & x\geq 0 \\
+            -x & x < 0
+        \end{cases}
+    \] 
+\end{definition}
+
+\section*{Sequences and Limits} 
+\begin{definition}[Sequences]
+    A sequence of real numbers is a map 
+    \(a_n: \mathbb N \to \mathbb R\) 
+    or \(a_n: \mathbb N_0 \to \mathbb R\) if you have \(0 \in \mathbb N\). 
+    (Truly, a number theorist's worst nightmare)
+
+    \noindent 
+    We will more often use the notations \((a_1, a_2, a_3, \dots)\) or 
+    \((a_n)_{n\in \mathbb N}\) or \((a_n)_{n=1}^\infty\) or \((a_n)\).
+\end{definition}
+
+\noindent
+\textbf{Examples:}
+\begin{enumerate}
+    \item 
+        \[
+            (a_n)_{n \in \mathbb N} = ((-1)^n)_{n\in \mathbb N}
+            = (-1, 1, -1, 1, \dots)
+        \]
+
+    \item  
+        \[
+            (a_n)_{n\in \mathbb N} = \left(\frac{1}{n}\right)_{n\in\mathbb N} 
+            = (1, \frac{1}{2}, \frac{1}{3}, \dots)
+        \] 
+
+    \item 
+        \[ 
+            (a_n)_{n \in \mathbb N} = (2^n)_{n\in \mathbb N}
+            = (2, 4, 8, 16, 32, \dots)
+        \]
+\end{enumerate}
+
+\subsection*{Convergent Series}
+\begin{definition}[Convergent Series]
+    A sequence \((a_n)_{a\in \mathbb N}\) is called convergent to \(a\in \mathbb R\) if
+    \begin{gather*}
+        \mathcal E > 0, \quad \exists N \in \mathbb N, \quad
+        \forall n \geq N : |a_n - a | < \mathcal E
+    \end{gather*}
+\end{definition}
+
+\noindent 
+\textbf{Example:}
+\((a_n) = (\frac{1}{n})\) (change in notation) is convergent to \(0 \in \mathbb R\).
+
+\begin{proof}
+    Let \(\mathcal E > 0\). Choose \(N \in \mathbb N\) such that 
+    \(N \cdot \mathcal E > 1\) or, in other words, let \(N > \frac{1}{\mathcal E}\) 
+    which must exist because of the Archimedian property.
+    Then for \(n \geq N\), we have:
+    \[
+        |a_n - 0| = |\frac{1}{n} - 0| = |\frac{1}{n}| \leq \frac{1}{N}
+        < \mathcal E
+    \]
+\end{proof}
+
+\end{document}

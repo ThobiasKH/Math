@@ -1,0 +1,637 @@
+\input{preamble.tex}
+\usepackage{tikz}
+
+\title{\huge{Oblig 3}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+\newpage 
+Jeg antar i oppgave 4.1.2 (a) at det er en skrivefeil, siden 
+når jeg søker opp additivitet i det andre argumentet på nettet 
+får jeg 
+$$
+    \langle u, v + w \rangle = \langle u, v\rangle + \langle u,w\rangle
+$$ 
+
+\newpage
+\begin{prob*}{Oppgave 3.5.8}{}
+    En diagonalmatrise er en matrise $A \in M_{m\times n}(\mathbb K)$ som har ikke-null elementer 
+    kun langs diagonalen: $(A)_{ij} = 0$ for alle $i \neq j$. Vis at 
+    $$ 
+    \left\|A\right\|_\mathcal L = \max_i|(A_{ij})|
+    $$
+\end{prob*}
+\begin{proof}[Bevis]
+    La $A \in M_{m\times n}(\mathbb K)$ være en diagonalmatrise. 
+    La $d_i = (A)_{ii}$ ($1\leq i \leq \min\{m,n\}$ for $m \neq n$). 
+    
+    For enhver $x \in \mathbb K^n$ har vi da 
+    \begin{align*}
+        \left\|Ax\right\|_{\ell^2}^2 
+        &= 
+        \displaystyle\sum_{i} |d_ix_i|^2 \\ 
+        &\leq (\max_i|d_i|^2) \displaystyle\sum_{i}|x_i|^2 \\ 
+        &= (\max_i |d_i|^2)\left\|x\right\|_{\ell^2}^2
+    \end{align*}
+    men for enhetsvektorer har vi $\left\|x\right\|_{\ell^2}^2 = 1$
+    så 
+    $$ 
+        \left\|Ax\right\|_{\ell^2} \leq \max_i|d_i|
+    $$ 
+    og dette gjelder for enhetsvektorer, dermed 
+    $$ 
+        \left\|A\right\|_\mathcal L = 
+        \sup_{\left\|x\right\| = 1} \left\|Ax\right\|_{\ell^2} 
+        \leq \max_i|d_i|
+    $$ 
+
+    La $k$ være slik at $|d_k| = \max_i |d_i|$. Ta basisvektoren 
+    $e_k$ med $\left\|e_k\right\|_{\ell^2} = 1$. Da har vi 
+    \begin{align*}
+        \left\|Ae_k\right\|_{\ell^2} &= 
+        |d_k|\left\|e_k\right\|_{\ell^2} \\ 
+                                     &= |d_k| \\
+                                     &= \max_i|d_i|
+    \end{align*}
+    så 
+    $$ 
+    ||A||_\mathcal L \geq \max_i|d_i|
+    $$ 
+
+    Det følger da at 
+    $$ 
+        \left\|A\right\|_\mathcal L = \max_i|d_i|
+    $$ 
+\end{proof}
+
+\newpage
+\begin{prob*}{Oppgave 4.1.2}{}
+    Bevis følgende: 
+
+    \quad (a) Indreproduktet er additivt i andre argument: 
+    $\langle u, v + w \rangle = \langle u, v \rangle + 
+    \langle u, w \rangle$
+
+    \quad (b) Indreproduktet er konjugert-homogen i andre argument: 
+    $\langle u, \alpha v \rangle = \overline \alpha \langle u,v\rangle$
+
+    \quad (c) Dersom $\mathbb K = \mathbb R$, er indreproduktet 
+    symmetrisk: $\langle u, v \rangle = \langle v, u \rangle$
+\end{prob*}
+\begin{proof}[Bevis av (a)]
+    La $V$ være et indreproduktrom med $u,v,w \in V$.
+
+    \begin{align*}
+        \langle u, v + w \rangle 
+        &= \overline{\langle v + w, u \rangle}
+        \\ 
+        &= 
+        \overline{\langle v, u \rangle + \langle w, u \rangle}
+        \\
+        &= 
+        \overline{\langle v, u\rangle} + \overline{\langle w, u \rangle}
+        \\ 
+        &=
+        \langle u, v\rangle + \langle u,w\rangle
+    \end{align*}
+    \begin{proof}[Bevis av (b)]
+        La $V$ være et indreproduktrom over $\mathbb K$ med 
+        $u,v \in V$ og $\alpha \in \mathbb K$.
+
+        \begin{align*}
+            \langle u, \alpha v\rangle
+            &= \overline{\langle \alpha v, u\rangle} 
+            \\ 
+            &= \overline{\alpha \langle v, u\rangle} \\ 
+            &= \overline \alpha \overline{\langle v, u\rangle} \\ 
+            &= \overline \alpha \langle u, v \rangle
+        \end{align*}
+    \end{proof}
+    \begin{proof}[Bevis av (c)]
+        La $V$ være et indreproduktrom over $\mathbb R$ 
+        med $u,v \in \mathbb R$. 
+
+        $$
+            \langle u,v\rangle = \overline{\langle v, u\rangle}
+        $$
+        
+        Det komplekse konjugatet er 
+        $$
+            \overline{a + bi} = a - bi 
+        $$
+        
+        For reelle tall har vi $b = 0$ så det komplekse konjugatet 
+        gjør ingenting med reelle tall så 
+        $$ 
+            \overline{\langle v, u \rangle} = \langle v, u\rangle 
+        $$ 
+    \end{proof}
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 4.1.3}{}
+    La $u \in U$ være slik at $\langle u,v\rangle = 0$ for alle 
+    $v \in U$. Vis at $u = 0$. Er det samme sant dersom 
+    $\langle v, u\rangle = 0$ for alle $v \in U$?
+
+    \emph{Hint:} Prøv med $v = u$.
+\end{prob*}
+\begin{proof}[Bevis]
+    La $U$ være et indreproduktrom med $u \in U$ slik som i  
+    oppgavebeskrivelsen. 
+
+    Siden $u$ tilfredsstiller 
+    $$ 
+        \langle u, v\rangle = 0 \quad \forall v \in U
+    $$
+    så krever vi at 
+    $$ 
+        \langle u, u \rangle = 0
+    $$ 
+    siden $u \in U$. 
+
+    $$ 
+        \langle u, u \rangle = 0
+    $$ 
+    kun dersom $u = \textbf{0}$. 
+
+    Dersom $\langle v, u\rangle = 0, \forall v \in U$ 
+    så har vi at 
+    $$ 
+        \overline{\langle v, u\rangle} = \overline 0 = 0 
+    $$ 
+    så 
+    $$ 
+        \langle u, v\rangle = 0
+    $$ 
+\end{proof}
+\newpage 
+\begin{prob*}{Oppgave 4.1.5}{}
+    Vi lar $\mathbb K = \mathbb R$ eller $\mathbb K = \mathbb C$. 
+    Vis at følgende er indreprodukter.
+
+    \quad (a) Det kanoniske indreproduktet i $\mathbb K^n$ er 
+    prikkproduktet 
+    $$ 
+    \langle x, y \rangle_{\mathbb K^n} := x \cdot y = 
+    \displaystyle\sum_{k = 1}^{n} x_k\overline{y_k}
+    $$ 
+
+    \quad (c) La $\ell^2(\mathbb K) := 
+    \left\{(a_1,a_2,\dots) : \sum_{k \in \mathbb N}^{}
+    |a_k|^2 < \infty\right\}$ (se Eksempel 3.1.2). 
+
+    \quad Vi definerer 
+    $\ell^2$-indreproduktet som 
+    $$ 
+    \langle a,b\rangle_{\ell^2} := \displaystyle\sum_{k=1}^{\infty}
+    a_k\overline{b_k}
+    $$ 
+
+    \quad (d) For $f,g \in C([a,b], \mathbb K)$ (se Oppgave 1.1.5)
+    definerer vi $L^2$-indreproduktet 
+    $$ 
+    \langle f,g \rangle_{L^2} := \displaystyle\int_{a}^{b}f(t)
+    \overline{g(t)}dt
+    $$ 
+\end{prob*}
+\begin{proof}[Bevis av (a)]
+    La $U$ være et vektorrom over $\mathbb K = \mathbb R$ eller 
+    $\mathbb K = \mathbb C$, med 
+    $u,v,w \in U$ og $\alpha \in \mathbb K$. Da vil 
+    $\langle \cdot, \cdot \rangle_{\mathbb K^n}$ gi en skalar i 
+    $\mathbb K$ siden den er definert til å ta summen av skalar-verdier
+    i $\mathbb K$.
+
+    \emph{(i)}
+
+    Vi vet at $\langle u, u \rangle \geq 0$ fordi, i tilfellet 
+    der $\mathbb K = \mathbb R$ tar vi summen av kvadraten av hver 
+    komponent i vektoren $u$ 
+    (i.e. vi tar summen av verdier som er større enn eller lik 0). 
+    I tilfellet der $\mathbb K = \mathbb C$ simplifiseres uttrykket 
+    til 
+    $$ 
+        \displaystyle\sum_{k=1}^{n}a_k^2 + b_k^2
+    $$ 
+    hvor $u_k = a_k + b_ki, a_k,b_k \in \mathbb R$, 
+    som er ikke-negativt 
+    for samme grunn.
+
+    Dersom $u = (0, 0, \dots, 0)$ blir summen åpenbart $0$. 
+    Viss vi antar 
+    $$ 
+        \displaystyle\sum_{k=1}^{n}x_k\overline{x_k} = 0
+    $$ 
+    vet vi at hver $x_k = 0$ siden $x_k \overline{x_k} \geq 0$ 
+    så eneste måten summen er $0$ er vist alle $x_k = 0$.
+
+    \emph{(ii)}
+
+    \begin{align*}
+        \langle u + v, w\rangle 
+        &= \displaystyle\sum_{k = 1}^{n} (u_k + v_k)\overline{w_k} \\  
+        &= \displaystyle\sum_{k = 1}^{n} u_k\overline{w_k} + 
+        v_k\overline{w_k} \\ 
+        &= \displaystyle\sum_{k=1}^{n}u_k\overline{w_k} + 
+        \displaystyle\sum_{k=1}^{n}v_k\overline{w_k} 
+        \\ 
+        &= \langle u, w\rangle + \langle v,w\rangle
+    \end{align*}
+
+    \emph{(iii)}
+
+    \begin{align*}
+        \langle \alpha u, v \rangle 
+    &= \displaystyle\sum_{k = 1}^{n} \alpha u_k \overline{v_k} 
+    \\ 
+    &= \alpha \displaystyle\sum_{k=1}^{n} u_k \overline{v_k}
+    \\ 
+    &= \alpha \langle u, v\rangle
+    \end{align*}
+
+    \emph{(iv)}
+
+    \begin{align*}
+        \langle u, v\rangle 
+    &= \displaystyle\sum_{k=1}^{n} u_k \overline v_k 
+    \\ 
+    &= \displaystyle\sum_{k=1}^{n}\overline{v_k}u_k
+    = \overline{\displaystyle\sum_{k=1}^{n}v_k\overline{u_k}}
+    \\ 
+    &= \overline{\langle v,u\rangle}
+    \end{align*}
+
+    Dermed oppfyller $\langle \cdot, \cdot 
+    \rangle_{\mathbb K^n} : U\times U \to \mathbb K$ egenskapene 
+    til et indreprodukt.
+\end{proof}
+\begin{proof}[Bevis av (c)]
+    La $a, b \in \ell^2(\mathbb K)$. Da har vi at 
+    \begin{align*}
+        \displaystyle\sum_{k=1}^{\infty}|a_k \overline{b_k}|
+        &\leq  
+        \frac{1}{2}\left( 
+        \displaystyle\sum_{i=1}^{\infty}|a_i|^2 
+    + \displaystyle\sum_{i = 1}^{\infty}|b_i|^2
+\right)
+    \end{align*}    
+    og de to summene er ved definisjon of $\ell^2(\mathbb K)$ endelige,
+    så $\langle a, b \rangle$ gir da en endelig verdi. 
+
+    Videre la også $c \in \ell^2(\mathbb K)$ og $\delta \in \mathbb K$.
+
+    \emph{i)}
+
+    \begin{align*}
+        \langle a, a \rangle 
+        &= 
+        \displaystyle\sum_{k = 1}^{\infty} a_k\overline{a_k} \\ 
+        &= 
+        \displaystyle\sum_{k=1}^{\infty}\mathbb Re(a_K)^2 + 
+        \mathbb Im(a_k)^2 \geq 0 
+    \end{align*}
+    siden hver $\mathbb Re(a_k)^2 \geq 0$ og 
+    $\mathbb Im(a_k)^2 \geq 0$.
+
+    Viss $a = \textbf 0$ får vi $\sum_{k=1}^{\infty} 0 = 0$. 
+    Anta da at 
+    $\langle a, a \rangle = 0$. 
+    \begin{align*}
+        \displaystyle\sum_{k=1}^{\infty} 
+        \mathbb Re(a_k)^2 + \mathbb Im(a_k)^2 &= 0
+    \end{align*}
+    
+    Som sagt er $\mathbb Re(a_k)^2$ og $\mathbb Im(a_k)^2$ 
+    ikke-negative reelle tall. Den eneste løsningen for at summen 
+    av ikke-negative reelle tall skal være lik $0$ er den 
+    trivielle løsningen hvor 
+    $\mathbb Re(a_k) = \mathbb Im(a_k) = 0$ for alle $k$. 
+    Med andre ord har vi at hver $a_k = 0$ så $a = \textbf 0$.
+
+    \emph{ii)}
+    \begin{align*}
+        \langle a + b, c\rangle 
+        &= \displaystyle\sum_{k=1}^{\infty}(a_k+b_k) \overline{c_k}
+        \\ 
+        &= \displaystyle\sum_{k=1}^{\infty}a_k\overline{c_k} + 
+        b_k\overline{c_k}
+        \\ 
+        &= \displaystyle\sum_{k=1}^{\infty} a_k\overline{c_k} + 
+        \displaystyle\sum_{k=1}^{\infty} b_k\overline{c_k} 
+        \\ 
+        &= \langle a, c\rangle + \langle b,c\rangle
+    \end{align*}
+
+    \emph{iii)}
+    \begin{align*}
+        \langle \delta a, b \rangle 
+        &= 
+        \displaystyle\sum_{k=1}^{\infty}\delta a_k \overline{b_k}
+        \\ 
+        &= 
+        \delta\displaystyle\sum_{k=1}^{\infty}a_k\overline{b_k}
+        \\ 
+        &= \delta \langle a,b\rangle
+    \end{align*}
+
+    \emph{iv)}
+    \begin{align*}
+        \langle a,b \rangle 
+        &=
+        \displaystyle\sum_{k=1}^{\infty}a_k \overline{b_k}
+        \\ 
+        &= 
+        \displaystyle\sum_{k=1}^{\infty} \overline{b_k} a_k 
+        = 
+        \overline{\displaystyle\sum_{k=1}^{\infty} b_k\overline{a_k}} 
+        \\ 
+        &= \overline{\langle b,a\rangle}
+    \end{align*}
+     
+    Dermed er $\langle \cdot, \cdot \rangle$ et indreprodukt 
+    på $\ell^2(\mathbb K)$.
+\end{proof}
+\begin{proof}[Bevis av (c)]
+    La $f,g,h \in C([a,b], \mathbb K)$ med $\alpha \in \mathbb K$,
+    indreproduktet 
+    $$ 
+    \langle f, g \rangle_{L^2} = 
+        \displaystyle\int_{a}^{b}f(t)\overline{g(t)}dt
+    $$ 
+
+    Viss $g$ er kontinuerlig på $[a,b]$ så er $\overline g$ også 
+    kontinuerlig på dette intervallet. Dermed er integralet 
+    over $f(t)\overline{g(t)}$ vell-definert.
+
+    \emph{i)}
+    \begin{align*}
+        \langle f, f \rangle = \displaystyle\int_{a}^{b}|f(t)|^2 dt
+    \end{align*}
+
+    $|f(t)|^2 \in [0, \infty)$ for alle $t \in [a,b]$. 
+    Siden $|f(t)|^2$ er kontinuerlig og ikke negativ på $[a,b]$ gir 
+    inetgralet en ikke-negativ verdi.
+    Siden vi tar integralet over ikke-negative verdier er eneste 
+    løsningen hvor hele integralet blir $0$ når $f(t) = 0$ for alle 
+    $t \in [a,b]$.
+
+    \emph{ii)}
+    \begin{align*}
+        \langle f + g, h \rangle 
+        &= \displaystyle\int_{a}^{b} (f(t) + g(t))\overline{h(t)}dt
+        \\ 
+        &= \displaystyle\int_{a}^{b}f(t)\overline{h(t)} + 
+        g(t)\overline{h(t)} dt
+        \\ 
+        &= 
+        \displaystyle\int_{a}^{b}f(t)\overline{h(t)}dt + 
+        \displaystyle\int_{a}^{b}g(t)\overline{h(t)}dt
+        \\ 
+        &= \langle f, h \rangle + \langle g, h \rangle
+    \end{align*}
+
+    \emph{iii)}
+    \begin{align*}
+        \langle \alpha f, g \rangle 
+        &= 
+        \displaystyle\int_{a}^{b}\alpha f(t)\overline{g(t)}dt 
+        \\ 
+        &= 
+        \alpha \displaystyle\int_{a}^{b}f(t)\overline{g(t)}dt 
+        \\ 
+        &= \alpha \langle f, g\rangle
+    \end{align*}
+
+    \emph{iv)}
+    \begin{align*}
+        \langle f,g\rangle 
+        &= 
+        \displaystyle\int_{a}^{b}f(t)\overline{g(t)}dt 
+        \\ 
+        &= 
+        \displaystyle\int_{a}^{b}\overline{g(t)}f(t)dt 
+        = 
+        \overline{\displaystyle\int_{a}^{b}g(t)\overline{f(t)}dt} 
+        \\ 
+        &= \overline{\langle g,f\rangle}
+    \end{align*}
+
+    $\langle \cdot, \cdot \rangle_{L^2}$ utgjør et 
+    indreprodukt på $C([a,b], \mathbb K)$.
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 4.2.2}{}
+    Vis at $L^2$-normen $\left\|f\right\|_{L^2} := 
+    (\int_{a}^{b}|f(t)|^2 dt)^{1/2}$ (se Eksempel 3.1.2 (d)) er 
+    normen indusert av $L^2$-indreproduktet $\langle f,g\rangle_{L^2}
+    := \int_{a}^{b}f(t)\overline{g(t)}dt$ (se Oppgave 4.1.5 (d)).
+
+\end{prob*}
+\begin{proof}[Bevis]
+    Husk at for en $f$ i et indreproduktrom har vi  
+    $$ 
+        \left\|f\right\|^2 = \langle f, f \rangle
+    $$ 
+    så
+    \begin{align*}
+        (\langle f,f \rangle)^{1/2}_{L^2} 
+        &= 
+        \left\|f\right\|_{L^2} \\ 
+        (\langle f,f\rangle)^{1/2}                                   
+        &= 
+        \left(\displaystyle\int_{a}^{b}f(t)
+        \overline{f(t)}dt\right)^{1/2}
+        \\ 
+        &= 
+        \left(\displaystyle\int_{a}^{b}|f(t)|^2 dt\right)^{1/2}
+        \\ 
+        &= 
+        \left\|f\right\|_{L^2}
+    \end{align*}
+
+    $L^2$-normen er indusert av $L^2$-indreproduktet.
+\end{proof}
+\newpage 
+\begin{prob*}{Oppgave 4.3.2}{}
+    Vi betrakter $\mathbb R^2$ med standardindreproduktet. Vis 
+    at listene 
+    $$ 
+        \mathcal B = 
+        \left( 
+            \begin{pmatrix}
+                1 \\ 0 
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                0 \\ 1
+            \end{pmatrix}
+        \right)
+        \text{ og }
+        \mathcal C = 
+        \left( 
+            \begin{pmatrix}
+                1/\sqrt 2 \\ 1/\sqrt 2
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                -1/\sqrt 2 \\ 1 / \sqrt 2
+            \end{pmatrix}
+        \right)
+    $$ 
+    er ortonormale. Tegn vektorene i hver av listene og 
+    forklar hvordan man kan se at de to listene er ortonormale.
+\end{prob*}
+\begin{proof}[Bevis]
+    La $\langle x, y \rangle : 
+    \mathbb R^2 \times \mathbb R^2 \to \mathbb R$ betegne 
+    standardindreproduktet $x \cdot y = \sum_{k=1}^{2}x_ky_k$. 
+
+    $\mathcal{B}$)
+
+    \begin{align*}
+        \langle e_1, e_2 \rangle 
+        \\ 
+        &= 1 \cdot 0 + 0 \cdot 1  
+        \\ 
+        &= 0 
+    \end{align*}
+    siden $\mathbb R^2$ er over $\mathbb R$ har vi symmetri 
+    og trenger derfor ikke sjekke $\langle e_2, e_1 \rangle$ 
+    eksplisitt.
+
+    \begin{align*}
+        \langle e_1, e_1\rangle
+        &= 
+        1 \cdot 1 + 0 \cdot 0 
+        \\ 
+        &= 1
+        \\ 
+        \langle e_2, e_2\rangle
+        &= 
+        0 \cdot 0 + 1\cdot 1 
+        \\ 
+        &= 1
+    \end{align*}
+
+    Så $\mathcal B = (e_1, e_2)$ er ortonormal.
+
+    $\mathcal C$)
+    La $f_1 = (1/\sqrt 2, 1/\sqrt 2)$ og 
+    $f_2 = (-1/\sqrt 2, 1/\sqrt 2)$ så $\mathcal C = (f_1, f_2)$.
+
+    \begin{align*}
+        \langle f_1, f_2 \rangle 
+        &= 
+        1/\sqrt 2 \cdot -1 / \sqrt 2 + 
+        1/\sqrt 2 \cdot 1 /\sqrt 2
+        \\ 
+        &= 
+        -1/2 + 1/2 
+        \\ 
+        &= 0
+    \end{align*}
+    
+    Igjen, vi har symmetri så dette holder for å konkludere 
+    at listen er ortogonal. 
+
+    \begin{align*}
+        \langle f_1, f_1\rangle
+        &= 
+        1/\sqrt 2 \cdot 1 / \sqrt 2 + 1 /\sqrt 2 \cdot 1 /\sqrt 2
+        \\ 
+        &= 
+        1/2 + 1/2 
+        \\ 
+        &= 1 
+        \\ 
+        \langle f_2, f_2 \rangle 
+        &= 
+        -1 / \sqrt 2 \cdot -1/\sqrt 2 + 1 / \sqrt 2 \cdot 1 / \sqrt 2
+        \\ 
+        &= 
+        1/2 + 1/2 
+        \\ 
+        &= 1
+    \end{align*}
+    
+    $\mathcal C$ er ortonormal.
+\end{proof}
+\begin{tikzpicture}[scale=1]
+  % axes
+  \draw[->] (-0.5,0) -- (3,0) node[right] {$x$};
+  \draw[->] (0,-0.5) -- (0,3) node[above] {$y$};
+
+  % vector
+  \draw[->, thick, blue] (0,0) -- (1,0) node[midway, above] {$\vec{e_1}$};
+
+  % another vector
+  \draw[->, thick, red] (0,0) -- (0,1) node[midway, left] {$\vec{e_2}$};
+\end{tikzpicture}
+\begin{tikzpicture}[scale=1]
+  % axes
+  \draw[->] (-0.5,0) -- (3,0) node[right] {$x$};
+  \draw[->] (0,-0.5) -- (0,3) node[above] {$y$};
+
+  % vector
+  \draw[->, thick, blue] (0,0) -- (0.7,0.7) node[midway, above] {$\vec{f_1}$};
+
+  % another vector
+  \draw[->, thick, red] (0,0) -- (-0.7,0.7) node[midway, left] {$\vec{f_2}$};
+\end{tikzpicture}
+
+Vi ser at vektorene i $\mathcal B$ og $\mathcal C$ er 
+enhetsvektorer med $90$ grader vinkel i mellom seg.
+
+\newpage 
+\begin{prob*}{Oppgave 4.3.3}{}
+    Vis at en ortogonal liste $(u_1,\dots,u_n)$ automatisk er 
+    linerært uavhengig.
+\end{prob*}
+\begin{proof}[Bevis]
+    Anta at vi har en liste $U = (u_1,\dots,u_n)$ som er 
+    ortogonal. 
+
+    $$ 
+        \langle u_i, u_j\rangle = 0 \quad \forall i \neq j
+    $$ 
+    og ingen av vektorene er $0$.
+
+    For at en liste skal være lineært uavhengig trenger vi at 
+    $$ 
+        \displaystyle\sum_{i=1}^{n} \alpha_i u_i = 0
+    $$ 
+    kunn har den trivielle løsningen hvor $\alpha_i = 0$ for alle 
+    $1 \leq i \leq n$.   
+
+    La $u_j \in U$ være en vilkårlig vektor. 
+
+    \begin{align*}
+        \displaystyle\sum_{i=1}^{n}a_iu_i 
+        &= 0 \\ 
+        \left\langle \displaystyle\sum_{i=1}^{n}a_iu_i,u_j
+        \right\rangle 
+        &= \langle 0, u_j \rangle = 0 \quad \forall u_j \in U\\ 
+        \left\langle \displaystyle\sum_{i=1}^{n}\alpha_iu_i, u_j 
+            \right\rangle
+        &= 
+        \displaystyle\sum_{i=1}^{n}\alpha_i \langle u_i, u_j \rangle
+        \\ 
+        &= 
+        \alpha_1 \langle u_1, u_j\rangle + \cdots + 
+        \alpha_n \langle u_n, u_j \rangle
+    \end{align*}
+
+    Siden $\langle u_i, u_j\rangle = 0$ for alle $i \neq j$ 
+    sitter vi igjen med 
+    \begin{align*}
+        \alpha_j \langle u_j, u_j \rangle 
+    \end{align*}
+
+    Siden ingen $u_i$ kan være $0$ har vi at $\alpha_j = 0$. 
+    $u_j$ var valgt vilkårlig så da har vi at $\alpha_j = 0$ for alle 
+    $j$. Så $\alpha_1 = \alpha 2 = \cdots = \alpha_n = 0$.
+\end{proof}
+
+\end{document}

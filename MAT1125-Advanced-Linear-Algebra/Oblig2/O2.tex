@@ -1,0 +1,590 @@
+\input{preamble.tex}
+
+\title{\huge{Oblig 2}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage 
+\emph{Problem med Newton-basisen.}
+
+I to av oppgavene skal vi se på Newton-basisen over 
+tre punkter, men viss jeg forstår forklaringen i 
+Seksjon 1.5.2 er ikke $t_2$ relevant siden det basiselementet 
+med grad lik $n$ er definert som 
+$$\alpha_n\displaystyle\prod_{i=0}^{n-1}(t-t_i)$$ 
+så en Newton-basisen for $\mathcal P_2$ vil ikke ha 
+noen element som trenger $t_2$?
+
+Kan hende jeg misforstår, men i de oppgavene antar 
+jeg at $t_2$ står i oppgaveteksten ved uhell og 
+ignorer de.
+
+\newpage
+\begin{prob*}{Oppgave 2.5.2}{}
+    Bevis følgende korollar: Alle $n$-dimensjonelle vektorrom over 
+    $\mathbb K$ er isomorfe med hverrandre.
+\end{prob*}
+\begin{proof}[Bevis]
+    La $\mathbb K$ være en kropp, og $U,V$ n-dimensjonelle 
+    vektorrom over 
+    $\mathbb K$. 
+
+    Vi ønsker å vise at de er isomorfe, og med det at alle 
+    $n$-dimensjonelle vektorrom over $\mathbb K$ er isomorfe 
+    med hverrandre (siden $U,V$ er vilkårlige).
+
+    Siden $U$ og $V$ er $n$-dimensjonelle vektorrom over $\mathbb K$
+    så har vi $U \cong \mathbb K^n$ og $\mathbb K^n \cong V$ 
+    ifølge Teorem 2.5.1 fra boken. 
+
+    Siden $\cong$ utgjør en ekvivalensrelasjon må det 
+    være tilfellet at vi har transitivitet: 
+    $$ 
+        U \cong \mathbb K^n \land \mathbb K^n \cong V \Rightarrow 
+        U \cong V
+    $$ 
+\end{proof}
+
+\begin{prob*}{Oppgave 2.5.3}{}
+    I vektorrommet $\mathcal P_2$ lar vi $\mathcal B = (p_0, p_1, p_2)$
+    være den kanoniske basisen og $\mathcal C = (q_0,q_1,q_2)$ være 
+    Newton-basisen over punktene $t_0 = 0, t_1 = 1, t_2 = 2$. 
+    Finn $[p]_\mathcal B$ og $[p]_\mathcal C$, der 
+    $p(t) = 2 - t + 3t^2$.
+\end{prob*}
+\begin{proof}[Løsning]
+    La $\mathcal B = (p_0, p_1, p_2)$ være den kanoniske basisen 
+    til $\mathcal P_2$, og $\mathcal C = (q_0, q_1, q_2)$ være 
+    Newton-basisen over punktene $t_0 = 0, t_1 = 1, t_2 = 2$. 
+
+    Vi ønsker å finne $[p]_\mathcal B$ og $[p]_\mathcal C$, der 
+    $p(t) = 2 - t + 3t^2$.
+
+    Med andre ord, vi skal finne $\alpha_0, \alpha_1, \alpha_2$ og 
+    $\beta_0, \beta_1, \beta_2$ slik at 
+    $$ 
+        p(t) = \alpha_0 p_0 + \alpha_1 p_1 + \alpha_2 p_2
+    $$ 
+    og
+    $$ 
+        p(t) = \beta_0 q_0 + \beta_1 q_1 + \beta_2 q_2
+    $$  
+    
+    Vi begynner med $[p]_\mathcal B$. 
+
+    \begin{align*}
+        p(t) &= \alpha_0 p_0 + \alpha_1 p_1 + \alpha_2 p_2 \\
+        2 - t + 3t^2 &= \alpha_0 p_0 + \alpha_1 p_1 + \alpha_2 p_2 \\
+    \end{align*} 
+    
+    Husk at $p_i = t^i$ så 
+
+    \begin{align*}
+        2 - t + 3t^2 &= \alpha_0 + \alpha_1 t + \alpha_2 t^2 \\ 
+        \alpha_0 &= 2 \\ 
+        \alpha_1 &= -1 \\ 
+        \alpha_2 &= 3 \\ 
+        \Rightarrow \left[p\right]_\mathcal B &= (2, -1, 3)
+    \end{align*}
+
+
+    Deretter tar vi $[p]_\mathcal C$. 
+
+    \begin{align*}
+        p(t) &= \beta_0 q_0 + \beta_1 q_1 + \beta_2 q_2 \\ 
+             &= \beta_0 \cdot 1 + \beta_1 \cdot t + 
+             \beta_2 \cdot t(t-1) \\ 
+             &= \beta_0 + \beta_1 t + \beta_2(t^2 - t) \\ 
+             &= \beta_2 t^2 + (\beta_1 - \beta_2)t + \beta_0
+    \end{align*}
+
+    Vi sammenligner med $p(t) = 2 - t + 3t^2$, og får systemet
+    \begin{align*}
+        \beta_2 &= 3 \\ 
+        \beta_1 - \beta_2 &= -1 \\ 
+        \beta_0 &= 2
+    \end{align*}
+
+    Dermed
+    \begin{align*}
+        \beta_2 &= 3 \\ 
+        \beta_1 &= 2 \\ 
+        \beta_0 &= 2
+    \end{align*}
+
+    som gir
+    $$
+    [p]_\mathcal C = (2, 2, 3).
+    $$
+\end{proof}
+
+\begin{prob*}{Oppgave 2.5.6}{}
+    La $\mathcal B$ og $\mathcal C$ være standardbasisene 
+    i henholdsvis $\mathbb K^n$ og $\mathbb K^m$, og la 
+    $A \in M_{m\times n}(\mathbb K)$. 
+    La $T: \mathbb K^n \to \mathbb K^m$ være den tilhørende 
+    avbildingen $T(x) := Ax$. 
+    Vis at 
+    $$ 
+        [T]_\mathcal C^\mathcal B = A
+    $$ 
+\end{prob*}
+\begin{proof}[Bevis]
+    La $\mathcal B = (e_1,\dots,e_n)$ være standardbasisen 
+    for $\mathbb K^n$, og la $\mathcal C = (f_1,\dots,f_m)$ være 
+    standardbasisen for $\mathbb K^m$. 
+    La $A \in M_{m\times n}(\mathbb K)$, 
+    og definer en lineær avbildning 
+    $T : \mathbb K^n \to \mathbb K^m$ ved $T(x) = Ax$.
+
+    Vi skal vise at
+    \[
+        [T]_{\mathcal C}^{\mathcal B} = A.
+    \]
+
+    Per definisjon består matrisen $[T]_{\mathcal C}^{\mathcal B}$ 
+    av kolonnene
+    \[
+        [T]_{\mathcal C}^{\mathcal B}
+        = \bigl([T(e_1)]_{\mathcal C}\;\; [T(e_2)]_{\mathcal C}\;\; \dots\;\; [T(e_n)]_{\mathcal C}\bigr).
+    \]
+
+    Siden $T(e_j) = A e_j$, får vi
+    \[
+        [T]_{\mathcal C}^{\mathcal B}
+        = \bigl([Ae_1]_{\mathcal C}\;\; [Ae_2]_{\mathcal C}\;\; \dots\;\; [Ae_n]_{\mathcal C}\bigr).
+    \]
+
+    Men vektoren $Ae_j$ er nøyaktig den $j$-te kolonnen i $A$, 
+    og koordinatene til en standardkolonne i 
+    standardbasisen er seg selv. 
+    Dermed blir hver kolonne $[Ae_j]_{\mathcal C}$ 
+    lik kolonne $j$ i $A$. 
+
+    Altså er
+    \[
+        [T]_{\mathcal C}^{\mathcal B} = A.
+    \]
+\end{proof}
+
+\begin{prob*}{Oppgave 2.5.9}{}
+    La $U$ og $V$ være endeligdimensjonelle vektorrom av lik dimensjon,
+    og la $T \in \mathcal L(U,V)$. La $\mathcal B$ og $\mathcal C$
+    være basiser for henholdsvis $U$ og $V$. Vis at 
+    $T$ er en isomorfi hvis og bare hvis den kvadratiske matrisen 
+    $[T]_\mathcal C^\mathcal B$ er inverterbar.
+\end{prob*}
+\begin{proof}[Bevis]
+    La $U$ og $V$ være vektorrom slik at 
+    $\text{dim}U = \text{dim}V = n, n \in \mathbb N$, 
+    med basiser $\mathcal B$ for $U$ og $\mathcal C$ for $V$.
+    La $T \in \mathcal L(U,V)$. 
+
+    Vi ønsker å vise at $T$ er en isomorfi viss og bare viss 
+    $[T]_\mathcal C^\mathcal B$ er inverterbar.
+    Dette gjøres enklest med bruk av Proposisjon 2.5.8 fra 
+    boken. 
+
+    \emph{Fremover.}
+
+    Anta at $T$ utgjør en isomorfi fra $U$ til $V$. Da finnes 
+    $T^{-1} \in \mathcal L (V, U)$ slik at 
+    $TT^{-1} = id$. 
+    I følge 2.5.8 har vi at 
+    $$ 
+        \left[TT^{-1}\right]_\mathcal B^\mathcal B = 
+        \left[T\right]_\mathcal C^\mathcal B 
+        \left[T^{-1}\right]_\mathcal B^\mathcal C
+    $$ 
+
+    Betrakt
+    \begin{align*}
+        \left[TT^{-1}\right]_\mathcal B^\mathcal B 
+        &= \left[id\right]_\mathcal B^\mathcal B
+    \end{align*}
+
+    Siden $\text{id}: V \to V$ er identitetsavbildingen, 
+    er den $j$-te kolonnen i matrisen 
+    $\left[\text{id}\right]_\mathcal C^\mathcal B$ 
+    koordinatvektoren til $\text{id}(b_j) = b_j$ uttrykt i 
+    basis $\mathcal C$.  
+    Koordinatvektoren til $b_j$ i basis 
+    $\mathcal C$ har 1 i den $j$-te posisjonen og 0 ellers.  
+
+    Derfor er 
+    \[
+        \left[TT^{-1}\right]_\mathcal B^\mathcal B = 
+        \left[\text{id}\right]_\mathcal B^\mathcal B = I,
+    \] 
+    der $I$ er identitetsmatrisen.
+
+    Så $\left[T\right]_\mathcal C^\mathcal B$ har en matrise 
+    $\left[T^{-1}\right]_\mathcal B^\mathcal C$ slik at 
+    de multipliserer til identitetsmatrisen. Så 
+    $\left[T\right]_\mathcal C^\mathcal B$ er inverterbar.
+
+    \medskip
+    \noindent
+    \emph{Bakover.} 
+
+    Anta nå at $\left[T\right]_\mathcal C^\mathcal B$ er inverterbar. Da finnes 
+    en matrise $A^{-1}$ slik at 
+    \[
+        \left[T\right]_\mathcal C^\mathcal B \, A^{-1} = I.
+    \] 
+    I følge Proposisjon 2.5.8 finnes det da en lineær avbildning 
+    $S \in \mathcal L(V,U)$ slik at $\left[S\right]_\mathcal B^\mathcal C = A^{-1}$.  
+
+Da har vi 
+\[
+[T]_\mathcal C^\mathcal B [S]_\mathcal B^\mathcal C = 
+I = [\text{id}]_\mathcal B^\mathcal B,
+\] 
+som igjen impliserer at 
+\[
+T \circ S = \text{id}_V \quad \text{og} \quad S \circ T = \text{id}_U.
+\] 
+
+Dermed er $T$ invertibel som lineær avbildning, altså en isomorfi.
+
+\medskip
+\noindent
+Vi konkluderer da at $T$ er en isomorfi hvis og bare hvis 
+$\left[T\right]_\mathcal C^\mathcal B$ er inverterbar.
+\end{proof}
+
+\newpage 
+\begin{prob}{Oppgave 2.5.10}{}
+    La $T : \mathcal P_3 \to \mathcal P_2$ være gitt ved 
+    $$ 
+        Tp := \frac{dp}{dt} \quad\quad \forall p \in \mathcal P_3,
+    $$ 
+
+    den deriverte til polynomet $p$.
+
+    (a) La $\mathcal B = (p_0,p_1,p_2,p_3)$ og 
+    $\mathcal C = (p_0, p_1, p_2)$ være de kanoniske 
+    basisene for henholdsvis 
+    $\mathcal P_3$ og $\mathcal P_2$. 
+    Finn basisrepresentasjonen $[T]_\mathcal C^\mathcal B$. 
+
+    (b) Generaliser den forrige oppgaven til avbildingen 
+    $T:\mathcal P_n \to \mathcal P_{n-1}$, definert på samme måte, 
+    for en vilkårlig $n \in \mathbb N$.
+\end{prob}
+\begin{proof}[Løsning til (a)]
+    \begin{align*}
+        [T]_\mathcal C^\mathcal B  
+        &= 
+        \begin{pmatrix}
+            [Tp_0]_\mathcal C
+            &
+            [Tp_1]_\mathcal C 
+            &
+            [Tp_2]_\mathcal C 
+            &
+            [Tp_3]_\mathcal C
+        \end{pmatrix}
+        \\ 
+        Tp_0 &= \frac{d}{dt}1 = 0 
+        \\
+        [0]_\mathcal C &= (0, 0, 0)
+        \\ 
+        Tp_1 &= \frac{d}{dt}t = 1 
+        \\ 
+        [1]_\mathcal C &= (1, 0, 0)
+        \\ 
+        Tp_2 &= \frac{d}{dt}t^2 = 2t 
+        \\ 
+        [2t]_\mathcal C &= (0, 2, 0)
+        \\ 
+        Tp_3 &= \frac{d}{dt}t^3 = 3t^2 
+        \\ 
+        [3t^2]_\mathcal C &= (0, 0, 3)
+        \\ 
+        \Rightarrow 
+        [T]_\mathcal C^\mathcal B  
+                          &= 
+        \begin{pmatrix}
+            0 & 1 & 0 & 0 \\ 
+            0 & 0 & 2 & 0 \\ 
+            0 & 0 & 0 & 3 
+        \end{pmatrix}
+    \end{align*}
+    
+    La oss sjekke at matrisen gjør det vi forventer. 
+
+    La $p = t^3 + 2t^2 + 4t + 6$. Da er 
+    $[p]_\mathcal B = (6, 4, 2, 1)$. 
+    \begin{align*}
+        [T]_\mathcal C^\mathcal B [p]_\mathcal B 
+        &= 
+        \begin{pmatrix}
+            0 & 1 & 0 & 0 \\ 
+            0 & 0 & 2 & 0 \\ 
+            0 & 0 & 0 & 3 \\ 
+        \end{pmatrix}
+        \begin{pmatrix}
+            6 \\ 4 \\ 2 \\ 1
+        \end{pmatrix}
+        \\ 
+        &= 
+        \begin{pmatrix}
+            4 \\ 4 \\ 3
+        \end{pmatrix}
+        \\ 
+        \Rightarrow 4 + 4t + 3t^2 &= \frac{dp}{dt}
+    \end{align*}
+\end{proof}
+
+\begin{proof}[Løsning til (b)]
+    For $T:\mathcal P_n \to \mathcal P_{n-1}$ har vi 
+    en $n \times n+1 = \text{dim}\mathcal P_{n-1} \times 
+    \text{dim}\mathcal P_n$ 
+    matrise med følgende struktur 
+    $$ 
+        \begin{pmatrix}
+            0 & 1 & 0 & 0 & \cdots & 0 & 0 \\ 
+            0 & 0 & 2 & 0 & \cdots & 0 & 0 \\ 
+            0 & 0 & 0 & 3 & \cdots & 0 & 0 \\ 
+            0 & 0 & 0 & 0 & \cdots & 0 & 0 \\ 
+            \vdots & \vdots & \vdots & \vdots & 
+            \ddots & \vdots & \vdots \\ 
+            0 & 0 & 0 & 0 & \cdots & 0 & n \\
+            0 & 0 & 0 & 0 & \cdots & 0 & 0
+        \end{pmatrix}
+    $$ 
+
+    altså en matrise med en "offset" diagonal med økende 
+    naturlige tal som ender med $n$ is nest nederste 
+    rad i kolonnen helt til høyre.
+\end{proof}
+
+\newpage
+\begin{prob*}{Oppgave 2.6.4}{}
+    I vektorrommet $\mathbb R^2$ lar vi $\mathcal B = (u_1,u_2)$
+    være basisen gitt ved 
+    $
+    u_1 = 
+    \begin{pmatrix}
+        1 \\ 2
+    \end{pmatrix}
+    $,
+    $ 
+    \begin{pmatrix}
+        -2 \\ 2
+    \end{pmatrix}
+    $ 
+    og 
+    $\mathcal C = (e_1, e_2)$ være standardbasisen. 
+    Finn basisskiftematrisene $[id]_\mathcal B^\mathcal C$
+    og $[id]_\mathcal C^\mathcal B$
+\end{prob*}
+
+\begin{proof}[Løsning]
+    Vi begynner med å finne 
+    $$ 
+        \left[id\right]_\mathcal C^\mathcal B = 
+        \begin{pmatrix}
+            [e_1]_\mathcal C & [e_2]_\mathcal C
+        \end{pmatrix}
+    $$ 
+
+    \begin{align*}
+        [e_1]_\mathcal C 
+        &= 
+        \begin{pmatrix}
+            \alpha \\ \beta
+        \end{pmatrix},
+        \\ 
+        \alpha u_1 + \beta u_2
+        &= e_1 
+        \\ 
+        \alpha 
+        \begin{pmatrix}
+            1 \\ 2 
+        \end{pmatrix}
+        + 
+        \beta
+        \begin{pmatrix}
+            -2 \\ 2
+        \end{pmatrix} 
+        &= 
+        \begin{pmatrix}
+            1 \\ 0
+        \end{pmatrix}
+        \\ 
+        \alpha - 2\beta &= 1
+        \\
+        2(\alpha + \beta) &= 0
+        \\ 
+        3\alpha &= 1 
+        \Rightarrow \alpha = \frac{1}{3}
+        \\ 
+        \Rightarrow \beta &= -\frac{1}{3}  
+    \end{align*}
+    
+    så 
+    $$ 
+        [e_1]_\mathcal C =
+        \frac{1}{6}
+        \begin{pmatrix}
+            2 \\ -2
+        \end{pmatrix}
+    $$ 
+
+    Deretter 
+    \begin{align*}
+        [e_2]_\mathcal C 
+        &= 
+        \begin{pmatrix}
+            \gamma \\ \delta
+        \end{pmatrix}, 
+        \\ 
+        \gamma u_1 + \delta u_2 &= e_2 
+        \\ 
+        \gamma 
+        \begin{pmatrix}
+            1 \\ 2 
+        \end{pmatrix}
+        +
+        \delta 
+        \begin{pmatrix}
+            -2 \\ 2
+        \end{pmatrix} 
+                                &= 
+        \begin{pmatrix}
+            0 \\ 1
+        \end{pmatrix}
+        \\ 
+        \gamma - 2\delta &= 0 \\
+        2(\gamma + \delta) &= 1 \\ 
+        3\gamma &= 1 \Rightarrow \gamma = \frac{1}{3} \\ 
+        \Rightarrow \delta &= \frac{1}{6}
+    \end{align*}    
+
+    så 
+    $$ 
+        [e_2]_\mathcal C = \frac{1}{6}
+        \begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}
+    $$ 
+
+    Med dette har vi at 
+    $$ 
+        [id]_\mathcal C^\mathcal B = 
+        \frac{1}{6}
+        \begin{pmatrix}
+            2 & 2 \\
+            -2 & 1
+        \end{pmatrix}
+    $$ 
+
+    For å finne 
+    $$ 
+        [id]_\mathcal B^\mathcal C
+    $$ 
+
+    må vi bare finne inversen til 
+    matrisen over siden 
+    $$ 
+        [id]_\mathcal B^\mathcal C [id]_\mathcal C^\mathcal B 
+        = I_n
+    $$ 
+    
+    \begin{align*}
+        \begin{pmatrix}
+            1 & -2 \\ 
+            2 & 2 
+        \end{pmatrix}
+        \begin{pmatrix}
+            \frac{1}{3} & \frac{1}{3} \\ 
+            -\frac{1}{3} & \frac{1}{6}
+        \end{pmatrix}
+        &= 
+        \begin{pmatrix}
+            1 & 0 \\ 
+            0 & 1
+        \end{pmatrix}
+        \\ 
+        \therefore [id]_\mathcal B^\mathcal C &= 
+        \begin{pmatrix}
+            1 & -2 \\ 
+            2 & 2
+        \end{pmatrix}
+    \end{align*}
+
+\end{proof}
+
+\newpage
+\begin{prob*}{Oppgave 2.6.5}{}
+    På vektorrommet $\mathcal P_2$ lar vi 
+    $\mathcal B = (p_0, p_1, p_2)$ være den kanoniske basisen 
+    og $\mathcal C = (q_0, q_1, q_2)$ være Newton-basisen
+    over punktene $t_0 = 0, t_1 = 1, t_2 = 2$. 
+    Finn basisskiftematrisene $[id]_\mathcal B^\mathcal C$ 
+    og $[id]_\mathcal C^\mathcal B$.
+\end{prob*}
+\begin{proof}[Løsning]
+    La $\mathcal P_2$ være rommet av alle polynomer med reelle
+    koeffisienter av grad $\leq 2$. 
+
+    La $\mathcal B = (p_0, p_1, p_2)$ være den kanoniske basisen, der $p_0(x)=1, p_1(x)=x, p_2(x)=x^2$. Newton-basisen $\mathcal C = (q_0, q_1, q_2)$ over punktene $t_0 = 0, t_1 = 1, t_2 = 2$ er definert som $q_0(x)=1$, $q_1(x) = x-t_0 = x$, og $q_2(x) = (x-t_0)(x-t_1) = x(x-1) = x^2-x$.
+
+    Vi ønsker å finne basisskiftematrisene.
+
+    Vi begynner med $[id]_\mathcal C^\mathcal B$. Per definisjon er kolonnene i $[id]_\mathcal C^\mathcal B$ koordinatvektorene til basisvektorene i $\mathcal B$ uttrykt i basis $\mathcal C$.
+    \begin{align*}
+        [id]_\mathcal C^\mathcal B
+        &=
+        \begin{pmatrix}
+            [p_0]_\mathcal C & [p_1]_\mathcal C & [p_2]_\mathcal C
+        \end{pmatrix}
+    \end{align*}
+    Vi finner koordinatvektorene:
+    \begin{itemize}
+        \item For $p_0(x) = 1$:
+        $1 = \alpha_0 q_0(x) + \alpha_1 q_1(x) + \alpha_2 q_2(x) = \alpha_0(1) + \alpha_1(x) + \alpha_2(x^2-x)$.
+        Ved å sammenligne koeffisienter får vi $\alpha_0=1, \alpha_1=0, \alpha_2=0$.
+        Dermed er
+        $$[p_0]_\mathcal C = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}$$
+        \item For $p_1(x) = x$:
+        $x = \beta_0 q_0(x) + \beta_1 q_1(x) + \beta_2 q_2(x) = \beta_0(1) + \beta_1(x) + \beta_2(x^2-x)$.
+        Ved å sammenligne koeffisienter får vi $\beta_0=0, \beta_1-\beta_2=1, \beta_2=0$. Dette gir $\beta_0=0, \beta_1=1, \beta_2=0$.
+        Dermed er
+        $$[p_1]_\mathcal C = \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}$$
+        \item For $p_2(x) = x^2$:
+        $x^2 = \gamma_0 q_0(x) + \gamma_1 q_1(x) + \gamma_2 q_2(x) = \gamma_0(1) + \gamma_1(x) + \gamma_2(x^2-x)$.
+        Ved å sammenligne koeffisienter får vi $\gamma_0=0, \gamma_1-\gamma_2=0, \gamma_2=1$. Dette gir $\gamma_0=0, \gamma_1=1, \gamma_2=1$.
+        Dermed er
+        $$[p_2]_\mathcal C = \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}$$
+    \end{itemize}
+    Dette gir oss basisskiftematrisen
+    $$[id]_\mathcal C^\mathcal B = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}$$
+
+    For å finne $[id]_\mathcal B^\mathcal C$ kan vi ta inversen av $[id]_\mathcal C^\mathcal B$.
+    \begin{align*}
+        \left([id]_\mathcal C^\mathcal B\right)^{-1}
+        &=
+        \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 1 \\
+            0 & 0 & 1
+        \end{pmatrix}^{-1}
+        \\
+        &=
+        \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & -1 \\
+            0 & 0 & 1
+        \end{pmatrix}
+    \end{align*}
+    Dermed er
+    $$[id]_\mathcal B^\mathcal C = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & -1 \\ 0 & 0 & 1 \end{pmatrix}$$
+\end{proof}
+
+\end{document}

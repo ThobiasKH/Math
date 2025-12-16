@@ -1,0 +1,365 @@
+\input{preamble.tex}
+
+\title{\huge{MAT-INF3600 Assignment}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+\section*{Problem 1}
+
+\begin{proof}[Solution for (a)]
+    Let $A = \{0,1\}$, $c^\mathfrak A$ be any element in $A$ and 
+    $R^\mathfrak A(x,y)$ if $x = y$. Let $f^\mathfrak A(x) = x$ 
+    be the identity function on $A$.
+    
+    Then (i) is satisfied and (ii), $(\forall x)[R(x,f(x)]$ 
+    is satisfied.
+\end{proof}
+
+\begin{proof}[Solution for (b)]
+    Let $A = \{0,1\}$, $c^\mathfrak A$ be any element in $A$ and 
+    $R^\mathfrak A(x,y)$ if $x < y$ with $f^\mathfrak A(x) = x$ 
+    as before. Then, we get a $2$ element universe, 
+    but $R(x,f(x))$ is not satisfied for any $x$ since 
+    $0$ is not less than itself and $1$ is not less than itself.
+\end{proof}
+
+\begin{proof}[Solution for (c)]
+    Now we must construct a $5$ element universe with 
+    an injective function. 
+    
+    Let $A = \{1,\dots,5\}$ with $c^\mathfrak A = 1$ 
+    (or any other choice), $R = \emptyset$ (again, arbitrary) 
+    and $f(5) = 1$, $f(x) = x + 1$ otherwise.
+\end{proof}
+
+\begin{proof}[Solution and proof of (d)]
+    Let $A = \mathbb N$ ($0$ included) with $c^\mathfrak A = 0$, 
+    $R = \emptyset$ (choice is arbitrary) 
+    and $f^\mathfrak A(n) = n + 1$ 
+    be the successor function. 
+
+    Then $\forall x[f(x) \neq c]$ since $0$ is not the successor 
+    of any natural number. 
+    Furthermore the second condition 
+    of $f$ being injective is satisfied since 
+    \begin{align*}
+        f(x) &= f(y) \\ 
+        \rightarrow x + 1 &= y + 1 \\ 
+        \rightarrow x &= y
+    \end{align*}
+
+    Hence $\mathfrak A \vDash \Gamma$. 
+
+    Now to prove that any model of $\Gamma$ has an infinite 
+    universe. 
+    
+    Suppose we have some model of $\Gamma$ with a finite universe 
+    $A = \{c^\mathfrak A, x_1, x_2, \dots, x_n\}$. 
+    We require $f:A \to A \setminus \{c^\mathfrak A\}$ and for 
+    it to be injective. Since $A$ is finite we have an injective map 
+    from a set of size $n + 1$ to a set of size $n$ which is not 
+    possible by the pigeonhole principle, thus we arrive at 
+    a contradiction.
+     
+    To vizualize this more clearly we can attempt to construct 
+    an injection $f:A \to A$. 
+    \begin{align*}
+        f^\mathfrak A(c^\mathfrak A) &= x_{i_1} \text{ where } 
+        x_{i_1} \neq c^\mathfrak A \\ 
+        f^\mathfrak A(x_1) &= x_{i_2} \text{ where } x_{i_2} 
+        \neq x_{i_1}, \text{ and } 
+        x_{i_2} \neq c \\ 
+                           &\vdots \\ 
+        f^\mathfrak A(x_{n-1}) &= x_{i_n} \text{ where } 
+        x_{i_n} \neq x_{i_{n-1}} 
+        ,\dots, x_{i_1}, \text{ and } x_{i_n} \neq c^\mathfrak A
+    \end{align*}
+    But now we arrive at $f^\mathfrak A(x_n)$ which 
+    cannot go to $c^\mathfrak A$
+    as that violates $f(x) \neq c$ and $f^\mathfrak A(x_n)$ 
+    cannot go to any 
+    $x_i$ as that would violate injectivity. So 
+    we cannot construct a well-defined injection that satisfies 
+    $f(x) \neq c$ for all $x$ given a finite universe.
+
+    Hence any model of $\Gamma$ necessarily has an infinite universe.
+\end{proof}
+
+\newpage 
+\section*{Problem 2}
+\begin{proof}
+    Let $n \geq 1$ and let $\theta_1, \dots, \theta_n$ be sentences. 
+    Let $\Sigma$ be a set of formulas. We will prove, by induction, 
+    that $\Sigma \cup \{\theta_1, \dots, \theta_n\} \vdash \phi$ 
+    if and only if $\Sigma \vdash \theta_1 \land \dots \land \theta_n 
+    \rightarrow \phi$.
+
+    \emph{Base case $n = 1$}.
+
+    $\Sigma \cup \theta \vdash \phi$ if any only if 
+    $\Sigma \vdash \theta \rightarrow \phi$, by 
+    \textbf{Theorem 2.7.4 (The Deduction Theorem)}. 
+
+    Assume that for $n = k$. 
+    Now look at $n = k + 1$,
+    \begin{align*}
+        \Sigma \cup \{\theta_1,\dots,\theta_k, \theta_{k + 1}\} 
+        &\vdash \phi \\ 
+        \Sigma \cup \{\theta_1,\dots,\theta_n\} 
+        &\vdash \theta_{k+1} \rightarrow \phi 
+        \text{ by the regular Deduction Theorem}
+        \\ 
+        \Sigma 
+        &\vdash \left[\bigwedge_{i = 1}^k \theta_i\right] \rightarrow 
+        (\theta_{k+1} \rightarrow \phi)
+        \text{ by assumption} 
+        \\ 
+        \alpha \rightarrow (\beta \rightarrow \gamma) 
+        & \text{ equivalent to }
+        (\alpha \land \beta) \rightarrow \gamma
+        \\ 
+        \text{Hence } 
+        \Sigma &\vdash \left[\bigwedge_{i=1}^{k+1=n}
+        \theta_i \right] \rightarrow \phi
+    \end{align*}
+
+    Now to show the implication in the other direction: 
+    \begin{align*}
+        \Sigma &\vdash \left[\bigwedge_{i=1}^{k+1=n} \theta_i\right]
+        \rightarrow \phi
+        \\ 
+        \Sigma &\vdash \left[\bigwedge_{i=1}^k \theta_i\right]
+        \rightarrow (\theta_{k+1} \rightarrow \phi) \\ 
+        \Sigma \cup \{\theta_1,\dots,\theta_k\} 
+               &\vdash \theta_{k+1} \rightarrow \phi 
+               \text{ by assumption } \\ 
+        \Sigma \cup \{\theta_1,\dots,\theta_{k+1}\} 
+               &\vdash \phi \text{ by the regular Deduction Theorem}
+    \end{align*}
+
+    This completes the proof.
+\end{proof}
+
+\newpage 
+\section*{Problem 3}
+\begin{proof}[Proof of (a)]
+    \begin{align*}
+        &1. \forall x [Rx \rightarrow Sx]  \\ 
+        &2. \forall x [Rx \rightarrow Sx] \rightarrow 
+        (Rt \rightarrow St) &(Q1) \\ 
+        &3. (Rt \rightarrow St) \rightarrow (\lnot St \rightarrow 
+        \lnot Rt) &(PC) \\ 
+        &4. \forall x[Rx \rightarrow Sx] \rightarrow 
+        (\lnot St \rightarrow \lnot Rt) &2,3 \quad (PC) \\
+        &5. \forall x [Rx \rightarrow Sx] \rightarrow 
+        \forall y [\lnot Sy \rightarrow \lnot Ry] &4, \quad (QR) \\
+        &6. \forall y [\lnot Sy \rightarrow \lnot Ry] &1,5 \quad (PC) 
+    \end{align*}
+    Thus we have a deduction of 
+    $\forall y[\lnot Sy \rightarrow \lnot Ry]$ from 
+    $\forall x[Rx \rightarrow Sx]$.
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    First we recognize that $\phi \not\vdash \psi$ if and only 
+    if $\{\phi, \lnot \psi\}$ is satisfiable. 
+
+    Let $\mathfrak A$ be a structure with universe 
+    $A = \{a,b\}$, $R^\mathfrak A = \{a\}$, 
+    $S^\mathfrak A = \{a,b\}$. 
+
+    Then if $t = a$, $Ra$ is true and $Sa$ is true so 
+    $Rx \rightarrow Sx$ is true. 
+    If $t = b$, $Rb$ is false so the implication is true regardless. 
+    Therefore $\mathfrak A \vDash \forall x[Rx \rightarrow Sx]$.
+
+    Now to check the other formula. If $t = b$ we have 
+    $Sb$, but we do not have $Rb$. Hence the implication does 
+    not hold for all terms and 
+    $\mathfrak A \not\vDash \forall y[Sy \rightarrow Ry]$.
+\end{proof}
+
+\newpage 
+\section*{Problem 4}
+\begin{proof}[Proof of (a)]
+    We will appeal to Lemma 1 by showing that the negation 
+    leads to the given contradiction. 
+    \begin{align*}
+        &1. \exists x (R(x)) \land \forall x (\lnot R(x) \land 
+        \lnot S(x)) 
+        \\ 
+        &2. \exists x (R(x)) &1 \quad (PC) 
+        \\ 
+        &3. \forall x (\lnot R(x) \land \lnot S(x)) &1 \quad (PC)
+        \\ 
+        &4. \forall x (\lnot R(x) \land \lnot S(x))
+        \rightarrow (\lnot R(x) \land \lnot S(x)) & (Q1)
+        \\ 
+        &5. \lnot R(x) \land \lnot S(x) & 3,4 \quad (PC)
+        \\ 
+        &6. \lnot R(x) & 5 \quad (PC)
+        \\ 
+        &7. \lnot R(x) \rightarrow (R(x) \rightarrow 
+        \lnot (\forall x [x = x]) & (PC)
+        \\
+        &8. R(x) \rightarrow \lnot(\forall x [x = x]) &6,7 \quad (PC)
+        \\ 
+        &9. \exists x (R(x)) \rightarrow \lnot(\forall x [x = x])
+        & 8 \quad (QR)
+        \\ 
+        &10. \lnot(\forall x [x = x]) &2,9 \quad (PC) 
+        \\
+        &11. \forall x (x = x) & (E1)
+        \\ 
+        &12. \bot &10,11 \quad (PC)
+    \end{align*}
+
+    Therefore 
+    $$ 
+        \vdash \exists x (R(x)) \rightarrow [\exists x(R(x) 
+        \lor S(x))]
+    $$ 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Once again, we will appeal to Lemma 1 by showing that 
+    $$ 
+        \forall x (R(x) \land \exists x \lnot R(x)) 
+        \vdash \bot
+    $$ 
+    \begin{align*}
+        &1. \forall x (R(x) \land \exists x \lnot R(x))
+        \\ 
+        &2. \forall x (R(x) \land \exists x \lnot R(x))
+        \rightarrow R(x) \land \exists x \lnot (R(x)) 
+        & (Q1)
+        \\ 
+        &3. R(x) \land \exists x \lnot (R(x))
+        & 1,2 \quad (PC)
+        \\ 
+        &4. R(x) 
+        & 3 \quad (PC)
+        \\ 
+        &5. \exists \lnot (R(x)) 
+        & 3 \quad (PC)
+        \\ 
+        &6. R(x) \rightarrow (\lnot R(x) \rightarrow 
+        \lnot [\forall x (x=x)]) 
+        & (PC)
+        \\
+        &7. \lnot R(x) \rightarrow \lnot [\forall x (x=x)]
+        & 4,6 \quad (PC)
+        \\ 
+        &8. \exists x (\lnot R(x)) \rightarrow 
+        \lnot [\forall x (x = x)] 
+        & 7 \quad (QR)
+        \\ 
+        &9. \lnot [\forall x (x = x)]
+        & 5,8 \quad (PC)
+        \\ 
+        &10. \forall x (x = x) 
+        & (E1)
+        \\ 
+        &11. \bot 
+        & 9,10 \quad (PC)
+    \end{align*}
+\end{proof}
+
+\newpage 
+\section*{Problem 5}
+\begin{proof}
+    We proceed by structural induction on $t$. 
+
+    \textbf{Base case $(t = 0)$}. 
+
+    Then there is $p = 0$, $T \vdash 0 = 0$.
+
+    Assume that for any variable-free $\mathfrak L$-term $t$ 
+    of height $n$, 
+    we can find some prime term $p$ such that 
+    $$ 
+        T \vdash t = p
+    $$ 
+
+    \textbf{Inductive step}.
+
+    Now we look at variable-free terms of height $n + 1$.
+
+    \emph{Case 1 (f)}.
+    Suppose $t = f(t_1, t_2)$ is variable-free. Then 
+    $t_1,t_2$ are variable free $\mathfrak L$-terms. 
+    By our hypothesis there exist prime terms $p_1,p_2$ such that 
+    $$ 
+        T \vdash p_1 = t_1, \quad T \vdash p_2 = t_2
+    $$ 
+
+    By $E2$ we have 
+    $$ 
+        p_1 = t_1 \land p_2 = t_2 \rightarrow 
+        f(t_1,t_2) = f(p_1,p_2)
+    $$ 
+
+    By the inductive definition of prime terms, 
+    $f(p_1, p_2)$ is a prime term and we have 
+    $$ 
+        T \vdash t = p
+    $$ 
+    where $t = f(t_1, t_2)$ and $p = f(p_1,p_2)$.
+
+    \emph{Case 2 (v)}. 
+    Suppose $t = v(t')$ is variable-free. Then $t'$ is 
+    variable-free. By our hypothesis there exists a prime 
+    term $p'$ such that 
+    $$ 
+        T \vdash p' = t'
+    $$ 
+
+    $p'$ is prime so it is the constant $0$ or of the form 
+    $f(p'_1, p'_2)$ where $p'_1, p'_2$ are prime. 
+    If $p'$ is $0$ we have (by $E2$) 
+    $$ 
+        v(t') = v(0) = 0
+    $$ 
+    which is a prime term. Otherwise if $p' = f(p'_1, p'_2)$ then 
+    $$ 
+        v(t') = v(f(p'_1, p'_2)) = p'_1
+    $$
+    by $T_3$ (and $E2$), which is prime.
+
+    In other words there exists, in both cases, prime $p$ such that 
+    $$ 
+        T \vdash t = p
+    $$ 
+
+    \emph{Case 3 (h)}. 
+    Suppose $t = h(t')$ is variable-free. Then $t'$ is 
+    variable-free. By our hypothesis there exists a prime 
+    term $p'$ such that 
+    $$ 
+        T \vdash p' = t'
+    $$ 
+
+    $p'$ is prime so it is the constant $0$ or of the form 
+    $f(p'_1, p'_2)$ where $p'_1, p'_2$ are prime. 
+    If $p'$ is $0$ we have (by $E2$) 
+    $$ 
+        h(t') = h(0) = 0
+    $$ 
+    which is a prime term. Otherwise if $p' = f(p'_1, p'_2)$ then 
+    $$ 
+        h(t') = h(f(p'_1, p'_2)) = p'_2
+    $$
+    by $T_4$ (and $E2$), which is prime.
+
+    In other words there exists, in both cases, prime $p$ such that 
+    $$ 
+        T \vdash t = p
+    $$ 
+\end{proof}
+
+
+
+\end{document}

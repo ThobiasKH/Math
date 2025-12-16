@@ -1,0 +1,184 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, amsfonts, geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Real Analysis | Characterizing the Reals (Course: MIT 18.100A)}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Abstract Algebra revision}
+
+Recall the definition of the field from abstract algebra:
+\begin{definition}[Field]
+    A field \((F, +, \cdot)\) is a set with two operations denoted as \(+\) and \(\cdot\) 
+    satisfying the following conditions, 
+    \begin{enumerate}
+        \item Closure of addition; If \(x,y\in F \Rightarrow x+y \in F\) 
+        \item Commutativity of addition; \(x+y=y+x, \forall x,y \in F\)
+        \item Associativity of addition; \(\forall x,y,z \in F : 
+            (x+y)+z=x+(y+z)\)
+        \item Additive identity; \(\forall x \in F: x+0=0+x=x\)
+        \item Additive inverses; \(\forall x \in F, \exists (-x):x+(-x)=(-x)+x = 0\)
+        \item Closure of multiplication; If \(x,y \in F \Rightarrow x\cdot y \in F\)
+        \item Commutativity of multiplication; \(x \cdot y=y\cdot x, \forall x,y \in F\)
+        \item Associativity of multiplication; \(\forall x,y,z \in F : (xy)z=x(yz)\) 
+        \item Multiplicative identity; \(\forall x \in F: 1 \cdot x = x \cdot 1 = x\) 
+        \item Multiplicative inverses: \(\forall x \in F, (x \neq 0) \Rightarrow
+            \exists x^{-1} \in F : x \cdot x^{-1} = x^{-1} \cdot x = 1\)
+        \item (Left \& right) distributive property \(x(y+z) = xy + xz \land 
+            (x +y)z = xz+yz \quad \forall x,y,z \in F\)
+    \end{enumerate}
+\end{definition}
+
+\noindent 
+\textbf{Examples:}
+
+\noindent
+A clear example of this would be \(\mathbb Q\). \(\mathbb Z\), however, may only 
+have sufficient structure for an integral domain
+or even a euclidean domain if we want to be a bit more specific.
+
+\begin{theorem} 
+    If F is a field then \(\forall x \in F\), 
+    \[ 
+        0\cdot x = 0
+    \]
+\end{theorem}
+
+\begin{proof}
+    If \(x\in F\), 
+    \[ 
+        0 = 0x + (-0x) = (0+0)x+(-0x) = 0x + 0x + (-0x) 
+    \]
+    \[ 
+        = 0x + 0 = 0x
+    \]
+        
+\end{proof}
+
+\begin{definition}[Ordered Field]
+    An ordered field is a field F which is also an ordered set such that 
+    \begin{enumerate}
+        \item \(\forall x,y,z \in F,\) if \(x < y \Rightarrow x+z < y+z\)
+        \item If \(x > 0\) and \(y > 0\) then \(xy > 0\)
+    \end{enumerate}
+    If \(x > 0\) we say x is positive and for \(x \geq 0\) we say x is non-negative.
+\end{definition}
+
+\noindent
+\textbf{Example:}
+
+\noindent 
+Here \(\mathbb Q\) is an example, yet again.
+
+\begin{theorem}
+    If F is an ordered field, then if \(x > 0 \Rightarrow -x < 0\)
+\end{theorem}
+\begin{proof}
+    If \(0 < x \Rightarrow -x + 0 < -x + x \Rightarrow -x < 0\)
+\end{proof}
+
+\noindent 
+The same can be said for \(x<0 \Rightarrow -x > 0\) and it is equally trivial 
+to prove.
+
+\break
+\section*{Field with the Least Upper Bound property}
+\begin{theorem}
+    Let F be an ordered field with the least upper bound property.
+    Then if \(A \subset F, A \neq \emptyset\) and bounded below then \(inf(A)\) exists 
+    in F.
+\end{theorem}
+
+\begin{proof}
+    We are given that for any \(\emptyset \neq A \subset F \Rightarrow \exists sup(A)\). 
+    Consider then the set \(-A = \{-x : x\in A\}\). 
+    Clearly \(-A\) is nonempty and since F is a field \(x\in F \Rightarrow -x \in F\) so 
+    \(-A \subset F\). Thus \(-A\) is a nonempty subset of F. 
+    We assume there exists a supremum of \(-A\) since F has 
+    the least upper bound property.
+    If \(b \geq x, \forall x \in -A\) is an arbitrary upper bound of \(-A\), 
+    the supremum \(sup(A)\) is the bound 
+    \(b_0 \leq b\), observe what happens when we take their inverses. 
+    \begin{gather*}
+        b \geq x \\ 
+        b + (-b) \geq x + (-b) \\ 
+        0 \geq x + (-b) \\ 
+        (-x) + 0 \geq (-x) + x + (-b) \\ 
+        -x \geq -b
+    \end{gather*}
+    Thus the additive inverse of any arbitrary upper bound of \(-A\) is a lower bound of 
+    the set containing the additive inverses of \(-A\)
+    \begin{gather*}
+        b_0 \leq b \\ 
+        b_0 + (-b_0) \leq b + (-b_0) \\ 
+        0 \leq b +(-b_0) \\ 
+        (-b) + 0\leq (-b) + b + (-b_0) \\ 
+        -b \leq -b_0
+    \end{gather*} 
+    Thus the inverse of the supremum of \(-A\) is the infimum of the set of \(-A's\) inverses. 
+    Recall that \(-A = \{-x : x \in A\}\) so \(A = \{x : -x \in -A\}\). 
+    Thus, a subset \(A\) bounded below of an ordered field has \(\inf(A) = -\sup(-A)\) 
+    and so a ordered field with the least upper bound property has the greates lower
+    bound property, also.
+
+\end{proof}
+
+\break
+\section*{The reals again}
+\begin{theorem}
+    There exists a unique (up to isomorphisms) ordered field with the least upper bound 
+    property containing \(\mathbb Q\). This is the field denoted by \(\mathbb R\).
+\end{theorem}
+
+\noindent 
+This is not trivial to prove and will, once again, not be done here.
+
+\begin{theorem}
+    There exists unique \(r \in \mathbb R\) such that \(r > 0 \land r^2 = 2\). 
+\end{theorem}
+\begin{proof}
+    Let \(E = \{x\in \mathbb R : x > 0 \land x^2 < 2\}\). Then E is bounded above 
+    by 2, so \(\sup E \) exists by the least upper bounde property.
+    Let \(r = \sup E\). We will show that \(r^2 = 2\). 
+    Assume for contradiction that \(r^2 < 2\) or \(r^2 > 2\).
+    
+    \noindent
+    \textbf{Case 1: \(r^2 < 2\) }
+    Since \(r\) is the least upper bound, for any \(\mathcal E > 0\), 
+    there exists \(x \in E\) such that \(r - \mathcal E < x\).  
+    Choose \(\mathcal E > 0\) small enough such that \( (r + \mathcal E)^2 < 2 \).  
+    Then \(r + \mathcal E \in E\), contradicting that \(r\) is an upper bound.  
+    Hence, \(r^2 \geq 2\).
+    
+    \noindent
+    \textbf{Case 2: \(r^2 > 2\)}
+    Choose \(\mathcal E > 0\) small enough such that \( (r - \mathcal E)^2 > 2 \).  
+    Then \(r - \mathcal E\) is an upper bound of \(E\), 
+    contradicting the assumption that \(r = \sup E\).  
+      Hence, \(r^2 \leq 2\).
+    
+    \noindent 
+    Since both cases lead to contradictions, we conclude that \(r^2 = 2\).
+    
+    \noindent 
+    \textbf{Uniqueness:} 
+    Suppose there exists another \(s > 0\) such that \(s^2 = 2\).  
+    If \(s > r\), then \(s\) is an upper bound smaller than \(\sup E\), 
+    contradicting the definition of \(r\).  
+    If \(s < r\), then \(r\) is not the least upper bound, also a contradiction.  
+    Hence, \(r = s\), proving uniqueness.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,964 @@
+\input{preamble.tex}
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \littletaller % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
+
+\title{\huge{Advanced Linear Algebra}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{Fall 2025}}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+The first few sections of this collection of notes follows 
+the public advanced linear algebra course from the 
+math at andrews university youtube channel. The lecturer 
+is Dr. Andrew Bosman. These notes will, later on, be for 
+the advanced linear algebra course at the University of Oslo
+if I'm allowed to take the course. The University of Oslo's course 
+follows the same book as Andrews' does; Advanced Linear and Matrix 
+Algebra by Nathaniel Johnston. Thus these notes will be an 
+amalgamation of the content of those two courses and the book.
+
+\section{Vector Spaces and Subspaces}
+Typically, when vectors are introduced in an introductory course, 
+we look at vectors in \(\mathbb R^n\).  
+However, vector spaces can be much more abstract and unintuitive. 
+For example, \(\mathbb R\) itself, can be understood as a 
+vector space over \(\mathbb Q\) with an uncountably infinite 
+set of bases. So \(\mathbb R\) is a field, but also a vector space 
+(which, as we'll see in the following definition, is a structure 
+over a field). The same can be said for \(\mathbb C\), which is  
+a field as well as a vector space over \(\mathbb R\). 
+We'll also look at vector spaces of functions and all other sorts 
+of abstract spaces.
+
+\begin{defn}{Vector Space}{}
+A \emph{vector space} over a field \( \mathbb{F} \) is a set \( V \) equipped with two operations:
+\begin{itemize}
+  \item \textbf{Vector addition:} \( + : V \times V \to V \)
+  \item \textbf{Scalar multiplication:} \( \cdot : \mathbb{F} \times V \to V \)
+\end{itemize}
+These must satisfy 8 axioms such as associativity, distributivity, identity, and existence of additive inverses.
+\end{defn}
+
+While we will not rigorously define what a field is 
+(that is usually first seen in a first course in 
+abstract algebra), we can aid our intuition by 
+listing a few interesting fields: 
+\begin{itemize}
+    \item \(\mathbb R\), as mentioned above
+    \item \(\mathbb Q\)
+    \item \(\mathbb C\)
+    \item \(\mathbb F_2 = \{0,1\}\)
+\end{itemize}
+
+\begin{ex}{Vector Spaces}{}
+\begin{itemize}
+  \item \( \mathbb{R}^n \), \( \mathbb{C}^n \), over \(\mathbb R\)
+      and \(\mathbb C\), respectively
+  \item Spaces of functions: \( C([a,b]) \), \( \mathbb{R}^{\mathbb{N}} \)
+  \item Polynomial spaces: \( \mathbb{R}[x] \)
+\end{itemize}
+\end{ex}
+
+\begin{defn}{Subspace}{}
+A subset \( U \subseteq V \) is a \emph{subspace} if:
+\begin{itemize}
+  \item \( \overline0 \in U \)
+  \item \( u + v \in U \) for all \( u, v \in U \)
+  \item \( \lambda u \in U \) for all \( \lambda \in \mathbb{F}, u \in U \)
+\end{itemize}
+\end{defn}
+Note that a subspace has to be a subset which satisfies all 
+of the axioms of a vector space, but checking these properties 
+gives us the rest for free. In fact, checking the last property 
+gives us \(0 \in U\) for free, since \(0 \in \mathbb F\), so 
+that check is also technically redundant.  
+
+\begin{ex}{Subspaces of \( \mathbb{R}^3 \)}{}
+\begin{itemize}
+  \item The zero subspace: \( \{0\} \)
+  \item Any line or plane through the origin
+  \item The whole space \( \mathbb{R}^3 \)
+\end{itemize}
+\end{ex}
+
+
+\newpage
+\section{Spans and Linear Independence}
+
+\begin{defn}{Span}{}
+Given vectors \( v_1, \ldots, v_k \in V \), the \emph{span} is:
+\[
+\text{span}(v_1, \ldots, v_k) = \left\{ \sum_{i=1}^k \lambda_i v_i : \lambda_i \in \mathbb{F} \right\}.
+\]
+It is the smallest subspace containing all the \( v_i \).
+\end{defn}
+
+\begin{defn}{Linear Independence}{}
+Vectors \( v_1, \ldots, v_k \) are \emph{linearly independent} if:
+\[
+\sum_{i=1}^k \lambda_i v_i = 0 \quad \Rightarrow \quad \lambda_1 = \cdots = \lambda_k = 0.
+\]
+Otherwise, they are \emph{linearly dependent}.
+\end{defn}
+
+\begin{ex}{Dependence and Independence}{}
+\begin{itemize}
+  \item In \( \mathbb{R}^3 \), any three vectors lying in the same plane are linearly dependent.
+  \item The standard basis vectors \( e_1, e_2, e_3 \) in \( \mathbb{R}^3 \) are linearly independent.
+\end{itemize}
+\end{ex}
+
+\begin{thm}{Characterization of Dependence}{}
+A set \( \{v_1, \ldots, v_k\} \) is linearly dependent if and only if some \( v_j \) lies in the span of the others.
+\end{thm}
+
+\newpage
+\section{Bases}
+
+\begin{defn}{Basis}{}
+A \emph{basis} for a vector space \( V \) is a linearly independent set \( \{v_1, \ldots, v_n\} \subseteq V \) such that
+\[
+\text{span}(v_1, \ldots, v_n) = V.
+\]
+\end{defn}
+
+\begin{defn}{Dimension}{}
+The \emph{dimension} of a vector space \( V \), written \( \dim V \), is the number of vectors in any basis for \( V \).
+\end{defn}
+
+\begin{thm}{Uniqueness of Representation}{}
+If \( \{v_1, \ldots, v_n\} \) is a basis for \( V \), then every \( v \in V \) can be written \emph{uniquely} as
+\[
+v = \lambda_1 v_1 + \cdots + \lambda_n v_n.
+\]
+\end{thm}
+
+\begin{ex}{Standard Basis}{}
+The standard basis of \( \mathbb{R}^n \) is \( \{e_1, \ldots, e_n\} \), where \( e_i \) has a 1 in the \( i \)th position and 0 elsewhere.
+\end{ex}
+
+\begin{thm}{All Bases Have Equal Size}{}
+If \( V \) has a finite basis, then all bases of \( V \) have the same number of vectors.
+\end{thm}
+
+\begin{proof}[Sketch of Proof]
+Any set of more than \( \dim V \) vectors is dependent, and any spanning set with fewer than \( \dim V \) vectors cannot span. This leads to the conclusion that all bases must contain exactly \( \dim V \) vectors.
+\end{proof}
+
+\newpage
+\section{Some problems for section 2--3}
+\begin{prob}{Subspace Verification}{}
+Let \( V = \mathbb{R}^3 \) and let \( U = \{ (x, y, z) \in \mathbb{R}^3 : x + y + z = 0 \} \). Prove that \( U \) is a subspace of \( V \).
+\end{prob}
+\begin{proof}[Proof of 5.1]
+    Let \(u,v \in U = \{(x,y,z)\in \mathbb R^3 : x+y+z = 0\}\).
+    Trivially, the zero vector is in \(U\) since 
+    \(\overline 0 = (0, 0, 0)\) and \(0+0+0 = 0\). 
+    Now denote \(u = (u_1, u_2, u_3), v = (v_1, v_2, v_3)\)
+    and let \(x \in \mathbb R\). 
+    Then 
+    \begin{align*}
+        u_1 + u_2 + u_3 &= 0 \\
+        x \cdot u &= x \cdot u_1 + x \cdot u_2 + x \cdot u_3 \\ 
+         &= x \cdot 0 = 0\\
+         &\Rightarrow x \cdot u \in U
+    \end{align*}
+    Next we check vector addition is closed: 
+    \begin{align*}
+        u + v &= (u_1 + v_1, u_2 + v_2, u_3 + v_3) \\
+        u_1 + v_1 + u_2 + v_2 + u_3 + v_3 &= 0 + 0 \\ 
+                                          &= 0 \\ 
+                                          &\Rightarrow u + v \in U
+    \end{align*}
+    Thus \(U\) is a subspace of \(\mathbb R^3\)
+\end{proof}
+
+\begin{prob}{Span Problem}{}
+Let \( v_1 = (1, 2, 1) \), \( v_2 = (2, 4, 2) \), and \( v_3 = (0, 1, -1) \) in \( \mathbb{R}^3 \). Determine whether \( \text{span}(v_1, v_2, v_3) = \mathbb{R}^3 \).
+\end{prob}
+\textit{Solution.} Note that \( v_2 = 2 v_1 \), so \( v_1 \) and \( v_2 \) are linearly dependent and span the same line.
+
+We must check whether \( v_3 \) lies outside the span of \( v_1 \). Suppose \( v_3 = a v_1 \) for some \( a \in \mathbb{R} \):
+\[
+(0, 1, -1) = a(1, 2, 1) = (a, 2a, a),
+\]
+which implies \( a = 0 \Rightarrow 1 = 0 \), contradiction.
+
+So \( v_3 \notin \text{span}(v_1) \), and \( \{v_1, v_3\} \) is linearly independent.
+
+But since \( \mathbb{R}^3 \) is 3-dimensional, and \( \text{span}(v_1, v_2, v_3) = \text{span}(v_1, v_3) \), a 2-dimensional subspace, the span is not all of \( \mathbb{R}^3 \).
+
+Therefore,
+\[
+\text{span}(v_1, v_2, v_3) \subsetneq \mathbb{R}^3.
+\]
+
+\newpage
+\section{Dimensions of a Vector Space}
+Suppose we have the following vectors in $\mathbb R^4$: 
+$$ 
+    \begin{bmatrix}
+        2 \\ 1 \\ 0 \\ -3 
+    \end{bmatrix},
+    \begin{bmatrix}
+        0 \\ 1 \\ 1 \\ 0 
+    \end{bmatrix},
+    \begin{bmatrix}
+        3 \\ 0 \\ 0 \\ 1 
+    \end{bmatrix}
+$$
+Are these linearly independent in $\mathbb R^4$? 
+In other words, 
+does there not exist non-trivial $c_1,c_2,c_3 \in \mathbb R$
+such that the sum of these three vectors is $\vec{0}$?
+\begin{align*}
+    2c_1 + 3c_3 &= 0 \\ 
+    c_1 + c_2 &= 0 \\ 
+    c2 &= 0 \\ 
+    -3c_1 + c_3 &= 0
+\end{align*}
+As we can quickly see there is no solution to this system, save for 
+the trivial one. Therefore these three vectors are linearly  
+independent. 
+How about we look at a different space. 
+
+Let $P^3$ be the space 
+of polynomials of degree at most $3$.
+Consider the following polynomials: 
+\begin{align*}
+    2+x-3x^3 \\ 
+    x + x^2 \\ 
+    3 + x^3
+\end{align*}
+Somehow, the question of these polynomials being linearly independent,
+is the same as the one for the vectors in $\mathbb R^4$.
+Let us see if we can make this problem again in some different vector 
+space. 
+
+Let $M_2(\mathbb R)$ be the space of real-valued $2\times 2$ matrices, 
+focusing on the following elements: 
+\begin{align*}
+    \begin{bmatrix}
+        2 & 1 \\ 
+        0 & -3
+    \end{bmatrix},
+    \begin{bmatrix}
+        0 & 1 \\ 
+        1 & 0
+    \end{bmatrix},
+    \begin{bmatrix}
+        3 & 0 \\ 
+        0 & 1
+    \end{bmatrix}
+\end{align*}
+
+All of these are equivalent so it would be helpful to find a 
+way to reduce problems of linear independence to 
+an equivalent problem in the familiar $\mathbb R^n$.
+
+
+\begin{defn}{}{}
+    Let \( B = \{\vec{v}_1, \dots, \vec{v}_n \} \) 
+    be a finite basis for a vector space \( V \) over a field 
+    \( \mathbb{F} \).  
+    If a vector \( \vec{v} \in V \) can be written as
+    \[
+        \vec{v} = c_1 \vec{v}_1 + \cdots + c_n \vec{v}_n
+    \]
+    for scalars \( c_1, \dots, c_n \in \mathbb{F} \), then the tuple  
+    \[
+        \left[\vec{v}\right]_B = (c_1, \dots, c_n) \in \mathbb{F}^n
+    \]
+    is called the \textbf{coordinate vector} of \( \vec{v} \) 
+    with respect to the basis \( B \), and the scalars \( c_1, 
+    \dots, c_n \) are called the \textbf{coordinates} or 
+    \textbf{coefficients/coefficients} of 
+    \( \vec{v} \) in the basis \( B \).
+\end{defn}
+\begin{ex}{}{}
+    Consider the example from earlier with the vector space of 
+    polynomials of degree at most 4. 
+    The natural basis $B = \{1, x, x^2, x^3\}$. 
+    Then we have that  
+    \begin{align*}
+        \left[2 + x -3x^3\right]_B &= (2, 1, 0, -3) \\
+        \left[x + x^2\right]_B &= (0, 1, 1, 0) \\
+        \left[3 + x^3\right]_B &= (3, 0, 0, 1) \\
+    \end{align*}
+\end{ex}
+
+\begin{thm}{}{}
+    If $B = \{\vec{v_1},\dots,\vec{v_n}\}$ is a finite basis 
+    for some vector space $V$ over a field $\mathbb F$,
+    then any basis for $V$ will have $n$ vectors.
+
+    \begin{proof}
+        Assume, seeking contradiction, there exists some 
+        basis $B'$ which does not have $n$ elements. 
+        
+        \emph{Case 1: $B'$ has more than $n$ elements.}
+
+        Suppose $B' = \{\vec{w_1},\dots,\vec{w_m}\} \subseteq V$ 
+        has $m > n$ elements. We show 
+        $B'$ is linearly dependent in $V$.
+        We want to find a non-trivial solution to 
+        $$ 
+            \displaystyle\sum_{i=1}^{m} a_i\vec{w_i} = \vec{0}
+        $$
+        Let us express these as coefficient vectors 
+        $$ 
+            \displaystyle\sum_{i=1}^{m} 
+            a_i\left[\vec{w_i}\right]_{B}
+            = \left[\vec{0}\right]_B
+        $$ 
+        $$ 
+            \left[\vec{w_i}\right]_B 
+            = (c_{i1}, \dots, c_{in}) 
+            \in \mathbb F^n 
+        $$
+        Then the the expression becomes 
+        \begin{align*}
+            \displaystyle\sum_{i=1}^{m} 
+            a_i
+            \begin{bmatrix}
+                c_{i1} \\ 
+                \vdots \\ 
+                c_{in}
+            \end{bmatrix}
+            = 
+            \begin{bmatrix}
+                0 \\
+                \vdots \\ 
+                0
+            \end{bmatrix}
+        \end{align*}
+        Here we get $n$ equations with $m > n$ variables.
+        By a standard result from linear algebra, 
+        any homogeneous system 
+        of linear equations with more unknowns than equations 
+        has at least one non-trivial solution, 
+        regardless of the field. 
+        Hence, the vectors \( \vec{w}_1, \dots, \vec{w}_m \) 
+        are linearly dependent.
+
+        \emph{Case 2: B' has less than n elements.}
+
+        Suppose there is some other basis 
+        $B' = \{\vec{w_1}, \dots, \vec{w_m}\} \subseteq V$
+        where $m < n$. If it were true that $B'$ constitutes a basis, 
+        i.e. spans $V$ and is linearly independent, then 
+        since $m < n$ we must have that $B$ is linearly dependent, 
+        as shown in \emph{case 1}. In other words if $B'$ was a 
+        basis with $m < n$ elements then $B$ cannot be a basis for 
+        $V$ since we would, through the same method as above, get 
+        that there exists a non-trivial solution for 
+        the sum of $n$ coefficients multiplied by 
+        $\vec{v_1}, \dots, \vec{v_n}$ equaling the zero vector. 
+        This contradicts our assumption that $B$ is a basis for 
+        $V$ and therefore $B'$ cannot be a basis for $V$.
+
+    \end{proof}
+\end{thm}
+
+\begin{defn}{}{}
+    $V$ has a basis $\{\vec{v_1},\dots,\vec{v_n}\}$, 
+    we say that the dimension $dim(V) = n$. 
+    Note by the theorem above that $n$ is unique since 
+    we cannot have a basis with $m \neq n$ elements.
+    This means that $V$ is a finite-dimensional vector space. 
+    If there does not exist a finite basis we say $V$ is  
+    infinite-dimensional, $dim(V) = \infty$.
+\end{defn}
+
+\newpage 
+\section{Tasks from MAT1125 book chapter 2}
+The following section covers some tasks from the 
+main book used in my course and will therefore be 
+in Norwegian.
+
+\begin{prob}{Oppgave 2.1.3}{}
+    Vis at følgende funksjoner er lineære. 
+    
+    \quad (a) $T:\mathbb R^n \to \mathbb R^m$ gitt ved 
+    $Tx := Ax$ for en matrise $A \in M_{m\times n}(\mathbb R)$. 
+
+    \quad (b) La $a,b \in \mathbb R, a < b$, og definer
+    $T:C^0([a,b], \mathbb R) \to \mathbb R$ ved 
+    $$ 
+        Tf := \displaystyle\int_{a}^{b}f(t)dt
+        \quad \quad 
+        \forall f \in C^0([a,b], \mathbb R)
+    $$ 
+
+    \quad (c) La $g\in C^0(\mathbb R, \mathbb R) \to \mathbb R$
+    være en gitt funksjon, og definer 
+    $T:C^0([0,1],\mathbb R) \to \mathbb R$ ved 
+    $$ 
+        Tf := \displaystyle\int_{0}^{1}f(t)g(t)dt
+        \quad\quad 
+        \forall f \in C^0([0,1],\mathbb R)
+    $$  
+
+    \quad (d) $T:\mathcal P \to C^0([a,b],\mathbb R)$ gitt ved 
+    $$ 
+        Tp:=\restr{p}{[a,b]}
+    $$ 
+    alstå restriksjonen av $p$ til intervallet $[a,b]$.
+\end{prob}
+\begin{proof}[Bevis av (a)]
+    La $T:\mathbb R^n \to \mathbb M^m$ definert slik 
+    som i oppgavebeskrivelsen.
+
+    Vi ønsker å vise at funksjonen er lineær 
+    (bevarer vektor-addisjon og skalar-multiplikasjon).
+
+    La $x,y \in \mathbb R^n$, la $r \in \mathbb R$, 
+    og la $A \in M_{m\times n}(\mathbb R)$.
+    Da er $x$ og $y$ av formen: 
+    $$ 
+        x = 
+        \begin{pmatrix}
+            x_1 \\ 
+            \vdots \\ 
+            x_n
+        \end{pmatrix}, 
+        \quad
+        y = 
+        \begin{pmatrix}
+            y_1 \\ 
+            \vdots \\ 
+            y_n
+        \end{pmatrix},
+        \quad 
+        x_y,y_i \in \mathbb R \quad(1\leq i \leq n)
+    $$ 
+    mens 
+    $$ 
+        A = 
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\ 
+            a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+    $$
+    som betyr at 
+    \begin{align*}
+        Tx = Ax &= 
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\ 
+            a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1 \\ \vdots \\ x_n
+        \end{pmatrix}
+        \\ 
+           &= 
+           \begin{pmatrix}
+            \displaystyle\sum_{i=1}^n a_{1i}x_i \\ 
+            \vdots \\
+            \displaystyle\sum_{i=1}^n a_{mi}x_i
+           \end{pmatrix}
+           \in \mathbb R^m
+    \end{align*} 
+    så $T$ er vell-definert.
+
+    For så å sjekke lineæritet av vektor addisjon: 
+    \begin{align*}
+        T(x+y) 
+        &= 
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\ 
+            a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1 + y_1 \\ \vdots \\ x_n + y_i 
+        \end{pmatrix} 
+        \\
+        &= 
+        \begin{pmatrix}
+            \displaystyle\sum_{i=1}^n a_{1i}x_i 
+            +
+            \displaystyle\sum_{i=1}^n a_{1i}y_i 
+            \\ 
+            \vdots \\
+            \displaystyle\sum_{i=1}^n a_{mi}x_i
+            +
+            \displaystyle\sum_{i=1}^n a_{mi}y_i
+        \end{pmatrix}
+        \\ 
+        &= 
+        \begin{pmatrix}
+            \displaystyle\sum_{i=1}^n a_{1i}x_i 
+            \\ 
+            \vdots \\
+            \displaystyle\sum_{i=1}^n a_{mi}x_i
+        \end{pmatrix}
+        +
+        \begin{pmatrix}
+            \displaystyle\sum_{i=1}^n a_{1i}y_i 
+            \\ 
+            \vdots \\
+            \displaystyle\sum_{i=1}^n a_{mi}y_i
+        \end{pmatrix}
+        \\ 
+        &= 
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\ 
+            a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1 \\ \vdots \\ x_n 
+        \end{pmatrix}
+        + 
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\ 
+            a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        \begin{pmatrix}
+            y_1 \\ \vdots \\ y_i 
+        \end{pmatrix}
+        \\ 
+        &= 
+        Tx + Ty
+    \end{align*}
+
+    Deretter sjekker vi lineæritet av skalar-multiplikasjon: 
+    \begin{align*}
+        T(rx) &= 
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\ 
+            \vdots & \ddots & \vdots \\ 
+            a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        \begin{pmatrix}
+            rx_1 \\ \vdots \\ rx_n 
+        \end{pmatrix}
+    \\ 
+    &= 
+    \begin{pmatrix}
+        \displaystyle\sum_{i=1}^n a_{1i}rx_i 
+        \\ 
+        \vdots \\
+        \displaystyle\sum_{i=1}^n a_{mi}rx_i
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+        r\displaystyle\sum_{i=1}^n a_{1i}x_i 
+        \\ 
+        \vdots \\
+        r\displaystyle\sum_{i=1}^n a_{mi}x_i
+    \end{pmatrix}
+    = 
+    r 
+    \begin{pmatrix}
+        \displaystyle\sum_{i=1}^n a_{1i}x_i 
+        \\ 
+        \vdots \\
+        \displaystyle\sum_{i=1}^n a_{mi}x_i
+    \end{pmatrix}
+    \\
+    &= rTx
+    \end{align*}
+
+    Med det har vi vist at $T$ er en lineær.
+\end{proof}
+
+\begin{proof}[Bevis av (b)]
+    La $T:C^0([a,b], \mathbb R) \to \mathbb R$ være definert 
+    som i oppgavebeskrivelsen.
+
+    Vi ønsker å vise at $T$ er lineær.
+
+    $T$ er vell-definert siden å ta integralet fra $a$ til $b$
+    av en funksjon, kontinuerlig på det intervalet, som 
+    har $\mathbb R$ som co-domene, gir et reelt tal.
+
+    Vi sjekker så lineæritet av vektor-addisjon. 
+    La $f,g \in C^0([a,b], \mathbb R)$. Da har vi 
+    \begin{align*}
+        T(f+g) &= \displaystyle\int_{a}^{b}(f+g)(t) dt \\ 
+               &= \displaystyle\int_{a}^{b}f(t)+g(t)dt \\ 
+               &= \displaystyle\int_{a}^{b}f(t)dt 
+               +  \displaystyle\int_{a}^{b}g(t)dt      \\ 
+               &= Tf + Tg
+    \end{align*}
+
+    Deretter sjekker vi lineæritet av skalar-multiplikasjon. 
+    La $f \in C^0([a,b],\mathbb R)$ og $r \in \mathbb R$.
+    Da har vi 
+    \begin{align*}
+        T(rf) &= \displaystyle\int_{a}^{b}(rf)(t)dt \\ 
+              &= \displaystyle\int_{a}^{b}rf(t)dt \\ 
+              &= r\displaystyle\int_{a}^{b}f(t)dt \\ 
+              &= rTf
+    \end{align*}
+    som ønsket. 
+
+    Med dette har vi vist at $T$ er lineær fra 
+    $C^0([a,b],\mathbb R) \to \mathbb R$.
+\end{proof}
+
+\begin{proof}[Bevis av (c)]
+    La $g \in C^0([0,1], \mathbb R)$ være gitt og 
+    $T:C^0([0,1],\mathbb R$ definert som i oppgavebeskrivelsen.
+
+    Vi ønsker å vise at $T$ er lineær.
+
+    Først merk at produktet av to funksjoner kontinuerlige på 
+    $[0,1]$ blir en funksjon kontinuerlig på $[0,1]$ 
+    (kan vises med å bruke definisjonen, med grenseverdier).
+    Så integralet fra $[0,1]$ av denne funksjonen er vell-definert.
+
+    La $f,h \in C^0([0,1], \mathbb R)$. Da har vi 
+    \begin{align*}
+        T(f+h) &= \displaystyle\int_{0}^{1}(f+h)(t)g(t)dt \\ 
+               &= \displaystyle\int_{0}^{1}(f(t)+h(t))g(t)dt \\ 
+               &= \displaystyle\int_{0}^{1}f(t)g(t) + h(t)g(t)dt \\ 
+               &= \displaystyle\int_{0}^{1}f(t)g(t)dt  
+               +  \displaystyle\int_{0}^{1}h(t)g(t)dt \\ 
+               &= Tf + Th
+    \end{align*}
+
+    La $f \in C^0([0,1], \mathbb R)$ og $r \in \mathbb R$. 
+    Da har vi 
+    \begin{align*}
+        T(rf) &= \displaystyle\int_{0}^{1}(rf)(t)g(t)dt \\ 
+              &= \displaystyle\int_{0}^{1}rf(t)g(t)dt \\ 
+              &= r\displaystyle\int_{0}^{1}f(t)g(t)dt \\ 
+              &= rTf
+    \end{align*}
+    som ønsket.
+\end{proof}
+\begin{proof}[Bevis av (d)]
+    La $T:\mathcal P \to C^0([a,b],\mathbb R)$ definert som i 
+    oppgavebeskrivelsen.
+
+    Merk at for alle $p \in \mathcal P$, $p$ er kontinuerlig. 
+    Så restriksjonen av $p$ til $[a,b]$ gir en kontinuerlig 
+    funksjon med domene $[a,b]$, så $T$ er vell-definert. 
+
+    For lineæritet av vektor-addisjon bruker vi faktumet at 
+    for to funksjoner $p,q$ med domene $\mathbb R$ 
+    (som polynomene våre) 
+    $$ 
+        (p+q)(x) = p(x) + q(x)
+    $$ 
+
+    Siden $[a,b] \subset \mathbb R$ må dette også 
+    være tilfellet for alle $x \in [a,b]$. 
+
+    Et lignende argument gjelder for skalar-multiplikasjon.
+\end{proof}
+
+\begin{prob}{Oppgave 2.2.5}{}
+    La $T:\mathcal P_8 \to \mathbb R$ være den lineære avbildingen 
+    $$ 
+        T(p):= \displaystyle\int_{0}^{1}p(t)dt 
+        \quad\quad  
+        \forall p \in \mathcal P_8
+    $$ 
+
+    \quad (a) Vis at $\text{im}T = \mathbb R$. 
+
+    \quad (b) Bruk dimensjonssatsen til å finne dimensjonen til 
+    kjernen til $T$. Vil du si at kjernen til $T$ 
+    er "stor" eller "liten"?
+\end{prob}
+\begin{proof}[Bevis av (a)]
+    La $T: \mathcal P_8 \to \mathbb R$ være definert som 
+    i oppgavebeskrivelsen.
+
+    Vi ønskjer å vise at $\text{im}T = \mathbb R$. 
+
+    For en hver $\alpha \in \mathbb R$, betrakt konstant-polynomet 
+    $p(t) = \alpha \in \mathcal P_8$.
+    Merk da at 
+    $$ 
+        T(p) = \displaystyle\int_{0}^{1}\alpha dt
+        = \alpha \displaystyle\int_{0}^{1} 1 dt
+        = \alpha \left[t\right]_0^1 = \alpha \cdot 1 = \alpha
+    $$ 
+
+    Så for hver $\alpha \in \mathbb R$ har vi polynomet 
+    $p(t) = \alpha$ slik at $T(t) = \alpha$. 
+    Så $\text{im}T = \mathbb R$.
+
+\end{proof}
+\begin{proof}[Løsning av (b)]
+    Ifølge dimensjonssatsen har vi at viss $U,V$ er vektorrom 
+    med $T \in \mathcal L(U,V)$ så er 
+    $$ 
+        \text{dim}(\text{im}T) + \text{dim}(\text{ker}T) = \text{dim}U
+    $$ 
+
+    Vi vet at $\text{dim}\mathcal P_8 = 9$ og 
+    $\text{dim}(\text{im}T) = \text{dim}\mathbb R = 1$ så da vet vi 
+    at dimensjonen til kjernen av $T$ er $8$, alle polynom 
+    utenom konstant-polynomene. 
+
+    Et underrom med dimensjon $n - 1$ er ganske stort.
+\end{proof}
+
+\begin{prob}{Oppgave 2.5.2}{}
+    Bevis at alle $n$-dimensjonelle vektorrom over $\mathbb K$
+    er isomorfe med hverandre.
+\end{prob}
+\begin{proof}[Bevis]
+    La $U,V$ være $n$-dimensjonelle vektorrom over $\mathbb K$.
+
+    Vi ønsker å vise at  
+    $$ 
+        U \cong V
+    $$ 
+
+    Siden $U,V$ er $n$-dimensjonelle har vi at 
+    det finnes basiser $\mathcal B = (u_1,\dots,u_n)$ for $U$, og 
+    $\mathcal C = (v_1,\dots,v_n)$ for $V$. 
+    Siden $U,V$ er isomorfe med $\mathbb K^n$, så bør vi ha 
+    at komposisjonen av isomorfien fra $U$ til $\mathbb K^n$ med 
+    isomorfien fra $\mathbb K^n$ til $V$ gir en isomorfi 
+    fra $U$ til $V$.
+\end{proof}
+
+\newpage
+\section{Analysis in vector spaces}
+\begin{defn}{Norm}{}
+    Let $U$ be a vector space over either $\mathbb F = \mathbb R$ 
+    or $\mathbb F = \mathbb C$. A norm on $U$ is a 
+    function $\left\|\cdot\right\|:U \to \mathbb R$ such that 
+    \begin{enumerate}
+        \item $\left\|u\right\| \geq 0$ for all $u \in U$,
+            and $\left\|u\right| = 0$ if any only if 
+            $u = \overline 0$ 
+        
+        \item $\left\|\alpha u \right\| = |\alpha|\left|u\right|$ 
+            for all $\alpha \in \mathbb K$ and $u \in U$
+
+        \item $\left\|u + v \right\| \leq 
+            \left\|u\right\| + \left\|v\right\|$ for all 
+            $u,v \in U$
+    \end{enumerate}
+
+    A normed vector space is a pair 
+    $\left(U, \left\|\cdot\right\|\right)$ consisting of a 
+    vector space $U$ and a norm $\left\|\cdot\right\|$ on $U$. 
+    The "length" of a vector $u$ is $\left\|u\right\|$. 
+    The "distance" between two vectors $u,v$ is 
+    $\left\|u - v\right\|$.
+\end{defn} 
+
+The "distance" we are most familiar with in a first course 
+in linear algebra is the euclidian norm 
+$$ 
+    \left\|x\right\|_{\ell^2} = 
+    \sqrt{\sum_{k=1}^{n}|x_k|^2}
+$$ 
+on $\mathbb R^n$ or $\mathbb C^n$.
+
+In general for $p \in [1, \infty)$, the $\ell^p$-norm on 
+$\mathbb R^n$ or $\mathbb C^n$ is given by 
+$$ 
+    \left\|x\right\|_{\ell^p(\mathbb F^n)} := 
+    \left(\sum_{k=1}^{n}|x_k|^p\right)^{\frac{1}{p}}
+$$ 
+where $|x| = \sqrt{x\overline x}$ for a complex $x$, and 
+absolute value if real.
+
+When we set $p = \infty$ we get the so-called "max-norm"
+$$ 
+    \left\|x\right\|_{\ell^\infty} := \max_{k=1,\dots,n}|x_k|
+$$ 
+
+On the other extreme, when $p=1$, is often called the 
+"manhattan-metric". 
+
+\begin{prob}{Oppgave 3.1.3}{}
+    La $x, y \in \mathbb R^2$, given by 
+    $$ 
+        x := 
+        \begin{pmatrix}
+            0 \\ 3 
+        \end{pmatrix}, 
+        y := 
+        \begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix}
+    $$ 
+
+    Calculate the length of $x$ and $y$ in the following norms: 
+    $\left\|\cdot\right\|_{\ell^1}$
+    $\left\|\cdot\right\|_{\ell^2}$
+    and 
+    $\left\|\cdot\right\|_{\ell^\infty}$
+\end{prob}
+\begin{proof}[Solution]
+    Let $x,y$ be given as in the problem description. 
+
+    \emph{$\ell^1$)}
+
+    \begin{align*}
+        \left\|x\right\| 
+        &= 
+        \displaystyle\sum_{k=1}^{2}|x_k| 
+        \\ 
+        &= 
+        |0| + |3| = 0+3 = 3   
+        \\ 
+        \left\|y\right\|
+        &=  
+        \displaystyle\sum_{k=1}^{2}|y_k|
+        \\
+        &= |1| + |1| = 1+1 = 2
+    \end{align*}
+
+    \emph{$\ell^2$)}
+
+    \begin{align*}
+        \left\|x\right\| 
+        &= 
+        \sqrt{\displaystyle\sum_{k=1}^{2}|x_k|}
+        \\ 
+        &= 
+        \sqrt{|0| + |3|} = \sqrt{|3|} = \sqrt 3
+        \\ 
+        \left\|y\right\|
+        &= 
+        \sqrt{\displaystyle\sum_{k=1}^{2}|y_k|}
+        \\ 
+        &= 
+        \sqrt{|1| + |1|} = \sqrt{1 + 1} = \sqrt{2}
+    \end{align*}
+
+    \emph{$\ell^\infty$)}
+
+    \begin{align*}
+        \left\|x\right\| 
+        &= 
+        \max_{k=1,2}\{|x_k|\}
+        \\ 
+        &= \max\{0,3\} = 3 
+        \\ 
+        \left\|y\right\|
+        &= 
+        \max_{k=1,2}\{|y_k|\}
+        \\ 
+        &= 
+        \max\{1\} = 1
+    \end{align*}
+\end{proof}
+
+\begin{prob}{Oppgave 3.2.7}{}
+    Vis at 
+
+    \quad\quad (a) alle kuler er begrensede 
+
+    \quad\quad (b) alle åpne kuler $B_r(u)$ er åpne mengder 
+\end{prob}
+\begin{proof}[Bevis av (a)]
+    Vi ønsker å vise at det finnes en $r' > 0$ slik at 
+    $B_r(u) \subseteq \overline B_r(u) \subseteq B_{r'}(0)$.
+
+    La $r' = \left\|u\right\| + r + 1$. 
+    Da er 
+    $$ 
+        B_{r'}(0) = \{v \in U : \left\|v\right\| < 
+        \left\|u\right\| + r + 1\}
+    $$
+
+    Viss vi betrakter en $v \in \overline B_r(u)$ så 
+    får vi at 
+    \begin{align*}
+        \left\|v\right\| &= \left\|v - u + u\right\| 
+        \leq \left\|v - u\right\| + \left\|u\right\| \\ 
+                        &\leq r + \left\|u\right\| < r + 
+                        \left\|u\right\| + 1
+    \end{align*}
+
+    så $v \in B_{r'}(0)$ og siden $B_r(u) \subseteq \overline B_r(u)$,
+    så gjelder er både den åpne- og lukkede kulen 
+    begrensede.
+\end{proof}
+
+\begin{proof}[Bevis av (b)]
+    Vi ønsker å vise at alle åpne kuler er åpne mengder.
+
+    La $B_r(u) = \{v \in U : \left\|v - u\right\| < r\}$ for 
+    et vektorrom $U$ og en vilkårlig $r > 0$. Vi må så 
+    vise at det finnes en $s > 0$ slik at 
+    $B_s(v) \subseteq B_r(u)$ for enhver $v \in B_r(u)$.
+
+    For en vilkårlig $v \in B_r(u)$, la 
+    $s = r - \left\|v - u\right\| > 0$.
+    Da har vi for enhver $v' \in B_s(v)$ at 
+    \begin{align*}
+        \left\|v' - u\right\| &\leq \left\|v - v'\right\| + 
+        \left\|v - u\right\| < s + \left\|v - u\right\| = r\\ 
+                             &\Rightarrow 
+        v' \in B_r(u) \Rightarrow B_s(v) \subseteq B_r(u)
+    \end{align*}
+
+
+\end{proof}
+
+\begin{prob*}{Oppgave 3.4.3}{}
+    Vi betrakter normene $\left\|\cdot\right\|_{\ell^1}$ og 
+    $\left\|\cdot\right\|_{\ell^2}$ på $\mathbb R^2$.
+
+    Vis at 
+    $$ 
+        \left\|u\right\|_{\ell^1} \leq 2\left\|u\right\|_{\ell^2}
+        \text{ og }
+        \left\|u\right\|_{\ell^2} \leq \left\|y\right\|_{\ell^1}
+    $$ 
+    for alle $u \in \mathbb R^2$
+\end{prob*}
+\begin{proof}[Bevis av (a)]
+    La $u \in \mathbb R^2$.
+
+    Da har vi 
+    \begin{align*}
+        \left\|u\right\|_{\ell^2} 
+        &= \sqrt{u_1^2 + u_2^2} \\ 
+        &\leq \sqrt{u_1^2} + \sqrt{u_2^2} \\ 
+        &= u_1 + u_2 = \left\|u\right\|_{\ell^1} 
+    \end{align*}
+
+    For den andre ulikheten anta at 
+    $$ 
+        \left\|u\right\|_{\ell^1} > 2\left\|u\right\|_{\ell^2}
+    $$ 
+
+    Da får vi 
+    \begin{align*}
+        u_1 + u_2 &> 2\sqrt{u_1^2 + u_2^2} \\ 
+        \frac{u_1 + u_2}{2} &> \sqrt{u_1^2 + u_2^2} \\ 
+        \frac{u_1^2 + 2u_1u_2 + u_2^2}{4} &> u_1^2 + u_2^2 \\ 
+        \frac{u_1^2 - 4u_1^2 + 2u_1u_2 + u_2^2 - 4u_2^2}{4} &> 0 \\
+        -3u_1^2 - 3u_2^2 + 2u_1u_2 &> 0 \\ 
+        2u_1u_2 &> 3(u_1^2u_2^2)
+    \end{align*}
+    som er usant for alle reelle $u_1, u_2$. 
+    Da var antagelsen feil og dermed har vi 
+    $$ 
+        \left\|u\right\|_{\ell^1} \leq \left\|u\right\|_{\ell^2}
+    $$ 
+\end{proof}
+
+\end{document}

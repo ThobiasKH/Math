@@ -1,0 +1,101 @@
+\input{preamble.tex}
+
+\title{\huge{My Math Notes}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{\today}}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+
+\begin{defn}[Sets]
+\label{def:sets}
+A \emph{set} is a collection of distinct elements.
+\end{defn}
+
+As discussed in \cref{def:sets}, elements must be distinct.
+
+\begin{thm}[Sum of evens]\label{thm:sum}
+The sum of two even numbers is even.
+\begin{proof}
+Let the even numbers be \(2a\) and \(2b\). Their sum is
+\[
+2a + 2b = 2(a+b),
+\]
+which is even.
+\end{proof}
+\end{thm}
+
+As described in \cref{thm:sum}. 
+
+\begin{lem}[Parity of sum]\label{lem:parity}
+If \(x\) and \(y\) are integers, then \(x + y\) is even if and only if \(x\) and \(y\) have the same parity.
+\end{lem}
+
+As seen in \cref{lem:parity}, you are a very nice person.
+
+\begin{proof}
+Assume \(x\) and \(y\) are both even or both odd.
+
+- If both even, \(x=2m\), \(y=2n\), then \(x+y=2(m+n)\) is even.
+
+- If both odd, \(x=2m+1\), \(y=2n+1\), then
+\[
+x+y = 2m + 1 + 2n + 1 = 2(m+n+1),
+\]
+also even.
+
+Conversely, if \(x+y\) is even and \(x\) is even, then \(y\) must be even; similarly for odd.
+\end{proof}
+
+\section{Model Theory}
+
+\begin{prob}[Satisfiability]
+Let \(\mathfrak{M} \models \phi\). Show that \(\phi\) is satisfiable.
+\end{prob}
+
+\begin{proof}[Proof of Problem 2.1]
+Since \(\mathfrak{M} \models \phi\), by definition \(\phi\) is true in some model (namely \(\mathfrak{M}\)). Therefore, \(\phi\) is satisfiable.
+
+More explicitly,
+\[
+\phi = \psi \wedge \theta,
+\]
+where \(\psi\) and \(\theta\) are formulas satisfied by \(\mathfrak{M}\). Hence \(\phi\) is satisfiable.
+\end{proof}
+
+\begin{cor}[Consequence of satisfiability]
+If \(\phi\) is satisfiable, then \(\neg \phi\) is not valid.
+\end{cor}
+
+\begin{proof}
+If \(\neg \phi\) were valid, then \(\phi\) would be false in every model. This contradicts the satisfiability of \(\phi\).
+\end{proof}
+
+\section{Fourier Analysis}
+
+\begin{defn}[Fourier Transform]
+The Fourier transform of a function \(f \in L^1(\mathbb{R})\) is defined as
+\[
+\hat{f}(\xi) = \int_{\mathbb{R}} f(x) e^{-2\pi i x \xi} \, dx.
+\]
+\end{defn}
+
+\begin{thm}[Fourier Inversion]
+If \(f\) and \(\hat{f}\) are both in \(L^1(\mathbb{R})\), then for almost every \(x\),
+\[
+f(x) = \int_{\mathbb{R}} \hat{f}(\xi) e^{2\pi i x \xi} \, d\xi.
+\]
+\end{thm}
+
+\begin{proof}[Sketch of proof]
+This theorem follows from Plancherel's theorem and properties of the Fourier transform on Schwartz functions. The full proof is beyond this note.
+\end{proof}
+
+
+\end{document}

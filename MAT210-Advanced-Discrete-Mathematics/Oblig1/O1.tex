@@ -1,0 +1,529 @@
+\input{preamble.tex}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\title{\huge{Oblig 1}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{}}
+
+\begin{document}
+\maketitle
+
+\newpage
+\begin{prob*}{Oppgave 1}{}
+    Hva er verdien av $k$ etter at følgende script er utført.
+    \[
+        \begin{aligned}
+  &k = 0 \\
+  &\text{for } i_{1} = 1 \text{ to } n_{1} \\
+  &\quad \text{for } i_{2} = 1 \text{ to } n_{2} \\
+  &\quad \quad \vdots \\
+  &\quad \quad \text{for } i_{k} = 1 \text{ to } n_{k} \\
+  &\quad \quad \quad k = k + 1
+        \end{aligned}
+    \]
+\end{prob*}
+\begin{proof}[Løsning]
+    Vi antar for denne oppgaven at loop-en er inklusiv på siste 
+    variabel (i.e. for $i_k$ to $n_k$ tar $n_k$ iterasjoner).
+
+    Viss vi jobber baklengs har vi at, i den siste loop-en, 
+    $k$ ender opp med å være $n_k$. 
+    Loop-en som gjør dette blir utført $n_{k-1}$ ganger som gir 
+    $k = n_{k-1}n_k$.
+
+    Vi kunne lagd en formel og vist korrekthet via induksjon, men 
+    vi kan tydelig se at summen for $k$ blir antal iterasjoner av 
+    den siste loop-en, multiplisert med antall iterasjoner av 
+    den nest siste loop-en og så videre ned til vi når den første 
+    iterasjonen. 
+
+    Da får vi at 
+    $$ 
+        k = n_1n_2n_3\cdots n_p = \displaystyle\prod_{i=1}^p n_i
+    $$ 
+    viss vi antar $p$ loops.
+\end{proof}
+
+\begin{prob*}{Oppgave 2}{}
+    a) Teikn grafane til alle bijektive funksjonar mellom 
+    $A = \{1,2,3\}$ og $B = \{a,b,c\}$. Kva seier dette om 
+    kardinaliteten?
+
+    b) Anta at mengdene $A = \{1,2,3,4,5,6,7\}$ og 
+    $B = \{a,b,c,d,e,f,g\}$. Kor mange bijektive funksjonar er 
+    det mellom $A$ og $B$? Bruk multiplikasjonsprinsippet 
+    for å grunngje svaret.
+\end{prob*}
+\begin{proof}[Løsning av a)]
+    \[
+        \begin{tikzpicture}[node distance=2cm, every node/.style={minimum width=1cm, align=center}]
+  % Set positions for clarity
+            \foreach \y/\label in {1/1,2/2,3/3} {
+                \node (A\y) at (0,-\y) {$\label$};
+            }
+            \foreach \y/\label in {1/a,2/b,3/c} {
+                \node (B\y) at (3,-\y) {$\label$};
+            }
+
+  % Bijection 1: 1->a, 2->b, 3->c
+  \draw[->] (A1) -- (B1);
+  \draw[->] (A2) -- (B2);
+  \draw[->] (A3) -- (B3);
+  \node at (1.5,0.5) {1};
+
+  % Bijection 2: 1->a, 2->c, 3->b
+  \begin{scope}[yshift=-4cm]
+    \foreach \y/\label in {1/1,2/2,3/3} {
+      \node (A\y) at (0,-\y) {$\label$};
+    }
+    \foreach \y/\label in {1/a,2/b,3/c} {
+      \node (B\y) at (3,-\y) {$\label$};
+    }
+    \draw[->] (A1) -- (B1);
+    \draw[->] (A2) -- (B3);
+    \draw[->] (A3) -- (B2);
+    \node at (1.5,0.5) {2};
+  \end{scope}
+
+  % Bijection 3: 1->b, 2->a, 3->c
+  \begin{scope}[yshift=-8cm]
+    \foreach \y/\label in {1/1,2/2,3/3} {
+      \node (A\y) at (0,-\y) {$\label$};
+    }
+    \foreach \y/\label in {1/a,2/b,3/c} {
+      \node (B\y) at (3,-\y) {$\label$};
+    }
+    \draw[->] (A1) -- (B2);
+    \draw[->] (A2) -- (B1);
+    \draw[->] (A3) -- (B3);
+    \node at (1.5,0.5) {3};
+  \end{scope}
+
+  % Bijection 4: 1->b, 2->c, 3->a
+  \begin{scope}[yshift=-12cm]
+    \foreach \y/\label in {1/1,2/2,3/3} {
+      \node (A\y) at (0,-\y) {$\label$};
+    }
+    \foreach \y/\label in {1/a,2/b,3/c} {
+      \node (B\y) at (3,-\y) {$\label$};
+    }
+    \draw[->] (A1) -- (B2);
+    \draw[->] (A2) -- (B3);
+    \draw[->] (A3) -- (B1);
+    \node at (1.5,0.5) {4};
+  \end{scope}
+
+  % Bijection 5: 1->c, 2->a, 3->b
+  \begin{scope}[yshift=-16cm]
+    \foreach \y/\label in {1/1,2/2,3/3} {
+      \node (A\y) at (0,-\y) {$\label$};
+    }
+    \foreach \y/\label in {1/a,2/b,3/c} {
+      \node (B\y) at (3,-\y) {$\label$};
+    }
+    \draw[->] (A1) -- (B3);
+    \draw[->] (A2) -- (B1);
+    \draw[->] (A3) -- (B2);
+    \node at (1.5,0.5) {5};
+  \end{scope}
+
+  % Bijection 6: 1->c, 2->b, 3->a
+  \begin{scope}[yshift=-20cm]
+    \foreach \y/\label in {1/1,2/2,3/3} {
+      \node (A\y) at (0,-\y) {$\label$};
+    }
+    \foreach \y/\label in {1/a,2/b,3/c} {
+      \node (B\y) at (3,-\y) {$\label$};
+    }
+    \draw[->] (A1) -- (B3);
+    \draw[->] (A2) -- (B2);
+    \draw[->] (A3) -- (B1);
+    \node at (1.5,0.5) {6};
+  \end{scope}
+
+\end{tikzpicture}
+\]
+
+Det er $6 = 3! = |A|! = |B|!$ bijeksjoner.
+\end{proof}
+
+\begin{proof}[Løsning av b)]
+    Mellom to mengder med kardinalitet $7$ fins det 
+    $7!$ ulike bijeksjoner.
+
+    Viss vi betrakter en vilkårlig bijeksjon $\phi: A \to B$, der 
+    $|A| = |B| = 7$, har vi at $\phi(a_1) = b_1$ for en 
+    $a_1 \in A, b_1 \in A$ der $b_1$ er en av $7$ elementer i $B$.
+    Så $a_1$ har $7$ elementer å "velge" mellom. 
+    Deretter for $a_2 \in A$ må $\phi(a_2) \neq b_1$ så $a_2$ 
+    kan sendes til $1$ av $7-1 = 6$ elementer.
+    Dette fortsettes helt til $a_7$ kun har et element det kan 
+    være pre-bildet av. For å finne antallet mulige bijeksjoner 
+    tar vi produktet av alle mulige "valg". 
+    Dette betyr at antallet bijeksjoner 
+    er 
+    $$ 
+        7 \cdot 6 \cdot 5 \cdots 1 = 7! = |A|! = |B|!
+    $$ 
+
+    Generellt blir formelen for kardinaliteten til mengden av 
+    bijeksjoner mellom $A$ og $B$ (gitt at $|A| = |B|$) lik 
+    $|A|!$ når $|A| < \aleph_0$.
+    Viss $|A| \geq \aleph_\alpha$, så er 
+    $|\{\phi:A \to B : \phi \text{ bijektiv}\}| = 
+    2^{\aleph_\alpha}$.
+
+    Så det er like mange bijeksjoner fra $\mathbb N$ til 
+    $\mathbb N$ som det er reelle tall!
+\end{proof}
+
+\begin{prob*}{Oppgave 3}
+    I forelesningsrommet i MAT210 er det $100$ sitteplassar. 
+    I ei forelesning møtte $20$ studentar. Kor mange ulike 
+    måtar kunne studentane plassere seg i forelesninga?
+\end{prob*}
+\begin{proof}[Løsning]
+    Det er $100$ plassar og $20$ av plassene skal velges. 
+    Da får vi 
+    $$ 
+        \binom{100}{20}
+    $$ 
+    konfigurasjoner.
+
+    Men, studentene er unike, så for hver av  
+    måtene å velge $20$ seter fra $100$ er det 
+    $20!$ studentene kan sette seg (siden student nr.$1$ har 
+    $20$ valg, student nr.$2$ har $19$ valg, osv.). 
+
+    Så det endelige antall måter $20$ studenter kan 
+    fordele seg på $100$ seter er 
+    $$ 
+        \binom{100}{20}\cdot 20!
+    $$ 
+    som er ca. antall stjerner i universet i andre.
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 4}{}
+    a) Vis at $|\mathbb N| = |\{5n + 1 : n \in \mathbb N\}|$.
+
+    b) Vis at $|(0,1)| = |(0,10)|$.
+\end{prob*}
+\begin{proof}[Bevis av a)]
+    La $f: \mathbb N \to \{5n+1 : n \in \mathbb N\}$ definert ved 
+    $$ 
+        f(n) = 5n+1
+    $$ 
+
+    Vi ser at $f$ er veldefinert og fortsetter med 
+    å vise at $f$ utgjør en bijeksjon. 
+
+    \emph{Injektiv.}
+
+    La $n,m \in \mathbb N$ og anta at 
+    $f(n) = f(m)$. 
+    \begin{align*}
+        f(n) &= f(m) \\ 
+        5n + 1 &= 5m + 1 \\ 
+        5n &= 5m \\ 
+        n &= m \\ 
+    \end{align*}
+    $\Rightarrow f$ injektiv. 
+
+    \emph{Surjektiv.}
+
+    La $m \in \{5n+1 : n \in \mathbb N\}$. 
+    Da er pre-bildet til $m$ 
+    $$ 
+        n = \frac{m - 1}{5}
+    $$ 
+    siden 
+    $$ 
+        f(n) = f\left(\frac{m - 1}{5}\right) = 5 \frac{m-1}{5} + 1 = m
+    $$ 
+    så $f$ er surjektiv. 
+
+    Med dette har vi vist at $f$ utgjør en bijeksjon 
+    fra de to mengdene og de har da samme kardinalitet ($\aleph_0$).
+\end{proof}
+
+\begin{proof}[Bevis av b)]
+    La $f : (0,1) \to (0, 10)$ definert ved 
+    $$ 
+        f(x) = 10x
+    $$ 
+    da har vi, for en vilkårlig $x \in (0,1)$, at
+    $$
+        0 < x < 1 \Rightarrow f(0) < f(x) < f(10)
+        \Rightarrow 0 < f(x) < 10
+    $$
+    så $f(x) \in (0,10)$. 
+
+    \emph{Injektiv.}
+
+    La $x,y \in (0,1)$ og anta at $f(x) = f(y)$. 
+    Da får vi 
+    \begin{align*} 
+        f(x) &= f(y) \\ 
+        10x &= 10y \\ 
+        x &= y
+    \end{align*}
+
+    \emph{Surjektiv.}
+    La $y \in (0,10)$. Da er pre-bildet til $y$
+    $$ 
+        x = \frac{y}{10}
+    $$ 
+    som vi vet er i $(0,1)$ siden $0/10 = 0$ og $10/10 = 1$. 
+    Som vi ser har vi at 
+    $$ 
+        f(x) = f\left(\frac{y}{10}\right) = 10\frac{y}{10} = y
+    $$ 
+
+    $f$ utgjør en bijeksjon mellom mengdene og de har derfor 
+    lik kardinalitet ($\aleph_1$).
+\end{proof}
+
+\begin{prob*}{Oppgave 5}{}
+    a) Kor mange ord med $3$ bokstavar startar med $A$ eller $B$?
+
+    b) Kor mange to-bokstav-ord startar med ein vokal i det norske 
+    alfabetet?
+
+    c) Du har $5$ par sokkar og $3$ par sandalar. 
+    Kor mange måtar kan ein kombinere sokkar og sandalar? 
+    Kor mange er det viss du ikkje har sokkar og sandalar på 
+    samtidig?
+\end{prob*}
+\begin{proof}[Løsning av a)]
+    Viss vi antar at vi har tilgang til det norske alfabetet, 
+    og at vi ignorerer store- og små bokstaver,
+    får vi ord av formen 
+    $$ 
+        XYZ,\quad Y,Z \in \{A,B,C,\dots,\text{Æ},\text{Ø},\text{Å}\}
+    $$ 
+    og 
+    $$ 
+        X \in \{A,B\}
+    $$ 
+
+    Valgene for bokstavene er uavhengige 
+    så vi begynner med bokstav nummer $1$ hvor vi har 
+    $n_1 = 2$ valg. 
+    
+    Deretter for $Y$ og $Z$ har vi $n_2 = n_3 = 29$ valg. 
+
+    Da er det $$n_1 \cdot n_2 \cdot n_3 = 2 \cdot 29^2 = 1682$$
+    muligheter.
+\end{proof}
+\begin{proof}[Løsning av b)]
+    \begin{align*}
+        &AB, \\   
+        A &\in \{A,E,I,O,U,Y,\text{Æ},\text{Ø},\text{Å}\} \\
+        B &\in \{A,B,C,\dots,\text{Æ},\text{Ø},\text{Å}\} \\
+        |\text{vokaler}| \cdot |\text{alfabetet}| 
+          &= 9 \cdot 29 = 261 
+    \end{align*}
+\end{proof}
+\begin{proof}[Løsning av c)]
+    Først, viss vi antar at du må velge et par (kan ikke 
+    ha på to mismatchende sandaler/sokker), 
+    da får vi at du velger blant $5$ par sokkar og 
+    $3$ par sandaler. 
+
+    $\Rightarrow 3 \cdot 5 = 15$ kombinasjoner.
+
+    Viss du må ha enten sokkar på eller sandaler 
+    kan du ta eit valg blant $5$ sokkar og $3$ sandaler. 
+
+    $\Rightarrow 5 + 3 = 8$ kombinasjoner.
+\end{proof}
+
+\begin{prob*}{Oppgave 6}{}
+    Ei klasse med informatikkstudentar tar tre emne: 
+    diskret matematikk, statistikk og
+    programmering. Under er ein tabell med kor mange som 
+    strauk kvart emne:
+
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline 
+        Emne: & Stat & Mat & Prog & Stat \& Mat & Prog \& Stat & 
+        Mat \& Prog & Mat \& Prog \& Stat \\
+        \hline
+        Stryk: & 12 & 5 & 8 & 2 & 6 & 3 & 1 \\
+        \hline
+    \end{tabular}
+
+    \vspace{1em}
+    a) Kor mange studentar strauk på eit emne? 
+
+    b) Kor mange studentar strauk berre diskret matematikk?
+\end{prob*}
+\begin{proof}[Løsning av a)]
+    La $S = \{\text{studenter som trauk Stat}\}$, 
+    $M = \{\text{studenter som strauk Mat}\}$, osv. 
+    hvor vi da kan finne de som strauk Mat \& Prog med 
+    $$ 
+        M \cap P = \{\text{studenter som strauk Mat \& Prog}\}
+    $$ 
+
+    Da har vi 
+    \begin{align*}
+        |M \cap P \cap S| &= 1 \\ 
+        |M \cap P| &= 3 \\ 
+        |P \cap S| &= 6 \\ 
+        |S \cap M| &= 2 \\ 
+        |P| &= 8 \\ 
+        |M| &= 5 \\ 
+        |S| &= 12 
+    \end{align*}
+
+    Da har vi at 
+    \begin{align*}
+    |\{\text{studenter som strauk ett emne}\}|
+        &= |S| + |M| + |P| - 2(|S\cap M| + |S\cap P|+ |M \cap P|)
+        + 3(|M\cap P \cap S|) \\ 
+        &= 12 + 5 + 8 - 2(2 + 6 + 3) + 3(1) \\ 
+        &= 25 - 22 + 3 \\
+        &= 6
+    \end{align*}
+\end{proof}
+\begin{proof}[Løsning av b)]
+    \begin{align*}
+        6 - |S| - |P| = 6 - 5 = 1
+    \end{align*}
+\end{proof}
+
+\newpage 
+\begin{prob*}{}{}
+    a) Kor mange måtar kan ein skrive bokstavane i ordet 
+    DISKRET? 
+
+    b) Kor mange måtar kan ein skrive bokstavane i ordet 
+    DISKRET viss bokstavane IS må stå saman. 
+
+    c) Kor mange måtar er det for å ordne $5$ jenter og 
+    $5$ gutar i ei rad på kino med $10$ stoler slik at ingen 
+    gutar sitter ved sidan av kvarrandre?
+\end{prob*}
+\begin{proof}[Løsning av a)]
+    Vi velger bokstav for bokstave. 
+
+    Velg en bokstav fra 
+    $$ 
+        \{D,I,S,K,R,E,T\}
+    $$ 
+    for eksempel D. 
+
+    Da tar vi neste valget fra 
+    $$ 
+    \{D,I,S,K,R,E,T\} \setminus \{D\}
+    $$ 
+    og så videre. 
+
+    Dermed får vi
+    \begin{align*}
+        = 7 \cdot 6 \cdot 5 \cdots 1 = 7!  
+    \end{align*}
+    muligheter.
+\end{proof}
+\begin{proof}[Løsning av b)]
+    Samme prosedyre som sist, men 
+    mengden vi velger fra er 
+    $$ 
+        \{D, IS, K, R, E, T\}
+    $$
+    som burde bety $6!$ muligheter, men 
+    vi kan også velge $SI$ siden bokstavene fortsatt stå sammen. 
+    Så for hvert ord 
+    kan vi bytte plass på I og S som gir et nytt valg for 
+    hvert ord som kan lages med metoden over. 
+
+    Dermed får vi  
+    $$ 
+        6! \cdot 2
+    $$ 
+    muligheter.
+\end{proof}
+\begin{proof}[Løsning av c)]
+    Hver gutt må ha en jente på hver side, eller 
+    en jente på en side viss de sitter på enden, så 
+    jentene må plasseres uniformt på følgende måte: 
+    $$ 
+        F\_F\_F\_F\_F\_
+    $$ 
+    eller 
+    $$ 
+        \_F\_F\_F\_F\_F
+    $$ 
+    så vi har to konfigurasjoner. 
+    For hver av disse er det $5!$ måter å arangere jentene.
+
+    Da må vi plassere gutane på $5!$ måter i hvert tilfelle. 
+
+    Alt i alt 
+    $$ 
+        2 \cdot 2 \cdot 5! \cdot 5!
+    $$ 
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 8}{}
+    a) Kor mange måtar kan vi trekke $2$ ess og $3$ kongar fra 
+    ein kortstokk med $52$ kort? 
+
+    b) Kor mange løysinger finns det til likninga som oppfyller 
+    betingelsen: 
+    $$ 
+        a + b + c + d + e = 500
+    $$ 
+    Betingelse: $a,b,c,d,e$ er heiltal som er minst $10$?
+\end{prob*}
+\begin{proof}[Løsning av a)]
+    Vi antar at vi bruker en standard kortstokk $4$ av hvert 
+    kort og at vi ikke betrakter 
+    $$ 
+        \text{ess}, \text{1}, \text{kong}
+    $$ 
+    som å være forskjellig fra 
+    $$ 
+        \text{ess}, \text{kong}
+    $$ 
+
+    Da får vi 
+    $$ 
+        \binom{4}{2} \cdot \binom{4}{3} = 6 \cdot 4 = 24 
+    $$ 
+\end{proof}
+\begin{proof}[Løsning av b)]
+    Siden hver variabel er større en $10$ kan vi skrive 
+    \begin{align*}
+        a &= \alpha + 10 \\ 
+        b &= \beta + 10 \\ 
+        c &= \gamma + 10 \\ 
+        d &= \delta + 10 \\ 
+        e &= \epsilon + 10 \\ 
+    \end{align*}
+
+    Da har vi 
+    $$ 
+        \alpha + \beta + \gamma + \delta + \epsilon = 450
+    $$ 
+
+    Antall ikke-negative heltalsløsninger til 
+    $$ 
+        x_1 + x_2 + \cdots + x_n = k 
+    $$ 
+    er 
+    $$ 
+        \binom{n + k - 1}{n - 1}
+    $$ 
+
+    Så svaret er 
+    $$ 
+        \binom{454}{4}
+    $$ 
+\end{proof}
+
+\end{document}

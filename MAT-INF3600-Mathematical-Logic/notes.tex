@@ -1,0 +1,1720 @@
+\input{preamble.tex}
+
+\title{\huge{Mathematical Logic}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{Fall 2025}}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+These notes are for (introductory) mathematical logic.  
+As of writing this introduction, I have not yet been accepted 
+to take the mathematical logic course (University of Oslo). 
+These notes will be based on the book used in the aforementioned 
+course, as well as resources I can find online (e.g. publicly 
+avaliable courses like UCLA's Math 220A). Therefore 
+the structure of these notes might be a bit scattered and 
+disorganized.
+
+\subsection{High level overview / rambling}
+First-order logic is the standard way to formalize mathematics. 
+For instance Peano arithmetic formalizes number theory, 
+Zermelo-Fraenkel set theory formalizes set theory. 
+In symbolic logic, with formal languages, 
+we don't consider interpretations of symbols.
+Using structures we can have a notion of validity or satisfaction 
+to logical expressions. With these, we have notions of syntax 
+and semantics. 
+
+\subsection{Gödel's Completeness Theorem} 
+This is a fundamental result in mathematical logic which states 
+(informally) that a formula with no free 
+variables can be formally deduced 
+from a given set of axioms if and only if it is valid in every 
+structure satisfying these axioms. 
+
+\newpage
+\section{Languages and Structures}
+\subsection{Languages}
+What does \(\forall x (x > 0 \Rightarrow \exists y (y \cdot y = x))\) 
+mean? While we might recognize that this is a statement 
+that holds in an ordered field where every positive element is a square
+, it is just a sequence of symbols. 
+\begin{defn}{First order language}{}
+     A (first-order) language is a set of symbols \(\mathfrak L\)
+     composed of two disjoint subsets: 
+     \begin{enumerate}
+        \item The first part (common to all languages) consists 
+            of "(" and ")" together with the following logical 
+            symbols: the set of variables \(\mathcal V = 
+            \{v_n : n \in \mathbb N\}\), 
+            the equality symbol "\(=\)", 
+            connectives "\(\lnot\)", "\(\land\)", 
+            the existential quantifier "\(\exists\)"
+
+        \item The second part, called the signature of 
+            \(\mathfrak L\) denoted \(\sigma^\mathfrak L\), 
+            consists of the non-logical symbols of \(\mathfrak L\).
+            It consists of: 
+            \begin{itemize}
+                \item a set of constant symbols 
+                    \(C^\mathfrak L\) 
+                \item a sequence of sets 
+                    \(\mathcal F_n^\mathfrak L, n 
+                    \in \mathbb N_{\geq 1}\),
+                    where 
+                    elements of this set are called the n-ary function 
+                    symbols 
+                \item a sequence of sets \(\mathcal R_n^\mathfrak L, 
+                    n \in \mathbb N_{\geq 1}\), 
+                    where elements of this set 
+                    are called n-ary relation symbols 
+                    (or, n-ary predicates)
+            \end{itemize}
+    \end{enumerate}
+    The language \(\mathfrak L\) is given by the disjoint union 
+    of these sets. 
+\end{defn}
+Note that the existential quantifier and logical or may be swapped 
+for their negations: \(\forall, \lor\) and nothing will change. 
+The choice is a matter of taste. Also note that while we give 
+practical names to the sets in \(\mathfrak L\), we should 
+attempt not to imbue any sort of interpretation on languages.
+
+Now, a few \emph{remarks}: 
+\begin{enumerate}
+    \item A language is always infinite. Furthermore, the logical 
+        part is countable while the non-logical can have 
+        arbitrary cardinality. 
+    \item Abusing the notation: \(\mathfrak L\) and 
+        \(\sigma^\mathfrak L\) may be identified. 
+\end{enumerate}
+
+\begin{ex}{}{}
+    \(\mathfrak L_\emptyset\) the empty language 
+    (still contains logical part). 
+
+    \(\mathfrak L_{ring} = \{\underline 0, \underline 1, 
+    +, -, \cdot\}\) the ring language. 
+
+    \(\mathfrak L_{ord} = \{<\}\) the order language. 
+
+    \(\mathfrak L_{o.ring} := \mathfrak L_{ring} \cup 
+    \mathfrak L_{ord}\)
+    the ordered ring language. 
+
+    \(\mathfrak L_{set} = \{\in\}\) the language of set theory. 
+
+    \(\mathfrak L_{grp} = \{\cdot, ^{-1}\}, 1\) the language 
+    of groups. 
+
+    \(\mathfrak L_{graph} = \{E\}\) the language of graphs.
+
+    \(\mathfrak L_{ar} = \{\underline 0, S, +, \cdot, <\}\) 
+    the language of arithmetic.
+
+\end{ex}
+
+\subsection{Structures}
+
+\begin{defn}{Structures}{}
+    Let \(\mathfrak L\) be a first-order language. 
+    An \(\mathfrak L\)-structure, \(\mathfrak A\), constists 
+    of a non-empty set A (called the base set or universe of 
+    \(\mathfrak A\) together with an element \(c^\mathfrak A \in A\) 
+    for each \(c \in c^\mathfrak L\), a function 
+    \(f^\mathfrak A: A^n \to A\) for each \(f\in F_n^\mathfrak L\), 
+    and a subset \(R^\mathfrak A \subseteq A^n\) for each 
+    \(R \in R_n^\mathfrak L\). We 
+    write \(\mathfrak A = \left(A, \left(Z^\mathfrak A\right)_{Z \in 
+    \sigma^\mathfrak L}\right)\). 
+    \(Z^\mathfrak A\) is called the interpretation of the symbol 
+    \(Z \in \sigma^\mathfrak L\) in the structure \(\mathfrak A\)
+\end{defn}
+Note that there are different ways of formally defining this 
+and the specifics of this can safely be taken for granted later 
+on. 
+
+\begin{ex}{}{}
+    \begin{enumerate}
+        \item \(\mathcal N = (\mathbb N, 0, 
+            \underset{x \mapsto x + 1}{S}, 
+            +, \cdot, <)\) is an \(\mathfrak L_{ar}\)-structure
+
+        \item \(C = (\mathbb C, 0, 1, +, -, \cdot)\) is an 
+            \(\mathfrak L_{ring}\)-structure 
+
+        \item \(R = (\mathbb R, 0, 1, +, -, \cdot, <)\) the ordered 
+            field of real numbers, 
+            is an \(\mathfrak L_{o.ring}\)-structures
+    \end{enumerate}
+\end{ex}
+
+
+\begin{defn}{isomorphism of structures}{}
+    We say that two \(\mathfrak L\)-structures 
+    \(\mathfrak A, \mathfrak B\) are isomorphic, \(\mathfrak A 
+    \cong \mathfrak B\), if there exists an isomorphism 
+
+    \(F:A \underset{\text{bijection}}{\to} B\) between the base 
+    sets which commutes with the interpretations of the symbols 
+    \(\sigma^\mathfrak L\), that is: 
+    \begin{enumerate}
+        \item \(F(c^\mathfrak A) = c^\mathfrak B\) for every 
+            constant symbol \(c\in C^\mathfrak L\)
+
+        \item \(F(f^\mathfrak A(a_1, \dots, a_n)) = 
+            f^\mathfrak B(F(a_1), \dots, F(a_n))\) for every 
+            function symbol \(f \in \mathcal F^\mathfrak L_n\), and 
+            every tuple \((a_1, \dots, a_n) \in A^n\)
+
+        \item \((a_1,\dots,a_n) \in R^\mathfrak A \Leftrightarrow 
+            (F(a_1), \dots, F(a_n)) \in R^\mathfrak B\) for every 
+            predicate \(R \in \mathcal R^\mathfrak L_n\) and every 
+            tuple \((a_1, \dots, a_n) \in A^n\)
+    \end{enumerate}
+    
+\end{defn}
+
+\newpage
+\section{Terms and Formulas}
+
+\subsection{Terms}
+\begin{defn}{}{}
+    A word \(w\) over a set (alphabet) \(E\) is a finite string 
+    \(w=a_0a_1\dots a_{k-1}\) with \(a_i \in E\) for every 
+    \(i\). 
+    We call \(k\) the length of \(w\), and we denote \(E^*\)
+    the set of all words over \(E\). 
+\end{defn}
+
+\begin{defn}{}{}
+    Let $\mathfrak L$ be a language. The set 
+    \(\mathcal T^\mathfrak L\) of 
+    $\mathfrak L$-terms is the smallest subset $D$ of $\mathfrak L^*$ 
+    containing the variables and the constants of $\mathfrak L$, 
+    such that if $f \in F_n^\mathfrak L$ and $t_1,\dots,t_n \in D$, 
+    then $ft_1\dots t_n \in D$. 
+
+    \[\Rightarrow \mathcal T^\mathfrak L = \bigcup_{n\in\mathbb N} 
+    \mathcal T^\mathfrak L_n\] where \(\mathcal T^\mathfrak L_0 
+    = C^\mathfrak L \cup \mathcal V^\mathfrak L\) and, inductively 
+    \[\mathcal T^\mathfrak L_{n+1} = \mathcal T^{\mathfrak L}_n \cup 
+    \{ft_1\dots t_k : k\in\mathbb N_{\geq 1}, f \in \mathcal
+    F^\mathfrak L_k \text{ and } t_1,\dots,t_k 
+    \in \mathcal T_n^\mathfrak L\}\].
+
+\end{defn}
+
+\emph{Proposition}:
+
+Any term \(t \in \mathcal T^\mathfrak L\) satisfies one 
+and only one of the following: 
+\begin{enumerate}
+    \item \(t\) is a variable 
+    \item $t$ is a constant symbol 
+    \item there exists a unique integer $n \geq 1$, a unique 
+        n-ary function symbol \(f\in \mathcal F^\mathfrak L_n\) 
+        and a unique sequence \((t_1, \dots, t_n)\) of terms such 
+        that \(t = ft_1\dots t_n\)
+\end{enumerate}
+\begin{proof}{}{}
+     
+We proceed by structural induction on the term \( t \in \mathcal{T}^{\mathfrak{L}} \), as defined by the inductive construction of terms in a first-order language.
+
+\textbf{Base cases.}
+
+If \( t \) is a \emph{variable} (i.e., \( t \in \mathcal{V} \)), then it satisfies condition (1).
+
+If \( t \) is a \emph{constant symbol} (i.e., a 0-ary function symbol), then it satisfies condition (2).
+
+These two cases are mutually exclusive since the sets of variables and constant symbols are disjoint.
+
+\textbf{Inductive step.}
+
+Assume the statement holds for terms \( t_1, \dots, t_n \in \mathcal{T}^{\mathfrak{L}} \).
+
+Let \( f \in \mathcal{F}^{\mathfrak{L}}_n \) be an \( n \)-ary function symbol for some \( n \geq 1 \), and define a new term 
+\[
+t = f t_1 \dots t_n.
+\]
+
+Then \( t \) is neither a variable nor a constant symbol. Furthermore, the structure of the term guarantees that there exists a \emph{unique} integer \( n \), a unique function symbol \( f \), and a unique sequence \( (t_1, \dots, t_n) \) of terms such that 
+\[
+t = f t_1 \dots t_n,
+\]
+due to the syntactic rules of term formation in first-order logic. Thus, condition (3) holds uniquely.
+
+\textbf{Exclusivity.}
+
+We now verify that the three cases are mutually exclusive:
+
+\begin{itemize}
+    \item A term cannot be both a variable and a constant symbol (by definition of the syntax).
+    \item A term cannot be a variable or constant symbol and simultaneously of the form \( f t_1 \dots t_n \) for any \( n \geq 1 \).
+    \item Finally, due to the unique structure of terms, a term of the form \( f t_1 \dots t_n \) cannot be written in any other way.
+\end{itemize}
+
+Therefore, every term falls under exactly one of the three cases, completing the proof.
+
+\end{proof}
+
+We introduce some \emph{notation} here, for practical purposes: 
+we shall often write \(f(t_1,\dots,t_n)\) instead of \(ft_1\dots t_n\).
+When \(f\) is binary we might write \(t_1 f t_2\) instead of 
+\(ft_1t_2\). For example: \((x+y) \cdot z\) means \(\cdot + x y z\). 
+
+\begin{defn}{}{}
+    The height of a term \(t\), denoted \(ht(t)\), is defined as the 
+    smallest natural number \(k\) such that 
+    \(t \in \mathcal T^\mathfrak L_k\).
+\end{defn}
+From this definition and the unique reading 
+property for terms, it follows that 
+\(ht(f(t_1,\dots,t_n)) = 1 + \max\{ht(t_i) : 1 \leq i \leq n\}\). 
+
+
+\subsection{Formulas}
+\begin{defn}{Atomic formula}{}
+    An atomic $\mathfrak L$-formula is one of the following
+    \begin{itemize}
+        \item a word of the form \(t_1 = t_2\), where \(t_1, t_2\) are 
+            terms of the language 
+        \item a word of the form \(Rt_1\dots t_n\), 
+            where \(R\in \mathcal R^\mathfrak L_n\) and all 
+            \(t_1,\dots,t_n\) are terms of the language 
+    \end{itemize}
+    Then the set \(Fml^\mathfrak L\) of $\mathfrak L$-formulas 
+    is the smallest subset \(D\) of \(\mathfrak L^*\) that contains 
+    all atomic $\mathfrak L$-formulas such that 
+    if \(x \in \mathcal V^\mathfrak L\) and \(\phi, \psi \in D\), 
+    then $\lnot \phi, (\phi \land \psi)$ and $\exists x \phi $ are 
+    all in $D$.
+
+    $$\Rightarrow Fml^\mathfrak L = \bigcup_{n\in \mathbb N} 
+    Fml_n^\mathfrak L$$ where $Fml_0^\mathfrak L$ is the set of 
+    atomic $\mathfrak L$-formulas, and inductively 
+    $$Fml_{n+1}^\mathfrak L := Fml_{n}^\mathfrak L \cup
+    \{\lnot \phi : \phi \in Fml_n^\mathfrak L\} \cup 
+    \{(\phi \land \psi) : \phi, \psi \in Fml_n^\mathfrak L\} 
+    \cup \{\exists x \phi : \phi \in Fml_n^\mathfrak L, x \in 
+    \mathcal V^\mathfrak L\}$$
+\end{defn}
+Note that the inclusion of $Fml_n^\mathfrak L$ in the 
+union in the inductive definition is technically redundant, but 
+we defined it like this for practicallity in other definitions.
+
+The same can be said for the definition of $\mathcal T^\mathfrak L_n$.
+
+\newpage
+\subsection{Exercises from 1.6.1}
+\begin{prob}{Task 4}{}
+    Suppose that $\mathfrak A$ and $\mathfrak B$ are two 
+    $\mathfrak L$-structures. 
+    We say that they are \emph{isomorphic}, 
+    $\mathfrak A \cong \mathfrak B$, if there 
+    exists a bijection \(i: A \to A\) such that 
+    for each constant symbol \(c\) of $C^\mathfrak L$, 
+    \(i(c^\mathfrak A) = c^\mathfrak B\), 
+    for each n-ary function symbol \(f\) in $\mathcal F^\mathfrak L_n$,
+    and for each $(a_1,\dots,a_n) \in A^n$, 
+    $i(f^\mathfrak A(a_1,\dots,a_n)) = f^\mathfrak B(i(a_1),\dots 
+    , i(a_n))$, and for each n-ary relation/predicate symbol 
+    $R$ in $\mathcal R^\mathfrak L_n$, and for each 
+    $(a_1,\dots,a_n) \in A^n$, we have $(a_1,\dots,a_n) 
+    \in R^\mathfrak A \Leftrightarrow (i(a_1),\dots,i(a_n)) \in 
+    R^\mathfrak B$. 
+
+
+    \begin{enumerate}[label=\Alph*]
+        \item Show that $\cong$ is an equivalence relation.
+        \item Find two different structures for a particular 
+            language and prove that they are not isomorphic. 
+    \end{enumerate}
+
+\end{prob}
+\begin{proof}[Proof of first]
+    Let $\mathfrak L$ be an arbitrary language, and 
+    $\mathfrak A, \mathfrak B, 
+    \mathfrak C$ be $\mathfrak L$-structures. 
+    
+    First we show that $\mathfrak A \cong \mathfrak A$, i.e. 
+    $\cong$ is reflexive. Let $i:A\to A$ be the identity map 
+    $i(a) = a$. It is trivial to show that $i$ is bijective,
+    being its own inverse. Then we have 
+    $i(c^\mathfrak A) = c^\mathfrak A$ satisfying the first property 
+    of structure isomorphisms. Furthermore, if we take $f$ to be 
+    an $n$-ary function symbol of the language, and 
+    $(a_1,\dots,a_n)\in A^n$, we get that 
+    $i(f^\mathfrak A(a_1,\dots,a_n)) = f^\mathfrak A(a_1,\dots,a_n)$. 
+    Now recognize that $i(a_j) = a_j$ for all $j$, and we find that 
+    $i(f^\mathfrak A(a_1,\dots,a_n)) = 
+    f^\mathfrak A(i(a_1),\dots,i(a_n))$, showing that the second  
+    property holds. 
+    Lastly, with $R$ being some $n$-ary relation symbol in the language
+    and $(a_1,\dots,a_n) \in A^n$, 
+    we have, through the same identity argument, 
+    \[
+        (a_1, \dots, a_n) \in R^\mathfrak A 
+        \Leftrightarrow 
+        (i(a_1),\dots,i(a_n)) \in R^\mathfrak A.
+    \]
+    Thus $\mathfrak A \cong \mathfrak A$.
+
+    Second we show that $\cong$ is symmetric.   
+    Suppose $i: A \to B$ is an isomorphism, so $\mathfrak A \cong \mathfrak B$ via $i$. 
+    Since $i$ is bijective, it has an inverse $j := i^{-1} : B \to A$ 
+    which is also a bijection.
+
+    We now show that $j$ is a structure isomorphism from $\mathfrak B$ to $\mathfrak A$.
+
+    \textbf{Constants:} For any constant symbol $c$ in the language, we know 
+    $i(c^\mathfrak A) = c^\mathfrak B$. Applying $j$ to both sides gives:
+    \[
+        j(c^\mathfrak B) = j(i(c^\mathfrak A)) = c^\mathfrak A.
+    \]
+    So the condition on constants is satisfied.
+
+    \textbf{Functions:} Let $f$ be an $n$-ary function symbol and 
+    $(b_1,\dots,b_n) \in B^n$. Since $j$ maps from $B$ to $A$, we define
+    $a_k := j(b_k)$ for each $k$. Then $i(a_k) = b_k$ for all $k$, and:
+    \begin{align*}
+        j(f^\mathfrak B(b_1,\dots,b_n)) 
+        &= j(f^\mathfrak B(i(a_1),\dots,i(a_n))) \\
+        &= j(i(f^\mathfrak A(a_1,\dots,a_n))) 
+        = f^\mathfrak A(a_1,\dots,a_n),
+    \end{align*}
+    which shows that:
+    \[
+        f^\mathfrak A(j(b_1),\dots,j(b_n)) 
+        = j(f^\mathfrak B(b_1,\dots,b_n)),
+    \]
+    satisfying the function compatibility condition.
+
+    \textbf{Relations:} Let $R$ be an $n$-ary relation symbol and 
+    $(b_1,\dots,b_n) \in B^n$. Let $a_k := j(b_k)$ as before. 
+    Then, since $i(a_k) = b_k$, we get:
+    \[
+        (b_1,\dots,b_n) \in R^\mathfrak B 
+        \Leftrightarrow 
+        (i(a_1),\dots,i(a_n)) \in R^\mathfrak B 
+        \Leftrightarrow 
+        (a_1,\dots,a_n) \in R^\mathfrak A
+    \]
+    by the isomorphism definition for $i$. Applying $j$ to the tuple 
+    and reversing the direction of the implication gives the desired 
+    equivalence. Hence $\mathfrak B \cong \mathfrak A$.
+
+    Lastly, we show that $\cong$ is transitive. 
+    Suppose $\mathfrak A \underset{i}{\cong} \mathfrak B$ and 
+    $\mathfrak B \underset{j}{\cong} \mathfrak C$. 
+    Define $k := j \circ i : A \to C$, which is bijective 
+    since it is the composition of two bijections.
+
+    We show that $k$ is a structure isomorphism from 
+    $\mathfrak A$ to $\mathfrak C$.
+
+    \textbf{Constants:} For any constant symbol $c$, we have:
+    \[
+        k(c^\mathfrak A) = j(i(c^\mathfrak A)) = j(c^\mathfrak B) = c^\mathfrak C.
+    \]
+
+    \textbf{Functions:} Let $f$ be an $n$-ary function symbol 
+    and $(a_1,\dots,a_n) \in A^n$. Then:
+    \begin{align*}
+        k(f^\mathfrak A(a_1,\dots,a_n)) 
+        &= j(i(f^\mathfrak A(a_1,\dots,a_n))) \\ 
+        &= j(f^\mathfrak B(i(a_1),\dots,i(a_n)))\\
+        &= f^\mathfrak C(j(i(a_1)), \dots, j(i(a_n)))\\
+        &= f^\mathfrak C(k(a_1),\dots,k(a_n)).
+    \end{align*}
+
+    \textbf{Relations:} Let $R$ be an $n$-ary relation symbol 
+    and $(a_1,\dots,a_n) \in A^n$. Then:
+    \[
+        (a_1,\dots,a_n) \in R^\mathfrak A 
+        \Leftrightarrow 
+        (i(a_1),\dots,i(a_n)) \in R^\mathfrak B 
+        \Leftrightarrow 
+        (j(i(a_1)),\dots,j(i(a_n))) \in R^\mathfrak C
+        \Leftrightarrow 
+        (k(a_1),\dots,k(a_n)) \in R^\mathfrak C.
+    \]
+    The reverse direction follows similarly by applying the inverses 
+    of $j$ and $i$. Hence, $k$ preserves all relations.
+
+    Thus, $\mathfrak A \cong \mathfrak C$, and we have shown that 
+    $\cong$ is transitive.
+
+    Therefore, $\cong$ is an equivalence relation 
+    (reflexive, symmetric, transitive).
+\end{proof}
+
+\emph{Solution to the second (Informal)}. 
+Let $\mathfrak L_{NT} = \{0, S, +, \cdot, E, <\}$
+be the language of number theory. 
+
+Let $\mathcal N, \mathfrak A$ be $\mathfrak L_{NT}$-structures. 
+More specifically, let $\mathcal N$ be the usual structure 
+which models number theory. In $\mathfrak A$, let 
+$a +^\mathfrak A b = a$ for all $a,b \in A$. 
+To show that two structures like these cannot be isomorphic we 
+proceed by contradiction, supposing there does exist an isomorphism 
+$i: \mathbb N \to A$. 
+
+$i$ is some function that, among other properties, satisfies 
+$i(n + m) = i(n) +^\mathfrak A i(m)$, much like 
+a group homomorphism, fun fun. 
+Now since $i(n) +^\mathfrak A i(m) = i(n)$ we have 
+$$ 
+    i(n+m) = i(n) 
+$$ 
+Choose $n = 1 = m$ and we get 
+$$ 
+    i(2) = i(1) 
+$$
+which contradicts injectivity of $i$. 
+
+\newpage 
+\section{Semantics of first-order formulas}
+\subsection{Unique readability, free variables, notation}
+\emph{Proposition. (Unique readability of formulas)} 
+Any $\mathfrak L$-formula $\phi$ satisfies one 
+and only one of the following: 
+\begin{enumerate}
+    \item $\phi$ is an atomic formula 
+    \item $\phi$ is equal to $\lnot \psi$ for some unique 
+        $\mathfrak L$-formula $\psi$
+    \item $\phi$ is equal to $\psi \land \mathfrak X$ for some unique 
+        $\mathfrak L$-formulas $\psi, \mathfrak X$
+    \item $\phi$ is equal to $\exists x \psi$ for some unique 
+        variable x and some unique $\mathfrak L$-formula $\psi$
+\end{enumerate}
+
+\begin{proof}
+We proceed by structural induction on the formation of formulas in $\mathfrak{L}$.
+
+Let $Fml_n^{\mathfrak{L}}$ denote the set of formulas of depth at most $n$:
+\begin{itemize}
+    \item Base case: $Fml_0^{\mathfrak{L}}$ consists of atomic formulas.
+    \item Inductive step: $Fml_{n+1}^{\mathfrak{L}}$ consists of formulas obtained by applying negation, conjunction, or existential quantification to formulas in $Fml_n^{\mathfrak{L}}$.
+\end{itemize}
+
+\textbf{Base case $(n = 0)$:}  
+Any formula $\phi \in Fml_0^{\mathfrak{L}}$ is, by definition, atomic.  
+Hence, case (1) holds, and the rest do not apply. The decomposition is trivially unique.
+
+\medskip
+
+\textbf{Inductive hypothesis:}  
+Assume that for all $\psi \in Fml_n^{\mathfrak{L}}$, $\psi$ satisfies exactly one of the four cases of the proposition, with the associated subformulas and variables being unique.
+
+\medskip
+
+\textbf{Inductive step:}  
+Let $\phi \in Fml_{n+1}^{\mathfrak{L}} \setminus Fml_n^{\mathfrak{L}}$. Then $\phi$ is constructed as exactly one of the following:
+\begin{itemize}
+    \item $\phi = \lnot \psi$, where $\psi \in Fml_n^{\mathfrak{L}}$,
+    \item $\phi = \psi \land \chi$, where $\psi, \chi \in Fml_n^{\mathfrak{L}}$,
+    \item $\phi = \exists x\, \psi$, where $x$ is a variable and $\psi \in Fml_n^{\mathfrak{L}}$.
+\end{itemize}
+
+Each of these constructions matches exactly one of cases (2), (3), or (4). We now prove uniqueness for each case.
+
+\medskip
+
+\textit{Case 2:} Suppose $\phi = \lnot \psi_1 = \lnot \psi_2$.  
+Then by the syntax of negation, it follows that $\psi_1 = \psi_2$. Hence, $\psi$ is uniquely determined.
+
+\medskip
+
+\textit{Case 3:} Suppose $\phi = \psi_1 \land \chi_1 = \psi_2 \land \chi_2$.  
+Then the only way such a formula can be parsed as a conjunction is with:
+\[
+\psi_1 = \psi_2 \quad \text{and} \quad \chi_1 = \chi_2.
+\]
+Thus, both components are uniquely determined.
+
+\medskip
+
+\textit{Case 4:} Suppose $\phi = \exists x_1\, \psi_1 = \exists x_2\, \psi_2$.  
+By the syntax of quantification, it must be that $x_1 = x_2$ and $\psi_1 = \psi_2$.  
+Hence, both the variable and subformula are uniquely determined.
+
+\medskip
+
+\textbf{Mutual exclusivity:}  
+Finally, we verify that no formula can belong to more than one of the cases (1)–(4).
+\begin{itemize}
+    \item Atomic formulas cannot start with $\lnot$, $\land$, or $\exists$.
+    \item Formulas of the form $\lnot \psi$ cannot be written as conjunctions or quantifiers.
+    \item Conjunctions and quantifiers have distinct syntactic structures and cannot be confused.
+\end{itemize}
+
+\medskip
+
+Hence, each formula $\phi$ satisfies exactly one of the four cases, and the decomposition is unique in each.
+
+\end{proof}
+
+\begin{defn}{}{}
+    Let $v_k \in \mathcal V^\mathfrak L$ be a variable.
+    We define: a free occurence of $v_k$ in $\phi$: 
+    \begin{itemize}
+        \item If $\phi$ is atomic (i.e. $t_1 = t_2$ for some terms), 
+            all occurences of $v_k$ in $\phi$ are free. 
+
+        \item If $\phi$ is of the form $\lnot \psi$, then the 
+            free occurences of $v_k$ in $\phi$ are those which are 
+            free in $\psi$.
+
+        \item If $\phi$ is of the form $(\psi \land \chi)$, 
+            then the free occurences of $v_k$ in $\phi$ are those 
+            that are free in $\psi$ and those that are free in 
+            $\chi$
+
+        \item If $\phi$ is of the form $\exists v_l \psi$ and 
+            $l \neq k$, then the free occurences of $v_k$ in $\phi$
+            are those which are free in $\psi$
+
+        \item If $\phi$ is of the form $\exists v_k \psi$, then no 
+            occurence of $v_k$ in $\phi$ is free
+    \end{itemize}
+
+    Occurences of $v_k$ in $\phi$ that are not free are called 
+    bound. 
+
+    The free variables of $\phi$ are those having at least one 
+    reoccurence in $\phi$. Denote $Free(\phi)$ the set of free 
+    variables of $\phi$. 
+
+    A sentence is a formula with no free variables. 
+\end{defn}
+
+\begin{ex}{}{}
+    If $\phi$ is the formula $(\exists v_0 v_0 < v_1 \land v_0 = v_1)$ 
+    (note that there is no use of "(" or ")" in the formula itself). 
+
+    Then: 
+    \begin{itemize}
+        \item The first two occurences of $v_0$ are bound 
+
+        \item The third $v_0$ is free
+
+        \item All occurences of $v_1$ are free
+    \end{itemize}
+\end{ex}
+
+\emph{Notation.}
+We will use the following abbreviations: 
+\begin{itemize}
+    \item $(\phi \lor \psi)$ for $\lnot(\lnot \phi \land \lnot \psi)$
+
+    \item $(\phi \Rightarrow \psi)$ for $\lnot (\phi \land \lnot \psi)$
+
+    \item $(\phi \Leftrightarrow \psi)$ for 
+        $((\phi \Rightarrow \psi) \land (\psi \Rightarrow \phi))$
+
+    \item $\forall x \phi$ for $\lnot \exists x \lnot \phi$
+\end{itemize}
+Note that these do not constitute new symbols in 
+the meaning of formulas in the formation rules, this is 
+simply for convenience. We, formally, stick to the minimum  
+amount of symbols for the full power of first-order logic.
+
+We will also write $\exists x_1, \dots, x_n$ instead of 
+$\exists x_1,\dots,\exists x_n$ and do so for the universal 
+quantifier, also. 
+Furthermore we write $R(t_1,\dots,t_n)$ instead of $Rt_1,\dots,t_n$ 
+as well as write $t_1 R t_2$ instead of $Rt_1t_2$ when $R$ is 
+a binary relation. 
+We will write $(\phi_0 \land \dots \land \phi_n)$ or 
+sometimes $\bigwedge_{i=0}^n \phi_i$ instead of 
+$(\dots(\phi_0 \land \phi_1)\land \phi_2) \land \dots \phi_n)$, 
+as well as similar abbreviations for disjunction.
+We will add parentheses, or omit them for readability; 
+with the convention that symbols from $\{\exists, \lnot, \forall\}$
+bind strongest, followed by $\land$, then $\lor$, then the symbols 
+from $\{\Rightarrow, \Leftrightarrow\}$.
+
+\begin{ex}{}{}
+    $\forall x \phi \land \psi \Rightarrow \chi$ is read as 
+    $((\forall x \phi \land \psi) \Rightarrow \chi)$, that is 
+    $\lnot(\forall x \phi \land \psi) \land \lnot \chi)$, and so 
+    finally we get 
+    $$ 
+        \lnot((\lnot \exists x \lnot \phi \land \psi) \land \lnot \chi)
+    $$
+\end{ex}
+
+\subsection{Semantics}
+\begin{defn}{}{}
+    Let $\mathfrak A$ be an $\mathfrak L$-structure. 
+    \begin{enumerate}
+        \item An assignment (with value in $\mathfrak A$) is a 
+            function $\alpha : \mathcal V^\mathfrak L \to A$ from 
+            the set of variables to the base set or universe of 
+            $\mathfrak A$.
+
+        \item If $\alpha$ is an assignment and $t$ is an 
+            $\mathfrak L$-term, we define $t^\mathfrak A[\alpha]$
+            by induction on the height of t $ht(t)$: 
+            \begin{itemize}
+                \item $v_i^\mathfrak A[\alpha] := \alpha(v_i)$ 
+                    (for $v_i \in \mathcal V^\mathfrak A$) and 
+                    $c^\mathfrak A[\alpha] := c^\mathfrak A$ 
+                    (for constant symbol $c \in C^\mathfrak L$)
+                \item $f(t_1,\dots,t_n)^\mathfrak A[\alpha] := 
+                    f^\mathfrak A(t^\mathfrak A_1[\alpha],\dots,
+                    t^\mathfrak A_n[\alpha])$
+            \end{itemize}
+    \end{enumerate}
+\end{defn}
+
+\begin{lem}{}{}
+    If two assignments $\alpha, \beta$ concide on all variables 
+    occuring in $t$, then $t[\alpha] = t[\beta]$.
+\end{lem}
+
+\emph{Notation.} 
+If $t$ is a term, we might denote it by $t(x_1,\dots,x_n)$ if the 
+variables $x_i$ are all distinct and all variables having 
+at least one occurence in $t$ all belong to the set 
+$\{x_1, \dots, x_n\}$. If $t(x_1,\dots,x_n)$ and a tuple of elements 
+$a_1,\dots,a_n \in A$, we define $t^\mathfrak A[a_1,\dots,a_n]$ 
+by $t^\mathfrak A[\alpha]$ with $\alpha$ defined to be 
+$\alpha(x_i) = a_i$ for all $i$. 
+
+\begin{defn}{Satisfaction of a formula/"Tarski's definition of truth"}
+    {}
+    Let $\mathfrak A$ be an $\mathfrak L$-structure. By induction 
+    on the height $ht(\phi)$ of a formula we define 
+    $\mathfrak A \vDash \phi[\alpha]$ 
+
+    (read as "$\phi$ is satisfied in $\mathfrak A$ in $\alpha$"): 
+    \begin{itemize}
+        \item $\mathfrak A \vDash t_1 = t_2$ if and only if 
+            $t_1^\mathfrak A[\alpha] = t_2^\mathfrak A[\alpha]$ 
+        
+        \item $\mathfrak A \vDash Rt_1 \dots t_n[\alpha]$ if and 
+            only if $(t_1[\alpha],\dots,t_n[\alpha] \in R^\mathfrak A$
+
+        \item $\mathfrak A \vDash \lnot \psi[\alpha]$ if and only if 
+            $\mathfrak \nvDash \psi[\alpha]$ 
+
+        \item $\mathfrak A \vDash (\psi \land \chi)[\alpha]$ if 
+            and only if $\mathfrak A \vDash \psi[\alpha]$ and 
+            $\mathfrak A \vDash \chi[\alpha]$
+
+        \item $\mathfrak A \vDash \exists x \psi[\alpha]$ if 
+            and only if there exists $a \in A$ with 
+            $\mathfrak A \vDash \psi[\alpha_{a/x}]$, 
+            where $\alpha_{a/x}$ denotes the assignment 
+            defined by $\alpha_{a/x}(x) = a$ and 
+            $\alpha_{a/x}(y) = \alpha(y)$ for all 
+            $y$ different from $x$
+    \end{itemize}
+\end{defn}
+
+\newpage
+\emph{Proposition.}
+If two assignments $\alpha, \beta$ coincide on $Free(\phi)$, then 
+one has:
+$$
+    \mathfrak A \vDash \phi[\alpha] 
+    \text{ if and only if } 
+    \mathfrak A \vDash \phi[\beta]
+$$
+
+\begin{proof}
+    By induction on $ht(\phi)$. The case of atomic formulas follows 
+    from the earlier lemma about terms. 
+
+    \emph{Inductive step:}
+
+    Consider the case $\phi$ is equal to $\exists x \psi$. 
+    If we have that $\mathfrak A \vDash \phi[\alpha]$, there exists 
+    $a \in A$ such that $\mathfrak A \vDash \psi[\alpha_{a/x}]$. 
+    Any variable $y \neq x$ that is free in $\psi$ is also free in 
+    $\phi$. Hence we have $\mathfrak A \vDash \psi[\beta_{a/x}] $.
+    By the inductive hypothesis, we also have 
+    $\mathfrak A \vDash \phi[\beta]$.
+\end{proof}
+
+\emph{Notation.}
+A formula $\phi$ will be denoted by $\phi(x_1, \dots, x_n)$ if the 
+variables $x_i$ are all distinct and free in $\phi$ and 
+they belong to the set $\{x_1,\dots,x_n\}$. 
+If a formula $\phi(x_1,\dots,x_n)$ and elements $a_1,\dots,a_n \in A$
+are given, we define $\mathfrak A \vDash \phi[a_1,\dots,a_n]$ by 
+$\mathfrak A \vDash \phi[\alpha]$ where $\alpha$ is an assignment 
+such that $\alpha(x_i) = a_i$ 
+(well defined by the previous proposition).
+Thus the formula $\phi(x_1,\dots,x_n)$ defines an n-ary relation 
+on the underlying base set $A$ given by 
+$\{(a_1,\dots,a_n) \in A^n : \mathfrak A \vDash \phi[a_1,\dots,a_n]\}$.
+In particular, when $\phi$ is a sentence, then the relation 
+$\mathfrak A \vDash \phi$ is interpreted as "$\phi$ is satisfied 
+or true in $\mathfrak A$" or "$\mathfrak A$ is a model of $\phi$".
+
+\newpage
+\section{Substitution}
+\subsection{Substitution of terms into formulas}
+Earlier we have discussed satisfaction of formulas 
+in structures with assignment functions, 
+$\mathfrak A \vDash \phi[\alpha]$. 
+We may write $\phi(x_1,\dots,x_n)$ if $x_i$ are distinct, free 
+variables in $x_1,\dots,x_n$. Given $a_1,\dots,a_n \in A$, 
+$\mathfrak A \vDash \phi[a_1,\dots,a_n] 
+:\Leftrightarrow \mathfrak A \vDash \phi[\alpha]$ for $\alpha$ 
+some assignment where $\alpha(x_i) = a_i$. 
+Then the formula $\phi(x_1,\dots,x_n)$ defines an n-ary 
+relation on $A$, given by 
+$\phi[\mathfrak A] := \{(a_1,\dots,a_n) \in A^n : \mathfrak A
+\vDash \phi[a_1,\dots,a_n]\}$.
+
+\begin{defn}{}{}
+    Let $\mathfrak A$ be an $\mathfrak L$-structure, and 
+    $D \subseteq A^n$.  
+
+    \begin{enumerate}
+        \item The set $D$ is $\emptyset$-definable (or, $0$-definable)
+            if $D = \phi[\mathfrak A]$ for some 
+            formula $\phi(x_1,\dots,x_n)$.
+
+        \item Let $B \subseteq A$. Then $D$ is $B$-definable 
+            (or, definable over $B$) if 
+            there exists a formula $\phi(x_1,\dots,x_n,y_1,\dots,y_m)$
+            and $\overline b\in B^m$ such that  
+            $$D = 
+            \phi[\mathfrak A, \overline b] := 
+            \{\overline a \in A^n : 
+            \mathfrak A \vDash \phi(a_1,\dots,a_n,b_1,\dots,b_m)\} 
+            $$
+    \end{enumerate}
+\end{defn}
+Intuitively, a subset $D \subseteq A^n$ of 
+an $\mathfrak{L}$-structure $\mathfrak{A}$ is 
+\emph{definable} if it can be described by a formula in the 
+language $\mathfrak{L}$, possibly using parameters from the domain. 
+
+\begin{itemize}
+    \item If $D$ is \emph{$\emptyset$-definable} (or $0$-definable), 
+        then there exists a formula 
+    $\phi(x_1,\dots,x_n)$ with no parameters from $A$ such that 
+    \[
+        D = \{\overline{a} \in A^n : \mathfrak{A} \vDash 
+        \phi(\overline{a})\}.
+    \]
+    In other words, $D$ can be described without naming any 
+    specific elements of $A$ beyond those already available 
+    through the symbols of $\mathfrak{L}$.
+
+    \item If $D$ is \emph{$B$-definable} for some $B \subseteq A$, 
+        then there exists a formula 
+    $\phi(x_1,\dots,x_n,y_1,\dots,y_m)$ and a tuple $\overline{b} 
+    \in B^m$ such that 
+    \[
+        D = \{\overline{a} \in A^n : \mathfrak{A} \vDash 
+        \phi(\overline{a},\overline{b})\}.
+    \]
+    Here, the formula may refer to specific elements of $B$ 
+    through the parameters $\overline{b}$.
+\end{itemize}
+
+\begin{ex}{}{}
+    Let $\mathfrak{A} = (\mathbb{N}, 0, S, +, \times)$, 
+    where $S$ is the successor function.
+
+    \begin{enumerate}
+        \item The set of even natural numbers 
+            \[
+                E = \{ n \in \mathbb{N} : \exists y \ (n = y + y) \}
+            \]
+            is $\emptyset$-definable, since it can be defined 
+            by the formula 
+            $\phi(x) := \exists y \ (x = y + y)$, which uses no
+            parameters from $\mathbb{N}$.
+
+    \item The singleton set $\{3\}$ is not $\emptyset$-definable 
+        in this language (unless a constant symbol for $3$ is 
+        present in $\mathfrak{L}$), but it is definable over 
+        $B = \{3\}$ using the formula 
+    $\psi(x,y) := (x = y)$ with $y$ interpreted as $3$.
+
+    \item The set $\{ x \in \mathbb{N} : x > 3 \}$ is 
+        definable over $B = \{3\}$ by the formula 
+    $\theta(x,y) := x > y$, again with $y$ interpreted as $3$.
+\end{enumerate}
+\end{ex}
+
+When it comes to substitution we may, naively, want to 
+replace every free occurence of some variable $x$ by a term $s$. 
+For example $\phi(x_0)$ of the form $\exists v_1 \lnot(v_1 = v_0)$.
+Now, what if $s = v_1$. This is bad because we would get 
+$$ 
+    \exists v_1 \lnot(v_1 = v_1)
+$$ 
+which is satisfied in no structure.
+
+
+\begin{defn}{}{}
+    Let $x_0,\dots, x_r$ be distinct variables and $s_0,\dots, s_r$ 
+    be terms. Then we define the simultaneous substitution of 
+    the $x_i$ by the terms $s_i$ in the following manner: 
+    \begin{enumerate}
+        \item Let $t$ be a term. 
+            Then $t_{s_0/x_0,\dots,s_r/x_r} = 
+            t_{\overline s / \overline x}$ is the word 
+            obtained by: 
+            $$
+                x_{\overline s/\overline x} = 
+                        \begin{cases}
+                            x & \text{if } x\neq x_0,\dots, x_r \\ 
+                            s_i & \text{if } x = x_i
+                        \end{cases}
+            $$
+            for $x\in \mathcal V^\mathfrak L$. 
+            $$ 
+                c_{\overline s / \overline x} = c
+            $$ 
+            for $c \in C^\mathfrak L$.
+            $$ 
+                \left[f t^1\dots t^n\right]_{\overline s/\overline x} = 
+                f t^1_{\overline s/\overline x} \dots 
+                t^n_{\overline s/\overline x}
+            $$ 
+            for $f \in \mathcal F^\mathfrak L$ and 
+            $t^i$ a term.
+             
+            By induction on the height of terms, this is well-defined.
+
+        \item By induction on the height of a formula: 
+
+            $[t = t']_{\overline s / \overline x} = 
+            t_{\overline s / \overline x} = t'_{\overline s/ \overline x}$.  
+
+            $[R t^1\dots t^n]_{\overline s / \overline x} = 
+            R t^1_{\overline s/ \overline x} \dots 
+            t^n_{\overline s/\overline x}$
+
+            $[\lnot \psi]_{\overline s / \overline x} = 
+            \lnot [\psi]_{\overline s / \overline x}$
+
+            $(\psi \land \chi)_{\overline s / \overline x} = 
+            \psi_{\overline s / \overline x} \land  
+            \chi_{\overline s / \overline x}$
+
+            For quantifiers: let $x_{i_1},\dots,x_{i_k}$ 
+            ($i_1 < \dots < i_k$) be those variables among $x_0,\dots,x_r$ 
+            that are free in $\exists x \psi$ 
+            (in particular $x \neq x_{i_1} \neq \dots \neq x_{i_k}$). 
+            Then we define:
+            $$
+                (\exists x \, \psi)_{\overline s / \overline x} = 
+                \exists x \, (\psi_{\overline s' / \overline x'})
+            $$
+            where $\overline x' = (x_{i_1},\dots,x_{i_k})$ 
+            and $\overline s' = (s_{i_1},\dots,s_{i_k})$.
+             
+            If $x$ has some occurence in one of 
+            $s_{i_1},\dots,s_{i_k}$, we define it to be 
+            $\exists u \left[\psi_{\overline s / 
+            \overline x, u / x}\right]$
+            where $u$ is the first variable appearing in 
+            $v_1,v_2,\dots$ which does not occur in 
+            $\exists x \psi, s_{i_1},\dots,s_{i_k}$.
+            
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}{}{}
+    Let $x_0,\dots,x_r$ be distinct variables, $\alpha$ an assignment
+    with values in $\mathfrak A$ and $a_0,\dots,a_r$ are elements 
+    of $A$. We define the assignment 
+    $\alpha_{a_0/x_0, \dots, a_r/x_r} = 
+    \alpha_{\overline a / \overline x}$ 
+    by $\alpha_{\overline a / \overline x}(x_i) = a_i$ 
+    and $\alpha_{\overline a / \overline x}(y) = \alpha(y)$ for 
+    $y \neq x_i$.
+\end{defn}
+
+\begin{lem}{}{}
+    $Let x_0, \dots, x_r$ be distinct variables, 
+    $s_0, \dots, x_r$ be terms, and $\alpha$ be an assignment 
+    with values in $\mathfrak A$.
+
+    \begin{enumerate}
+        \item For every term $t$, 
+            $t^\mathfrak A_{\overline s / \overline x}[\alpha] = 
+            t^\mathfrak A[\alpha_{s_0^\mathfrak A[\alpha]/x_0, 
+            \dots, s_r^\mathfrak A[\alpha]/x_r}]$
+
+        \item For every formula $\phi$, 
+            $\mathfrak A \vDash 
+            \phi_{\overline s / \overline x}[\alpha]$
+            if and only if 
+            $\mathfrak A \vDash 
+            \phi[\alpha_{s_0^\mathfrak A[\alpha]/x_r,\dots,
+            s_r^\mathfrak A[\alpha]/x_r}]$
+    \end{enumerate}
+
+
+    
+\end{lem}
+\begin{proof}[Proof of (1)]
+        We proceed by induction on the structure of the term $t$.
+
+        \textbf{Base case.} Suppose $t$ is a variable $y$.
+        \begin{itemize}
+            \item If $y = x_i$ for some $i \leq r$, 
+                then by definition of substitution 
+                \[
+                    t_{\overline s/\overline x} = s_i.
+                \]
+                Hence
+                \[
+                    t^\mathfrak A_{\overline s/\overline x}[\alpha] 
+                    = s_i^\mathfrak A[\alpha].
+                \]
+                On the other hand,
+                \[
+                    t^\mathfrak A
+                    \bigl[\alpha_{s_0^\mathfrak A[\alpha]/x_0,\dots,
+                    s_r^\mathfrak A[\alpha]/x_r}\bigr]
+                    = 
+                    (\alpha_{s_0^\mathfrak A[\alpha]/x_0,\dots})(x_i)
+                    = s_i^\mathfrak A[\alpha].
+                \]
+                Thus the equality holds.
+
+            \item If $y \notin \{x_0,\dots,x_r\}$, then 
+                $t_{\overline s/\overline x} = y$, so
+                \[
+                    t^\mathfrak A_{\overline s/\overline x}[\alpha] 
+                    = \alpha(y).
+                \]
+                Since the modified assignment 
+                $\alpha_{s_0^\mathfrak A[\alpha]/x_0,
+                \dots,s_r^\mathfrak A[\alpha]/x_r}$
+                agrees with $\alpha$ on $y$, we have
+                \[
+                    t^\mathfrak A\bigl[\alpha_{s_0^\mathfrak A
+                    [\alpha]/x_0,\dots}\bigr] 
+                    = \alpha(y).
+                \]
+        \end{itemize}
+
+        \textbf{Inductive step.} Suppose $t = f(t_1,\dots,t_n)$ 
+        with function symbol $f$.
+        By definition of substitution, 
+        \[
+            t_{\overline s/\overline x} 
+            = f\bigl((t_1)_{\overline s/\overline x},\dots,
+            (t_n)_{\overline s/\overline x}\bigr).
+        \]
+        Hence
+        \[
+            t^\mathfrak A_{\overline s/\overline x}[\alpha]
+            = f^\mathfrak A\bigl((t_1)^\mathfrak A_{\overline 
+                s/\overline x}[\alpha],\dots,
+            (t_n)^\mathfrak A_{\overline s/\overline x}[\alpha]\bigr).
+        \]
+        By the induction hypothesis, for each $j$,
+        \[
+            (t_j)^\mathfrak A_{\overline s/\overline x}[\alpha]
+            = t_j^\mathfrak A\bigl[\alpha_{s_0^\mathfrak A[\alpha]
+                    /x_0,\dots,
+            s_r^\mathfrak A[\alpha]/x_r}\bigr].
+        \]
+        Thus
+        \[
+            t^\mathfrak A_{\overline s/\overline x}[\alpha]
+            = f^\mathfrak A\bigl(
+                t_1^\mathfrak A[\alpha_{...}],\dots,
+                t_n^\mathfrak A[\alpha_{...}]
+            \bigr)
+            = t^\mathfrak A\bigl[\alpha_{
+                    s_0^\mathfrak A[\alpha]/x_0,\dots,
+            s_r^\mathfrak A[\alpha]/x_r}\bigr].
+        \]
+
+        This completes the induction and the proof.
+    \end{proof}
+
+
+    \begin{proof}[Proof of (2)]
+        We proceed by induction on the height $ht(\phi)$ of 
+        the formula $\phi$.
+
+        \textbf{Base cases.}  
+
+        \begin{itemize}
+            \item If $\phi$ is an atomic formula of the form 
+                $t_1 = t_2$, then
+                \[
+                    \mathfrak A \vDash 
+                    (t_1 = t_2)_{\overline s/\overline x}[\alpha]
+                    \iff
+                    t^\mathfrak A_{1_{\overline s/\overline x}}
+                    [\alpha]
+                    = t^\mathfrak A_{2_{\overline s/\overline x}}[\alpha].
+                \]
+                By part (1), this is equivalent to
+                \[
+                    t_1^\mathfrak A\bigl[\alpha_{s_0^\mathfrak A
+                    [\alpha]/x_0,\dots,s_r^\mathfrak A[\alpha]/x_r}
+                \bigr]
+                    = t_2^\mathfrak A\bigl[\alpha_{s_0^\mathfrak A
+                    [\alpha]/x_0,\dots,s_r^\mathfrak A[\alpha]/x_r}
+                \bigr],
+                \]
+                which is precisely
+                \[
+                    \mathfrak A \vDash (t_1 = t_2)
+                    [\alpha_{s_0^\mathfrak A[\alpha]/x_0,\dots,
+                    s_r^\mathfrak A[\alpha]/x_r}].
+                \]
+
+            \item If $\phi$ is atomic of the form $R(t_1,\dots,t_n)$, then
+                \[
+                    \mathfrak A \vDash (R(t_1,\dots,t_n))_{\overline 
+                    s/\overline x}[\alpha]
+                    \iff 
+                    (t^\mathfrak A_{1_{\overline s/\overline x}}
+                    [\alpha],\dots,
+                    t^\mathfrak A_{n_{\overline s/\overline x}}
+                    [\alpha]) \in R^\mathfrak A.
+                \]
+                By part (1), this is equivalent to
+                \[
+                    (t_1^\mathfrak A[\alpha_{...}],\dots,
+                    t_n^\mathfrak A[\alpha_{...}]) \in R^\mathfrak A,
+                \]
+                i.e.
+                \[
+                    \mathfrak A \vDash R(t_1,\dots,t_n)
+                    [\alpha_{s_0^\mathfrak A[\alpha]/x_0,\dots,
+                    s_r^\mathfrak A[\alpha]/x_r}].
+                \]
+        \end{itemize}
+
+        \textbf{Inductive step.} 
+        Assume the claim holds for all formulas of smaller
+        height than $\phi$.
+
+        \begin{itemize}
+            \item If $\phi = \lnot \psi$, then
+                \[
+                    \mathfrak A \vDash 
+                    (\lnot \psi)_{\overline s/\overline x}[\alpha]
+                    \iff
+                    \mathfrak A \not\vDash 
+                    \psi_{\overline s/\overline x}[\alpha].
+                \]
+                By the induction hypothesis,
+                \[
+                    \mathfrak A \not\vDash \psi[\alpha_{...}]
+                    \iff
+                    \mathfrak A \vDash (\lnot \psi)[\alpha_{...}].
+                \]
+
+            \item If $\phi = (\psi \land \theta)$, then
+                \[
+                    \mathfrak A \vDash 
+                    (\psi \land \theta)_{\overline s/\overline x}
+                    [\alpha]
+                    \iff
+                    \mathfrak A \vDash \psi_{\overline s/\overline x}
+                    [\alpha]
+                    \;\text{and}\;
+                    \mathfrak A \vDash \theta_{\overline s/
+                    \overline x}[\alpha].
+                \]
+                By induction hypothesis, this is equivalent to
+                \[
+                    \mathfrak A \vDash \psi[\alpha_{...}] \;
+                    \text{and}\;
+                    \mathfrak A \vDash \theta[\alpha_{...}],
+                \]
+                which is
+                \[
+                    \mathfrak A \vDash (\psi \land \theta)
+                    [\alpha_{...}].
+                \]
+                The same reasoning works for $\lor, \to, 
+                \leftrightarrow$.
+
+            \item If $\phi = \forall y\,\psi$, 
+                then by definition of substitution
+                \[
+                    (\forall y\,\psi)_{\overline s/\overline x}
+                    = \forall y\,(\psi_{\overline s/\overline x}),
+                \]
+                assuming $y \notin \{x_0,\dots,x_r\}$ 
+                (or else with variable renaming).
+                Then
+                \[
+                    \mathfrak A \vDash (\forall y\,\psi)_{\overline s
+                    /\overline x}[\alpha]
+                    \iff
+                    \text{for all } a \in A,\;
+                    \mathfrak A \vDash \psi_{\overline s/\overline x}
+                    [\alpha_{a/y}].
+                \]
+                By induction hypothesis, this is equivalent to
+                \[
+                    \text{for all } a \in A,\;
+                    \mathfrak A \vDash \psi[\alpha_{a/y,\,
+                        s_0^\mathfrak A[\alpha]/x_0,\dots,
+                    s_r^\mathfrak A[\alpha]/x_r}],
+                \]
+                which is precisely
+                \[
+                    \mathfrak A \vDash \forall y\,
+                    \psi[\alpha_{s_0^\mathfrak A[\alpha]/x_0,\dots,
+                    s_r^\mathfrak A[\alpha]/x_r}].
+                \]
+
+                The case $\phi = \exists y\,\psi$ is analogous.
+        \end{itemize}
+
+        Thus by structural induction the equivalence 
+        holds for every formula $\phi$.
+    \end{proof}
+
+
+\subsection{Exercises from 1.8.1}
+\begin{prob}{Task 4}{}
+    Show that $x$ is always substitutable for $x$ in $\phi$.
+\end{prob}
+\begin{proof}
+    Let $\phi$ be some $\mathfrak L$-formula 
+    and let $x \in \mathcal V^\mathfrak L$.
+    Let $Fml_n^\mathfrak L, n\in\mathbb N$ denote 
+    the $\mathfrak L$-formulas with height at most $n$.
+    We proceed by structural induction on the height of the formula 
+    $ht(\phi)$.
+
+    For the base case suppose $ht(\phi) = 0$, 
+    i.e. $\phi \in Fml_0^\mathfrak L$ is an atomic formula.
+    Then all occurences of variables in $\phi$ are free 
+    since there are no quantifiers, and so are substitutable. 
+
+    Suppose, for our inductive hypothesis, that $x$ is substitutable
+    for $x$, for any formula in $Fml_n^\mathfrak L$.
+
+    Then, ignoring the trivial case where $\phi$ is atomic, 
+    we have $3$ cases to check. 
+
+    \begin{enumerate}
+        \item $\phi :\equiv \lnot \psi$
+
+        \item $\phi :\equiv (\psi \lor \gamma)$
+
+        \item $\phi :\equiv (\forall y (\psi))$ 
+    \end{enumerate}
+
+    \emph{Case 1.} 
+
+    Suppose $\phi$ is of the form $\lnot \psi$, 
+    where $\psi \in Fml_n^\mathfrak L$, 
+    and by our inductive 
+    hypothesis $x$ is substituable for $x$ in 
+    $\psi \in Fml_n^\mathfrak L$. 
+    Then $x$ is substitutable for $x$ in $\phi$.
+
+    \emph{Case 2.}
+
+    Suppose $\phi$ is of the form $(\psi \lor \gamma)$, 
+    where $\psi,\gamma \in Fml_n^\mathfrak L$, and 
+    by our inductive hypothesis $x$ is substitutable for $x$ in 
+    any formula of height $n$. Then $x$ is substitutable for $x$ 
+    in both $\psi$ and $\gamma$. Thus $x$ is substitutable for $x$ 
+    in $\phi$.
+
+    \emph{Case 3.}
+
+    Suppose $\phi$ is of the form $(\forall y (\psi))$, 
+    where $\psi \in Fml_n^\mathfrak L$, and 
+    by our inductive hypothesis $x$ is substitutable for $x$ 
+    in $\psi$. Since $x$ is substitutable for $x$ in $\psi$ and 
+    $y$ does not occur in $x$ we have that $x$ is substitutable for 
+    $x$ in $\phi$.
+
+    This completes the proof.
+\end{proof}
+
+\subsection{Exercises from 1.9.1} 
+\begin{prob}{Task 3}{}
+    Suppose that $\phi$ is an $\mathfrak L$-formula and $x$ is 
+    a variable. Prove that $\phi$ is valid if and only if 
+    $\left(\forall x\right)\left(\phi\right)$ is valid.
+\end{prob}
+
+\begin{proof}
+    Let $\mathfrak{L}$ be a language, 
+    let $\phi$ be an $\mathfrak{L}$-formula, and let 
+    $x \in \mathcal{V}^{\mathfrak{L}}$ be a variable of the language.  
+    We show that $\phi$ is valid if and only if 
+    $\forall x\,\phi$ is valid.
+
+    \emph{($\Rightarrow$) Suppose $\phi$ is valid.}  
+    This means that for every $\mathfrak{L}$-structure 
+    $\mathfrak{A}$ and every assignment $\alpha$, we have
+    \[
+        \mathfrak{A} \vDash \phi[\alpha].
+    \]
+    Let $\mathfrak{A}$ be any $\mathfrak{L}$-structure 
+    and $\alpha$ any assignment.  
+    To check $\mathfrak{A} \vDash \forall x\,\phi[\alpha]$, 
+    we must verify that
+    \[
+        \mathfrak{A} \vDash \phi[\alpha[a/x]] \quad 
+        \text{for every } a \in A.
+    \]
+    But since $\phi$ is valid, $\mathfrak{A} \vDash 
+    \phi[\alpha[a/x]]$ holds for every $a \in A$.  
+    Thus $\mathfrak{A} \vDash \forall x\,\phi[\alpha]$ 
+    for all $\mathfrak{A}$ and $\alpha$, so $\forall x\,\phi$ is valid.
+
+    \emph{($\Leftarrow$) Suppose $\forall x\,\phi$ is valid.}  
+    This means that for every $\mathfrak{L}$-structure 
+    $\mathfrak{A}$ and every assignment $\alpha$,
+    \[
+        \mathfrak{A} \vDash \forall x\,\phi[\alpha].
+    \]
+    By the semantics of $\forall$, this means that for 
+    every $a \in A$,
+    \[
+        \mathfrak{A} \vDash \phi[\alpha[a/x]].
+    \]
+    In particular, if we take $a = \alpha(x)$, 
+    then $\alpha[a/x]$ agrees with $\alpha$ on all variables, so
+    \[
+        \mathfrak{A} \vDash \phi[\alpha].
+    \]
+    Since this holds for all $\mathfrak{A}$ and $\alpha$, 
+    $\phi$ is valid.
+\end{proof}
+
+\begin{prob}{Task 4}{}
+    a) Assume that $\vDash (\phi \Rightarrow \psi)$. Show that 
+    $\phi \vDash \psi$. 
+
+    b) Suppose that $\phi$ is $x < y$ and $\psi$ is 
+    $z < w$. Show that $\phi \vDash \psi$, 
+    but $\nvDash (\phi \Rightarrow \psi)$.
+\end{prob}
+\begin{proof}[Proof of a]
+     Let $\mathfrak L$ be a language $\phi, \psi$ 
+     $\mathfrak L$-formulas and for any arbitrary 
+     $\mathfrak L$-structure $\mathfrak A$ and assignment $\alpha$, 
+     we are have 
+     $\mathfrak A \vDash (\phi \Rightarrow \psi)$.
+     Our goal is to show that for any $\mathfrak A$ with assignment 
+     $\alpha$, if $\mathfrak A \vDash \phi$ then 
+     $\mathfrak A \vDash \psi$.
+
+     As mentioned we have 
+     $\mathfrak A \vDash (\phi \Rightarrow \psi)[\alpha]$ 
+     for arbitrary structure and assignment. Recall that 
+     $\phi \Rightarrow \psi$ is short-hand for 
+     $\lnot \phi \lor \psi$. 
+     Suppose $\mathfrak A \vDash (\lnot \phi \lor \psi)[\alpha]$ and 
+     $\mathfrak A \vDash \phi[\alpha]$, 
+     where structure and assignment are arbitrary, as mentioned. 
+     Then by the semantics of disjunction we have 
+     $\mathfrak A \vDash \lnot\phi[\alpha]$ or 
+     $\mathfrak A \vDash \psi[\alpha]$, 
+     and $\mathfrak A \vDash \phi[\alpha]$. 
+     In particular $\mathfrak A \vDash \lnot \phi[\alpha]$ means 
+     that $\mathfrak A \nvDash \phi[\alpha]$, but this is not the 
+     case since we have $\mathfrak A \vDash \phi[\alpha]$.
+     Therefore $\mathfrak A \vDash \psi[\alpha]$ must hold. 
+     Hence $\phi \vDash \psi$.
+\end{proof}
+
+
+\begin{proof}[Proof of b]
+    Let $\phi$ be the formula $x < y$ and $\psi$ 
+    be the formula $z < w$.
+
+    \emph{Step 1: Show $\phi \vDash \psi$.}  
+    Assume $\mathfrak{A}$ is a structure with domain $A$ and 
+    interpretation $<^{\mathfrak{A}} \subseteq A \times A$ of the 
+    relation symbol $<$. Suppose $\mathfrak{A} \vDash \phi$, 
+    i.e.\ for every assignment $\alpha$ we have 
+    \[
+        (\alpha(x), \alpha(y)) \in <^{\mathfrak{A}}.
+    \]
+    Let $a,b \in A$ be arbitrary.  
+    Define an assignment $\alpha$ with $\alpha(x) = a$ and 
+    $\alpha(y) = b$ (the values of other variables are irrelevant).  
+    By assumption, $(a,b) \in <^{\mathfrak{A}}$.  
+    Since $a,b$ were arbitrary, this shows that
+    \[
+        <^{\mathfrak{A}} = A \times A.
+    \]
+    Now let $\beta$ be any assignment.  
+    Then $(\beta(z), \beta(w)) \in A \times A = <^{\mathfrak{A}}$,  
+    so $\mathfrak{A} \vDash \psi$.  
+    Thus every structure that satisfies $\phi$ also satisfies $\psi$, 
+    so $\phi \vDash \psi$.
+
+    \emph{Step 2: Show $\nvDash (\phi \to \psi)$.}  
+    Consider the structure $\mathfrak{A}$ with domain $A = \{0,1\}$ 
+    and $<^{\mathfrak{A}}$ interpreted as the usual strict order 
+    $\{(0,1)\}$.  
+    Let $\alpha$ be an assignment with
+    \[
+        \alpha(x) = 0, \quad \alpha(y) = 1, \quad
+        \alpha(z) = 1, \quad \alpha(w) = 0.
+    \]
+    Then $\mathfrak{A} \vDash \phi[\alpha]$ since $0 < 1$,  
+    but $\mathfrak{A} \nvDash \psi[\alpha]$ since $1 \not< 0$.  
+    Hence $\mathfrak{A} \nvDash (\phi \to \psi)[\alpha]$, so 
+    $\phi \to \psi$ is not valid.
+
+    Therefore, $\phi \vDash \psi$ but $\nvDash (\phi \to \psi)$.
+\end{proof}
+
+\newpage
+\section{Elementary Classes and Equivalence}
+\begin{defn}{}{}
+    For a set of well-formed-formulas $\Gamma$, 
+    let $Mod \Gamma$ (sometimes written $M(\Gamma)$) 
+    be the class of all structures which 
+    model $\Gamma$. 
+
+    A class of structures $\mathcal K$ is an elementary class 
+    if there exists a well-formed-formula $\phi$ such that 
+    $\mathcal K = Mod \phi$.
+
+    A class of structures $\mathcal K$ is a weakly elementary class 
+    if there exists a set of well-formed-formulas $\Gamma$ 
+    such that $\mathcal K = Mod \Gamma$.
+\end{defn}
+
+\begin{defn}{}{}
+    Two structures $\mathfrak A, \mathfrak B$ are 
+    elementary equivalent
+    (written $\mathfrak A \equiv \mathfrak B$) if, for all sentences 
+    $\phi$ 
+    $$ 
+        \mathfrak A \vDash \phi \Leftrightarrow \mathfrak B 
+        \vDash \phi
+    $$ 
+\end{defn}
+
+\begin{ex}{}{}
+    \begin{itemize}
+        \item $(\mathbb N, 0, +) \not\equiv (\mathbb Z, 0, +)$
+        \item $(\mathbb Q, 0, +) \not\equiv (\mathbb Z, 0, +)$
+        \item $(\mathbb Q, 0, +) \equiv (\mathbb R, 0, +)$
+    \end{itemize}
+    The first example can be shown by using the formula 
+    for existence of inverses, which $\mathbb Z$ has, while 
+    $\mathbb N$ does not.
+
+    For the second we can use the fact that for all $x$, there 
+    exists $\frac{x}{2}$.
+
+    The last one seems counterintuitive, but without multiplication
+    and a notion of subsets, the two structures are equivalent.
+\end{ex}
+
+\begin{defn}{}{}
+    Let $Th(\mathfrak A)$ be the set of all sentences 
+    true in $\mathfrak A$.
+
+    Note: 
+    $$ 
+        \mathfrak A \equiv \mathfrak B  
+        \Leftrightarrow 
+        Th(\mathfrak A) = Th(\mathfrak B)
+    $$ 
+\end{defn}
+
+\newpage 
+\section{Deductions}
+This concept is not explored in the 
+supplementary lecture videos I use and I do not feel like 
+copy and pasting theorems and definitions from the whole 
+second chapter of the book, so this section will be 
+mostly problems.
+
+\subsection{Exercises from 2.2.1}
+\begin{prob}{Task 1}{}
+    Let the collection of non-logical axioms be
+    $$ 
+    \Sigma = \{(A(x) \land A(x)) \rightarrow B(x,y), 
+    A(x), B(x,y) \rightarrow A(x)\} 
+    $$ 
+    and let the rule of inference be modus ponens.
+    Determine whether the following are deductions or not.
+
+    \begin{enumerate}
+        \item $A(x)$ 
+
+            $A(x) \land A(x)$
+
+            $(A(x) \land A(x)) \rightarrow B(x,y)$
+
+            $B(x,y)$
+
+        \item $B(x,y) \rightarrow A(x)$
+
+            $A(x)$
+
+            $B(x,y)$
+
+        \item $(A(x) \land A(x)) \rightarrow B(x,y)$
+
+            $B(x,y) \rightarrow A(x)$
+
+            $(A(x) \land A(x)) \rightarrow A(x)$
+    \end{enumerate}
+\end{prob}
+\emph{Solution.}
+
+The first is not valid since we cannot conclude $A(x) \land A(x)$  
+from $A(x)$.
+
+The second is not valid since $B(x,y)$ does not follow from any of 
+the preceding. 
+
+The third is valid since we can conclude $B(x,y)$ from 
+the first line. Then we can conclude $A(x)$ from the second 
+line. Then we can conclude $(A(x) \land A(x)) \rightarrow A(x)$.  
+In other words we can get $A(x)$ from $(A(x)\land A(x))$.
+
+\begin{prob}{Task 4}{}
+    Let $\mathcal L$ be a language consisting of a single unary 
+    predicate symbol $R$, and $B$ be the infinite set of axioms 
+    \begin{align*}
+        B = \{&R(x_1),
+            \\
+              &R(x_1) \rightarrow R(x_2), 
+              \\
+              &R(x_2) \rightarrow R(x_3),
+              \\
+              & \quad \quad \quad \vdots 
+            \\ 
+              &R(x_i) \rightarrow R(x_{i+1}),
+              \\
+              & \quad \quad \quad \vdots
+        \\
+    \}  
+    \end{align*}
+    Using modus ponens, prove by induction that 
+    $B \vdash R(x_j)$, for each $j \geq 1$.
+\end{prob}
+
+\begin{proof}
+    For our base case we use the axiom $R(x_i) \in B$, which 
+    gives us $B \vdash R(x_i)$. For our inductive hypothesis, 
+    assume $B \vdash R(x_i)$ for some $i \geq 1$. 
+    Then since $R(x_i) \rightarrow R(x_{i+1})$ we have, 
+    via modus ponens, $B \vdash R(x_{i+1})$. 
+    Then since $B \vdash R(x_1)$ and 
+    $(R(x_i), R(x_i) \rightarrow R(x_{i+1}))$ we get 
+    $B \vdash R(x_2), B \vdash R(x_3), \dots, B \vdash R_{x_j}$ 
+    for each $j \geq 1$.
+\end{proof}
+
+\subsection{Tasks from 2.5.1}
+\begin{prob}{Task 4}{}
+    Show that, if $x$ is not free in $\psi$, 
+    $(\phi \rightarrow \psi) \vDash 
+    \left[(\exists x\phi) \rightarrow \psi\right]$.
+\end{prob}
+
+\begin{proof}
+    Let $\phi, \psi$ be $\mathfrak L$-formulas such that 
+    $x$ is not free in $\psi$. 
+
+    Assume, for any $\mathfrak L$-structure, 
+    $\mathfrak A \vDash (\phi \rightarrow \psi)[s]$.
+
+    Suppose, ignoring the trivial case, 
+    $\mathfrak A \vDash (\exists x \phi)[s]$.
+    Then there exists $a \in A$ such that 
+    $$ 
+        \mathfrak A \vDash \phi[s[x|a]]
+    $$ 
+
+    From $\mathfrak A \vDash \phi$, we know that 
+    for every assignment $t$, if $\mathfrak A \vDash \phi$, 
+    then $\mathfrak A \vDash \psi$. In particular, 
+    this holds for $t = s[x|a]$. 
+    Hence 
+    $$ 
+        \mathfrak A \vDash \psi[s[x|a]]
+    $$ 
+    since $\psi$ is invariant under changes to the value 
+    of $x$.
+
+    This completes the proof.
+\end{proof}
+
+\newpage
+\subsection{Tasks from 2.7.1}
+
+\begin{prob}{Task 4}{}
+    Suppose that $\eta$ is a sentence. 
+    Prove that $\Sigma \vdash \eta$ if and only if 
+    $\Sigma \cup (\lnot \eta) \vdash [(\forall x) x=x] \land 
+    \lnot [(\forall x) x= x]$. Notice that 
+    this exercise tells us that our deductive system allows us 
+    to do proofs by contradiction.
+\end{prob}
+
+\begin{proof}
+    Let $\eta$ be a sentence. 
+
+    Suppose $\Sigma \vdash \eta$. 
+    Then consider $\Sigma \cup (\lnot \eta)$. 
+    Clearly $\Sigma \cup (\lnot \eta) \vdash \eta$, since 
+    the smaller set of non-logical axioms $\Sigma \vdash \eta$. 
+    Thus $\Sigma \cup (\lnot \eta)\vdash \eta \land (\lnot \eta)$. 
+    Since $\eta$ has no free variables, 
+    $\eta \land (\lnot \eta)$ is a contradiction. 
+    Then, for any formula $\phi$, 
+    $$ 
+        \eta \land (\lnot \eta) \vDash \phi
+    $$  
+    more specifically, 
+    $$ 
+        \eta \land (\lnot \eta) \vDash 
+        [(\forall x) x = x] \land \lnot[(\forall x) x = x]
+    $$ 
+
+    By the completeness theorem, we get 
+    $$ 
+        \eta \land (\lnot \eta) \vdash 
+        [(\forall x) x = x] \land \lnot[(\forall x) x = x]
+    $$ 
+
+    Since, with our assumptions, 
+    $\eta \land (\lnot \eta)$ is provable from 
+    $\Sigma \cup (\lnot \eta)$, 
+    $[(\forall x) x = x) \land \lnot [(\forall x) x = x]$ 
+    is provable from the same set of non-logical axioms.
+
+    Now, the other way, assume 
+    $\Sigma \cup (\lnot \eta) \vdash [(\forall x) x = x) 
+    \land \lnot [(\forall x) x = x]$. 
+    Then, by the soundness theorem, 
+    $$ 
+        \Sigma \cup (\lnot \eta ) \vDash [(\forall x) x = x) \land 
+        \lnot [(\forall x) x = x]
+    $$ 
+    which means that for arbitrary structure $\mathfrak A$, 
+    $\mathfrak A \nvDash \Sigma \cup (\lnot \eta)$ or 
+    $\mathfrak A \vDash [(\forall x) x = x) 
+    \land \lnot [(\forall x) x = x]$.
+
+    Since no structure can satisfy a contradiction it must be 
+    the case that 
+    $$ 
+        \mathfrak A \nvDash \Sigma \cup (\lnot \eta) 
+    $$ 
+
+    So $\Sigma \cup (\lnot \eta)$ has no modles which means that 
+    it is inconsistent. Then, any contradiction can be 
+    proven from it. 
+    For example 
+    $$ 
+        \Sigma \cup (\lnot \eta) \vdash (\eta \land \lnot \eta)
+    $$ 
+    which can be rewritten via the deduction theorem to 
+    $$ 
+        \Sigma \vdash (\lnot \eta) \rightarrow (\eta \land \lnot \eta)
+    $$ 
+    which can again be rewritten, using the laws of propositional 
+    logic, to 
+    $$ 
+        \Sigma \vdash \eta \lor (\eta \land \lnot \eta)
+    $$ 
+    which simplifies to 
+    $$ 
+        \Sigma \vdash \eta
+    $$ 
+
+    Since, from any contradiction the implication to some formula 
+    is valid, we can pick any contradiction 
+    to be provable from an inconsistent set of non-logical axioms. 
+    It does not necessarily have to be 
+    $[(\forall x) x = x] \land \lnot [(\forall x) x = x]$. 
+    This equips us to do proofs by contradiction since 
+    if we prove a contradiction our assumptions must be 
+    inconsistent, which alows us to prove the 
+    contradiction which simplifies to the thing we want to prove.
+\end{proof}
+
+\newpage
+\section{3rd chapter, completeness and compactness}
+\section{Tasks from 3.2.1}
+\begin{prob}{Task 1}{}
+    Suppose that $\Sigma$ is inconsistent and $\phi$ is an 
+    $\mathfrak L$-formula. 
+    Prove that $\Sigma \vdash \phi$.
+\end{prob}
+\begin{proof}
+    Let $\Sigma$ be an inconsistent set of non-logical axioms 
+    and $\phi$ an $\mathfrak L$-formula.
+
+    Since $\Sigma$ is inconsistent we have 
+    $$ 
+        \Sigma \vdash \bot
+    $$ 
+
+    From our logical axioms $\Lambda$, we have
+    $$ 
+        \vdash \bot \rightarrow \phi
+    $$ 
+    for any $\mathfrak L$-formula $\phi$.
+
+    Then, since 
+    $$ 
+        \Sigma \vdash \bot
+    $$ 
+    and 
+    $$ 
+        \bot \rightarrow \phi
+    $$ 
+    we have 
+    $$ 
+        \Sigma \vdash \phi
+    $$ 
+    through modus ponens.
+\end{proof}
+
+\begin{prob}{Task 2}{}
+    Assume that 
+    $\Sigma_0 \subseteq \Sigma_1 \subseteq \Sigma_2 \cdots$
+    are such that each $\Sigma_i$ is a consistent set of 
+    sentences in a language $\mathfrak L$. Show that 
+    $\bigcup \Sigma_i$ is consistent.
+\end{prob}
+\begin{proof}
+    We prove the claim by contradiction. 
+
+    Suppose $\Gamma := \bigcup \Sigma_i$ is inconsistent. 
+    Then there exists a finite subset $\Delta \subseteq \Gamma$. 
+    But $\Delta$ is finite, so each sentence in $\Delta$ lies 
+    in some $\Sigma_i$, and because $\Sigma_i$ forms an increasing 
+    chain there is an index $N$ such that 
+    $\Delta \subseteq \Sigma_N$. Thus $\Sigma_N$ is inconsistent 
+    since it contains an inconsistent subset, contradicting 
+    the assumption that each $\Sigma_i$ is consistent. 
+    Therefore $\Gamma$ must be consistent.
+\end{proof}
+
+\end{document}

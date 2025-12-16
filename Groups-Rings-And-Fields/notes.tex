@@ -1,0 +1,131 @@
+\input{preamble.tex}
+
+\title{\huge{Groups, Rings and Fields}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{Spring 2026}}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Groups}
+
+\begin{defn}[Group]
+\label{defn:group}
+A group is a set $S$ together with a binary operation 
+$\circ$ such that the following properties hold: 
+
+\begin{enumerate}
+    \item Identity: There exists an element $e \in S$, satisfying
+        $$ 
+            e \circ a = a \circ e = a 
+        $$ 
+        for every $a \in S$.
+
+    \item Inverses: For every $a \in S$ there exists $b \in S$ such 
+        that 
+        $$ 
+            a \circ b = b \circ a = e, \text{ the identity element}
+        $$ 
+        We usually denote this element as $a^{-1}$ or $-a$, depending
+        on context.
+
+    \item Associativity: For any $a,b,c \in S$, we require 
+        $$ 
+            a \circ (b \circ c) = (a \circ b) \circ c
+        $$ 
+\end{enumerate}
+
+A group is then the tupple $(S,\circ)$. We will often just write 
+the set to refer to the group, e.g. refering to the group 
+$(\mathbb Z, +)$ as just $\mathbb Z$.
+    
+\end{defn}
+
+\subsection{Basic Examples}
+
+\begin{ex}[Integers under addition]
+The set of integers $\mathbb{Z}$ with the operation $+$ forms a group:
+\begin{itemize}
+    \item Identity: $0$ since $0 + n = n + 0 = n$ for all $n \in \mathbb{Z}$.
+    \item Inverses: For $n \in \mathbb{Z}$, the inverse is $-n$.
+    \item Associativity: Addition is associative.
+\end{itemize}
+Hence $(\mathbb{Z}, +)$ is a group.
+\end{ex}
+
+\begin{ex}[Non-example: Natural numbers under addition]
+The set $\mathbb{N}$ under $+$ is \emph{not} a group since
+there is no inverse for $n > 0$.
+\end{ex}
+
+\subsection{Basic Properties}
+
+\begin{thm}[Uniqueness of identity]
+\label{thm:identity-unique}
+The identity element in a group is unique.
+\end{thm}
+
+\begin{proof}
+Suppose $e$ and $e'$ are both identities. Then
+$$
+e = e \circ e' = e',
+$$
+so the identity is unique.
+\end{proof}
+
+\begin{thm}[Uniqueness of inverses]
+\label{thm:inverse-unique}
+Each element in a group has a unique inverse.
+\end{thm}
+
+\begin{proof}
+Suppose $b$ and $c$ are inverses of $a$. Then
+$$
+b = b \circ e = b \circ (a \circ c) = (b \circ a) \circ c = e \circ c = c.
+$$
+\end{proof}
+
+\subsection{Example Problem}
+
+\begin{prob}
+Determine whether the set 
+$$
+G = \{1, -1, i, -i\} \subset \mathbb{C}
+$$ 
+with multiplication is a group.
+\end{prob}
+
+\begin{proof}[Solution]
+We check the group axioms:
+\begin{enumerate}
+    \item \textbf{Closure:} Multiplying any two elements of $G$ yields another element in $G$. True.
+    \item \textbf{Identity:} The element $1$ acts as identity. True.
+    \item \textbf{Inverses:} Each element has an inverse in $G$: $1^{-1}=1$, $(-1)^{-1}=-1$, $i^{-1}=-i$, $(-i)^{-1}=i$. True.
+    \item \textbf{Associativity:} Multiplication of complex numbers is associative. True.
+\end{enumerate}
+Hence $(G, \cdot)$ is a group, in fact it is an abelian group 
+which we shall describe below in \cref{defn:abelian_group}. 
+\end{proof}
+
+\newpage
+\subsection{Abelian Groups}
+
+\begin{defn}[Abelian Group]
+\label{defn:abelian_group}
+A group $(G, \circ)$ is \emph{abelian} (or commutative) if
+$$
+a \circ b = b \circ a \quad \forall a,b \in G.
+$$
+\end{defn}
+
+\begin{ex}
+The group $(\mathbb{Z}, +)$ is abelian because $m+n = n+m$.
+\end{ex}
+
+
+
+\end{document}

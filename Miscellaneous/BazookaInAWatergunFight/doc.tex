@@ -1,0 +1,66 @@
+\input{preamble.tex}
+
+\title{\huge{Killing an ant with an ICBM}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{\today}}
+
+\begin{document}
+\maketitle
+
+\newpage
+The following is a proof that the $n$-th root of $2$ 
+is irrational for $n \geq 2$, inspired by a similar 
+proof that $\sqrt[3]2$ is irrational I saw on YT shorts.
+
+\begin{proof}
+    Let $n \geq 2$. Then 
+    $$ 
+        \sqrt[n]2 \text{ is irrational }
+    $$
+
+    \textbf{Case 1 $(n = 2)$}.
+
+    We proceed in the usual way. Assume, for a contradiction, 
+    that the square-root of $2$ is rational. 
+    \begin{align*}
+        \sqrt 2 &= \frac{a}{b} \\ \text{ where } a,b &\in \mathbb Z, 
+        \text{ and } gcd(a,b) = 1\\ 
+        2 &= \frac{a^2}{b^2} \\ 
+        2b^2 &= a^2 \\ 
+        \Rightarrow a &= 2k, k \in \mathbb Z \\ 
+        2b^2 &= 4k^2 \\ 
+        b^2 &= 2k^2 \\ 
+        \Rightarrow b &= 2j, j\in\mathbb Z
+    \end{align*}
+    Now we see that $a$ and $b$ share a factor larger than $1$, 
+    contradicting 
+    our assumption. Hence $\sqrt 2$ cannot be a rational 
+    number. 
+
+    \textbf{Case 2 $(n > 2)$}. 
+
+    Proceed as above, assuming the $n$-th root is rational. 
+    \begin{align*}
+        \sqrt[n]2 &= \frac{a}{b}, a,b\in \mathbb Z \\ 
+        2 &= \frac{a^n}{b^n} \\ 
+        2b^n &= a^n \\ 
+        b^n + b^n &= a^n
+    \end{align*}
+
+    Which has no non-zero integer solutions 
+    (which we would require since $b\neq0$) 
+    by Fermat's 
+    Last Theorem \cite{Wiles95}, a 
+    contradiction. 
+    Thus $\sqrt[n]2$ cannot be rational.
+     
+\end{proof}
+
+\newpage
+\begin{thebibliography}{9}
+
+\bibitem{Wiles95} Wiles, A. (1995). Modular elliptic curves and Fermat's Last Theorem. \textit{Annals of Mathematics}, 141(3), 443--551.
+
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,106 @@
+\input{preamble.tex}
+
+\title{\huge{Shift Space of First Order Language Symbols}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{\today}}
+
+\begin{document}
+\maketitle
+
+
+\newpage
+\section{Cool Beans}
+\begin{defn}{First Order Language}{}
+    A first-order language $\mathfrak L$ is a set of symbols 
+    composed of two disjoint subsets: 
+    \begin{enumerate}
+        \item 
+        The first part, which is common to all languages, 
+        consists of "(" and ")" together with the following 
+        symbols: 
+        the variables $\mathcal V = \{v_n : n \in \mathbb N\}$, 
+        the equality 
+        symbol "$=$", connectives "$\lnot$", "$\land$" and the 
+        existential quantifier "$\exists$".
+
+        \item 
+        The non-logical symbols, consisting of 
+        \begin{itemize}
+            \item a set of constant symbols $\mathcal C^\mathcal L$.
+            \item a sequence of sets \(\mathcal F^\mathfrak L_n\), 
+                $n\in \mathbb Z^+$, where elements 
+                of this set are called n-ary functions symbols.
+            \item a sequence of sets $\mathcal R_n^\mathfrak L$, 
+                $n\in \mathbb Z^+$, where elements of this set 
+                are called n-ary relation symbols or predicates 
+                depending on the context. 
+        \end{itemize}
+    \end{enumerate}
+\end{defn}
+
+
+\begin{defn}{The Language Alphabet}{}
+    Let $\mathfrak L$ be a first-order language as defined above. 
+    We define the alphabet $\mathcal A_\mathfrak L$ of the 
+    dynamical system to be the complete set of symbols comprising 
+    the language $\mathfrak L$:
+    $$\mathcal A_\mathfrak L = \text{Set of all symbols in } 
+    \mathfrak L$$
+    Since $\mathfrak L$ contains a countably infinite set of 
+    variables $\mathcal V$ (and potentially infinite sets of 
+    non-logical symbols), the alphabet $\mathcal A_\mathfrak L$ 
+    is countably infinite. We equip $\mathcal A_\mathfrak L$ 
+    with the discrete topology $\tau_{\text{disc}}$.
+\end{defn}
+
+\begin{defn}{The Full Shift Space over $\mathfrak L$}{}
+    The full shift space over the first-order language 
+    $\mathfrak L$, denoted $\Sigma_\mathfrak L$, is the set of all two-sided infinite sequences (or words) formed by symbols from 
+    $\mathcal A_\mathfrak L$:
+    $$\Sigma_\mathfrak L = \mathcal A_\mathfrak L^{\mathbb Z} = 
+    \{ s = (\dots, s_{-1}, s_0, s_1, \dots) : 
+    s_i \in \mathcal A_\mathfrak L \text{ for all } i 
+    \in \mathbb Z \}$$
+    We equip $\Sigma_\mathfrak L$ with the product topology, 
+    where a basis for the open sets is given by the 
+    cylinder sets $C_W = \{ s \in \Sigma_\mathfrak L : 
+    s_{[i, i+k-1]} = W \}$ for any finite word (block) $W$ of 
+    length $k$ occurring at position $i$.
+\end{defn}
+
+\begin{defn}{The Shift Map}{}
+    The shift map (or shift automorphism) $\sigma: 
+    \Sigma_\mathfrak L \to \Sigma_\mathfrak L$ is the function 
+    defined by shifting every sequence one position to the left:
+    $$\sigma(s)_i = s_{i+1} \quad \text{for all } s \in 
+    \Sigma_\mathfrak L \text{ and } i \in \mathbb Z$$
+    The pair $(\Sigma_\mathfrak L, \sigma)$ forms a 
+    topological dynamical system. Since the alphabet 
+    $\mathcal A_\mathfrak L$ is infinite, the space 
+    $\Sigma_\mathfrak L$ is not compact, which contrasts 
+    with classical symbolic dynamics over finite alphabets.
+\end{defn}
+
+\begin{defn}{The Subshift of Well-Formed Terms}{}
+    A subshift $X \subseteq \Sigma_\mathfrak L$ is a closed and 
+    $\sigma$-invariant subset of $\Sigma_\mathfrak L$. 
+    We can define a specific subshift $X_{\text{Term}}$ by
+    imposing a logical constraint:
+    \begin{align*}
+        &X_{\text{Term}} = \{ s \in \Sigma_\mathfrak L : 
+        \text{no block in } s \\ &\text{ is a finite sequence of 
+            symbols that violates the } 
+            \mathfrak L \text{-grammar for a 
+        well-formed term} \}
+    \end{align*}
+    This definition means that every finite word $W$ 
+    appearing in a sequence $s \in X_{\text{Term}}$ must be a 
+    $\mathfrak L$-grammatically valid string (not necessarily a 
+    complete term, but one that doesn't contain a forbidden block 
+    $\mathcal F$ that violates the rules of $\mathfrak L$-term 
+    formation, such as $x(\land$). The set of forbidden blocks 
+    $\mathcal F$ is typically context-free or higher in 
+    complexity due to the recursive nature of term formation.
+\end{defn}
+
+\end{document}

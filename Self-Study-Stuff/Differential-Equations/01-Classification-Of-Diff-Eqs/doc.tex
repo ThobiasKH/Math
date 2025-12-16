@@ -1,0 +1,98 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsfonts, geometry}
+
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Professor Dave's Differential Equations}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section*{Classification of Differential Equations}
+Algebraic functions such as \(x^2 + 4x + 4 = 0\) have an unknown variable which
+we are solving for. 
+Differential equations such as \(\frac{dy}{dx} = x^2\), on the other hand, 
+have an unknown function.
+When we find indefinite integrals, we are technically finding the function 
+of a differential equation: \(\frac{dy}{dx} = x^2 
+\Rightarrow y = \displaystyle\int x^2 dx = \frac{x^3}{3} + C\). 
+
+\subsection*{Terminology Pertaining to the Classification of Differential Equations}
+\begin{enumerate}
+    \item 
+    y is the dependent variable and x the independent variable in the differential 
+    equation above.
+
+    \item
+    \textbf{ODE:} An ordinary differential equation 
+    contains only \textbf{one} independent variable, 
+    for instance: \[\frac{dy}{dx} + xy = \tan x\]
+
+    \item 
+    \textbf{PDE:}
+    A partial differential equation contains more than one independent variable, 
+    for instance: 
+    \[\frac{\partial y}{\partial x} - 2\frac{\partial y}{\partial t} = t^2 y\]
+
+    \item 
+    Linear differential equations are DE's where the dependent variables, and it's 
+    derivatives, are alone (no exponent or function acting on y or it's derivatives): 
+    \[\frac{dx}{dy} + y\sin x = 0\]
+
+    \item Nonlinear differential equations are DE's not explicitly satisfying 
+    the conditions that make a DE linear: 
+    \[\frac{dy}{dx}+y^2 = 0\]
+
+    \item 
+    A homogenous differntial equation is a DE where there are no terms with just the 
+    independent variable or constant: 
+    \[ 
+        \frac{dy}{dx} + y = 0
+    \]
+
+    \item 
+    A nonhomegnous differential equation has terms with just the independent variable 
+    or a constant: 
+    \[ \frac{dy}{dx} + y = x \lor \frac{dy}{dx} + y = 1 \]
+
+\item 
+    The order of a DE is the highest derivative present: 
+    \[\frac{d^2y}{dx^2} + \frac{dy}{dx} = x\]
+    has order = 2. 
+
+\item 
+    The degree is the exponent on the highest derivative present: 
+    \[\left(\frac{d^2y}{dx^2} \right)^3 + \frac{dy}{dx} = x\]
+    would have order = 2 and degree = 3.
+
+\item 
+    Autonomous DE's are DE's where the independent variable only appears as a derivative:
+    \[\frac{dy}{dx} + y = 0\]
+    has no term with x other than the derivative. 
+
+\item 
+    Nonautonomous have the independent variable appearing in other terms: 
+    \[\frac{dy}{dx} + xy = 0\]
+\end{enumerate}
+
+\subsection*{Solving Differential Equations} 
+We want to solve for the dependent variable y. Getting y as a function of x would be 
+an \textbf{explicit solution}.
+
+\noindent 
+If we can't express y in terms of x we would call it an \textbf{implicit solution}.
+
+\noindent 
+Consider \[y = \frac{x^3}{3} + C\] the solution to a differential equation. 
+This solution is what we would call a general solution as it contains the constant 
+term \(+ C\). Boundary conditions tell us information about the solution.  
+A common type of boundary condition is an initial condition, for example 
+given \(y(0) = 1\) we could find the value for \(C\) in the genral solution above.
+This number of boundary conditions required to reach a particular solution is 
+equal to the order of the DE. First derivative yields one C term, second two C terms 
+and so on.
+ 
+\end{document}

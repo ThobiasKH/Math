@@ -1,0 +1,156 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsfonts, geometry, amsthm}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+% Page Setup
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Lecture Notes: Abstract Algebra (Course by: Alvaro Lozano-Robledo)}
+\author{Thobias K. Høivik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section*{Lagrange's Theorem}
+Let G be a finite group and let H be a subgroup of G.
+
+\noindent
+Then the order of H is a divisor of G \(\rightarrow |G| = k|H|, k \in \mathbb Z
+\Leftrightarrow |G| \equiv 0 \text{ mod } |H|
+\)
+
+\subsection*{Examples}
+\(\{0, 3\} \leq \mathbb Z / 6\mathbb Z \land 
+\{0, 2, 4\} \leq \mathbb Z / 6\mathbb Z
+\) 
+
+\noindent 
+\(|\{0,3\}| = 2 \land |\{0,2,4\}| = 3\)
+
+\noindent 
+\( \{1,6\} \leq (\mathbb Z / 7\mathbb Z)^x\)
+
+\noindent 
+and many more.
+
+\subsection*{Coset Definition}
+Let \(<G,\star>\) be a group and let H be a subgroup of G. 
+
+\noindent 
+A left coset of H with representative \(g \in G\) is \(gH = g\star H = 
+\{g \star h | h \in H\}
+\)
+
+\noindent 
+and a right coset is \(\{h \star g |h \in H\}\). 
+
+\noindent 
+Trivially, G abelian \(\Rightarrow gH = Hg \text{ } \forall H \leq G\), 
+\(gH = Hg\) means H is a \textbf{normal subgroup}.
+
+\subsection*{Partition Theorem} 
+Let \( G \) be a group and \( H \) a subgroup of \( G \). The left cosets of \( H \) in \( G \),
+\[
+gH = \{ gh \mid h \in H \}, \quad g \in G,
+\]
+form a partition of \( G \). That is:
+\begin{enumerate}
+    \item Every element of \( G \) belongs to some left coset of \( H \).
+    \item Any two left cosets of \( H \) are either disjoint or identical.
+\end{enumerate}
+
+\noindent
+\textbf{Proof:}
+
+\noindent
+\textbf{(1) Every element of \( G \) belongs to some coset:}  
+Let \( g \in G \). Since \( e \in H \), we have
+\[
+g = g e \in gH.
+\]
+Thus, every element of \( G \) is contained in some left coset of \( H \).
+
+\noindent
+\textbf{(2) Cosets are either disjoint or identical:}  
+Suppose \( g_1H \cap g_2H \neq \emptyset \), meaning there exists some \( x \in g_1H \cap g_2H \). Then we can write:
+\[
+x = g_1 h_1 = g_2 h_2, \quad \text{for some } h_1, h_2 \in H.
+\]
+Rearranging gives
+\[
+g_2^{-1} g_1 = h_2 h_1^{-1} \in H,
+\]
+so \( g_1 \) and \( g_2 \) belong to the same left coset of \( H \), implying
+\[
+g_1H = g_2H.
+\]
+
+\noindent
+Therefore, the left cosets of \( H \) form a partition of \( G \). \(\square\)
+
+\subsection*{The Index of H in G Definition}
+Let G be a group and H a subgroup. The index of H in G, denoted by \([G:H]\) is 
+the number of disjoint left-cosets of H in G.
+
+\subsection*{Example} 
+\(G = \mathbb Z/6\mathbb Z \leq \{0,2,4\} = H \text{, }[G:H] = 2 \because 
+(0+H)\sqcup (1+H) = G\)
+
+\subsection*{Proposition}
+Let H be a subgroup of G. Then every coset of H has the same number of elements.
+
+\noindent
+\textbf{Proof: } 
+
+\noindent 
+Let H be a subgroup of G, and let \(g \in G\), consider gH.
+
+\noindent 
+Let \(\lambda : H -> gH, \lambda (h) = g \star h\)
+
+\noindent 
+\begin{enumerate}
+  \item Well defined: \(h \in H \Rightarrow g \star h \in gH\)
+  \item Injective: \(\lambda (g) = \lambda (g^*) \Rightarrow gh = gh^* 
+    \Rightarrow h = h^* 
+  \)
+  \item Surjective: \(f \in gH \Rightarrow \exists h \in H \text{ s.t } f = gh 
+    \Rightarrow \lambda (h) = gh = f\)
+
+\end{enumerate}
+
+\noindent 
+Hence \(\lambda\) is a bijection \(\rightarrow |H| = |gH| = |g^*H|\)
+
+\subsection*{Proof of Lagrange's Theorem}
+Let G be a finite group and H a subgroup of G. 
+
+\noindent 
+Then, \([G:H] = \frac{|G|}{|H|}\) is the number of distinct cosets of H in G.
+
+\noindent 
+In particular \(|H| \times [G:H] = |G|\).
+
+\noindent 
+Thus \(|H|\) divides \(|G|\).
+
+\subsection*{}
+\(H \leq G\). 
+
+\noindent 
+Then \(G = g_1H \sqcup g_2H \sqcup \cdots \sqcup g_nH\), where \(n = [H:G]\)
+
+\noindent 
+Prop \(\rightarrow |g_1H| = |g_2H| = \cdots |g_nH|\) and 
+\(\therefore |G| = \displaystyle\sum_{i=1}^{n} |g_iH| = |H| \times n = |H| 
+\times [G:H]\)
+
+\noindent 
+In particular \(|G| = |H| \times [G:H] \rightarrow [G:H] = \frac{|G|}{|H|} 
+\quad \square\) 
+
+
+
+\end{document}

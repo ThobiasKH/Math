@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, tikz}
+
+\title{Algebraic and Enumerative Combinatorics: Overview}
+\author{Thobias K. Høivik}
+\date{February 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction to Combinatorics}
+Combinatorics is the branch of mathematics concerned with counting, arrangement, and structure of sets, particularly finite sets. The two main subfields of combinatorics are:
+
+\begin{itemize}
+    \item \textbf{Enumerative Combinatorics}: Counting the number of ways to arrange or select objects under various conditions.
+    \item \textbf{Algebraic Combinatorics}: Applying algebraic techniques to combinatorial structures, often focusing on generating functions, group actions, and symmetric functions.
+\end{itemize}
+
+\section{Basic Counting Principles}
+One of the fundamental problems in combinatorics is counting how many ways we can arrange or choose objects. Some basic counting principles include:
+
+\subsection{The Addition Rule}
+If we have two disjoint sets \( A \) and \( B \), the total number of elements in \( A \cup B \) is:
+\[
+|A \cup B| = |A| + |B|.
+\]
+This is known as the addition rule, and it generalizes to the union of any finite number of disjoint sets.
+
+\subsection{The Multiplication Rule}
+If we are selecting an element from set \( A \) and an element from set \( B \), and the choice of an element from \( A \) does not affect the choice from \( B \), the total number of possibilities is:
+\[
+|A \times B| = |A| \times |B|.
+\]
+This is known as the multiplication rule.
+
+\section{Permutations and Combinations}
+A permutation is an arrangement of objects in a specific order, while a combination is a selection of objects without regard to the order.
+
+\subsection{Permutations}
+The number of ways to arrange \( n \) objects in order is given by:
+\[
+P(n) = n! = n \times (n-1) \times (n-2) \times \cdots \times 1.
+\]
+If only \( r \) objects are selected from a set of \( n \) objects, the number of possible arrangements (permutations) is:
+\[
+P(n, r) = \frac{n!}{(n-r)!}.
+\]
+
+\subsection{Combinations}
+The number of ways to choose \( r \) objects from a set of \( n \) objects, regardless of the order, is given by:
+\[
+C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}.
+\]
+
+\section{Introduction to Generating Functions}
+Generating functions are a powerful tool in combinatorics that allow us to encode sequences of numbers into a formal power series.
+
+\subsection{The Ordinary Generating Function (OGF)}
+The ordinary generating function of a sequence \( \{a_n\} \) is defined as:
+\[
+A(x) = \sum_{n=0}^{\infty} a_n x^n.
+\]
+This function helps in solving recurrence relations and counting problems.
+
+\subsection{The Exponential Generating Function (EGF)}
+The exponential generating function for a sequence \( \{a_n\} \) is defined as:
+\[
+A(x) = \sum_{n=0}^{\infty} \frac{a_n x^n}{n!}.
+\]
+EGFs are particularly useful for counting labeled structures, like trees or graphs.
+
+\section{Applications of Combinatorics}
+In algebraic and enumerative combinatorics, one often works with specific problems like:
+
+\begin{itemize}
+    \item Counting the number of distinct objects under symmetries (e.g., counting distinct colorings or graphs).
+    \item Solving recurrences using generating functions.
+    \item Applying group theory to count invariant objects.
+\end{itemize}
+
+\section{A fun problem}
+The lecturer introduced a problem at the start of the lecture which we were to find 4 formulas for. 
+Given a \(2 \times n \) rectangle, \(n \in \mathbb{N}\), how many ways can we tile it with \(2 \times 1\) rectangles.
+\begin{enumerate}
+  \item Explicit formula 
+  \item Recursive formula 
+  \item Formula for generating function
+  \item Asymptotic formula
+\end{enumerate}
+
+\subsection{Explicit formula}
+Here we were simply given the formula: 
+
+\begin{gather*}
+  T_n = \binom{n}{0} + \binom{n-1}{1} + \binom{n-2}{2} 
+    + \dots + \binom{\lfloor \frac{n}{2} \rfloor}{\lfloor \frac{n}{2} \rfloor}  \\
+  = \sum_{k = 0}^{\lfloor \frac{n}{2} \rfloor} \binom{n-k}{k}
+\end{gather*}
+
+\noindent Which reveals to us that the question we were posed is the same thing as asking how many ways can we sum up to \(n\) using only 1 and 2.
+
+\subsection{Recursive formula}
+\begin{gather*}
+  T_n = T_{n-1} + T_{n-2} \text{, } T_0 = 0 \land T_1 = 0 
+\end{gather*}
+Observe that this turns out to be the formula for the $n^{\text{th}}$ fibbonacci number.
+This means that the number of ways to tile the rectangle is the same as numbers of ways to sum up to $n$ using only $1\text{s and } 2\text{s}$, which is the same as getting the $n^{\text{th}}$ fibbonacci number. 
+These are all the same question we're asking, just made more and more familiar.
+
+\end{document}

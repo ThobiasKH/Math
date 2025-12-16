@@ -1,0 +1,1823 @@
+\input{preamble.tex}
+\usepackage{pgfplots}
+\usepackage{mathtools,amssymb}
+\usepackage{tikz}
+\usepackage{xcolor}
+\pgfplotsset{compat=1.7}
+\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\title{\huge{Statistics for Engineering}}
+\author{\LARGE{Thobias Høivik}}
+\date{Fall 2025}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage 
+\section{Introduction}
+This course covers introductory statistics and is taught at 
+the Western Norway University of Applied Science. 
+This will be among my most scattered and improvised 
+notes, probably mostly in norwegian. 
+
+\section{Lecture 1}
+\emph{Mål:}
+\begin{itemize}
+    \item Finne matematiske størrelser som beskriver data i eit 
+        datasett
+    \item Sentralmål 
+    \item Spredningsmål
+\end{itemize}
+
+\subsection{Sentralmål}
+\begin{itemize}
+    \item Finne ein verdi som representerer ein "typisk" enhet 
+        i ei mengde.
+\end{itemize}
+\begin{ex}{}{}
+    Lønna til $13$ personer oppgitt som: 
+    $110, 125, 125, 300, 350, 370, 375, 380, 390, 410, 430, 435, 440$.
+\end{ex}
+
+\emph{Modus/typetal.}
+
+Verdien som dukkar opp flest gangar.
+Fra eksempellet har at vi moduslønn er 125.
+
+\emph{Median.}
+Median er den midterste verdien i ei datamengde. I dette tilfellet 
+fra Example 2.1 har vi at medianlønn ligger på $375$. I tilfellet 
+hvor det er et partall antall verdier tar vi gjennomsnittet 
+av de to midterste verdiene.
+
+\emph{Gjennomsnitt.}
+
+Gjennomsnittet av en datamengde $X$ er gitt ved 
+$$ 
+    \overline X = \frac{1}{|X|} \displaystyle\sum_{i=1}^{|X|} x_i
+$$ 
+I dette tilfellet, fra Example 2.1, har vi gjennomsnitt på 
+$326$.
+
+Anta nå at en $14$-ende tjener blir lagt til i mengden som tjener 
+$30,000$. Da er gjennomsnittslønnen på de $14$ personene 
+rundt $2445$ som ligger langt over den nest høgste tjeneren. 
+Med andre ord drar person nummer $14$ gjennomsnittet opp vanvittigt.
+
+\subsection{Spredningsmål.}
+
+Målet med et spredningsmål er å beskrive hvor stor variasjon
+det er i datasettet.
+
+\begin{ex}{}{}
+    Gitt to mengder $X, Y$. 
+
+    $X = \{80,90,100,110,120\}$
+    
+    $\overline X = 100$
+
+    $Y = \{20, 60, 100, 140, 180\}$
+
+    $\overline Y = 100$
+\end{ex}
+
+\emph{Variasjonsbredde.}
+
+Variasjonsbredda er største verdi minus minste verdi: 
+$$ 
+    \max X - \min X
+$$ 
+Fra Example 2.2 har vi at at variasjonsbredda til $X$ er $40$ og 
+variasjonsbredda til $Y$ er 160.
+
+\emph{Varians og standardavik.}
+
+Varians: 
+$$
+\text{var}(X) = s_X^2 = \frac{1}{|X|-1}
+\displaystyle\sum_{i=1}^{|X|} \left(x_i - \overline X\right)^2
+$$
+
+Standardavik: 
+$$ 
+\text{std}(X) = \sqrt{s_X^2} = \sqrt{\text{var}(X)}
+$$ 
+
+Viss vi ser på Example 2.3 får vi 
+$$ 
+    \text{var}(X) = 
+    \frac{(80-100)^2 + (90-100)^2 + \dots + (120 - 100)^2}{4}
+    = 250 = 15.8^2
+$$ 
+og 
+$$ 
+    \text{std}(X) = 15.8 
+$$ 
+mens for $Y$
+$$
+    \text{var}(Y) = 
+    \frac{(20-100)^2 + (40-100)^2 + \dots + (180 - 100)^2}{4}
+    = 4000 = 63.25^2
+$$ 
+$$ 
+    \text{std}(Y) = 63.25
+$$ 
+
+\subsection{Tsjebytsjevs regel}
+"Sammenhengen mellom ei datamengde, gjennomsnitt og standardavik."
+ 
+Minimum $75\%$ av observasjonane har verdi i intervallet
+$$ 
+    \left[\overline X - 2s_X, \overline X + 2s_X\right]
+$$ 
+
+\newpage
+\section{Lecture 2}
+Vi begynner med begrepet sannsyn.
+
+Mål:
+\begin{itemize}
+    \item kjennskap til sentrale begrep 
+    \item rekne ut sannsyn 
+    \item kjenne til grunnleggande begrep frå mengdelære 
+\end{itemize}
+
+\subsection{Stokastisk forsøk, utfallsrom og hending}
+\begin{defn}{Stokastisk forsøk}{}
+    \begin{itemize}
+        \item Vi veit kva utfall som er mulig 
+        \item Berre eitt utfall kan skje i kvart forsøk 
+        \item Veit ikkje utfallet vil bli
+    \end{itemize}
+\end{defn}
+\begin{ex}{}{}
+    Terningskast er eit eksempel på eit stokastisk forsøk. 
+    Vi veit at vi får $1-6$. Vi kan kunn få eit utfall. 
+    Vi veit ikkje på førhånd kva vi får.
+
+    Vi kaster $2$ terninger. Dei mulige utfalla er 
+    $$ 
+    \begin{matrix}
+        1,1 & 1,2 & 1,3 & 1,4 & 1,5 & 1,6 \\ 
+        2,1 & 2,2 & 2,3 & 2,4 & 2,5 & 2,6 \\ 
+        3,1 & 3,2 & 3,3 & 3,4 & 3,5 & 3,6 \\ 
+        4,1 & 4,2 & 4,3 & 4,4 & 4,5 & 4,6 \\ 
+        5,1 & 5,2 & 5,3 & 5,4 & 5,5 & 5,6 \\ 
+        6,1 & 6,2 & 6,3 & 6,4 & 6,5 & 6,6 \\ 
+    \end{matrix}
+    $$
+    som utgør $6^2 = 36$ mulige utfall.
+\end{ex}
+\begin{ex}{}{}
+    Kaster eit kronestykke $3$ gongar. 
+    Dei mulige utfalla er 
+    $$
+    \begin{matrix}
+        KKK & KKM & KMK & KMM \\ 
+        MKK & MKM & MMK & MMM 
+    \end{matrix}
+    $$
+    som utgjør $2^3 = 8$ mulige utfall.
+\end{ex}
+\begin{defn}{Utfallsrom og hending}{}
+    Utfallsrommet $S$ er mengda av alle mulige utfall.
+     
+    Hending er eitt eller fleire utfall som oppfyller ein 
+    gitt betingelse.
+\end{defn}
+\begin{ex}{}{}
+    Viss vi tar utgangspunkt i Example 3.1 
+    kan vi se på hendinga 
+    $A = \{\text{sum er } 4\} = \{(3,1),(2,2), (1,3)\}$. 
+    $B = \{\text{minst eit partal}\} = \{(1,2), (1,4), (1,6), \dots\}$
+    som gir $|B| = 27$.
+\end{ex}
+\begin{ex}{}{}
+    Viss ein målar høgda til personer er tilstandsrommet 
+    $S = \{\text{alle reelle tal mellom } 0.5 \text{ og } 2.5\}$.
+\end{ex}
+
+\subsection{Sannsyn for handling}
+\begin{itemize}
+    \item Bruke modell for sannsyn 
+    \item Empiri
+    \item Magefølelse
+\end{itemize}
+
+\emph{Notasjon.} 
+
+La $A$ være ei hending: 
+
+\begin{itemize}
+    \item sannsyn for $A : P(A)$
+    \item $0 \leq P(A) \leq 1$
+\end{itemize}
+
+
+\begin{defn}{Uniform sannsynlighetsmodell}{}
+    La $S$ være utfallsrommet til eit stokastisk forsøk, 
+    og la $A$ være ei hending.
+
+    Viss alle utfall er like sannsynlige, 
+    då er 
+    $$ 
+        P(A) = \frac{\text{antal utfall der } A \text{ er gunnstig}}
+        {\text{antal mulige utfall}}
+    $$ 
+\end{defn}
+
+\begin{ex}{}{}
+    Betrakt terningskast eksempellet fra tidligere. 
+
+    La $S$ være terningskast med to terninger. 
+
+    $$ 
+        A = \{\text{sum er } 4\}
+    $$ 
+    $$ 
+        P(A) = \frac{3}{6^2} = \frac{3}{36} = \frac{1}{12}
+    $$ 
+    $$ 
+        B = \{\text{minst eitt partal}\} 
+    $$ 
+    $$ 
+        P(B) = \frac{27}{36} = \frac{3}{4}
+    $$ 
+\end{ex}
+
+\newpage
+\emph{Empirisk sannsyn.}
+
+Kva er sannsynligheita for at ein person 
+er mellom $175$cm og $180$cm?
+
+Dette er ikkje ein uniform modell siden det ikkje er like stor 
+sannsynligheit for ein person å ha ein gitt høgde.
+
+Det vi kan gjere da er å velge $1000$ personer, måle høgda 
+og lage ein frekvenstabell.
+
+Da ville vi hatt 
+$$ 
+    P(\text{mellom } 175 \text{ og } 180) = \text{ relativ frekvens }
+$$ 
+
+\emph{Store tals lov.}
+
+Viss eit stokastisk forsøk blir gjentatt mange 
+gangar så vil den empiriske sannsynligheita 
+nærme seg den teoretiske sannsynligheita.
+
+\subsection{Mengdelære}
+\begin{ex}{}{}
+    $A = \{\text{sum} = 4\}$, $P(A) = \frac{1}{12}$. 
+
+    $B = \{\text{minst eitt partal}\}$, $P(B) = \frac{3}{4}$. 
+
+    $C = \{\text{sum}\geq 9\}$, $P(C) = \frac{5}{18}$. 
+
+    $P(\text{sum} = 4 \text{ og minst eitt partal})$? 
+
+    $P(\text{sum} ) 4 \text{ og sum} \geq 9)$?
+\end{ex}
+
+\begin{defn}{Mengde}{}
+    Ei mengde $A$ er ei samling element 
+    (fra ei utvalgsmengde $S$).
+\end{defn}
+
+\begin{defn}{Union, snitt, komplement, disjunkt}{}
+    La $A,B$ være mengder med element fra ei utvalgsmengde $S$.
+
+    \emph{Union.}
+
+    $$ 
+        A \cup B = \{x : x \in A \lor x \in B\}
+    $$ 
+
+    \emph{Snitt.}
+
+    $$
+        A \cap B = \{x : x\in A \land x \in B\} 
+    $$ 
+
+    \emph{Komplement.}
+
+    $$ 
+        \overline A = A^c = S \setminus A = \{x \in S : x \not\in A\}
+    $$ 
+
+    \emph{Disjunkt.}
+
+    $A$ og $B$ er disjunkte viss 
+    $$ 
+        A \cap B = \emptyset
+    $$ 
+\end{defn}
+
+\newpage 
+\section{Lecture 3}
+
+\subsection{Grunnreglar for sannsynlighet}
+La $S$ være utfallsrommet til eit stokastisk forsøk, 
+og la $A,B$ være hendingar.
+\begin{enumerate}
+    \item $0 \leq P(A) \leq 1$
+    \item $P(S) = 1, P(\emptyset) = 0$ 
+    \item Viss $A$ og $B$ er disjunkte hendingar 
+        $(A\cap B = \emptyset)$, då er 
+        $P(A \cup B) = P(A) + P(B)$
+    \item $P(\overline A) = 1 - P(A)$
+\end{enumerate}
+\begin{ex}{}{}
+    Betrakt kastingen av to terninger. 
+
+    $A = \{\text{summen er }4\}$
+
+    $B = \{\text{minst } 1 \text{ terning er partal}\}$
+
+    $C = \{\text{sum } \geq 9\}$
+
+    $P(A) = \frac{3}{36}, P(B) = \frac{27}{36}, P(C) = \frac{10}{36}$
+
+    $P(A \cup C) = P(A) + P(C) = \frac{13}{36}$ siden 
+    $A$ og $C$ er disjunkte (ingen tall $x$ 
+    oppfyller $x=4 \land x \geq 9$ samtidig).
+
+    $P(A\cup B)$. Her kan vi ikke bruke 
+    regel $3$, siden $2 + 2 = 4$ og $(2,2)$ oppfyller at minst 
+    en er partal, så $A \cap B = \{(2,2)\} \neq \emptyset$.
+    I dette tilfellet har vi 
+    $P(A\cup B) = P(A\cup B) - P(A\cap B) = \frac{29}{36}$
+    (som addisjonsregelen for ikke-disjunkte mengder fra MAT210).
+
+    $P(\overline{A\cup B}) = 1 - P(A\cup B) = \frac{7}{36}$
+\end{ex}
+
+\subsection{Betinget sannsynlighet}
+\begin{ex}{}{}
+    Eit bilfirma har $2000$ tilsette. 
+    
+    La 
+
+    \quad $A = \{\text{stemmer Ap}\}$
+
+    \quad $B = \{\text{er bilmekaniker}\}$
+
+    La oss si at vi vet at en person er bilmekaniker, 
+    hva er da sjansen for at de stemmer Ap? 
+
+    Viss vi vet at blant bilmekanikere så stemmer 
+    $500$ Ap og $380$ ikke da er sjansen 
+    for at, gitt en bilmekaniker, de stemmer Ap 
+    $$ 
+        P(A | B) ) \frac{500}{500+380} = \frac{500}{880}
+    $$ 
+\end{ex}
+
+Den betinget sannsynligheten for at $A$ skjer viss $B$ har skjedd 
+$$
+    P(A | B) = \frac{P(A\cap B)}{P(B)}
+$$ 
+
+Fra dette følger det et par formler 
+\begin{enumerate}
+    \item $P(A\cap B) = P(A|B)\cdot P(B)$
+    \item $P(A) = P(A\cap B) + P(A \cap \overline B)$
+    \item $P(A) = P(A|B)\cdot P(B) + 
+        p(A|\overline B)\cdot P(\overline B)$
+\end{enumerate}
+
+\begin{thm}{Bayes teorem}{}
+    La $A,B$ være hendingar 
+    da har vi at 
+    $$ 
+        P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+    $$ 
+\end{thm}
+\begin{proof}[Kort bevis]
+    \begin{align*}
+        P(A|B) &= \frac{P(B|A)P(A)}{P(B)}
+            \\ &= \frac{\frac{P(B\cap A)}{P(A)}P(A)}{P(B)} 
+            \\ &= \frac{P(B\cap A)}{P(B)}
+            \\ &= \frac{P(A \cap B)}{P(B)} 
+            \\ &= P(A|B)
+    \end{align*}
+\end{proof}
+
+\emph{Sensitivitet, spesifisitet, basisrate.}
+
+La  
+
+\quad $B = \{\text{pasient er syk}\}$
+
+\quad $A = \{\text{testmetode er positiv}\}$
+
+Vi har som mål å finne sjansen for at en person er syk når 
+testen er positiv, $P(B|A)$.
+
+\begin{itemize}
+    \item Sensitivitet: $P(A|B)$, sannsynligheten for at 
+        test er positiv når pasient er syk
+    \item Spesifisitet: $P(\overline A | \overline B)$, 
+        sannsynlighet for at test er negativ når pasient 
+        er frisk
+    \item Basisrate: $P(B)$, sannsynlighet for at gitt 
+        pasient er syk
+\end{itemize}
+
+\begin{align*}
+    P(B|A) &= P(A|B) \frac{P(B)}{P(A)} \\ 
+    P(A)   &= P(A|B)\cdot P(B) + P(A|\overline B) P(\overline B) \\ 
+    P(\overline B) 
+           &= 1 - P(B) \\ 
+    P(A|\overline B) 
+           &= 1 - P(\overline A | \overline B) \\ 
+    \Rightarrow P(B|A) 
+           &= P(A|B) \frac{P(B)}{P(A|B) \cdot P(B) + 
+           (1 - P(\overline A | \overline B))(1-P(B))}
+\end{align*}
+
+\newpage 
+\section{Lecture 4}
+\subsection{Diskret synnsynlighetsmodell}
+Mål: 
+\begin{itemize}
+    \item kva er ein stokastisk variabel
+    \item innholdet i sannsynlighetsmodell
+    \item fordelingsfunksjonar og anvendelse        
+    \item sentralmål og spredningsmål for diskret sannsynlighetsmodell
+\end{itemize}
+\begin{defn}{Stokastisk variabel}{}
+    Ein stokastisk variabel $X$ er 
+    ein tilfeldig variabel som knytter alle utfall i 
+    utfallsrommet til ein verdi.
+\end{defn}
+
+\begin{defn}{Verdimengde}{}
+    Dei moglege verdiane av eit stokastisk forsøk kalles 
+    verdimengda $V_X$.
+\end{defn}
+
+\begin{ex}{}{}
+    Anta at vi kaster $2$ terninger.
+    
+    La $X = \{\text{summen av terningene}\}$. 
+     
+    $X = 4 = \{13, 22, 31\}$. 
+
+    $X \leq 4 = \{11, 12, 21, 13, 22, 31\}$.
+
+    $V_X = \{2, 3, 4, \dots, 9, 10, 11, 12\}$.
+
+    $Y = \{\text{antall partall}\}$. 
+
+    $V_Y = \{0,1,2\}$.
+
+    I eit pengespill taper du $10$ viss 
+    sum $\leq 6$, vinner $8$ viss sum $ = 7$, og vinner 1 
+    viss sum $\geq 8$.
+
+    Viss vi lar $Z$ betegne den stokastiske variabelen i pengespillet
+    får vi: 
+
+    $V_Z = \{-10,8,1\}$.
+\end{ex}
+
+\begin{defn}{Sannsynlighetsfordeling}{}
+    Ein sannsynlighetsfordeling til ein stokastisk 
+    variabel $X$ inneholder: 
+    \begin{enumerate}
+        \item verdimengden $V_X$
+        \item sannsynligheten for alle mulige utfall i $V_X$
+    \end{enumerate}
+\end{defn}
+$$ 
+    \begin{array}{c|c|c|c|c}
+        V_X & P(X = x) & F(x) & x\cdot P(X=x) & x^2 \cdot P(X = x)\\ 
+        \hline  
+        2 & 1/36 & 1/36  & 2/36  & 4/36   \\
+        3 & 2/36 & 3/36  & 6/36  & 18/36  \\
+        4 & 3/36 & 6/36  & 12/36 & 43/36  \\
+        5 & 4/36 & 10/36 & 20/36 & 100/36 \\
+        6 & 5/36 & 15/36 & 30/36 & 180/36 \\
+        7 & 6/36 & 21/36 & 42/36 & 294/36 \\
+        8 & 5/36 & 26/36 & 40/36 & 320/36 \\
+        9 & 4/36 & 30/36 & 36/36 & 324/36 \\
+        10& 3/36 & 33/36 & 30/36 & 300/36 \\
+        11& 2/36 & 35/36 & 22/36 & 242/36 \\
+        12& 1/36 & 36/36 & 12/36 & 144/36 \\
+          &      &       & E(X) = 252/36 = 7
+                         & E(X^2) = 1974/36  \\ 
+
+    \end{array}
+$$ 
+er hvordan synnsynlighetsfordelingen kan se ut for 
+$X = \{\text{summen av terningene}\}$.
+$F(x)$ er definert som sannsynligheten for at $X \leq x$. 
+Med andre ord 
+$$
+    F(x) = P(X \leq x) = 
+    \displaystyle\sum_{y \in V_X, y \leq x}P(X = y) 
+$$
+
+\begin{ex}{}{}
+    Finn sannsynlighet for at sum er $7$ eller mindre. 
+    Da skal vi finne $P(X \leq 7)$ som næmlig er 
+    $$F(7) = \frac{21}{36}$$ 
+
+    Finn sannsynlighet for at sum er større enn $8$. 
+    
+    $$ 
+        P(X > 8) = 1 - P(x \leq 8) = 1 - F(8) = \frac{10}{36}
+    $$ 
+\end{ex}
+
+\emph{Sentralmål og spredningsmål.}
+
+Forventningsverdi: 
+$$ 
+    E(X) = \mu_X = \displaystyle\sum_{x \in V_X}^{}xP(X=x)
+$$ 
+$$ 
+    Var(X) = \sigma_X^2 = 
+    \left(\displaystyle\sum_{x\in V_X}x^2P(X=x)\right) - \mu_X^2
+$$ 
+$$
+    std(X) = \sigma_X 
+$$ 
+
+\newpage 
+\section{Lecture 5}
+\subsection{Fleire stokastiske variabler}
+I eit terningspel kaster ein to terningar. 
+Det er $2$ måtar å vinne.
+
+I spel $1$ vinner ein $2$ viss summen av terningane er $7$, 
+vinner $1$ viss sum $\geq 8$ og ein vinner $0$ viss 
+sum $\leq 6$.
+
+I spel $2$ vinner ein $2$ viss begge terningane er partal, 
+$1$ viss ein av terningane er partal og $0$ viss begge er 
+oddetal.
+
+La $X = \{\text{gevinst spel } 1\}$, $V_X = \{0,1,2\}$. 
+$Y = \{\text{gevinst spel } 2\}$, $V_Y = \{0,1,2\}$.
+
+\begin{align*}
+\begin{array}{c|c|c|c|c}
+    & y = 0 & y = 1 & y = 2 & P(X=x)
+    \\
+    \hline 
+    x = 0 & 1/6 & 1/6 & 1/12 & 5/12
+    \\ 
+    \hline 
+    x = 1 & 1/12 & 1/6 & 1/6 & 5/12
+    \\ 
+    \hline 
+    x = 2 & 0 & 1/6 & 0 & 1/6
+    \\ 
+    \hline 
+    P(Y=y) & 1/4 & 1/2 & 1/4 & 1
+\end{array}
+\end{align*} 
+
+$E(X), E(Y), Var(X), Var(Y)$
+
+$$ 
+    E(X) = \displaystyle\sum_{}^{}xP(X=x) = \mu_X
+$$ 
+$$ 
+    Var(X) = \displaystyle\sum_{}^{}x^2P(X=x) - \mu_X^2
+$$ 
+$$ 
+    E(X) = 0 \cdot \frac{5}{12} + 1 \cdot \frac{5}{12} 
+    + 2 \cdot \frac{1}{6} = \frac{3}{4} = \mu_X
+$$ 
+$$ 
+    Var(X) = 0 + \frac{5}{12} + 4 \cdot \frac{1}{6} - \mu_X^2 
+    = \frac{13}{12} - \mu_X^2 = \frac{13}{12} - \frac{9}{16}
+    = \frac{25}{48} = \left(\frac{5 \sqrt 3}{12}\right)^2
+    = \sigma_X^2
+$$ 
+$$ 
+    E(Y) = \frac{1}{2} + \frac{2}{4} = 1 = \mu_Y
+$$ 
+$$ 
+    Var(Y) = \frac{1}{2} + \frac{4}{4} - \mu_Y^2
+    = \frac{1}{2} = \frac{1}{\sqrt 2} = \sigma_Y^2
+$$ 
+
+\emph{Interessante spørsmål.}
+
+\begin{itemize}
+    \item Viss eg spelar på begge spela, 
+        kva er forventa verdi og varians?
+    \item Viss eg vinner på spel $1$, 
+        aukar eg eller minkar eg sjansen for å vinne på 
+        spel $2$?
+    \item Er spela uavhengige av kvarandre? 
+\end{itemize}
+
+\newpage 
+La $Z = X + Y$ (den samla gevinsten ved å spele på begge spela).
+Verdimengda $V_Z = \{0,1,2,3,4\}$.
+
+\begin{align*}
+    \begin{array}{c|c|c|c}
+        z & P(Z=z) & zP(Z=z) & z^2P(Z=z) \\ 
+        \hline 
+        0 & 1/6 & 0 & 0 \\ 
+        \hline 
+        1 & 1/4 & 1/4 & 1/4 \\
+        \hline 
+        2 & 1/4 & 1/2 & 1\\
+        \hline 
+        3 & 1/3 & 1 &  3\\
+        \hline 
+        4 & 0 & 0 & 0\\
+        \hline 
+          & & \mu_Z = 7/4 & E(Z^2) = 17/4
+    \end{array}
+\end{align*}
+
+$E(Z) = \mu_Z = 7/4$ 
+
+$Var(Z) = 17/4 - (7/4)^2 = (\sqrt 19 / 4)^2 = \sigma_Z^2$
+
+\begin{thm}{}{}
+    La $X$ og $Y$ vere stokastiske variablar. 
+    La $Z = aX + bY + c$. 
+
+    $$ 
+        E(Z) = aE(X) + bE(X) + c
+    $$ 
+\end{thm}
+
+\subsection{Kovarians og korrelasjon}
+\begin{itemize}
+    \item Er det samanheng mellom $X$ og $Y$? 
+    \item Er $X$ og $Y$ uavhengige? 
+    \item Vil seier i $X$ påvirke $Y$?
+\end{itemize}
+
+\emph{Kovarians}
+$$ 
+    Cov(X,Y) = E(X \cdot Y) - \mu_X \cdot \mu_Y
+    = 
+    \left(\displaystyle\sum_{x,y} x \cdot y P(X=x \land Y=y)\right) 
+    - \mu_X\mu_Y
+$$ 
+
+\emph{Korrelasjon}
+$$ 
+    Corr(X,Y) = \rho(X,Y) = \frac{Cov(X,Y)}{\sigma_X\sigma_Y}
+$$ 
+
+Viss vi betrakter eksempellet fra tidligere får vi 
+$$ 
+E(X \cdot Y) = \frac{1}{6} + 2 \frac{1}{6} + 2\frac{1}{6} 
+= \frac{5}{6}
+$$ 
+så 
+$$ 
+    Cov(X,Y) = \frac{5}{6} - \mu_X \mu_Y = \frac{1}{12} 
+$$ 
+
+Deretter finner vi korrelasjon ved 
+$$ 
+    Corr(X,Y) = \frac{1/12}{\sigma_X\sigma_Y} = 
+    \frac{1/12}{\left(\frac{5\sqrt 3}{12}\right)
+    \left(\frac{1}{\sqrt 2}\right)} = \frac{\sqrt 2}{5\sqrt 3} = 0.164
+$$ 
+
+For korrelasjon har vi at 
+$$ 
+    -1 \leq Corr(X,Y) \leq 1
+$$ 
+hvor nærmere $-1$ betyr mer negativ relasjon og nærmere
+$1$ betyr mer positiv relasjon. 
+Med andre ord $\rho$ nær $1$ betyr ein lineær samanheng mellom 
+$X$ og $Y$ (altså en økning i $X$ betyr en økning i $Y$ og vice-versa).
+På samme måte betyr $\rho$ nær $-1$ at en økning i en er en minking
+i den andre.
+$\rho = 0$ betyr ingen lineær samanheng.
+
+\begin{thm}{}{}
+    For stokastiske variabler $X$ og $Y$ og konstanter 
+    $a,b,c$ har vi:
+    $$ 
+    Var(aX + bY + c) = a^2 Var(X) + b^2 Var(Y) + 2ab Cov(X,Y)
+    $$
+\end{thm}
+
+\begin{defn}{Uavhengighet}{}
+    To stokastiske variablar $X$ og $Y$ er uavhengige 
+    dersom 
+    $$
+        P(X = a \land Y = b) = P(X=a)\cdot P(Y=b)
+    $$ 
+\end{defn}
+
+\begin{thm}{}{}
+    Viss to stokastiske variablar $X$ og $Y$ er uavhengige  
+    så er 
+    $$ 
+        Corr(X,Y) = 0
+    $$ 
+
+    Denne implikasjonen går bare en veg.
+\end{thm}
+
+\newpage 
+\section{Lecture 6}
+\subsection{Binomiske forsøk}
+\begin{ex}{}{}
+    Ei skål inneholder $20$ kuler. $8$ av kulene er raude og 
+    $12$ er ikkje raude. Vi trekker $5$ kuler ut av skåla, 
+    og legger tilbake kula.
+    Kva er sannsynligheita for å trekke $3$ raude kuler?
+
+    La $R$ - kula raud, $P(R) = \frac{2}{5}$. 
+
+    $\overline R$ - kula ikkje raud, $P(\overline R) = \frac{3}{5}$.
+
+    Sannsynligheten for å trekke $3$ raude er då sannsynligheita 
+    for å trekke raud $3$ gongar og sannsynligheita for å 
+    trekke ikkje raud $2$ gongar, siden hendelsane ikkje 
+    er relaterte (tilbakelegging). 
+
+    Dermed er 
+    $$ 
+        P(RRR\overline R \overline R) = \left(\frac{2}{5}\right)^3 
+        \left(\frac{3}{5}\right)^2 = \frac{72}{3125}
+    $$ 
+    men dette er bare en av måtene å trekke $3$ raude. 
+
+    Vi kunne også tatt 
+    $$ 
+        P(RR\overline R R \overline R) = \frac{72}{3125}
+    $$ 
+    
+    Som vi ser, sannsynligheten for å trekke $3$ raude er 
+    uavhengig av rekkefølgen. 
+    Dermed kan vi legge sammen alle sannsynligheitene for 
+    alle måtene å velge $3$ raude og $2$ ikkje raude. 
+
+    Måtene å velge $3$ raude er 
+    $$ 
+        \binom{5}{3} = 20
+    $$ 
+
+    Dermed er sjansen for å trekke $3$ raude er 
+    $$ 
+        20 \cdot \frac{72}{3125}
+    $$ 
+\end{ex}
+\begin{defn}{Binomisk forsøk}{}
+    \begin{enumerate}
+        \item Det utføres $n$ forsøk
+        \item Kvart forsøk har to utfall $A$ eller $\overline A$
+        \item Sannsynet $P(A)$ er likt i kvart forsøk 
+        \item Forsøka er uavhengige 
+    \end{enumerate}
+    
+    Viss $X$ - antal ganger $A$ skjer er 
+    $X$ \textasciitilde binomial $(n,p)$.
+
+    $$ 
+    P(X = x) = \binom{n}{x}P^x(1-p)^{n-x}
+    $$ 
+    $$ 
+        E(X) = np
+    $$ 
+    $$ 
+        Var(X) = np(1-p)
+    $$ 
+\end{defn}
+
+\begin{ex}{}{}
+    Trekker kuler ut av ei skål. 
+    Legger kula tilbake. 
+    $8$ raude, $12$ ikkje raude. 
+    Trekker $5$ kuler. 
+
+    $X$ \textasciitilde antall raude kuler, så er det 
+    binomial($5$, $\frac{2}{5}$). 
+
+    $E(X) = 5 \cdot \frac{2}{5} = 2$
+
+    $Var(X) = 5 \cdot \frac{2}{5}(1-\frac{2}{5}) = 1.2$. 
+
+    $$
+    p(X=0) = \binom{5}{0}\left(\frac{2}{5}\right)^0 
+    \left(\frac{3}{5}\right)^5 = 0.074
+    $$   
+    $$ 
+        P(X=1) = \binom{5}{1} \left(\frac{2}{5}\right)^1 
+        \left(\frac{3}{5}\right)^4 = 0.259
+    $$ 
+    $$ 
+        P(X=2) = \binom{5}{2} \left(\frac{2}{5}\right)^2 
+        \left(\frac{3}{5}\right)^3 = 0.346
+    $$ 
+\end{ex}
+
+\begin{prob}{Oppgave 5.2}{}
+    Du er sulten, og kjøper åtte tilfeldig valgte pølser. 
+    Sannsynet for at pølsa er sprukken er $0.2$ for hver av 
+    pølsene. La $X$ være antall sprukne pølser blant de $8$. 
+    Hvilken sannsynlighetsfordeling for $X$? Finn $P(X=2)$.
+\end{prob}
+\begin{proof}[Løsning]
+    $X$ er et binomisk forsøk siden hver utfallet er sprukken 
+    eller ikke sprukken. Det at en pølse er sprukken påvirker ikke 
+    sannsynet for at en annen pølse er sprukken, så forsøka 
+    er uavhengige. Dermed er $X$ \textasciitilde binomial($8$,$0.2$).
+
+    $$ 
+        P(X=2) = \binom{8}{2} \left(0.2\right)^2\left(0.8\right)^6 
+        = 0.29360128
+    $$ 
+    litt mindre en $1/3$ gongar.
+\end{proof}
+
+Med utgangspunkt i Oppgave 5.2, hva er da sjansen for at mellom 
+$2$ og $5$ av pølsene sprekker? 
+
+\begin{align*}
+    P(2 \leq X \leq 5) &= \displaystyle\sum_{x=2}^{5} P(X=x)
+                    \\ &= \binom{8}{2}0.2^2 0.8^6 + \cdots + 
+                         \binom{8}{5}0.2^5 0.8^3  
+\end{align*}
+som blir en ganske lang utregning. Kan vi være mer effektive?
+
+Fra \emph{Kapittel 4.1} har vi 
+$$ 
+    P(a \leq X \leq b) = P(X \leq b) - P(X < a)
+$$ 
+og 
+$$ 
+    P(X \geq a) = 1 - P(X < a)
+$$ 
+
+Så 
+$$ 
+    P(2 \leq X \leq 5) = P(X \leq 5) - P(X \leq 1) 
+    = 0.999 - 0.503 = 0.496
+$$ 
+
+\subsection{Poissonfordeling}
+\begin{defn}{Poissonprosess}{}
+    La $A = \{\text{antall førekomster}\}$. 
+    Da er $A$ ein poissonprosess viss 
+    \begin{enumerate}
+        \item Antall gongar $A$ intreffer i eit tidsinterval 
+            er uavhengig av andre førekomster. 
+
+        \item Forventa antal førekomster i ei gitt tidsenhet er 
+            konstant.
+
+        \item To førekomster kan ikkje skje samtidig.
+    \end{enumerate}
+\end{defn}
+
+\begin{thm}{}{}
+    $X$ - antal gongar $A$ skjer. 
+
+    $X$ \textasciitilde poisson($\lambda t$) der 
+    $\lambda$ er en konsentrasjon og $t$ er eit tidsinterval. 
+
+    Da er 
+    $$ 
+        E(X) = Var(X) = \lambda t
+    $$ 
+    $$ 
+        P(X = x) = \frac{(\lambda t)^x}{x!}e^{-\lambda t}
+    $$ 
+\end{thm}
+\begin{ex}{}{}
+    Ved en bensinstasjon er det i snitt $10$ bilar som fyller bensin 
+    per time. Da er $\lambda = \frac{10 \text{ bilar}}{t}$. 
+    
+    La $Y = \{\text{antall tankingar på } 30 \text{ min}\}$.  
+    Vi antar at raten ikke endrer seg, at forventet antal biler 
+    per time er konstant og at to biler ikke kan tanke på same tid. 
+
+    Da er $Y$ en poissonprosess med $t = 0.5$, så 
+    $Y$ \textasciitilde poisson($5$). 
+
+    \begin{align*}
+        P(Y = 10) &= \frac{5^{10}}{10!}e^{-5}
+        = 0.018
+        \\ 
+        P(Y = 4) &= \frac{5^4}{4!}e^{-5} = 0.175
+        \\ 
+        P(Y \leq 8) &= \displaystyle\sum_{y = 0}^{8}P(Y=y) 
+        \\ 
+    \end{align*}
+    Dette er langt å rekne ut så vi bruker en tabell for å finne
+    \begin{align*}
+        P(Y \leq 8) &= 0.932 
+    \end{align*}
+\end{ex}
+
+Et viktig punkt er at $\lambda$ og $t$ ikkje treng å være 
+tidsavhengig. For eksempel kan 
+$\lambda$ være antall mol/liter og $t$ være volum. 
+Eller $\lambda$ sauar/$m^2$ og $t$ være $m^2$, osv.
+
+\begin{ex}{}{}
+    I prøvetaking av avløpsvatn kan du spore molekyla i vatnet. 
+    Vi forventer $100$ molekyl fentanyl pr.liter.
+    Ein tank inneholder $40mL$.
+
+    $X =$ antall molekyl $=$ poisson($100\cdot 0.04$) $=$ 
+    possion($4$) 
+
+    $E(X) = 4$ molekyl med fentanyl. 
+
+    $Var(X) = 4$, så $90\%$ av tiden har vi mellom $2$ og $6$
+    molekyl med fentanyl. 
+
+    \begin{align*}
+        P(X=8) = \frac{(\lambda t)^x}{x!} e^{-\lambda t} 
+        = \frac{4^8}{8!}e^{-4} = 0.030
+    \end{align*} 
+    så det er $3\%$ sjanse å finne $8$ molekyl fentanyl i en 
+    $40mL$ prøve.
+
+    \begin{align*}
+        P(3 \leq X \leq 5) 
+        &= P(X \leq 5) - P(X \leq 2)
+        \\
+        &= 0.547 
+    \end{align*}
+    via poisson-tabell. 
+
+\end{ex}
+
+\newpage 
+\section{Lecture 7 | Kontinurelige sannsynlighetsmodellar}
+\begin{defn}{Sannsynlighetstetthet}{}
+    Sannsynlighetstettheten $f(x)$ beskriver 
+    fordelinga av ein kontinuerlig variabel, og 
+    oppfyller: 
+    \begin{enumerate}
+        \item Arealet under kurven er $1$. 
+            $$ 
+                \displaystyle\int_{-\infty}^{\infty} f(x) dx = 1
+            $$ 
+
+        \item Sannsynligheten for utfall mellom $a$ og $b$ er 
+            gitt ved 
+            $$ 
+                P(a \leq X \leq B) = \displaystyle\int_{a}^{b} f(x)dx
+            $$ 
+
+        \item $f(x) \geq 0$
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}{Fordelingsfunksjon}{}
+    La 
+    $$
+        F(x) = \displaystyle\int_{-\infty}^{x}f(x)dx
+    $$
+
+    Da er $F(a)$ sannsynligheten for at $X$ er mindre enn eller 
+    like $a$, i.e. $P(X \leq a)$.
+
+    Da er $1 - F(a)$ sannsynligheten for at $X$ er større enn 
+    $a$, i.e. $P(a < X)$.
+
+    $F(B) - F(A)$ er sannsynligheten for $P(a < X \leq b)$. 
+\end{defn}
+
+\begin{defn}{Normalfordelt}{}
+    Ein variabel $X$ er normalfordelt dersom med middelverdi 
+    $E(X) = \mu$ og standardavik $\sigma$. 
+
+    $$ 
+    X \text{\textasciitilde} \mathcal N(\mu, \sigma)
+    $$ 
+    viss tetthetsfunksjonen er 
+    $$ 
+        f(x) = \frac{1}{\sqrt{2\pi} \sigma}
+        e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+    $$ 
+
+\end{defn}
+
+Tetthetsfunksjonen beskrivd i $8.3$ ser slik ut: 
+
+\begin{tikzpicture}
+
+    \begin{axis}[no markers, domain=0:10, samples=100,
+        axis lines*=left, xlabel=Normalfordeling, ylabel=axis $y$,
+        height=6cm, width=\textwidth,
+        enlargelimits=false, clip=false, axis on top,
+        grid = major]
+        \addplot [fill=cyan!20, draw=none, domain=-3:3] {gauss(0,1)} \closedcycle;
+        \addplot [fill=orange!20, draw=none, domain=-3:-2] {gauss(0,1)} \closedcycle;
+        \addplot [fill=orange!20, draw=none, domain=2:3] {gauss(0,1)} \closedcycle;
+        \addplot [fill=blue!20, draw=none, domain=-2:-1] {gauss(0,1)} \closedcycle;
+        \addplot [fill=blue!20, draw=none, domain=1:2] {gauss(0,1)} \closedcycle;
+    \end{axis}
+\end{tikzpicture}
+
+Her har vi $\mu = 0$ som fører til at høydepunktet på kurven er 
+ved $0$.
+
+\emph{Regel.}
+
+Anta at $X$ \textasciitilde $\mathcal N(\mu, \sigma)$. 
+
+Da er 
+$$
+P(X \leq b) = G\left(\frac{b-\mu}{\sigma}\right) 
+$$ 
+
+$$ 
+    P(a \leq X \leq b) = G\left(\frac{b-\mu}{\sigma}\right) - 
+    G\left(\frac{a - \mu}{\sigma}\right)
+$$ 
+og 
+$$ 
+    P(X > b) = 1 - G\left(\frac{b-\mu}{\sigma}\right)
+$$ 
+
+Hvor vi leter opp  
+$$ 
+    G\left(\frac{b - \mu}{\sigma}\right)
+$$ 
+i en tabell.
+
+\begin{ex}{}{}
+    Anta at høgda av $18$ åringar er 
+    $\mathcal N(180, 7)$.
+
+    \begin{itemize}
+        \item Kva er sannsynlighet for å velge en person mellom 
+            $175$- og $185$cm?
+    \end{itemize}
+
+    \begin{align*}
+        P(175 \leq X \leq 185) 
+        &= 
+        G\left(\frac{5}{7}\right) - G\left(-\frac{5}{7}\right)
+        \\ 
+        &= 
+        G(0.71) - G(-0.71)
+        \\
+        &= 
+        0.7611 - 0.2389 
+        \\ 
+        &= 
+        0.52
+    \end{align*}
+
+    \begin{itemize}
+        \item Kva er sannsynligheten for å velge ein person 
+            høgare enn $200$cm?
+    \end{itemize}
+    \begin{align*}
+        P(X \geq 200)  
+        &= 
+        1 - G\left(\frac{20}{7}\right) 
+        \\ 
+        &= 
+        1 - G(2.86)
+        \\ 
+        &= 1 - 0.9979 
+        \\ 
+        &= 
+        0.0021
+    \end{align*}
+
+    \begin{itemize}
+        \item Finn eit intervall $[180-x, 180+x]$ slik 
+            at det er $90\%$ sjanse for at ein gitt person 
+            har høgde innafor intervallet. 
+    \end{itemize}
+    \begin{align*}
+        P(180 - x \leq X \leq 180 + x) 
+        &= 0.9  
+        \\ 
+        G\left(\frac{x}{7}\right) - G\left(-\frac{x}{7}\right)
+        &=
+        0.9 
+        \\ 
+        x/7 &= 1.65
+        \\ 
+        x &= 11.55
+    \end{align*}
+
+    Så intervallet blir $[168.45, 191.55]$. 
+\end{ex}
+
+\begin{thm}{Spredningsinterval}{}
+    La $X$ \textasciitilde $\mathcal N(\mu, \sigma)$. 
+
+    \begin{itemize}
+        \item Da er det $100(1-\alpha)\%$ sikkert at utfallet 
+            av $X$ er mindre enn $\mu + Z_\alpha \sigma$.
+
+        \item Det er $100(1-\alpha)\%$ sjanse for at utfallet av 
+            $X$ er større enn $\mu -Z_\alpha \sigma$. 
+
+        \item Det er $100(1-\alpha)\%$ sikkert at utfallet av 
+            $X$ er mellom $\mu - Z_{\alpha/2} \sigma$ og 
+            $\mu + Z_{\alpha/2} \sigma$. 
+    \end{itemize}
+\end{thm}
+
+\newpage
+\emph{Regel.}
+La $X_1, X_2, \dots, X_n$ være uavhengige. 
+Anta $X_i$ \textasciitilde $\mathcal N(\mu, \sigma)$. 
+Da er summen av forsøka $X_1 + X_2 +\cdots + X_n$ 
+\textasciitilde $\mathcal N(n\mu, \sqrt{n}\sigma$. 
+Da er gjennomsnittet 
+$\frac{1}{n} \left(X_1 + \cdots X_n\right)$ \textasciitilde 
+$\mathcal N\left(\mu, \frac{\sigma}{\sqrt n}\right)$
+
+\begin{ex}{}{}
+    Anta øretvekt er $\mathcal N(300, 50)$. 
+
+    En dag fekk eg $50$ fisk.
+    Kva er sannsynligheten for at totalvekta er større en $15750$g?
+
+    $Y=$ totalvekt $= \sum_{i=1}^{50}X_i$ \textasciitilde 
+    $\mathcal N(50 \cdot 300, \sqrt{50} \cdot 50) = 
+    \mathcal N(15000, 354)$. 
+
+    \begin{align*}
+        P(Y > 15750) 
+        &= 1 - G\left(\frac{15750-15000}{354}\right)
+        \\ 
+        &= 1 - G(2.12)
+        \\ 
+        &= 1 - 0.983 
+        \\ 
+        &= 0.017
+    \end{align*}
+\end{ex}
+
+\begin{thm}{Sentralgrenseteoremet}{}
+    La $X_1, \dots, X_n$ være uavhengige forsøk frå samme 
+    sannsynlighets-fordeling.
+    Anta $E(X_i) = \mu$, $Var(X_i) = \sigma^2$. 
+    Viss $n$ er tilstrekkelig stor (tommelregel $n \geq 30$), 
+    $$ 
+        \frac{\sum_{i=1}^{n}X_i}{n} 
+        \text{\textasciitilde} \mathcal 
+        N\left(\mu, \frac{\sigma}{\sqrt n}\right)
+    $$ 
+    og 
+    $$ 
+        \displaystyle\sum_{i=1}^{n}X_i \text{\textasciitilde}
+        \mathcal N(n\mu, \sqrt n \sigma)
+    $$ 
+\end{thm}
+
+\begin{ex}{Galton}{}
+    La $X_i = \text{antall høgrehopp}$ \textasciitilde 
+    binomial(30, 0.5). 
+
+    $E(X) = n \cdot p = 15$. 
+
+    $Var(X) = np(1-p) = 2.74^2$.
+
+    Anta at vi slipper $1000$ kuler. La $Y = \sum_{i=1}^{1000}X_i$ 
+    \textasciitilde $\mathcal N\left(15000, 86.6\right)$. 
+\end{ex}
+ 
+\newpage
+\section{Lecture 8 | Konfidensinterval}
+\begin{ex}{}{}
+    La oss si at vi har to fjell hvor vi vil måle avstanden mellom 
+    toppene av desse fjellene.
+
+    Da vil det være mange faktorer som påvirker nøyaktigheten 
+    av målingen som f.eks feil i måleutstyr, feil 
+    av den som måler avstanden, og mer.
+
+    Vi øsnker å kunne finne et intervalt slik at vi kan være 
+    $x$ antall $\%$ sikker på at høyden faller 
+    innenfor det intervalet.
+    I vårt eksempell ønsker vi å finne et interval slik at det 
+    er $95\%$ sikkerheit for at den faktiske høgda ligger 
+    i intervalet.
+
+    \begin{itemize}
+        \item Eg veit usikkerheita til måleutstyret av målinga 
+            $X$ \textasciitilde $\mathcal N(\mu, 30)$, 
+            hvor $\mu$ (middelverdien) forventer vi at 
+            er den nøytaktige verdien og $30$ (standardaviket) 
+            er usikkerheita.
+    \end{itemize}
+
+    \emph{Regel 5.16 (Repitisjon).}
+
+    Viss $X$ \textasciitilde $\mathcal N(\mu, \sigma)$ veit vi at 
+    det er $100(1-\alpha)\%$ sikker på at $X$ er i intervallet 
+    $\mu \pm Z_{\alpha/2} \cdot \sigma$.
+
+    \begin{itemize}
+        \item $\sigma = 30$  
+
+        \item $100(1-\alpha) = 95 \Rightarrow \alpha = 0.05 
+            \Rightarrow \alpha/2 = 0.025$
+            
+            $Z_{0.025} = 1.960$
+    \end{itemize}
+
+    Vi trenger da eit estimat for $\mu$.
+    Vi måler avstanden, og det beste estimatet er resultatet 
+    av målinga.
+    $$ 
+        X_1 = 3245m
+    $$ 
+
+    Eit $95\%$-Konfidensinterval er gitt ved 
+    $$ 
+        \widehat{\mu} = \pm Z_{\alpha/2} \cdot \sigma 
+    $$ 
+    $$ 
+        3245 \pm 1.960 \cdot 30 = [3186, 3303] 
+    $$
+    når vi runder av til næreste meter.
+
+    For å forbedre estimatet tar vi fleire målingar.
+    
+    Anta totalt $9$ målingar, der gjennomsnittet ble 
+    $$ 
+        Z = \frac{X_1 + \cdots + X_9}{9} = 3204m
+    $$
+
+    Sentralgrenseteoremet seier då at 
+    $$ 
+        Z \text{ \textasciitilde } \mathcal N(\mu, 30/\sqrt 9) 
+        = \mathcal N(\mu, 10)
+    $$ 
+    så usikkerheten har gått ned ved fleire målinger. 
+
+    Eit $95\%$-konfidensinterval blir da 
+    $$ 
+        \widehat{\mu} \pm Z_{\alpha/2} \cdot (\sigma/\sqrt n)
+    $$ 
+    $$ 
+        3204 \pm 1.96 \cdot 10 = [3184, 3223]
+    $$ 
+
+\end{ex}
+
+\newpage 
+\begin{defn}{Estimator}{}
+    Ein estimator $\widehat{\theta}$ er ein stokastisk variabel 
+    knytta til ei forsøksrekke $\theta_1, \theta_2, \dots$ som 
+    estimerer $\theta$.
+
+    \begin{enumerate}
+        \item $E(\widehat\theta) = \theta$ 
+
+        \item $Var(\widehat\theta)$ skal være minst mulig.    
+
+        \item $Var(\widehat\theta)$ skal gå mot $0$ viss 
+            antal forsøk auker.
+    \end{enumerate}
+\end{defn}
+
+\textbf{Estimator for $\mu$.}
+
+\[ 
+    \widehat\mu = \overline X = 
+    \frac{\displaystyle\sum_{i=1}^{n}X_i}{n}
+\]
+
+\textbf{Estimator for $\sigma$.} 
+
+\[ 
+    \widehat{\sigma^2} = S^2 = 
+    \frac{1}{n-1}\displaystyle\sum (X_i-\overline X)^2
+\]
+
+\textbf{Estimator for $P$.}
+
+\[ 
+    \widehat P = \frac{X}{n}
+\]
+der $X$ er positive utfall og $n$ er antall forsøk.
+
+\begin{prob}{}{}
+    $\theta$ er ein ukjent stokastisk variabel.
+
+    Mål: Finne eit interval $[A,B]$ slik at 
+    $$ 
+        P(A \leq \theta \leq B) = 1 - \alpha
+    $$ 
+
+\end{prob}
+
+\textbf{$Z$-interval.}  
+
+\begin{itemize}
+    \item $\mu$ - ukjent
+
+    \item $\sigma$ - kjent
+\end{itemize}
+
+Da er eit $100(1-\alpha)\%$ konfidensinterval gitt ved 
+$$ 
+    X \pm Z_{\alpha/2} \frac{\sigma}{\sqrt n}
+$$ 
+
+\textbf{$P$-interval.}
+
+Da er eit $100(1-\alpha)\%$ konfidensinterval gitt ved
+$$
+\widehat P \pm Z_{\alpha/2} \sqrt{\frac{\widehat P(1-\widehat P)}{n}} 
+$$ 
+
+\newpage
+\textbf{$T$-interval.}
+\begin{itemize}
+    \item $\mu$ - ukjent 
+    \item $\sigma$ - ukjent 
+\end{itemize}
+
+Eit $100(1-\alpha)\%$-konfidensinterval for $\mu$ er gitt ved 
+\[ 
+    \overline X \pm t_{\alpha/2}\cdot \frac{S}{\sqrt n}
+\]
+der $S$ er estimatet for standardaviket, og $t_{\alpha/2}$ har 
+$(n-1)$ frihetsgrader. 
+
+\begin{itemize}
+    \item Siden $\sigma$ er ukjent er eit $T$-interval større 
+        enn eit $Z$-interval.
+
+    \item Viss $n > 30$ er $T$-interval tilnærma lik $Z$-interval.
+\end{itemize}
+
+\begin{prob}{5.13}{}
+    $X = $ diametere \textasciitilde $\mathcal N(\mu, \sigma)$, 
+    $n = 6$. 
+
+
+    Vi ønsker $95\%$-konfidensinterval $\Rightarrow \alpha/2 = 0.025$.
+\end{prob}
+$t_{0.025}$ med $5$ frihetsgrad $= 2.571$.
+
+\(\overline X = (31 + 32 + 30 + 31 + 29 + 30)/6 = 30.5\) 
+
+\(S^2 = \frac{1}{5}((31 - 30.5)^2 + (32 - 30.5)^2 + 
+\cdots + (30-30.5)^2) = 1.1 \approx 1.05^2 \)
+
+Da blir konfidensintervalet 
+\[ 
+    30.5 \pm 2.571 \cdot \frac{1.05}{\sqrt 6} = [29.4, 31.6] 
+\]
+
+\textbf{Konfidens for $P$.}
+
+Eit \(100(1-\alpha)\%\)-konfidensinterval for $P$ er gitt ved 
+\[ 
+    \widehat P \pm Z_{\alpha/2}
+    \sqrt{\frac{\widehat P (1 - \widehat P)}{n}}
+\]
+
+\begin{prob}{6.16}{}
+    $n = 36$ 
+
+    $X = 29$
+
+
+    Da er $\widehat P = \frac{29}{36}$.
+
+    Vi vil finne $90\%$-konfidensinterval.
+\end{prob}
+
+\begin{align*}
+    \alpha/2 &= 0.05
+    \\ 
+    Z_{0.05} &= 1.645
+\end{align*}
+
+Da blir konfidensintervalet 
+\[ 
+    \frac{29}{36} \pm \sqrt{\frac{29/36(1-29/36)}{36}} 
+    = [0.70, 0.91]
+\]
+
+\newpage 
+\section{Lecture 9 | Hypotesetesting}
+\begin{ex}{}{}
+    Politiet utfører ei hastighetsmåling i ei \(80\) sone.  
+    Dei bruker lasermåler \(X \sim \mathcal N(\mu, 3)\).
+    Dei utfører \(5\) uavhengige målinger.
+    \begin{align*}
+        x_1 &= 79.9 \\ 
+        x_2 &= 81.5 \\ 
+        x_3 &= 83.2 \\ 
+        x_4 &= 83.1 \\
+        x_5 &= 82.0 \\
+    \end{align*}
+
+    Tar ein gjennomsnittet av desse målingane får vi 
+    \[ 
+        \overline X \sim \mathcal N\left(\mu, \frac{3}{\sqrt 5}\right)
+    \]
+
+    \textbf{Spørsmål.}
+
+    \[ 
+        \text{Kjører personen for fort?}
+        \begin{cases}
+            \text{ja, og han skal dommast} \\ 
+            \text{nei han blir frikjent}
+        \end{cases}
+    \]
+
+    Vi må ha rom for tvil: 
+    
+    Enten: bevise med tilstrekkelig sikkerhet at dei har 
+    kjørt for fort. 
+
+    Eller: frikjennast.
+
+    Tilstrekkelig \(=\) signifikansnivå. Viss vi krever 
+    signifikansnivå \(\alpha = 0.05\) betyr det i praksis at 
+    viss vi har \(100\) folk som kjøyrer nøyaktig fartsgrensa 
+    skal \(5\) personar dømmast urettferdig.
+
+    \textbf{Hypoteser.}
+
+    Nullhypotese \(H_0\) (må ikkje bevisast). 
+    \[ 
+        H_0 : \mu \leq 80
+    \]
+
+    Alternativ hypotese \(H_1\) må bevisast. 
+
+    \[ 
+        H_1 : \mu > 80
+    \]
+\end{ex}
+
+\begin{defn}{}{}
+    \textbf{Testobservatør.}
+
+    Ein stokastisk variabel som vi baserer beslutning på.
+    \begin{align*}
+        \widehat\mu &= \overline X = \frac{X_1 + \cdots + X_n}{n}
+        \\ 
+        \widehat P &= \frac{X}{n}
+    \end{align*}
+
+    \textbf{From av forkastningsområde.}
+    
+    Høgresidig: Forkast \(H_0\) viss observatør er for stor. 
+
+    Venstresidig: Forkast \(H_0\) viss observatør er for liten.
+
+    Tosidig: Forkast \(H_0\) viss observatlør enten 
+    er for stor eller viss den er for liten.
+
+    \textbf{Signifikansnivå.} 
+
+    Vi må fastsette kor stor sannsynlighet vi kan tillate 
+    for å feilaktig forkaste \(H_0\). 
+
+    \textbf{Styrkefunksjon.} 
+
+    Styrkefunksjon \(\gamma(x)\) angir sannsynet for 
+    å forkaste \(H_0\). 
+
+    \textbf{p-verdi.}
+
+    p-verdien av ein test er sannsynet \(P\) for at ein 
+    foraster \(H_0\) (og påstår \(H_1\)) viss 
+    \(H_0\) er sann.
+\end{defn}
+
+\textbf{Hypotesetest(Z-test, \(\mu\) ukjent, \(\sigma\) kjent).}
+
+La 
+\[ 
+    Z = \frac{\overline X - \mu_0}{\sigma/\sqrt n}
+\]
+
+Høgresidig test: 
+\[ 
+    \begin{cases}
+        H_0 : \mu \leq \mu_0 \\ 
+        H_1 : \mu > \mu_0
+    \end{cases}
+\]
+
+Forkast \(H_0\) viss \(Z > Z_\alpha\). 
+
+Styrkefunksjon: \(\gamma(x) = 1 - 
+G\left(Z_\alpha - \frac{X - \mu_0}{\sigma/\sqrt n}\right)\)
+
+Venstresidig test: 
+\[ 
+    \begin{cases}
+        H_0 : \mu \geq \mu_0 \\ 
+        H_1 : \mu < \mu_0
+    \end{cases}
+\]
+
+Forkast \(H_0\) viss \(Z < -Z_\alpha\).
+
+Dobbeltsidig test: 
+\[ 
+    \begin{cases}
+        H_0 : \mu = \mu_0 \\ 
+        H_1 : \mu \neq \mu_0
+    \end{cases}
+\]
+
+Forkast \(H_0\) viss \(|Z| > Z_{\alpha/2}\).
+
+\newpage
+\textbf{Hypotesetest(T-test, \(\mu\) ukjent, \(\sigma\)ukjent).}
+La 
+\[
+    T = \frac{\overline X - \mu_0}{S/\sqrt n}
+\]
+
+\(t_\alpha\) has \(n-1\) frihetsgrader. 
+
+Høgresidig: 
+\[ 
+    \begin{cases}
+        H_0 : \mu \leq \mu_0 \\ 
+        H_1 : \mu > \mu_0 
+    \end{cases}
+\]
+
+Forkast \(H_0\) dersom \(T > t_\alpha\).
+
+Dette fortsetter helt likt som med \(Z\)-test bare med 
+\(T\) isteden.
+
+\begin{ex}{6.21}{}
+    Hypotese 
+    
+    \(H_0 : \mu \leq 100\)
+
+    \(H_1 : \mu > 100\)
+
+    Vi velger å bruke signifikansnivå \(\alpha = 0.05\).
+
+    Testobservatør: \(\overline X = 
+    \frac{103 + \cdots + 103}{9} = 103.8\).
+
+    Estimerer \(S^2 = \frac{1}{9-1}
+    \left((103-103.8)^2 + \cdots + (103-103.8)^2\right) = 
+    8.695 = 2.95^2\).
+
+    \(t_0.05\) med \(8\) frihetsgrader \(= 1.86\). 
+
+    \[ 
+        T = \frac{103.8-100}{2.95/\sqrt 9} = 3.86
+    \]
+    \[ 
+        \Rightarrow T > t_\alpha
+    \]
+    
+    Dermed forkaster vi \(H_0\).
+\end{ex}
+
+\textbf{Hypotesetest for sannsyn P.}
+La 
+\[ 
+    Z = \frac{\widehat P - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
+    = \frac{X - np_0}{\sqrt{np_0(1-p_0)}}
+\]
+
+Høgresidig: 
+\[ 
+    \begin{cases}
+        H_0 : p \leq p_0 \\ 
+        H_1 : p > p_0
+    \end{cases}
+\]
+
+Forkaster \(H_0\) dersom \(Z > z_\alpha\).
+
+Venstresidig: 
+\[ 
+    \begin{cases}
+        H_0 : p \geq p_0 \\ 
+        H_1 : p < p_0
+    \end{cases}
+\]
+
+Forkaster \(H_0\) dersom \(Z < -z_\alpha\).
+
+Dobbeltsidig: 
+\[ 
+    \begin{cases}
+        H_0 : p = p_0 \\ 
+        H_1 : p \neq p_0
+    \end{cases}
+\]
+
+Forkaster \(H_0\) dersom \(|Z| > z_{\alpha/2}\).
+
+\newpage 
+\begin{ex}{6.29}{}
+    \(n = 134\)
+
+    \(X = 6\)
+
+    Estimator/testobservatør: \(\widehat P = \frac{6}{134} = 0.045\)
+
+    Hypotese: 
+    \[ 
+        \begin{cases}
+            H_0: p = 0.1 
+            \\ 
+            H_1: p \neq 0.1
+        \end{cases}
+    \]
+
+    Signifikansnivå \(\alpha = 0.05\), \(z_{0.025} = 1.960\)
+
+    Finner 
+    \[ 
+        Z = \frac{6-134\cdot 0.1}{\sqrt{134\cdot 0.1 \cdot 0.9}} 
+        = -2.131 
+    \]
+
+    \[ 
+        |Z| = 2.131 > z_{0.025} = 1.960
+    \]
+
+    Dermed forkaster vi \(H_0\).
+\end{ex}
+
+\textbf{Konfidensinterval og hypotesetest.}
+
+Gitt hypotesa 
+\[ 
+    \begin{cases}
+        H_0 : \mu \leq \mu_0 \\ 
+        H_1 : \mu > \mu_0
+    \end{cases}
+\]
+
+Test med signifikansnivå \(\alpha\).
+
+Da er \((-\infty,\mu]\) \(H_0\) sitt gyldighetsområde og 
+\((\mu, \infty)\) \(H_1\) sitt gyldighetsområde.
+
+Anta at vi har eit \(100(1-\alpha)\) konfidensinterval 
+\([x_0, x_1]\). 
+
+Dersom 
+\[ 
+    [x_0,x_1] \subseteq (-\infty, \mu]
+    \text{ og } [x_0,x_1] \cap (\mu, \infty) = \emptyset
+\]
+forkaster vi ikke \(H_0\).
+
+Dersom 
+\[ 
+    [x_0,x_1] \subseteq (\mu, \infty)
+    \text{ og } [x_0,x_1] \cap (-\infty, \mu] = \emptyset
+\]
+forkaster vi \(H_0\).
+
+Ellers viss 
+\[ 
+    [x_0, x_1] \subseteq (-\infty, \mu]
+    \text{ og } [x_0,x_1] \subseteq (\mu, \infty) 
+\]
+beholder vi fortsatt \(H_0\).
+
+\newpage 
+\section{Lecture 10 | Regresjon}
+Er det ein samanhenge mellom to stokastiske variabler 
+\(X\) og \(Y\)?
+
+\((X_1,Y_1), \dots, (X_n,Y_n)\). 
+
+\textbf{Spørsmål:} 
+
+Er det ein lineære samanhgen mellom \(X\) og \(Y\)?
+
+\textbf{Spredningsplott.}
+Ved å plotte datapunkt i planet, viss det er en sterk lineære  
+samanheng mellom \(x\)- og \(y\)-verdiene finne ligninga for 
+ei linjer som korrelerer \(x\)- og \(y\)-verdiene.
+
+\begin{defn}{Empirisk korrelasjon}{}
+    Gitt \(n\) observasjonar \((x_1,y_1),(x_2,y_2),\dots,(x_n,y_n)\).
+
+    La 
+    \begin{align*}
+        S_x &= \sqrt{\frac{1}{n-1}\displaystyle\sum_{i=1}^n 
+        (X_i - \overline X)^2}
+        \text{ standardavvike for x-ane}
+        \\
+        S_y &= \sqrt{\frac{1}{n-1}\displaystyle\sum_{i=1}^n 
+        (Y_i - \overline Y)^2}
+        \text{ standardavvik for y-ane}
+        \\ 
+            S_{XY} &= \frac{1}{n-1}\displaystyle\sum_{i=1}^{n}
+        (X_i-\overline X)(Y_i - \overline Y)
+        \text{ kovarians}
+    \end{align*}
+
+    Da er korrelasjonen 
+    \[ 
+        r=\frac{S_{XY}}{S_X S_Y}
+    \]
+\end{defn}
+
+\begin{ex}{}{}
+    \[
+        \begin{array}{c|ccccc}
+            x & 4&2&3&5&2 \\
+            y & 3&2&2&4&1 \\
+        \end{array}
+    \]
+
+    \(\overline X = 3.2\) 
+
+    \(\overline Y = 2.4\)
+
+    \(S^2_X = 1.31^2 \Rightarrow S_X = 1.31\)
+
+    \(S^2_Y = 1.14^2 \Rightarrow S_Y = 1.14\)
+
+    \(S_{XY} = 1.4\)
+
+    \[ 
+        r = \frac{S_{XY}}{S_X S_Y} = \frac{1.4}{1.31 \cdot 1.14} = 
+        0.94
+    \]
+\end{ex}
+
+\textbf{Egenskaper av korrelasjon.}
+
+\begin{itemize}
+    \item \(|r| \leq 1\)
+    \item Jo nærmare \(r\) er \(1\), jo meir indikerer det at 
+        observasjonane ligger langs ei aukande linje.
+    \item Jo nærmare \(r\) er \(-1\), jo meir indikerer det 
+        at observasjonane ligger langs ei minkande linje.
+    \item Jo nærmare \(r\) er \(0\), jo meir indikerer det 
+        ingen lineær samanheng.
+\end{itemize}
+
+\newpage 
+\subsection{Lineær regresjon}
+Ved ein høg korrelasjon vil vi finne ei linje som best 
+beskriver samanhengen mellom x og y. 
+
+\textbf{Minste kvadratets rette linje.} 
+
+\(\widehat y = \widehat \alpha + \widehat \beta x\) 
+
+\[ 
+    \widehat \beta = r \frac{S_Y}{S_X}
+\]
+
+\[ 
+    \widehat \alpha = \overline y - \widehat \beta \overline X
+\]
+
+Med utgangspunkt i eksempelet over 
+får vi 
+\[ 
+    \widehat \beta = 0.94 \cdot \frac{1.14}{1.31} = 0.82 
+\]
+\[ 
+    \widehat \alpha = 2.4 - 0.82 \cdot 3.2 = -0.224
+\]
+
+Da får vi 
+\[ 
+    \widehat y = -0.224 + 0.82 x
+\]
+
+\textbf{Modellens godhet.}
+
+Del av variasjon blant observasjonane som blir 
+forklart av modell \(r^2\).
+
+Del av variasjon som skyldes tilfeldige avvik 
+er \(1-r^2\).
+
+\end{document}
+

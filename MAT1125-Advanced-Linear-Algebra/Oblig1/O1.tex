@@ -1,0 +1,786 @@
+\input{preamble.tex}
+\usepackage{mathrsfs}
+
+\title{\huge{Oblig 1}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+\begin{prob*}{Oppgave 1.4.2}{}
+    Vis at standardbasisen $\left(e_1,\dots,e_n\right)$ er en basis 
+    for $\mathbb K^n$. 
+\end{prob*}
+\begin{proof}[Bevis]
+    La $\mathbb K$ være en kropp og la 
+    $E = (e_1,\dots,e_n)$ hvor
+    $$ 
+        e_1 = 
+        \begin{pmatrix}
+            1 \\
+            \vdots \\
+            0 \\ 
+            \vdots \\ 
+            0
+        \end{pmatrix},
+        e_i = 
+        \begin{pmatrix}
+            0 \\
+            \vdots \\
+            1 \\ 
+            \vdots \\ 
+            0
+        \end{pmatrix},
+        e_n = 
+        \begin{pmatrix}
+            0 \\
+            \vdots \\
+            0 \\ 
+            \vdots \\ 
+            1
+        \end{pmatrix}
+    $$ 
+    For å vise at 
+    $E$ utgjør en basis for 
+    $\mathbb K^n$ må vi vise at $E$ er 
+    lineært uavhengig og spenner $\mathbb K^n$.
+
+    \emph{Lineær uavhengighet.}
+
+    Vi ønsker å vise at det ikke finnes en 
+    ikke-triviel løsning til 
+    $$ 
+        \displaystyle\sum_{i=1}^{n}k_ie_i = \vec{0} 
+    $$
+    hvor $k_i \in \mathbb K$. 
+    Summen av alle $k_ie_i$ er 
+    $$
+        \displaystyle\sum_{i=1}^{n}k_ie_i 
+        = 
+        \begin{pmatrix}
+            k_1 \\ 
+            0 \\ 
+            \vdots \\ 
+            0
+        \end{pmatrix} 
+        +
+        \begin{pmatrix}
+            0 \\ 
+            k_2 \\ 
+            \vdots \\
+            0
+        \end{pmatrix}
+        +
+        \dots 
+        +
+        \begin{pmatrix}
+            0 \\ 
+            0 \\
+            \vdots \\ 
+            k_n
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            k_1 \\ 
+            k_2 \\ 
+            \vdots \\ 
+            k_n
+        \end{pmatrix} 
+    $$ 
+    Vi ser at eneste måten 
+    $$ 
+        \begin{pmatrix}
+            k_1 \\ 
+            \vdots \\ 
+            k_n
+        \end{pmatrix}  
+        = 
+        \vec{0}
+        =
+        \begin{pmatrix}
+            0 \\ 
+            \vdots \\ 
+            0
+        \end{pmatrix} 
+    $$ 
+    er den trivielle løsningen 
+    $k_1 = k_2 = \dots = k_n = 0$.
+    Dette betyr at $E$ er lineært uavhengig. 
+
+    \emph{Utspenning av rommet.}
+
+    Vi ønsker å vise at $\text{span}(E) = \mathbb K^n$.
+    Husk at 
+    $$ 
+        \mathbb K^n = 
+        \left\{ 
+            \begin{pmatrix}
+                k_1 \\ 
+                k_2 \\ 
+                \vdots \\ 
+                k_n
+            \end{pmatrix}
+            \middle| 
+            k_i \in \mathbb K, i \in \{1,2,\dots, n\}
+        \right\} 
+    $$ 
+    Spennrommet $\text{span}(E)$ er underrommet av alle vektorer 
+    av formen 
+    $$ 
+        k_1e_1 + k_2e_2 + \dots + k_ne_n = 
+        \begin{pmatrix}
+            k_1 \\ 
+            k_2 \\ 
+            \vdots \\ 
+            k_n
+        \end{pmatrix}
+    $$ 
+    hvor $k_i \in \mathbb K$. Med andre ord: 
+    $$ 
+        \text{span}E = 
+        \left\{
+            \begin{pmatrix}
+                k_1 \\ 
+                k_2 \\ 
+                \vdots \\ 
+                k_n
+            \end{pmatrix}
+            \middle| 
+            k_i \in \mathbb K, i \in \{1,2,\dots, n\}
+        \right\}
+        = \mathbb K^n
+    $$ 
+    som ønsket. Med dette har vi vist at $E$ spenner ut 
+    hele rommet. 
+
+    Siden vi har vist at $E$ er lineært uavhengig 
+    og spenner ut $\mathbb K^n$
+    konkluderer vi med at $E$ utgjør en basis for $\mathbb K^n$.
+\end{proof}
+
+\newpage
+\begin{prob*}{Oppgave 1.4.6}{}
+    (a) 
+    La $\mathscr C = (e_1,\dots,e_n)$ være standardbasisen i 
+    $\mathbb K^n$. Vis at 
+    $$ 
+        \left[ x \right]_{\mathscr C} = x 
+        \quad 
+        \forall x \in \mathbb K^n
+    $$ 
+
+    (b)
+    La $U$ være et vektorrom over $\mathbb K$ med en basis 
+    $\mathscr B = (u_1,\dots,u_n)$. Vis at 
+    $$ 
+        \left[u_j\right]_{\mathscr B} = e_j \quad \forall j = 1,\dots,n
+    $$ 
+\end{prob*}
+
+\begin{proof}[Bevis av (a)]
+    La $\mathbb K$ være en kropp og la 
+    $\mathscr C = (e_1,\dots,e_n)$ være 
+    standardbasisen i $\mathbb K^n$.
+    
+    Vi ønsker å vise at basisrepresentasjonen av $x$ i basisen 
+    $\mathscr C$, $[x]_{\mathscr C} = x$ for alle $x \in \mathbb K^n$.
+
+    La $x \in \mathbb K^n$. Da har vi at det finnes en 
+    unik n-tuppel $(b_1, b_2, \dots, b_n) \in \mathbb K^n$ slik at 
+    $x = b_1e_1 + b_2e_2 + \dots + b_ne_n$. Denne tuppelen er 
+    basisrepresentasjonen $[x]_\mathscr C = (b_1, b_2, \dots, b_n)$.
+    Med standardbasisen har vi at 
+    \begin{align*}
+        x &= b_1e_1 + b_2e_2 + \dots + b_ne_n \\ 
+          &= 
+          \begin{pmatrix}
+            1 \\ 
+            0 \\ 
+            \vdots \\ 
+            0
+          \end{pmatrix} 
+          b_1
+          + 
+          \begin{pmatrix}
+            0 \\ 
+            1 \\ 
+            \vdots \\ 
+            0   
+          \end{pmatrix}
+          b_2
+          +
+          \dots 
+          + 
+          \begin{pmatrix}
+            0 \\
+            0 \\ 
+            \vdots \\ 
+            1
+          \end{pmatrix}
+          b_n
+          \\ 
+          &= 
+          \begin{pmatrix}
+            b_1 \\ 
+            b_2 \\
+            \vdots \\ 
+            b_n
+          \end{pmatrix} 
+          = (b_1, b_2, \dots, b_n) = \left[x\right]_{\mathscr C}
+    \end{align*}
+    som er det vi ønsket å vise.
+\end{proof}
+
+\begin{proof}[Bevis av (b)]
+    La $U$ være et vektorrom over kroppen $\mathbb K$ med 
+    en basis $\mathscr B = (u_1,\dots,u_n)$. 
+
+    Vi ønsker å vise at basisrepresentasjonen, 
+    $\left[u_j\right]_\mathscr B = e_j$ hvor 
+    $e_j$ refererer til den $j$-ende vektoren 
+    i standard basisen (vektoren med 0 i alle index-er utenom j, 
+    hvor vi har 1) 
+    og $j \in \{1,2,\dots,n\}$.
+    La $u_j$ være en vilkårlig vektor i basisen. 
+    Da er $u_j$ også en vektor i $U$, næmlig vektoren 
+    $$ 
+        0 \cdot u_1 + \dots + 1 \cdot u_j + \dots + 0 \cdot u_n
+    $$ 
+    Da finens det en n-tuppel $(k_1, k_2, \dots, k_n) \in \mathbb K^n$
+    slik at  
+    $$ 
+        k_1 u_1 + \dots + k_j u_j + \dots + k_n j_n = u_j
+    $$ 
+    Dette er basisrepresentasjonen av $u_j$ i basisen. 
+    Spesifikt, er det tuppelen $(0, \dots, 1, \dots, 0)$, hvor 
+    alle oppføringer er $0$ utenom den $j$-ende index-en, som er $1$. 
+    Dette er $e_j = (0, \dots, 1, \dots, 0)$.
+    Med andre ord, 
+    $$ 
+        \left[u_j\right]_\mathscr B = e_j
+    $$ 
+    som ønsket.
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 1.5.2}{}
+    Vis at 
+
+    \quad (a) dim$\mathscr P^n = n + 1$
+
+    \quad (b) dim$\mathscr P = \infty$
+
+    \quad (c) dim$C^0(\mathbb R, \mathbb R) = \infty$
+\end{prob*}
+
+\begin{proof}[Bevis av (a)]
+    La $\mathscr P^n$ være rommet av polynomer med 
+    koeffisienter i $\mathbb R$.
+
+    Vi ønsker å vise at dim$\mathscr P^n = n+1$. 
+    Vi vet at, viss et vektorrom har en 
+    basis $(b_1, b_2, \dots, b_n)$, 
+    så er rommet et endelig-dimensjonelt rom med dimensjon $n$.
+    La oss se på den kanoniske basisen til $\mathscr P^n$, 
+    altså $(1, x, x^2, \dots, x^n)$. 
+    Denne basisen består av alle $x^i$ hvor $i = 0,1,\dots,n$. 
+    Med andre ord består den av $|\{0,1,2,\dots,n\}| = n+1$ elementer. 
+    Derfor kan vi konkludere at dim$\mathscr P^n = n+1$.
+\end{proof}
+
+\begin{proof}[Bevis av (b)]
+    La $\mathscr P$ være rommet av alle polynomer med 
+    koeffisienter i $\mathbb R$.
+
+    Vi ønsker å vise at dim$\mathscr P = \infty$. Vi gjør dette ved 
+    å vise at det ikke finnes en endelig basis for $\mathscr P$.
+
+    Anta, i søk om kontradiksjon, at det finnes en endelig basis 
+    $B = \{p_1, p_2, \dots, p_n\}$ for $\mathscr P$, 
+    med $n$ elementer. 
+    La $d_i$ være graden av polynomet $p_i$ for $i = 1,\dots,n$. 
+    La $d = \max\{d_1,\dots,d_n\}$. Da er graden av hver $p_i$
+    mindre enn eller lik $d$. 
+    Hvis vi nå ser på den lineære kombinasjonen 
+    $$ 
+        q(x) = \displaystyle\sum_{i=1}^{n} k_ip_i(x), 
+        k_i \in \mathbb K
+    $$
+    så får vi at graden av $q$ er mindre enn eller lik $d$. 
+    Så for hvert polynom i spennrommet til $B$ har grad høyst $d$, 
+    men $x^{d + 1} \in \mathscr P$, som motsier antagelsen vår 
+    at det finnes en endelig basis for rommet. 
+
+    Med det kan vi konkludere at dim$\mathscr P = \infty$.
+\end{proof}
+
+\begin{proof}[Bevis av (c)] 
+    La $C^0(\mathbb R, \mathbb R)$ være rommet av kontinuerlige 
+    $f:\mathbb R \to \mathbb R$.
+
+    Hvert polynom er kontinuerlig, så 
+    $\mathscr P \subset C^0(\mathbb R, \mathbb R)$.
+
+    Siden $C^0(\mathbb R, \mathbb R)$ har et uendelig-dimensjonelt 
+    underrom, kan ikke $C^0(\mathbb R, \mathbb R)$ 
+    være endelig-dimensjonelt. Som sagt i Proposisjon 1.4.11 fra 
+    boken, for et underrom $V$ av rommet $U$ har vi at 
+    $\text{dim}(V) \leq \text{dim}(U)$.
+
+    Konklusjon: $\text{dim}(C^0(\mathbb R, \mathbb R)) = \infty$.
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 1.6.5}{}
+    (a) Vis at $V \oplus W$ er et vektorrom.  
+
+    (b) Vis at dersom $(v_1,\dots,v_n)$ er en basis 
+    for $V$ og $(w_1,\dots,w_n)$ er en basis for $W$, er 
+    $$ 
+        \mathscr B := 
+        \left(
+            \left( 
+                v_1, 0_W
+            \right),
+            \dots, 
+            \left( 
+                v_n, 0_W
+            \right),
+            \left( 
+                0_V, w_1
+            \right),
+            \dots, 
+            \left( 
+                0_V, w_m
+            \right)
+        \right)
+    $$ 
+    en basis for $V \oplus W$.
+
+    (c) Vis at $\text{dim}(V \oplus W) = \text{dim}V + \text{dim}W$.
+\end{prob*}
+\begin{proof}[Bevis av (a)]
+    La $\mathbb K$ være en kropp og $V,W$ rom over 
+    $\mathbb K$.
+
+    Vi ønsker å vise at $V \oplus W = \{(v,w):v\in V, w \in W\}$ 
+    er et vektorrom med 
+    $$ 
+        \text{Null element: } \left(0_V, 0_W\right)
+    $$ 
+    og
+    $$ 
+        \left(u,v\right) + \left(u',v'\right)
+        = 
+        \left(u+u',v+v'\right)
+    $$ 
+    og 
+    $$ 
+        k\left(u,w\right) = \left(ku,kw\right) 
+    $$ 
+    for $v,v' \in V, w,w' \in W$ og $k \in \mathbb K$.
+    
+    Vi begynner med å vise at $(V \oplus W, +)$ er en abelsk gruppe.
+    Da må vi vise følgende
+    \begin{enumerate}
+        \item Assosiativitet av addisjon
+        \item Identitetselement 
+        \item Inverser
+        \item Kommutativitet
+    \end{enumerate}
+    
+    Merk først at addisjonen, som vi har definert komponentvis, 
+    er lukket, siden addisjonsoperasjonene for 
+    $V$ og $W$ er lukket.
+
+    \emph{Assosiativitet.}
+
+    La $v_1,v_2,v_3 \in V$ og $w_1,w_2,w_3 \in W$.
+    \begin{align*}
+        \left(
+            \left(v_1, w_1\right) 
+            +  
+            \left(v_2, w_2\right) 
+        \right)
+        + 
+        \left(v_3, w_3\right) 
+        &= 
+        \left( 
+            v_1 + v_2, w_1 + w_2
+        \right)
+        + 
+        \left(v_3, w_3\right)
+        \\ 
+        &= 
+        \left(
+            v_1 + v_2 + v_3, w_1 + w_2 + w_3
+        \right)
+        \\ 
+        &= 
+        \left(v_1, w_1\right) 
+        + 
+        \left( 
+            v_2 + v_3, w_2 + w_3 
+        \right)
+        \\ 
+        &= 
+        \left(v_1, w_1\right) 
+        + 
+        \left( 
+            \left(v_2, w_2\right) 
+            + 
+            \left(v_3, w_3\right)
+        \right)
+    \end{align*}
+
+    \emph{Identitetselement.}
+
+    Vi viser at null-elementet utgjør 
+    en identitet for denne gruppen. 
+    Vi har, for en vilkårlig $(v,w) \in V \oplus W$
+    $$ 
+        (v,w) + \left(0_V, 0_W\right) 
+        = 
+        \left(0_V, 0_W\right) + (v,w)
+        = 
+        \left(v + 0_V, w + 0_W\right) 
+        = (v, w)
+    $$ 
+
+    \emph{Inverser.}
+    For en vilkårlig $(v,w) \in V \oplus W$ har vi inversen 
+    $$ 
+        (-v, -w) \in V \oplus W 
+    $$ 
+    $$ 
+        (v,w) + (-v,-w) = (v - v, w - w) = 
+        (0_V, 0_W) = (-v, -w) + (v, w)
+    $$ 
+
+    \emph{Kommutativitet.}
+
+    Addisjonsoperasjonene til $V$ og $W$ er 
+    kommutative, så siden addisjon i $V \oplus W$ er komponentvis 
+    er addisjonen kommutativ.
+    $$ 
+        (v_1,w_1) + (v_2, w_2) = (v_1+v_2, w_1 + w_2)
+        = (v_2 + v_1, w_2, + w_1) 
+        = (v_2, w_2) + (v_1, w_1)
+    $$ 
+
+    Deretter viser vi egenskapene til multiplikasjon, 
+    næmlig følgende 
+    \begin{enumerate}
+        \item $0(v,w) = (0_V, 0_W)$
+        \item $1(v,w) = (v, w)$
+    \end{enumerate}
+
+    Den første egenskapen følger fra hvordan 
+    multiplikasjon er definert med $k \in \mathbb K$.
+    Det samme gjelder for den andre egenskapen. 
+
+    Til slutt har vi di distributative egenskapene. 
+
+    For $k \in \mathbb K$ og $(v_1, w_1), (v_2,w_2) \in V \oplus W$
+    så har vi 
+    \begin{align*}
+        k((v_1, w_1) + (v_2, w_2)) 
+        &= 
+        k(v_1+v_2, w_1 + w_2) = (k(v_1 + v_2), k(w_1, w_2)) 
+        \\ 
+        &= 
+        (kv_1 + kv_2, kw_1 + kw_2) = (kv_1, kw_1) + (kv_2, kw_2)
+        \\ 
+        &= k(v_1, w_1) + k(v_2, w_2)
+    \end{align*}
+    Med det har vi vist at multiplikasjon er distributativt
+    over vektor-addisjon. 
+
+    For $k_1, k_2 \in \mathbb K$ og $(v,w) \in V \oplus W$ 
+    så har vi 
+    \begin{align*}
+        (k_1 + k_2)(v,w) 
+        &= 
+        ((k_1 + k_2) v, (k_1 + k_2) w) = (k_1v + k_2v, k_1w + k_2w)
+        \\                      
+        &=
+        (k_1v, k_1w) + (k_2v, k_2w) = k_1(v,w) + k_2(v,w)
+    \end{align*}
+    Med dette kan vi konludere at multiplikasjon er distributativt 
+    over skalar-addisjon. 
+
+    Da har vi vist at $V \oplus W$ oppfølger alle kravene 
+    for å være et vektorrom.
+\end{proof}
+
+\begin{proof}[Bevis av (b)]
+    La $(v_1,\dots,v_n)$ være en basis for $V$ og 
+    $(w_1,\dots,w_m)$ være en basis for $W$.
+    
+    Vi ønsker å vise at  
+    $$ 
+        \mathscr B := 
+        \left(
+            \left( 
+                v_1, 0_W
+            \right),
+            \dots, 
+            \left( 
+                v_n, 0_W
+            \right),
+            \left( 
+                0_V, w_1
+            \right),
+            \dots, 
+            \left( 
+                0_V, w_m
+            \right)
+        \right)
+    $$
+    er en basis for $V \oplus W$.
+    Vi må da vise at $\mathscr B$ er lineært uavhengig og 
+    spenner ut $V \oplus W$.
+
+    \emph{Lineær uavhengighet.}
+    
+    Vi må vise at den eneste løsningen til 
+    $$ 
+        \displaystyle\sum_{s=1}^{|\mathscr B|} k_sb_s = 
+        \left(0_V, 0_W\right), 
+        k_s \in \mathbb K,
+        b_s \in \mathscr B 
+    $$ 
+    er den trivielle løsningen.
+
+    Summen over blir 
+    \begin{align*}
+        &
+        k_1(v_1, 0_W) + \dots + k_n(v_n, 0_W) + 
+        k_{n+1}(0_V, w_1) + \dots + k_{m+n}(0_V, w_m)
+        \\
+        &= 
+        (k_1v_1 + \dots k_nv_n + k_{n+1}0_V + \dots + k_{m+n}0_V, 
+        k_10_W + \dots + k_n0_W + k_{n+1}w_1 + \dots + k_{m+n}w_m)
+        \\ 
+        &=
+        (k_1v_1 + \dots + k_nv_n , k_{n+1}w_1 + \dots + k_{m+n}w_m )
+        \\
+        &=
+        \left(
+            \sum_{i=1}^n k_iv_i, 
+            \sum_{j=1}^m k_jw_j 
+        \right)
+    \end{align*}
+    Nå sitter vi igjen med en 2-tuppel der første 
+    er summen av alle $v_i$ i basisen til $V$, ganget 
+    med koeffisient, og andre 
+    er summen av alle $w_j$ i basisen til $W$, ganget med koeffisient. 
+    Siden $v_i, w_j$ er elementer av basisen til sine 
+    rom, vet vi at den eneste måten 
+    $$ 
+        \displaystyle\sum_{i=1}^{n}k_iv_i 
+        = 0_V
+        \text{ og }
+        \displaystyle\sum_{j=1}^{m}k_jw_j
+        = 
+        0_W
+    $$ 
+    er når alle koeffisientene er $0$; 
+    Den trivielle løsningen.
+
+    \emph{Spenner hele rommet.}
+
+    Vi vet at for en vilkårlig $v \in V$ så har vi at 
+    $v$ er en lineær kombinasjon av $(v_1, \dots, v_n)$  
+    hvor $v_i$ er multiplisert med en $k_i \in \mathbb K$
+    og det samme gjelder for en $w \in W$ med $W$ sin basis 
+    og koeffisienter i $\mathbb K$.
+
+    Viss $v = \sum_{i=1}^nk_iv_i$ og $w = \sum_{j=1}^m k_jw_j$, 
+    så er 
+    \begin{align*}
+        (v,w) 
+        &= 
+        \displaystyle\sum_{i=1}^n k_i\left(v_i, 0_W\right)
+        + 
+        \displaystyle\sum_{j=1}^{m} k_j\left(0_V, w_j\right)
+        \\      
+        &= 
+        \displaystyle\sum_{s=1}^{n+m = |\mathscr B|} 
+        k_s b_s 
+    \end{align*}
+    hvor $k_s \in \{k_1,\dots,k_n, k_{n+1}, \dots, k_m\}$ 
+    og $b_s = (v_s, 0_W)$ for $s = 1,2,\dots,n$ og 
+    $b_s = (0_V, w_{s-n})$ 
+
+    for $s = n + 1, n + 2, \dots, n+m$. 
+
+    Så vi kan, for en vilkårlig $(v,w) \in V \oplus W$, 
+    lage $(v,w)$ med en lineær kombinasjon av vektorer i basisen 
+    $\mathscr B$. Med andre ord har vi at 
+    $\text{span}(\mathscr B) = V \oplus W$. 
+    
+    Siden $\mathscr B$ er lineært uavhengig og spenner ut $V \oplus W$
+    så har vi at $\mathscr B$ utgjør en basis til dette rommet.
+\end{proof}
+
+\begin{proof}[Bevis av (c)]
+    Som vi peket til i \emph{Bevis av (b)}, så har vi at 
+    $|\mathscr B| = n+m$. Siden $\mathscr B$ utgjør en basis 
+    for $V \oplus W$, har vi at 
+    $\text{dim}V\oplus W = n+m = \text{dim}V + \text{dim}W$ på 
+    grunn av at det er antatt at basisen til $V$ har $n$ elementer
+    og basisen til $W$, $m$.
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 1.8.2}{}
+    (a) Vis at vektorrommet $\mathbb K^n$ har dimensjon $n$.
+
+    (b) Vis at vektorrommet $M_{m\times n}(\mathbb K)$ har  
+    dimensjon $mn$.
+\end{prob*}
+
+\begin{proof}[Bevis av (a)]
+    La $\mathbb K$ være en kropp. 
+
+    Vi ønsker å vise at $\text{dim}(\mathbb K^n) = n$.
+
+    Betrakt basisen 
+    $$
+        E = (e_1, e_2, \dots, e_n)
+    $$ 
+    hvor $e_i$ er tuppelen med $0$ alle steder utenom 
+    den $i$-ende index hvor det er en $1$.
+    I Oppgave 1.4.2 viste vi at dette utgjør en basis 
+    for $\mathbb K^n$. Siden $E$ har $n$ elementer 
+    og utgjør en basis for $\mathbb K^n$ så har 
+    $\mathbb K^n$ dimensjon $n$.
+\end{proof}
+
+\begin{proof}[Bevis av (b)]
+    La $\mathbb K$ være en kropp og 
+    $M_{m\times n}(\mathbb K)$ være rommet av 
+    $m \times n$ matriser med koeffisienter 
+    i $\mathbb K$.
+
+    Vi ønsker å vise at $\text{dim}(M_{m\times n}(\mathbb K)) = mn$.
+    
+    La $\mathscr B$ være den kanoniske basisen 
+    $$
+        \mathscr B = \{E_{ij} : 1 \leq i \leq m, 1 \leq j \leq n\}
+    $$
+    hvor $E_{ij}$ er matrisen hvor med $1$ i posisjon $(i,j)$  
+    og $0$ i alle de andre. Det er tydlig at 
+    $|\mathscr B| = m \cdot n$, så hvis den utgjør en basis for 
+    $M_{m \times n}(\mathbb K)$ kan vi konkludere at rommet 
+    er $mn$-dimensjonelt.
+
+    \emph{Lineær uavhengighet.}
+
+    La $c_{ij} \in \mathbb K$, for alle $1 \leq i \leq m$ og 
+    $1 \leq j \leq n$.
+    \begin{align*}
+        \displaystyle\sum_{i=1}^{m}\displaystyle\sum_{j=1}^{n}
+        c_{ij}E_{ij} 
+        = 
+        \begin{pmatrix}
+            c_{11} & \dots & c_{1n} \\
+            \vdots & \ddots & \vdots \\
+            c_{m1} & \dots & c_{mn}
+        \end{pmatrix} 
+        &= 
+        \begin{pmatrix}
+            0 & \dots & 0 \\
+            \vdots & \ddots & \vdots \\
+            0 & \dots & 0
+        \end{pmatrix} 
+        \\ 
+        & 
+        \text{\Large$\Updownarrow$}
+        \\ 
+        c_{11} = \dots = c_{mn} &= 0
+    \end{align*}
+
+    \emph{Spenner rommet.}
+
+    La $A=(a_{ij}) \in M_{m \times n}(\mathbb K)$. 
+    \begin{align*}
+        A 
+        &= 
+        \begin{pmatrix}
+            a_{11} & \dots & a_{1n} \\
+            \vdots & \ddots & \vdots \\
+            a_{m1} & \dots & a_{mn}
+        \end{pmatrix}
+        = 
+        \displaystyle\sum_{i=1}^{m}\displaystyle\sum_{j=1}^{n}
+        a_{ij}E_{ij}
+    \end{align*}
+
+    $\mathscr B$ utgjør en basis for rommet og inneholder 
+    $m \cdot n$ elementer, derfor er 
+    $M_{m \times n}(\mathbb K)$ $mn$-dimensjonelt.
+\end{proof}
+
+\newpage 
+\begin{prob*}{Oppgave 1.8.3}{}
+    La $U$ være et vektorrom. Bevis at følgende utsagn er ekvivalente: 
+    
+    \quad (a) dim$U = \infty$
+
+    \quad (b) for enhver $n \in \mathbb N$ finnes et underrom 
+    $U_n$ av $U$ med dimensjon $n$ 
+\end{prob*}
+\begin{proof}[Bevis]
+    La $U$ være et vektorrom over $\mathbb K$. 
+
+    Vi ønsker å vise at 
+    $$
+        \text{dim}(U) = \infty 
+        \Leftrightarrow \exists U_n \text{ underrom av } U, 
+        \quad
+        \text{dim}(U_n) = n
+    $$ 
+
+    \emph{$\Rightarrow$}
+
+    Basistilfelle: Velg $u_1 \in U, u_1 \neq 0$. 
+
+    Anta at det er valgt $u_1,\dots,u_n$ lineært uavhengige. 
+    $u_1,\dots,u_n$ kan ikke spenne $U$ siden da ville 
+    ikke $\text{dim}U = \infty$.
+
+    Velg så $u_{n+1} \in U\setminus\{\{\vec{0}\} 
+    \cup \text{span}(u_1,\dots,u_n)\} \neq \emptyset$.
+    Da er $(u_1,\dots,u_{n+1})$ lineært uavhengig.
+
+    Det finnes da, for hver $n\in\mathbb N$ en lineært uavhengig 
+    $(u_1,\dots,u_n)$. 
+
+    La $U_n = \text{span}(u_1,\dots,u_n)$.
+    $U_n$ er et $n$-dimensjonelt underrom av $U$.
+
+    \emph{$\Leftarrow$}
+
+    Anta at for enhver $n \in \mathbb N$, så finnes det et underrom 
+    $U_n \subset U$ hvor $\text{dim}(U_n) = n$. 
+    La oss anta, for en kontradiksjon, at det finnes en endelig 
+    basis $(b_1, \dots, b_m)$. 
+    Betrakt underrommet $U_{m+1}$ som nødvendighvis har 
+    en basis $B'$ med $m+1$ elementer. $B'$ er, per definisjon, 
+    lineært uavhengig, men vi vet at i et $m$-dimensjonelt 
+    vektorrom kan det ikke eksistere en samling 
+    med vektorer på størrelse mer en $m$, lineært uavhengig. 
+    Så $B$ kan ikke utgjøre en basis for $U$. 
+    Vår antagelse at det finnes en endelig basis for $U$ var feil 
+    og derfor har vi at $\text{dim}(U) = \infty$.
+
+    Siden vi har vist implikasjonen begge veier har 
+    vi at de to utsagnene er ekvivalente.
+
+\end{proof}
+
+\end{document}
