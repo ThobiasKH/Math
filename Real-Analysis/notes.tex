@@ -1,0 +1,323 @@
+\input{preamble.tex}
+
+\title{\huge{Real Analysis}}
+\author{\LARGE{Thobias Høivik}}
+\date{\Large{Spring 2026}}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Introduction}
+The following is intended for anyone who stumbles over these notes. 
+This is intended to be my personal notes in real analysis. 
+I will hopefully be attending MAT2400 Real Analysis at 
+the University of Oslo in the spring of 2026. However, 
+as I am not a program student at this institution, but 
+just someone who takes individual courses there 
+of my own volition, I do not and cannot attend lectures and 
+therefore I have to learn the material on my own. 
+As far as I understand, while this course is called Real Analysis, 
+it is a bit different than a first course from what I understand. 
+The earlier exams give a hint of functional analysis and 
+also include topics such as fourier analysis, meassure- and integration
+theory among other things. Thus the different supplementary 
+coursematerial I will use to aid myself in learning the content 
+of this course will most likely be a bit scattered and all over the 
+place, which these notes will undoubtedly reflect. I will 
+do my best to keep things organized for my own sake, but keep 
+this in mind if you are someone who intends to use these 
+notes to learn Real Analysis. 
+
+\newpage 
+\section{Basic Banch Space theory}
+The following section of notes is derived from the first video 
+in the lecture series MIT 18.102 Introduction to Functional 
+Analysis, Spring 2021 (found on youtube). 
+
+\begin{defn}[Vector Space]
+    \label{defn:vector_space}
+    A vector space $V$ over a field $\mathbb F$ is a nonempty 
+    set of elements called "vectors" together with 
+    a binary operation $+$ on $V$ and a binary function 
+    $\cdot$ which maps elements of $V, \mathbb F$ to $V$ 
+    satisfying: 
+
+    \begin{enumerate}
+        \item Associativity of vector addition: 
+            $$ 
+                u + (v+w) = (u+v)+w, \forall u,v,w \in V
+            $$
+        \item Commutativity of vector addition: 
+            $$ 
+                u + v = v + w, \forall u,v \in V
+            $$ 
+        \item Identity element: 
+            $$ 
+                \exists 0 \in V : v + 0 = 0 + v = v, \forall v \in V
+            $$ 
+        \item Each $v \in V$ has an inverse $-v$ under the 
+            vector-addition operation.
+        \item Scalar multiplication is compatible with field 
+            multiplication: 
+            $$ 
+                a(bv) = (ab)v
+            $$ 
+            where $a,b \in \mathbb F$ and $v \in V$. 
+        \item The multiplicative identity $1 \in \mathbb F$ 
+            satisfies: 
+            $$ 
+                1v = v, \forall v \in V
+            $$ 
+        \item Distributivity of scalar multiplication with respect 
+            to vector addition: 
+            $$ 
+                a(u+v) = au + av
+            $$ 
+            where $a \in \mathbb F$ and $u,v \in V$. 
+        \item Distributivity of scalar multiplication with 
+            respect to field addition: 
+            $$ 
+                (a+b)v = av + bv
+            $$ 
+            where $a,b \in \mathbb F$ and $v \in V$. 
+    \end{enumerate}
+
+    When proving that something is a vector space, most 
+    of these follow naturally from showing closure under 
+    addition and scalar multiplication and those two properties, 
+    are generally enough to show that it is indeed a vector space. 
+
+    A subspace $U$ of $V$ is a set $U \subseteq V$ which is also 
+    a vector space. It is enough to show that $U \subseteq V$ and 
+    that it is closed under the two operations. 
+\end{defn}
+
+\newpage 
+Some typical examples of vector spaces are 
+$\mathbb F^n$ where $\mathbb F$ is the reals or the complex 
+numbers. We also have spaces like the space of real polynomials 
+of degree $\leq n$, i.e. $\mathcal P_n = 
+\{\sum_{i=0}^n \alpha_i x^i : \alpha_i \in \mathbb R\}$, 
+which is itself a subspace of the space of continuous real-valued 
+functions $C(\mathbb R)$. 
+
+So $\mathbb R^2$ and $C(\mathbb R)$ 
+are both vector spaces over $\mathbb R$, but 
+they have one really big difference, that being the dimension. 
+
+\begin{defn}
+    \label{defn:linear_independence}
+    Let $V$ be a vector space. A set $\{v_1,\ldots, v_n\} \subseteq V$
+    is linearly independent if  
+    $$ 
+        \displaystyle\sum_{i=1}^n \alpha_i v_i = 0 
+        \Leftrightarrow \alpha_1 = \dots = \alpha_n = 0 \in \mathbb F
+    $$ 
+
+    Note: the right-to-left direction of this implication is 
+    always true. 
+\end{defn}
+
+The two spaces discussed above are different in dimension, 
+$\mathbb R^2$ being $2$-dimensional and the other being 
+infinite-dimensional. 
+One definition of finite-dimensional is that every linearly 
+independent set in the space is finite. 
+I however like the definition using bases more. 
+Both of these definitions are equivalent. 
+
+We won't give a rigorous definition of a basis, but in short 
+a basis of $V$ is a linearly independent set of vectors which spans 
+$V$, i.e. every vector in $V$ can be expressed as a linear combination
+of basis-vectors. If the basis is finite then $V$ 
+is finite dimensional. Moreover, if the basis is finite then the 
+dimension of $V$ is the number of basis-vectors. Note that 
+if a finite dimensional space $V$ has a basis with $n$ elements 
+then every basis of $V$ has $n$ elements. A space is  
+infinite-dimensional if no finite set of linearly independent vectors 
+spans the space. 
+
+\newpage 
+\subsection{Norms and Metrics}
+
+\begin{defn}[Norm]
+    \label{defn:norm}
+    Let $V$ be a vector space. 
+    A norm $|| \cdot || $ is a function 
+    from $V \to [0,\infty)$ satisfying: 
+    \begin{enumerate}
+        \item $|| v || = 0$ if and only if 
+            $v = 0$. 
+        \item $|| \alpha v || = |\alpha| \cdot ||v||$ where 
+            $\alpha$ is an element of the ground field. 
+        \item $||v + w|| \leq ||v|| + ||w||$.
+    \end{enumerate}
+    
+    The tuple $(V, ||\cdot||)$ is called a normed space. 
+\end{defn}
+
+\begin{ex}
+    \label{ex:lp_norms}
+    $||x||_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}$ defines 
+    a norm on $\mathbb R^n$.
+
+    In fact it constitutes a norm on $\mathbb C^2$ as well. 
+    Formally, if we take $\mathbb F = \mathbb R$ or  
+    $\mathbb F = \mathbb C$ the p-norm of a vector 
+    $v \in \mathbb F^n$ ($p \in [1,\infty]$) is
+    $$ 
+        ||v||_p := 
+        \begin{cases}
+            \left(\displaystyle\sum_{i=1}^n |v_i|^p\right)^{1/p} & 
+            p < \infty\\ 
+            \max_{i=1,\dots,n}|v_i| & p = \infty
+        \end{cases}
+    $$ 
+\end{ex}
+
+Norms give us a notion of the "length" of a vector.  
+Now all we need to do analysis on spaces is a notion of 
+distance. Intuitively, norms already give us a notion of 
+distance from $0$. 
+
+\begin{defn}
+    \label{defn:metric}
+    Let $X$ be a set. 
+
+    A metric is a function 
+    $d:X^2 \to [0,\infty)$ satisfying: 
+    \begin{enumerate}
+        \item $d(x,y) = 0$ if and only if $x = y$. 
+        \item $d(x,y) = d(y,x)$. 
+        \item $d(x,z) \leq d(x,y) + d(y,z)$. 
+    \end{enumerate}
+\end{defn}
+
+The metric gives us a notion of distance. 
+In a typical first course in analysis where we work on 
+the reals, $d(a,b) = |a - b|$ is the metric we deal with. 
+
+\newpage 
+\begin{prop}
+    Let $V$ be a normed space with norm $||\cdot||$. 
+    Then we can define the distance (a metric) between two vectors 
+    by 
+    $$ 
+        d(x,y) := \left|\left| x - y \right|\right|
+    $$ 
+
+    In other words you can define a metric in terms of the norm 
+    in any normed space. This metric is usually refered to 
+    as the metric induced by the norm. 
+\end{prop}
+
+We won't provide a proof of this as it's fairly intuitive. 
+Now we can get a sense of convergence and continuity in 
+vector spaces by saying that a sequence $\{a_n\}_{n \in \mathbb N}$
+converges to a value $a$ if 
+$$ 
+    \forall \varepsilon > 0, \exists N \in \mathbb N : 
+    n \geq N \Rightarrow ||a_n - a || < \varepsilon 
+$$ 
+and a linear transformation (look up definition if necessary) 
+$T \in \mathcal L(U,V)$ is (uniformly) continuous if 
+$$ 
+    \forall \varepsilon > 0, \exists \delta > 0 : 
+    ||x - y||_U < \delta \Rightarrow 
+    ||Tx - Ty||_V < \varepsilon
+$$ 
+for every $x,y \in U$. Notice that if you replace $||x-y||$ with 
+$d(x,y)$ it looks like the standard definitions in terms 
+of metric spaces. 
+
+\newpage 
+\subsection{Banach Spaces}
+\begin{defn}[Banach Space]
+    \label{defn:banach_space}
+    A normed space $V$ is a Banach Space if it is 
+    complete with respect to the metric induced by the norm, meaning
+    that every cauchy sequence converges to a value in the 
+    space. 
+\end{defn}
+
+\begin{ex} 
+    $\mathbb R^n$ or $\mathbb C^n$ form Banach Spaces 
+    with respect to the $\ell^p$ norms (see \Cref{ex:lp_norms}).
+\end{ex}
+
+\begin{thm}
+    If $X$ is a complete metric space, then 
+    $C_\infty(X)$ is a Banach Space. 
+\end{thm}
+
+Recall that $C_\infty(X)$ is the space of bounded continuous 
+functions on $X$.
+
+\begin{proof}
+    We show that every Cauchy sequence in $C_\infty(X)$ converges 
+    to an element
+    of $C_\infty(X)$.
+
+    Let $\{u_n\}_{n=1}^\infty \subseteq C_\infty(X)$ be a Cauchy 
+    sequence with
+    respect to the supremum norm. Then for every $\varepsilon > 0$ 
+    there exists
+    $N \in \mathbb{N}$ such that
+    \[
+        \|u_n - u_m\|_\infty < \varepsilon \quad \text{for all } 
+        n,m \ge N.
+    \]
+    Equivalently,
+    \[
+        |u_n(x) - u_m(x)| < \varepsilon
+        \quad \text{for all } x \in X \text{ and all } n,m \ge N.
+    \]
+
+    Fix $x \in X$. Then $\{u_n(x)\}_{n=1}^\infty$ is a 
+    Cauchy sequence in
+    $\mathbb{R}$ (or $\mathbb{C}$), since
+    \[
+        |u_n(x) - u_m(x)| \le \|u_n - u_m\|_\infty.
+    \]
+    Because $\mathbb{R}$ (or $\mathbb{C}$) is complete, the limit
+    \[
+        u(x) := \lim_{n\to\infty} u_n(x)
+    \]
+    exists. This defines a function $u : X \to \mathbb{R}$.
+
+    We now show that $u_n \to u$ uniformly on $X$. Let 
+    $\varepsilon > 0$ and
+    choose $N$ such that $\|u_n - u_m\|_\infty < \varepsilon$ 
+    for all $n,m \ge N$.
+    Fix $n \ge N$ and $x \in X$. Taking the limit $m \to \infty$ gives
+    \[
+        |u_n(x) - u(x)|
+        = \lim_{m\to\infty} |u_n(x) - u_m(x)|
+        \le \varepsilon.
+    \]
+    Since $x \in X$ was arbitrary, it follows that
+    \[
+        \|u_n - u\|_\infty \le \varepsilon \quad \text{for all } 
+        n \ge N.
+    \]
+    Thus $u_n \to u$ uniformly on $X$.
+
+    Since each $u_n$ is bounded and the convergence is uniform, 
+    the limit
+    function $u$ is bounded. Moreover, since each $u_n$ 
+    is continuous and
+    uniform limits of continuous functions are continuous, 
+    $u$ is continuous
+    on $X$.
+
+    Therefore $u \in C_\infty(X)$ and $\{u_n\}$ converges to $u$ in the
+    supremum norm. Hence $C_\infty(X)$ is complete, 
+    and thus a Banach space.
+\end{proof}
+
+
+\end{document}

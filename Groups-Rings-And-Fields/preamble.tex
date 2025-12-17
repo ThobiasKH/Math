@@ -15,6 +15,7 @@
 \usepackage{fontspec}
 \usepackage{unicode-math}
 
+
 %-------------------------
 % Fonts
 %-------------------------
@@ -23,28 +24,24 @@
 \setmonofont{JetBrains Mono}
 
 
-% 1. Load a proper OpenType Math font first (Latin Modern Math is standard and works with the engine)
 \setmathfont[
     Scale=1.25
 ]{latinmodern-math.otf}
 
-% 2. Overwrite ranges to use the *Bold* version of JetBrains Mono for a visually heavier look.
-% We use "Bold" in the font name to ensure we get the heavier weight you want.
 \setmathfont[
-  % Upright Latin and Digits (e.g., constants, functions like 'sin')
   range=\mathup/{latin, Latin, 0-9},
-  % Italic Latin (e.g., variables)
   range=\mathit/{latin, Latin},
-  % Bold Italic Latin (e.g., bold variables)
   range=\mathbfit/{latin, Latin},
-  % Scaling to match text size
   Scale=1.5
-]{JetBrains Mono Bold} % <<< Using 'JetBrains Mono Bold' here
+]{JetBrains Mono Bold} 
 
-% 3. Use a reliable font for specialized symbols like Blackboard Bold (\mathbb)
-% Since you removed the previous line, we will ensure that \mathbb{R} works by including a reliable font.
-% Let's use the Latin Modern Math font itself for these symbols, as it is already loaded.
 \setmathfont[range=\mathbb, Scale=MatchUppercase]{latinmodern-math.otf}
+
+%-------------------------
+% Paragraph spacing
+%-------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7em}
 
 
 %-------------------------
@@ -58,6 +55,7 @@
 \definecolor{corcolor}{HTML}{9B4AF7}
 \definecolor{probcolor}{HTML}{EE9B00}
 \definecolor{excolor}{HTML}{21E933}
+\definecolor{propcolor}{HTML}{EE9B20}
 
 %-------------------------
 % Background and text color
@@ -102,6 +100,7 @@
 \newtheorem{cor}{Corollary}[section]
 \newtheorem{prob}{Problem}[section]
 \newtheorem{ex}{Example}[section]
+\newtheorem{prop}{Proposition}[section]
 
 %-------------------------
 % Tcolorbox environments (applies style to amsthm environments)
@@ -161,6 +160,15 @@
   title after break,
 }
 
+\tcolorboxenvironment{prop}{
+    colframe=propcolor, 
+    colback=propcolor!15!bgcolor,
+    fonttitle=\bfseries,
+    coltitle=white,
+    breakable,
+    title after break
+}
+
 %-------------------------
 % Cleveref settings (Using short environment names for correct display)
 %-------------------------
@@ -181,3 +189,6 @@
 
 \crefname{ex}{example}{examples}
 \Crefname{ex}{Example}{Examples}
+
+\crefname{prop}{proposition}{propositions}
+\Crefname{prop}{Proposition}{Propositions}
