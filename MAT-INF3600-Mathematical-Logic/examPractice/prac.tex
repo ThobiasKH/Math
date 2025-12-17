@@ -121,6 +121,99 @@
     that it is satisfied by an infinite structure. 
 \end{proof}
 
+\newpage 
+\section{Exam 2022}
+\begin{proof}[Solution of problem 1]
+    \begin{align*}
+        &1. \forall x[Q(Sx) \rightarrow Q(x)] & \Sigma_1 \\ 
+        &2. \forall x[Q(Sx) \rightarrow Q(x)] 
+            \rightarrow [Q(S0) \rightarrow Q(0)] & (Q1) \\ 
+        &3. Q(S0) \rightarrow Q(0) & 1,2 \quad (PC) \\ 
+        &4. Q(S0) & \Sigma_1 \\ 
+        &5. Q(0) & 3,4 \quad (PC)
+    \end{align*}
+    
+    Hence we have $\Sigma_1 \vdash Q(0)$. 
+\end{proof}
+
+\begin{proof}[Solution of problem 2]
+    \begin{align*}
+        &1. \forall x[Q(Sx) \rightarrow Q(x)] & \Sigma_1 \\ 
+        & \vdots \\ 
+        &5. Q(0) & 4,5 \quad (PC) \\
+        &6. 0 = x \rightarrow (Q(0) \rightarrow Q(x)) & E3 \\ 
+        &7. Q(0) \rightarrow (0 = x \rightarrow Q(x)) & 1
+        \quad (PC)\\
+        &8. 0 = x \rightarrow Q(x) & 5,7 \quad (PC)
+    \end{align*}
+
+    Hence we have $\Sigma_1 \vdash 0 = x \rightarrow Q(x)$. 
+\end{proof}
+
+\begin{proof}[Proof of problem 3]
+    Let $\mathfrak A \vDash \Sigma_{17}$, then we have 
+    $\mathfrak A \vDash Q(\overline n)$ for $n \in \{1,\ldots,17\}$.
+    Notice that then $\mathfrak A \vDash \Sigma_{16}$. 
+    Thus we have $\Sigma_{17} \vDash \Sigma_{16}$. 
+
+    Let $\mathfrak B$ be a structure with universe $[16]$, that 
+    is, the natural numbers from $0$ to $16$. Let $S^{\mathfrak B}$ 
+    be the successor function for $n = 0,\ldots,15$ while 
+    $S^{\mathfrak B}(16) = 16$. Furthermore let $Q^{\mathfrak B} = 
+    \{0,\dots,16\}$. We see that $\mathfrak B \vDash \Sigma_{16}$, 
+    but $\mathfrak B \nvDash \Sigma_{17}$. Therefore 
+    $\Sigma_{16} \nvDash \Sigma_{17}$.
+\end{proof}
+
+\newpage 
+\begin{proof}[Solution of problem 4]
+    Let $\phi := \forall x [Qx]$. 
+    Then we can create a model for $\Sigma$ which satisfies 
+    $\phi$ in the same manner as done above with universe 
+    $\mathbb N$, but we can also 
+    have a model $\mathfrak A$ where the universe is 
+    $\mathbb N \cup \{\omega\}$
+    such that $S^{\mathfrak A}(\omega) = \omega$ and 
+    $\omega \not\in Q^{\mathfrak A}$. 
+\end{proof}
+
+\begin{proof}[Solution of problem 5]
+    A set of formulas $\Sigma$ is consistent if it is 
+    not inconsistent. Meaning 
+    $\Sigma \nvdash \bot$, equivalently 
+    $\Sigma$ has a model. 
+
+    $\Gamma_1$ is consistent. Take a model $\mathfrak A$ with 
+    universe $\{c\}$, where the constant is interpreted as 
+    $c$, $f^{\mathfrak A}(c,c) = c$. 
+
+    $\Gamma_2$ is not consistent. 
+    \begin{align*}
+        &1. \forall x [\lnot x = c] & \Gamma_2 \\ 
+        &2. \forall x [\lnot x = c] \rightarrow f(c,c) = c & (Q_1) \\
+        &3. f(c,c) = c & 1,2 \quad (PC) \\ 
+        &4. \lnot f(c,c) = c & \Gamma_2 \\ 
+        &5. f(c,c) = c \land \lnot f(c,c) = c & 3,4 \quad (PC)
+    \end{align*}
+    From here we get such nonsense as $\Gamma_2 \vdash x \neq x$. 
+
+    $\Gamma_3$ is inconsistent. 
+    \begin{align*}
+        &1. \forall x[\lnot x = c] & \Gamma_3 \\ 
+        &2. \forall x[\lnot x = c] \rightarrow \lnot c = c & 
+        (Q_1) \\ 
+        &3. \lnot c = c & 1,2 \quad (PC) \\ 
+    \end{align*}
+    but $\Gamma_3 \vdash c = c$ using $E_1$. Nonsense. 
+
+    $\Gamma_4$ is fine. 
+
+    Let $\mathfrak B$ be a structure 
+    with universe $\{a,c\}$, $c^{\mathfrak B} = c$, 
+    $f^{\mathfrak B}(c,c) = c$. Now it doesn't matter how we 
+    define the rest we are already done as $a \neq c$ so there 
+    exists an element different from $c$. 
+\end{proof}
 
 
 \end{document}
