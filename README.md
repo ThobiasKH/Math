@@ -1,5 +1,5 @@
 # Math & Theoretical Computer Science
 
-Math/TCS is one of my biggest interests and this is a collection of lecture notes, assignments and more.
+Math/TCS is my biggest interest and I derive a lot of happiness in writing nice notes. 
 
-Most of the subjects here are self-taught for fun so they are not comprehensive and often unfinished because I decided to delve into a new topic before finishing.
+To create the notes I use Neovim with the Vimtex plugin. Feel free to steal my preamble or use my notes for your own studying. 
