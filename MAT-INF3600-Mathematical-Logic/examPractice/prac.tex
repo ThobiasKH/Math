@@ -1,0 +1,126 @@
+\input{preamble.tex}
+
+\title{\huge{MAT-INF3600 Exam Practice}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage 
+\tableofcontents
+
+\newpage
+\section{Problem set}
+\begin{prob}
+    Let $\mathfrak L$ be the language with a binary relation 
+    symbol $R$. 
+    Consider the sentence $\phi$: 
+    $$ 
+        \forall x \lnot R(x,x) \land \forall x,y,z [R(x,y) \land 
+        R(y,z) \rightarrow R(x,z)]
+    $$ 
+
+    Prove or disprove: If a structure $\mathcal M$ satisfies 
+    $\phi$ with a finite domain $M$, then there must exist 
+    $a \in M$ such that $(a,b) \not\in R, \forall b\in M$.
+\end{prob}
+\begin{proof}
+    The claim is true. 
+    Assume $\mathcal M \vDash \phi$ with $|M| = |\{m_1,\dots,m_n\}| 
+    < \infty$.
+    Suppose, for a contradiction, that there 
+    is some $m_j$ for every $m_i$ such that $(m_i,m_j) \in R$.
+
+    Then we have 
+    $(m_{i_1}, m_{i_2}) \in R$. $R$ is irreflexive so 
+    $m_{i_2}$ must relate to some element other than 
+    $m_{i_1}$ (as otherwise we would get $(m_{i_1}, m_{i_1}) \in R$ 
+    through transitivity), thus 
+    $(m_{i_2}, m_{i_3}) \in R$.
+    Extrapolating we get $(m_{i_{n-1}}, m_{i_n}) \in R$, but now 
+    $m_{i_n}$ must relate to some element, but this would lead to 
+    $(m_{i_n}, m_{i_n}) \in R$ through transitivity so 
+    $\mathcal M \not\vDash \phi$, a contradiction.
+\end{proof}
+
+\begin{prob}
+    Provide a formal derivation of: 
+    $$
+        (\lnot P \rightarrow \lnot Q) \vdash (Q \rightarrow P)
+    $$ 
+\end{prob}
+\begin{proof}
+    The deduction, using L \& K's system, is trivial. 
+
+    Let $\Sigma = \{\lnot P \rightarrow \lnot Q\}$.
+
+    \begin{align*}
+        &1. \lnot P \rightarrow \lnot Q & (\Sigma) \\ 
+        &2. Q \rightarrow P & 1, (PC) \\ 
+    \end{align*}
+
+    We could also use the deduction theorem where we have 
+    $\phi \vdash \psi$ if and only if $\vdash \phi \rightarrow \psi$ 
+    for formula $\psi$ and sentence $\phi$.
+\end{proof}
+
+\newpage
+\begin{prob}
+    \label{prob:set1_prob3}
+    Let $\Sigma$ be a set of first-order sentences. Suppose 
+    that for every natural number $n$, there exists a model 
+    $\mathcal M_n$ of $\Sigma$ such that $\mathcal M_n$ has 
+    $n$ elements. Prove $\Sigma$ has an infinite model.  
+\end{prob}
+
+\begin{proof}
+    Assume $\mathcal M_n \vDash \Sigma, |M| = n$ for every 
+    $n \in \mathbb N$.
+
+    Consider the expanded set $\Sigma' \supseteq \Sigma$ defined as 
+    $$ 
+        \Sigma' := \Sigma \cup 
+        \{\exists x_1,\dots,\exists x_n 
+        \bigwedge_{i < j} x_i \neq x_j 
+        : n \in \mathbb N \}
+    $$ 
+
+    This set is essentially $\Sigma$ as well as 
+    "there are at least $n$ elements" (for every $n$). 
+    Consider the set
+    $$
+        \Delta \subset \Sigma' 
+    $$
+    
+    such that $\phi_k \in \Delta$ where $\phi_k$ is the 
+    statement "there are at least $k$ elements". 
+    It is then straightforward that every finite 
+    subset of $\Sigma'$ is satisfiable so $\Sigma'$ is as well, 
+    and in particular, it's model is infinite. 
+    $\Sigma' \supseteq \Sigma$ so this model also satisfies 
+    $\Sigma$. 
+\end{proof} 
+
+\newpage 
+\section{Problem set}
+\begin{prob}
+    Show that the class of all finite structures (in a language 
+    with at least one relation) is not first-order axiomatizable.
+\end{prob}
+\begin{proof}[Sketch proof]
+    Classifying all finite structures includes 
+    structures that are arbitrarily large. 
+    It is straightforward to show that if some set of sentences 
+    has arbitrarily large finite models then it also has 
+    an infinite model.  
+
+    As seen in \cref{prob:set1_prob3}, defining "at least $n$ elements"
+    for every natural $n$
+    and having that sentence satisfied for every $n$ means 
+    that it is satisfied by an infinite structure. 
+\end{proof}
+
+
+
+\end{document}
