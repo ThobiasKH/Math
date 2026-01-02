@@ -319,5 +319,35 @@ functions on $X$.
     and thus a Banach space.
 \end{proof}
 
+\newpage 
+\section{Exercises from 2.1 in the textbook}
+\begin{prob}[Problem 1]
+    Show that if $\{x_n\} \to a$ then the sequence $\{Mx_n\}$, 
+    where $M$ is some constant, converges to $Ma$. 
+\end{prob}
+\begin{proof}
+    Suppose $\{x_n\} \to a$, i.e. 
+    $\forall \varepsilon_0 > 0, \exists N_0 \in \mathbb N$ such that 
+    $$ 
+        ||x_n - a|| < \varepsilon_0
+    $$ 
+    whenever $n \geq N_0$. 
+    
+    Let $\varepsilon > 0$ and pick some $N$ such that 
+    $$ 
+        ||x_n - a|| < \varepsilon/M
+    $$ 
+
+    Recall that such an $N$ can be found since $\varepsilon / M > 0$. 
+    Then 
+    \begin{align*}
+        M||x_n-a|| &< \varepsilon \\ 
+        ||M(x_n - a)|| &< \varepsilon \\ 
+        ||Mx_n - Ma|| &< \varepsilon
+    \end{align*}
+    so $\{Mx_n\} \to Ma$. 
+\end{proof}
+
+
 
 \end{document}
