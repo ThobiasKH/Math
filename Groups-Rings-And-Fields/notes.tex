@@ -126,6 +126,298 @@ $$
 The group $(\mathbb{Z}, +)$ is abelian because $m+n = n+m$.
 \end{ex}
 
+\newpage 
+\section{Important Groups}
+First let's define some often used notation. 
 
+For $g \in G$, define: 
+\begin{itemize}
+    \item $g^n = gg\ldots g(n > 0)$ 
+    \item $g^0 = e$
+    \item $g^{-n} = (g^{-1})^n$
+\end{itemize} 
+and recognize the following identities (which are provable 
+by induction): 
+$$ 
+    g^m g^n = g^{m+n}, \quad (g^m)^n = g^{mn}
+$$ 
+
+\begin{defn}[Roots of Unity]
+    \label{defn:roots_of_unity}
+    $$ 
+        U_n = \{e^{2\pi ik/n} : 0 \leq k < n\}
+    $$ 
+    are called the n-th roots of unity.
+\end{defn}
+
+\begin{defn}
+    An subset $\{g_1,\ldots,g_k\} \subseteq G$ is a generating set 
+    if every $g \in G$ can be expressed as 
+    $$ 
+        g_1^{n_1} \cdots g_k^{n_k}
+    $$ 
+
+    If a singleton $g'$ alone generates a group then it is called 
+    a generator of $G$ and $G$ is said to be cyclic. 
+\end{defn}
+
+The $n$-th roots of unity are finite, with exactly $n$ elements. 
+They are cyclic, with generator $e^{2i\pi/n}$.
+
+\begin{defn}[Symmetric Group]
+    \label{defn:symmetric_group}
+    The symmetric group $S_n$ is the set of all permutations of 
+    $n$ elements under composition. 
+    In other words it is the set of all $\sigma : [n] \to [n]$ with 
+    composition as its operation. 
+\end{defn}
+
+The symmetric group is non-abelian for $n \geq 3$. The identity 
+corresponds to the identity permutation (doing nothing) and inverses 
+are undoing a permutation. 
+We have the following notation for permutations in the symmetric Group
+(assume $n = 3$ for this example): 
+$$ 
+    \begin{pmatrix}
+        1 & 2 & 3 \\ 
+        2 & 3 & 1
+    \end{pmatrix}
+$$ 
+corresponds to $1 \mapsto 2, 2 \mapsto 3, 3 \mapsto 1$. 
+
+Another way to write the same permutation is: 
+$$ 
+    \left(1 \: 2 \: 3\right)
+$$ 
+
+\newpage 
+\section{Subgroups}
+\begin{defn}[Subgroup]
+    \label{defn:subgroup}
+    Let $G$ be a group under $\star$.
+    A subgroup $H \leq G$ is a subset $H \subseteq G$ that is itself 
+    a group under $\star$.
+\end{defn}
+
+Having to mechanically check if $H \subseteq G$ satisfies all the 
+required axioms can be a bit tedious so next we introduce a 
+powerful theorem which let's us easily determine whether some 
+subset is a subgroup or not. 
+
+\begin{thm}[Subgroup Test]
+    \label{thm:subgroup_test}
+    A nonempty subset $H \subseteq G$ is a subgroup if and only 
+    if 
+    $$ 
+        \forall x,y \in H, \; xy^{-1} \in H.
+    $$ 
+\end{thm}
+\begin{proof}[Proof Idea]
+    If $H$ is a subgroup the required conditions follows. 
+
+    Conversely: 
+    \begin{itemize}
+        \item Nonempty so some $h \in H$.
+        \item $hh^{-1} = e \in H$. 
+        \item Closure under $xy^{-1}$ will give inverses and 
+            closure. 
+    \end{itemize}
+\end{proof}
+
+We get some nice corollaries from this, as well as a nice and tidy 
+way to prove whether or not a subset is a subgroup. 
+
+\begin{cor}
+    The intersection of any collection of subgroups is a subgroup. 
+
+    Given any subset $S \subseteq G$, there is a smallest subgroup 
+    containing it. 
+\end{cor}
+
+\begin{defn}[Cyclic Subgroups]
+    Let $G$ be a group. 
+
+    For any $g \in G$, define: 
+    $$ 
+        \langle g \rangle  = \{g^n : n \in \mathbb Z\}.
+    $$ 
+
+    $\langle g \rangle$ is called the cyclic subgroup generated 
+    by $g$. 
+\end{defn}
+
+It is very straightforward to show that the cyclic subgroup generated 
+by some $g \in G$ is indeed a subgroup with the use of 
+\cref{thm:subgroup_test}.
+
+On page \pageref{defn:roots_of_unity} we say that a group is cyclic 
+if it has a signle element which generates it, but now we can simply
+say that a group $G$ is cyclic if $G = \langle g \rangle$ for some 
+$g \in G$.
+
+\begin{thm}
+    Suppose a group $G$ is cyclic, i.e. $G = \langle g \rangle$ 
+    for some $g \in G$. 
+
+    Then it is isomorphic to one of the following: 
+    \begin{itemize}
+        \item $(\mathbb Z, +)$, or 
+        \item $(\mathbb Z/n\mathbb Z, +)$ for some $n \geq 1$. 
+    \end{itemize}
+\end{thm}
+
+\subsection{Structure of Cyclic Subgroups}
+\begin{defn}[Order]
+    The order of an element $g \in G$ is 
+    $$ 
+        \text{ord}(g) = |\langle g \rangle|
+    $$ 
+\end{defn}
+
+Furthermore, if $\text{ord}(g) = n < \infty$, then $g^n = e$ and 
+$n$ is minimal, otherwise we say $g$ has infinite order.  
+
+If $\text{ord}(g) = n$, then: 
+$$ 
+    \langle g \rangle = \{e, g, g^2, \ldots, g^{n-1}\}
+$$ 
+
+Moreover: 
+\begin{itemize}
+    \item $g^k = e \Leftrightarrow n \mid k$
+    \item $\langle g^k \rangle = \langle g \rangle \Leftrightarrow 
+        \gcd(k,n) = 1$
+\end{itemize}
+
+\begin{thm}
+    Every subgroup of a cyclic group is cyclic. 
+
+    More precisely: 
+    \begin{itemize}
+        \item Subgroups of $\mathbb Z$ are exactly $n\mathbb Z$.
+        \item Subgroups of $\mathbb Z/n\mathbb Z$ correspond 
+            to the divisors of $n$.
+    \end{itemize}
+\end{thm}
+
+With all of this machinery we can approach group theory with geometric
+and algebraic intuition. Cyclic groups are like repeated motion, 
+finite cyclic groups corresponding to rotations by rational angles 
+and infinite ones corresponding to translations. 
+
+\newpage 
+\section{Cosets and Lagrange's Theorem}
+\begin{defn}[Left and Right Cosets]
+    Let $H \leq G$, and let $g \in G$. 
+
+    The left- and right cosets are: 
+    $$ 
+        gH = \{gh : h \in H\} \quad Hg = \{hg : h \in H\}
+    $$ 
+    respectively.
+\end{defn}
+
+A key intuition is that a coset is like a copy of $H$ shifted 
+by $g$. 
+We may also recognize that the cosets are the same size as $H$ by 
+identifying $h \mapsto gh$ to be a bijection and so forth. 
+
+The next natural question is when are two cosets equal? 
+Like with showing when a subset is a subgroup we have a little trick 
+for this problem. 
+
+\begin{thm}
+    Let $G$ be a group. 
+
+    For $g_1, g_2 \in G$, the following are equivalent: 
+    \begin{align*}
+        g_1 H &= g_2 H \\ 
+              &\Updownarrow \\ 
+        g_2^{-1}g_1 &\in H \\ 
+                    &\Updownarrow \\ 
+        g_1 &\in g_2 H 
+    \end{align*}
+\end{thm}
+
+\begin{thm}
+    \label{thm:coset_partition}
+    The set of all left cosets of $H \leq G$ forms a 
+    partition of $G$. 
+
+    That is, 
+    \begin{itemize}
+        \item Every element of $G$ is in exactly on coset. 
+        \item Two cosets are either the same or disjoint. 
+    \end{itemize}
+\end{thm}
+
+\begin{defn}
+    Let $G$ be a group with $H \leq G$. 
+
+    The index of $H$ in $G$, written $[G:H]$, is the number of 
+    left cosets of $H$. 
+\end{defn}
+
+If $G$ is finite we get $|G| = [G:H] \cdot |H|$.
+
+\newpage 
+\begin{thm}[Lagrange's Theorem]
+    \label{thm:lagrange} 
+    Let $G$ be a group with $H \leq G$. 
+
+    Then: 
+    $$ 
+        |H| \bigm\vert |G|
+    $$ 
+\end{thm}
+\begin{proof}
+    Let $G$ be a group with $H \leq G$. 
+
+    Recall that by \cref{thm:coset_partition} we have that the 
+    set of left cosets of $H$, $g_1 H, g_2 H, \ldots, g_k H$ 
+    (this set is finite since $G$ is finite) are 
+    pairwise disjoint, satisfying 
+    $$ 
+        G = \bigcup_{i=1}^k g_i H
+    $$ 
+    meaning 
+    $$ 
+        |G| = \displaystyle\sum_{i=1}^{k}|g_i H|
+    $$ 
+
+    Recall also that $|H| = |g_i H|, \, \forall i \in [k]$. 
+    Thus 
+    $$ 
+        |G| = \displaystyle\sum_{i=1}^{k}|H| = k|H|
+    $$ 
+
+    In other words $|G|$ is $|H|$ times some integer $k$, therefore 
+    $|H|$ divides $|G|$. 
+\end{proof}
+
+
+\Cref{thm:lagrange} has the following immediate consequences: 
+\begin{itemize}
+    \item The order of any element divides $|G|$. 
+    \item $g^{|G|} = e$ for every $g \in G$. 
+\end{itemize}
+
+Beware that it does not follow from Lagrange's Theorem that there 
+exists a subgroup with the order of a divisor of $|G|$ for every 
+divisor of $G$. The alternating group of order $12$, $A_{4}$, 
+has no subgroup of order $6$ for example.
+
+\begin{prop}
+    A group of order $p$ where $p$ is prime, is cyclic. 
+\end{prop}
+\begin{proof}[Proof Sketch]
+    Let $G$ be a group with $|G| = p$ (prime). 
+
+    Let $g \in G \setminus \{1\}$. Consider it's generated subgroup 
+    $\langle g \rangle$. By Lagrange's Theorem the order of this 
+    subgroup divides $p$ so $|\langle g \rangle|$ is $1$ or $p$, but 
+    it can't be $1$ as $g \neq 1$ so it's order is $p$, i.e. 
+    $g$ generates the entirety of $G$. 
+\end{proof}
 
 \end{document}
