@@ -320,34 +320,168 @@ functions on $X$.
 \end{proof}
 
 \newpage 
-\section{Exercises from 2.1 in the textbook}
-\begin{prob}[Problem 1]
-    Show that if $\{x_n\} \to a$ then the sequence $\{Mx_n\}$, 
-    where $M$ is some constant, converges to $Ma$. 
-\end{prob}
-\begin{proof}
-    Suppose $\{x_n\} \to a$, i.e. 
-    $\forall \varepsilon_0 > 0, \exists N_0 \in \mathbb N$ such that 
-    $$ 
-        ||x_n - a|| < \varepsilon_0
-    $$ 
-    whenever $n \geq N_0$. 
-    
-    Let $\varepsilon > 0$ and pick some $N$ such that 
-    $$ 
-        ||x_n - a|| < \varepsilon/M
-    $$ 
+\section{A step back into Calculus Theory}
+The following section is largely in accordance with 
+chapter 2 of Lindstrøm's Spaces: An Introduction 
+To Real Analysis. 
 
-    Recall that such an $N$ can be found since $\varepsilon / M > 0$. 
-    Then 
-    \begin{align*}
-        M||x_n-a|| &< \varepsilon \\ 
-        ||M(x_n - a)|| &< \varepsilon \\ 
-        ||Mx_n - Ma|| &< \varepsilon
-    \end{align*}
-    so $\{Mx_n\} \to Ma$. 
+\begin{defn}[Limit of a sequence]
+    \label{defn:limit_sequence}
+    Let $(x_n)$ be a sequence of real numbers and $x \in \mathbb R$. 
+
+    We say 
+    $$ 
+        x_n \to x
+    $$ 
+    if for every $\varepsilon > 0$, there exists a natural number 
+    $N$ such that 
+    $$ 
+        |x_n - x| < \varepsilon, \; \forall n \geq N
+    $$ 
+\end{defn}
+This is among the most important definitions in a first 
+course in Real-Analysis.   
+Intuitively what it captures is the sense of being able 
+to get arbitrarily close to a value. 
+We will all be familiar with examples from 
+calculus like $\lim_{n\to\infty} \frac{1}{n} = 0$. 
+
+\begin{thm}
+    \label{thm:limit_unique}
+    If a sequence converges, then its limit is unique. 
+\end{thm}
+\begin{proof}
+    Suppose, for a contradiction, that we have some sequence 
+    $(x_n)$ with 
+    $$ 
+        x_n \to x \text{ and } x_n \to y
+    $$ 
+    of course with $x \neq y$.
+
+    $x_n$ converges so we can choose any $\varepsilon > 0$ 
+    for the condition in \cref{defn:limit_sequence} to hold. 
+
+    Consider the case of $\varepsilon = \frac{|x-y|}{2}$. 
+    $\varepsilon > 0$ since $x \neq y$ and is therefore a value 
+    for which the condition must hold. Namely, 
+    $$ 
+        |x_n - x| < \varepsilon \text{ and } |x_n - y| < \varepsilon
+    $$ 
+    leading to
+    $$ 
+        |x - x_n| + |x_n - y| < 2\varepsilon = |x - y|
+    $$ 
+    which, via triangle inequality, yields 
+    $$ 
+        |x-y| = |x - x_n + x_n - y| \leq |x - x_n| + |x_n - y| < |x-y| 
+    $$ 
+    in particular 
+    $$ 
+        |x-y| < |x-y|
+    $$ 
+    which is not possible, a contradiction. 
+
 \end{proof}
 
+\newpage 
+\begin{thm}[Algebra of Limits]
+    \label{thm:algebra_limits}
+    If $x_n \to x$ and $y_n \to y$, then: 
+    \begin{enumerate}
+        \item $x_n + y_n \to x + y$ 
+        \item $x_ny_n \to xy$
+        \item If $y_n \neq 0$ and $y \neq 0$, then $\frac{x_n}{y_n}
+            \to \frac{x}{y}$.
+    \end{enumerate}
+\end{thm}
+\begin{proof}[Proof of (1): Sum of Limits]
+    Let $(x_n)$ and $(y_n)$ be convergent sequences with 
+    $x_n \to x$ and $y_n \to y$. 
+
+    Let $\varepsilon > 0$. Since both sequences converge to their 
+    respective limits we have some 
+    $N_1, N_2 \in \mathbb N$ such that 
+    \begin{align*}
+        |x_n - x| &< \varepsilon/2, \: \forall n \geq N_1 \\ 
+        |y_n - y| &< \varepsilon/2, \: \forall n \geq N_2
+    \end{align*}
+
+    Let $N = \max\{N_1, N_2\}$, then $n \geq N$ satisfies 
+    $n \geq N_1$ and $N \geq N_2$ so 
+    $$ 
+        |x_n - x| + |y_n - y| < \varepsilon
+    $$ 
+
+    Notice that via the triangle inequality we get 
+    $$ 
+        |(x_n + y_n) - (x + y)| = |(x_n - x) + (y_n - y)| 
+        \leq |x_n - x| + |y_n - y| < \varepsilon
+    $$ 
+    completing the proof. 
+\end{proof}
+
+\begin{thm}
+    A sequence $x_n$ converges to $x$ if and only if 
+    $$
+        \lim \sup x_n = \lim \inf x_n = x
+    $$ 
+\end{thm}
+We will take this theorem without proof as it requires some background
+about monotone sequences and completeness which are covered 
+later. 
+
+\begin{defn}[Limit of a function]
+    \label{defn:limit_function}
+    Let $f: D \subset \mathbb R \to \mathbb R$, and let 
+    $a$ be a limit point of $D$. 
+
+    We say 
+    $$ 
+        \lim_{x \to a} f(x) = L 
+    $$ 
+    if for every $\varepsilon > 0$ there exists $\delta > 0$ 
+    such that 
+    $$ 
+        0 < |x - a| < \delta \Rightarrow |f(x) - L| < \varepsilon
+    $$ 
+\end{defn}
+
+Later, when we get to metric spaces again, this condition becomes 
+$$ 
+    d_X(x,a) < \delta \Rightarrow d_Y(f(x), f(a)) < \varepsilon
+$$ 
+for continuity. 
+
+\begin{thm}[Sequential criterion]
+    $$ 
+        \lim_{x\to a}f(x) = L \Leftrightarrow 
+        \text{for every sequence } x_n \to a \text{ with }
+        x_n \neq a, f(x_n) \to L
+    $$ 
+\end{thm}
+\begin{proof}[Proof sketch]
+    We only prove $\Rightarrow$, for now. 
+
+    Assume $\lim_{x\to a}f(x) = L$. 
+
+    Let $x_n \to a$ with $x_n \neq a$. 
+
+    Given $\varepsilon > 0$, choose $\delta > 0$ from the 
+    definition of the limit. 
+
+    Since $x_n \to a$ there exists $N \in \mathbb N$ such that 
+    with $n \geq N$ we have 
+    $$ 
+        |x_n - a| < \delta 
+    $$ 
+
+    Hence for $n \geq N$, 
+    $$ 
+        |f(x_n) - L| < \varepsilon
+    $$ 
+
+    Thus $f(x_n) \to L$.
+\end{proof}
 
 
 \end{document}
