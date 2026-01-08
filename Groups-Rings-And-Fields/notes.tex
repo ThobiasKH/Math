@@ -420,4 +420,132 @@ has no subgroup of order $6$ for example.
     $g$ generates the entirety of $G$. 
 \end{proof}
 
+\subsection{Problems relating to subgroups}
+\begin{prob}
+    Let $G$ be a group and $g \in G$ with  $\text{ord}(g) = 12$. 
+
+    \begin{itemize}
+        \item List all distinct subgroups of $\langle g \rangle$.
+        \item For which integers $k$ does $g^k$ generate $\langle g \rangle$?
+    \end{itemize}
+\end{prob}
+\begin{proof}[Solution]
+    Recalling that $\langle g \rangle = \{g^k : k \in \mathbb Z\}$, 
+    we want to find all the distinct subgroups of $\langle g \rangle$. 
+    In other words, which subsets of $\langle g \rangle$ are also 
+    groups with respect to the operation of $G$? 
+
+    $\text{ord}(g) = |\langle g \rangle| = 12$ hence $\langle g \rangle = \{g^0, g^1, \ldots, g^{11}\}$.
+    We know that there are two trivial subgroups of $\langle g \rangle$, namely $\{g^0\}$ and $\langle g \rangle$. 
+    Otherwise, we know that every cyclic subgroub of a cyclic group (which $\langle g\rangle$ is) is itself 
+    cyclic, so we can find the subgroups by looking at the generated groups of each element 
+    of $\langle g \rangle$. Otherwise, we could use the fact that 
+    $\langle g\rangle $ is isomorphic to $\mathbb Z/12\mathbb Z$ together with realizing that the number 
+    of subgroups is then the same as the number of positive divisors of $12$. 
+
+    Using the first approach we get: 
+    \begin{align*}
+        \langle g^2 \rangle &= \{g^n : n = 2k, \: k \in \mathbb Z\} \\ 
+                            &= \{e, g^2, \ldots, g^10\} = \langle g^10 \rangle \\ 
+        \langle g^3 \rangle &= \{e, g^3, g^6, g^9\} = \langle g^9 \rangle \\ 
+        \langle g^4 \rangle &= \{e, g^4, g^8\} = \langle g^8 \rangle \\ 
+        \langle g^6 \rangle &= \{e, g^6\} \\ 
+    \end{align*}
+    
+    Those integers which are coprime to $12$, like $1,5,7,11$, will generate $\langle g \rangle$. 
+    Thus we have $6$ distinct subgroups, exactly the same as the number of 
+    positive divisors of $12$, as expected. 
+\end{proof}
+
+\begin{prob}
+    Let $G$ be any group $H = \langle g \rangle$ where $\text{ord}(g) < \infty$. 
+
+    Prove that if $g^m \in H$, then $\langle g^m \rangle \leq H$. 
+\end{prob}
+\begin{proof}
+    Assume, for contradiction, that $g^m \in H$, but $\langle g^m \rangle$ 
+    is not a subgroup of $H$. 
+
+    Let $s = m \mod \text{ord}(g)$. 
+    Then $\langle g^m \rangle = \{g^{sk} : k \in \mathbb Z\} \neq \emptyset$.  
+    It is clear that this is a subset of $\langle g \rangle = H$, since 
+    $\langle g \rangle$ is closed under the group operation and 
+    $g^m \in H$. 
+    Then the only way our assumption is true is if 
+    there exists some $x,y \in \langle g^m \rangle$ such that 
+    $xy^{-1} \not\in \langle g^m \rangle$. 
+
+    Every element $x,y \in \langle g^m \rangle$ is of the form 
+    $x = g^{sn}, \, y = g^{st}$ for some $n,l \in \mathbb N$. 
+    By assumption, 
+    $xy^{-1} = g^{s(n-t)} \not\in \langle g^m \rangle$ 
+    which would necessarily mean that $n-t \not \in \mathbb Z$, 
+    impossible. 
+\end{proof}
+The above argument can be made more rigorous 
+by considering the isomorphism between $\langle g^m \rangle$ and 
+$\mathbb Z/s\mathbb Z$, or by proving the claim 
+directly (I am an idiot, and this was a bad approach). 
+
+\newpage 
+\section{Normal subgroups}
+\begin{defn}[Normal subgroup]
+    \label{defn:normal_subgroup}
+    A subgroup $H \leq G$ is normal, written $H \trianglelefteq G$, if:
+    $$ 
+        gH = Hg, \: \forall g \in G
+    $$ 
+    with the equivalent characterization:
+    $$ 
+        H \trianglelefteq G \Leftrightarrow gHg^{-1} = H, \: \forall g \in G
+    $$ 
+\end{defn}
+
+A few things to tick off immediately; 
+\begin{enumerate}
+    \item Every subgroup of an abelian group is normal. 
+    \item \{e\} and $G$ are always normal. 
+    \item The alternating group $A_n \trianglelefteq S_n$. 
+    \item Subgroups of index $2$ are always normal. 
+\end{enumerate}
+
+If you consider the map (conjugation)
+$$ 
+    x \mapsto gxg^{-1},
+$$ 
+which constitutes an automorphism of $G$ we can say 
+the following. 
+
+Normal subgroups are precisely those subgroups which are 
+fixed under every conjugation. 
+
+\begin{defn}[Quotient Group]
+    \label{defn:quotient_group}
+    If $H \trianglelefteq G$, define: 
+    $$ 
+        G/H := \{gH : g \in G\}
+    $$ 
+    with an operation we'll call multiplication by: 
+    $$ 
+        (gH)(kH) = (gk)H
+    $$ 
+\end{defn}
+
+\begin{thm}
+    The quotient group with multiplication, as defined above, 
+    is a well-defined group. 
+\end{thm}
+
+\newpage 
+\begin{defn}
+    We define the \textbf{canonical projection} as 
+    $$ 
+        \pi : G \to G/H, \: \pi(g) = gH.
+    $$ 
+\end{defn}
+Notably, the projection $\pi$ constitutes 
+a homomorphism with kernel $\ker \pi = H$.
+Notice that this claim of the kernel being $H$ itself 
+should be immediately obvious as $hH$ for some 
+$h \in H$ is itself $H$ as it's closed. 
 \end{document}
