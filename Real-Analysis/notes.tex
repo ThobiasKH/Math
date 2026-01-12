@@ -483,5 +483,153 @@ for continuity.
     Thus $f(x_n) \to L$.
 \end{proof}
 
+\newpage 
+\section{Completeness}
+\begin{defn}[Upper Bound]
+    \label{defn:upper_bound}
+    A set $A \subset \mathbb R$ is bounded above if 
+    there exists $M \in \mathbb R$ such that 
+    $$ 
+        a \leq M, \: \forall a \in A
+    $$ 
+
+    Such an $M$ is called an upper bound. 
+\end{defn}
+
+\begin{defn}[Supremum]
+    \label{defn:sup}
+    Let $A \subset \mathbb R$. 
+
+    A number $s \in \mathbb R$ is the supremum of $A$ if it 
+    is an upper bound of $A$ and for any 
+    upper bound $u$ of $A$ we have 
+    $$ 
+        s \leq u
+    $$  
+    and we use the notation 
+    $$ 
+        s = \sup A
+    $$ 
+\end{defn}
+
+The completeness axiom says that every nonempty subset of 
+$\mathbb R$ that is bounded above has a supremum in $\mathbb R$, 
+this being the distinguishing quality separating 
+$\mathbb R$ from $\mathbb Q$. 
+
+Sidenote: You can also characterize the reals 
+as the \emph{unique} ordered field containing $\mathbb Q$ which 
+has the least upper bound property. More precisely, every 
+$\mathbb F$ with this property satisfies $\mathbb F \cong \mathbb R$.
+
+\begin{prop}
+    If $A$ has a supremum then for every $\varepsilon > 0$, 
+    there exists $a \in A$ such that 
+    $$ 
+        s - \varepsilon < a \leq s
+    $$ 
+\end{prop}
+\begin{proof}
+    Let $\varepsilon > 0$. If no $a \in A$ existed with the 
+    desired property, then $s - \varepsilon$ would be a supremum, 
+    contradicting minimality of $s$.
+\end{proof}
+This proposition becomes useful later in many arguments. 
+
+The infimum $\inf A$ is also something we need and classically we 
+define it as being the greatest lower bound, but for 
+the purposes of keeping things simple, we 
+just let the infimum of a set $A$, $\inf A$, be defined as 
+$$ 
+    \inf A = -\sup(-A)
+$$ 
+
+\newpage 
+\begin{thm}[Monotone convergence]
+    Let $(x_n)$ be a monotone increasing sequence 
+    (a sequence with which $x_n \leq x_{n+1}$ for every 
+    $n \in \mathbb N$) which is bounded above. 
+
+    Then $(x_n)$ converges, and 
+    $$ 
+        \lim x_n = \sup\{x_n : n \in \mathbb N\}
+    $$ 
+\end{thm}
+\begin{proof}
+    Let 
+    $$ 
+        A = \{x_n : n \in \mathbb N\}
+    $$ 
+    
+    Since $A$ is bounded above, $A$ has some supremum $s$. 
+    We claim $x_n \to s$. 
+
+    Let $\varepsilon > 0$. 
+
+    By the supremum property, there exists $N$ such that 
+    $$ 
+        s - \varepsilon < x_N < \leq s
+    $$ 
+    
+    Since the sequence is increasing, for all $n \geq N$, 
+    $$ 
+        s - \varepsilon < x_n \leq s
+    $$ 
+
+    Thus 
+    $$ 
+        |x_n - s| < \varepsilon
+    $$ 
+\end{proof}
+
+\begin{lem}
+    Every cauchy sequence in $\mathbb R$ is bounded. 
+\end{lem}
+\begin{proof}
+    Let $(x_n)$ be cauchy. 
+
+    Choose $\varepsilon = 1$. Then there exists $N$ such 
+    that 
+    $$ 
+        |x_n - x_m| < 1, \: \forall n,m \geq N
+    $$ 
+
+    Fix $m = N$. Then for all $n \geq N$: 
+    $$ 
+        |x_n| \leq |x_N| + |x_n - x_N| < |x_N| + 1
+    $$ 
+    
+    Thus all terms are bounded. 
+\end{proof}
+
+\begin{thm}
+    Every cauchy sequence in $\mathbb R$ converges. 
+\end{thm}
+\begin{proof}[Proof idea]
+    Let $(x_n)$ be cauchy. 
+
+    $(x_n)$ is bounded. Use the cauchy property to construct nested 
+    intervals. Show the intersection of these to be nonempty 
+    via completeness of $\mathbb R$. 
+    $(x_n)$ will converge to a point in this intersection. 
+
+    A bit more formally, we choose indices $n_1, n_2, \ldots$ 
+    such that 
+    $$ 
+        |x_n - x_m| < 2^{-k}, \: \forall n,m \geq n_k
+    $$ 
+    and define the intervals 
+    $$ 
+        I_k = [x_{n_k} - 2^{-k}, x_{n_k} + 2^{-k}]
+    $$ 
+
+    Then each $I_k$ is closed and bounded with $I_{k+1} \subset I_k$.
+    Completeness wil give us 
+    $$ 
+        \bigcap_{k \in \mathbb N} I_k \neq \emptyset
+    $$ 
+    
+    There will be an $x$ in this set which is the limit point. 
+\end{proof}
 
 \end{document}
