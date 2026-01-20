@@ -632,4 +632,39 @@ $$ 
     There will be an $x$ in this set which is the limit point. 
 \end{proof}
 
+\newpage 
+\section{Open and Closed Sets in Metric Spaces}
+Let $X$ be a set and $A \subseteq X$. 
+Intuitively, a point $x$ is either \textbf{inside of} $A$, 
+\textbf{outside of} $A$, or \textbf{on the boundary} of A.  
+We know what it means to not be in $A$; $a \not\in A \Leftrightarrow 
+a \in A^c$. 
+We also know what $a \in A$ means, but set-theoretically we don't 
+have a notion of being on the "boundary" of $A$. 
+We can make sense of this notion in a metric space. 
+
+Recall that the open ball is the set 
+$B(x;r) = \{z \in X : d(x,z) < r\}$. Likewise we can define 
+the closed ball as follows. 
+
+\begin{defn}[Closed Ball]
+    The closed ball centered at $x \in X$ with radius $r \geq 0$ in 
+    $B(x;r) = \{z \in X : d(x,z) \leq r\}$. 
+\end{defn}
+
+Let $(X,d)$ be a metric space with $A \subseteq X$. 
+
+\begin{itemize}
+    \item $x \in X$ is an interior point of $A$ if 
+        $B(x;r) \subseteq A$ for some $r > 0$. 
+    \item $y \in X$ is an interior point of $A$ if 
+        $B(x;r) \subseteq A^c$ for some $r > 0$. 
+    \item $z \in X$ is a boundary point of $A$ if it is neither of 
+        the above, i.e. 
+        $B(z;r) \cap A \neq \emptyset$ and $B(z;r) \cap A^c \neq  
+        \emptyset$ for every $r > 0$.
+\end{itemize}
+
+Notably, every point in $X$ is one of these three. 
+
 \end{document}
