@@ -548,4 +548,101 @@ a homomorphism with kernel $\ker \pi = H$.
 Notice that this claim of the kernel being $H$ itself 
 should be immediately obvious as $hH$ for some 
 $h \in H$ is itself $H$ as it's closed. 
+
+\newpage 
+\section{Exercises for Week 1}
+\begin{prob}[29, p.48]
+    Show that if $G$ is a finite group with identity $e$ and 
+    an even number of elements, then there is 
+    $a \neq e$ in the group such that $a * a = e$.
+\end{prob}
+\begin{proof}
+    We are being asked to show that in a finite group with even 
+    order, there exists some element other than the identity which 
+    is it's own inverse. 
+
+    Recall uniqueness of inverses and that for $g \in G$, 
+    $(g^{-1})^{-1} = g$. Thus for every element there exists one 
+    and only one element which is it's inverse. $e^{-1} = e$ is 
+    covered. In $G \setminus \{e\}$ there are an odd number of 
+    elements. Each of these have exactly one unique inverse meaning 
+    that there is one element "left" over which then necessarily 
+    has itself as it's inverse. 
+\end{proof}
+
+\begin{prob}[33, p.49]
+    Let $G$ be an abelian group and let $c^n = c * c * \cdots * c$ 
+    for $n$ factors c, where $c \in G$ and $n \in \mathbb Z^+$. 
+    Give a proof by mathematical induction that $(a*b)^n = a^n * b^n$ 
+    for all $a,b \in G$. 
+\end{prob}
+\begin{proof}
+    Let $a,b \in G$. The base case where $n = 1$ is trivial so 
+    we proceed to our assumption that for any $k \in \mathbb Z^+$ we 
+    have $(a*b)^k = a^k * b^k$. 
+
+    Let $n = k + 1$. 
+    \begin{align*}
+        (a*b)^n &= (a*b)^{k+1} \\ 
+                &= (a*b)^k * (a*b) \\  
+                &= a^k * b^k * (a*b) & \text{by hypothesis} \\ 
+                &= a^k * (b^k * a) * b & \text{by associativity} \\ 
+                &= a^k * (a * b^k) * b & \text{by commutativity} \\ 
+                &= (a^k * a) * (b^k * b) \\ 
+                &= (a^{k+1}) * (b^{k+1}) \\ 
+                &= a^n * b^n
+    \end{align*}
+     
+    By the principle of mathematical induction we have that 
+    $$  
+        (a*b)^n = a^n * b^n, \: \forall n \in \mathbb Z^+
+    $$ 
+\end{proof}
+
+\newpage 
+\begin{prob}[35, p. 49]
+    Show that if $(a*b)^2 = a^2 * b^2$ for $a,b$ in a group, then 
+    $a*b = b*a$.  
+\end{prob}
+\begin{proof}
+    \begin{align*}
+        (a*b)^2 &= (a*b)*(a*b) \\ 
+        a^2 * b^2 &= (a*a) * (b*b) \\ 
+        \Rightarrow (a*b) * (a*b) &= (a*a) * (b*b) \\ 
+                    a * (b*a) * b &= a*(a*b)*b
+    \end{align*}
+    
+    By one application each of left- and right cancellation we have 
+    $$ 
+        a*b = b*a
+    $$ 
+\end{proof}
+
+\begin{prob}[41, p. 49]
+    Let $G$ be a group and fix $g \in G$. Show that the map 
+    $i_g$, s.t. $i_g(x) = gxg^{-1}$ for $x \in G$. Show that 
+    $i_g$ is an automorphism on $G$.
+\end{prob}
+\begin{proof}
+    Let $i_g : G \to G$ be defined as above. We need to show that 
+    it satisfies all the properties of an isomorphism. 
+
+    It is clear, through left- and right cancellation, that 
+    $i_g$ is injective. 
+
+    Notice also that for any $x \in G$ we have the pre-image 
+    $g^{-1}xg$ since $i_g(g^{-1}xg) = gg^{-1}xgg^{-1} = x$, hence 
+    $i_g$ is surjective. 
+
+    Lastly we verify the homomorphism property: 
+    \begin{align*}
+        i_g(xy) &= gxyg^{-1} \\ 
+                &= gxeyg^{-1} \\ 
+                &= gxg^{-1}gyg^{-1} \\ 
+                &= i_g(x) i_g(y)
+    \end{align*}
+    completing the proof. 
+\end{proof}
+
+
 \end{document}
