@@ -667,4 +667,73 @@ Let $(X,d)$ be a metric space with $A \subseteq X$.
 
 Notably, every point in $X$ is one of these three. 
 
+\begin{itemize}
+    \item $A^0 = \{\text{all interior points of } A\}$
+    \item $\partial A = \{\text{all boundary points of } A\}$ 
+    \item $\overline A = A \cup \partial A = ((A^c)^0)^c$
+\end{itemize}
+
+\begin{prop}
+    For any $A \subset X$, we have $\partial A = \partial (A^c)$.
+\end{prop}
+
+\begin{thm}
+    Useful characterizations of openness: 
+
+    $A \subseteq X$ is open if $A = A^0$
+
+    $A \subseteq X$ is open if $A$ contains none of its boundary 
+    points. 
+
+    $A \subseteq X$ is open if $A \cap \partial A = \emptyset$
+
+    $A \subseteq X$ is open if $\forall x \in A$ there is some 
+    $r > 0$ s.t. $B(x;r) \subseteq A$ 
+\end{thm}
+
+\begin{thm}
+    Useful characterizations of openness: 
+
+    $B \subseteq X$ is closed if $B = \overline B$
+
+    $B \subseteq X$ is closed if $A$ contains all of its boundary 
+    points. 
+
+    $A \subseteq X$ is closed if $ \partial B\subseteq B$
+\end{thm}
+
+\newpage 
+\begin{prob}
+    Consider $X = \mathbb R$ with the canonical metric $|\cdot|$. 
+    Show that $(a,b)$ is open and $[a,b]$ is open for 
+    $a \leq b \in \mathbb R$, and $(a,b]$ is 
+    neither open nor closed for $a < b$.
+\end{prob}
+\begin{proof}
+    Let $x \in (a,b)$, i.e. $a < x < b$. Take 
+    \[
+        r := \min\{x - a, x - b \} > 0
+    \]
+    Take any $y \in (x-r, x+y)$. 
+    Then 
+    \[
+        y > x - r \geq a, \: y < x + r \leq b
+    \]
+    Therefore 
+    \[
+        (x-r, x + r) \subset (a,b)
+    \]
+
+    In other words, every $x \in (a,b)$ admits and open ball 
+    contained entirely in the interval, so $(a,b)$ is open.
+
+    Notice that $\partial(a,b) = \{a,b\}$ and that 
+    $[a,b] = \partial(a,b) \cup (a,b)$ hence $[a,b]$ is the closure 
+    of $(a,b)$ and thus is closed.  
+
+    It is clear that $(a,b]$ is neither open nor closed as 
+    $\partial(a,b] = \{a,b\} \not \subseteq (a,b]$ and 
+    $(a,b] \cap \partial(a,b] \neq \emptyset$. 
+\end{proof}
+
 \end{document}
