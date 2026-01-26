@@ -736,4 +736,192 @@ Notably, every point in $X$ is one of these three.
     $(a,b] \cap \partial(a,b] \neq \emptyset$. 
 \end{proof}
 
+\newpage 
+\section{Week 4 problem set}
+\begin{prop}[Proposition 3.1.4 in Spaces]
+    \label{prop:reverse_triangle}
+    If $(X,d)$ is a metric space with $x,y,z \in X$, then 
+    \[
+        |d(x,y) - d(y,z)| \leq d(x,z)
+    \]
+\end{prop}
+\begin{prob}
+    Prove \Cref{prop:reverse_triangle}. 
+\end{prob}
+\begin{proof}
+    Let $(X,d)$ be a metric space and recall the standard 
+    triangle inequality: 
+    \[
+        d(x,z) \leq d(x,y) + d(y,z)
+    \]
+    Now observe the following rearangements: 
+    \begin{align*}
+        d(x,y) &\leq d(y,z) + d(x,z) \\ 
+        d(x,y) - d(y,z) &\leq d(x,z) \\ 
+                        &\text{and} \\ 
+        d(x,y) &\leq d(y,z) + d(x,z) \\ 
+        d(y,z) &\leq d(x,y) + d(x,z) \\ 
+        d(y,z) - d(x,z) &\leq d(x,y) \\ 
+        -d(x,z) &\leq d(x,y) - d(y,z) 
+    \end{align*}
+
+    Together: 
+    \[
+        |d(x,y) - d(y,z)| \leq d(x,z)
+    \]
+\end{proof}
+\begin{prob}[3.1.6 Spaces]
+    Let $(V,||\cdot||)$ be a normed space. Show that 
+    it induces a norm, i.e. 
+    \[
+        d(x,y) := ||x-y||
+    \]
+    is a norm.
+\end{prob}
+\begin{proof}
+    Let $(V,||\cdot||)$ be a normed space. 
+
+    \textbf{Non-negativity and Identity of Indiscernibles:}
+
+    \[
+        d(x,y) = ||x-y|| \geq 0 
+    \]
+    since $x-y \in V$ and $||\cdot||$ is non-negative. 
+    
+    \[
+        d(x,x) = ||x-x|| = ||0|| = 0
+    \]
+    Assume $d(x,y) = 0$. 
+    \[
+        d(x,y) = ||x-y|| = 0
+    \]
+    Then $x-y = 0 \Rightarrow x = y$.
+
+    \textbf{Symmetry:}
+
+    Recall for a norm we have $||\alpha x|| = |\alpha| ||x||$, 
+    hence 
+    \[
+        d(x,y) = |1|||x-y|| = ||-1(x-y)|| = ||y-x|| = d(y,x)
+    \]
+
+    \textbf{Triangle Inequality:}
+    \begin{align*}
+        d(x,z) &= ||x-z|| = ||x - (y + y) - z|| \\ 
+               &\leq ||x-y|| + ||y - z|| \\ 
+               &= ||x-y|| + ||z-y|| \\ 
+               &= d(x,y) + d(y,z)
+    \end{align*}
+\end{proof}
+
+\begin{prob}[3.1.7 Spaces]
+    Show that if $x_1, x_2, \ldots, x_n$ are points in a metric space,
+    then 
+    \[
+        d(x_1,x_n) \leq \displaystyle\sum_{i=1}^{n-1} d(x_i, x_{i+1})
+    \]
+\end{prob}
+\begin{proof}
+    We proceed by induction on $n \in \mathbb N$. 
+
+    \textbf{Base Case ($n=1$).}
+
+    Clearly, 
+    \[
+        d(x_1, x_1) \leq d(x_1, x_1)
+    \]
+
+    \textbf{Hypothesis.}
+    Now assume, for any $k \in \mathbb N$, 
+    \[
+        d(x_1, x_k) \leq \displaystyle\sum_{i=1}^{k-1}d(x_i, x_{i+1})
+    \]
+
+    \textbf{Induction.}
+    Let $n = k+1$. 
+
+    \begin{align*}
+        d(x_1, x_n) = d(x_1, x_{k+1}) &\leq d(x_1, x_k) + 
+        d(x_k, x_{k+1}) \\ 
+    &\leq \left(\displaystyle\sum_{i=1}^{k-1} d(x_i, x_{i+1})\right) 
+    + d(x_k, x_{k+1}) \\ 
+    &= \displaystyle\sum_{i=1}^{n-1} d(x_i, x_{i+1})
+    \end{align*}
+    as desired. 
+\end{proof}
+
+\begin{prob}[3.2.1 Spaces]
+    Assume that $(X,d)$ is a discrete metric space. Show that 
+    the sequence $\{x_n\}$ converges to $a$ if and only if there is an 
+    $N \in \mathbb N$ such that $x_n = a$ for all $n \geq N$. 
+\end{prob}
+\begin{proof}
+    Let $(X,d)$ be a discrete metric space, i.e. a metric space where
+    \[
+        d(x,y) = 
+        \begin{cases}
+            0 & \text{if } x = y \\ 
+            1 & \text{otherwise}
+        \end{cases}
+    \]
+
+    \textbf{$\Leftarrow$.} 
+    
+    Assume there is some $N \in \mathbb N$ such that 
+    $\forall n \geq N$, 
+    \[
+        x_n = a
+    \]
+    Then it is clear that for any $\varepsilon > 0$, 
+    \[
+        x_n = 0 \Rightarrow  d(x_n,a) = 0 < \varepsilon
+    \]
+    so $\{x_n\} \to a$. 
+
+    \textbf{$\Rightarrow$.}
+
+    Assume that $\{x_n\} \to a$. Then for any $\varepsilon > 0$ 
+    there exists $N \in \mathbb N$ such that for $n \geq N$, then 
+    \[
+        d(x_n, a) < \varepsilon
+    \]
+    In particular, this must hold for $\varepsilon = 0.5$. 
+    Notice that this requires $x_n = a$ since otherwise we would 
+    have $1 < 0.5$, a contradiction. 
+\end{proof}
+
+\begin{prob}[3.2.5 Spaces]
+    Let $(X,d)$ be a metric space and fix some $a \in X$. 
+    Show that the function $f:X \to \mathbb R$ defined as 
+    \[
+        f(x) = d(x,a)
+    \]
+    is continuous. 
+    Note: $\mathbb R$ is finite dimensional so we are free 
+    to choose any metric. $d{\mathbb R}(x,y) = |x-y|$ is fine.
+\end{prob}
+\begin{proof}
+    Let $(X,d)$ be a metric space and fix $a \in X$. 
+    Let $f$ be defined as above. 
+
+    Consider a family of sequences in $X$ such that every sequence 
+    $\{x_n\}$ converges to $a \in X$. Let $\{x_n\}$ be some arbitrary
+    sequence in this family.
+
+    Then, $\forall \varepsilon > 0$ we have some natural number 
+    $\mathbb N$, s.t. for any $n \geq N$,
+    \[
+        d(x_n, a) < \varepsilon
+    \]
+
+    Notice that 
+    \[
+        d(x_n,a) = |d(x_n,a) - 0| < \varepsilon
+    \]
+    where $\varepsilon > 0$ was arbitrary. Hence 
+    $f(\{x_n\})$ converges to $0 = d(a,a) = f(a)$. 
+
+    Thus $f$ is continuous.
+\end{proof}
+
 \end{document}
