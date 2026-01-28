@@ -673,4 +673,188 @@ $h \in H$ is itself $H$ as it's closed.
     This completes the proof.
 \end{proof}
 
+\begin{prob}[Problem 6 Fraleigh's p.83]
+    Compute $|\sigma|$ for 
+    \[
+        \sigma = 
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 \\ 
+            3 & 1 & 4 & 5 & 6 & 2
+        \end{pmatrix}
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    Observe that $\sigma$ is the permutation which sends 
+    \begin{align*}
+        1 &\to 3 \\ 
+        2 &\to 1 \\ 
+        & \ \vdots \\ 
+        6 &\to 2
+    \end{align*}
+    so $\sigma^2$ is 
+    \begin{align*}
+        1 &\to 4 \\ 
+        2 &\to 3 \\ 
+          & \ \vdots \\ 
+        6 &\to 1
+    \end{align*}
+    We want to find $n \in \mathbb N$ such that 
+    $\sigma^n = $ the identity permutation. 
+    It's easy to see that performing the permutation $6$ times 
+    gives $1 \to 1$ which we would require. We also see that 
+    $2 \to 2$, $3 \to 3$ and so on. 
+
+    We could also write the permutation in compact form and see 
+    that $\sigma$ is a cycle of length $6$, so the order is $6$. 
+\end{proof}
+
+\newpage 
+\begin{prob}[Problem 7 Fraleigh's p.83]
+    Compute $|\tau|$ for 
+    \[
+        \tau = 
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 \\ 
+            2 & 4 & 1 & 3 & 6 & 5 
+        \end{pmatrix}
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    Note that $\tau$ in compact notation is 
+    \[
+        \tau = (1 \ 2 \ 4 \ 3)(5 \ 6)
+    \]
+    so $\tau$ is the composition of a $2$- and $4$-cycle. 
+    \[
+        |\tau| = \text{lcm}(4, 2) = 4
+    \]
+\end{proof}
+\begin{prob}[Problem 49 Fraleigh's p.86]
+    If $A$ is a set, then a subgroup $H \leq S_A$ is transitive 
+    on $A$ if for each $a,b \in A$ there exists $\sigma \in H$ 
+    such that $\sigma(a)=b$. Show that if $A$ is a nonempty finite 
+    set, then there exists a finite cylic subgroup $H$ of $S_A$ 
+    with $|H| = |A|$ that is transitive on $A$.
+\end{prob}
+\begin{proof}
+    Let $A = \{a_1, a_2, \ldots, a_n\}$ with $S_A$ being the 
+    permutations on $A$. Let $\sigma \in S_A$ be the permutation which 
+    sends $a_i \to a_{i+1}$ (take $i$ modulo $n$). It is clear that 
+    $\sigma^k$ is the permutation which sends $a_i$ to $a_{i+k}$ and 
+    furthermore $|\sigma| = n = |A|$. It is not hard to see 
+    that $\langle\sigma\rangle$ forms a subgroup 
+    where each permutation shifts 
+    all elements of $A$. 
+    
+    It is clear that for any $a_i, a_j \in A$ we can find 
+    a permutation which sends one to the other. Suppose, without 
+    loss of generality, $i < j$. Then 
+    $\sigma^{j-i}(a_i) = a_j$, and the inverse of said permutation 
+    sends $a_j$ to $a_i$.
+
+    A bit inelegantly written, but I digress. 
+\end{proof}
+\begin{prob}[Problem 1 Fraleigh's p.94]
+    Find the orbit of 
+    \[
+        \sigma = 
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 & 6 \\ 
+            5 & 1 & 3 & 6 & 2 & 4
+        \end{pmatrix}
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    We are looking at $\sigma \in S_6$ acting on $[6]$ (I assume)
+    so we want to find 
+    \[
+        \left\{ 
+            \text{Orb}_\sigma(n) = \{\sigma^k(x) : 
+            k \in \mathbb Z\} 
+            \mid n = 1, 2, \ldots, 6
+        \right\}
+    \]
+
+    Let us rewrite $\sigma$ more compactly. 
+    \[
+        1 \to 5 \to 2 \to 1 
+    \]
+    \[
+        3 \to 3 
+    \]
+    \[
+        4 \to 6 \to 4
+    \]
+    so 
+    \[
+        \sigma = (1 \ 5 \ 2)(4 \ 6)
+    \]
+    
+    Thus we have the following orbits: 
+    \begin{align*}
+        \text{Orb}_\sigma(1) = \text{Orb}_\sigma(2) = 
+        \text{Orb}_\sigma(5) = \{1,2,5\} \\ 
+        \text{Orb}_\sigma(4) = \text{Orb}_\sigma(6) = \{4,6\} \\
+        \text{Orb}_\sigma(3) = \{3\} \\ 
+    \end{align*}
+\end{proof}
+
+\begin{prob}[Problem 7 Fraleigh's p.94]
+    Compute: 
+    \[
+        (1 \ 4 \ 5)(7 \ 8)(2 \ 5 \ 7)
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    \begin{align*}
+        (1 \ 4 \ 5)(7 \ 8)(2 \ 5 \ 7)
+        &= (1 \ 4 \ 5) \circ ((7 \ 8)(2 \ 5 \ 7)) \\ 
+        &= (1 \ 4 \ 5) (2 \ 5 \ 8 \ 7) \\ 
+        &= (2 \ 1 \ 4 \ 5 \ 8 \ 7)
+    \end{align*}
+\end{proof}
+\begin{prob}[Problem 29 Fraleigh's p.96]
+    Show that for every subgroup $H$ of $S_n$ for $n \geq 2$, 
+    either all permutations in $H$ are even or exactly half are. 
+\end{prob}
+\begin{proof}
+    Recall that an even permutation is a permutation which can be 
+    expressed as an even number of transpositions (swaps of 
+    $2$ elements). 
+
+    Let $\text{sgn}(\sigma) = 1$ if $\sigma$ is even, 
+    $\text{sgn}(\sigma) = -1$ otherwise for all $\sigma \in S_n$.  
+    $\text{sgn}:S_n \to \{1,-1\}$ is a homomorphism.  
+    Restrict this map to $H$. Then, the image: 
+    \[
+        \text{sgn}[H] = 
+        \begin{cases}
+            \{+1\} \\ 
+            \{+1,-1\}
+        \end{cases}
+    \]
+    In the first case it is clear that every element of $H$ must 
+    be even. 
+
+    In the other case where $\text{sgn}$ is surjective, the 
+    kernel 
+    \[
+        \ker(\text{sgn}[H]) = H \cap A_n,
+    \]
+    the set of even permutations in $H$. 
+    By the first isomorphism theorem, 
+    \[
+        H/(H\cap A_n) \cong \{+1, -1\}
+    \]
+    so 
+    \[
+        [H:H\cap A_n] = 2
+    \]
+    hence 
+    \[
+        |H \cap A_n| = \frac{1}{2} H
+    \]
+    i.e. half of $H$ is even. 
+\end{proof}
+
 \end{document}
