@@ -923,5 +923,68 @@ Notably, every point in $X$ is one of these three.
 
     Thus $f$ is continuous.
 \end{proof}
+\begin{prob}
+    Let $(X,d)$ be a metric space. Prove that every finite 
+    subset of $X$ is closed. 
+\end{prob}
+\begin{proof}
+    Recall that proposition $3.3.13$ from Spaces tells us that 
+    for any finite collection $F_1, \ldots, F_n$ of closed sets, 
+    their union 
+    \[
+        \bigcup_{i \in [n]} F_i
+    \]
+    is closed. 
+
+    Consider any singleton $\{x\} \subseteq X$. It is clear that 
+    $\{x\}$ is closed since $\{x\}^c$ is open. Observe that 
+    the open ball $B(y;\varepsilon) \subseteq \{x\}^c$ for any 
+    $y \in X \setminus \{x\}$ with $\varepsilon = d(x,y)$.
+    
+    Let $\{x_1,\ldots,x_n\} \subseteq X$ be any finite subset. As 
+    shown above, $\{x_i\}$ is closed, and by proposition 3.3.13 
+    \[
+        \{x_1,\ldots,x_n\} = \bigcup_{i\in[n]} \{x_i\}
+    \] 
+    is closed. 
+\end{proof}
+
+\begin{prob}[3.3.13 Spaces]
+    A metric space $(X,d)$ is disconnected if it is the union 
+    of two non-empty, disjoint and open subsets. If it is not 
+    disconnected it is connected. 
+    
+    a) Let $X = (-1,1) \setminus \{0\}$ and let $d$ be the usual 
+    metric on $X$. Show that $(X,d)$ is disconnected. 
+
+    b) Let $X = \mathbb Q$ and let $d$ be the usual metric again. 
+    Show that $(X,d)$ is disconnected. 
+
+    c) Assume that $(X,d)$ is a connected metric space
+    and that $f: X \to Y$ is continuous and surjective. Show that 
+    $Y$ is connected.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    It is clear that $(-1,0)$ and $(0,1)$ are open with respect to 
+    $d(x,y) = |x-y|$ as, we can find an open ball around any 
+    point in either. Since 
+    \[
+        X = (-1,0) \cup (0,1)
+    \]
+    we conclude that $X$ is disconnected. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Recall that $\sqrt 2 \not\in \mathbb Q$ so 
+    the open subsets 
+    \[
+        (-\infty, \sqrt 2) \cap \mathbb Q 
+        \text{ and }
+        (\sqrt 2, \infty) \cap \mathbb Q 
+    \]
+    Both of these sets are open in $\mathbb R$ and thus they 
+    are also open in $\mathbb Q$.
+\end{proof}
+\begin{proof}[Proof of (c)]
+\end{proof}
 
 \end{document}
