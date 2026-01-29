@@ -985,6 +985,123 @@ Notably, every point in $X$ is one of these three.
     are also open in $\mathbb Q$.
 \end{proof}
 \begin{proof}[Proof of (c)]
+    Suppose, for a contradiction that we have some 
+    continuous surjection $f : X \to Y$ where $X$ is connected 
+    and $Y$ is not. 
+
+    From surjection we can gleam that for any $y \in Y$ there 
+    is some $x \in X$ such that $f(x) = y$. From continuity
+    at every point we have that there is some 
+    $\delta > 0$ for any $\varepsilon > 0$ such that
+    \[
+        f\left[B_X(x;\delta)\right] \subseteq B_Y(f(x);\varepsilon)
+    \]
+    By assumption 
+    \[
+        Y = O_1 \cup O_2
+    \]
+    for some nonempty, disjoint, open $O_1$ and $O_2$.  
+    So for any point in $O_1$ or $O_2$ we have an open neighbourhood 
+    surrounding it. Consider some family open sets in 
+    $O_1$, $\{\omega_n\}_{n\in\mathbb N}$ such that 
+    \[
+        \bigcup_{n\in\mathbb N} \omega_n = O_1
+    \]
+    It is clear that $\omega_i \not \in O_2$ for any $\omega_i$. 
+    Suppose $\omega_i$ is centered around $y_i \in Y$. By surjectivity
+    we have that there are some $x_i \in X$ such that 
+    the image open ball around $x_i$ goes to the open ball around 
+    $y_i$. It is not hard to see that we are characterizing 
+    an open set in $X$ which is mapped to $O_1$. Repeat this process 
+    for $O_2$ and we will see that since there is no open ball 
+    which falls in both sets, and correspondingly via 
+    continuity there then is no ball in $X$ which falls in the 
+    pre-images of both $O_1$ and $O_2$, hence we have partitioned 
+    $X$ into two disjoint non-empty subsets. So $X$ is disconnected, 
+    a catastrophic contradiction.
+\end{proof}
+\begin{proof}[Another attempt at a proof of (c)]
+    Suppose, for a contradiction that we have a 
+    continuous surjection $f: X \to Y$ where $X$ is connected and 
+    $Y$ is not. 
+
+    Let $A \subseteq X$ be a subset such that $f\mid_A : A \to Y$ 
+    is a bijection. Since it is the restriction of $f$ to $A$ is 
+    still continuous $f$ constitutes a homeomorphism from $A \to Y$.
+    Then, the inverse $g : Y \to A$ exists, which is still continuous 
+    of course. 
+
+    Recall that a function $g$ from a metric space $Y \to A$ is 
+    continuous if and only if for any $\varepsilon > 0$ we 
+    have some $\delta > 0$ such that 
+    \[
+        g\left[B_Y(y;\delta)\right] \subseteq B_A(g(y);\varepsilon)
+    \]
+    for any $y \in Y$.
+    By assumption, there exist $O_1$ and $O_2$ such that 
+    \[
+        Y = O_1 \cup O_2
+    \]
+    with $O_1, O_2 \neq \emptyset$ and disjoint. 
+    Furthermore, $O_1$ and $O_2$ are open. 
+    We now claim that $A$ is partitioned into 
+    two disjoint, nonempty, open sets
+    \[
+        g[O_1] \text{ and } g[O_2]
+    \]
+    It is not hard to see that they are both open as the 
+    open ball around any point in $O_1$ or $O_2$ is sent to 
+    some open ball around a point in their image via continuity. 
+    Furthermore it is clear that they are nonempty since 
+    $g$ is a bijection and $O_1, O_2$ are nonempty. 
+
+    Lastly, assume (for contradiction) 
+    that there is some $y \in Y$ such that 
+    $g(y) \in g[O_1]$ and $g(y) \in g[O_2]$, i.e. 
+    they are not disjoint. 
+    Then we would have $f\mid_A(g(y)) \in O_1$ and 
+    $f\mid_A(g(y)) \in O_2$. Recalling that $f\mid_A \circ g = id_Y$ 
+    we have that $y \in O_1$ and $y \in O_2$, but it is established 
+    that no such point exists, contradicting the 
+    assumption that $g[O_1] \cap g[O_2] \neq \emptyset$.
+
+    Thus we have shown that $A$ is disconnected, but then 
+    $X$ is also disconnected, a catastrophic contradiction to 
+    our original assumption.
+\end{proof}
+
+\begin{prob}[3.3.13 Spaces (again)]
+    A space $X$ is path connected if there is a 
+    continuous $r : [0,1] \to X$ for every pair $x,y \in X$
+    such that $r(0) = x$ and $r(1) = y$.
+
+    d) Let $d$ be the usual metric on $\mathbb R^n$: 
+    \[
+        d(x,y) = ||x-y|| = \sqrt{\displaystyle\sum_{i=1}^{n} 
+        (x_i - y_i)^2}
+    \]
+    Show that $(\mathbb R^n, d)$ is path-connected. 
+
+    e) Show that every path-connected metric space is connected.
+\end{prob}
+\begin{proof}[Proof of (d)]
+    Consider two points $x,y \in \mathbb R^n$. Then 
+    \[
+        x = (x_1,\ldots,x_n), \ y = (y_1,\ldots,y_n)
+    \]
+    Consider the vector 
+    \[
+        (y - x) \cdot z = (y_1 - x_1, \ldots, y_n - x_n) \cdot z, \; 
+        z \in [0,1]
+    \]
+    It is clear that 
+    \[
+        x + (y-x) \cdot 0 = x \text{ and } x + (y - x) \cdot 1 = y  
+    \]
+    So defined $r: [0,1] \to X$ by 
+    \[
+        r(z) := x + (y-x) \cdot z
+    \]
 \end{proof}
 
 \end{document}
