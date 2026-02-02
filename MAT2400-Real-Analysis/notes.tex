@@ -1085,7 +1085,7 @@ Notably, every point in $X$ is one of these three.
     e) Show that every path-connected metric space is connected.
 \end{prob}
 \begin{proof}[Proof of (d)]
-    Consider two points $x,y \in \mathbb R^n$. Then 
+    Consider two distinct points $x,y \in \mathbb R^n$. Then 
     \[
         x = (x_1,\ldots,x_n), \ y = (y_1,\ldots,y_n)
     \]
@@ -1098,10 +1098,162 @@ Notably, every point in $X$ is one of these three.
     \[
         x + (y-x) \cdot 0 = x \text{ and } x + (y - x) \cdot 1 = y  
     \]
-    So defined $r: [0,1] \to X$ by 
+    So define $r: [0,1] \to X$ by 
     \[
         r(z) := x + (y-x) \cdot z
     \]
+    Let $z \in [0,1]$ and fix any $z_0 \in \mathbb Z$, 
+    let $\varepsilon > 0$ and choose $\delta := 
+    \frac{\varepsilon}{||x-y||}> 0$. 
+    Assume
+    \[
+        |z - z_0| < \delta 
+    \]
+    Then, 
+    \begin{align*}
+        ||r(z) - r(z_0)|| 
+        &= ||(x + (y-x) \cdot z) - (x + (y-x) \cdot z_0)|| \\ 
+        &= \left(\displaystyle\sum_{i=1}^{n} 
+        \left(
+            (x_i - zx_i + zy_i) 
+            - 
+            (x_i - z_0x_i + z_0y_i)
+        \right)^2
+        \right)^{1/2} \\ 
+        &= \left(\displaystyle\sum_{i=1}^{n} 
+        \left(
+            (z_0-z)x_i + (z - z_0)y_i
+        \right)^2
+        \right)^{1/2} \\ 
+        &= \left(\displaystyle\sum_{i=1}^{n} 
+        \left(
+            (z - z_0)(y_i - x_i)
+        \right)^2
+        \right)^{1/2} \\ 
+        &= |z - z_0| \left(\displaystyle\sum_{i=1}^{n} 
+        \left(
+            y_i - x_i
+        \right)^2
+        \right)^{1/2} \\ 
+        &= |z-z_0| \cdot ||x - y||
+        < \delta \cdot ||x-y|| = \frac{\varepsilon}{||x-y||}||x-y|| 
+        \\ 
+        &= \varepsilon
+    \end{align*}
 \end{proof}
 
+\newpage 
+\section{Week 6 problem set}
+\begin{prob}[Problem relating to Section 3.3]
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces, let $f:X\to Y$ be a continuous function, let $y\in Y$ be some given point, and consider the problem of finding an $x\in X$ such that $f(x)=y$ (that is, we wish to solve the above equation). Prove that the set of solutions of this equation is a closed subset of $X$.  
+
+    \emph{Hint:} Phrase the question in terms of finding $f^{-1}$ of a closed set.
+\end{prob}
+\begin{proof}
+    Apply the assumptions of the problem description.
+
+    Let $S_y \subseteq X$ denote the set of solutions to 
+    $f(x) = y \in Y$.
+    Notice that $S_y$ is the set $f^{-1}[\{y\}]$. Since $\{y\}$ is 
+    a singleton it is a closed set. 
+    In the topological sense, if $f$ is continuous then the preimage 
+    of every closed set in $Y$ is closed in $X$. 
+    This would complete the proof, but let us give an analytical 
+    way of doing it instead. 
+
+    Once again let $S_y \subset X$ denote the set of $x \in X$ such 
+    that $f(x) = y \in Y$. Let $\{x_n\}$ be some sequence in 
+    $S_y$ such that $x_n \to x$ in $X$. Now we need to show 
+    that $x \in S_n$, i.e. $f(x) = y$. Since $x_n \in S_y$ 
+    we have that (for every $n \in \mathbb N$) 
+    \[
+        f(x_n) = y
+    \]
+    $f$ is continuous so via sequential continuity we get 
+    \[
+        f(x_n) = f(x)
+    \]
+    i.e. 
+    \[
+        f(x) = y
+    \]
+    Thus $x \in S_y$. 
+    Since $\{x_n\}$ was an arbitrarily chosen convergent sequence 
+    in $S_y$ and we found that $x_n \to x \in S_y$ we conclude 
+    that $S_y$ contains all it's limit points. In other 
+    words $S_y$ is closed. 
+\end{proof}
+\begin{prob}
+    Prove that $(\mathbb{Z},d)$, where $d(x,y)=|x-y|$, is complete.  
+    \emph{Hint:} What does it mean for a sequence in $(\mathbb{Z},d)$ to converge or to be Cauchy?
+\end{prob}
+\begin{proof}
+    Let $\{x_n\}$ be a cauchy sequence in $\mathbb Z$. 
+    Then, for every $\varepsilon > 0$ there is some $N \in \mathbb N$
+    s.t. 
+    \[
+        |x_n - x_m| < \varepsilon
+    \] 
+    for every $n,m \geq N$. 
+    Notice that we then require $x_n = x_m$ for all $n,m \geq N$ 
+    since if that weren't the case we would have 
+    $0 < \varepsilon := 0.5 < 1 \leq |x_n - x_m|$. Thus 
+    every cauchy sequence in $\mathbb Z$ will necessarily settle 
+    at some $x \in \mathbb Z$ and be constant. In other words, 
+    $\{x_n\} \to x \in \mathbb Z$, as desired.  
+\end{proof}
+\begin{prob}[Problem 3.3.3 Spaces]
+    Assume that $F$ is a nonempty, closed and bounded 
+    subset of $\mathbb R$ with the usual metric. Show that 
+    $\inf F \in F$ and $\sup F\in F$. Give an example of a 
+    bounded, but not closed set such that it contains it's supremum
+    and infinmum.
+\end{prob}
+\begin{proof}
+    Suppose $\emptyset \neq F \subseteq \mathbb R$ with 
+    $F$ closed and bounded. 
+
+    Recall that since $F$ is bounded there is some finite 
+    $r > 0$, $x \in F$ such that 
+    \[
+        F \subseteq (x-r,x+r)
+    \]
+    Recall that for any nonempty subset of $\mathbb R$ there 
+    exists a least upper bound and greates lower bound, i.e.
+    $\inf F \in \mathbb R$ and $\sup F \in \mathbb R$. 
+
+    Let $\{x_n\}$ be a sequence in $F$ such that $\{x_n\} \to \sup F$.
+    By closedness $\sup F \in F$. Apply this same reasoning to 
+    the infimum to get the desired result. Notice that we required 
+    boundedness as, if $F$ wasn't bounded above and below we 
+    might have had $\inf F = -\infty$ or $\sup F = \infty$. In 
+    that case we couldn't have constructed sequences converging 
+    to these points.
+
+    Let $F = [0,1] \setminus \{\frac{1}{2}\}$. Clearly not closed 
+    since any sequence converging to $1/2$ contradicts it being 
+    closed. It is bounded above and below and $\inf F = 0 \in F$ 
+    and $\sup F = 1 \in F$. 
+\end{proof}
+\begin{prob}[Problem 3.3.11 Spaces]
+    Prove Proposition 3.3.12. Find an infinite collection of open 
+    sets whose intersection is closed. 
+\end{prob}
+\begin{prop}[Proposition 3.3.12 from Spaces]
+    Let $(X,d)$ be a metric space. 
+
+    a) If $\mathcal G$ is a finite or infinite collection of 
+    open sets, then 
+    \[
+        \bigcup_{G \in \mathcal G}G 
+    \]
+    is open.
+
+    b) If $G_1, \ldots, G_n$ is a finite collection of open sets 
+    then 
+    \[
+        \bigcap_{i=1}^n G_i
+    \]
+    is closed.
+\end{prop}
 \end{document}
