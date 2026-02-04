@@ -1368,4 +1368,164 @@ Notably, every point in $X$ is one of these three.
     \]
 \end{proof}
 
+\newpage 
+\section{3.4 \& 3.5}
+\begin{prop}
+    Let $(X,d)$ be a metric space. Let $f : X \to X$ be 
+    a contraction. Then $f$ is continuous.
+\end{prop}
+\begin{proof}
+    Let $f : X \to X$ be a contraction. In other words, for 
+    some $\omega \in (0,1)$, let 
+    $f$ satisfy  
+    \[
+        d(f(x), f(y)) \leq \omega d(x,y), \: \forall x,y \in X
+    \]
+    Let $\varepsilon > 0$. 
+    Define $\delta = \frac{\varepsilon}{\omega}$.
+    Suppose $d(x,y) < \delta$. Then 
+    \[
+        d(f(x),f(y)) \leq \omega d(x,y) < \omega \cdot \delta 
+        = \varepsilon
+    \]
+\end{proof}
+
+Recall that completeness is a very usefull property as if a 
+sequence seems to converge then it does converge, and to a 
+point in the space. However, sometimes it is hard to 
+show that a sequence is cauchy. 
+It would be nice to substitute this requirement to get 
+some other way of showing convergence of sequence in a space. 
+We could require that every sequence converges, but that 
+is a ridiculously strict requirement and false most of the time. 
+So instead, we require all sequences to have convergent subseqneces. 
+
+Recall the definition of a subsequence: 
+\begin{defn}[Subsequence]
+    Let $\{x_n\}_{n\in \mathbb N}$ be a sequence. A subsequence is 
+    a sequence of the form $\{x_{n(k)}\}_{k\in\mathbb N}$, 
+    where $n(k) \in \mathbb N$ and 
+    \[
+        n(1) < n(2) < n(3) < \cdots
+    \]
+\end{defn}
+Useful note: $n(k) \geq k$.
+\begin{prop}
+    Let $(X,d)$ be a metric space. If $\{x_n\}_n$ converges, then 
+    all possible subsequences converge, and the limit is the 
+    same. 
+\end{prop}
+\begin{proof}
+    Let $\varepsilon > 0$, let $N \in \mathbb N$ be such that 
+    $d(x_n, x) < \varepsilon$. Then $n(k) \geq n \geq N$
+    so also 
+    \[
+        d(x_{n(k)}, x) < \varepsilon
+    \]
+\end{proof}
+\begin{defn}[Compactness]
+    A metric space $(X,d)$ is said to be \emph{compact} if every 
+    sequence $\{x_n\}_n$ has a convergent subsequence 
+    $\{x_n(k)\}_k$.
+\end{defn}
+\begin{defn}
+    A subset $K \subseteq X$ of a metric space $(X,d)$ 
+    is compact if $(K,d)$ is compact. 
+\end{defn}
+\begin{thm}
+    Let $(X,d)$ be a metric space. If $K \subseteq X$ is finite 
+    then $(K,d)$ is compact.
+\end{thm}
+\begin{proof}
+    Let $\{x_n\}_{n\in\mathbb N}$ be a sequence in 
+    $K = \{k_1, k_2, \ldots, k_m\}$. 
+    As $\{x_n\}_n$ is infinite, there must be at least one 
+    element $k_i$ where $x_j = k_i$ for infinitely many 
+    $j \in \mathbb N$. 
+    Then we can pick out indices such that 
+    $\{x_n(p)\}_{p\in\mathbb N}$ is a constant sequence for 
+    some $k_i \in K$ and thus convergent.
+\end{proof}
+\begin{thm}
+    Let $(X,d)$ is compact. Then $(X,d)$ is complete. 
+\end{thm}
+\begin{proof}
+    Let $\{x_n\}_n$ be cauchy. As $(X,d)$ is compact there exists 
+    some convergent $\{x_{n(k)}\}_k$ which converges to $x \in X$.  
+    For $\varepsilon > 0$, let $N_1 \in \mathbb N$ be s.t. 
+    \[
+        d(x_{n(k)}, x) < \varepsilon, \: n \geq N_1
+    \]
+    and let $N_2 \in \mathbb N$ s.t. 
+    \[
+        d(x_n, x_m) < \varepsilon, \: n,m \geq N_2
+    \]
+    Let $N = \max\{n(N_1),N_2\}$. If $m \geq N$ then 
+    \[
+        d(x_m, x) \leq \underset{<\varepsilon}{d(x_m, x_{n(m)})}  
+        + \underset{<\varepsilon}{d(x_{n(m)}, x)} < 
+        2\varepsilon
+    \]
+    Hence $\{x_n\}_n$ converges to $x \in X$.
+\end{proof}
+\begin{thm}
+    If $K \subseteq X$ is compact then it is closed and bounded. 
+\end{thm}
+\begin{proof}
+    Let $K \subseteq X$ be compact.
+
+    \textbf{Closed.} 
+
+    Let $\{x_n\}_n$ be a sequence in $K$ converging to $x \in X$. 
+    By compactness we can find a subsequence $\{x_{n(k)}\}_k$ 
+    converging to some $y \in K$. Then $x = y \in K$, as the 
+    subsequence converges to the same value. 
+
+    \textbf{Bounded.}
+
+    Assume $K$ is not bounded. Fix $\overline x \in X$. Then 
+    for every $n \in \mathbb N$, there is some $x_n \in K$ with 
+    \[
+        d(x_n, \overline x) \geq n
+    \]
+    Let $\{x_{n(k)}\}_k$ be a convergent subsequence of $\{x_n\}_n$.
+    Then 
+    \[
+        n(k) \leq d(x_{n(k)}, \overline x) 
+        \underset{k \to \infty}{\to} d(x,\overline x)
+    \]
+    In other words, a value which tends to infinity is less than 
+    a fixed value. 
+\end{proof}
+\begin{prop}
+    Let $X = \mathbb R^n$, $d(x,y) = ||x-y||$ 
+    (all norms are equivalent in $\mathbb R^n$). 
+    Let $K \subseteq \mathbb R^n$. Then 
+    \[
+        K \text{ is compact}
+        \Leftrightarrow 
+        K \text{ is closed and bounded}
+    \]
+\end{prop}
+\begin{proof}
+    The l2r direction is already covered so we tackle the other 
+    way. 
+
+    Let $K$ be closed and bounded. Let $\{x_n\}_n$ be a sequence 
+    in $K$. 
+    Then $\{x_n\}_n$ is bounded, so by Bolzano-Weierstrass, there 
+    is a convergent subsequence $\{x_{n(k)}\}_k$ converging to 
+    some $x \in \mathbb R^n$. Since $K$ is closed $x \in K$. 
+    We conclude that $K$ is compact. 
+\end{proof}
+\begin{thm}
+    Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces with 
+    $f:X\to Y$ continuous. If $K \subseteq X$ is compact then 
+    $f[K]$ is, also.
+\end{thm}
+\begin{thm}
+    If $(X,d)$ is compact and $f : X \to \mathbb R$ continuous. 
+    Then $f$ attains a minimum and maximum.
+\end{thm}
+
 \end{document}
