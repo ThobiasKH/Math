@@ -1254,6 +1254,118 @@ Notably, every point in $X$ is one of these three.
     \[
         \bigcap_{i=1}^n G_i
     \]
-    is closed.
+    is open.
 \end{prop}
+\begin{proof}[Proof of (a)]
+    Consider a (potentially infinite) family 
+    $\mathcal G = \{G_1,G_2,\ldots\}$ of open sets. 
+    Define 
+    \[
+        \Gamma := \bigcup_{G \in \mathcal G} G
+    \]
+    Take any arbitrary $x \in \Gamma$. Then there is some 
+    $G_i$ such that $x \in G_i$. 
+    As $G_i$ is open there is some $r\in \mathbb R^+$ with 
+    \[
+        B(x;r) \subseteq G_i \subseteq \Gamma
+    \]
+    Hence $\Gamma$ is open. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Let $\mathcal G = \{G_i\}_{i \in [n]}$ be a finite family of 
+    open sets.  
+    Define 
+    \[
+        \Gamma := \bigcap_{i\in[n]} G_i
+    \]
+    Suppose $x \in \Gamma$. Then $\bigwedge_{i=1}^n x \in G_i$ and 
+    for each $G_i$ there is some $r_i > 0$ such that 
+    \[
+        B(x;r_i) \subseteq G_i
+    \]
+    Then 
+    \[
+        B(x;\min\{r_i : 1 \leq i \leq n\}) = 
+        \bigcap_{i=1}^n B(x;r_i) \subseteq \bigcap_{i \in [n]} G_i 
+        = \Gamma
+    \]
+    so $\Gamma$ is open.
+\end{proof}
+\begin{ex}[Counter example for infinite intersection.]
+    Consider the metric space $(\mathbb R, |\cdot|)$. 
+    Consider the following infinite family of open sets 
+    \[
+        \left\{ 
+            (-1/n,1/n)
+        \right\}_{n \in \mathbb N}
+    \]      
+    Clearly, 
+    \[
+        \bigcap_{n\in\mathbb N} (-1/n,1/n) = \{0\}
+    \]
+    which is closed in $\mathbb R$.
+\end{ex}
+\begin{prob}
+    prob
+    Consider $X=\mathbb{R}$ with the canonical metric $d(x,y)=|x-y|$. The \emph{support} of a function $f:\mathbb{R}\to\mathbb{R}$ is the set of points $x$ where $f(x)\neq 0$. Prove that the support of a continuous function is always open.  
+    \emph{Note:} In the literature, the "support" of $f$ is usually defined to be the closure of the above set, which is of course closed, not open.
+\end{prob}
+\begin{proof}
+    Let $f:\mathbb R\to\mathbb R$ be continuous and let
+    \[
+        \Omega := \{x\in\mathbb R : f(x)\neq 0\}.
+    \]
+    Suppose, for a contradiction, that $\Omega$ is not open. 
+    Then there exists
+    $x\in\Omega$ such that for every $r>0$ there is some 
+    $y\in(x-r,x+r)$ with
+    $f(y)=0$.
+
+    Since $f$ is continuous at $x$, for $\varepsilon := |f(x)| > 0$ 
+    there exists
+    $\delta>0$ such that
+    \[
+        |f(y)-f(x)|<\varepsilon \quad \text{whenever } |y-x|<\delta.
+    \]
+    By assumption, there exists $y\in(x-\delta,x+\delta)$ 
+    with $f(y)=0$.
+    Then
+    \[
+        |f(x)| = |f(x)-f(y)| < |f(x)|,
+    \]
+    a contradiction. Hence $\Omega$ is open.
+\end{proof}
+\begin{prob}
+    Show that the equation $\cos t = 2t$ has a unique solution.  
+    \emph{Hint:} Formulate the problem as finding the fixed point of a function $f$.
+\end{prob}
+\begin{proof}
+    Banach's fixed-point theorem tells us that for some complete 
+    metric space $X$, a contraction $F:X\to X$ will have a unique 
+    $t \in X$ such that 
+    \[
+        t = F(t)
+    \]
+    Let $F: \mathbb [0,\pi/2] \to \mathbb [0,\pi/2]$ be defined by 
+    \[
+        F(t) := \frac{1}{2}\cos t
+    \]
+    Clearly, $F(t) = t$ if and only if $\cos t = 2t$. 
+    Furthermore, as a closed bounded subset of a compelte emtric  
+    space,  $([0,\pi/2], |\cdot|_{[0,\pi/2]})$ is complete.  
+    Now all we need is to show that 
+    $F$ constitutes a contraction on $\mathbb R$. 
+    Notice that 
+    \[
+        \frac{1}{2}\cos(t) \in [0,1/2], \: t \in [0,\pi/2]
+    \]
+    so $F$ ceirtanly constitutes a contraction. Thus 
+    by Banach's fixed point theorem there is a unique 
+    point $t \in [0,\pi/2]$ such that $t = F(t)$. $t$ constitutes 
+    the unique solution to 
+    \[
+        \cos(t) = 2t
+    \]
+\end{proof}
+
 \end{document}
