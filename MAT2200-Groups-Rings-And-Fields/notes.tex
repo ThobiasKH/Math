@@ -1,4 +1,5 @@
 \input{preamble.tex}
+\usepackage{tikz-cd}
 
 \title{\huge{Groups, Rings and Fields}}
 \author{\LARGE{Thobias Høivik}}
@@ -856,5 +857,91 @@ $h \in H$ is itself $H$ as it's closed.
     \]
     i.e. half of $H$ is even. 
 \end{proof}
+
+\newpage 
+\section{External- and Internal Direct Products}
+\begin{defn}
+    Let $H,K \leq G$, 
+    \begin{align*}
+        G' = H \times K = \{(h,k) \bigm| h \in H, \ k \in K\} \\ 
+        G = H \oplus K = \{hk \bigm| h \in H, \ k \in K\}
+    \end{align*}
+    The internal direct product $H \oplus K$ presupposes that 
+    $H, K \unlhd G$, and $H \cap K = \{e\}$.
+\end{defn}
+We really want to be able to say that $H \times K \cong H \oplus K$.
+
+\begin{ex}
+    Consider the dihedral group $D_3 = \{1,x,x^2, y, xy, x^y\}$. 
+    Let $H = \langle x \rangle$ and $K = \langle y \rangle$.
+    It's easy to see that 
+    $H \cap K = \{e\} = \{1\}$, and $H \unlhd D_3$. 
+    However $xK = \{x, xy\}$, but $Kx = \{x,yx\} = \{x, x^2y\}$. 
+    Hence 
+    \[
+        D_3 \neq H \oplus K
+    \]
+\end{ex}
+
+\begin{lem}
+    $H,K \unlhd G$ and $H \cap K = \{e\}$. 
+    \begin{enumerate}
+        \item if $ab = a'b'$ where $a,a' \in H$ and $b,b' \in K$ 
+            then $a = a'$ and $b = b'$.
+        \item if $a \in H$ and $b \in K $ then $ab = ba$.
+    \end{enumerate}
+\end{lem}
+
+\begin{thm}
+    Assuming $H,K$ normal subgroups of $G$ with trivial intersection, 
+    then 
+    \[
+        H \times K \cong H \oplus K
+    \]
+\end{thm}
+\begin{proof}
+Define a map
+\[
+\varphi : H \times K \to HK, \qquad \varphi(h,k) = hk.
+\]
+
+This map is well-defined since \(h \in H\), \(k \in K\) implies \(hk \in HK\).
+
+Define a second map
+\[
+\psi : HK \to H \times K
+\]
+by sending \(g \in HK\) to the unique pair \((h,k)\) such that \(g = hk\).
+Such a decomposition exists since \(HK = G\), and is unique because
+\(H \cap K = \{e\}\).
+
+We now verify that these maps are inverse to one another. For all
+\((h,k) \in H \times K\),
+\[
+(\psi \circ \varphi)(h,k) = \psi(hk) = (h,k),
+\]
+and for all \(g \in HK\),
+\[
+(\varphi \circ \psi)(g) = g.
+\]
+Thus \(\varphi\) is bijective with inverse \(\psi\).
+
+Finally, \(\varphi\) is a homomorphism, since for \((h_1,k_1),(h_2,k_2) \in H \times K\),
+\begin{align*}
+    \varphi((h_1,k_1)(h_2,k_2))
+    &= \varphi(h_1h_2,k_1k_2) \\
+    &= h_1h_2k_1k_2 \\
+    &= h_1k_1h_2k_2 \\
+    &= \varphi(h_1,k_1)\varphi(h_2,k_2),
+\end{align*}
+where we use that elements of \(H\) and \(K\) commute.
+
+Therefore \(\varphi\) is an isomorphism, and \(HK \cong H \times K\).
+\end{proof}
+
+\begin{thm}
+    If $|x|, |y| < \infty$ and $(x,y) \in G \times H$ then 
+    $|(x,y)| = \text{lcm}(|x|,|y|)$.
+\end{thm}
 
 \end{document}
