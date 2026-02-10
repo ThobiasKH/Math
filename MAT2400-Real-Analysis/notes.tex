@@ -1528,4 +1528,226 @@ Useful note: $n(k) \geq k$.
     Then $f$ attains a minimum and maximum.
 \end{thm}
 
+\begin{defn}
+    Let $(X,d)$ be a metric space. A set $K \subseteq X$ is 
+    \emph{totally bounded} if $\forall \varepsilon > 0$, 
+    there exists finitely many points $x_1,\ldots,x_n \in K$ 
+    such that 
+    \[
+        K \subseteq \bigcup_{i=1}^n B(x_i;\varepsilon)
+    \]
+\end{defn}
+In other words, we say $K$ is totally bounded if we can find 
+finitely many open balls which cover it for any 
+radius $\varepsilon$. This sounds a lot like the topological 
+definition of compactness (Every open cover has a finite subcover).
+What we have here is a stronger property than meere boundedness. 
+\begin{lem}
+    Every compact set is totally bounded.
+\end{lem}
+\begin{proof}
+    Let $K \subseteq X$ be a compact subspace of a metric 
+    space $(X,d)$, and assume it is not totally bounded.   
+    So $K$ compact with 
+    \[
+        K \not\subseteq \bigcup_{i=1}^n B(x_i;\varepsilon)  
+    \]
+    for any choice of $x_1, \ldots,x_n$ for some $\varepsilon$.
+    Pick any $x_1 \in K$. Then $K \not\subseteq B(x_1;\varepsilon)$,
+    so there is some $x_2 \in K \setminus B(x_1;\varepsilon)$.
+    Iteratively pick $x_1,\ldots,x_n$, pick any 
+    $x_{n+1} \in K \setminus \bigcup_{i=1}^n B(x_i;\varepsilon)$. 
+    Note: $d(x_n, x_m) \geq \varepsilon$ for any $x \neq m$. 
+    Then $\{x_n\}_n$ is a sequence in $K$, so has convergent 
+    subsequence with limit $x \in K$. But then 
+    $\varepsilon \leq d(x_n,x) + d(x,x_m) 
+    \underset{x,m \to \infty}{\to} 0$.
+\end{proof}
+
+\begin{defn}
+    Let $(X,d)$ be a metric space. A set $B \subseteq X$ is 
+    separable if there exists a dense, countable set 
+    $D \subseteq B$.
+\end{defn}
+\begin{ex}
+    \begin{itemize}
+        \item $\mathbb R$ is separable ($\mathbb Q \subseteq 
+            \mathbb R$)
+        \item Any subset of $\mathbb R$ is separable 
+        \item $B_1, B_2, \ldots$ separable, then 
+            \[
+                \bigcup_{i\in\mathbb N} B_i
+            \]
+            is, also 
+        \item $\ell^p(\mathbb R)$ is separable for all 
+            $p < \infty$, but not $p = \infty$
+    \end{itemize}
+\end{ex}
+\begin{thm}
+    Let $(X,d)$ be a complete metric space, $K \subseteq X$. 
+    \[
+        K \ \text{compact} \Leftrightarrow K \ \text{totally bounded}
+    \]
+\end{thm}
+\begin{thm}
+    Every compact set is separable.
+\end{thm}
+\newpage 
+\section{3.6 - Compactness IV}
+\begin{defn}
+    Let $(X,d)$ be a metric space and let $K \subseteq X$. 
+    An \emph{open covering} of $K$ is a family of open sets 
+    $\mathcal F$ satisfying 
+    \[
+        K \subseteq \bigcup_{\mathcal O \in \mathcal F} \mathcal O
+    \]
+\end{defn}
+\begin{defn}
+    A set $K \subseteq X$ has the open covering property if 
+    for any open covering $\mathcal F$ of $K$, 
+    there exists $\mathcal O_1,\ldots,\mathcal O_n \in \mathcal F$
+    such that $\{\mathcal O_1,\ldots, \mathcal O_n\}$ is an 
+    open covering of $K$.
+\end{defn}
+\begin{thm}
+    A set $K \subseteq X$ is compact if and only if it has 
+    the open covering property. 
+\end{thm}
+This is a very powerful classification of compactness and is the 
+one you typically first encounter in a topology course. 
+Notice that we don't need to assume completeness of $X$, 
+closedness of $K$ (as that comes for free), etc. 
+
+\newpage 
+\section{4.1 - Models of Continuity}
+\begin{defn}
+    A function $f : X \to Y$ is 
+    \begin{itemize}
+        \item continuous at $x$ if $\forall \varepsilon > 0, \:
+            \exists \delta > 0$ such that 
+            \[
+                d_Y(f(x), f(y)) < \varepsilon
+            \]
+            for every $y \in X$ satisfying $d_X(x,y) < \delta$.
+        \item continuous if it is continuous at all 
+            $x \in X$.
+        \item uniformly continuous if 
+            $\forall \varepsilon > 0, \: \exists \delta > 0$ s.t. 
+            \[
+                d_X(x,y) < \delta \Rightarrow d_Y(f(x),f(y))
+            \]
+            $\forall x,y \in X$.
+        \item Lipschitz continuous if $\exists C > 0$ s.t. 
+            \[
+                d_Y(f(x),f(y)) < C d_x(x,y), \ \forall x,y \in X
+            \]
+    \end{itemize}
+    with each subsequent property implying the one before it. 
+\end{defn}
+\begin{defn}
+    Denote 
+    \[
+        C(X,Y) = \{\text{all continuous} \ f:X\to Y\}
+    \]
+    \[
+        C(X) = C(X,\mathbb R)
+    \]
+\end{defn}
+\begin{lem}
+    If $f:A \to \mathbb R$ ($A \subseteq \mathbb R$) satisfies 
+    $|f'(x)| \leq M, \: \forall x \in A$, then $f$ is 
+    Lipschitz with constant $M$.
+\end{lem}
+\begin{lem}
+    If $f : [a,b] \to \mathbb R$ is continuously differentiable, 
+    then it is Lipschitz.
+\end{lem}
+\begin{thm}
+    Let $f : X \to Y$ be continuous and $(X,d_X)$ compact. 
+    Then $f$ is uniformly continuous.
+\end{thm}
+
+\newpage 
+\section{Problems from week of 9/2 to 15/2}
+\begin{prob}[Problem 5, Spaces p.67]
+    Let $(X,d)$ be a metric space. For a subset $A \subseteq X$, 
+    let $\partial A$ denote the set of all boundary points of $A$. 
+    Recall that the closure of $A$ is $\overline A = A 
+    \cup \partial A$. 
+
+    \medskip
+
+    a) A subset $A$ of $X$ is called \emph{precompact} if 
+    $\overline A$ is compact. Show that $A$ is precompact if 
+    and only if all sequences in $A$ have a convergent subsequence. 
+
+    \medskip 
+
+    b) Show that a subset of $\mathbb R^m$ is precompact if 
+    and only if it is bounded. 
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Notice that what we're really saying here is that 
+    $A$ is precompact if and only if $A$ is compact. 
+
+    By an earlier theorem we have that if $A \subseteq X$ is 
+    compact then it is closed and bounded. Namely 
+    $A$ is closed so $A = \overline A$. Thus it is clear to 
+    see that $A$ is precompact if and only if it is compact. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    By an earlier proposition we have that a $A \subseteq \mathbb R^m$
+    is compact if and only if it is closed and bounded. As we 
+    saw in (a) we know that $A$ is precompact if and only 
+    if it is compact. 
+\end{proof}
+\begin{prob}[Problem 6, Spaces p.67]
+    Assume that $(X,d)$ is a metric space and that 
+    $f : X \to [0,\infty)$ is continuous. Assume that for each 
+    $\varepsilon > 0$, there is a compact set $K_\varepsilon 
+    \subseteq X$ such taht $f(x) < \varepsilon$ when 
+    $x \not\in K_\varepsilon$, Show that $f$ has a maximum point.
+\end{prob}
+\begin{proof}
+    If $f \equiv 0$, then $f$ trivially attains its maximum.
+    Assume therefore that there exists $x_0 \in X$ such that
+    $f(x_0) > 0$.
+
+    Let
+    \[
+        \varepsilon := \frac{1}{2} f(x_0) > 0.
+    \]
+    By assumption, there exists a compact set
+    $K_\varepsilon \subseteq X$ such that
+    \[
+        f(x) < \varepsilon \quad \text{for all } x \notin K_\varepsilon.
+    \]
+
+    Since $f$ is continuous and $K_\varepsilon$ is compact, the
+    restriction
+    \[
+        f\bigm|_{K_\varepsilon} : K_\varepsilon \to [0,\infty)
+    \]
+    attains a maximum. Let $x^* \in K_\varepsilon$ be such that
+    \[
+        f(x^*) = \max_{x \in K_\varepsilon} f(x) =: M.
+    \]
+    Note that
+    \[
+        M \ge f(x_0) > \varepsilon.
+    \]
+
+    Now let $x \in X$ be arbitrary. If $x \in K_\varepsilon$, then
+    $f(x) \le M$. If $x \notin K_\varepsilon$, then
+    \[
+        f(x) < \varepsilon < M.
+    \]
+    Hence in all cases,
+    \[
+        f(x) \le M = f(x^*).
+    \]
+
+    Therefore $f$ attains its maximum at $x^*$.
+\end{proof}
+
 \end{document}
