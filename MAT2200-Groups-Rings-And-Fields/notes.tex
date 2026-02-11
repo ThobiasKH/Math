@@ -1185,5 +1185,144 @@ Hence the quotient group has order $4$.
     which implies that $H$ is normal.
 
 \end{proof}
+\begin{prob}[Problem 35 Fraleigh's p.143]
+    Show that if $H$ and $N$ are subgroups of a group $G$, and 
+    $N$ is normal in $G$, then $H \cap N$ is normal in $H$. 
+\end{prob}
+\begin{proof}
+    Let $G$ be a group with $H \leq G$ and $N \trianglelefteq G$.
+    We take it for granted that $H \cap N$ is indeed a group 
+    (this is not hard to show). 
+
+    Fix some arbitrary $h \in H$.
+    We must show that $h(H\cap N)h^{-1} \subseteq H \cap N$. 
+    
+    Let $x \in H \cap N$. As $x, h \in H$ we ceirtanly have 
+    $hxh^{-1} \in H$. As $x \in N$, $N$ normal, we have that 
+    for any $h \in H \subseteq G$, $hxh^{-1} \in N$. 
+
+    Hence 
+    \[
+        hxh^{-1} \in H \cap N
+    \]
+\end{proof}
+
+\begin{prob}[Problem 3 Fraleigh's p.151]
+    Classify the groups according to the fundamental theorem of 
+    finitely generated abelian groups.
+    \[
+        (\mathbb Z_2 \times \mathbb Z_4)/\langle(1,2)\rangle
+    \]
+    \[
+        (\mathbb Z_4 \times \mathbb Z_8)/\langle(1,2)\rangle
+    \]
+    \[ 
+        (\mathbb Z_4 \times \mathbb Z_4 \times \mathbb Z_8)/
+        \langle (1,2,4) \rangle
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    We begin with 
+    $(\mathbb Z_2 \times \mathbb Z_4)/\langle(1,2)\rangle$. 
+
+    \begin{align*}
+        \langle (1,2) \rangle &= \{(0,0), (1,2)\} \\ 
+        (0,0) \{(0,0), (1,2)\} &= \{(0,0), (1,2)\} = A \\ 
+        (1,0) \{(0,0), (1,2)\} &= \{(1,0), (0,2)\} = B \\ 
+        (0,1) \{(0,0), (1,2)\} &= \{(0,1), (1,3)\} = C \\ 
+        (1,1) \{(0,0), (1,2)\} &= \{(1,1), (0,3)\} = D \\ 
+        (0,2) \{(0,0), (1,2)\} &= \{(1,0), (0,2)\} = B \\ 
+        (1,2) \{(0,0), (1,2)\} &= \{(1,2), (0,0)\} = A \\ 
+        (0,3) \{(0,0), (1,2)\} &= \{(0,3), (1,1)\} = D \\ 
+        (1,3) \{(0,0), (1,2)\} &= \{(1,3), (0,1)\} = C \\ 
+    \end{align*}
+    We get an abelian group with $4$ distinct elements.
+    Crucially, we can see that the coset of $(0,1)$ has order 
+    $4$ and is thus a generator. 
+    We conclude that $(\mathbb Z_2 \times \mathbb Z_4)/
+    \langle (1,2)\rangle \cong \mathbb Z_4$.
+
+    Now we look at $(\mathbb Z_4 \times \mathbb Z_8)/
+    \langle(1,2)\rangle$.
+
+    Notice that 
+    \[
+        (\mathbb Z_4 \times \mathbb Z_8) = \langle a,b 
+        \bigm| 4a = 0, \: 8b = 0, \: ab = ba\rangle
+    \]
+    so quotienting with $\langle(1,2)\rangle$ only imposes 
+    the extra relation that 
+    \[
+        a + 2b = 0 \Leftrightarrow a = -2b
+    \]
+    then $\text{ord}(1,2) = \text{lcm}(4,4) = 4$ so 
+    $\langle (1,2)\rangle$ has $4$ elements.  
+    $|\mathbb Z_4 \times \mathbb Z_8| = 32$ so the quotient group has 
+    \[
+        \frac{32}{4} = 8
+    \]
+    elements. 
+    Up to isomorphism there exist $3$ abelian groups of order 
+    $8$.
+    The relation imposed by $\langle (1,2)\rangle$ changes nothing 
+    so we require $8b = 0$. Clearly 
+    \[
+        (\mathbb Z_4 \times \mathbb Z_8)/\langle (1,2)\rangle 
+        \cong \mathbb Z_8
+    \]
+
+    Lastly we look at 
+    \[
+        (\mathbb Z_4 \times \mathbb Z_4 \times \mathbb Z_8)/
+        \langle (1,2,4) \rangle
+    \]
+    Notice that 
+    \[
+        \mathbb Z_4 \times \mathbb Z_4 \times \mathbb Z_8 
+        = \{a,b,c \bigm| 4a = 0, \: 4b = 0, \: 8c = 0, \; 
+        ab = ba, \; ac = ca, \; bc = ca\}
+    \]
+    with 
+    \[
+        \langle (1,2,4) \rangle
+    \]
+    imposing $a + 2b + 4c = 0$ which then means that 
+    $a = -2b -4c$. The order of $\mathbb Z_4 \times 
+    \mathbb Z_4 \times \mathbb Z_8$ is $128$. The order
+    of the subgroup is $\text{lcm}(4, 2, 2)$ which is $4$. 
+    Thus the order of the quotient group is 
+    \[
+        \frac{128}{4} = 32 = 2^5
+    \]
+    There are precisely $7$ abelian groups unique up to isomorphism.
+    $b$ has order $4$ and $c$ has $8$ so we conclude that 
+    the quotient group is isomorphic to 
+    \[
+        \mathbb Z_4 \times \mathbb Z_8 
+    \]
+\end{proof}
+\begin{prob}[Problem 34 Fraleigh's p.153]
+    Let $G$ be finite, containing a nontrivial subgroup of index $2$
+    in $G$. Show that $G$ is not simple. 
+\end{prob}
+\begin{proof}
+    There exists a subgroup $H \leq G$ with 
+    $2$ left cosets. Since $H$ is always a left coset of $H$ there 
+    must be one more left coset $gH$ for any $g \not\in H$. 
+    Since the number of right cosets is the same we 
+    have right cosets $H$ and $Hg$. There are only $2$ cosets 
+    so the non-$H$ cosets must be the same 
+    \[
+        gH = Hg
+    \]
+    Thus left and right cosets coincide. Therefore 
+    \[
+        H \trianglelefteq G
+    \]
+    $H$ is nontrivial, and crucially $H \neq G$ (since the index 
+    is $2$). Hence $G$ has a nontrivial proper subgroup. 
+    In other words, $G$ is not simple. 
+\end{proof}
+
 
 \end{document}
