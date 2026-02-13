@@ -1750,4 +1750,330 @@ closedness of $K$ (as that comes for free), etc.
     Therefore $f$ attains its maximum at $x^*$.
 \end{proof}
 
+\begin{prob}[Problem 7 Spaces p.67]
+    Let $(X,d)$ be a compact metric space, and assume that 
+    $f : X \to \mathbb R$ is continuous when $\mathbb R$ is 
+    given the usual metric. Show that if $f(x) > 0$ for 
+    every $x \in X$, then there is a positive, real number
+    $a$ such that $f(x) > a$ for every $x \in X$.
+\end{prob}
+\begin{proof}
+    Notice that what the claim gives us is that 
+    $f[X]$ is bounded below by some \emph{positive} real 
+    number $a$. By assumption $f[X]$ is already bounded 
+    below by $0$. We give a constructive argument 
+    for the existence of $a > 0$ as follows: 
+
+    As $f$ is continuous, $X$ compact, we conclude that 
+    $f[X] \subseteq \mathbb R$ is compact. By the Heine-Borel 
+    theorem $f[X]$ is closed and bounded. 
+    Thus $\inf f[X]$ exists and furthermore $0 < \inf f[X] \in f[X]$.
+    (We conclude that $\inf f[X]$ is strictly greater than $0$ 
+    as $f(x) > 0$ by assumption).
+    Let $a = \frac{1}{2} \inf f[X]$. 
+
+    Clearly, 
+    \[
+        0 < a < \inf f[X]
+    \]
+    so 
+    \[
+        0 < a < f(x), \: \forall x \in X
+    \]
+    
+\end{proof}
+
+\begin{prob}[Problem 8 Spaces p.68]
+    Assume that $f: X \to Y$ is a continuous function between 
+    metric spaces, and let $K$ be a compact subset of $Y$. 
+    Show that $f^{-1}(K)$ is closed. 
+\end{prob}
+\begin{proof}
+    Let $K \subseteq Y$ compact, $f : X \to Y$ continuous, and denote 
+    \[
+        \Omega := f^{-1}[K] = \{x \in X \bigm| f(x) \in K\}
+    \]
+    Suppose $\Omega$ is open. Then there is some sequence 
+    $\{x_n\}_{n\in\mathbb N}$ in $\Omega$ which converges 
+    to a limit point $x \not\in \Omega$. 
+    By sequential continuity we have that 
+    \[
+        f(x_n) \to f(x)
+    \]
+    $f(x_n) \in K$. Since $K$ is compact (and thus closed), 
+    we conclude that 
+    \[
+        f(x) \in K
+    \]
+    so 
+    \[
+        x \in f^{-1}[K] = \Omega
+    \]
+    In other words, $x \in \Omega$ and $x \not\in \Omega$. 
+
+    (No this did not need to be a proof by contradiction)
+\end{proof}
+\begin{prob}[Problem 9 Spaces p.68]
+    Show that a totally bounded subset of a metric space is always
+    bounded. Find an example of a bounded set in a metric space 
+    that is not totally bounded. 
+\end{prob}
+\begin{proof}
+    Let $(X,d)$ be a metric space with $K \subseteq X$ totally 
+    bounded. Recall that what we mean by totally bounded is 
+    that for every $\varepsilon > 0$, there exists finitely 
+    many $x_1, \ldots, x_n \in K$ such that 
+    \[
+        K \subseteq \bigcup_{i=1}^n B(x_i;\varepsilon)
+    \]
+    $K$ is bounded if 
+    \[
+        K \subseteq B(x;r)
+    \]
+    for some $x \in K$ and $r > 0$.
+
+    Pick $x := x_i$ for any $i \in [n]$, and let 
+    \[
+        r := \sup_{1 \leq j \leq n} d_X(x,x_j) 
+        + \varepsilon
+    \]
+    Consider any $y \in B(x_j; \varepsilon)$.  
+    Then 
+    \[
+        d_X(y,x_j) < \varepsilon
+    \]
+    and, by triangle inequality 
+    \[
+        d(y,x) \le d(y,x_j) + d(x_j,x)
+    \]
+    Hence, 
+    \[
+        d(y,x) < \varepsilon + d(x_j,x)
+    \]
+    Since $d(x_j,x) \le \sup_{1 \le j \le n} d(x,x_j)$, we get 
+    \[
+        d(y,x)< \varepsilon + \sup_{1 \le j \le n} d(x,x_j)
+    \]
+    As $r$ is defined, 
+    \[
+        \varepsilon + \sup_{j} d(x,x_j) = r
+    \]
+    Thus 
+    \[
+        d(y,x) < r.
+    \]
+    As $y \in B(x_j;\varepsilon)$ was arbitrarily chosen 
+    we may conclude that 
+    \[
+        K \subseteq B(x;r)
+    \]
+\end{proof}
+
+\begin{prob}[Problem 11 Spaces p.68]
+    A metric space $(X,d)$ is locally compact if there for each 
+    $a \in X$ is some $r > 0$ such that the closed ball 
+    $\overline B(a;r)$ is compact. 
+
+    a) Show that $\mathbb R^n$ is locally compact. 
+
+    b) Show that if $X = \mathbb R \setminus \{0\}$, and 
+    $d: X \to \mathbb R$ is the metric defined by $d(x,y) = |x-y|$, 
+    then $(X,d)$ is locally compact, but not complete.  
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Let $a \in \mathbb R^n$ and take \emph{any} $r > 0$. 
+    Clearly 
+    \[
+        \overline B(a;r)
+    \]
+    is closed and furthermore 
+    \[
+        \overline B(a;r) \subseteq \overline B(a;r)
+    \]
+    so bounded. 
+    
+    By the Heine-Borel theorem $\overline B(a;r)$ is compact. 
+    As $a \in \mathbb R^n$ was chosen arbitrarily we conclude 
+    that $\mathbb R^n$ is locally compact. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Pick any $a \in X$. If $a > 0$ we define the closed ball 
+    \[
+        a \pm \frac{|a|}{2} 
+    \]
+    which is clearly closed and bounded (thus compact). 
+
+    The space is not complete because 
+    \[
+        \left\{\frac{1}{n}\right\}_{n\in\mathbb N} 
+        \underset{n \to \infty}{\to} 0 \not\in X
+    \]
+    i.e. we have a cauchy sequence which does not converge 
+    to a point in the space. 
+\end{proof}
+\begin{prob}[Problem 15 Spaces p.68]
+    Assume that $C$ and $K$ are disjoint, compact subsets of a 
+    metric space $(X,d)$, and define 
+    \[
+        a = \inf\left\{ d(x,y) \bigm| x \in C, y \in K \right\}
+    \]
+    Show that $a$ is strictly positive and that there 
+    are point $x_0 \in C, \: y_0 \in K$ such that 
+    $d(x_0, y_0) = a$. Show by an example that the result 
+    does not hold if we only assume that one of the sets is compact 
+    and the other is closed. 
+\end{prob}
+\begin{proof}
+    As the metric is non-negative we can clearly see that 
+    $a \geq 0$. Assume, in search of contradiction, that 
+    $a = 0$.
+    Then, for every $n \in \mathbb N$ there exists 
+    $x_n \in C, \: y_n \in K$ such that 
+    \[
+        d(x_n, y_n) < \frac{1}{n}
+    \]
+    $C$ is compact so you can take a convergent subsequence 
+    \[
+        \{x_n(k)\}_k \to x_0 \in C
+    \]
+    Then, as  
+    \[
+        d(x_{n(k)}, y_{n(k)}) \to 0
+    \]
+    we see 
+    \[
+        \{y_{n(k)}\}_k \to x_0 \in K
+    \]
+    and thus conclude 
+    \[
+        x_0 \in C \cap K \neq \emptyset 
+    \]
+    contradiction our assumption. Hence $a > 0$. 
+
+    Now consider two sequences $\{x_n\}_n \subseteq C$ 
+    and $\{y_n\}_n \subseteq K$ such that 
+    \[
+        d(x_n, y_n) \underset{n \to \infty}{\to} a
+    \]
+    By sequential continuity (metric is continuous) we 
+    get that 
+    \[
+        d(x_n, y_n) \to d(x,y)
+    \]
+    and by uniqueness of limit point we conclude that 
+    \[
+        d(x,y) = a
+    \]
+    Now, as $C$ and $K$ are compact we can find 
+    convergent subsequences which must then again 
+    converge to $x$ and $y$ in their respective sets. 
+    In other words, 
+    \[
+        x \in C \ \text{and} \ y \in K
+    \]
+    Therefore you can find points in $C$ and $K$ such that 
+    the minimum distance is attained. 
+
+    (Perhaps this could have been shown by arguing that 
+    as $d$ is continuous and thus the set of distances 
+    between $C$ and $K$ are compact in $\mathbb R$ 
+    ($\Rightarrow$ closed and bounded), the 
+    extreme-value theorem applies?)
+\end{proof}
+
+\begin{prob}[Problem 2 Spaces p.80]
+    Prove that $f:(0,1) \to \mathbb R$ given by $f(x) = \frac{1}{x}$
+    is not uniformly continuous.
+\end{prob}
+\begin{proof}
+    Recall that a function $f : X \to Y$ is uniformly continuous 
+    if 
+    \[
+        \forall \varepsilon > 0, \: \exists \delta > 0 : 
+        d_X(x,y) < \delta \Rightarrow d_Y(f(x),f(y)), 
+        \: \forall x,y \in X
+    \]
+    Crucially there must be a $\delta$ for every $\varepsilon$ 
+    which works at every point similtaneously.
+    Informally, the problem with $\frac{1}{x}$ is that 
+    it grows without bound when $x \to 0$. 
+    
+    Consider what happens as $x \to 0$. 
+    Let $x_n = \frac{1}{n}$ and $y = \frac{1}{n+1}$. 
+    Then 
+    \[
+        d_X(x_n, y_n) \underset{n\to\infty}{\to} 0
+    \]
+    but 
+    \[
+        d_Y(f(x_n),f(y_n)) = |n - (n + 1)| = 1
+    \]
+    So we can fix $\varepsilon_0 = 1/2$ and for 
+    any $\delta > 0$ we can pick $n$ large enough so that 
+    \[
+        d_X(x_n,y_n) < \delta
+    \]
+    but 
+    \[
+        d_Y(f(x_n),f(y_n)) = 1 > \varepsilon_0
+    \]
+    
+\end{proof}
+\begin{prob}[Problem 4 Spaces p.80]
+    Let $f : \mathbb R \to \mathbb R$ be a differentiable 
+    function and assume that the derivative 
+    $f'$ is bounded. Show that $f$ is uniformly continuous. 
+\end{prob}
+\begin{proof}
+    We know that $f$ is a real-valued function such that there 
+    exists $M \in \mathbb N$ for which
+    \[
+        \left|\frac{d}{dx}f(x)\right| = 
+        \left|\lim_{h \to 0}\frac{f(x+h)-f(x)}{h}\right|
+        \leq M, \: \forall x \in \mathbb R
+    \]
+    Suppose $f$ is not uniformly continuous. Then it is ceirtainly 
+    not Lipschitz continuous. I.e. for every constant $C$ 
+    there are points $x_C, y_C$ such that
+    \[
+        |f(x_C) - f(y_C)| > C|x_C-y_C| 
+    \]
+    Specifically: 
+    \begin{align*}
+        |f(x_M)-f(y_M)| &> M|x_M-y_M| 
+        \\ 
+        \left|\frac{f(x_M)-f(y_M)}{x_M-y_M}\right| &> M \\ 
+        M \geq \left|\frac{f(x_M)-f(y_M)}{x_M-y_M}\right| &> M
+    \end{align*}
+    Our assumption that $f$ is not Lipschitz continuous 
+    has led to a contradiction, so $f$ is Lipschitz and hence 
+    uniformly continuous.
+\end{proof}
+
+\newpage  
+\begin{prob}[A reach problem from section 4.6]
+    Assume that $X \subset \mathbb R^n$ is not compact. 
+    Show that there is an unbounded continuous function 
+    $f: X \to \mathbb R$. 
+\end{prob}
+\begin{proof}   
+    Recall that from the Heine-Borel theorem a 
+    subset of $\mathbb R^n$ is compact if and only if 
+    it is closed and bounded. Therefore 
+    we may conclude that $X$ is either open or 
+    unbounded. In the case where $X$ is unbounded 
+    we construct the function $f : X \to \mathbb R$ with 
+    \[
+        f(x) = ||x||
+    \]
+    which very clearly is continuous and not bounded. 
+    
+    Now suppose $X$ is open. 
+    Fix some $y \in \partial X \setminus X$. 
+    Define $f : X \to \mathbb R$ as 
+    \[
+        f(x) = \frac{1}{||x-y||} = \frac{1}{d_X(x,y)} 
+    \]
+\end{proof}
+
 \end{document}

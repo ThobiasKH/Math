@@ -1,0 +1,435 @@
+\input{preamble.tex}
+
+\title{\huge{Oblig 1}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+\begin{prob*}[Problem 1] 
+    La $\mathbb C^* = \mathbb C \setminus \{0\}$, hvor 
+    gruppeoperasjonen er vanlig multiplikasjon med 
+    komplekse tall. La 
+    \[
+        A = \left\{z \in \mathbb C^* \bigm| |z| = 1\right\}
+    \]
+
+    a) Er $A$ lukket under multiplikasjon?  
+
+    b) Er $A$ en undergruppe av $\mathbb C^*$?
+\end{prob*}
+\begin{proof}[Løsning og bevis av (a)]
+    $A$ er lukket under multiplikasjon. 
+
+    Merk at for $z \in A$ kan vi skrive $z$ som 
+    \[
+        z = e^{i\theta}, \: \theta \in \mathbb R/2\pi\mathbb Z
+    \]
+    Vi vet at $\mathbb R/2\pi\mathbb Z$ er lukket under 
+    addisjon (faktisk en gruppe), og isomorf med 
+    $A$ via $\phi:\mathbb R/2\pi\mathbb Z \to A$
+    \[
+        \phi(\theta) = e^{i\theta}
+    \]
+    så $A$ er lukket. 
+
+    Alternativt: 
+    \begin{align*}
+        z,w \in A \Rightarrow |z| = |w| = 1 \\ 
+        |z\cdot w| = |z| \cdot |w| = 1 \\ 
+        \Rightarrow z\cdot w \in A
+    \end{align*}
+\end{proof}
+\medskip
+\begin{proof}[Løsning og bevis av (b)]
+    Vi hevder at $A \leq \mathbb C^*$. 
+
+    Med tanke på at $A \subseteq \mathbb C^*$, og at $A$ er 
+    en gruppe (isomorf med $\mathbb R/2\pi \mathbb Z$, som vist 
+    i (a)), kan vi konkludere at $A \leq \mathbb C^*$. 
+
+    Alternativt kan vi gjøre følgende:
+
+    $A \subseteq \mathbb C^*$, per definisjon, og 
+    \[
+        1 = e^{0i} \in A \neq \emptyset
+    \]
+    Da gjennstår det å vise at for vilkårlig valgte 
+    $a,b \in A$ så har vi at 
+    \[
+        ab^{-1} \in A
+    \]
+    For $a,b \in A$ finnes det $\theta_a, \theta_b \in 
+    \mathbb R/2\pi\mathbb Z$ slik at 
+    \[
+        a = e^{i\theta_a}, \: b = e^{i\theta_b} 
+    \]
+    Vi ser at 
+    \begin{align*}
+        ab^{-1} &= e^{i\theta_a} (e^{i\theta_b})^{-1} \\ 
+                &= e^{i\theta_a} e^{i(-\theta_b)} \\ 
+                &= e^{i(\theta_a - \theta_b)} \in A
+    \end{align*}
+    og konkluderer dermed at $A \leq \mathbb C^*$.
+\end{proof}
+\newpage 
+\begin{prob*}[Problem 2]
+    La $G$ være en endelig gruppe med identitetselement $e$. 
+    Anta at for alle $g \in G$ gjelder 
+    \[
+        g^2 = e.
+    \]
+
+    a) La $a,b \in G$. Vis at 
+    \[
+        aba^{-1}b^{-1} = e
+    \]
+
+    b) Vis at $G$ er abelsk. 
+
+    c) Vis at $G$ er enten triviell eller isomorf med gruppen 
+    \[
+        \prod_{n=1}^n \mathbb Z_2 = \overbrace{\mathbb Z_2
+        \times \cdots \times \mathbb Z_2}^n
+    \]
+    for en eller annen $n \geq 1$.
+\end{prob*}
+For simplisitet viser vi (b) først. 
+
+\begin{proof}[Bevis av (b)]
+    $G = \{e,g_1,\ldots,g_n\}$ med $g^2 = e, \: \forall g \in G$.
+    
+    Vi har da at $g = g^{-1}$. Ta vilkårlige $x,y \in G$. 
+    Da får vi 
+    \begin{align*}
+        (xy)^{-1} &= y^{-1}x^{-1} \\ 
+        (xy)^{-1} &= yx & (g = g^{-1}) \\ 
+        xy = (xy)^{-1} &= yx
+    \end{align*}
+    $x,y \in G$ var vilkårlig valgt så vi konkluderer at 
+    alle $x,y \in G$ kommuterer (sikkert ikke riktig Norsk begrep) 
+    med hverrandre. Altså $G$ er abelsk. 
+\end{proof}
+\medskip
+\begin{proof}[Bevis av (a)]
+    Nå følger $aba^{-1}b^{-1} = e$ direkte siden $G$ er abelsk. 
+
+    Viss vi skulle vist det uten å vite at $G$ er abelsk 
+    kan vi igjen observere at $g = g^{-1}$ og da 
+    \begin{align*}
+        e &= abb^{-1}a^{-1} \\ 
+          &= abba & \text{siden} \ g = g^{-1} \\ 
+          &= aba^{-1}b^{-1} & \text{siden} \ (ba)^{-1} = a^{-1}b^{-1}
+    \end{align*}
+\end{proof}
+\medskip
+\begin{proof}[Bevis av (c)]
+    $G$ er endelig (og dermed endelig generert) og abelsk, 
+    så 
+    \[
+        G \cong \left(\prod_{i=1}^n \mathbb Z_{p_i^{(e_i)}}\right) 
+        \times \mathbb Z \times \cdots \times \mathbb Z
+    \]
+    Ettersom $|G| < \infty$ må $G$ være isomorf til produktet 
+    av grupper av formen $\mathbb Z_{p_i^{(e_i)}}$, altså 
+    \[
+        G \cong \prod_{i=1}^n \mathbb Z_{p_i^{(e_i)}}
+    \]
+    Betegn 
+    \[
+        \Gamma := \prod_{i=1}^n \mathbb Z_{p_i^{(e_i)}}
+    \]
+    med antagelsen at $G \cong \Gamma$. 
+    Viss vi antar, for en kontradiksjon, at dette produktet 
+    inneholder $\mathbb Z_{p_k^{e_k}}$ med $p_k^{e_k} > 2$ ser 
+    vi at det finnes et element $\gamma = (0,\ldots,1,\ldots,0) 
+    \in \Gamma$ (0 i alle innslag uten om $k$) med 
+    \[
+        |\gamma| = p_k^{e_k} > 2 
+    \]
+    Med antagelsen at $\Gamma \cong G$ får vi da 
+    at et element med orden $>2$ må bli sent til et element av 
+    orden $2$, som ikke er mulig. Videre kan vi se 
+    at fra Lagrange's teorem må 
+    \[
+        |g| = 2 \Bigm| |G|
+    \]
+    så $|G| = 2^m, \: m \in \mathbb N$ (siden en odd prim divisor for 
+    $|G|$ hadde motsigt $|g| \leq 2$ pga. Cauchy's). 
+    Så for $|G| = 2^m$ blir 
+    \[
+        G \cong \prod_{i=1}^{n:=m} \mathbb Z_2
+    \]
+
+    Dersom $G \not\cong \Gamma$ så er den eneste andre endelige 
+    genererte abelske gruppen med $g^2 = e, \: \forall g \in G$ 
+    den trivielle gruppen $\{e\}$.
+\end{proof}
+
+\newpage 
+\begin{prob*}[Problem 3]
+    La 
+    \[
+        \sigma = 
+        \begin{pmatrix}
+            1 & 2 & 3 & 4 & 5 \\ 
+            2 & 5 & 4 & 3 & 1
+        \end{pmatrix}
+        \in S_5
+    \]
+
+    a) Skriv $\sigma$ som et produkt av disjunkte sykler. 
+
+    b) Ligger $\sigma$ i $A_5$? 
+
+    c) Hva er ordenen til $\sigma$? 
+
+    d) For den sykliske gruppen $\langle \sigma \rangle$ og 
+    elementet $(1,4) \in S_5$, vis at venstre restklasse 
+    $(1,4)\sigma$ er ikke lik høyre restklasse $\sigma(1,4)$.
+\end{prob*}
+\begin{proof}[Løsning av (a)]
+    $\sigma$ sender $1 \to 2 \to 5 \to 1$ og 
+    $3 \to 4 \to 3$ så 
+    \[
+        \sigma = (1 \ 2 \ 5)(3 \ 4)
+    \]
+\end{proof}
+\medskip 
+\begin{proof}[Løsning av b)]
+    Nei, 
+    \[
+        \sigma = (1 \ 5)(1 \ 2)(3 \ 4)
+    \]
+    Altså, $\sigma$ er ikke komposisjonen av et partal 
+    transposisjoner. 
+\end{proof}
+\medskip
+\begin{proof}[Løsning av (c)]
+    Ordenen av en komposisjon av disjunkte sykler $\sigma_1, \sigma_2$
+    er $\text{lcm}(|\sigma_1|, |\sigma_2|)$.  
+
+    \[
+        \sigma = (1 \ 2 \ 5)(3 \ 4)
+    \]
+    og siden ordenen av en $3$-sykel er $3$ og en $2$-sykel $2$ 
+    så konkluderer vi at 
+    \[
+        |\sigma| = \text{lcm}(2,3) = 6
+    \]
+\end{proof}
+\begin{proof}[Bevis av (d)]
+    Anta at de er like. 
+    Husk at $gH = Hg \Leftrightarrow gHg^{-1} = H$, så 
+    viss 
+    \[
+        (1 \ 4)\sigma(1 \ 4)^{-1} = \sigma^r
+    \]
+    for en $r \in \mathbb Z$ ville vi hatt 
+    at venstre restklasse er lik høyre. 
+    For simplisitet bruker vi at 
+    \[
+        \tau(a_1 \ \cdots \ a_n) \tau^{-1} = (\tau(a_1) \ 
+        \cdots \ \tau(a_n))
+    \]
+    så 
+    \begin{align*}
+        (1 \ 4) \sigma (1 \ 4) &= (1 \ 4)(1 \ 2 \ 5)(3 \ 4)(1 \ 4) \\ 
+                               &= (4 \ 2 \ 5)(3 \ 1) 
+    \end{align*}
+    Merk her at $3 \leftrightarrow 1$, men ingen potens av 
+    $\sigma$ vil transponere $3$ og $1$. Dermed er antagelsen at 
+    $(1 \ 4)\langle \sigma \rangle = \langle \sigma \rangle (1 \ 4)$
+    feil. 
+\end{proof}
+\newpage 
+\begin{prob*}[Problem 4]
+    La $GL_2(\mathbb R)$ være gruppen av reelle, inverterbare 
+    $(2\times 2)$-matriser, dvs. 
+    \[
+        GL_2(\mathbb R) = \left\{ 
+            \begin{pmatrix}
+                a & b \\ 
+                c & d
+            \end{pmatrix} 
+            \Biggm| a,b,c,d \in \mathbb R, ad - bc \neq 0
+        \right\}, 
+    \]  
+    med gruppeoperasjonen matrisemultiplikasjon. La 
+    \[
+        B = \left\{ 
+            \begin{pmatrix}
+                a & b \\ 
+                0 & d
+            \end{pmatrix} 
+            \Biggm| 
+            a,b,d \in \mathbb R, ad \neq 0
+        \right\}
+        \subseteq GL_2(\mathbb R).
+    \] 
+
+    a) Vis at $B \leq GL_2(\mathbb R)$. 
+
+    La nå $M_1, M_2 \in GL_2(\mathbb R)$ være gitt ved 
+    \[
+        M_1 = 
+        \begin{pmatrix}
+            a_1 & b_1 \\ 
+            c_1 & d_1
+        \end{pmatrix}, \: 
+        M_2 = 
+        \begin{pmatrix}
+            a_2 & b_2 \\ 
+            c_2 & d_2
+        \end{pmatrix}.
+    \]
+    
+    b) Vis at hvis $M_1B = M_2B$, så finnes det en $a \in \mathbb R 
+    \setminus \{0\}$ slik at 
+    \[
+        \begin{pmatrix}
+            a_1 \\ 
+            c_1
+        \end{pmatrix} 
+        = 
+        a \begin{pmatrix}
+            a_2 \\ 
+            c_2
+        \end{pmatrix}
+    \]
+
+    c) Vis at det finnes $a \in \mathbb R \setminus \{0\}$ slik at 
+    \[
+        \begin{pmatrix}
+            a_1 \\ 
+            c_1
+        \end{pmatrix} 
+        = 
+        a \begin{pmatrix}
+            a_2 \\ 
+            c_2
+        \end{pmatrix}
+    \]
+    så er $M_1B = M_2B$. 
+\end{prob*}
+\begin{proof}[Bevis av (a)]
+    Merk at identitetsmatrisen er i $B$; 
+    \[
+        e = 
+        \begin{pmatrix}
+            1 & 0 \\ 
+            0 & 1
+        \end{pmatrix} 
+        \in B
+    \]
+    så $B \neq \emptyset$. 
+    Videre la $x,y \in B$. 
+    \begin{align*}
+        xy^{-1} &= 
+        \begin{pmatrix}
+            a_x & b_x \\ 
+            0 & d_x
+        \end{pmatrix}
+        \frac{1}{a_yd_y}
+        \begin{pmatrix}
+            d_y & -b_y \\ 
+            0 & a_y
+        \end{pmatrix}
+        \\ 
+                &=
+        \begin{pmatrix}
+            a_x & b_x \\ 
+            0 & d_x
+        \end{pmatrix}
+        \begin{pmatrix}
+            \frac{1}{a_y} & -\frac{b_y}{a_yd_y} \\ 
+            0 & \frac{1}{d_y}
+        \end{pmatrix}
+        \\ 
+                &= 
+        \begin{pmatrix}
+            \frac{a_x}{a_y} &
+            -\frac{a_x b_y}{a_y d_y}
+            +
+            \frac{b_x}{d_y} \\[6pt]
+            0 & \frac{d_x}{d_y}
+        \end{pmatrix}.
+    \end{align*}
+\end{proof}
+Vi ser at $(a_x / a_y) \cdot (d_x / d_y) \neq 0$, så 
+$xy^{-1} \in B$ og vi konkluderer at 
+$B \leq GL_2(\mathbb R)$. (Kanskje one-step test ikke var det 
+enkleste her)
+
+\newpage 
+\begin{proof}[Bevis av (b)]
+    Vi antar at $M_1B = M_2B$ så 
+    \[
+        M_2^{-1}M_1 \in B
+    \]
+    Viss vi gjør utregninge får vi da 
+    \begin{align*}
+        M_2^{-1}M_1 &=
+        \frac{1}{a_2d_2 - b_2c_2}
+        \begin{pmatrix}
+            d_2 & -b_2 \\ 
+            -c_2 & a_2
+        \end{pmatrix}
+        \begin{pmatrix}
+            a_1 & b_1 \\ 
+            c_1 & d_1
+        \end{pmatrix}
+        \\ 
+                    &= 
+        \frac{1}{a_2d_2 - b_2c_2} 
+        \begin{pmatrix} 
+            a_1 d_2 - b_2 c_1 & b_1 d_2 - b_2 d_1 \\ 
+            a_2 c_1 - a_1 c_2 & a_2 d_1 - b_1 c_2 
+        \end{pmatrix} \in B
+    \end{align*}
+    så $a_2c_1 - a_1c_2 = 0 \Rightarrow a_1c_2 = a_2c_1$. Med andre 
+    ord er determinanten av 
+    \[
+        \det\begin{pmatrix}
+            a_1 & a_2 \\ 
+            c_1 & c_2 
+        \end{pmatrix} = 0
+    \]
+    så kolonnevektorene $(a_1, c_1), (a_2, c_2)$ er lineært avhengige.
+    Altså 
+    \[
+        \begin{pmatrix}
+            a_1 \\ c_1 
+        \end{pmatrix}
+        = 
+        a 
+        \begin{pmatrix}
+            a_2 \\ c_2 
+        \end{pmatrix}
+        , \: a \in \mathbb R \setminus \{0\}
+    \]
+    som ønsket. 
+\end{proof}
+\begin{proof}[Bevis av (c)]
+    Vi går fram med samme argument som i (b). 
+
+    Viss vi antar at de første kolonnevektorene av $M_1$
+    er lineært uavhengige kan vi jobbe baklengs for å finne 
+    at 
+    \[
+        M_2^{-1}M_1 = \frac{1}{a_2d_2 - b_2c_2} 
+        \begin{pmatrix}
+            \alpha & \beta \\
+            \det (\text{col}_1(M_1) \ \text{col}_1(M_2)) & 
+            \delta
+        \end{pmatrix}
+    \]
+    Så $M_2^{-1}M_1$ er en upper-triangular, $2\times 2$ 
+    inverterbar, reell, matrise. 
+    Altså er $M_2^{-1}M_1 \in B$ så vi konkluderer at 
+    $M_2 B = M_1 B$. 
+\end{proof}
+
+\end{document}
