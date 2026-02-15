@@ -1324,5 +1324,218 @@ Hence the quotient group has order $4$.
     In other words, $G$ is not simple. 
 \end{proof}
 
+\newpage 
+\section{Group Actions}
+\begin{defn}
+    Let $X$ be a set, and $G$ a group. A (left) action of $G$ on $X$ 
+    is a map 
+    \[
+        G \times X \to X 
+    \]
+    \[
+        (g,x) \mapsto gx
+    \]
+    such that $ex = x$ and $g_1(g_2x) = (g_1g_2)x$ for all 
+    $x \in X$ and $g_1,g_2 \in G$.
+\end{defn}
+The right action is similarily defined, and in the case where 
+$G$ is abelian the actions coincide. 
 
-\end{document}
+\begin{ex}
+    The following constitute group actions when 
+    considering matrix-vector multiplication. 
+
+    \begin{enumerate}
+        \item $GL_2(\mathbb R)$ and its subgroups on $\mathbb R^2$. 
+        \item same for $GL_n(\mathbb R)$ on $\mathbb R^n$.
+    \end{enumerate}
+
+    A very natural group action is $D_n$ acting on the regular polygon
+    with $n$ sides, as $D_n$ \emph{is} the symmetries of 
+    the regular $n$-gon.
+
+    Furthermore $S_n$ (which is often thought of as the 
+    bijections $f: [n] \to [n]$) can act on 
+    said $[n]$. 
+
+    Another group action which we have also seen many times 
+    is conjugation where $G$ acts on itself. 
+\end{ex}
+
+\begin{defn} 
+    \label{defn:faithful_group_action}
+    Let $G$ be a group and $X$ a set. 
+
+    We say that a group action $G \times X \to X$ is \emph{faithful} 
+    if for any $g \in G, \; g\neq e$ implies there is some 
+    $x \in X$ such that $g x \neq x$. 
+
+    Alternatively it can be defined to be a group action for which 
+    any $g_1,g_2 \in G$ with $g_1 \neq g_2$ implies that there 
+    exists $x \in X$ such that $g_1 x \neq g_2 x$. 
+ \end{defn}
+ \begin{prop}
+     Consider a group action $G \times X \to X$. 
+     It defines a group homomorphism 
+     $\phi : G \to \text{Sym}(X)$ for which 
+     $\ker \phi = \{e\}$ if and only if the group action is 
+     faithful. 
+ \end{prop}
+\newpage 
+ \begin{prob}[Problem 11 Fraleigh's p.160]
+     Let $X$ be a $G$-set. Show that $G$ acts faithfully on $X$ 
+     if and only if no two distinct elements of $G$ have the same 
+     action on each element $X$. 
+
+     (I.e. prove the equivalent definition posed in 
+     \cref{defn:faithful_group_action}) 
+ \end{prob}
+ \begin{proof}
+    Let $G$ be a group, $X$ a $G$-set.  
+
+    Assume first that the action of $G$ on $X$ is faithful. 
+    Then $e \neq g \in G$ implies the existence of some 
+    $x \in X$ for which 
+    \[
+        gx \neq x
+    \]
+    Suppose, for a contradiction, that there exist some 
+    distinct $g_1,g_2 \in G$ which coincide on every $x \in X$. 
+    Then 
+    \begin{align*}
+        g_1 x &= g_2 x \\ 
+        g_2^{-1}g_1x &= x
+    \end{align*}
+    In other words there exists $g = g_2^{-1}g_1 \in G$ 
+    for which every $x \in X$ is a fixed-point, contradicting 
+    the assumption that $G$ acts faithfully on $X$. Thus $G$ acting 
+    faithfully on $X$ must imply that any distinct pair of elements 
+    of $G$ have some $x \in X$ for which they do not coincide. 
+
+    Assume now that $G$ acts on $X$ such that for every 
+    distinct $g_1,g_2 \in G$ for which there exists $x \in X$ 
+    such that $g_1 x \neq g_2 x$. Let $g_2 = e \neq g_1$. 
+    They are clearly distinct and furthermore 
+    \[
+        g_1 x \neq g_2x = x
+    \]
+    This holds for any $g_1 \in G$ so $G$ acts faithfully on $X$.  
+ \end{proof}
+
+ \begin{defn}[Orbit]
+     Let $G$ be a group acting on a $G$-set $X$. Let $x \in X$.  
+
+     The orbit of $x$, often denoted $\text{Orb}(x)$ or $Gx$ 
+     is the set 
+     \[
+        \text{Orb}(x) := \left\{gx \bigm| g \in G\right\}
+     \]
+ \end{defn} 
+ \begin{defn}[Stabilizer]
+     Let $G$ be a group acting on a $G$-set $X$. Let $x \in X$. 
+
+     The stabilizer of $x$, often denoted $\text{Stab}_G(x)$ 
+     or $G_x$ is the set 
+     \[
+         \left\{g \in G \bigm| gx = x\right\}
+     \]
+ \end{defn}
+ \newpage 
+ \begin{thm}[Orbit-Stabilizer]
+     For a finite group $G$ acting on a set $X$, the following 
+     holds (conditions are equivalent). 
+
+     \[
+         |\text{Orb}(x)| = [G : \text{Stab}_G(x)]
+     \]
+     \[
+         |G| = |\text{Orb}(x)| \cdot |\text{Stab}_G(x)|
+     \]
+ \end{thm}
+ \begin{prob}
+     Let $\{X_i \bigm| i \in I\}$ be a disjoint collection of 
+     sets. Let each $X_i$ be a $G$-set for the same group $G$. 
+    
+     a) Show that $\bigcup_{i\in I}X_i$ can be viewed in a 
+     natural way as a $G$-set, the \textbf{union} of the $G$-sets 
+     $X_i$. 
+
+     b) Show that every $G$-set $X$ is the union of its orbits. 
+ \end{prob}
+ \begin{proof}[Proof of (a)]
+     Let $X=\bigcup_{i\in I}X_i$. Since the union is disjoint, each
+     $x\in X$ lies in a unique $X_i$. Define
+     \[
+         g\cdot x := g\cdot_{X_i} x
+     \]
+     where the right-hand side denotes the given $G$-action on $X_i$.
+
+     This is well-defined because the union is disjoint.
+     For $x\in X_i$ we have
+     \[
+         e\cdot x = x
+     \]
+     since $X_i$ is a $G$-set, and
+     \[
+         (gh)\cdot x
+         = (gh)\cdot_{X_i} x
+         = g\cdot_{X_i}(h\cdot_{X_i}x)
+         = g\cdot(h\cdot x).
+     \]
+     Thus the action axioms hold, and $X$ becomes a $G$-set.
+ \end{proof}
+ \begin{proof}[Proof of (b)]
+     For $x\in X$, define the orbit
+     \[
+         G\cdot x = \{ g\cdot x \mid g\in G\}.
+     \]
+     Since $x=e\cdot x$, every element lies in its orbit,
+     so
+     \[
+         X = \bigcup_{x\in X} G\cdot x.
+     \]
+
+     If $G\cdot x \cap G\cdot y \neq \emptyset$, then
+     $g\cdot x = h\cdot y$ for some $g,h\in G$.
+     Then
+     \[
+         x = g^{-1}h\cdot y,
+     \]
+     so $x\in G\cdot y$, which implies
+     $G\cdot x = G\cdot y$.
+     Thus distinct orbits are disjoint, and $X$ is the
+     disjoint union of its orbits.
+ \end{proof}
+\newpage 
+ \begin{thm}[Burnside's Formula]
+     Let $G$ be a finite group and $X$ a finite $G$-set. If 
+     $r$ is the number of orbits in $X$ under $G$, then 
+     \[
+        r \cdot |G| = \displaystyle\sum_{g \in G}|X_g|
+     \]
+     where $X_g$ are the \emph{fixed points} of $g$, namely 
+     all $x \in X$ satisfying $gx = x$. 
+ \end{thm}
+ \begin{prob}[Problem 1 Fraileigh's p.164]
+    Find the number of orbits in $\{1,\ldots, 8\}$ under the 
+    cyclic subgroup $\langle (1 \ 3 \ 5 \ 6) \rangle \leq S_8$.
+ \end{prob}
+ \begin{proof}[Solution]
+
+    Both $[8]$ and the given subgroup of $S_8$ are finite so we 
+    use Burnside's formula. Denote 
+    $\langle \sigma \rangle := \langle 1 \ 3 \ 5 \ 6\rangle$. 
+    We know that $|\sigma| = 4$ so we must simply calculate 
+    the sum of sizes of fixed points of each permutation in 
+    $\langle \sigma \rangle$. Obviously $|X_e| = |X| = 8$.   
+    Next up $\sigma$ has $2,4,7,8$ as fixed points so 
+    $|X_\sigma| = 4$. Next up $\sigma^2 = (1 \ 5)(3 \ 6)$ and has 
+    the same fixed points. $\sigma^3 = (1 \ 6 \ 5 \ 3)$ with 
+    the same fixed points once again. Thus 
+    \[
+        r = 8 + 4 + 4 + 4  / |\sigma| = 5
+    \]
+ \end{proof}
+
+
+ \end{document}
