@@ -2076,4 +2076,84 @@ closedness of $K$ (as that comes for free), etc.
     \]
 \end{proof}
 
+\newpage 
+\section{Spaces 4.2 - Models of convergence} 
+\begin{defn}
+    Let $(X,d_X), (Y,d_Y)$ be metric spaces. 
+
+    Let $\{f_n\}_{n\in\mathbb N}$ be a sequence of functions 
+    with domain $X$ and co-domain $Y$. Let $f : X \to Y$ be 
+    another function. 
+
+    We say that 
+    $\{f_n\}_{n\in\mathbb N}$ converges to $f$ \emph{pointwise} 
+    if $\forall \varepsilon > 0$ and $x \in X$ there exists 
+    $n \in \mathbb N$ such that 
+    \[
+        d_Y(f_n(x),f(x)) < \varepsilon, \: \forall n \geq N
+    \]
+    and will often write $f_n \underset{n \to \infty}{\to} f$ 
+    pointwise. 
+
+    We say that $\{f_n\}_{n\in\mathbb N}$ converges to 
+    $f$ \emph{uniformly} if $\forall \varepsilon > 0, \: \exists 
+    N \in \mathbb N$ such that 
+    \[
+        d_Y(f_(x), f(x)) < \varepsilon, \: \forall n \geq N 
+        \ \text{and} \ \forall x \in X
+    \]
+    and we often write $f_n \underset{n \to \infty}{\to} f$ 
+    uniformly. 
+
+    The difference being that for uniform convergence, 
+    the choice of $N$ doens't depend on $x \in X$. 
+\end{defn}
+\begin{prop}
+    Let $\{f_n\}_n$ be a sequence of $f_n : X \to Y$, and let 
+    $f: X \to Y$. Then the following are equivalent. 
+
+    \begin{enumerate}
+        \item $f_n \to f$ pointwise.
+        \item $f_n(x) \to f(x)$ for every $x \in X$. 
+    \end{enumerate}
+\end{prop}
+\begin{defn}
+    For $f,g : X \to Y$, define the supremum metric 
+    \[
+        \rho(f,g) = \sup_{x\in X} d_Y(f(x),g(x))
+    \]
+    also denoted 
+    \[
+        d_\infty(f,g), \ ||f-g||_\infty \ \text{or} \ 
+        ||f-g||_{L^\infty}
+    \]
+\end{defn}
+\begin{prop}
+    Let $\{f_n\}_n$ be a sequence of functions from $X \to Y$, 
+    and let $f: X \to Y$. Then the following are equivalent. 
+
+    \begin{enumerate}
+        \item $f_n \to f$ uniformly. 
+        \item $\rho(f_n,f) \underset{n \to \infty}{\to} 0$.
+    \end{enumerate}
+\end{prop}
+
+\begin{ex}
+    Let $f_n, f : \mathbb R \to \mathbb R$, $f(x) = x^2$, 
+    $f_n(x) = \min(n, x^2)$. Show that 
+    $f_n$ converges to $f$ pointwise, but not uniformly. 
+\end{ex}
+\begin{proof}
+    For any $x \in \mathbb R$, we have $f_n(x) = f(x)$ 
+    for every $n \geq x^2$, so $f_n(x) \to f(x)$. 
+    Next $\rho(f_n,f) = \sup_{x\in\mathbb R} |f_n(x) - f(x)| 
+    = \sup_{x\in\mathbb R} |\min(n,x^2) - x^2| = \infty$.
+\end{proof}
+\begin{thm}
+    Let $\{f_n\}_n$ be a sequence of $f_n : X \to Y$ and suppose 
+    $f_n \to f$ uniformly for some $f : X \to Y$. 
+
+    Then, $f$ is continuous.
+\end{thm}
+
 \end{document}
