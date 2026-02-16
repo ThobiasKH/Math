@@ -1537,5 +1537,143 @@ $G$ is abelian the actions coincide.
     \]
  \end{proof}
 
+ \newpage 
+ \section{Rings, Fields \& Integral domains}
+ \begin{defn}[Ring]
+     A ring $R$ is a set together with two binary operations 
+     $+$ and $\cdot$, written $(R, +, \cdot)$, satisfying 
+     \begin{enumerate}
+        \item $(R,+)$ is an abelian group (identity denoted $0$), 
+        \item $(R,\cdot)$ has closure and associativity, 
+        \item with distributive laws, i.e. 
+            \[
+                a \cdot (b + c) = ab + ac, \ (b+c) \cdot a = 
+                ba + ca. 
+            \]
+     \end{enumerate}
+     If $R$ has a multiplicative identity $1$, we say 
+     $R$ is a ring with identity, or $R$ is a ring with unity 
+     or $R$ is unital. 
+
+     If $ab = ba$ for all $a,b \in R$, then $R$ is a commutative ring.
+ \end{defn}
+ So what, informally, a ring is, is a structure where you can 
+ add, multiply and subtract, but not necessarily divide. 
+
+ Rings have a bunch of immediately nice properties such as 
+ \begin{itemize}
+    \item $0 \in R$ is unique (follows from $(R,+)$ 
+        being abelian grp),
+    \item $-a$ is unique (follows from the same logic),
+    \item $a \cdot 0 = 0 = 0 \cdot a$ (very nice), 
+    \item $|R| \geq 2$, then $1 \neq 0$, 
+    \item $-(a+b) = (-a) + (-b)$, 
+    \item $-(-a) = a$, 
+    \item $-(ab) = (-a)b = a(-b)$, 
+    \item $ab = (-a)(-b)$.
+ \end{itemize}
+ 
+ \begin{defn}[Unit]
+     Let $(R,+,\cdot)$ be a ring with identity, and let $u \in R$. 
+     $u$ is called a unit if $u$ has a multiplicative inverse 
+     $u^{-1}$ such that 
+     \[
+         u \cdot u^{-1} = u^{-1} \cdot u = 1
+     \]
+     We denote the set of units 
+     \[
+         \{u \in R \bigm| u \ \text{unit}\} =: R^x
+     \]
+     (This set is a group under the multiplication of $R$)
+ \end{defn}
+
+ \newpage 
+ \begin{defn}[Zero divisor]
+    Let $(R,+,\cdot)$ be a ring. A zero divisor is a non-zero 
+    element $a \in R$ such that there exists non-zero 
+    $b \in R$ satisfying 
+    \begin{align*}
+        ab &= 0 & \text{left zero divisor}
+        ba &= 0 & \text{right zero divisor}
+    \end{align*}
+    Where these coincide in commutative rings. 
+ \end{defn}
+ \begin{defn}[Field]
+     Let $(R,+,\cdot)$ be a ring. 
+
+     $R$ is a \textbf{field} if 
+     $(R\setminus \{0\}, \cdot)$ is an abelian group. 
+ \end{defn}
+ \begin{defn}
+     Let $(R,+,\cdot)$ be a ring.  
+
+     $R$ is a \textbf{division ring} if $(R \setminus \{0\}, \cdot)$ 
+     is a group.
+ \end{defn}
+
+ Crucially, in both a divison ring and a field we know that 
+ $\exists 1 \in R$, the multiplicative identity, meaning 
+ a field/division ring is unital. 
+
+The prototypical example of a commutative unital ring 
+is $(\mathbb Z, +, \cdot)$. Importantly, $\mathbb Z$ is not 
+a field. So a big area of focus will be to look at larger 
+more powerful structures. 
+
+\begin{defn}[Integral Domain]
+    Let $(R,+,\cdot)$ be a ring. 
+
+    $R$ is an \textbf{integral domain} if it is a commutative, 
+    unital ring. 
+\end{defn}
+\begin{prop}
+    A ring $R$ is an integral domain if and only if 
+    $R$ has no zero-divisors and $|R| \geq 2$. 
+\end{prop}
+The nice property we can gleam from integral domains is that 
+$a\cdot b = 0$ if and only if either $a$ or $b$ is zero.  
+
+Usually, when we say integral domain, or field, we will be refering 
+to said structure when it has $2$ or more elements. 
+The reason for this is that a ring or field with 
+$1$ element is not worth dwelling on. 
+
+\begin{prop}
+    A field is an integral domain. 
+\end{prop}
+\begin{proof}[Proof sketch]
+    If $ab = 0$ and $a \neq 0$, then $b = a^{-1}(ab) = a^{-1}0 = 0$. 
+\end{proof}
+
+\begin{thm}
+    Every finite integral domain is a field.
+\end{thm}
+\begin{proof}
+    Let $D$ be a finite integral domain. 
+
+    $(D\setminus \{0\},\cdot)$ is closed, because $D$ has no 
+    zero divisors. Furthermore it is associative and $1 \in D 
+    \setminus \{0\}$ by definition. The last thing we need 
+    is inverses. 
+
+    Let $r \in D, \: r \neq 0$. 
+    Consider $r, r^2, r^3, \ldots r^k, \ldots$ 
+
+    As $D$ is finite there must be repeted powers in this list. 
+    Let $r^i = r^j, \: i < j$ wlog. Then 
+    \[
+        \underbrace{r\cdot r\cdots r}_{i} \cdot 1 = 
+        \underbrace{r\cdot r \cdots r}_{j}
+    \]
+    Use left cancellation repeatedly to get 
+    \[
+        r^{j-i} = 1
+    \]
+    Let $s = r^{j-i-1}$. Then $rs = sr = 1$, so $s = r^{-1}$.
+\end{proof}
+\begin{thm}
+    Every finite division ring is a field. 
+\end{thm}
+
 
  \end{document}
