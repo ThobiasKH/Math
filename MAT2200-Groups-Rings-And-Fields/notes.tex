@@ -1675,5 +1675,93 @@ $1$ element is not worth dwelling on.
     Every finite division ring is a field. 
 \end{thm}
 
+\newpage 
+\section{Some problems pertaining to Rings, Fields, etc.}
+\begin{prob}[Problem 3 \& 5 Fraleigh's p.174]
+    Compute the products
+    \[
+        (11)(-4) \in \mathbb Z_{15}
+    \]
+    \[
+        (2,3)(3,5) \in \mathbb Z_5 \times \mathbb Z_9
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    \begin{align*}
+        11 \cdot -4 &= -(11 \cdot 4) \\ 
+                    &= -(44) \\ 
+                    &\equiv 1 \mod 15
+    \end{align*}
+
+    \begin{align*}
+        (2,3)(3,5) &= (2\cdot 3, 3 \cdot 5) \\ 
+                   &= (6, 15) \\ 
+                   &\equiv (1,6)
+    \end{align*}
+\end{proof}
+\begin{prob}[Problem 11 Fraleigh's p.175]
+    Determine whether the following structure is a ring, 
+    then if it is a commutative ring, whether it is unital, 
+    and whether it is a field. 
+
+    \[
+        \left\{ a + b \sqrt 2 \bigm| a,b \in \mathbb Z \right\}
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    Let's denote this structure as $\mathbb Z(\sqrt 2)$.
+
+    It is quite clear that $(\mathbb Z(\sqrt 2), +)$ forms an 
+    abelian group as the integers is an abelian group 
+    and the identity here is $0 + 0\sqrt 2 \in \mathbb Z(\sqrt 2)$. 
+    Furthermore $(a+b\sqrt 2) + (c+d\sqrt 2) = 
+    (a+c) + (b+d)\sqrt 2 \in \mathbb Z(\sqrt 2)$, so we're good. 
+
+    The $\mathbb Z \setminus \{0\}$ with multiplication is closed, 
+    but not every element has an inverse (in fact only $1$ and $-1$  
+    do), so we'd expect something similar here. 
+
+    Suppose $a+b\sqrt 2, c+d\sqrt 2 \in \mathbb Z(\sqrt 2)
+    \setminus \{0\}$. Then 
+    \begin{align*}
+        (a+b\sqrt 2)(c + d\sqrt 2) &= ac + cb\sqrt2 + ad\sqrt 2 
+        +2bd \\ 
+        &= (ac + 2bd) + (ad + cb)\sqrt 2 \in \mathbb Z(\sqrt 2) 
+        \setminus \{0\}
+    \end{align*}
+    So the multiplicative structure is closed with identity, but 
+    there does not exist inverses for every element as for instance
+    $2 \in \mathbb Z(\sqrt 2)^x$, but $2^{-1}$ does not exist. 
+    It is also not hard to see that distributive laws work fine. 
+
+    Thus we conclude that $\mathbb Z(\sqrt 2)$ is a 
+    commutative unital ring. 
+\end{proof}
+\begin{prob}[Problem 20 Fraleigh's p.175]
+    Consider the matrix ring $M_2(\mathbb Z_2)$. 
+
+    a. Find the order (number of elements) of the ring.
+
+    b. List all units in the ring.
+\end{prob}
+\begin{proof}[Solution of (a)]
+    Recall that 
+    \[
+        M_2(\mathbb Z_2) 
+        =
+        \left\{
+        \begin{pmatrix}
+            a & b \\ 
+            c & d
+        \end{pmatrix}
+        \Biggm| 
+        a,b,c,d \in \mathbb Z_2
+        \right\}
+    \]  
+    There are $4$ entries in each matrix in the ring, all of which 
+    can take on one of two values from $\mathbb Z_4$. Thus 
+    there are $2^4 = 16$ elements. 
+\end{proof}
+
 
  \end{document}

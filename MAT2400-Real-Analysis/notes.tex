@@ -2156,4 +2156,66 @@ closedness of $K$ (as that comes for free), etc.
     Then, $f$ is continuous.
 \end{thm}
 
+\newpage 
+\section{Some problems for week of Feb 16th}
+\begin{prob}
+    Let $f_n : \mathbb R \to \mathbb R$ and assume that the 
+    sequence $\{f_n\}_n$ of continuous functions converges 
+    uniformly to $f : \mathbb R \to \mathbb R$ on 
+    all intervals $[-k,k], \ k \in \mathbb N$. 
+    Show that $f$ is continuous. 
+\end{prob}
+\begin{proof}
+    Let $x_0 \in \mathbb{R}$ be arbitrary. We prove that $f$ is 
+    continuous at $x_0$.
+
+    Choose $k \in \mathbb{N}$ such that $k > |x_0| + 1$. 
+    Then a neighbourhood of $x_0$ is contained in $[-k,k]$. 
+    By assumption, $f_n \to f$ uniformly on $[-k,k]$.
+
+    Let $\varepsilon > 0$ be given. 
+    Since the convergence is uniform on $[-k,k]$, there exists 
+    $N \in \mathbb{N}$ such that for all $x \in [-k,k]$ and all 
+    $n \ge N$,
+    \[
+        |f_n(x) - f(x)| < \frac{\varepsilon}{3}.
+    \]
+
+    Fix such an $N$. 
+    Because $f_N$ is continuous at $x_0$, there exists 
+    $\delta > 0$ such that
+    \[
+        |x - x_0| < \delta 
+        \quad \Rightarrow \quad 
+        |f_N(x) - f_N(x_0)| < \frac{\varepsilon}{3}.
+    \]
+
+    We may assume $\delta \le 1$, so that 
+    $|x - x_0| < \delta$ implies $x \in [-k,k]$.
+
+    For such $x$ we estimate:
+    \[
+        \begin{aligned}
+            |f(x) - f(x_0)|
+&\le |f(x) - f_N(x)| 
++ |f_N(x) - f_N(x_0)| 
++ |f_N(x_0) - f(x_0)| \\
+&< \frac{\varepsilon}{3} 
++ \frac{\varepsilon}{3} 
++ \frac{\varepsilon}{3} 
+= \varepsilon.
+        \end{aligned}
+    \]
+
+    Thus,
+    \[
+        |x - x_0| < \delta 
+        \quad \Rightarrow \quad 
+        |f(x) - f(x_0)| < \varepsilon.
+    \]
+
+    Since $\varepsilon > 0$ was arbitrary, $f$ is continuous at $x_0$. 
+    Because $x_0$ was arbitrary, $f$ is continuous on $\mathbb{R}$.
+\end{proof}
+
 \end{document}
