@@ -2217,5 +2217,122 @@ closedness of $K$ (as that comes for free), etc.
     Since $\varepsilon > 0$ was arbitrary, $f$ is continuous at $x_0$. 
     Because $x_0$ was arbitrary, $f$ is continuous on $\mathbb{R}$.
 \end{proof}
+\begin{prob}[Problem 9, Spaces p.85]
+    Let $(X,d)$ be a metric space and assume that the sequence 
+    $f_n$ of continuous functions on $X$ converges uniformly 
+    to $f$. Show that if $\{x_n\}_n$ is a sequence in $X$ converging 
+    to $x$, then $f_n(x_n) \to f(x)$. Find an example which 
+    shows that this is not necessarily the case if the 
+    sequence of functions converges pointwise. 
+\end{prob}
+\begin{proof}
+    Recall that, as $f_n \to f$ uniformly, we can for every 
+    $\varepsilon$, find $N \in \mathbb N$ such that 
+    \[
+        d(f_n(x),f(x)) < \varepsilon, \: \forall n \geq N \ 
+        \text{and} \ \forall x \in X
+    \]
+    As $f_n$ is continuous we can use the property of sequential 
+    continuity. I.e. 
+    \[
+        f_n(x_{n'}) \underset{n' \to \infty}{\to} f_n(x) 
+    \]
+    Thus
+    \[
+        d(f_n(x_{n'}), f_n(x)) \to 0, \: n' \to \infty
+    \]
+    Let $\varepsilon > 0$.
+    Pick $N \in \mathbb N$ such that 
+    \[
+        d(f_n(x_n), f_n(x)) < \varepsilon/2
+    \]
+    and 
+    \[
+        d(f_n(x), f(x)) < \varepsilon/2, \: \forall x \in X 
+    \]
+    Then 
+    \[
+        d(f_n(x_n), f(x)) \leq 
+        d(f_n(x_n), f_n(x)) + d(f_n(x), f(x)) 
+        < \varepsilon
+    \]
+\end{proof}
+
+\begin{prob}[Problem 4.5.1, Spaces p.100]
+    Let $f,g : [0,1] \to \mathbb R$ be given by 
+    $f(x) = x, \: g(x) = x^2$. Find $\rho(f,g)$. 
+\end{prob}
+\begin{proof}[Solution]
+    \[
+        \rho(f,g) = \sup_{0\leq x \leq 1}|g(x) - f(x)|
+    \]
+    As $f,g$ continuous we know that there exists extremal values 
+    in $[0,1]$. 
+    $|f(0) - g(0)| = 0$ and $|f(1) - f(1)| = 0$ so 
+    the endpoints are not it. We know that there must be some 
+    point in $[0,1]$ where a maxima or minima of $g(x) - f(x)$ is 
+    attained. 
+    \begin{align*}
+        g(x) - f(x) &= x^2 - x \\ 
+                    &= x(x-1) \\ 
+        \frac{d}{dx}(g-f)(x) &= 2x - 1\\  
+        2x - 1 &= 0 \\ 
+        x &= \frac{1}{2}
+    \end{align*}
+    $(g-f)(1/2) = - 1 / 4$ so 
+    \[
+        \rho(f,g) = \frac{1}{4}
+    \]
+\end{proof}
+\begin{prob}[Problem 4.5.7, Spaces p.101]
+    For $f \in B(\mathbb R, \mathbb R)$ and $r \in \mathbb R$, 
+    we define a function $f_r$ by $f_r(x) = f(x + r)$. 
+
+    a) Show that if $f$ is uniformly continuous, then 
+    $\lim_{r\to 0}\rho(f_r,f) = 0$. 
+
+    b) Show that the function $g$ defined by $g(x) = \cos(\pi x^2)$ 
+    is not uniformly continuous on $\mathbb R$. 
+
+    c) Is it true that $\lim_{r\to0}\rho(f_r,f) \to 0$ for 
+    all $f \in B(\mathbb R, \mathbb R)$?
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose $f \in B(\mathbb R, \mathbb R)$ is uniformly continuous. 
+    Namely, $\forall \varepsilon > 0, \: \exists \delta > 0$ for 
+    which 
+    \[
+        |x-y| < \delta \Rightarrow |f(x) - f(y)| < \varepsilon, 
+        \: \forall x,y \in \mathbb R
+    \]
+    We are asked to show that 
+    \[
+        \lim_{r\to 0}\rho(f_r, f) = 0
+    \]
+    In other words  
+    \[
+        \sup_{x \in \mathbb R}|f(x+r)-f(x)| 
+        \underset{r \to 0}{\to} 0
+    \]
+    Notice then that $f(x+r)$ converges to $f(x)$ for every $x$.
+    Let $\varepsilon > 0$ and choose $\delta$ from uniform 
+    continuity. If $|r| < \varepsilon$, then for every 
+    $x\in \mathbb R$, 
+    \[
+        |(x+r) - r| = |r| < \delta
+    \]
+    Therefore 
+    \[
+        |f(x+r) - f(x)| < \varepsilon, \: \forall x\in\mathbb R
+    \]
+    Hence 
+    \[
+        \rho(f_r,f) \leq \varepsilon \ \text{whenever} \ |r| < \delta
+    \]
+    so 
+    \[
+        \lim_{r\to 0}\rho(f_r,f) = 0
+    \]
+\end{proof}
 
 \end{document}
