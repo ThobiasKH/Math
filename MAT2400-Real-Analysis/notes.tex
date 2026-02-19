@@ -2335,4 +2335,44 @@ closedness of $K$ (as that comes for free), etc.
     \]
 \end{proof}
 
+\begin{prob}
+    The space $C_b(X,Y)$ is always "larger" than $Y$, in the sense that $Y$ can be embedded in $C_b(X,Y)$:
+
+    Indeed, show that the map $i:Y\to C_b(X,Y)$ 
+    which maps $y\in Y$ to the constant function $f(x)\equiv y$, is an embedding (cf. Definition 3.1.3).
+    
+    Show that $i(Y)$ is precisely the subset of constant functions, and that this set is a closed subset of $C_b(X,Y)$.
+    
+    Conclude that $C_b(X,Y)$ is complete if and only if $Y$ is complete.
+\end{prob}
+\begin{proof}[Proof sketch]
+    Define $i: Y \to C_b(X,Y)$ by 
+    \[
+        y \mapsto f(x) \equiv y
+    \]
+    We begin by showing the necessary condition of an embedding 
+    before arguing that it is injective (as the latter will 
+    follow clearly from the former). 
+
+    Let $y_1,y_2 \in Y$ and denote constant functions which map 
+    to them by $f_{y_1}, f_{y_2}$ respectively. 
+    \begin{align*}
+        \rho(f_{y_1}, f_{y_2}) &= \sup_{x\in X}d_Y(f_{y_1}(x), 
+        f_{y_2}(x)) \\ 
+        &= \sup\{d_Y(y_1, y_2), d_Y(y_1,y_2) \ldots\} \\ 
+        &= d_Y(y_1, y_2)
+    \end{align*}
+    It is clear that for distinct $y_1, y_2$ their images 
+    are distinct since otherwise the supremum distance between 
+    $f_{y_1}, f_{y_2}$ would be $0$, but then it would follow 
+    that $d_Y(y_1, y_2) = 0$. Therefore we conclude that $i$ is 
+    an injection.
+
+    From a similar argument we can also see that there necessarily 
+    exists one and only one constant function $f_y$ for every 
+    $y \in Y$, so $i[Y]$ must be exactly the set of all of these, 
+    and therefore we could create a one-to-one mapping 
+    from $y$'s and constant functions.  
+\end{proof}
+
 \end{document}
