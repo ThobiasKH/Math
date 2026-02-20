@@ -2375,4 +2375,69 @@ closedness of $K$ (as that comes for free), etc.
     from $y$'s and constant functions.  
 \end{proof}
 
+\begin{prob}[Problem 4.6.1, Spaces p.102]
+    Let $X,Y = \mathbb R$. Find functions $f,g \in C(X,Y)$ such 
+    that 
+    \[
+        \sup_x\{d_Y(f(x),g(x))\} = \infty
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    Consider $f,g : \mathbb R \to \mathbb R$ defined by 
+    \[
+        f(x) = x, \ g(x) = -x
+    \]
+    As $\mathbb R$ is finite-dimensional, every norm-induced metric 
+    is equivalent so we work with $d_Y(x,y) = |x-y|$. 
+    Thus 
+    \[
+        \rho(f,g) = \sup_x |f(x) - g(x)| 
+        = 2 \sup_x|x|
+    \]
+    As $\mathbb R$ is unbounded $\sup_x|x| = \infty$. 
+\end{proof}
+\begin{prob}[Problem 4.6.2, Spaces p.102]
+    Assume that $X \subseteq \mathbb R^n$ is not compact. 
+    Show that there is an unbounded, continuous function 
+    $f : X \to \mathbb R$. 
+\end{prob}
+\begin{proof}
+    Recall that, from the Heine-Borel theorem, $X$ is either 
+    unbounded or open. If $X$ is unbounded we can trivially find 
+    the unbounded continuous function
+    \[
+        f : X \to \mathbb R, f(x) = x
+    \]
+    Constant functions are (Lipschitz) continuous and 
+    this function $f$ is unbounded as $X$ is unbounded. 
+    (For every $M > 0$ there exists $x \in X$ such that 
+    $||x|| > M$). 
+
+    If $X$ is open we can define $f : X \to \mathbb R$ as follows. 
+    Fix some $y \in \partial X$ ($y \not\in X$ by definition) and 
+    let 
+    \[
+        f(x) = \frac{1}{||x - y||}
+    \]
+    can take on arbitrarily large values. (Consider some 
+    sequence in $X$ converging to $y$ will always be well-defined  
+    for $x_n$, but grow undbounded).  
+\end{proof}
+\begin{prob}[Problem 4.6.3, Spaces p.102]
+    Assume that $f : \mathbb R \to \mathbb R$ is a bounded 
+    continuous function. If $u \in C([0,1],\mathbb R)$, we 
+    define $L(u):[0,1]\to \mathbb R$ to be the function 
+    \[
+        L(u)(t) \int_{0}^1 \frac{1}{1+t+s}f(u(s)) ds.
+    \]
+
+    a) Show that $L$ is a function from $C([0,1],\mathbb R)$ to 
+    $C([0,1],\mathbb R)$. 
+
+    b) Show that ... 
+\end{prob}
+\begin{proof}[Proof of (a)]
+    proof
+\end{proof}
+
 \end{document}
