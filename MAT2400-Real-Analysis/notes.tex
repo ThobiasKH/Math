@@ -2542,4 +2542,28 @@ $N \to \infty$.
     \]
 \end{thm}
 
+\newpage 
+\section{Tasks from week of 23 Feb}
+\begin{prob}[Problem 1, Spaces p.91]
+    Show that $\sum_{n=1}^{\infty}\frac{\cos(nx)}{n^2 + 1}$ converges
+    uniformly on $\mathbb R$.
+\end{prob}
+\begin{proof}
+    We prove the claim by applying the Weierstrass M-test. 
+
+    It is clear that $\cos(nx)/(n^2+1)$ is bounded by 
+    $\frac{1}{n^2 + 1}$ as $|\cos(nx)| \leq 1$. 
+    Furthermore 
+    \[
+        \displaystyle\sum_{n=1}^{\infty}\frac{1}{n^2 + 1} \leq
+        \displaystyle\sum_{n=1}^{\infty}\frac{1}{n^2} = 
+        \frac{\pi^2}{6} < \infty
+    \]
+    By the Weierstrass M-test,  
+    \[
+        \displaystyle\sum_{n=1}^{\infty}\frac{\cos(nx)}{n^2 + 1}
+    \]
+    \textbf{converges uniformly} on $\mathbb R$.
+\end{proof}
+
 \end{document}
