@@ -2440,4 +2440,106 @@ closedness of $K$ (as that comes for free), etc.
     proof
 \end{proof}
 
+\newpage 
+\section{Integrating sequences of functions}
+\begin{thm}
+    Let $f_n : [a,b] \to \mathbb R$ be continuous 
+    $\forall n \in \mathbb N$ and assume 
+    $f_n \to f$ uniformly. Let $F_n(x) = 
+    \displaystyle\int_a^x f_n(t) \;dt, \ F(x) = 
+    \displaystyle\int_a^x f(t) \; dt$. 
+
+    Then $F_n \to F$ uniformly. 
+\end{thm}
+\begin{proof}
+    Let $\varepsilon > 0$ and let $N \in \mathbb N$ be such that 
+    \[
+        \rho(f_n,f) < \varepsilon
+    \]
+    when $n \geq N$. Then 
+    \begin{align*}
+        |F_n(x) - F(x)| &= \left|\displaystyle\int_a^x f_n(t) 
+        - f(t) \; dt\right| \\ 
+                        &\leq \displaystyle\int_a^x \left|
+                        f_n(t) - f(t) \right| \; dt \\ 
+                        &\leq \displaystyle\int_a^x \rho(f_n,f) \; dt 
+                        \\ 
+                        &= (x-a)\rho(f_n,f) < (b-a) \varepsilon
+    \end{align*}
+\end{proof}
+
+Next we look at the following. Given $v_1,v_2,\ldots : [a,b] 
+\to \mathbb R$, what do we mean by 
+\[
+    \displaystyle\sum_{n=1}^{\infty}v_n(x)\; ?
+\]
+
+Recall that if $a_1,a_2,\ldots$ are numbers we say that 
+\[
+    \displaystyle\sum_{n=1}^{\infty}a_n \ \textbf{converges}
+\]
+if the partial sums $S_n = \sum_{n=1}^{N}a_n$ converge as 
+$N \to \infty$. 
+
+\begin{defn}
+    Let $(X,d)$ be a metric space. Let $A \subseteq X$ and let 
+    $\{v_n\}_{n \in \mathbb N}$ be a sequence of functions 
+    $v_n : A \to \mathbb R$. We say that the series 
+    $\sum_{n=1}^\infty v_n$ 
+    \begin{itemize}
+        \item \textbf{converges pointwise} if for every 
+            $x \in A$, the partial sums 
+            $S_N(x) = \sum_{n=1}^{N}v_n(x)$ converge as $N 
+            \to \infty$
+        \item \textbf{converges uniformly} if the partial sums $S_N$ 
+            converge uniformly as $N \to \infty$. 
+    \end{itemize}
+\end{defn}
+\begin{lem}[Weierstrass M-test]
+    Assume that there are numbers $M_n \geq 0$ such that 
+    \begin{itemize}
+        \item $|v_n(x)| \leq M_n, \: \forall x \in A$
+        \item $\sum_{n=1}^\infty M_n < \infty$
+    \end{itemize}
+    Then $\sum_{n=1}^{\infty}v_n$ converges uniformly.
+\end{lem}
+\begin{thm}
+    Let $v_n : [a,b] \to \mathbb R$ be continuous $\forall n \in 
+    \mathbb N$ and assume $\sum_{n=1}^{\infty}v_n$ converges 
+    uniformly. Let $V_n(x) := \displaystyle\int_{a}^{x}v_n(t) \; dt$. 
+
+    Then the series $\sum_{n=1}^{\infty}V_n$ converges uniformly, 
+    and 
+    \[
+        \displaystyle\sum_{n=1}^\infty V_n(x) = 
+        \displaystyle\int_{a}^{x}\displaystyle\sum_{n=1}^\infty 
+        v_n(t) \; dt, \ \forall x \in [a,b]
+    \]
+\end{thm}
+\begin{thm}
+    Let $f_n : [a,b] \to \mathbb R$ be continuously differentiable 
+    $\forall n \in \mathbb N$. Assume 
+    \begin{itemize}
+        \item $\{f'_n\}_{n\in\mathbb N}$ 
+                converges uniformly to some $g : [a,b] 
+            \to \mathbb R$ 
+        \item $\{f_n(x_0)\}_{n\in\mathbb N}$ converges to some 
+            $\alpha \in \mathbb R$, for some $x_0 \in \mathbb R$
+    \end{itemize}
+    Then $f_n \to f $ uniformly for some $f : [a,b] \to \mathbb R$
+    with $f' = g$ and $f(x_0 ) = \alpha$.
+\end{thm}
+\begin{thm}
+    If $\{u_n\}_n$ is a sequence of continuously differentiable 
+    functions $u_n : [a,b] \to \mathbb R$ such that 
+    $\sum_{n=1}^{\infty}u_n'$ converges uniformly and 
+    $\sum_{n=1}^{\infty}u_n(x_0)$ converges for some $x_0 \in [a,b]$,
+    then $\sum_{n=1}^{\infty}u_n$ converges uniformly, and 
+    \[
+        \frac{d}{dx} \left( \displaystyle\sum_{n=1}^{\infty}u_n  
+        \right) = \displaystyle\sum_{n=1}^{\infty}\left( 
+        \frac{d}{dx} u_n\right)
+    \]
+\end{thm}
+
 \end{document}
