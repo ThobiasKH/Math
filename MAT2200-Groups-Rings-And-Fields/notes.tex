@@ -1762,6 +1762,32 @@ $1$ element is not worth dwelling on.
     can take on one of two values from $\mathbb Z_4$. Thus 
     there are $2^4 = 16$ elements. 
 \end{proof}
+\begin{prob}[Problem 37 Fraleigh's p.176]
+    Show that if $U$ is the collection of all units in a ring  
+    $(R,+,\cdot)$ with unity, then $(U,\cdot)$ is a group. 
+\end{prob}
+\begin{proof}
+    We conisder $U$ the collection of the units of a ring 
+    $R$. $1 \in R$ (as $R$ has unity), 
+    $(R,\cdot)$ has associativity by definition and 
+    the set of units $U$ is precisely those $u \in R$ such that 
+    \[
+        u \cdot u^{-1} = u^{-1} \cdot u = 1
+    \]
+    so it remains to show that $U$ is closed. 
+    Let $u,v \in U$. Then, as said, there exists inverses 
+    $u^{-1},v^{-1} \in U$. Then  
+    \begin{align*}
+        (uv)(v^{-1}u^{-1}) &= u(vv^{-1})u^{-1} \\ 
+                           &= u(1)u^{-1} \\ 
+                           &= uu^{-1} \\ 
+                           &= 1
+    \end{align*}
+    so $(uv)^{-1} = (v^{-1}u^{-1}) \in U$. Thus the product 
+    of two units is itself a unit. 
+    We have shown $(U,\cdot)$ to have all the properties of 
+    a group.
+\end{proof}
 
 
  \end{document}
