@@ -1,4 +1,5 @@
 \input{preamble.tex}
+\hfuzz=\maxdimen
 
 \title{\huge{Real Analysis}}
 \author{\LARGE{Thobias Høivik}}
@@ -2543,7 +2544,6 @@ $N \to \infty$.
 \end{thm}
 
 \newpage 
-\section{Tasks from week of 23 Feb}
 \begin{prob}[Problem 1, Spaces p.91]
     Show that $\sum_{n=1}^{\infty}\frac{\cos(nx)}{n^2 + 1}$ converges
     uniformly on $\mathbb R$.
@@ -2564,6 +2564,219 @@ $N \to \infty$.
         \displaystyle\sum_{n=1}^{\infty}\frac{\cos(nx)}{n^2 + 1}
     \]
     \textbf{converges uniformly} on $\mathbb R$.
+\end{proof}
+
+\newpage 
+\subsection{Power Series}
+\begin{defn}
+    A \textbf{power series} is an expression of the form 
+    \[
+        \displaystyle\sum_{n=0}^{\infty}c_n(x-a)^n
+    \]
+    where $a \in \mathbb R$ and $c_0,c_1,\ldots \in \mathbb R$ are 
+    fixed, and $x$ takes values in $\mathbb R$. 
+\end{defn}
+\begin{ex}
+    \[
+        e^x = \displaystyle\sum_{n=0}^{\infty}\frac{x^n}{n!}, \ \ 
+        \ln x = -\displaystyle\sum_{n=1}^{\infty} \frac{(1-x)^n}{n}, 
+        \ \ 
+        \cos x = 
+        \displaystyle\sum_{n=0}^{\infty} \frac{(-1)^n}{(2n)!}x^{2n}
+    \]
+\end{ex}
+\begin{defn}
+    A function $f : B \to \mathbb R$ (for open $B \subseteq 
+    \mathbb R$) is \textbf{real analytic} if there are 
+    $c_0,c_1,\ldots \in \mathbb R$ and $a \in B$ such that 
+    \[
+        f(x) = \displaystyle\sum_{n=0}^{\infty}c_n(x-a)^n, \ \forall 
+        x \in B
+    \]
+\end{defn}
+Notably, the series must converge at all $x \in B$. 
+
+\begin{defn}
+    The \textbf{radius of convergence} of a power series 
+    $\sum_{n=0}^{\infty}c_n(x-a)^n$ is 
+    \[
+        R = \frac{1}{\underset{n\to\infty}{\lim\sup} |c_n|^{1/n}}
+    \]
+    where we use the convention that $1/0 = \infty$ and 
+    $1/\infty = 0$.
+\end{defn}
+\begin{prop}
+    The power series converges if $|x-a| < R$, 
+    and diverges if $|x-a| >R$. It converges uniformly if on 
+    every interval $[a-r, a+r]$ for $r < R$.
+\end{prop}
+\begin{proof}
+    Recall that 
+    \[
+        R = \frac{1}{\underset{n \to \infty}{\lim\sup}|c_n|^{1/n}}
+    \]
+    If $|x-a| > R$ then $\frac{1}{|x-a|} < \frac{1}{R}$, so for any 
+    $N \in \mathbb N$ there is an $n \geq N$ such that 
+    \[
+        \frac{1}{|x-a|} < |c_n|^{1/n}
+    \]
+    but then $|c_n(x-a)^n| > 1$. Hence the sum cannot converge. 
+
+    If $R = 0$ we are done. Otherwise let $r < R$. Then 
+    $\frac{1}{r} > \frac{1}{R} = \underset{n\to\infty}{\lim\sup} 
+    |c_n|^{1/n}$, so for some $N \in \mathbb N$ we have 
+    $|c_n|^{1/n} \leq \eta, \ \forall n \geq N$, where 
+    $\eta = \frac{1}{2}(\frac{1}{r} + \frac{1}{R}$. Note that 
+    $\eta^r < \frac{1}{r}r = 1$. We now have 
+    $|c_n(x-a)^n| = |c_n||x-a|^n \leq 2\eta^n r^n = (\eta r)^n, \ 
+    \forall n \geq N$, so $\sum_{n=0}^{\infty}|c_n(x-a)^n| 
+    \leq \sum_{n=0}^{N-1}|c_n|r^n + \sum_{n = N}^{\infty}(\eta r)^n 
+    < \infty$. Thus by Weierstrass M-test, the series converges 
+    uniformly on $[a-r, a+r]$.
+\end{proof}
+\begin{thm}
+    Let $R$ be the radius of convergence of the power series 
+    \[
+        f(x) = \displaystyle\sum_{n=0}^\infty c_n(x-a)^n,
+    \]
+    and assume $R > 0$. Then $f$ is continuous and differentiable 
+    on $(a-R, a+R)$, and 
+    \[
+        \frac{d}{dx} f(x) = 
+        \displaystyle\sum_{n=1}^{\infty}nc_n(x-a)^{n-1} 
+        = 
+        \displaystyle\sum_{n=0}^{\infty}(n+1)c_{n+1}(x-a)^n
+    \]
+\end{thm}
+\begin{thm}
+    Let $R$ be the radius of convergence of the power series 
+    $f(x) = \sum_{n=0}^\infty c_n(x-a)^n$, and assume $R > 0$. 
+    Then all derivatives of $f$ exist, and $f^{(k)}(a) = k!c_k$, so 
+    \[
+        f(x) = \displaystyle\sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}
+        (x-a)^n
+    \]
+\end{thm}
+I.e. a power seris can be written as it's Taylor-series.  
+
+\begin{prob}[Problem 2, Spaces p.91]
+    Show that $\sum_{n=1}^{\infty}\frac{x}{n^2}$ converges uniformly 
+    on $[-1,1]$. 
+\end{prob}
+\begin{proof}
+    We proceed by Weierstrass M-test. 
+
+    Notice that for $x$ in the closed unit-interval, 
+    $|\frac{x}{n^2}| \leq \frac{1}{n^2} =: M_n$. 
+
+    Then it is well known from Euler's classic result that 
+    \[
+        \displaystyle\sum_{n=1}^{\infty}\frac{1}{n^2} = 
+        \frac{\pi^2}{6} < \infty
+    \]
+    We conclude that 
+    \[
+        \displaystyle\sum_{n=1}^{\infty}\frac{x}{n^2}  
+    \]
+    \textbf{converges uniformly} on $[-1,1]$. 
+\end{proof}
+\begin{prob}[Problem 3, Spaces p.91]
+    Let $f_n : [0,1]\to \mathbb R$ be defined by 
+    $f_n(x) = nx(1-x^2)^n$. Show that $f_n(x) \to 0$ for all 
+    $x \in [0,1]$, but that $\int_0^1 f_n(x) \; dx \to 1/2$. 
+\end{prob}
+\begin{proof}
+    Let $f : [0,1] \to \mathbb R$ be defined by 
+    \[
+        f(x) = \displaystyle\sum_{n=1}^{\infty} f_n(x)
+        = 
+        \displaystyle\sum_{n=1}^{\infty} nx(1-x^2)^n
+    \]
+    Notice that for $x$ in the closed unit interval, 
+    \[
+        |nx(1-x^2)^n| \leq \frac{n}{2}\frac{1}{4^n} = 
+        \frac{n}{2 \cdot 4^n} \leq \frac{n}{4^{n+1}} \leq 
+        \frac{1}{4^{n+1}} =: M_n
+    \]
+    and 
+    \[
+        \displaystyle\sum_{n=1}^\infty \frac{1}{4^{n+1}} 
+        < \displaystyle\sum_{n=1}^\infty \frac{1}{n^2} 
+        = \frac{\pi^2}{6} < \infty
+    \]
+    So by Weierstrass M-test, $\sum_{n=1}^{\infty}f_n(x)$ converges 
+    (uniformly) so $f_n \to 0$.
+
+    As $f_n$ are all continuous for $n \in \mathbb N$ and we showed 
+    that $\sum_{n=1}^{\infty}f_n$ converges uniformly by M-test so 
+    we can interchange limits when taking the integral of $f_n$'s. 
+    In other words 
+    \[
+        \lim_{n\to\infty}\displaystyle\int_{0}^{1}f_n(x) \;dx = 
+        \displaystyle\int_{0}^{1} \lim_{n\to\infty} f_n(x) \; dx
+    \]
+    Computing the integral: 
+    \begin{align*}
+        \displaystyle\int_0^1 f_n(x) \; dx 
+        &= \displaystyle\int_0^1 nx(1-x^2)^n \; dx \\ 
+        &= \left[\frac{n}{2(n+1)}(1-x^2)^{n+1} \right]_{x=0}^1 \\ 
+        &= \frac{n}{2(n+1)}
+    \end{align*}
+    Taking the limit: 
+    \begin{align*}
+        \lim_{n\to\infty} \frac{n}{2(n+1)} 
+        &= \frac{1}{2} \lim_{n\to\infty} \frac{n}{n+1} \\ 
+        &= \frac{1}{2}
+    \end{align*}
+    as desired. 
+\end{proof}
+
+\begin{prob}[Exam problem 1, 2021-kont]
+    Consider $\mathbb R^2$ equipped with the Euclidian norm 
+    $||x|| = \sqrt{x_1^2 + x_2^2}$ and the corresponding metric 
+    $d(x,y) = ||x-y||$. Define the unit circle 
+    $S = \left\{x \in \mathbb R^2 \bigm| ||x|| = 1\right\}$. 
+    Explain why 
+    \begin{itemize}
+        \item $(S,d)$ is a metric space, 
+        \item but $(S,||\cdot||)$ is not a normed vector space. 
+    \end{itemize}
+\end{prob}
+\begin{proof}[Solution]
+    It is clear that $(S,d)$ is a metric space as $||\cdot||$ is a 
+    well defined norm on $S \subseteq \mathbb R^2$ and 
+    $d(x,y) := ||x-y||$ always constitutes a metric. 
+    $(S,||\cdot||)$ is not a normed space because it is not even 
+    a vector space. $(0,1),(1,0) \in S$, but $||(0,1) + (1,0)|| > 1$
+    so $S$ is not closed. 
+\end{proof}
+\begin{prob}[Exam problem 2, 2021-kont]
+    Prove that $f:\mathbb R \to \mathbb R$ defined by 
+    $f(x) = e^{-x^2}$ is uniformly continuous. 
+\end{prob}
+\begin{proof}
+    Let $f(x) = e^{-x^2}$. Then
+    \[
+        f'(x) = -2x e^{-x^2}.
+    \]
+    Hence
+    \[
+        |f'(x)| = 2|x| e^{-x^2}.
+    \]
+    Consider $g(x) = 2x e^{-x^2}$ for $x \ge 0$. Then
+    \[
+        g'(x) = 2e^{-x^2}(1 - 2x^2).
+    \]
+    Thus $g'(x)=0$ when $x = \frac{1}{\sqrt{2}}$, and
+    \[
+        |f'(x)| \le g\!\left(\frac{1}{\sqrt{2}}\right)
+        = \sqrt{2} e^{-1/2}.
+    \]
+    Therefore $f'$ is bounded on $\mathbb{R}$. By the Mean Value Theorem,
+    \[
+        |f(x)-f(y)| \le M |x-y|
+    \]
+    for some constant $M$, so $f$ is Lipschitz continuous and hence uniformly continuous on $\mathbb{R}$.
 \end{proof}
 
 \end{document}
