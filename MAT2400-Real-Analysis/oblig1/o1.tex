@@ -208,5 +208,126 @@
     Together with the results from (a) and (b) we conclude the 
     desired result. 
 \end{proof}
+\newpage 
+\begin{prob*}[3]
+    Fix some $m \in \mathbb N$. We equip $\mathbb R^m$ with the 
+    metric given by the euclidian norm, $d(x,y) = ||x,y||$, where 
+    $||z|| = \sqrt{\sum_{n=1}^m|z_n|^2}$ (for $x,y,z \in \mathbb R^m$).
+    Define 
+    \begin{align*}
+        X&:= \text{Lip}([0,1],\mathbb R^m) = \{x:[0,1] \to \mathbb 
+        R^m : x \ \text{is Lipschitz continuous}\},\\
+            Y&:= C^1([0,1],\mathbb R^m) \\ 
+             &= \left\{x:[0,1] \to \mathbb 
+        R^m : \text{both} \ x \ \text{and} \ \frac{dx}{dt} \ 
+        \text{exist and are continuous}\right\}.
+    \end{align*}
+    We equip $X$ with the supremum metric, 
+    \[
+        \rho(x,y) := \sup_{t\in[0,1]}|x(t) - y(t)| \quad 
+        \text{for} \ x,y \in X.
+    \]
+    Fix $x_0, x_1 \in \mathbb R$, let $c > 0$, and define 
+    \[
+        E_c := \left\{x \in Y : x(0) = x_0, x(1) = x_1, 
+        \left|\left|\frac{dx}{dt}(t)\right|\right| \leq c \; \forall 
+        t \in [0,1]
+        \right\}.
+    \]
+
+    (a) Show that 
+    \begin{enumerate}
+        \item every $x \in E_c$ has Lipschitz constant at most $c$, 
+        \item $E_c$ is a subset of $X$, 
+        \item $E_c$ is non-empty when $c$ is large enough.
+    \end{enumerate}
+
+    (b) Show that $E_c$ is a \emph{precompact} subset of $X$, i.e., 
+    every sequence $(x_n)_{n\in\mathbb N}$ in $E_c$ has a subsequence 
+    that converges to a point in $X$. 
+
+    (c) For some continuous, bounded function $v : \mathbb R^m 
+    \to [0,\infty)$, define $f:E_c \to \mathbb R$ by 
+    \[
+        f(x) := \displaystyle\int_{0}^{1}v(x(t))\left|\left|
+        \frac{dx}{dt}(t) \right|\right| \qquad \text{for} \ x 
+        \in E_c
+    \]
+    Show that $f$ is bounded on $E_c$. 
+
+    (d) It is a fact that $f$ is not continuous on $E_c$, and 
+    $E_c$ is not compact, so we cannot apply the Extreme Value 
+    Theorem to deduce the existence of a minimum of $f$. 
+
+    It \emph{can be shown} that $f$ is lower semicontinuous
+    (but you are not asked to show this here). Assuming that this is 
+    true, show that there exists some $\overline x \in \overline{E_c}$
+    which "minimizes" $f$, in the sense that $\overline x$ is a 
+    minimum of the lowest semicontinuous envelope $g$ of $f$, 
+    and that if $\overline x \in E_c$, then $\overline x$ is 
+    a minimum of $f$. 
+\end{prob*}
+\newpage 
+\begin{proof}[Proof of (a)]
+    We begin with the second claim. 
+
+    \textbf{Claim 2.}
+
+    We are essentially asked to 
+    prove that $x \in E_c$ is Lipschitz. There is, I belive, a theorem 
+    in the book which explicitly states that functions from subsets 
+    of the reals to the reals which have bounded derivatives 
+    are Lipschitz, but that is not entirely applicable. 
+    Assume, for a contradiction, that there exists $x \in E_c$ which 
+    is not in $X$, i.e. $x$ is not Lipschitz. 
+
+    By definition $x$ and $x'$ are continuous with the latter being 
+    bounded by $c \in \mathbb R^+$. We're assuming non-Lipschitz 
+    so for every $C > 0$, there are points $\alpha_C, \beta_C \in 
+    [0,1]$ such that 
+    \[
+        ||x(\alpha_C)-x(\beta_C)|| > C||\alpha_C - \beta_C||
+    \]
+    In particular there exist exist points $\alpha_c, \beta_c$ such  
+    that 
+    \[
+        ||x(\alpha_c)-x(\beta_c)|| > c||\alpha_c - \beta_c||
+    \]
+    so 
+    \[
+        \frac{||x(\alpha_c) - x(\beta_c)||}{||\alpha_c - \beta_c||}
+        > c
+    \]
+    but as $dx/dt \leq c$ for every $t \in [0,1]$ it must be the 
+    case that 
+    \[
+        c \geq 
+        \frac{||x(\alpha_c) - x(\beta_c)||}{||\alpha_c - \beta_c||}
+    \]
+    In particular, $c > c$, a contradiction. 
+    Therefore our assumption that there exists $x \in E_c$ not 
+    Lipschitz is wrong and thus every $x \in E_c$ is Lipschitz. 
+    Summing up we get that 
+    \[
+        E_c \subseteq X
+    \]
+    
+    Now \textbf{Claim 1} follows nicely as we just saw that 
+    the assumption that $||x(\alpha_c) - x(\beta_c)|| > 
+    c ||\alpha_c - \beta_c||$ was wrong. 
+    
+    \textbf{Claim 3.}
+
+    Notice that as $x \in E_c$ is continuous, and it's derivative 
+    continuous, the average growth between $0$ and $1$ is 
+    $||x_1 - x_0||$. By the Mean-Value-Theorem there must be 
+    some point $t \in [0,1]$ such that the momentary growth in 
+    that point is $||x_1 - x_0||$. 
+    So $\frac{dx}{dt}$ must be at least $||x_1 - x_0||$. Therefore 
+    we require $c \geq ||x_1 - x_0||$. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Suppose $(x_n)_{n\in\mathbb N}$ is a sequence in $E_c$. 
+\end{proof}
 
 \end{document}
