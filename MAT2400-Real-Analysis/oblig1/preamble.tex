@@ -95,34 +95,19 @@
 % Syntax: \begin{thm}[Optional Title]\label{thm:label} ...
 %-------------------------
 \newtheorem{thm}{Theorem}[section]
-\newtheorem*{thm*}{Theorem}
 \newtheorem{defn}{Definition}[section]
-\newtheorem*{defn*}{Definition}
 \newtheorem{lem}{Lemma}[section]
-\newtheorem*{lem*}{Lemma}
 \newtheorem{cor}{Corollary}[section]
-\newtheorem*{cor*}{Corollary}
 \newtheorem{prob}{Problem}[section]
 \newtheorem*{prob*}{Problem}
 \newtheorem{ex}{Example}[section]
-\newtheorem*{ex*}{Example}
 \newtheorem{prop}{Proposition}[section]
-\newtheorem*{prop*}{Proposition}
 
 %-------------------------
 % Tcolorbox environments (applies style to amsthm environments)
 % Removed 'attach title to upper' from all individual settings.
 %-------------------------
 \tcolorboxenvironment{thm}{
-  colframe=thmcolor,
-  colback=thmcolor!15!bgcolor,
-  fonttitle=\bfseries,
-  coltitle=white,
-  breakable,
-  title after break,
-}
-
-\tcolorboxenvironment{thm*}{
   colframe=thmcolor,
   colback=thmcolor!15!bgcolor,
   fonttitle=\bfseries,
@@ -140,15 +125,6 @@
   title after break,
 }
 
-\tcolorboxenvironment{defn*}{
-  colframe=defcolor,
-  colback=defcolor!15!bgcolor,
-  fonttitle=\bfseries,
-  coltitle=white,
-  breakable,
-  title after break,
-}
-
 \tcolorboxenvironment{lem}{
   colframe=lemcolor,
   colback=lemcolor!15!bgcolor,
@@ -158,25 +134,7 @@
   title after break,
 }
 
-\tcolorboxenvironment{lem*}{
-  colframe=lemcolor,
-  colback=lemcolor!15!bgcolor,
-  fonttitle=\bfseries,
-  coltitle=white,
-  breakable,
-  title after break,
-}
-
 \tcolorboxenvironment{cor}{
-  colframe=corcolor,
-  colback=corcolor!15!bgcolor,
-  fonttitle=\bfseries,
-  coltitle=white,
-  breakable,
-  title after break,
-}
-
-\tcolorboxenvironment{cor*}{
   colframe=corcolor,
   colback=corcolor!15!bgcolor,
   fonttitle=\bfseries,
@@ -212,25 +170,7 @@
   title after break,
 }
 
-\tcolorboxenvironment{ex*}{
-  colframe=excolor,
-  colback=excolor!15!bgcolor,
-  fonttitle=\bfseries,
-  coltitle=white,
-  breakable,
-  title after break,
-}
-
 \tcolorboxenvironment{prop}{
-    colframe=propcolor, 
-    colback=propcolor!15!bgcolor,
-    fonttitle=\bfseries,
-    coltitle=white,
-    breakable,
-    title after break
-}
-
-\tcolorboxenvironment{prop*}{
     colframe=propcolor, 
     colback=propcolor!15!bgcolor,
     fonttitle=\bfseries,
@@ -262,24 +202,6 @@
 
 \crefname{prop}{proposition}{propositions}
 \Crefname{prop}{Proposition}{Propositions}
-
-\crefname{thm*}{theorem}{theorems}
-\Crefname{thm*}{Theorem}{Theorems}
-
-\crefname{defn*}{definition}{definitions}
-\Crefname{defn*}{Definition}{Definitions}
-
-\crefname{lem*}{lemma}{lemmas}
-\Crefname{lem*}{Lemma}{Lemmas}
-
-\crefname{cor*}{corollary}{corollaries}
-\Crefname{cor*}{Corollary}{Corollaries}
-
-\crefname{prob*}{problem}{problems}
-\Crefname{prob*}{Problem}{Problems}
-
-\crefname{ex*}{example}{examples}
-\Crefname{ex*}{Example}{Examples}
 
 \crefname{prop*}{proposition}{propositions}
 \Crefname{prop*}{Proposition}{Propositions}

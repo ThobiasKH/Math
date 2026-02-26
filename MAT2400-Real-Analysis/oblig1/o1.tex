@@ -1,0 +1,212 @@
+\input{preamble.tex}
+
+\title{\huge{Oblig 1}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+\begin{prob*}[1]
+    Let $(X,d)$ be a metric space and $K \subseteq X$ a subset. 
+    A function $f : K \to \mathbb R$ is \emph{lower semicontinuous}
+    if for all $x \in K$ and $\varepsilon > 0$, there exists 
+    $\delta > 0$ such that 
+    \[
+        y \in K, \: d(x,y) < \delta \Rightarrow f(x) < 
+        f(y) + \varepsilon
+    \]
+    The goal of this problem is to show that if $f : K \to \mathbb R$
+    is lower semicontinuous and $K$ is compact, then $f$ attains a 
+    minimum, i.e. there is some $\overline x\in K$ such that 
+    \[
+        f(\overline x) \leq f(x) \qquad \forall x \in K.
+    \] 
+    You may proceed as follows: 
+
+    (a) Let $m := \inf\{f(x) : x \in K\}$. Argue that there exists 
+    a \emph{minimizing sequence} for $f$, i.e. a sequence 
+    $(x_n)_{n \in \mathbb N}$ in $K$ such that $f(x_n) \to m$ as 
+    $n \to \infty$.
+
+    Assume from now that $K$ is compact. 
+
+    (b) Show that there is a subsequence $(x_{n_k})_{k\in\mathbb N}$ 
+    and some $\overline x \in K$ such that $x_{n_k}\to \overline x$ 
+    as $k \to \infty$. 
+
+    (c) Show that $m \leq f(\overline x) \leq m + \varepsilon$
+    for any $\varepsilon > 0$, and conclude that $\overline x$ is 
+    a minimum of $f$.
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    Let $f : K \to \mathbb R$ be some function and let 
+    $m := \inf\{f(x) : x \in K\}$. 
+
+    By the definition of the infimum we have that, for every 
+    $\varepsilon > 0$ there exists $x \in K$ such that
+    \[
+        f(x) \leq m + \varepsilon
+    \]
+    In particular for $\varepsilon := \frac{1}{n}$ this must be the 
+    case. Then, for $n \in \mathbb N$ there exists $x_n \in K$ such 
+    that 
+    \[
+        f(x_n) \leq m + \frac{1}{n}
+    \]
+    but $m$ is a lower bound for all $f(x_n)$ hence 
+    \[
+        m \leq f(x_n) \leq m + \frac{1}{n}
+    \]
+    so 
+    \[
+        f(x_n) \underset{n \to \infty}{\to} m 
+    \] 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    $(x_n)_{n\in\mathbb N} \in K$ as described in proof of (a). 
+    Since $K$ is compact, $(x_n)_{n\in\mathbb N}$ has a convergent 
+    subsequence which converges to some point $\overline x \in K$.
+\end{proof}
+\begin{proof}[Proof of (c)]
+    By definition of $m$ as the infimum of all values of $f$ we 
+    can see that 
+    \[
+        m \leq f(\overline x)
+    \]
+    By the virtue of $f$ being lower semicontinuous we may also 
+    conclude that for any $\varepsilon > 0$ there is $\delta > 0$
+    such that 
+    \[
+        d(\overline x, y) < \delta \Rightarrow f(\overline x) < 
+        f(y) + \varepsilon
+    \]
+    In particular, since $x_{n_k} \to \overline x$, we can choose 
+    $k$ large enough so that $d(\overline x, x_{n_k}) < \delta$. 
+    I.e. 
+    \[
+        d(\overline x, x_{n_k}) < \delta \Rightarrow f(\overline x) 
+        < f(x_{n_k}) + \varepsilon
+    \]
+    As $k \to \infty$ we know that $f(x_{n_k}) \to m$ so taking 
+    the limit we get 
+    \[
+        m \leq f(\overline x) \leq m + \varepsilon
+    \]
+    Taking $\varepsilon \to 0$ we conclude that 
+    \[
+        m \leq f(\overline x) \leq m
+    \]
+    so $\overline x$ is a minimum of $f$.
+\end{proof}
+
+\begin{prob*}[2]
+    Let $(X,d)$ be a metric space and $E \subseteq X$ any subset. 
+    Let $f : E \to \mathbb R$ be any bounded function (i.e. 
+    there is some $M \in \mathbb R$ such that $|f(x)| \leq M$ for 
+    all $x \in E$). Define $g : \overline E \to \mathbb R$ by 
+    \[
+        g(x) := \underset{\underset{y \in E}{y \to x}}{\lim \inf} f(y)
+        \qquad \forall x \in \overline E,
+    \]
+    that is, 
+    \[
+        g(x) := \lim_{n\to\infty}f_n(x), \qquad \text{where} \ 
+        f_n(x) := \inf\{f(y) : y \in E \cap B(x;1/n)\}.
+    \]
+    (Here, $\overline E := E \cup \partial E$ is the closure of $E$.)
+    The function $g$ is called the \emph{lower semicontinuous envelope}
+    of $f$. 
+
+    (a) Show that $g$ is well-defined, i.e. that the above limit 
+    exists, and that 
+    \[
+        g(x) \leq f(x)
+    \]
+    for all $x \in E$. 
+
+    (b) Show that $g$ is lower semicontinuous. 
+
+    (c) Show that if $f$ is lower semicontinuous on $E$, then 
+    $g(x) = f(x)$ for all $x \in E$.
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    Denote $\xi_{x,n} := E \cap B(x;1/n)$. It is easy to see that 
+    $\xi_{x,n+1} \subseteq \xi_{x,n}$ (and that they are 
+    nonempty for all $n\in\mathbb N$). Notice then that 
+    \[
+        f_n(x) \leq f_{n+1}(x) \leq f_{n+2}(x) \leq \cdots \leq M
+    \]
+    I.e. we get a monotone increasing sequence which is bounded 
+    above, which converges. 
+
+    It is quite clear that for $x \in E$ 
+    \[
+        \lim_{n\to\infty}f_n(x) \leq f(x)
+    \]
+    as for every $n$ $x \in B(x;\frac{1}{n})$ because 
+    $d(x,x) = 0 < 1/n$ and by the definition of the infimum 
+    $f_n(x) = \inf\{f(y) : y \in \xi_{x,n}\}$ is a lower bound for 
+    the value of every specific $x \in \xi_{x,n}$. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We wish to show that for every $x \in \overline E$ and 
+    $\varepsilon > 0$ we can find 
+    $\delta > 0$ such that 
+    \[
+        z \in \overline E, \; d(x,z) < \delta \Rightarrow 
+        g(x) < g(z) + \varepsilon
+    \]
+    Let $x \in \overline E$ and $\varepsilon > 0$. Since 
+    $g(x) = \lim_{n\to\infty}f_n(x)$ and the sequence of $f_n(x)$ is 
+    non-decreasing, we have $f_n(x) \leq g(x)$ for all 
+    $n \in \mathbb N$. Thus there exists $N \in \mathbb N$ such that 
+    \[
+        g(x) < f_N(x) + \varepsilon
+    \]
+    Recall that $f_N(x) = \inf\{f(y) : y \in E \cap B(x;1/N)\}$. 
+    Choose $\delta > 0$ such that $B(z;\delta) \subseteq B(x;1/N)$. 
+    For any $M > 1/\delta$ we have $B(z;1/M) \subseteq B(z;\delta) 
+    \subseteq B(x;1/N)$. As we said in (a), the infimum over a larger
+    set is less than or equal to the infimum over a subset. 
+    Therefore 
+    \[
+        f_N(x) \leq f_M(z)
+    \]
+    As $m \to \infty$ we get 
+    \[
+        f_N(x) \leq g(z)
+    \]
+    Recalling that 
+    \[
+        g(x) < f_N(x) + \varepsilon
+    \]
+    we finally conclude that 
+    \[
+        g(x) < g(z) + \varepsilon
+    \]
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Let $x \in E \subseteq \overline E$. If $f$ is lower 
+    semicontinuous then $\forall \varepsilon > 0, \ \exists \delta 
+    > 0$ s.t. 
+    \[
+        z \in E, \: d(x,z) < \delta \Rightarrow f(x) < f(y) +  
+        \varepsilon \Rightarrow f(x) \leq f(y) + \varepsilon
+    \]
+    In particular this holds for every $z \in E \cap B(x;1/N)$ (assume 
+    $N \geq 1/\delta$), so it holds for the infimum as well, i.e. 
+    \[
+        d(x,z) < \delta \Rightarrow f(x) \leq f_n(x) + \varepsilon, \: 
+        n \geq N
+    \]
+    Once again, nondecreasing sequence so take the limit to get 
+    \[
+        f(x) \leq g(x) + \varepsilon
+    \]
+    Together with the results from (a) and (b) we conclude the 
+    desired result. 
+\end{proof}
+
+\end{document}
