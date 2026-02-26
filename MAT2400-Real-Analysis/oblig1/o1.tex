@@ -286,23 +286,23 @@
     so for every $C > 0$, there are points $\alpha_C, \beta_C \in 
     [0,1]$ such that 
     \[
-        ||x(\alpha_C)-x(\beta_C)|| > C||\alpha_C - \beta_C||
+        ||x(\alpha_C)-x(\beta_C)|| > C|\alpha_C - \beta_C|
     \]
     In particular there exist exist points $\alpha_c, \beta_c$ such  
     that 
     \[
-        ||x(\alpha_c)-x(\beta_c)|| > c||\alpha_c - \beta_c||
+        ||x(\alpha_c)-x(\beta_c)|| > c|\alpha_c - \beta_c|
     \]
     so 
     \[
-        \frac{||x(\alpha_c) - x(\beta_c)||}{||\alpha_c - \beta_c||}
+        \frac{||x(\alpha_c) - x(\beta_c)||}{|\alpha_c - \beta_c|}
         > c
     \]
     but as $dx/dt \leq c$ for every $t \in [0,1]$ it must be the 
     case that 
     \[
         c \geq 
-        \frac{||x(\alpha_c) - x(\beta_c)||}{||\alpha_c - \beta_c||}
+        \frac{||x(\alpha_c) - x(\beta_c)||}{|\alpha_c - \beta_c|}
     \]
     In particular, $c > c$, a contradiction. 
     Therefore our assumption that there exists $x \in E_c$ not 
@@ -314,20 +314,26 @@
     
     Now \textbf{Claim 1} follows nicely as we just saw that 
     the assumption that $||x(\alpha_c) - x(\beta_c)|| > 
-    c ||\alpha_c - \beta_c||$ was wrong. 
+    c |\alpha_c - \beta_c|$ was wrong. 
     
     \textbf{Claim 3.}
 
-    Notice that as $x \in E_c$ is continuous, and it's derivative 
-    continuous, the average growth between $0$ and $1$ is 
-    $||x_1 - x_0||$. By the Mean-Value-Theorem there must be 
-    some point $t \in [0,1]$ such that the momentary growth in 
-    that point is $||x_1 - x_0||$. 
-    So $\frac{dx}{dt}$ must be at least $||x_1 - x_0||$. Therefore 
-    we require $c \geq ||x_1 - x_0||$. 
+    Let $x(t) = x_0 + t(x_1-x_0)$. Then $x'(t) = x_1 - x_0$ so 
+    \[
+        ||x'(t)|| = ||x_1-x_0||. 
+    \]
+    So if $c \geq ||x_1-x_0||$ then this function would lie in 
+    $E_c$. 
 \end{proof}
 \begin{proof}[Proof of (b)]
     Suppose $(x_n)_{n\in\mathbb N}$ is a sequence in $E_c$. 
+    We know that $x_n(0) = x_0$ and $||x_n'|| \leq c$ so 
+    \[
+        ||x_n(t) - x_n(s)|| \leq c|t - s| 
+    \]
+    for all $x_n$. I.e. every function in the sequence is Lipschitz 
+    bounded by the same Lipschitz constant $c$ and endpoints are 
+    all the same. 
 \end{proof}
 
 \end{document}
