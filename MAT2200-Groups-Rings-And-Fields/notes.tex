@@ -1,5 +1,6 @@
 \input{preamble.tex}
 \usepackage{tikz-cd}
+\hfuzz=5pt
 
 \title{\huge{Groups, Rings and Fields}}
 \author{\LARGE{Thobias Høivik}}
@@ -1910,6 +1911,258 @@ $1$ element is not worth dwelling on.
     \]
     so $n\cdot 1 = 0$ or $m\cdot1=0$ so $k$ is not the characteristic
     of $D$. 
+\end{proof}
+
+\newpage 
+\section{Fermat's and Euler's theorems, Quotient Fields}
+\begin{thm}[Fermat's Little Theorem]
+    If $p$ is prime and $\gcd(a,p) = 1$, then 
+    \[
+        a^{p-1} \equiv 1 \mod p
+    \]
+    Equivalently 
+    \[
+        a^p \equiv a \mod p
+    \]
+\end{thm}
+\begin{proof}[Proof idea]
+    The key fact is that 
+    \[
+        (\mathbb Z/p\mathbb Z)^\times
+    \]
+    the nonzero elements mod $p$, form a group under multiplication.
+    This group has $p-1$ elements (finite) and cyclic. By 
+    Lagrange's Theorem, if $G$ is finite and $g\in G$ then 
+    \[
+        g^{|G|} = e
+    \]
+    Applying this to $G = (\mathbb Z/p\mathbb Z)^\times$ we get 
+    \[
+        a^{p-1} \equiv 1
+    \]
+\end{proof}
+
+\begin{thm}{Euler's Theorem}
+    If $\gcd(a,n)=1$, then 
+    \[
+        a^{\phi(n)} \equiv 1 \mod n,
+    \]
+    where $\phi(n)$ is Euler's totient function.
+\end{thm}
+\begin{proof}[Proof idea]
+    We consider 
+    \[
+        (\mathbb Z/n\mathbb Z)^\times
+    \]
+    the group of units mod $n$. 
+    It has exactly $\phi(n)$ elements. 
+    Again by Lagrange: 
+    \[
+        a^{\phi(n)} \equiv 1 
+    \]
+\end{proof}
+So Fermat's Little Theorem is just Euler's Theorem for $n$ prime. 
+
+\subsection{Quotient Fields}
+In $\mathbb Z$, you generally cannot divide by $2$. 
+But in $\mathbb Q$, you can. 
+The questions we want to answer is: 
+
+"Can we build a field from a ring?"
+
+As it turns out the answer is yes (conditions may apply...).
+
+\newpage 
+Recall that an integral domain is 
+\begin{itemize}
+    \item a commutative ring, 
+    \item with identity, 
+    \item with no zero divisors
+\end{itemize}
+Suppose $D$ is an integral domain. We construct 
+$\operatorname{Frac}(D)$ like rational numbers.  
+ 
+\begin{defn}[Quotient Field]
+    The \textbf{field of fractions} or \textbf{quotient field}
+    of an integral domain $D$ is the smallest field $K$ 
+    (often denoted $\operatorname{Frac}(D)$)
+    containing $D$ as a subring, constructed by forming formal 
+    fractions $\frac{a}{b}$ where $a,b \in K \; (b \neq 0)$. 
+    
+    The operations on $K$ are defined as 
+    \[
+        \frac{a}{b} + \frac{c}{d} = \frac{ad + bd}{bd}
+    \]
+    and 
+    \[
+        \frac{a}{b}\cdot\frac{c}{d} = \frac{ac}{bd}
+    \]
+
+    We equip $K$ with an equivalence relation $\sim$ where we 
+    say 
+    \[
+        \frac{a}{b} \sim \frac{c}{d}
+    \]
+    if $ad=bc$.
+\end{defn}
+As we see we get a field $\operatorname{Frac}(D)$ and 
+we get an injective embedding
+\[
+    D \hookrightarrow{} \operatorname{Frac}(D)
+\]
+via 
+\[
+    a \mapsto \frac{a}{1}
+\]
+
+
+\begin{prob}[Problem 20.5 Fraleigh's p.189]
+    Use Fermat's theorem to find the remainder of 
+    $37^{49}$ when it is divided by $7$. 
+\end{prob}
+\begin{proof}[Solution]
+    $\gcd(37,7) = 1$ and $p = 7$ is ceirtainly prime so 
+    Fermat's Little Theorem applies. 
+
+    We can rewrite 
+    \[
+        37^{49} = 37^{7^2} \equiv 2^{7^2}
+    \]
+    From FLT we have $2^{6} \equiv 1$. 
+    \[
+        2^{7^2} = 2^{6 \cdot 8 + 1} \equiv 1^8 \cdot 2 \equiv 2
+        \mod 7
+    \]
+\end{proof}
+\begin{prob}[Problem 20.12 Fraleigh's p.189]
+    Describe all solutions to 
+    \[
+        22x \equiv 5 \mod 15
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    The greatest common divisor $\gcd(22,15) = 1$ which is a 
+    divisor of $5$ so there does exist solutions (in fact, as 
+    $\gcd(22,15) = 1$ there exist exactly one solution). We can 
+    simplify to get 
+    \[
+        7x \equiv 5 \mod 15
+    \]
+    As the greates common divisor is $1$ we know that $7$ is a 
+    unit in $\mathbb Z/15\mathbb Z$. We want to find $7^{-1}$. 
+    Notice that $7 \cdot 13 = 91 \equiv 1$. 
+    \begin{align*}
+        x \equiv 13 \cdot 5 \mod 15 \\ 
+        13 \cdot 5 = 65 \\ 
+        65 \equiv 5 \mod 15
+    \end{align*}
+    Thus 
+    \[
+        x \equiv 5 \mod 15
+    \]
+\end{proof}
+\begin{prob}[Problem 20.15 Fraleigh's p.189]
+    As in the task above for 
+    \[
+        39x \equiv 125 \mod 9
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    Notice that 
+    \[
+        39 \equiv 3 \mod 9
+    \]
+    and 
+    \[
+        125 \equiv -1 \equiv 8 \mod 9
+    \]
+    so we can transform the problem into 
+    \[
+        3x \equiv 8 \mod 9
+    \]
+    Notice that $\gcd(3,9) = 3$, but $3$ is not a divisor of 
+    $8$ thus the solution DNE. 
+\end{proof}
+\begin{prob}[Problem 20.27 Fraleigh's p.190]
+    Show that $1$ and $p-1$ are the only elements of the 
+    field $\mathbb Z_p$ that are their own multiplicative inverse. 
+    [Hint: Consider the equation $x^2-1 = 0$].
+\end{prob}
+\begin{proof}
+    Let $p$ be prime and let $x \in \mathbb Z_p$. 
+    Notice that $x = x^{-1}$ iff 
+    \[
+        x^2 \equiv 1 \mod p \Leftrightarrow x^2 - 1 \equiv 0 \mod p
+    \]
+    It is not hard to see that $1$ and $p-1$ are solutions to 
+    these equations, but we have to show that they are the only ones.
+    Notice that $x^2 - 1$ can be rewritten so we get 
+    \[
+        (x-1)(x+1) \equiv 0 \mod p
+    \]
+    Recall that since $\mathbb Z_p$ is a field (no zero divisors) 
+    it is the case that 
+    $x-1 \equiv 0$ or $x + 1 \equiv 0$. I.e. 
+    \[
+        x \equiv 1 \mod p, \ x \equiv - 1 \mod p.
+    \]
+    Therefore
+    \[
+        x = 
+        \begin{cases}
+            1 \\ p-1
+        \end{cases}
+    \]
+\end{proof}
+\begin{prob}[Problem 21.1 Fraleigh's p.196]
+    Describe the field $F$ of quotients of the integral subdomain
+    \[
+        D = \left\{n+mi \bigm| n,m \in \mathbb Z\right\}
+    \]
+    of $\mathbb C$. "Describe" means give the elements of 
+    $\mathbb C$ that make up the field of quotients of $D$ 
+    in $\mathbb C$.
+\end{prob}
+\begin{proof}[Solution]
+    Recall that 
+    \[
+        \operatorname{Frac}(D) = 
+        \left\{ \frac{a}{b} \biggm| a,b \in D \; (b \neq 0) \right\}
+    \]
+    $a,b \in D$ means that $a,b$ can be written as 
+    \[
+        a = n+mi, \ b = k+li, \ n,m,k,l \in \mathbb Z
+    \]
+    (note: $k+li \neq 0 \Rightarrow k \neq 0 \neq li$)
+    so 
+    \[
+        \operatorname{Frac}(D) 
+    \]
+    are elements of the form 
+    \begin{align*}
+        \frac{n+mi}{k+li} &= \frac{n+mi}{k+li}\cdot\frac{k-li}{k-li}\\
+        &= \frac{(n+mi)(k-li)}{k^2 + l^2} \\ 
+        &= \frac{nk+kmi-nli + ml}{k^2 + l^2} \\ 
+        &= \frac{nk+ml + (km-nl)i}{k^2 + l^2} \\ 
+        &= \frac{nk+ml}{k^2 + l^2} + \frac{km-nl}{k^2+l^2}i 
+    \end{align*}
+    Now we know $\operatorname{Frac}(D) \subseteq \mathbb Q(i)$, but 
+    is this subset relation strict?
+    Let $a = r/s, \ b = t/s$. 
+    Then 
+    \[
+        a+bi = \frac{r}{s} + \frac{t}{s}i 
+    \]
+    and since 
+    \[
+        r+ti \in \mathbb Z(i) = D, \ \text{and} \ 
+        s \in \mathbb Z \subset \mathbb Z(i) = D
+    \]
+    we conclude that $\mathbb Q(i) \subseteq D$. 
+    I.e. 
+    \[
+        D = \operatorname{Frac}(\mathbb Z(i)) = \mathbb Q(i) 
+    \]
 \end{proof}
 
  \end{document}
