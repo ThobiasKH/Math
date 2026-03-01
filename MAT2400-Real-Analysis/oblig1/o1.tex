@@ -318,9 +318,9 @@
     If not then the this should suffice: 
     \begin{align*}
         x(t) - x(s) &= \displaystyle\int_{s}^{t}x'(r)\;dr \\   
-        |x(t) - x(s)| &\leq \displaystyle\int_s^t |x'(r)|\;dr \\ 
+        ||x(t) - x(s)|| &\leq \displaystyle\int_s^t ||x'(r)||\;dr \\ 
                       &\leq \displaystyle\int_s^t c \; dr \\ 
-                      &= c|t-s|
+                      &= c||t-s||
     \end{align*}
     
     \textbf{Claim 3.}
@@ -341,6 +341,47 @@
         &\leq c\displaystyle\int_0^1 v(x(t)) \; dt \\ 
         &\leq Mc \displaystyle\int_0^1 \; dt = Mc
     \end{align*}
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Let $x \in E_c$. Then 
+    \[
+        x(t) = x_0 + \displaystyle\int_0^t x'(s) \; ds
+    \]
+    so 
+    \[
+        ||x(t)|| \leq ||x_0|| + \displaystyle\int_0^t ||x'(s)|| \;ds 
+        \leq ||x_0|| + c
+    \]
+    meaning all functions of $E_c$ are uniformly bounded. 
+    We know $x$ is Lipschitz with constant $c$ so 
+    \[
+        ||x(t) - x(s)|| \leq c||t-s|| 
+    \]
+    I.e. equicontinuous. 
+    Recalling that $E_c \subseteq C^1([0,1], \mathbb R^m)$ we get 
+    the desired result via an application of Arzelà-Ascoli. 
+\end{proof}
+\begin{proof}[Proof of (d)]
+    Let $g$ be the lower semicont. envelope of $f : E_c \to \mathbb R$.
+    From Problem 2 we recall that 
+    \[
+        g(x) \leq f(x)
+    \]
+    Recall also that, from Problem 1, a lower semicontinuous function
+    on a compact set attains a minimum. $\overline{E_c}$ is compact 
+    so there exists 
+    \[
+        \overline x \in \overline{E_c}
+    \]
+    s.t. 
+    \[
+        g(\overline x) \leq g(x), \ \forall x \in \overline{E_c}
+    \]
+    If $\overline x \in E_c$ then $g(\overline x) = f(\overline x)$,
+    and since $g \leq f$ we conclude that
+    \[
+        f(\overline x) \leq f(x), \ \forall x \in E_c
+    \]
 \end{proof}
 
 
