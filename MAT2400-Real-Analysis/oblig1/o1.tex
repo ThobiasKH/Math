@@ -250,7 +250,7 @@
     \to [0,\infty)$, define $f:E_c \to \mathbb R$ by 
     \[
         f(x) := \displaystyle\int_{0}^{1}v(x(t))\left|\left|
-        \frac{dx}{dt}(t) \right|\right| \qquad \text{for} \ x 
+        \frac{dx}{dt}(t) \right|\right| \; dt \qquad \text{for} \ x 
         \in E_c
     \]
     Show that $f$ is bounded on $E_c$. 
@@ -312,9 +312,16 @@
         E_c \subseteq X
     \]
     
-    Now \textbf{Claim 1} follows nicely as we just saw that 
+    Now, I believe, \textbf{Claim 1} follows as we just saw that 
     the assumption that $||x(\alpha_c) - x(\beta_c)|| > 
     c |\alpha_c - \beta_c|$ was wrong. 
+    If not then the this should suffice: 
+    \begin{align*}
+        x(t) - x(s) &= \displaystyle\int_{s}^{t}x'(r)\;dr \\   
+        |x(t) - x(s)| &\leq \displaystyle\int_s^t |x'(r)|\;dr \\ 
+                      &\leq \displaystyle\int_s^t c \; dr \\ 
+                      &= c|t-s|
+    \end{align*}
     
     \textbf{Claim 3.}
 
@@ -325,15 +332,16 @@
     So if $c \geq ||x_1-x_0||$ then this function would lie in 
     $E_c$, which would then be nonempty. 
 \end{proof}
-\begin{proof}[Proof of (b)]
-    Suppose $(x_n)_{n\in\mathbb N}$ is a sequence in $E_c$. 
-    We know that $x_n(0) = x_0$ and $||x_n'|| \leq c$ so 
-    \[
-        ||x_n(t) - x_n(s)|| \leq c|t - s| 
-    \]
-    for all $x_n$. I.e. every function in the sequence is Lipschitz 
-    bounded by the same Lipschitz constant $c$ and endpoints are 
-    all the same. 
+\begin{proof}[Proof of (c)]
+    We assume $v : \mathbb R^m \to [0,\infty)$ is continuous 
+    and bounded, i.e. $0 \leq v(x) \leq M$. 
+    \begin{align*}
+        f(x) &:= \displaystyle\int_0^1 v(x(t)) 
+        \left|\left|\frac{dx}{dt}(t)\right|\right| \; dt \\ 
+        &\leq c\displaystyle\int_0^1 v(x(t)) \; dt \\ 
+        &\leq Mc \displaystyle\int_0^1 \; dt = Mc
+    \end{align*}
 \end{proof}
+
 
 \end{document}
