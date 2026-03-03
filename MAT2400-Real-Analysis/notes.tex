@@ -2779,4 +2779,57 @@ I.e. a power seris can be written as it's Taylor-series.
     for some constant $M$, so $f$ is Lipschitz continuous and hence uniformly continuous on $\mathbb{R}$.
 \end{proof}
 
+\newpage 
+\section{Problems week of March 2}
+\begin{prob}[Problem from Spaces sec. 4.7]
+    Let $f$ be the function $f(y,t)=y$. 
+    Choose initial data, say, $\bar y=1$. Perform a fixed point 
+    iteration of the equation  
+    $y(t) = \bar y + \int_0^t f(y(s),s)\,ds$  
+    that is, for some continuous function $y^0$ 
+    (here, the superscripts are indices, not powers) let  
+    $y^{n+1}(t) = \bar y + \int_0^t f(y^n(s),s)\,ds$  
+    for $n=0,1,2,\dots$. (It's easiest to start with $y^0\equiv0$.) 
+    Compute $y^1,y^2,y^3,y^4$. Give an expression for $y^n$ 
+    for any $n$, and prove that $y^n\to y$, where $y(t)=e^t$.
+\end{prob}
+\begin{proof}[Solution and proof]
+    \begin{align*}
+        y^1(t) &=  1 + \displaystyle\int_0^t 0 \; ds \\ 
+        &= 1 + t \\ 
+        y^2(t) &= 1 + \displaystyle\int_0^t 1 + s \; ds \\ 
+        &= 1 + \left[s + \frac{s^2}{2}\right]_{s=0}^t \\ 
+        &= 1 + t + \frac{t^2}{2} \\ 
+        y^3(t) &= \cdots \\ 
+        &= 1 + t + \frac{t^2}{2} + \frac{t^3}{3!} \\ 
+    \end{align*}
+    and so on to arrive at 
+    \[
+        y^n(t) = \displaystyle\sum_{n=0}^{n-1} \frac{t^n}{n!}
+    \]
+    It is well known that the taylor expansion of $e^t$ is 
+    precisely 
+    \[
+        e^t = \displaystyle\sum_{n=0}^\infty \frac{t^n}{n!}
+    \]
+    Let $\varepsilon > 0$ for $t \in \mathbb R$ 
+    choose $N \in \mathbb N$ such that 
+    \[
+        \left|\frac{t^n}{n!}\right| + 
+        \left|\frac{t^{n+1}}{(n+1)!}\right| + \cdots 
+                < \varepsilon, \: n \geq N
+    \]
+    which we can do since $n!$ grows faster than any polynomial so the
+    terms go to $0$. 
+    Then  
+    \[
+        \left|\displaystyle\sum_{k=0}^{n-1} \frac{t^k}{k!} - e^t
+        \right|
+        = \left|\displaystyle\sum_{k=n}^\infty \frac{t^k}{k!}
+        \right| \leq 
+        \displaystyle\sum_{k=n+1}^\infty \left|\frac{t^k}{k!}\right|
+        < \varepsilon
+    \]
+\end{proof}
+
 \end{document}
