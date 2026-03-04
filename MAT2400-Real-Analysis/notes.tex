@@ -2827,9 +2827,127 @@ I.e. a power seris can be written as it's Taylor-series.
         \right|
         = \left|\displaystyle\sum_{k=n}^\infty \frac{t^k}{k!}
         \right| \leq 
-        \displaystyle\sum_{k=n+1}^\infty \left|\frac{t^k}{k!}\right|
+        \displaystyle\sum_{k=n}^\infty \left|\frac{t^k}{k!}\right|
         < \varepsilon
     \]
+\end{proof}
+
+\begin{prob}[Problem 4.8.3 Spaces p.111]
+    Assume that $(X,d)$ is a metric space, and that $A$ is a 
+    dense subset of $X$. We let $A$ have the subset metric $d_A$.
+
+    a) Assume that $f: A \to \mathbb R$ is uniformly continuous. 
+    Explain that if $\{a_n\}$ is a sequence from $A$ converging 
+    to a point $x\in X$, then $\{f(a_n)\}$ converges. Show that 
+    the limit is the same for all such sequences $\{a_n\}$ converging
+    to the same point $x$. 
+
+    b) Define $f: X \to \mathbb R$ by putting $\overline f(x) = 
+    \lim_{n\to\infty}f(a_n)$ where $\{a_n\}$ is a sequence from 
+    $A$ converging to $x$. We call $\overline f$ the \emph{continuous 
+    extension} of $f$ to $X$. Show that $f$ is uniformly continuous.
+
+    c) Let $f:\mathbb Q \to \mathbb R$ be defined by 
+    \[
+        f(q) = 
+        \begin{cases}
+            0 & \text{if} \ q < \sqrt 2 \\ 
+            1 & \text{if} \ q > \sqrt 2
+        \end{cases}
+    \]
+    Show that $f$ is continuous on $\mathbb Q$ (we are using the 
+    usual metric $d_{\mathbb Q}(q,r) = |q-r|$). Is $f$ uniformly 
+    continuous? 
+
+    d) Show that $f$ does not have a continuous extension to 
+    $\mathbb R$.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose $\{a_n\}$ is some sequence in $A$ converging to a 
+    point $x \in X$. Let $f: A \to \mathbb R$ be some uniformly 
+    continuous function. 
+
+    For any $\varepsilon > 0$ we can find $\delta > 0$ such that 
+    \[
+        d_A(a_n, a_m) < \delta \Rightarrow |f(a_n) - f(a_m)| <  
+        \varepsilon
+    \]
+    so since $\{a_n\}$ is cauchy we conclude that $\{f(a_n)\}$ is 
+    cauchy and thus convergent since $\mathbb R$ is complete.
+
+    Suppose $\{a_n\},\{b_n\}$ are sequences which both 
+    converge to $x \in \mathbb X$. Then 
+    \[
+        d(a_n,b_n) \leq d(a_n,x) + d(x,b_n) \to 0
+    \]
+    so for large enough $n$ we have 
+    \[
+        |f(a_n) - f(b_n)| < \varepsilon
+    \]
+    in particular 
+    \[
+        \lim_{n\to\infty}f(a_n) = \lim_{n\to\infty}f(b_n)
+    \]
+\end{proof} 
+\begin{proof}[Proof of (b)]
+    We are given that $f : A \to \mathbb R$ is uniformly continuous.
+    For some $x \in A$ we have constant sequences $\{x\}_n$ for 
+    which $\lim_{n\to\infty}f(x) = f(x)$ so $\overline f$ is 
+    well-defined on $A$.
+    For a dense subset $A \subseteq X$ we can, for every 
+    $x \in X$ and $\varepsilon > 0$, find $a \in A$ such that 
+    \[
+        d(x,a) < \varepsilon
+    \]
+    So we can construct, for $x \in X$, sequences $\{a_n\}$ which 
+    minimize the distance 
+    \[
+        d(x,a_n)
+    \]
+    with $a_n \to x$ when $n\to\infty$, so $\overline f$ is 
+    well-defined on $X \setminus A$. Now to check uniform continuity  
+    we ignore checking on $A$ as this follows trivially. 
+    For $x,y \in X \setminus A$ we can find sequences 
+    $\{x_n\},\{y_n\}$ in $A$ which minimize distance to $x,y$ and 
+    converge to those values. Consider then 
+    \[
+        d(x_n,y_n) \leq d(x_n, x) + d(y,y_n) \leq 
+        d(x_n, x) + d(x,y) + d(y,y_n) \to d(x,y) 
+    \]
+    Let $\varepsilon > 0$ and choose $\delta > 0$ such that 
+    \[
+        d(x,y) < \delta  
+    \]
+    then $d(x_n,y_n) < \delta$ so by uniform continuity of $f$ we 
+    have 
+    \[
+        |f(x_n) - f(y_n)| < \varepsilon
+    \]
+    Taking limits we get  
+    \[
+        \left|\overline f(x) - \overline f(y)\right| = 
+        \left|\lim_{n\to\infty}f(x_n) - \lim_{n\to\infty}f(y_n)\right|
+        = \lim_{n\to\infty}\left|f(x_n) - f(y_n)\right| 
+        \leq \varepsilon
+    \]
+\end{proof}
+\begin{prob}[Exam problem 1 2018]
+    Suppose that $u:\mathbb R \to \mathbb R$ is a continuous map, 
+    which has finite limits in $\pm \infty$, i.e. 
+    there are $a,b \in \mathbb R$ such that 
+    \[
+        \lim_{x\to-\infty}u(x) = a \ \text{and} \ 
+        \lim_{x\to\infty}u(x) = b
+    \]
+
+    a) 
+
+    Show that there exists $B \in \mathbb R_+$ and $C \in \mathbb R$
+    such that for all $x \in \mathbb R$, if $x \geq C$ then 
+    $|u(x)| \leq B$.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Consider a sequence $\{b_n\}$ in $\mathbb R$ which |
 \end{proof}
 
 \end{document}
