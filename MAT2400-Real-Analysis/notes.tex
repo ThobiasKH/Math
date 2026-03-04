@@ -2947,7 +2947,154 @@ I.e. a power seris can be written as it's Taylor-series.
     $|u(x)| \leq B$.
 \end{prob}
 \begin{proof}[Proof of (a)]
-    Consider a sequence $\{b_n\}$ in $\mathbb R$ which |
+    Since 
+    \[
+        \lim_{x\to\infty} u(x) = b,
+    \]
+    by definition of the limit there exists $C \in \mathbb R$ 
+    such that
+    for every $\varepsilon > 0$ there exists $C$ with
+    \[
+        |u(x) - b| < \varepsilon
+        \quad \text{whenever } x \ge C.
+    \]
+
+    Choose $\varepsilon = 1$. Then there exists $C \in \mathbb R$ 
+    such that
+    \[
+        |u(x) - b| < 1 \quad \text{for all } x \ge C.
+    \]
+
+    Using the triangle inequality we obtain
+    \[
+        |u(x)| = |u(x) - b + b|
+        \le |u(x) - b| + |b|
+        < 1 + |b|.
+    \]
+
+    Thus if we set
+    \[
+        B := 1 + |b|,
+    \]
+    then for all $x \ge C$ we have
+    \[
+        |u(x)| \le B.
+    \]
+    This proves the claim.
+\end{proof}
+
+\begin{prob}[Exam problem 2 2018]
+    Let $X$ be a normed vector space. We suppose that 
+    $(u_n)_{n\in\mathbb N}$ is a sequence in $X$ that converges 
+    to a limit $\ell \in X$, that is: 
+    \[
+        \lim_{n\to\infty}u_n = \ell.
+    \]
+    We define a new sequence $(v_n)_{n\in\mathbb N}$ by putting, 
+    for any $n \in \mathbb N$:
+    \[
+        v_n = \frac{1}{n+1}\displaystyle\sum_{k=n}^{2n}u_k.
+    \]
+    Show that $(v_n)_{n\in\mathbb N}$ converges to $\ell$, that is:
+    \[
+        \lim_{n\to\infty} v_n = \ell.
+    \]
+\end{prob}
+\begin{proof}
+    Recall that a sequence $(u_n)_n$ converges to 
+    $\ell$ in a normed space 
+    $(X,||\cdot||)$ if $\forall \varepsilon > 0, \; \exists N \in 
+    \mathbb N$ s.t. 
+    \[
+        ||u_n - \ell|| < \varepsilon
+    \]
+    for $n \geq N$. 
+    Assuming this condition holds, observe the following.
+    \begin{align*}
+        ||v_n - \ell|| 
+        &= 
+        \frac{1}{n+1}
+        \left|\left| 
+        \displaystyle\sum_{k=n}^{2n}\left(u_k - \ell \right)
+        \right|\right| \\ 
+        &= \frac{1}{n+1}||u_n - \ell + u_{n+1} - \ell + 
+        \cdots + u_{2n} - \ell||\\
+        &\leq 
+        \frac{1}{n+1}\left( 
+        \displaystyle\sum_{k=n}^{2n}||u_k - \ell||\right) \\ 
+        &< \frac{1}{n+1}
+        \left(\displaystyle\sum_{k=n}^{2n}\varepsilon\right)\\ 
+        &= \frac{n\cdot \varepsilon}{n+1} \\ 
+        &< \varepsilon
+    \end{align*}
+    Therefore $v_n$ converges to $\ell$.
+\end{proof}
+
+\begin{prob}[Problem 4.8.7 Spaces p.112]
+    A metric space $(X,d)$ is called \emph{locally compact} if 
+    for each point $a \in X$, there is a \emph{closed} ball 
+    $\overline B(a;r)$ centered at $a$ that is compact. Show that 
+    $\mathbb R^m$ is locally compact, but that $C([0,1], \mathbb R)$
+    is not.
+\end{prob}
+\begin{proof}
+    By the Heiner-Borel theorem, subsets of $\mathbb R^m$ are 
+    compact if and only if they are closed and bounded. 
+    Take some $x \in \mathbb R^m$. Clearly $\overline B(x;r)$ 
+    is compact and as $y \in \overline B(x;r)$ satisfies 
+    \[
+        ||y - x|| \leq r 
+    \]
+    we can conclude that 
+    \[
+        ||y|| \leq r + ||x||
+    \]
+    thus $\overline B(a;r)$ is bounded, hence compact. As 
+    $x\in \mathbb R^m$ was arbitrarily chosen we conclude that 
+    $\mathbb R^m$ is locally compact.  
+
+    Next consider $C([0,1],\mathbb R)$ with the supremum norm
+    \[
+        \rho(f,g) := \sup_{x\in[0,1]} |f(x)-g(x)|.
+    \]
+
+    We show that the closed unit ball around $f(x)\equiv0$
+    \[
+        \overline B(0;1) =
+        \{g \in C([0,1],\mathbb R) \mid \|g\|_\infty \le 1\}
+    \]
+    is not compact.
+
+    For $n\in\mathbb N$, define
+    \[
+        f_n(x) := x^n .
+    \]
+    Then $f_n \in C([0,1],\mathbb R)$ and
+    \[
+        \|f_n\|_\infty = 1,
+    \]
+    so $f_n \in \overline B(0;1)$ for all $n$.
+
+    The sequence $(f_n)$ converges pointwise to the function
+    \[
+        f(x) =
+        \begin{cases}
+            0 & x\in[0,1) \\
+            1 & x=1 .
+        \end{cases}
+    \]
+    This limit is not continuous. Hence $(f_n)$ does not converge
+    uniformly on $[0,1]$, because the uniform limit of continuous
+    functions must be continuous.
+
+    Furthermore, any uniformly convergent subsequence would also
+    have to converge to this same pointwise limit, which is not
+    continuous. Therefore $(f_n)$ has no uniformly convergent
+    subsequence.
+
+    Thus $\overline B(0;1)$ is not sequentially compact, and hence
+    not compact. Therefore $C([0,1],\mathbb R)$ is not locally
+    compact.
 \end{proof}
 
 \end{document}
