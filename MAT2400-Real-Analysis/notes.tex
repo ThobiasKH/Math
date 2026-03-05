@@ -3096,5 +3096,109 @@ I.e. a power seris can be written as it's Taylor-series.
     not compact. Therefore $C([0,1],\mathbb R)$ is not locally
     compact.
 \end{proof}
+ 
+\newpage
+\section{Weierstrass Approximation \& some Normed Space stuff}
+
+\begin{thm}
+    Let 
+    \[
+        f \in C([a,b])
+    \]
+    Then for every $\varepsilon > 0$ there exists a polynomial 
+    $p$ such that 
+    \[
+        \sup_{x\in[a,b]}|f(x)-p(x)| < \varepsilon
+    \]
+    meaning every continuous function can be uniformly approximated 
+    by polynomials.
+\end{thm}
+The intuition behind this is that we use the fact that 
+the polynomials are dense in $C([0,1])$. So the infinite-dimensional 
+space can be approximated arbitrarily well by using a simple 
+finite basis.
+
+The proof is brilliant and uses ideas from probability where 
+\[
+    B_n(f)(x) := \displaystyle\sum_{k=0}^{n}f\left(\frac{k}{n}\right)
+    \binom{n}{k}x^k(1-x)^{n-k}
+\]
+These polynomials converge uniformly to $f$.
+
+\begin{thm}
+    Let $X$ be a normed space with 
+    $\{x_n\}_{n\in\mathbb N} \subseteq  X$. 
+    Then 
+    \[
+        \displaystyle\sum_{n\in\mathbb N} x_n
+    \]
+    converges if partial sums converge.
+\end{thm}
+
+\begin{prob}[Problem 4.10.1 Spaces p.122]
+    Show that there is no sequence of polynomials that converges 
+    uniformly to the continuous function $f(x) = \frac{1}{x}$ 
+    on $(0,1)$.
+\end{prob}
+\begin{proof}
+    Suppose, for a contradiction, that there exists a family of 
+    polynomials $\{p_n\}_{n\to\mathbb N}$ 
+    such that 
+    \[
+        p_n \underset{n \to \infty}{\to} f
+    \]
+    Then $f$ is bounded since 
+    \[
+        \sup_{x \in (0,1)}|p_n(x) - f(x)| < \varepsilon
+    \]
+    for large enough $n$ and $p_n(x)$ is bounded. 
+    But $\lim_{x\to0}f(x) = \infty$. 
+    Pick $\varepsilon = 1$ to get 
+    \[
+        \frac{1}{x} \leq |p_n(x)| + 1
+    \]
+    which would give 
+    \[
+        \infty \leq |p_n(x)| + 1
+    \]
+    a finite value.
+\end{proof}
+\begin{prob}[Problem 4.10.2 Spaces p.122]
+    Show that there is no sequence of polynomials that converges 
+    uniformly to the function $f(x) = e^x$ on $\mathbb R$. 
+\end{prob}
+\begin{proof}
+    We know that $e^x$ is 
+    \[
+        \displaystyle\sum_{k=0}^\infty \frac{x^k}{k!}
+    \]
+    so one would think that we get uniform convergence, but 
+    on $\mathbb R$, $e^x$ grows exponentially fast while 
+    any polynomial does not. 
+
+    Suppose there is some family of polynomials, 
+    $\{p_n\}_n$, which converges uniformly to $e^x$. 
+    Then, for any $\varepsilon > 0$ 
+    \[
+        \rho(p_n,e^x) = \sup_{x\in\mathbb R}|p_n(x) - e^x| <  
+        \varepsilon
+    \]
+    for sufficiently large $n$. 
+    Fix $x \in \mathbb R$ to maximize $|p_n(x) - e^x|$. By assumption 
+    \[
+        |p_n(x)-e^x| = |e^x - p_n(x)| < \varepsilon
+    \]
+    so pick $\varepsilon = 1$ to get  
+    \[
+        |e^x| \leq |e^x - p_n(x)| + |p_n(x)| < 1 + |p_n(x)|
+    \]
+    i.e. $e^x$ is bounded above by $1 + |p_n(x)|$. 
+    Observe that 
+    \[
+        \lim_{x\to\infty}\frac{e^x}{p_n(x)} = \infty
+    \]
+    so $e^x$ grows too fast to be bounded by a polynomial.
+\end{proof}
+
 
 \end{document}
