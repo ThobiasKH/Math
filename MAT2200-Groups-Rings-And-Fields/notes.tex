@@ -2551,5 +2551,90 @@ to check whether they have roots.
         f(x) \equiv (x+4)(x+3)(x+2)(x+1) 
     \]
 \end{proof}
+\begin{prob}[Problem 23.14 Fraleigh's p.218]
+    Show that $f(x) = x^2 + 8x - 2$ is irreducible over 
+    $\mathbb Q$. Is $f(x)$ irreducible over $\mathbb R$?
+\end{prob}
+\begin{proof}
+    We consider $f(x) \in \mathbb Q[x]$.
+    \[
+        f(x) = x^2 + 8x - 2 
+    \]
+    Since $f(x)$ is degree $2$ it is irreducible in $\mathbb Q$ 
+    if and only if 
+    it has no root in $\mathbb Q$. 
+    \begin{align*}
+        f(x) &= 0 \\ 
+        x^2 + 8x - 2 &= 0 \\ 
+        (x+4-3\sqrt{2})(x+4+4\sqrt 2) &= 0
+    \end{align*}
+    $\sqrt 2 \not \in \mathbb Q[x]$ so $f(x)$ is irreducible in 
+    $\mathbb Q$. 
+
+    As $\sqrt 2 \in \mathbb R$ and $f(x)$ is degree $2$ we conclude 
+    that $f(x)$ is reducible in $\mathbb R[x]$. 
+\end{proof}
+\begin{prob}[Problems 18 \& 19 Fraleigh's p.219]
+    Determine whether the given polynomials satisfy the Eisenstein
+    criterion for irreducibility over $\mathbb Q$. 
+
+    \[
+        f(x) = x^2-12
+    \]
+    \[
+        g(x) = 8x^3 + 6x^2 -9x + 24
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    Recall that for some polynomial 
+    \[
+        \displaystyle\sum_{k=0}^{n}a_kx^k
+    \]
+    If there exists a prime $p$ which divdes $a_0,\ldots,a_{n-1}$
+    and doesn't divide $a_n$ and $p^2$ doesn't divide $a_0$, 
+    then it is irreducible over the rationals. 
+
+    For 
+    \[
+        f(x) = x^2 - 12
+    \]
+    we have $a_0 = -12$, $a_1 = a_n = 1$. 
+    No prime number divides $1$ so that condition is fulfilled. 
+    Then we see that $3 | 12$, but $3^2$ does not divide $-12$.
+    We conclude that $f(x)$ is irreducible in $\mathbb Q[x]$.
+
+    Next look at 
+    \[
+        g(x)
+    \]
+    Observe that for $p = 3$ we have 
+    \begin{align*}
+        p &\bigm| 24 \\ 
+        p &\bigm| -9 \\ 
+        p &\bigm| 6 \\ 
+    \end{align*}
+    but $p$ does not divide $8$ and $p^2 = 9$ does not divide 
+    $24$ so $g(x)$ is irreducible over the rationals.
+\end{proof}
+\begin{prob}[Problem 23.34 Fraleigh's p.219]
+    Show that for a prime $p$, the polynomial 
+    $x^p + a$ in $\mathbb Z_p[x]$ is not irreducible for any 
+    $a \in \mathbb Z_p$
+\end{prob}
+\begin{proof}
+    Let $p$ be prime and 
+    \[
+        x^p + a \in \mathbb Z_p[x]
+    \]
+    By Fermat's Little Theorem $a = a^p$. 
+    Furthermore observe that 
+    \[
+        x^p + a = x^p + a^p = (x+a)^p
+    \]
+    So $x^p + a$ is reducible to 
+    \[
+        \prod_{[p]}(x+a) \in \mathbb Z_p[x]
+    \]
+ \end{proof}
 
  \end{document}
