@@ -2526,5 +2526,30 @@ f \text{ has no root in } F.
 Thus to test irreducibility of such polynomials it suffices
 to check whether they have roots.
 
+\newpage 
+\section{Problems from week of March 22}
+\begin{prob}[Problem 23.9 Fraleigh's p.218]
+    The polynomial $x^4 + 4$ can be factored into linear 
+    factors in $\mathbb Z_5[x]$. Find this factorization.
+\end{prob}
+\begin{proof}[Solution]
+    We work with 
+    \[
+        f(x) = x^4 + 4 = (x^2 + 2x + 2)(x^2 - 2x + 2)
+    \]
+    We see that 
+    \[
+        x^2 + 2x + 2 \equiv x^2 + 2x - 3 = (x+3)(x-1) \equiv 
+        (x+3)(x+4) 
+    \]
+    and 
+    \[
+        x^2 - 2x + 2 \equiv x^2 + 3x + 2 = (x+2)(x+1)
+    \]
+    so 
+    \[
+        f(x) \equiv (x+4)(x+3)(x+2)(x+1) 
+    \]
+\end{proof}
 
  \end{document}
