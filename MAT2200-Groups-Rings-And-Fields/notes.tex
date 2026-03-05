@@ -2375,4 +2375,156 @@ via
     elements in the preimage.
 \end{proof}
 
+\newpage 
+\section{Polynomial Rings}
+\begin{defn}
+    Let $R$ be a ring. 
+
+    A polynomial over $R$ is 
+    \[
+        \displaystyle\sum_{k=0}^{n}a_kx^k
+    \]
+    where $a_k \in R$ and $n \geq 0$.
+
+    The set of all such polynomials is denoted $R[x]$, 
+    and is called the polynomial ring over $R$.
+
+    
+\end{defn}
+
+Two polynomials $\sum_{k=0}^{n}a_kx^k$ and $\sum_{k=0}^{n}b_kx^k$
+are equal iff $a_k = b_k, \: \forall k \in [n]$. 
+
+With addition, they are very nicely behaved: 
+\[
+    \displaystyle\sum_{k=0}^{n}a_kx^k + 
+    \displaystyle\sum_{k=0}^{n}b_kx^k = 
+    \displaystyle\sum_{k=0}^{n}(a_k+b_k)x^k
+\]
+while multiplication looks like: 
+\[
+    \displaystyle\sum_{k=0}^{n}a_kx^k \cdot 
+    \displaystyle\sum_{k=0}^{n}b_kx^k = 
+    \displaystyle\sum_k\left(
+    \displaystyle\sum_{i+j=k}a_ib_j
+    \right)x^k
+\]
+
+Notably, if $R$ is a ring then $R[x]$ is a ring. Furthermore 
+commutativity, identity and being and integral domain 
+carry over. Note that not all properties transfer, e.g. 
+being a field does not always carry over. 
+
+\subsection{Degree of a Polynomial}
+
+\begin{defn}
+Let 
+\[
+f(x) = a_n x^n + \dots + a_0
+\]
+with $a_n \neq 0$. The \textbf{degree} of $f$ is
+\[
+\deg(f) = n .
+\]
+
+The degree of the zero polynomial is defined to be $-\infty$.
+\end{defn}
+
+If $R$ is an integral domain then
+
+\[
+\deg(fg) = \deg(f) + \deg(g).
+\]
+
+\subsection{Units in Polynomial Ring}
+
+If $R$ is an integral domain, the only units in $R[x]$ are 
+the constant polynomials whose coefficients are units in $R$.
+
+For example, the only units in $\mathbb{Z}[x]$ are $\pm 1$.
+
+\subsection{Evaluation Homomorphisms}
+
+For $c \in R$ define
+\[
+\varphi_c : R[x] \to R
+\]
+by
+\[
+\varphi_c(f(x)) = f(c).
+\]
+
+This map is a ring homomorphism and is called the 
+\textbf{evaluation homomorphism}.
+
+\subsection{Roots}
+
+\begin{defn}
+Let $f(x) \in R[x]$ and $c \in R$.
+We say $c$ is a \textbf{root} of $f$ if
+\[
+f(c) = 0 .
+\]
+\end{defn}
+
+\begin{thm}[Factor Theorem]
+If $c$ is a root of $f(x)$ in $R$, then
+\[
+(x-c) \mid f(x).
+\]
+\end{thm}
+
+If $R$ is an integral domain and $\deg(f)=n$, then $f$ has at
+most $n$ roots in $R$.
+
+\section{Polynomial Factorisation}
+
+Polynomial arithmetic behaves especially well over fields.
+
+\begin{thm}[Division Algorithm]
+Let $F$ be a field and $f,g \in F[x]$ with $g \neq 0$.
+Then there exist unique polynomials $q,r \in F[x]$ such that
+\[
+f(x) = q(x)g(x) + r(x)
+\]
+where either $r=0$ or
+\[
+\deg(r) < \deg(g).
+\]
+\end{thm}
+
+This allows us to compute greatest common divisors of polynomials
+using the Euclidean algorithm.
+
+\begin{defn}
+A polynomial $f(x) \in F[x]$ is \textbf{irreducible} if
+
+\begin{itemize}
+\item $\deg(f) \ge 1$
+\item whenever $f = gh$ with $g,h \in F[x]$, one of $g,h$
+is a unit.
+\end{itemize}
+\end{defn}
+
+\begin{thm}
+If $F$ is a field then $F[x]$ is a unique factorization domain.
+In particular, every polynomial can be written as a product of
+irreducible polynomials, uniquely up to order and multiplication
+by units.
+\end{thm}
+
+\subsection{Useful Irreducibility Criterion}
+
+If $f(x) \in F[x]$ has degree $2$ or $3$, then
+
+\[
+f \text{ is irreducible}
+\quad \Longleftrightarrow \quad
+f \text{ has no root in } F.
+\]
+
+Thus to test irreducibility of such polynomials it suffices
+to check whether they have roots.
+
+
  \end{document}
