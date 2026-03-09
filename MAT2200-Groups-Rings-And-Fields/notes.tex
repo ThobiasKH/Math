@@ -2637,4 +2637,188 @@ to check whether they have roots.
     \]
  \end{proof}
 
- \end{document}
+ \begin{prob}[Problem 23.35 Fraleigh's p.219]
+     If $F$ is a field and $a \neq 0$ is a zero of $f(x) = 
+     a_0 + a_1x+\cdots x_nx^n$ in $F[x]$, show that 
+     $1/a$ is a zero of $a_n + a_{n-1}x + \cdots + 
+     a_0x^n$.
+ \end{prob}
+\begin{proof}["Thinking out loud" proof]
+    Let $F$ be a field and let
+    \[
+        f(x) := \sum_{i=0}^{n} a_i x^i
+    \]
+    be a polynomial in $F[x]$. Assume $a \neq 0$ is a root of $f$, 
+    i.e.
+    \[
+        f(a) = \sum_{i=0}^{n} a_i a^i = 0 .
+    \]
+
+    Consider the expression
+    \[
+        \frac{f(x)}{x^n}
+        =
+        \sum_{i=0}^{n} a_i x^{i-n}
+        =
+        a_0 x^{-n} + a_1 x^{1-n} + \cdots + a_{n-1} x^{-1} + a_n .
+    \]
+    This is not a polynomial in $F[x]$, but it suggests reversing the
+    powers of $x$.
+
+    To obtain a genuine polynomial, define
+    \[
+        g(x) := x^n f\!\left(\frac{1}{x}\right).
+    \]
+    Then
+    \[
+        \begin{aligned}
+            g(x)
+    &= x^n \sum_{i=0}^{n} a_i \left(\frac{1}{x}\right)^i \\
+    &= \sum_{i=0}^{n} a_i x^{n-i} \\
+    &= a_0 x^n + a_1 x^{n-1} + \cdots + a_{n-1}x + a_n .
+        \end{aligned}
+    \]
+    Thus $g(x) \in F[x]$ and it is the polynomial obtained by 
+    reversing the
+    coefficients of $f$.
+
+    Now evaluate $g$ at $1/a$:
+    \[
+        \begin{aligned}
+            g\!\left(\frac{1}{a}\right)
+    &= \left(\frac{1}{a}\right)^n f(a) \\
+    &= \frac{f(a)}{a^n} \\
+    &= 0 .
+        \end{aligned}
+    \]
+    Hence $1/a$ is a root of $g$ whenever $a \neq 0$ is a root of $f$.
+\end{proof}
+
+\newpage 
+\section{Homomorphisms of rings, Prime/maximal ideals}
+\begin{defn}
+    A \textbf{ring homomorphism} 
+    \[
+        \phi : R \to S
+    \]
+    between rings satisfies 
+    \begin{align*}
+        \phi(a+b) &= \phi(a) + \phi(b) \\ 
+        \phi(ab) &= \phi(a)\phi(b)
+    \end{align*}
+    and typically 
+    \[
+        \phi(1_R) = 1_S
+    \]
+\end{defn}
+
+\begin{thm}
+    Let $R,S$ be rings and $\phi : R \to S$ a homomorphism. 
+    Then $\ker \phi$ is an ideal of $R$.
+\end{thm}
+\begin{proof}
+    Let $a,b \in \ker \phi$.
+
+    \[
+        \phi(a-b) = 0
+    \]
+    so closed under subtraction. 
+    For any $r\in R$ we have 
+    \[
+        \phi(ra) = \phi(r)0 = 0
+    \]
+    so $ra \in \ker \phi$.
+
+    Therefore kernels behave like normal subgroups.
+\end{proof}
+
+\begin{thm}[First Isomorphism Theorem for Rings]
+    If 
+    \[
+        \phi : R \to S
+    \]
+    then 
+    \[
+        R/\ker \phi \cong \operatorname{Im} \phi
+    \]
+    meaning every homomorphic image of a ring is a quotient 
+    by an ideal.
+\end{thm}
+\begin{ex}
+    Take 
+    \[
+        \phi : \mathbb Z \to \mathbb Z_n
+    \]
+    as 
+    \[
+        \phi(k) = k \mod n
+    \]
+    The kernel is then 
+    \[
+        \ker \phi = n\mathbb Z
+    \]
+    so 
+    \[
+        \mathbb Z/n\mathbb Z \cong \mathbb Z_n
+    \]
+\end{ex}
+\begin{defn}
+    If $I$ is an ideal of a ring $R$ we define 
+    \[
+        R/I
+    \]
+    just like quotient groups, with operations 
+    \begin{align*}
+        (a+I) + (b + I) &= (a+b) + I \\ 
+        (a+I)(b+I) &= ab + I 
+    \end{align*}
+\end{defn}
+
+\subsection{Prime Ideals}
+\begin{defn}
+    An ideal $P \subset R$ is \textbf{prime} if 
+    \[
+        ab \in P \Rightarrow a \in P \ \text{or} \ b \in P
+    \]
+\end{defn}
+\begin{ex}
+    In $\mathbb Z$ all ideals are $(n)$ and the prime ideals are 
+    $(p)$ where $p$ is a prime number. 
+    If $a,b\in (p)$ then $p | ab$ so $p | a$ or $p | b$.
+\end{ex}
+\begin{thm}
+    Suppose $P \subset R$ is an ideal.
+    Then 
+    \[
+        P \ \text{prime} \Leftrightarrow R/P \ \text{is an integral 
+        domain}
+    \]
+\end{thm}
+
+\subsection{Maximal Ideals}
+\begin{defn}
+    An ideal $M \subset R$ is \textbf{maximal} if 
+    $M \neq R$ and there is no ideal strictily between $M$ and 
+    $R$, meaning 
+    \[
+        M \subset I \subset R
+    \]
+    implies $M = I$ or $R = I$.
+\end{defn}
+\begin{thm}
+    Let $M \subset R$ be an ideal. 
+
+    Then 
+    \[
+        M \ \text{maximal} \Leftrightarrow R/M \ \text{is a field}
+    \]
+\end{thm}
+
+An important note is that maximal $\Rightarrow$ prime, but not 
+necessarily the other way around, so being maximal is a strictly 
+stronger condition. This is easy to see since a field 
+is also an integral domain, but not vice versa.
+
+
+
+\end{document}
