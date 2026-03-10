@@ -3032,6 +3032,25 @@ is also an integral domain, but not vice versa.
 
     Therefore the quotient ring is a field only when $c=1$.
 \end{proof}
+\begin{prob}[Problem 27.15/16 Fraleigh's p.253]
+    Find a maximal ideal of $\mathbb Z \times \mathbb Z$.
+
+    Find a prime ideal of $\mathbb Z^2$ which is not maximal.
+\end{prob}
+\begin{proof}[Solution]
+    We want to find the the proper ideal $M \subseteq \mathbb Z 
+    \times \mathbb Z$ such that for any ideal $I$, 
+    if $M \subseteq I \subseteq \mathbb Z \times \mathbb Z$ 
+    then $I = \mathbb Z \times 
+    \mathbb Z$ or $I = M$.
+
+    The maximal ideals of $\mathbb Z^2$ is 
+    $\langle p\rangle \times \mathbb Z$ and 
+    $\mathbb Z \times \langle p\rangle$ where 
+    $p$ is some prime. $\langle p \rangle^2$ does not work as the 
+    quotient would be $\mathbb Z_p^2$. Both factors are nontrivial 
+    so this is not a field. 
+\end{proof}
 
 
 \end{document}
