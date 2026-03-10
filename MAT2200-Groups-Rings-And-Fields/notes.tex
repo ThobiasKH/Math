@@ -2943,5 +2943,95 @@ is also an integral domain, but not vice versa.
     so $ra \in A$. Thus $A$ constitutes an ideal of $R$.
 \end{proof}
 
+\begin{prob}[Problem 26.34 Fraleigh's p.245]
+    Let $R$ be a commutative ring and $N$ an ideal of $R$. 
+    Show that the set $\sqrt N$ of all $a \in R$, such that 
+    $a^n \in N$ for some $n \geq \mathbb Z^+$, is an ideal of 
+    $R$, the \textbf{radical ideal} of $N$.
+\end{prob}
+\begin{proof}
+    Let $N$ be an ideal of some commutative ring $R$. 
+
+    Let 
+    \[
+    \sqrt N = \left\{ a \in R \bigm| \exists n \in \mathbb Z^+ 
+    \ \text{s.t.} \ a^n \in N\right\}
+    \]
+    First, observe that $\sqrt N \neq \emptyset$ as 
+    $0 = 0^1 \in N$. Next, let $a,b \in \sqrt N$. We 
+    show that $(a-b)^k \in N$ for some $k$, i.e. $a-b \in \sqrt N$. 
+    By assumption there exists $m,n \in \mathbb Z^+$ so that 
+    $a^m,b^n \in N$.  
+    Let $k = m+n$. Then 
+    \begin{align*}
+        (a-b)^k 
+        &= \displaystyle\sum_{i=0}^{k}\binom{k}{i}a^i(-b)^{k-i} \\ 
+        &= \displaystyle\sum_{i=0}^{m+n}
+        \binom{m+n}{i}a^i(-b)^{m+n-i}\\
+        &=\displaystyle\sum_{i=m+1}^{m+n}
+        \binom{m+n}{i}a^i(-b)^{m+n-i}\\
+        &+ \displaystyle\sum_{i=0}^{m}\binom{m+n}{i}a^i(-b)^{m+n-i}
+    \end{align*}
+    The sum $\sum_{i=m+1}^{m+n}\binom{m+n}{i}a^i(-b)^{m+n-i}$ has 
+    $i \geq m+1$ so each term is of the form $a^m(a \cdots a) 
+    (-b)^{m+n-i}$. By assumption $a^m \in N$ and as 
+    $R$ is commutative we can rearange terms and see that 
+    since $N$ is an ideal of $R$ and $a\cdots a(-b)^{m+n-i} \in R$ 
+    we have that each term is in $N$ by the multiplication property 
+    of the ideal. As $N$ is a group under the addition, the sum 
+    of these terms is in $N$. Apply this same argument to the 
+    sum from $i=0$ to $m$, observing that $m+n - i \geq n$, to 
+    find that $\sum_{i=0}^{m}\binom{m+n}{i}a^i(-b)^{m+n-i} \in N$. 
+    Both sums are in $N$ so 
+    \[
+        (a-b)^k \in N
+    \]
+    i.e. $a-b \in \sqrt N$. 
+
+    Lastly let $r \in R$ and see that 
+    \[
+        (ra)^m = r^ma^m \in N 
+    \]
+    as $N$ is an ideal. Thus $ra \in \sqrt N$.
+
+    Therefore $\sqrt N$ is an ideal of $R$.
+\end{proof}
+
+\begin{prob}[Problem 27.5 Fraleigh's p.252]
+    Find all $c \in \mathbb Z_3$ such that 
+    \[
+        \mathbb Z_3[x]/\langle x^2 + c \rangle 
+    \]
+    is a field.
+\end{prob}
+\begin{proof}
+    Since $\mathbb Z_3$ is a field, the quotient
+    \[
+        \mathbb Z_3[x]/\langle x^2+c\rangle
+    \]
+    is a field if and only if $x^2+c$ is irreducible in 
+    $\mathbb Z_3[x]$.
+
+    The elements of $\mathbb Z_3$ are $0,1,2$. We check each case.
+
+    If $c=0$, then $x^2$ is reducible since $x^2=x\cdot x$.
+
+    If $c=1$, we check whether $x^2+1$ has a root in $\mathbb Z_3$.
+    The squares in $\mathbb Z_3$ are
+    \[
+        0^2=0,\quad 1^2=1,\quad 2^2=1.
+    \]
+    Thus $x^2$ never equals $2$, so $x^2+1$ has no root and is 
+    irreducible.
+
+    If $c=2$, then
+    \[
+        x^2+2=x^2-1=(x-1)(x+1),
+    \]
+    so it is reducible.
+
+    Therefore the quotient ring is a field only when $c=1$.
+\end{proof}
+
 
 \end{document}
