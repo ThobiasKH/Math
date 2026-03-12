@@ -3200,5 +3200,146 @@ These polynomials converge uniformly to $f$.
     so $e^x$ grows too fast to be bounded by a polynomial.
 \end{proof}
 
+\begin{prob}[Problem 5.2.1 Spaces p.141]
+    Prove that the set $\{e_k\}_{k\in\mathbb N}$ in Example $1$ really is a basis for $c_0$.
+\end{prob}
+\begin{proof}
+    Let $e_k$ be the sequence of real numbers which is 
+    $1$ at element number $k$ and $0$ everywhere else. We prove 
+    that this is a basis for the space of real-valued sequences 
+    which converge to $0$, with the norm 
+    \[
+        ||x|| = \sup\{|x_k| : k\in\mathbb N\}
+    \]
+    Let $\{x_k\}_k$ be a sequence of real numbers. It is easy to see 
+    that $x_k = x_k \cdot e_k$ and that 
+    \[
+        x = \displaystyle\sum_{k=1}^\infty x_ke_k 
+    \]
+    It is also easy to see that 
+    \[
+        \displaystyle\sum_{k=1}^{\infty}\alpha_ke_k = 0
+    \]
+    if and only if $\alpha_k = 0$ for all $k$.
+\end{proof}
+\begin{prob}[Problem 5.2.2 Spaces p.141]
+    Show that if a normed vector space $V$ has a basis, then it is 
+    separable.
+
+\end{prob}
+
+\begin{proof}
+    Let $\{v_1,v_2,\ldots\}$ be a countable basis of $X$. 
+    Every $x\in X$ can be written uniquely as a finite linear 
+    combination
+    \[
+        x=\sum_{j=1}^{k} a_j v_{i_j}
+    \]
+    for some $k\in\mathbb{N}$, coefficients $a_j\in\mathbb{R}$ 
+    (or $\mathbb{C}$), and indices $i_j\in\mathbb{N}$.
+
+    Define
+    \[
+        D=\left\{\sum_{j=1}^{k} q_j v_{i_j} \;:\; k\in\mathbb{N},\ 
+        i_j\in\mathbb{N},\ q_j\in\mathbb{Q} \right\}.
+    \]
+
+    We first show that $D$ is countable. For each fixed $k$, the set
+    \[
+        \mathbb{Q}^k \times \mathbb{N}^k
+    \]
+    is countable, hence the set of all expressions 
+    $\sum_{j=1}^k q_j v_{i_j}$ is countable. Since
+    \[
+        D = \bigcup_{k=1}^{\infty} 
+        \left\{\sum_{j=1}^{k} q_j v_{i_j}\right\},
+    \]
+    it follows that $D$ is a countable union of 
+    countable sets and therefore countable.
+
+    Next we show that $D$ is dense in $X$. Let $x\in X$ and 
+    $\varepsilon>0$. Write
+    \[
+        x=\sum_{j=1}^{k} a_j v_{i_j}.
+    \]
+    Since $\mathbb{Q}$ is dense in $\mathbb{R}$, choose 
+    $q_j\in\mathbb{Q}$ such that
+    \[
+        |a_j-q_j|<\delta
+    \]
+    for some $\delta>0$ to be chosen later. Define
+    \[
+        y=\sum_{j=1}^{k} q_j v_{i_j}\in D.
+    \]
+
+    Then
+    \[
+        x-y=\sum_{j=1}^{k} (a_j-q_j)v_{i_j}.
+    \]
+    By the triangle inequality,
+    \[
+        \|x-y\|
+        \leq
+        \sum_{j=1}^{k} |a_j-q_j|\,\|v_{i_j}\|
+        <
+        \delta \sum_{j=1}^{k}\|v_{i_j}\|.
+    \]
+
+    Choose
+    \[
+        \delta < \frac{\varepsilon}{\sum_{j=1}^{k}\|v_{i_j}\|}.
+    \]
+    Then $\|x-y\|<\varepsilon$. Hence for every $x\in X$ and 
+    $\varepsilon>0$ there exists $y\in D$ with $\|x-y\|<\varepsilon$.
+
+    Thus $D$ is a countable dense subset of $X$, so $X$ is separable.
+\end{proof}
+\begin{prob}[Problem 5.2.3 Spaces p.141]
+    $\ell_1$ is the set of all sequences $x = \{e_n\}_n$ of 
+    real numbers such that $\sum_{n=1}^\infty |x_n|$ converges. 
+
+    c) Show that the space is complete.
+\end{prob}
+\begin{proof}[Proof of (c)]
+    We consider the norm 
+    \[
+        ||x|| = \displaystyle\sum_{i=n}^\infty |x_n|
+    \]
+
+    Take some cauchy sequence $\{\chi_k\}_k$, where 
+    $\chi_k = \{x_n\}_n$, i.e. a sequence 
+    of sequences. 
+    By assumption, for every $\varepsilon > 0$, there exists $N$ s.t.
+    \[
+        ||\chi_n-\chi_m|| < \varepsilon
+    \]
+    whenever $n,m\geq N$. Recalling that the sequences are convergent
+    and the sum (and difference) of sequences converge we can pick 
+    $N$ large enough so that their difference converges. 
+    The candidate limit is ... etc.
+\end{proof}
+
+\begin{prob}[Problem 5.3.10 Spaces p.149]
+    Let $\{e_1,e_2,\ldots,e_n\}$ be an orthonormal set in 
+    some inner product space $V$. Show that the projection 
+    $P = P_{e_1,e_2,\ldots,e_n}$ is linear.
+\end{prob}
+\begin{proof}
+    Recall that the projection of $x$ is the element in the span of 
+    $\{e_1,\ldots,e_n\}$ which is "closest" to $x$.  
+
+    Let $u,v \in V$ with $P(u) = \sum_{i=1}^{n}u_ie_i$ and 
+    $P(v) = \sum_{i=1}^{n}v_ie_i$. With each of these being so that 
+    \[
+        ||u - P(u)|| = \min_{x \in \operatorname{Sp}(\{e_n\})}||u-x||
+    \]
+    and 
+    \[
+        ||v - P(v)|| = \min_{x \in \operatorname{Sp}(\{v_n\})}||u-x||
+    \]
+    It is clear that for scaled $\alpha u$, $\alpha P(u)$ is in 
+    the span and $||\alpha u - \alpha P(u)|| = \alpha||u-P(u)||$, 
+    ... etc.
+\end{proof}
 
 \end{document}
