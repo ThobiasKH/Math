@@ -3342,4 +3342,75 @@ These polynomials converge uniformly to $f$.
     ... etc.
 \end{proof}
 
+\begin{prob}
+    Show that the functions $e_k(t) = e^{ikt}$ (for $k \in \mathbb Z$)
+    constitute a basis for the space $C(\mathbb T, \mathbb C)$
+    of complex-valued, continuous functions on the torus, 
+    equipped with the $L^2$ norm $||f|| = \frac{1}{2\pi}\int_0^{2\pi}
+    |f(t)|^2\;dt$.
+\end{prob}
+\begin{proof}[Proof sketch]
+    We can note that functions in this space $f \in C(\mathbb T, 
+    \mathbb C)$ converge to their fourier series. I.e. functions of 
+    the form 
+    \[
+        f = \displaystyle\sum_{k\in\mathbb Z} \langle f,e_k \rangle 
+        e_k
+    \]
+    where 
+    \[
+        \langle f,e_k \rangle = \displaystyle\int_{0}^{2\pi}
+        f(t)e_k(t)\; dt
+    \]
+    and apply a theorem about how this converges is indicative 
+    of $\{e_k\}_k$ being a basis for the space.
+\end{proof}
+
+\begin{prob}[Problem 5.3.12 Spaces p.150]
+    If $S$ is a nonempty subset of an inner product space 
+    $V$, let 
+    \[
+        S^{\bot} = \{u \in V : \langle u,s\rangle = 0 \ 
+        \text{for all} \ s \in S\}
+    \]
+
+    a) Show that $S^\bot$ is a closed subspace of $V$. 
+
+    b) Show that if $S \subseteq T$, then $S^\bot \supseteq T^\bot$.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Since I am unsure of whether the problem refers to 
+    closed under multiplication or being a closed set we will 
+    prove both.
+
+    Let $a,b \in S^\bot$. Then, for any $s \in S$ we have 
+    \[
+        \langle a, s\rangle = 0
+    \]
+    and 
+    \[
+        \langle b,s \rangle = 0
+    \]
+    Then 
+    \begin{align*}
+        \langle a+b, s\rangle &= \langle a,s\rangle + 
+        \langle b,s\rangle \\ 
+                              &= 0 + 0 \\ 
+                              &= 0
+    \end{align*}
+    so $a+b \in S^\bot$. Hence $S$ is closed under multiplication. 
+
+    Now let $\{x_n\}_n \to x$ be a sequence in $S^\bot$. 
+    For every $\varepsilon > 0$ there exists $N \in \mathbb N$ 
+    so that 
+    \[
+        ||x_n - x|| = \sqrt{\langle x_n - x, x_n - x\rangle} < 
+        \varepsilon
+    \]
+    whenever $n \geq N$. Crucially 
+    \[
+        0 = \langle x_n, s\rangle = \langle x, s\rangle
+    \] 
+\end{proof}
+
 \end{document}
