@@ -3413,4 +3413,129 @@ These polynomials converge uniformly to $f$.
     \] 
 \end{proof}
 
+\begin{prob}[Problem 2, Exam 2018]
+    Let $X$ be the space from Problem 1 ($C([0,1],\mathbb R)$), and 
+    define a map $T : X \to X$ by 
+    \[
+        T(f)(x) = \displaystyle\int_{0}^{x}\cos\left(\frac{f(s)}{2}
+        \right)\;ds.
+    \]
+
+    (a) Show that the function $g(x) = \cos(\frac{x}{2})$ is 
+    Lipschitz continuous on $\mathbb R$. 
+
+    (b) Show that $T$ is a continuous mapping from $X$ to $X$ 
+    (We will take it for granted that $T(f) \in X$ for each 
+    $f \in X$). 
+
+    (c) Show that $T : X \to X$ has a unique fixed point.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Let $g(x) = \cos(\frac{x}{2})$. For $y \in \mathbb R$ we 
+    know that $|\cos(y)| \leq 1$. In particular, $x \in \mathbb R$ 
+    then $y = x/2 \in \mathbb R$, so
+    $|\cos(y)| = |\cos(x/2)| \leq 1$. Recall that $g$ on 
+    $\mathbb R$ is Lipschitz 
+    if there exists $C > 0$ so that for every $x,y \in \mathbb R$
+    \[
+        |g(x)-g(y)| < C|x-y|
+    \]
+    Notice that $|g'(x)| = \frac{1}{2}\sin(x/2)$, implying 
+    \[
+        |g(x)-g(y)| \leq (1/2)|x-y|
+    \]
+    for all $x,y \in \mathbb R$.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    For $u,v \in X$, we have that 
+    \begin{align*}
+        |T(u)(x) - T(v)(x)| 
+        &= \left|\displaystyle\int_{0}^{x}
+        \cos\left(\frac{u(s)}{2}-\cos\left(\frac{v(s)}{2}\right)
+        \right) \; ds\right| \\
+        &\leq \displaystyle\int_{0}^{x}\left|
+        \cos\left(\frac{u(s)}{2}-\cos\left(\frac{v(s)}{2}\right)
+        \right)\right|\;ds \\ 
+        &\leq \displaystyle\int_{0}^{x}(1/2)|u(s)-v(s)|\;ds \\ 
+        &\leq (1/2)||u-v|| 
+    \end{align*}
+\end{proof}
+\begin{proof}[Proof of (c)]
+    We see that $T$ is a contraction mapping, so it follows from 
+    Banach's fixed point theorem that $T$ has a unique fixed point, 
+    namely $f \equiv 0$.
+\end{proof}
+\begin{prob}[Problem 3, Exam 2018]
+    Let $Y$ be a nonempty set, and let $d_1,d_2$ be metrics on 
+    $Y$. We let $d: Y\times Y \to \mathbb R$ be 
+    \[
+        d(x,y) := \sup\{d_1(x,y),d_2(x,y)\},
+    \]
+    for all $x,y \in Y$. 
+
+    (a) Show that $Y$ is a metric. 
+
+    (b) Let $E = \{y_j\}_{j\in\mathbb N} \subset Y$ be a sequence 
+    of points which is cauchy w.r.t $d_1$ and $d_2$. Show that 
+    $E$ is cauchy w.r.t $d$.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Since $d_1,d_2$ are metrics it is clear that $d$ is non-negative.
+    Furthermore, as 
+    \[
+        d_i(x,y) = 0 \ \text{iff} \ x = y 
+    \]
+    for $i = 1,2$ we can see that as
+    \[
+        d(x,y) = \sup\{d_1(x,y),d_2(x,y)\} = 0
+    \]
+    iff $d_1(x,y) = d_2(x,y) = 0$, $d(x,y) = 0$ iff $x = y$. 
+    Symmetry follows similarily. 
+
+    Let $x,y,z \in Y$. We know that the triangle-inequality holds 
+    for $d_1,d_2$. 
+    \[
+        d(x,z) = \sup\{d_1(x,z),d_2(x,z)\}
+    \]
+    and 
+    \[
+        d(x,y) + d(y,z) = \sup\{d_1(x,y),d_2(x,y)\} + 
+        \sup\{d_1(y,z), d_1(y,z)\}
+    \]
+    Suppose wlog $d_1(x,z) \leq d_2(x,z)$. Then 
+    \begin{align*}
+        d(x,z) &= d_2(x,z) \\
+               &\leq d_2(x,y) + d_2(y,z) \\ 
+               &\leq \sup\{d_1(x,y),d_2(x,y)\} + \sup\{d_1(y,z), 
+               d_2(y,z)\} \\ 
+               &= d(x,y) + d(x,z)
+    \end{align*}
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Suppose $E = \{y_j\}_j$ is a sequence in $Y$ which is cauchy 
+    w.r.t $d_1,d_2$, i.e. $\forall \varepsilon > 0, \: \exists 
+    N_1,N_2 \in \mathbb N$ so that 
+    \[
+        d_1(y_j, y_i) < \varepsilon
+    \]
+    whenever $j,i \geq N_1$ and 
+    \[
+        d_2(y_j,y_i) < \varepsilon 
+    \]
+    whenever $j,i \geq N_2$.
+    Let $N = \max\{N_1,N_2\}$. Then both hold for $j,i \geq N$.
+    Then either 
+    \[
+        d_1(y_j,y_i) \leq d_2(y_j,y_i) < \varepsilon
+    \]
+    or 
+    \[
+        d_2(y_j,y_i) \leq d_1(y_j,y_i) < \varepsilon 
+    \]
+    so 
+    \[
+        d(y_j,y_i) < \varepsilon
+    \]
+\end{proof}
+
 \end{document}
