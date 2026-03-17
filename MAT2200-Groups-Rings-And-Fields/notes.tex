@@ -3160,5 +3160,280 @@ is also an integral domain, but not vice versa.
     we conclude that it is irreducible in $\mathbb Z_3[x]$.
 \end{proof}
 
+\newpage 
+\section{Trying an earlier exam}
+\begin{prob}[Problem 1a, Exam 2023]
+    Prove that the set 
+    \[
+        S = \{2^n \bigm| n \in \mathbb Z\}
+    \]
+    equipped with the usual operation of multiplication is a group.
+\end{prob}
+\begin{proof}
+    It suffices to show that $(S,\cdot)$ is isomorphic to a known 
+    group. Let $\phi : \mathbb Z \to S$ be defined by 
+    \[
+        \phi(n) = 2^n
+    \]
+    It is clear that $\phi$ is a bijection as the preimage of 
+    $2^n$ is $n$ and $2^n = 2^m$ iff $n = m$. 
+
+    Lastly we show $\phi$ to be a homomorphism. 
+    \begin{align*}
+        \phi(n+m) &= 2^{n+m} \\ 
+                  &= 2^n \cdot 2^m \\ 
+                  &= \phi(n)\phi(m)
+    \end{align*}
+    Thus $(S,\cdot)$ is isomorphic to $(\mathbb Z, +)$ 
+    which is a known group.
+\end{proof}
+
+\begin{prob}[Problem 1b, Exam 2023]
+    List all finite abelian groups of order $20$, up to isomorphism.
+\end{prob}
+\begin{proof}[Solution]
+    The finite abelian groups of order $20$ are trivially 
+    finitely generated so the fundamental theorem of finitely 
+    generated abelian groups applies. 
+
+    I.e. 
+    \[
+        G \cong \left(\prod_{i=1}^n 
+        \mathbb Z_{p_i^{e_i}}\right) \times 
+        \mathbb Z^k
+    \]
+    We are asked to find those of order $20$ (finite) so 
+    \[
+        G \cong \prod_{i=1}^n \mathbb Z_{p_i^{e_i}}
+    \]
+    where $\prod_{i=1}^n p_i^{e_i} = 20$. 
+
+    $20 = 4\cdot5 = 2\cdot2\cdot 5$. Thus there exists exactly 
+    two abelian groups of order $20$, namely 
+    \[
+        \mathbb Z_4 \times \mathbb Z_5
+    \]
+    and
+    \[
+        \mathbb Z_2 \times \mathbb Z_2 \times \mathbb Z_5
+    \]
+\end{proof}
+\begin{prob}[Problem 1c, Exam 2023]
+    Let $A_4$ be the alternating group on $4$ letters, that is 
+    the subgroup of $S_4$ consisting of even permutations. 
+    Find elements $\sigma_1,\sigma_2,\sigma_3 \in A_4$ such that 
+    $\sigma_i$ has order $i$ (for $i = 1,2,3$). 
+\end{prob}
+\begin{proof}[Solution]
+    $\sigma_1$ is the trivial permutation, i.e. the one which sends 
+    \[
+        1 \mapsto 1, 2 \mapsto 2, \ \text{etc.}
+    \]
+    Next a candidate for $\sigma_2$ is any permutation which is 
+    the composition of two transpositions, e.g. 
+    \[
+        (1 \ 2)(3 \ 4)
+    \]
+    Notice that 
+    \[
+        (1 \ 2)(3 \ 4) \circ (1 \ 2)(3 \ 4) 
+    \]
+    sends 
+    \[
+        1 \to 2 \to 1, 2 \to 1 \to 2, 3 \to 4 \to 3, 4 \to 3 \to 4
+    \]
+    So $(1 \ 2)(3 \ 4)$ has order $2$. 
+
+    An exampele of $\sigma_3$ is something like  
+    \[
+        (1 \ 2 \ 3) = (1 \ 3)(1 \ 2)
+    \]
+\end{proof}
+
+\begin{prob}[Problem 1d, Exam 2023]
+    Prove that $A_4$ is not abelian.
+\end{prob}
+\begin{proof}
+    Observe that $(1 \ 2)(3 \ 4)$ and $(1 \ 3)(1 \ 2)$ do not 
+    commute.
+
+    \[
+        (1 \ 2)(3 \ 4) \circ (1 \ 3)(1 \ 2)  
+    \]
+    sends 
+    \begin{align*}
+        1 \mapsto 2 \mapsto 1 \\ 
+        2 \mapsto 3 \mapsto 4 \\ 
+        3 \mapsto 1 \mapsto 2 \\ 
+        4 \mapsto 4 \mapsto 3
+    \end{align*}
+    So 
+    \[
+        (1 \ 2)(3 \ 4) \circ (1 \ 3)(1 \ 2)  
+        = (2 \ 4 \ 3)
+    \]
+    while 
+    \[
+        (1 \ 3)(1 \ 2) \circ (1 \ 2)(3 \ 4)
+    \]
+    sends 
+    \begin{align*}
+        3 \mapsto 4 \mapsto 4 \\
+    \end{align*}
+    So we can already see that 
+    \[
+        (1 \ 3)(1 \ 2) \circ (1 \ 2)(3 \ 4) 
+        \neq 
+        (1 \ 2)(3 \ 4) \circ (1 \ 3)(1 \ 2)
+    \]
+    Hence $A_4$ is not abelian.
+\end{proof}
+
+\newpage 
+\begin{prob}[Problem 2a, Exam 2023]
+    Determine the $0$-divisors in the ring $\mathbb Z_{10}$.
+\end{prob}
+\begin{proof}[Solution]
+    $\mathbb Z_{10}$ is commutative so left- and right 
+    divisors coincide. 
+
+    \begin{align*}
+        (2)(5) &= 10 \equiv 0 \\ 
+        (4)(5) &= 20 \equiv 0 \\ 
+        (6)(5) &= 30 \equiv 0 \\ 
+        (8)(5) &= 40 \equiv 0 \\ 
+    \end{align*}
+    so the $0$-divisrors in $\mathbb Z_{10}$ are 
+    $5$ with any power of $2$, which just so happens to be 
+    the nonzero elements of $\mathbb Z_{10}$ which are not coprime to 
+    $\mathbb Z_{10}$.
+\end{proof}
+
+\begin{prob}[Problem 2b, Exam 2023]
+    Let $R$ be the ring $\mathbb Z \times \mathbb Z$, where 
+    addition and multiplication is given by, for $(a,b),(c,d)\in 
+    \mathbb Z \times \mathbb Z$, setting 
+    \begin{align*}
+        (a,b)+(c,d)&=(a+c,b+d) \\ 
+        (a,b)(c,d)&=(ac,bd)
+    \end{align*}
+    Let 
+    \[
+        I = \{(a,0) | a \in \mathbb Z\}\subset R
+    \]
+    Prove that $I$ is an ideal of $R$.
+\end{prob}
+\begin{proof}
+    We show that $I$ is a subgroup of $(R,+)$ with the 
+    proper behavior w.r.t left-multiplication.
+
+    First we begin by observing that 
+    $(0,0) \in I \neq \emptyset$. 
+    Let $(a,0),(b,0) \in I$. 
+    Then we see that 
+    \begin{align*}
+        (a,0)-(b,0) &= (a,0)+(-b,0) \\ 
+                    &= (a-b, 0 + 0) \\ 
+                    &= (a-b,0) \in I
+    \end{align*}
+    So $I$ is a subgroup of the additive group of $R$. 
+
+    Lastly let $(c,d) \in R$. 
+    Then 
+    \begin{align*}
+        (c,d)(a,0) &= (ca,d0) \\ 
+                   &= (ca,0) \in I
+    \end{align*}
+    Thus $I$ is an ideal of $R$.
+\end{proof}
+\begin{prob}[Problem 2c, Exam 2023]
+    Prove that $I$ is a prime ideal and that $I$ is not 
+    a maximal ideal. 
+\end{prob}
+\begin{proof}
+    It is clear that $I \neq R$ as $(1,1) \in R \setminus I$. 
+
+    Now suppose $(ab,0) \in I$. 
+    Then 
+    \begin{align*}
+        (ab,0) &= (a,c)(b,d) 
+    \end{align*}
+    with $a,b,c,d \in \mathbb Z$ and $cd = 0$. 
+    In $\mathbb Z$ there are no zero-divisors, thus 
+    \[
+        c = 0 \ \text{or} \ d = 0
+    \]
+    and hence $(a,c) \in I$ or $(b,d) \in I$.
+
+    We show that $I$ is not maximal by giving some ideal $J$ so that 
+    \[
+        I \subseteq J \subseteq R
+    \]
+    with $I \neq J$ and $J \neq R$.
+
+    Let $J$ be the set of $(a,b) \in R$ so that 
+    $b$ is even. Formally 
+    \[
+        J = \{(a,b) \in R \bigm| b = 2n \ \text{for some} \ n 
+        \in \mathbb Z\}
+    \]
+    It is trival to check that this is an ideal and 
+    that 
+    \[
+        I \subsetneq J \subsetneq R
+    \]
+\end{proof}
+
+\newpage
+\begin{prob}[Problem 3a, Exam 2023]
+    Let $p$ be a prime number, and let 
+    $f(x) = x^p - x \in \mathbb Z_p[x]$.
+    Determine (with justification) the zeros of 
+    $f(x)$ in $\mathbb Z_p[x]$.
+\end{prob}
+\begin{proof}[Solution]
+    The zeros are all numbers in $\mathbb Z_p$. 
+    We can apply Fermat's little theorem 
+    \[
+        a^p \equiv a \mod p
+    \]
+    to get that 
+    \[
+        f(x) = x^p - x^p = x-x = 0
+    \]
+\end{proof}
+\begin{prob}[Problem 3b, Exam 2023]
+    Consider $x^2 + 1 \in \mathbb Z_3[x]$. Prove that the ring 
+    $\mathbb Z_3[x]/\langle x^2 + 1\rangle$ is a field, and 
+    determine its number of elements. 
+\end{prob}
+\begin{proof}
+    We use the following theorem: 
+    
+    For some field $F$ and $f \in F[x]$ 
+    \[
+        F[x]/\langle f(x) \rangle
+    \] 
+    is a field if and only if $f(x)$ is irreducible in $F[x]$. 
+    Since $f(x) = x^2 + 1$ is a degree $2$ polynomial we see 
+    that $f$ is irreducible in $\mathbb Z_3[x]$ if and only if 
+    $f$ has no zeros in $\mathbb Z_3[x]$. 
+
+    It is known that $f(x)$ is irreducible since it is the motivating
+    introductory example for the complex numbers with solution 
+    $x = \pm i$. 
+
+    We quickly check that $f(0) \neq 0$, $f(1) \neq 0$ and 
+    $f(2) \neq 0$ to confirm this. 
+
+    As $3$ is prime we see that $\mathbb Z_3$ is a field. 
+
+    We conclude therefore that 
+    \[
+        \mathbb Z_3[x]/\langle x^2 + 1\rangle
+    \]
+    is a field.
+\end{proof}
+
 
 \end{document}
