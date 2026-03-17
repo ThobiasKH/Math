@@ -3538,4 +3538,248 @@ These polynomials converge uniformly to $f$.
     \]
 \end{proof}
 
+\newpage 
+\section{Some problems from week of March 16}
+\begin{prob}[Problem 5.4.5 Spaces p.154]
+    Define $F : C([0,1], \mathbb R) \to \mathbb R$ by 
+    $F(u) = u(0)$. Show that $F$ is a linear functional. 
+    Is $F$ continuous?
+\end{prob}
+\begin{proof}
+    $F$ is well-defined since $u(0) \in \mathbb R$ for all 
+    $u \in C([0,1], \mathbb R)$, and is linear since 
+    \begin{align*}
+        F(u+v) &= (u+v)(0) \\ 
+               &= u(0) + v(0) \\ 
+               &= F(u) + F(v)
+        F(\alpha u) &= (\alpha u)(0) \\ 
+                    &= \alpha u(0) \\ 
+                    &= \alpha F(u)
+    \end{align*}
+    for arbitrary $u,v \in C([0,1],\mathbb R)$ and 
+    $\alpha \in \mathbb R$.
+
+    Let $\varepsilon > 0$ and pick $\delta = \varepsilon > 0$. 
+    Then if 
+    \[
+        \rho(u,v) = \sup_{x\in[0,1]}|u(x)-v(x)| < \delta
+    \]
+    we know that 
+    \[
+        |F(u)-F(v)| = |u(0) - v(0)| \leq \rho(u,v) < \delta =  
+        \varepsilon 
+    \]
+    Therefore $F$ is continuous.
+\end{proof}
+\begin{prob}[Problem 5.4.7 Spaces p.155]
+    Check that $\mathcal L(V,W)$ is a linear space.
+\end{prob}
+\begin{proof}[Proof sketch]
+    Suppose $V,W$ are vector spaces, with 
+    \[
+        \mathcal L(V,W) := \{\text{linear operators} \ 
+        T : V \to W\}
+    \]
+
+    Recognize that for $T,S \in \mathcal L(V,W)$ addition 
+    and multiplication is defined so that 
+    \begin{align*}
+        (T+S)(v) &= Tv + Sv \\ 
+        (\alpha T)(v) &= \alpha T v
+    \end{align*}
+    and that these operations are well-defined: 
+
+    For $\beta$ in the ground field of $V$, $\alpha$ in the 
+    ground field of $W$ (and $\mathcal L(V,W)$), and 
+    $T,S \in \mathcal L(V,W)$ we see that 
+    \begin{align*}
+        (T+S)(\beta v) &= T(\beta v) + S(\beta v) \\ 
+                       &= \beta T v + \beta S v \\ 
+                       &= \beta (T v + S v) \\ 
+                       &= \beta (T+S)(v)
+    \end{align*}
+    and 
+    \begin{align*}
+        (\alpha T)(\beta v) &= \alpha T (\beta v) \\ 
+                           &= \alpha \beta T v \\ 
+                           &= \beta \alpha T v \\ 
+                           &= \beta (\alpha T)(v)
+    \end{align*}
+    The rest of the vector-space axioms follow nicely from here.
+\end{proof}
+
+\begin{prob}[Problem 1, Exam 2021]
+    Let $(X,d)$ be a metric space $X = (0,1]$, $d(x,y) = |x-y|$, 
+    and let $T:X \to X$ be given by $T(x) = x/2$. 
+
+    Show that $T$ is a contraction. Does $T$ have a fixed point?
+\end{prob}
+\begin{proof}
+    Let $x,y \in X$, with $c = \frac{1}{2} \in (0,1)$. 
+    
+    We see that 
+    \[
+        d(Tx,Ty) = \left|\frac{1}{2}x - \frac{1}{2}y\right| = 
+        \frac{1}{2}d(x,y)
+        = cd(x,y)
+    \]
+    so $T$ is a contraction mapping.
+
+    If $X$ was $[0,1]$ a (unique) fixed point would follow 
+    from Banach's 
+    fixed point theorem, but notice that 
+    \[
+        Tx = \frac{1}{2}x = x 
+    \]
+    if and only if $x = 0\not\in X$ so $X$ does not have a fixed 
+    point.
+\end{proof}
+\begin{prob}[Problem 2, Exam 2021]
+    Let $(X,d)$ be a metric space and let $A \subseteq X$ be 
+    closed. We define the metric space $C_b(X,A) = \{\text{all 
+    continuous, bounded} \ f: X \to A\}$, equipped with the 
+    supremum metric 
+    \[
+        \rho(f,g) = \sup_{x\in X}|f(x) - g(x)| 
+    \]
+    Show that $C_b(X,A)$ is a closed subspace of $C_b(X,\mathbb R)$.
+\end{prob}
+\begin{proof}
+    It is trivial that $C_b(X,A) \subseteq C_b(X,\mathbb R)$ so 
+    it remains to show that this is closed w.r.t the supremum 
+    metric. 
+ 
+    Let $\{f_n\}_{n\in\mathbb N}$ be some sequence of functions 
+    in $C_b(X,A)$ which converge to a point $f \in C_b(X,\mathbb R)$.
+
+    I.e. we have 
+    \[
+        \rho(f_n,f) = \sup_{x\in X}|f_n(x) - f(x)| \to 0
+    \]
+    Fix any $x \in X$. Then 
+    $f_n(x) \in A$ for all $n$. Consider the sequence of images 
+    of $f_n(x)$, $\{f_n(x)\}_{n\in\mathbb N}$. This sequence converges
+    to $f(x)$ and since $A$ is closed we know $f(x) \in A$.
+
+    As $\{f_n\}_n$ was arbitrarily chosen as well as $x \in X$ we 
+    conclude that $\{f_n\}$ converges to $f \in C_b(X,A)$, 
+    so $C_b(X,A)$ is closed.
+\end{proof}
+\begin{prob}[Problem 3, Exam 2021]
+    Let $(X,d)$ be a metric space, and for every nonempty 
+    $E \subseteq X$ and $x \in X$, define 
+    \[
+        \operatorname{dist}(x,E) = \inf\{d(x,y) : y \in E\}.
+    \]
+
+    (a) Show that if $E$ is compact and nonempty, then there 
+    is some $z \in E$ such that $\operatorname{dist}(x,E) = d(x,z)$.
+
+    (b) Give an example of a metric space $(X,d)$, a point 
+    $x \in X$ and a nonempty subset $E \subseteq X$ for which there 
+    is no such point $z \in E$.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We consider a nontrivial compact subset $E$. 
+
+    Let $f: E \to \mathbb R, \ f(y) = d(x,y)$. 
+    Notice that $f$ is continuous. Since $f$ is continuous 
+    and $E$ is compact, $f$ attains its minimum, i.e. 
+    there is some $z \in E$ for which 
+    \[
+        f(z) = \inf_{y\in E}f(y) = \min_{y\in E}d(x,y)
+    \]
+\end{proof}
+\begin{proof}[Solution of (b)]
+    Let $X = \mathbb R$ with the usual metric. Then 
+    fix $x = 0$ with $E = (0,1)$. Then there is no point 
+    in $E$ which is "as close to" $x$ as possible. 
+
+    Assume, for contracition, that there exists $y \in E$ for which 
+    \[
+        d(x,y) = \operatorname{dist}(E) 
+    \]
+    Then $y > 0 = x$, but 
+    \[
+        x = 0 < y/2 < y
+    \]
+    so 
+    \[
+        d(x,y/2) < d(x,y)  
+    \]
+\end{proof}
+\begin{prob}[Problem 4, Exam 2021]
+    Let $(X,||\cdot||)$ be a normed space and let $A : X \to X$ be 
+    an invertible, bounded linear operator. Define 
+    $||x||_A = ||Ax||$ for every $x \in X$.
+
+    (a) Show that $||\cdot||_A$ is a norm on $X$.
+
+    (b) Show that a sequence in $X$ converges w.r.t $||\cdot||$ 
+    if and only if it converges w.r.t $||\cdot||_A$.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We let $(X,||\cdot||)$ be a normed space with 
+    $||\cdot||_A$ defined as above. 
+
+    $A$ is invertible (bijective) and thus has 
+    $\ker A = \{0\}$ so $Ax = 0$ if and only if $x = 0$ so 
+    $||x||_A = 0$ iff $x = 0$ follows.
+    
+    It is also clear that $||Ax|| \geq 0$ since $Ax \in X$ and 
+    $||\cdot||$ has non-negativity.
+    
+    Now let $\alpha$ be in the ground field of $X$. 
+    Then 
+    \begin{align*}
+        ||\alpha x||_A &= ||A(\alpha x)|| \\ 
+                       &= ||\alpha A x|| \\ 
+                       &= \alpha ||Ax|| \\ 
+                       &= \alpha ||x||_A
+    \end{align*}
+
+    Lastly we check the triangle inequality: 
+    \begin{align*}
+        ||x+y||_A &= ||A(x+y)|| \\ 
+                  &= ||Ax + Ay|| \\ 
+                  &\leq ||Ax|| + ||Ay|| \\ 
+                  &= ||x||_A + ||y||_A
+    \end{align*}
+    Thus $||\cdot||_A$ is a norm on $X$.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Let $\{x_n\}_{n\in\mathbb N}$ be some sequence in $X$. 
+
+    First, suppose $\{x_n\}_n$ converges to $x$ w.r.t $||\cdot||$, 
+    that is to say for every $\varepsilon > 0$ there is $N$ large 
+    enough so that 
+    \[
+        ||x_n - x|| < \varepsilon
+    \]
+    whenever $n \geq N$.
+    Then 
+    \begin{align*}
+        ||x_n-x||_A &= ||A(x_n - x)|| \\ 
+                    &= ||Ax_n - Ax|| \\ 
+                    &= ||x_n-x||\frac{||Ax_n - Ax||}{||x_n-x||}
+    \end{align*}
+    Notice that 
+    \[
+        ||x_n-x||_A = ||x_n-x||\frac{||Ax_n - Ax||}{||x_n-x||} 
+        \leq ||x_n-x|| \cdot ||A||_{\mathcal L} 
+        = ||x_n-x|| \sup_{y \in X, \ y \neq 0}\frac{||Ay||}{||y||}
+    \]
+    So for $||\cdot||_A$ choose $N$ large enough so that 
+    \[
+        ||x_n-x|| < \frac{\varepsilon}{||A||_{\mathcal L}} 
+    \]
+    noticing that $||A||_{\mathcal L} > 0$ since $A$ is invertible.  
+
+    For the other direction proceed in a similar way, but 
+    choose $N$ so that 
+    \[
+        ||x_n-x||_A < \varepsilon||A||_{\mathcal L}
+    \]
+\end{proof}
+
 \end{document}
