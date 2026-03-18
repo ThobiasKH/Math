@@ -3782,4 +3782,135 @@ These polynomials converge uniformly to $f$.
     \]
 \end{proof}
 
+\newpage 
+\section{Repition Problems from Last Month}
+\begin{prob}
+    Let 
+    \[
+        f_n(x) = x^n \ \text{on} \ [0,1]
+    \]
+
+    1. Find the pointwise limit. 
+
+    2. Does $f_n \to f$ uniformly? 
+
+    3. Is the convergence uniform on $[0,a]$ for $a < 1$?
+\end{prob}
+\begin{proof}
+    The pointwise limit is 
+    \[
+        f = 
+        \begin{cases}
+            0 & \text{for} \ x\in [0,1) \\ 
+            1 & \text{for} \ x = 1
+        \end{cases}
+    \]
+    as $0 \leq c^n < 1$ converges to $0$ while 
+    $1^n = 1, \ \forall n \in \mathbb N$.
+
+    Then $f_n$ does \textbf{not} converge unformly to 
+    $f$. 
+
+    Recalling that 
+    \[
+        \rho(f_n,f) = \sup_{x\in[0,1]}|f_n(x) - f(x)|
+    \]
+    Take $x = 1 - \varepsilon$ for some small $\varepsilon > 0$. 
+    Then 
+    \[
+        f(x) = 0
+    \]
+    but 
+    \[
+        f_n(x) = (1-\varepsilon)^n
+    \]
+    I.e. 
+    \[
+        |f_n(x) - f(x)| \leq \rho(f_n,f) = 
+        \sup_{x\in[0,1]}|1-\varepsilon|^n \to 1
+    \]
+    So $f_n$ does not converge pointwise to $f$.
+
+    Lastly we look at uniform convergence on $[0,a]$ for 
+    $a < 1$. Here $\lim_{n\to\infty}f_n(x) = 0$ for all 
+    $x \in [0,a]$, and 
+    \begin{align*}
+        \rho(f_n,f) &= \sup_{x\in[0,a]}|x^n - 0| \\ 
+                    &= \sup_{x\in[0,a]}|x^n| 
+    \end{align*}
+    which converges to $0$ for $n \to \infty$ on all $x \in [0,a]$.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        f_n(x) = \frac{x}{1+nx}, \ x \in [0,1]
+    \]
+
+    1. Show $f_n \to 0$ pointwise. 
+
+    2. Show convergence is uniformy (or not).
+\end{prob}
+\begin{proof}
+    Fix any $x \in [0,1]$. Informally (for $x > 0$) 
+    \[
+        f_n(x) = \theta\left(\frac{1}{n}\right)
+    \]
+    and for $x = 0$, $f_n(x) = 0$. And the asymptotic behaviour of 
+    $1/n$ is to approach $0$. 
+
+    Then, 
+    \begin{align*}
+        \rho(f_n,0) 
+        &= \sup_{0\leq x \leq1} |f_n(x)| \\ 
+        &= \sup_{0\leq x \leq 1}\left|\frac{x}{1+nx}\right| \\ 
+        &= \sup_{0\leq x \leq 1}\left|\frac{x/n}{1/n +x}\right| \\ 
+    \end{align*}
+    It is easy to see that 
+    \[
+        \rho(f_n,0) \leq \left|\frac{1}{1 + n}\right|\cdot 
+    \]
+    which converges to $0$ when $n \to \infty$.
+\end{proof}
+\begin{prob}
+    Define 
+    \[
+        f(x) = \frac{1}{x}
+    \]
+    on $(0,1)$. 
+
+    1. Show that $f$ is continuous. 
+
+    2. Show that $f$ is not uniformly continuous.
+\end{prob}
+\begin{proof}
+    Let $\varepsilon > 0$. We want to find $\delta > 0$ so that
+    \[
+        |x-y| < \delta 
+    \]
+    then 
+    \[
+        |f(x)-f(y)| = \left|\frac{1}{x}-\frac{1}{y}\right| 
+        = \left|\frac{x-y}{xy}\right| = 
+        \delta \cdot \frac{1}{|xy|} < \varepsilon
+    \]
+    So let $\delta := \frac{\varepsilon|xy|}{2} < 
+    \varepsilon|xy|$, but choice of $\delta$ is clearly 
+    dependent on $x,y \in (0,1)$.  
+    
+    In fact we find the following: 
+
+    \[
+        \sup_{x\in(0,1)}|f(x)| = \lim_{x\to 0} f(x) = \infty
+    \]
+    since for any $n \in \mathbb N$ we can find $f(x) \geq n$ 
+    by setting $x = \frac{1}{n}$ since then 
+    \[
+        f(x) = f\left(\frac{1}{n}\right) = (n^{-1})^{-1} = n
+    \]
+    so $f$ grows without bound for $x \to 0$ and is therefore 
+    not uniformly continuous.
+
+\end{proof}
+
 \end{document}
