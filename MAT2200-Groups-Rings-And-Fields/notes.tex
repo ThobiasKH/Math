@@ -3435,5 +3435,75 @@ is also an integral domain, but not vice versa.
     is a field.
 \end{proof}
 
+\newpage 
+\section{Extension fields \& Vector spaces}
+\begin{defn}
+    A \textbf{field extension} of a field $F$ is a field 
+    $K$ with $F \subseteq K$.
+
+    It is common to write 
+    \[
+        K / F
+    \]
+\end{defn}
+Some basic examples of the above include $\mathbb Q \subseteq 
+\mathbb R$, $\mathbb Q \subseteq \mathbb C$. 
+
+As we have seen earlier, 
+\[
+    \mathbb Z_3 \subseteq \mathbb Z_3[x]/\langle x^2 + 1\rangle 
+    \cong \mathbb Z_3(i)
+\]
+
+\begin{defn}
+    Given a field $F$ and an element $\alpha \not\in F$, define 
+    \[
+        F(\alpha)
+    \]
+    to be the smallest field containing both $F$ and $\alpha$.
+\end{defn}
+\begin{thm}
+    If $\alpha$ satisfies a polynomial over $F$, then 
+    \[
+        F(\alpha) \cong F[x]/\langle f(x) \rangle
+    \]
+    where $f$ is the minimal polynomial.
+
+    In other words, if $\alpha$ is algebraic over $F$ then this 
+    holds.
+\end{thm}
+\begin{defn}
+    The minimal polynomial of $\alpha$ over $F$ is  
+    the monic polynomial of smallest degree in $F[x]$ such that 
+    $\alpha$ is a zero of said polynomial.
+\end{defn}
+\begin{defn}
+    The degree of an extension $[K : F]$ is the dimension of 
+    $K$ as a vector space over $F$.
+\end{defn}
+\begin{ex}
+    $[\mathbb Q(\sqrt 2) : \mathbb Q] = 2$ with basis 
+    $\{1, \sqrt2\}$.
+\end{ex}
+\begin{thm}
+    If $K/F$ is a field extension then $K$ is a vector space over 
+    $F$.
+\end{thm}
+\begin{thm}
+    If minimal polynomial has degree $n$ then 
+    \[
+        [F(\alpha) : F] = n
+    \]
+\end{thm}
+\begin{thm}[Tower Law]
+    If 
+    \[
+        F \subseteq K \subseteq L
+    \]
+    then 
+    \[
+        [L : F] = [L : K][K : F]
+    \]
+\end{thm}
 
 \end{document}
