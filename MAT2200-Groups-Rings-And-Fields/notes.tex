@@ -3506,4 +3506,56 @@ As we have seen earlier,
     \]
 \end{thm}
 
+\newpage 
+\begin{prob}[Problem 4a, Exam 2023]
+    Let $f(x) = x^5 - 8x^4 + 2x + 2 \in \mathbb Q[x]$. You may use 
+    w/o proof that $f$ is irreducible. 
+
+    Let $\alpha \in \overline{\mathbb Q}$ be a zero of 
+    $f$. Compute $[\mathbb Q(\alpha) : \mathbb Q]$, and give 
+    a basis for $\mathbb Q(\alpha)$ as a vector space over 
+    $\mathbb Q$.
+\end{prob}
+\begin{proof}
+    Since $f(x) \in \mathbb{Q}[x]$ is irreducible and $\alpha$ 
+    is a root,
+    $f$ is the minimal polynomial of $\alpha$ over $\mathbb{Q}$.
+
+    Therefore,
+    \[
+        [\mathbb{Q}(\alpha) : \mathbb{Q}] = \deg f = 5.
+    \]
+
+    A basis for $\mathbb{Q}(\alpha)$ over $\mathbb{Q}$ is
+    \[
+        \{1,\alpha,\alpha^2,\alpha^3,\alpha^4\}.
+    \]
+\end{proof}
+\begin{prob}[Problem 4b, Exam 2023]
+    Let $\beta \in \mathbb Q(\alpha) \setminus \mathbb Q$. 
+    Prove that $\mathbb Q(\beta) = \mathbb Q(\alpha)$.
+\end{prob}
+\begin{proof}
+    $\beta \in \mathbb Q(\alpha)$ and $\beta \not \in \mathbb Q$, 
+    by assumption. So 
+    \[
+        \mathbb Q \subseteq \mathbb Q(\beta) \subseteq 
+        \mathbb Q(\alpha)
+    \]
+    We know that 
+    \[
+        [\mathbb Q(\alpha) : \mathbb Q] = 
+        [\mathbb Q(\alpha) : \mathbb Q(\beta)] \cdot 
+        [\mathbb Q(\beta) : \mathbb Q]
+    \]
+    $5$ is prime so one of the factors is $5$ and the other is $1$. 
+    It can't be the case that 
+    \[
+        [\mathbb Q(\alpha) : \mathbb Q(\beta)] = 5
+    \]
+    since that would imply $\mathbb Q(\beta) = \mathbb Q$ which 
+    is not the case, by assumption. Hence 
+    $\mathbb Q(\alpha) = \mathbb Q(\beta)$.
+\end{proof}
+
 \end{document}
