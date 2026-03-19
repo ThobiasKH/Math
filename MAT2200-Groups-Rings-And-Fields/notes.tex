@@ -3558,4 +3558,86 @@ As we have seen earlier,
     $\mathbb Q(\alpha) = \mathbb Q(\beta)$.
 \end{proof}
 
+\newpage 
+\section{Some problems relevant to Fraleigh's sections 29-33}
+\begin{prob}
+    Let $\alpha = \sqrt 2 + \sqrt 5$. Find the minimal 
+    polynomial for $\alpha$ over $\mathbb Q$.
+    Then compute degree and identify a basis.
+\end{prob}
+\begin{proof}[Solution]
+    \begin{align*}
+        x &= \sqrt 2 + \sqrt 5 \\ 
+        x^2 &= 7 + 2\sqrt{10} \\ 
+        x^2 - 7 &= 2\sqrt{10} \\ 
+        \frac{x^2-7}{2} &= \sqrt{10} \\ 
+        \frac{(x^2-7)(x^2-7)}{4} &= 10 \\ 
+        \frac{x^4 -14x^2 + 49 - 40}{4} &= 0 \\ 
+        \frac{x^4 - 14x^2 + 9}{4} &= 0 \\ 
+        x^4 - 14x^2 + 9 &= 0 \\ 
+    \end{align*}
+    is the minimal polynomial of $\alpha$. 
+    It is degree $r$ and thus a basis of 
+    $Q(\alpha)$ over $\mathbb Q$ is 
+    $\{1, \alpha, \alpha^2, \alpha^3\}$.
+\end{proof}
+\begin{prob}
+    Give an example of a field extension which is finitely generated 
+    and not finite.
+\end{prob}
+\begin{proof}[Solution]
+    Consider $\mathbb C/\mathbb R$. $\mathbb C$ is a 
+    $2$-dimensional vector space over $\mathbb R$, but 
+    as a field $|\mathbb C| = \aleph_1$ and 
+    \[
+        |\mathbb C\setminus \mathbb R| = \aleph_1
+    \]
+\end{proof}
+\begin{prob}
+    Let $\alpha, \beta$ be algebraic over $F$. 
+    Prove 
+    \[
+        [F(\alpha,\beta):F] \leq [F(\alpha):F][F(\beta):F]
+    \]
+    and explain when equality is achieved.
+\end{prob}
+\begin{proof}
+    Suppose $\alpha,\beta$ algebraic over some field $F$.
+    Then there exists minimal polynomials 
+    \[
+        f,g \in F[x]
+    \]
+    so that $f(\alpha) = 0$ and $g(\beta) = 0$. 
+    With 
+    \[
+        F(\alpha) = 
+        \left\{
+        \displaystyle\sum_{i=0}^{\deg f - 1}c_i\alpha_i \biggm|
+        c_i \in F
+        \right\}
+    \]
+    and 
+    \[
+        F(\beta) = 
+        \left\{
+        \displaystyle\sum_{i=0}^{\deg g - 1}c_i\beta_i \biggm|
+        c_i \in F
+        \right\}
+    \]
+    Then 
+    \[
+        [F(\alpha):F][F(\beta):F] = (\deg f-1)(\deg g-1)
+    \]
+    It is clear that the two expressions are equal when 
+    $g$ is irreducible in $F(\alpha)$, recalling 
+    \[
+        F \subseteq F(\alpha) \subseteq F(\alpha,\beta)
+    \]
+    A nice example is $\mathbb Q(\sqrt 2, \sqrt 5)$.
+
+    $F(\alpha,\beta)$ is an extension field of $F(\alpha)$ so if 
+    $\beta$ and $\alpha$ are independent in their minimal polynomials 
+    then we get equality. 
+\end{proof}
+
 \end{document}
