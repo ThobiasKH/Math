@@ -3913,4 +3913,114 @@ These polynomials converge uniformly to $f$.
 
 \end{proof}
 
+\begin{prob}[Problem 1, Exam 2021kont]
+    Consider $\mathbb R^2$ equipped with the Ruclidian norm, 
+    and the corresponding metric $d(x,y) = ||x-y||$.
+    Define the unit circle $S = \{s \in \mathbb R^2 : ||x|| = 1\}$. 
+    Explain why 
+    \begin{itemize}
+        \item $(S,d)$ is a metric space 
+        \item $(S,||\cdot||)$ is not a normed space
+    \end{itemize}
+\end{prob}
+\begin{proof}
+    $(S,d)$ is a metric space since $\mathbb R$ with the Euclidian 
+    metric is a metric space and $S \subseteq \mathbb R$, so 
+    the necessary properties hold for $x,y,z \in S \Rightarrow 
+    x,y,z \in \mathbb R$.
+
+    $(S,||\cdot||)$ is not a normed space because it is not even 
+    a vector space. 
+
+    Notice that $(1,0),(0,1) \in S$, but 
+    \[
+        (1,0) + (0,1) = (1,1)
+    \]
+    and $||(1,1)|| = \sqrt 2$ so $(1,1) \not\in S$.
+\end{proof}
+\begin{prob}[Problem 2, Exam 2021kont]
+    Prove that the function $f: \mathbb R \to \mathbb R$ 
+    defined by $f(x) = e^{-x^2}$ is uniformly continuous.
+\end{prob}
+\begin{proof}
+    Notice that $x^2 \in [0,\infty)$ and so 
+    \[
+        e^{-x^2} \in [0,1]
+    \]
+    with 
+    \[
+        \max_{x\in\mathbb R}|e^{-x^2}| = 1
+    \]
+    for $x = 0$.
+
+    So let $\varepsilon > 0$ and choose $\delta > 0$ so that 
+    \[
+        |x-y| < \delta
+    \]
+    we assume $x \neq y$ so $|x-y| > 0$ (since otherwise 
+    $|f(x)-f(y)| = 0$). 
+    Then 
+    \[
+        \frac{|f(x) - f(y)|}{|x-y|} \leq 
+        \sup_{z \in \mathbb R}|f'(z)| = \frac{1}{\sqrt 2}e^{1/\sqrt 2}
+    \]
+    so 
+    \[
+        |f(x)-f(y)| \leq \frac{1}{\sqrt 2}e^{1\sqrt 2}|x-y|
+    \]
+    and so $f$ is Lipschitz and hence uniformly continuous.
+\end{proof}
+
+\begin{prob}[Problem 3, Exam 2021kont]
+    Fix some $p \in [1,\infty]$ and let $x \in \ell^p(\mathbb R)$
+    with components $x = (x(1),x(2), \ldots)$. 
+    Define $y_n = (x(1), x(2), \ldots, x(n), 0,\ldots)$ for 
+    $n \in \mathbb N$. 
+
+    (a) Explain why $y_n \in \ell^p(\mathbb R)$ for every 
+    $n \in \mathbb N$. Show that if $p < \infty$ then 
+    $\{y_n\}_n$ is Cauchy.
+
+    (b) Is the same true for $p = \infty$? If yes, prove it. 
+    Otherwise provide a counterexample.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    $\ell^p(\mathbb R) = \{\{x_n\}_n : (\sum_{i=1}^\infty |x_i|^p
+        )^{1/p} < 
+    \infty\}$ so if $x \in \ell^p(\mathbb R)$ then 
+    \[
+        \left(\displaystyle\sum_{i=1}^\infty |y_i|^p\right)^{1/p}
+        = 
+        \left(\displaystyle\sum_{i=1}^n |x_i|^p\right)^{1/p}
+        \leq 
+        \left(\displaystyle\sum_{i=1}^\infty |x_i|^p\right)^{1/p} 
+        < \infty
+    \]
+    so 
+    \[
+        y_n \in \ell^p(\mathbb R)
+    \]
+
+    Suppose $p < \infty$ then for $y_n,y_m$ (supposing wlog 
+    $n \geq m$)
+    \begin{align*}
+        ||y_n - y_m|| &= 
+        \left(\displaystyle\sum_{i=1}^\infty 
+        |y_i - y_i|^p\right)^{1/p} \\
+        &= 
+        \left(\displaystyle\sum_{i=m}^n 
+        |x_i|^p\right)^{1/p}
+    \end{align*}
+    It is known that $x_n \to 0$ so we can pick $N$ large enough 
+    so that the above sum is as small as we want. 
+\end{proof}
+\begin{proof}[Proof sketch of (b)]
+    It is not true that $\{y_n\}_n$ is cauchy for $p = \infty$ since 
+    \[
+        ||x_n|| = \sup_{n\in\mathbb N}|x_n|
+    \]
+    which cannot necessarily be made arbitrarily small. 
+    Blah blah blah something more rigorous...
+\end{proof}
+
 \end{document}
