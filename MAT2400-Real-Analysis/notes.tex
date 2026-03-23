@@ -4023,4 +4023,144 @@ These polynomials converge uniformly to $f$.
     Blah blah blah something more rigorous...
 \end{proof}
 
+\newpage 
+\section{Doing some cathing up on Normed- and Inner Product Spaces}
+The following section will not be very rigorous as it's just to 
+reiterate some things from the past month which I have not been 
+very diligent in working on. 
+
+Given some series $\sum_{}^{}x_n$ in a normed space, the 
+series converges if 
+\[
+    \left|\left|
+        \displaystyle\sum_{k=1}^{n}x_k - S
+    \right|\right| 
+    \to 0
+\]
+
+If 
+\[
+    \displaystyle\sum ||x_n|| < \infty
+\]
+then $\sum x_n$ converges.
+
+This works in Banach spaces, but may fail in general.
+
+We differentiate between algebraic bases, finite linear 
+combinations so that every vector has a unique representation, 
+and Schaudner bases which are infinite series 
+\[
+    x = \displaystyle\sum_{n=1}^{\infty}a_ne_n
+\]
+An example of this are elements of $\ell^2$ which clearly 
+have no finite representation.
+
+Given some inner product space with i.p $\langle \cdot,\cdot \rangle$,
+the projection of $x$ over $v$ is 
+\[
+    \operatorname{proj}_v(x) = 
+    \frac{\langle x,v\rangle}{\langle v, v \rangle} v
+\]
+
+Given some linear operator $T$, $T$ is bounded if and only if 
+$T$ is continuous.
+
+The operator norm is 
+\[
+    ||T|| = \sup_{||x||\leq 1}||Tx||
+\]
+This has many, many equivalent formulations.
+
+The space of operators $\mathcal L(V,W)$ is a banach space 
+if $W$ is a banach space. 
+
+In infinite-dimensional spaces, $T$ being bijective does not imply 
+that $T^{-1}$ is bijective, so we end up caring about 
+the inverse being bounded.
+
+Neumann series are the analogue of geometric series. 
+If $||T|| < 1$ then 
+\[
+    (I-T)^{-1} = \displaystyle\sum_{n=0}^{\infty}T^n
+\]
+A nice application of this is that if $T$ is invertible 
+and $S$ is "small" then 
+\[
+    T + S
+\]
+is invertible if 
+\[
+    ||T^{-1}+S|| < 1
+\]
+
+\newpage 
+\section{Problems from week of March 23}
+\begin{prob}
+    Let $A : \ell^\infty \to \ell^\infty$ be the function 
+    \[
+        A((a_1,a_2,a_3,\ldots)) = (0,a_1,a_2,a_3,\ldots)
+    \]
+
+    Show that $A$ is a bounded linear operator. 
+
+    Find a bounded, linear operator $B : \ell^\infty \to 
+    \ell^\infty$ such that $BA = I$. 
+
+    Show that $AB \neq I$.
+\end{prob}
+\begin{proof}
+    Let $A : \ell^\infty \to \ell^\infty$ be as defined in the 
+    problem statement. If $(a_i)_{i\in\mathbb N} \in \ell^\infty$ 
+    then clearly $(0,a_1,a_2,\ldots)\in \ell^\infty$ so the 
+    map is well-defined.
+
+    Now let $a = (a_i)_{i\in\mathbb N}, b = (b_i)_{i\in\mathbb N} 
+    \in \ell^\infty$.  
+    
+    Then 
+    \begin{align*}
+        A(a+b) &= A((a_1+b_1,a_2+b_2,\ldots)) \\ 
+               &= (0,a_1+b_1,a_2+b_2\ldots) \\ 
+               &= (0,a_1,a_2,\ldots) + (0,b_1,b_2,\ldots) \\ 
+               &= A(a) + A(b)
+    \end{align*}
+    Now let $\alpha$ be some scalar from the ground-field.  
+    Then 
+    \begin{align*}
+        A(\alpha a) &= (0,\alpha a_1, \alpha a_2,\ldots) \\ 
+                    &= (\alpha \cdot 0, \alpha a_1,a_2, \ldots) \\ 
+                    &= \alpha (0,a_1,a_2,\ldots) \\ 
+                    &= \alpha A(a)
+    \end{align*}
+    Now it remains to show that $A$ is bounded. Notice 
+    that 
+    \begin{align*}
+        ||A(a)||_\infty &= \max\{0,|a_1|,|a_2|,\ldots\} \\ 
+                        &= \max\{|a_1|,|a_2|,\ldots\} \\ 
+                        &= ||a||_\infty
+    \end{align*}
+    for any $a \in \ell^\infty$, so $A$ is bounded.
+
+    Let $B : \ell^\infty \to \ell^\infty$ be defined by 
+    \[
+        B((a_1,a_2,\ldots)) = (a_2,a_3,\ldots)
+    \]
+    Then 
+    \[
+        BA((a_1,a_2,\ldots)) = B((0,a_1,a_2,\ldots)) 
+        = (a_1,a_2,\ldots)
+    \]
+    but 
+    \[
+        AB((a_1,a_2,\ldots)) = (0,a_2,\ldots)
+    \]
+    Now notice that 
+    \begin{align*}
+        ||B(a)||_\infty &= ||(a_2,a_3,\ldots)||_\infty \\ 
+                        &\leq ||(a_1,a_2,\ldots)||_\infty \\ 
+                        &= ||a||_\infty
+    \end{align*}
+    so $B$ is bounded (linearity would also be a quick check).
+\end{proof}
+
 \end{document}
