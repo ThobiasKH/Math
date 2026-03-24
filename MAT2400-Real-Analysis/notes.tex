@@ -4163,4 +4163,44 @@ is invertible if
     so $B$ is bounded (linearity would also be a quick check).
 \end{proof}
 
+\begin{prob}[Problem 5.5.2 Spaces p.160]
+    Assume that $U$ is a normed space and that $C : U \to U$ 
+    is a bounded, linear operator. Show that $||C^n|| \leq ||C||^n$.
+\end{prob}
+\begin{proof}[Proof sketch]
+    Let $C$ be some bounded, linear operator on a normed space $U$. 
+    Then 
+    \[
+        ||C|| \leq m
+    \]
+    for some $m \in \mathbb R_{\geq 0}$, recalling that 
+    \[
+        ||C|| = \sup_{x \in U\setminus \{0\}}\frac{||Cx||}{||x||}
+        = k
+    \]
+    with the observation that 
+    \[
+        ||C||^n = k^n \leq m^n
+    \]
+    We also observe that 
+    \[
+        ||C^n|| = \sup_{x \in U\setminus\{0\}}
+        \frac{||C^nx||}{||x||}
+    \]
+    Recall that for bounded, linear operators $A,B$ the following 
+    holds 
+    \[
+        ||AB|| \leq ||A||\cdot||B||
+    \]
+    Observe then that 
+    \[
+        ||C^n|| \leq ||C||\cdot||C^{n-1}|| \leq 
+        ||C||\cdot||C||\cdot||C^{n-2}||
+    \]
+    and so on. Inductively 
+    \[
+        ||C^n|| \leq \prod_{i \in [n]}||C|| = ||C||^n
+    \]
+\end{proof}
+
 \end{document}
