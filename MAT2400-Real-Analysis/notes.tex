@@ -4203,4 +4203,103 @@ is invertible if
     \]
 \end{proof}
 
+\begin{prob}[Problem 5.5.3 Spaces p.160]
+    Assume that $U,V$ are normed spaces and that $A : U \to V$ 
+    is a surjective, linear operator whose inverse $A^{-1}$ 
+    is bounded. Show that $||A(u)||_V \geq \frac{1}{||A^{-1}||}
+    ||u||_U$ for all $u \in U$.
+\end{prob}
+\begin{proof}
+    Since $A^{-1}$ exists, $A$ is bijective. Because $A^{-1}$ is 
+    bounded, we have
+    \[
+        \|A^{-1}v\|_U \le \|A^{-1}\|\,\|v\|_V
+        \quad \text{for all } v \in V.
+    \]
+    Now let $u \in U$. Since $A^{-1}(A(u)) = u$, we get
+    \[
+        \|u\|_U
+        =
+        \|A^{-1}(A(u))\|_U
+        \le
+        \|A^{-1}\|\,\|A(u)\|_V.
+    \]
+    Dividing by $\|A^{-1}\|$ yields
+    \[
+        \|A(u)\|_V \ge \frac{1}{\|A^{-1}\|}\,\|u\|_U,
+    \]
+    for all $u \in U$.
+\end{proof}
+\begin{prob}[Problem 4 Spaces p.160]
+    Assume that $U,V$ are normed spaces and that $A : U \to V$
+    is a surjective, bounded, linear operator. Show that if 
+    there is a $c \in \mathbb R$ such that $\|A(u)\|_V \ge c\|u\|_U$
+    for all $u \in U$, then $A$ is invertible.
+\end{prob}
+\begin{proof}
+    Assume there exists $c>0$ such that
+    \[
+        \|A(u)\|_V \ge c\|u\|_U
+        \qquad \text{for all } u\in U.
+    \]
+    Since $A$ is already assumed surjective, it remains only 
+    to show that
+    $A$ is injective.
+
+    Suppose $u\in U$ and $A(u)=0$. Then
+    \[
+        0=\|A(u)\|_V \ge c\|u\|_U.
+    \]
+    Because $c>0$, this implies $\|u\|_U=0$, and hence $u=0$.
+    Therefore $\ker(A)=\{0\}$, so $A$ is injective.
+
+    Thus $A$ is both injective and surjective, hence bijective. 
+    Therefore
+    $A$ is invertible.
+\end{proof}
+\begin{proof}
+    We show that the conclusion cannot be deduced if $c\le 0$.
+
+    Assume $c\le 0$, and let $A:U\to V$ be any map whatsoever. 
+    For every
+    $u\in U$ we have
+    \[
+        \|A(u)\|_V \ge 0,
+    \]
+    since norms are always nonnegative. Also, because $c\le 0$ and
+    $\|u\|_U\ge 0$, we have
+    \[
+        c\|u\|_U \le 0.
+    \]
+    Therefore
+    \[
+        \|A(u)\|_V \ge 0 \ge c\|u\|_U
+    \]
+    for every $u\in U$. Hence, whenever $c\le 0$, the inequality
+    \[
+        \|A(u)\|_V \ge c\|u\|_U \qquad \forall u\in U
+    \]
+    holds for every operator $A$.
+
+    So if the statement
+    "if $A$ is surjective, bounded, linear and $\|A(u)\|_V \geq 
+    c\|u\|_U \ \forall u \in U$, then $A$ is invertible"
+    were true for some $c\le 0$, it would follow that every 
+    surjective,
+    bounded, linear operator is invertible. This is false.
+
+    Indeed, define
+    \[
+        A:\mathbb{R}^2\to\mathbb{R}, \qquad A(x,y)=x.
+    \]
+    Then $A$ is linear, bounded, and surjective. However, $A$ is not
+    injective, since
+    \[
+        A(0,0)=0=A(0,1)
+    \]
+    with $(0,0)\neq(0,1)$. Hence $A$ is not invertible.
+
+    Thus the statement cannot hold for $c\le 0$.
+\end{proof}
+
 \end{document}
