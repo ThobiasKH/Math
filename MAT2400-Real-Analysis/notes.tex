@@ -4302,4 +4302,62 @@ is invertible if
     Thus the statement cannot hold for $c\le 0$.
 \end{proof}
 
+\begin{prob}[Problem 5.5.5 Spaces]
+    Assume $U$ is a Banach space and define 
+    \[
+        GL(U) := \{T \in \mathcal L(U) : T \ \text{is invertible}\}
+    \]
+    Show that $GL(U)$ is an open subset of $\mathcal L(U)$.
+\end{prob}
+\begin{proof}
+    $GL(U)$ is open if we for any $A \in GL(U)$ can find 
+    $r > 0$ so that 
+    \[
+        \forall B \in \mathcal L(U), \ 
+        \|B-A\| < r \Rightarrow B \in GL(U).
+    \]
+    By Banach's Lemma, if $A$ is invertible (which we assume) 
+    then 
+    \[
+        \|A-B\| < \frac{1}{\|A^{-1}\|}
+    \]
+    $A$ is invertible so we can take $r = \frac{1}{\|A^{-1}\|}$.
+\end{proof}
+
+\begin{prob}[Problem 3 Exam 2022]
+    Assume that $(X,d)$ is a metric space and that 
+    $f : X \to \mathbb R$ is a continuous function.
+    If $a \in \mathbb R$, we say that the equation 
+    $f(x) = a$ is almost solvable if there for each 
+    $\varepsilon > 0$ is an $x \in \mathbb R$ such that 
+    $|f(x) - a| < \varepsilon$. Show that if 
+    $X$ is compact and $f(x) = a$ is almost solvable, then 
+    there is an $x \in X$ such that $f(x) = a$.
+    Find an example which shows that this is not always true 
+    for noncompact $X$.
+\end{prob}
+\begin{proof}
+    We begin by giving an example where this does not work. 
+    Let $X = (0,\infty)$ with the usual norm and let 
+    \[
+        f(x) = x
+    \]
+    Let $a = 0$ then $f(x) = a$ is almost solvable since 
+    for any $\varepsilon > 0$ you can simply choose 
+    $x = \varepsilon/2 \in X$
+    and the condition is satisfied, but there is no 
+    $x \in X$ so that $f(x) = a$.
+
+    Now we prove the claim. Consider a sequence 
+    $\{x_n\}_n$ in $X$ so that $|f(x_n) - a| < \frac{1}{n}$.
+    Since $X$ is compact we can find a subsequence so that 
+    $x_{n_k} \to x \in X$. Then $f(x_{n_k}) \to f(x)$ and furthermore 
+    \[
+        |f(x_{n_k}) - a| < \frac{1}{n_{k}} \to 0
+    \]
+    so $f(x_{n_k}) \to a$ and by uniqueness of the limit 
+    $f(x) = a$.
+\end{proof}
+
+
 \end{document}
