@@ -1,0 +1,141 @@
+\documentclass[11pt]{article}
+\input{preamble.tex}
+
+\title{\huge{Oblig 2}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+\begin{prob*}[1]
+    La $G$ of $H$ være endelige grupper, og la $\phi : G \to H$
+    være en gruppehomomorfi.
+
+    \begin{enumerate}[label=(\alph*), align=left]
+        \item Bruk Lagranges teorem og fundamentalteoremet for 
+            gruppehomomorfier til å vise at $|G|/|\ker \phi|$ deler 
+            $|H|$.
+        \item Anta nå at $\gcd(|G|,|H|) = 1$. Vis at da er 
+            $\phi$ den trivielle homomorfien, det vil si 
+            $\phi(g) = e$ for alle $g \in G$.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Bevis av (a)]
+    Ved Lagranges teorem anvendt på undergruppen $\ker\phi \le G$ får vi
+    \[
+        |G| = |\ker\phi|\,[G:\ker\phi].
+    \]
+    Dermed er
+    \[
+        \frac{|G|}{|\ker\phi|} = [G:\ker\phi] = |G/\ker\phi|.
+    \]
+
+    Ved fundamentalteoremet for gruppehomomorfier har vi
+    \[
+        G/\ker\phi \cong \operatorname{Im}(\phi),
+    \]
+    og derfor
+    \[
+        |G/\ker\phi| = |\operatorname{Im}(\phi)|.
+    \]
+    Vi får altså
+    \[
+        \frac{|G|}{|\ker\phi|} = |\operatorname{Im}(\phi)|.
+    \]
+
+    Siden $\operatorname{Im}(\phi)$ er en undergruppe av $H$, 
+    følger det av
+    Lagranges teorem at
+    \[
+        |\operatorname{Im}(\phi)| \bigm| |H|.
+    \]
+    Dermed har vi vist at
+    \[
+        \frac{|G|}{|\ker\phi|} \biggm| |H|.
+    \]
+\end{proof}
+\begin{proof}[Bevis av (b)]
+    Vi vet at 
+    \[
+        \frac{|G|}{|\ker \phi|} \biggm| |H|,
+    \]
+    men også at 
+    \[
+        |G| = |\ker \phi| \cdot \frac{|G|}{|\ker\phi|},
+    \]
+    så $|G|/|\ker \phi|$ deler $|G|$. Altså $|G|/|\ker \phi|$ deler 
+    både $|G|$ og $|H|$ med $\gcd(|G|,|H|) = 1$ så 
+    $|G|/|\ker \phi| = 1$ så $|\operatorname{Im}(\phi)| = 1$ altså 
+    \[
+        \operatorname{Im}(\phi) = \{e\}
+    \]
+\end{proof}
+
+\newpage 
+\begin{prob}[2]
+    La $R$ og $S$ være ringer med identitetselementer $1_R \in R$ 
+    og $1_S \in S$, slik at $1_S \neq 0$. La $\phi : R \to S$
+    være en ringhomomorfi slik at $\phi(1_R) = 1_S$.
+
+    \begin{enumerate}[label=(\alph*), align=left]
+        \item Vis at hvis $r \in R$ er en enhet, så er 
+            $\phi(r)$ en enhet i $S$.
+        \item Vis at hvis $R$ er en kropp, så er $\phi$ injektiv. 
+        \item Vis at den motsatte implikasjonen fra punkt (a) ikke 
+            er sann, det vil si: 
+
+            Finn et eksempel på en ringhomomorfi $\phi : R \to S$ 
+            med $\phi(1_R) = 1_S \neq 0$ og en $r \in R$
+            slik at $\phi(r)$ er en enhet i $S$, men $r$ er ikke
+            en enhet i $R$.
+
+            \emph{Hint:} Du kan finne et eksempel med $R = \mathbb Z$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Bevis av (a)]
+    La $r \in R$ være en enhet, altså det fins 
+    $r^{-1} \in R$ slik at 
+    \[
+        rr^{-1} = r^{-1}r = 1_R
+    \]
+    Da ser vi at 
+    \begin{align*}
+        \phi(r)\phi(r^{-1}) &= \phi(rr^{-1}) \\
+                            &= \phi(1_R) \\ 
+                            &= 1_S
+    \end{align*}
+    og lignende med $\phi(r^{-1})\phi(r)$.
+    Dermed er $\phi(r)$ en enhet i $S$ med invers 
+    $\phi(r^{-1})$.
+\end{proof}
+\begin{proof}[Bevis av (b)]
+    Vi beviser rett frem. Anta at $R$ er en kropp. 
+    La $a,b \in R$ og anta at 
+    \[
+        \phi(a) = \phi(b)
+    \]
+    da har vi at 
+    \[
+        \phi(a) - \phi(b) = \phi(b) - \phi(a) = 0
+    \]
+    altså 
+    \[
+        \phi(a-b) = \phi(b-a) = 0 = \phi(0)
+    \]
+    så $a-b = b-a = 0$ altså $a = b$.
+
+    Dermed er $\phi$ injektiv.
+\end{proof}
+\begin{proof}[Bevis av (c)]
+    La $R = \mathbb Z$ og la $S = \mathbb Q$. Definer $\phi : R \to S$ 
+    ved 
+    \[
+        \phi(a) = a
+    \]
+    Da er $\phi(2) = 2$ som har en multiplikativ invers i $\mathbb Q$, 
+    men ikke i $\mathbb Z$.
+\end{proof}
+
+\end{document}
