@@ -111,22 +111,10 @@
     $\phi(r^{-1})$.
 \end{proof}
 \begin{proof}[Bevis av (b)]
-    Vi beviser rett frem. Anta at $R$ er en kropp. 
-    La $a,b \in R$ og anta at 
-    \[
-        \phi(a) = \phi(b)
-    \]
-    da har vi at 
-    \[
-        \phi(a) - \phi(b) = \phi(b) - \phi(a) = 0
-    \]
-    altså 
-    \[
-        \phi(a-b) = \phi(b-a) = 0 = \phi(0)
-    \]
-    så $a-b = b-a = 0$ altså $a = b$.
-
-    Dermed er $\phi$ injektiv.
+    $\ker \phi$ er et ideal i $R$. $R$ er en kropp så de enste 
+    idealen er $\{0\}$ og $R$. $\phi(1_R) = 1_S \neq 0$ så 
+    $1_R \not\in \ker \phi$ altså $\ker \phi \neq R$.
+    Vi konkluderer da at $\ker \phi = \{0\}$ dermed injektiv.
 \end{proof}
 \begin{proof}[Bevis av (c)]
     La $R = \mathbb Z$ og la $S = \mathbb Q$. Definer $\phi : R \to S$ 
@@ -136,6 +124,160 @@
     \]
     Da er $\phi(2) = 2$ som har en multiplikativ invers i $\mathbb Q$, 
     men ikke i $\mathbb Z$.
+\end{proof}
+
+\newpage 
+\begin{prob}[3]
+    Se på produktringen $\mathbb Z \times \mathbb Z$, og la 
+    \[
+        R = \{(m,n) \in \mathbb Z \times \mathbb Z \bigm| 
+        m\equiv n \!\!\!\! \mod 2\}
+        \subseteq \mathbb Z \times \mathbb Z.
+    \]
+
+
+    \begin{enumerate}[label=(\alph*), align=left]
+        \item Vis at $R$ er en underring av $\mathbb Z \times 
+            \mathbb Z$. 
+        \item Finn alle $0$-divisorer i $R$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Bevis av (a)]
+    Merk at $(0,0) \in R \neq \emptyset$ siden $0 \equiv 0$.
+    La $(a,b),(c,d) \in R$. Altså $a \equiv b$ og $c \equiv d$.
+    Da oppfyller 
+    \[
+        (a,b)-(c,d) = (a-c,b-d) 
+    \]
+    $a-c \equiv b-d$. 
+    Dermed er $(a-c,b-d)\in R$.
+
+    Videre er
+    \[
+        (a,b)(c,d) = (ac,bd).
+    \]
+    Nå har vi
+    \[
+        ac-bd = c(a-b)+b(c-d).
+    \]
+    Siden $2 \mid (a-b)$ og $2 \mid (c-d)$, følger det at
+    $2 \mid c(a-b)$ og $2 \mid b(c-d)$. Derfor er også
+    $2 \mid (ac-bd)$, altså
+    \[
+        ac \equiv bd \pmod 2.
+    \]
+    Dermed er $(ac,bd)\in R$.
+
+    Vi har altså vist at $R$ er ikke-tom og lukket under subtraksjon
+    og multiplikasjon, så $R$ er en underring av $\mathbb Z \times 
+    \mathbb Z$.
+\end{proof}
+\begin{proof}[Løsning av (b)]
+    Vi må finne $(a,b),(c,d) \in R\setminus \{(0,0)\}$ slik at 
+    \[
+        (a,b)(c,d) = (ac,bd) = (0,0)
+    \]
+    med $ac,bd \in \mathbb Z$. For $a = 0$ krever vi at 
+    $d = 0$ og vice versa for $b$ og $c$, siden ellers ville 
+    ene elementet vert $(0,0)$. Siden en av innslagene i tupplen 
+    er $0$ og vi krever $m \equiv n$ må det andre være 
+    i $2\mathbb Z \setminus \{0\}$. Så $0$-divisorene er alle par 
+    \[
+        (x,0),(0,y), \ x, y \in 2\mathbb Z \setminus \{0\}. 
+    \]
+\end{proof}
+\newpage 
+\begin{prob}[4]
+    La $F$ være en kropp. Vi sier at $a \in F$ er et kvadrat 
+    hvis det finnes $b$ slik at $a = b^2$. 
+
+    \begin{enumerate}[label=(\alph*), align=left]
+        \item Vis at $a \in F$ er et kvadrat hvis og bare hvis 
+            polynomet $x^2 - a \in F[x]$ er redusibelt.
+
+            \medskip 
+            La nå $p \geq 3$ være et primtal og la $a \in \mathbb Z_p$
+            med $a \neq 0$.
+        \item Vis at hvis $a$ er et kvadrat, så er 
+            $a^{\frac{p-1}{2}} = 1$.
+        \item Vis at hvis $a^{\frac{p-1}{2}} = 1$, så er 
+            $a$ et kvadrat.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Bevis av (a)] 
+    Vi lar $F$ være en kropp.
+        
+    ($\Rightarrow$) 
+
+    Anta at $a \in F$ er et kvadrat. Altså det finnes $b \in F$ 
+    slik at $a = b^2$.  
+    La $f(x) = x^2 - a \in F[x]$. Siden $\deg f = 2$ er 
+    $f$ redusibelt hvis og bare hvis det finnes $x \in F$ slik at 
+    $f(x) = 0$. Vi observerer at 
+    \begin{align*}
+        f(b) &= b^2 - a \\ 
+             &= a - a \\ 
+             &= 0
+    \end{align*}
+    så $f$ er redusibelt. 
+
+    ($\Leftarrow$) 
+
+    Anta at $f(x) = x^2 - a \in F[x]$ er redusibelt. Siden 
+    $\deg f = 2$ er $f$ redusibelt hvis og bare hvis det finnes 
+    $x \in F$ slik at $f(x) = 0$. $f$ er redusibelt så det finnes 
+    $b \in F$ slik at 
+    \begin{align*}
+        f(b) &= b^2 - a \\ 
+             &= 0 \\ 
+        \Rightarrow b^2 &= a
+    \end{align*}
+\end{proof}
+\begin{proof}[Bevis av (b)]
+    La $p \geq 3$ være et primtal.
+    Anta at $a \in \mathbb Z_p \setminus \{0\}$ er et kvadrat, 
+    altså det finnes 
+    $b \in \mathbb Z_p$ slik at $a = b^2$. Da har vi  
+    \begin{align*}
+        a^{\frac{p-1}{2}} &= (b^2)^{\frac{p-1}{2}} \\ 
+                          &= b^{p-1}
+    \end{align*}
+    Via Fermat's teorem: 
+    \[
+        b^{p-1} \equiv 1 \mod p
+    \]
+\end{proof}
+\begin{proof}[Bevis av (c)]
+    Siden $a \neq 0$, er $a \in \mathbb Z_p^\times$. Gruppen
+    $\mathbb Z_p^\times$ er syklisk av orden $p-1$, så det finnes
+    en generator $g$ slik at
+    \[
+        \mathbb Z_p^\times = \langle g\rangle.
+    \]
+    Dermed finnes et heltall $k$ slik at
+    \[
+        a = g^k.
+    \]
+
+    Anta nå at
+    \[
+        a^{\frac{p-1}{2}} = 1.
+    \]
+    Da får vi
+    \[
+        1 = (g^k)^{\frac{p-1}{2}} = g^{k\frac{p-1}{2}}.
+    \]
+    Siden $g$ har orden $p-1$, følger det at
+    \[
+        p-1 \mid k\frac{p-1}{2}.
+    \]
+    Dermed må $2 \mid k$, altså er $k=2m$ for et heltall $m$.
+
+    Da får vi
+    \[
+        a = g^k = g^{2m} = (g^m)^2.
+    \]
+    Altså er $a$ et kvadrat i $\mathbb Z_p$.
 \end{proof}
 
 \end{document}
