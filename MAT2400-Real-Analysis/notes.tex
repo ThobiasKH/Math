@@ -4359,5 +4359,108 @@ is invertible if
     $f(x) = a$.
 \end{proof}
 
+\newpage 
+\section{Derivatives - Chapter 6 of Spaces}
+We recall that for a function $f: \mathbb R \to \mathbb R$ 
+at $\overline x \in \mathbb R$, the derivative is 
+\[
+    f'(x) = \lim_{h\to0} \frac{f(\overline x + h) - f(\overline x)}{h}
+\]
+where the geometric intuition is that $f'(\overline x)$ is the 
+slope of the tangent of the graph of $f$ at $\overline x$.
+
+For our purposes, the following is the most important property 
+of $f'$.
+\begin{thm}[Taylor's Theorem]
+    Let $f : \mathbb R \to \mathbb R$ be a differentiable 
+    function. 
+
+    Let $\overline x \in \mathbb R$. Then 
+    \[
+        f(\overline x + h) 
+        \approx f(\overline x) + f'(\overline x)h
+    \]
+    for small $h$.
+    More precisely: 
+    \[
+        \frac{\left|f(\overline x + h) - (f(\overline x) 
+        + f'(\overline x)h)\right|}{|h|} \underset{h\to 0}{\to} 0
+    \]
+\end{thm}
+With some manipulation of the expression in the above 
+theorem, we get that 
+\[
+    f'(\overline x) = 
+    \lim_{h\to 0}\frac{f(\overline x + h) - f(\overline x)}{h}
+\]
+as we already know.
+
+For a function $f : \mathbb R^m \to \mathbb R^n$ we identify 
+the derivative with its Jacobian $\nabla f$, 
+\[
+    \nabla f(\overline{x}) =
+    \begin{pmatrix}
+        \frac{\partial f_1}{\partial x^1}(\overline{x}) & \cdots & \frac{\partial f_1}{\partial x^m}(\overline{x}) \\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial f_n}{\partial x^1}(\overline{x}) & \cdots & \frac{\partial f_n}{\partial x^m}(\overline{x})
+    \end{pmatrix}
+    \in \mathbb R^{n\times m}
+\]
+
+Then 
+\[
+    \frac{\| f(\overline x + h) - f(\overline x) - 
+    \nabla f(\overline x)h\|_2}{\|h\|_2} \underset{h\to 0}{\to}0
+\]
+Thinking of $\nabla f(\overline x)h$ as some linear function 
+of $h$ we get the correct notion; The derivative of 
+a function from some space to another shold be some linear function 
+of $h$.
+
+\begin{defn}[Frechet Derivative]
+    Let $X,Y$ be normed spaces, let $O \subseteq X$ be open 
+    and let $F : O \to Y$ be a function. 
+    Then $F$ is (Frechet) differentiable at $\overline x \in O$
+    if there is some $A \in \mathcal L(X,Y)$ such that 
+    \[
+        \lim_{h\in X, \ h\to 0}\frac{\|F(\overline x + h) - 
+        F(\overline x) - A(h)\|_Y}{\|h\|_X} = 0
+    \]
+    $A$ is the (Frechet) derivative of $F$.
+\end{defn}
+
+\begin{lem}
+    If $F: O \to Y$ is differentiable at $\overline x \in O$, 
+    then the derivative is unique.
+\end{lem}
+\begin{proof}
+    Suppose $A,B \in \mathcal L(X,Y)$ are derivatives of 
+    $F$. Let 
+    \[
+        f(h) := \frac{\|F(\overline x + h) - 
+        F(\overline x) - A(h) - (F(\overline x + h)- F(\overline x)
+        - B(h))\|_Y}{\|h\|_x}
+    \]
+    Then 
+    \[
+        f(h) = \left\|(B-A)\left(\frac{h}{\|h\|_X}\right)\right\|_Y
+    \]
+    By the triangle inequality 
+    \[
+        f(h) \leq 
+        \frac{\|F(\overline x + h) - F(\overline x) - 
+        A(h)\|_Y}{\|h\|_X} + 
+        \frac{\|F(\overline x + h) - F(\overline x) - 
+        B(h)\|_Y}{\|h\|_X} \to 0
+    \]
+    when $h \to 0$. 
+    For any $x \in X$ and $\alpha > 0$, we get 
+    \[
+        \|(B-A)(x)\|_Y = \|x\|_X \|(B-A)(\alpha x/\|\alpha x\|)\|_Y
+        = \|x\|_X f(\alpha x) \to 0
+    \]
+    as $\alpha \to 0$. So $(B-A)(x) = 0$. Since $x$ was arbitrary 
+    $A = B$.
+\end{proof}
 
 \end{document}
