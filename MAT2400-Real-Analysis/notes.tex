@@ -4599,4 +4599,214 @@ of $h$.
     \]
 \end{proof}
 
+\begin{prob}[Problem 6.1.6 Spaces]
+    Assume that $X,Y$ are normed spaces over 
+    $\mathbb R$ and that the norm in $Y$ is generated 
+    by an inner product $\langle \cdot, \cdot \rangle$. 
+    Assume that the functions $F, G : X \to Y$ are 
+    differentiable at $a \in X$. Show that the function 
+    $\langle F(x), G(x) \rangle$ is differentiable at 
+    $a$, and that 
+    \[
+        h'(a) = \langle F'(a), G(a)\rangle + 
+        \langle F(a), G'(a)\rangle
+    \]
+\end{prob}
+\begin{proof}
+    Define
+    \[
+        h(x) = \langle F(x), G(x)\rangle, \qquad x \in X.
+    \]
+    We will show that $h$ is differentiable at $a$ and that 
+    its derivative is
+    the linear functional $L : X \to \mathbb R$ given by
+    \[
+        L(u) = \langle F'(a)u, G(a)\rangle + \langle F(a), 
+        G'(a)u\rangle.
+    \]
+
+    Since $F$ and $G$ are differentiable at $a$, we may write
+    \[
+        F(a+u) = F(a) + F'(a)u + r_F(u),
+    \]
+    \[
+        G(a+u) = G(a) + G'(a)u + r_G(u),
+    \]
+    where
+    \[
+        \frac{\|r_F(u)\|_Y}{\|u\|_X} \to 0
+        \quad\text{and}\quad
+        \frac{\|r_G(u)\|_Y}{\|u\|_X} \to 0
+        \qquad\text{as } u\to 0.
+    \]
+
+    Then
+    \begin{align*}
+        h(a+u)
+        &= \langle F(a+u), G(a+u)\rangle \\
+        &= \langle F(a)+F'(a)u+r_F(u),\,
+                 G(a)+G'(a)u+r_G(u)\rangle.
+    \end{align*}
+    Expanding this inner product gives
+    \begin{align*}
+        h(a+u)
+        &= \langle F(a),G(a)\rangle
+         + \langle F'(a)u, G(a)\rangle
+         + \langle F(a), G'(a)u\rangle \\
+        &\quad
+         + \langle r_F(u), G(a)\rangle
+         + \langle F(a), r_G(u)\rangle
+         + \langle F'(a)u, G'(a)u\rangle \\
+        &\quad
+         + \langle F'(a)u, r_G(u)\rangle
+         + \langle r_F(u), G'(a)u\rangle
+         + \langle r_F(u), r_G(u)\rangle.
+    \end{align*}
+    Hence
+    \begin{align*}
+        h(a+u)-h(a)-L(u)
+        &= \langle r_F(u), G(a)\rangle
+         + \langle F(a), r_G(u)\rangle
+         + \langle F'(a)u, G'(a)u\rangle \\
+        &\quad
+         + \langle F'(a)u, r_G(u)\rangle
+         + \langle r_F(u), G'(a)u\rangle
+         + \langle r_F(u), r_G(u)\rangle.
+    \end{align*}
+
+    We now divide by $\|u\|_X$ and show that the quotient tends to 
+    $0$.
+    Using Cauchy--Schwarz and boundedness of the linear maps 
+    $F'(a)$ and $G'(a)$,
+    we get
+    \begin{align*}
+        \frac{|\langle r_F(u),G(a)\rangle|}{\|u\|_X}
+        &\le \|G(a)\|_Y \frac{\|r_F(u)\|_Y}{\|u\|_X} \to 0, \\
+        \frac{|\langle F(a),r_G(u)\rangle|}{\|u\|_X}
+        &\le \|F(a)\|_Y \frac{\|r_G(u)\|_Y}{\|u\|_X} \to 0, \\
+        \frac{|\langle F'(a)u,G'(a)u\rangle|}{\|u\|_X}
+        &\le \|F'(a)\|\,\|G'(a)\|\,\|u\|_X \to 0, \\
+        \frac{|\langle F'(a)u,r_G(u)\rangle|}{\|u\|_X}
+        &\le \|F'(a)\|\,\|r_G(u)\|_Y \to 0, \\
+        \frac{|\langle r_F(u),G'(a)u\rangle|}{\|u\|_X}
+        &\le \|G'(a)\|\,\|r_F(u)\|_Y \to 0, \\
+        \frac{|\langle r_F(u),r_G(u)\rangle|}{\|u\|_X}
+        &=
+        \left(\frac{\|r_F(u)\|_Y}{\|u\|_X}\right)\|r_G(u)\|_Y \to 0.
+    \end{align*}
+    Therefore
+    \[
+        \frac{|h(a+u)-h(a)-L(u)|}{\|u\|_X} \to 0
+        \qquad\text{as } u\to 0.
+    \]
+    So $h$ is differentiable at $a$, with derivative
+    \[
+        h'(a)(u)=\langle F'(a)u,G(a)\rangle+\langle F(a),
+        G'(a)u\rangle.
+    \]
+
+    In abbreviated notation, this is often written as
+    \[
+        h'(a)=\langle F'(a),G(a)\rangle+\langle F(a),G'(a)\rangle.
+    \]
+\end{proof}
+\begin{prob}[Problem 6.1.10 Spaces]
+    Let $X$ be a normed space and assume that the function 
+    $F : X \to \mathbb R$ has its maximal value at a point 
+    $a \in X$ where $F$ is differentiable. Show that 
+    $F'(a) = 0$.
+\end{prob}
+\begin{proof}
+    Since $F$ has a maximal value at $a$, we have
+    \[
+        F(x) \leq F(a)
+    \]
+    for all $x \in X$.
+
+    We want to show that $F'(a)=0$. Since $F'(a)$ is a bounded linear
+    functional on $X$, it suffices to show that
+    \[
+        F'(a)(h)=0
+    \]
+    for every $h \in X$.
+
+    Let $h \in X$ be arbitrary, and define a function
+    \[
+        \varphi : \mathbb R \to \mathbb R, \qquad \varphi(t)=F(a+th).
+    \]
+    Since $F$ has a maximum at $a$, the function $\varphi$ has a maximum
+    at $t=0$, because for every $t \in \mathbb R$,
+    \[
+        \varphi(t)=F(a+th)\leq F(a)=\varphi(0).
+    \]
+
+    Since $F$ is differentiable at $a$, $\varphi$ is differentiable at
+    $0$, and
+    \[
+        \varphi'(0)=F'(a)(h).
+    \]
+    On the other hand, because $\varphi$ has a maximum at $0$, the usual
+    one-variable result gives
+    \[
+        \varphi'(0)=0.
+    \]
+    Hence
+    \[
+        F'(a)(h)=0.
+    \]
+
+    Since $h \in X$ was arbitrary, it follows that
+    \[
+        F'(a)(h)=0 \qquad \text{for all } h \in X.
+    \]
+    Therefore $F'(a)$ is the zero functional, i.e.
+    \[
+        F'(a)=0.
+    \]
+\end{proof}
+
+\newpage 
+\subsection{Useful properties and rules}
+
+\begin{prop}
+    If $F$ is Frechet differentiable at $\overline x$, then 
+    it is continuous at $\overline x$. In particular 
+    \[
+        \lim_{x\to\overline x}\sup \frac{\|F(x) - 
+        F(\overline x)\|_Y}{\|x-\overline x\|_X} \leq 
+        \|F'(\overline x)\|_{\mathcal L}.
+    \]
+\end{prop}
+
+\begin{prop}
+    The following hold for normed spaces $X,Y$.
+
+    \begin{enumerate}
+        \item If $F \in \mathcal L(X,Y)$, then 
+        $F'(x) = F(x)$ for all $x \in X$, 
+        \item If $F : X \to Y$ is constant then 
+            $F'(x) = 0$ at all $x \in X$.
+    \end{enumerate}
+\end{prop}
+\begin{prop}
+    The following hold for $F,G : X \to Y$ where $X,Y$ are 
+    normed spaces.
+
+    \begin{enumerate}
+        \item $(F+G)'(x) = F'(x) + G'(x)$, 
+        \item $(FG)'(x) = F'(x)G(x) + F(x)G'(x)$.
+    \end{enumerate}
+\end{prop}
+
+\begin{prop}
+    For normed spaces $X,Y,Z$ and $x \in X$ let $F : X \to Y$
+    be differentiable at $x$ and let $G : Y \to Z$ be 
+    differentiable at $F(x)$.
+
+    Then $G \circ F$ is differentiable at $x$ and 
+    \[
+        (G\circ F)'(x) = G(F(x)) \circ F'(x).
+    \]
+\end{prop}
+
 \end{document}
