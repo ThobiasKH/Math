@@ -3863,5 +3863,141 @@ As we have seen earlier,
     is indeed simple.
 \end{proof}
 
+\section{Some problems from Section 33}
+\begin{prob}[Problem 33.4 Fraleigh's]
+    Find the number of primitive $8$th roots of unity 
+    in $GF(9)$ (also known as $\mathbb F_9$).
+\end{prob}
+\begin{proof}
+    The multiplicative group 
+    $\mathbb F^x_9$ has order $8$ since $0$ is excluded.
+    The multiplicative group of a finite field is 
+    cyclic so 
+    \[
+        \mathbb F_9^x \cong \mathcal C_8
+    \]
+    The $8$th roots of unity are the elements $x \in \mathcal C_8$
+    for which 
+    \[
+        x^8 = 1
+    \]
+    Since the whole group has order $8$, every nonzero element 
+    satisfies this. A primitive $8$th root of unity 
+    has order exactly $8$ and the Euler totient function 
+    gives 
+    \[
+        \phi(8) = 4
+    \]
+\end{proof}
+\begin{prob}[Problem 33.9 Fraleigh's p.305]
+    Let $\overline{\mathbb Z}_2$ be the algebraic closure 
+    of $\mathbb Z_2$, and let 
+    $\alpha,\beta \in \overline{\mathbb Z}_2$ be zeros 
+    of $x^3 + x^2 + 1$ and of $x^3 + x + 1$, respectively.
+    Using the results of this section, show that 
+    $\mathbb Z_2(\alpha) = \mathbb Z_2(\beta)$.
+\end{prob}
+\begin{proof}
+    We begin by showing that the polynomials 
+    $f(x) = x^3 + x^2 + 1$ and $g(x) = x^3 + x + 1$ are 
+    irreducible over $\mathbb Z_2$.
+    These are degree $3$ polynomials and $\mathbb Z_2$ is a field 
+    so they are irreducible if and only if 
+    they have no zeros in $\mathbb Z_2$.
+    \[
+        f(0) = 1 \ \text{and} \ f(1) = 1,
+    \]
+    and 
+    \[
+        g(0) = 1 \ \text{and} \ g(1) = 1.
+    \]
+    Thus $f,g$ are irreducible over $\mathbb Z_2$. 
+    Hence 
+    \[
+        [\mathbb Z_2(\alpha) : \mathbb Z_2] 
+        = 
+        [\mathbb Z_2(\beta) : \mathbb Z_2] 
+        = 3
+    \]
+    So both $\mathbb Z_2(\alpha)$ and $\mathbb Z_2(\beta)$ 
+    are field with degree $2^3$. Since $2$ is prime we can 
+    use the finite-field theorem and conclude that 
+    these two fields are isomorphic. Furthermore 
+    in an algebraic closure of some field $\mathbb F_p$, there 
+    is exactly one subfield with $p^n$ elements, namely 
+    the set of roots of 
+    \[
+        x^{p^n} - x.
+    \]
+    Thus 
+    \[
+        \mathbb Z_2(\alpha) = \mathbb Z_2(\beta).
+    \]
+\end{proof}
+
+\begin{prob}[Problem 33.10 Fraleigh's p.305]
+    Show that every irreducible polynomial in 
+    $\mathbb Z_p[x]$ is a dvisor of 
+    $x^{p^n} - x$ for some $n$.
+\end{prob}
+\begin{proof}
+    Let $\alpha \in \overline{\mathbb Z}_p$ be the root of 
+    some $f(x) \in \mathbb Z_p$, irreducible. 
+    Then 
+    \[
+        [\mathbb Z_p(\alpha) : \mathbb Z_p] = \deg f
+    \]
+    So $\mathbb Z_p(\alpha)$ is a finite field with 
+    $p^m$ elements.
+    If a field has $p^m$ elements then 
+    $a^{p^m} = a$ for all $a$ in said field.
+    Equivalently every elements is a root of 
+    \[
+        x^{p^m} - x.
+    \]
+    Then 
+    \[
+        \alpha^{p^m} - \alpha = 0.
+    \]
+    If a polynomial $g$ is the minimal polynomial of $\alpha$ 
+    over $\mathbb Z_p$, and $\alpha$ is also a root of another 
+    polynomial $f$ then 
+    \[
+        g \bigm| f
+    \]
+\end{proof}
+\begin{prob}[Problem 3a Exam 2016]
+    What is an integral domain? Show that 
+    $\mathbb Z[x]/(x^2 + 1)$ is an integral domain. 
+    Is $\mathbb Z[x]/(x^2 - 1)$ an integral domain?
+    Give reasons for your answer.
+\end{prob}
+\begin{proof}[Solution and Proof]
+    An integral domain is a non-zero ring with multiplicative 
+    identity ($1 \neq 0$) that has no zero divisors.
+
+    For $f(x) \in F[x]$, $F[x]/\langle f(x) \rangle$ is 
+    an integral domain iff $f(x)$ is irreducible in 
+    $F[x]$.
+    Since $x^2 + 1$ is a degree $2$ polynomial it is 
+    irreducible if and only if it has no zeros in 
+    $\mathbb Z$. $f(x) = x^2 + 1$ is famously a motivating example 
+    for complex numbers with zeros $\pm i \in \mathbb C$. 
+    A quick sanity check gives $f(0) = 1$, $f(\pm 1) = 2$ 
+    and generally $f(n) = f(-n) < f(n + 1) = f(-(n + 1))$ so 
+    it ceirtainly does not have any zeros in $\mathbb Z$ (can 
+    be proven with induction or standard techniques if necessary).
+    Thus $f$ is irreducible and so $\mathbb Z[x]/\langle f(x) 
+    \rangle$ is an integral domain.
+
+    Using this same procedure we see that 
+    $x^2 - 1$ has zeros $\pm 1 \in \mathbb Z$ and is therefore 
+    not irreducible so 
+    \[
+        \mathbb Z[x]/\langle x^2 - 1 \rangle
+    \]
+    is not an integral domain.
+\end{proof}
+
 
 \end{document}
