@@ -4809,4 +4809,42 @@ of $h$.
     \]
 \end{prop}
 
+\newpage 
+\section{Gateaux Derivative}
+\begin{defn}
+    Let $F : O \to Y$ ($O \subseteq X$ open) be a function 
+    and $x \in O$. The Gateaux Derivative (or directional derivative)
+    of $F$ at $x$ in some direction $r \in X$ is 
+    \[
+        F'(x;r)=\lim_{t \to 0, t \in \mathbb R} 
+        \frac{F(x+tr) - F(x)}{t}
+    \]
+\end{defn}
+Recall that partial derivatives of $F : \mathbb R^m \to \mathbb R^n$
+are 
+\[
+    \frac{\partial}{\partial x^j}F(x) = 
+    \lim_{t\to 0}\frac{F(x + te_j)-F(x)}{t} = F'(x;e_j)
+\]
+where $e_j = (0,\ldots, 1, \ldots, 0)$ ($j$-th position is $1$).
+
+\begin{prop}
+    If $F$ is Frechet differentiable at $x$, then 
+    \[
+        F'(x;r) = F'(x)(r)
+    \]
+    for all $r \in X$.
+\end{prop}
+The opposite implication is not necessarily true.
+
+\begin{prop}
+    Let $O \subseteq \mathbb R^m$ be open, 
+    let $x \in O$ and assume $F : O \to \mathbb R^n$ is 
+    such that all partial derivatives 
+    $\frac{\partial}{\partial x^j}F(x)$ ($j = 1,2,\ldots,m$)
+    exists for all $y \in O$ and are continuous at 
+    $y = x$. Then $F$ is frechet differentiable at 
+    $x$.
+\end{prop}
+
 \end{document}
