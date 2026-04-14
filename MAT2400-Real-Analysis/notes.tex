@@ -5135,4 +5135,96 @@ The opposite implication is not necessarily true.
     Since \(y \in X\) was arbitrary, \(F\) is differentiable on all of \(X\).
 \end{proof}
 
+\begin{prob}[Problem 6.2.7 Spaces p.186]
+    In this problem, $X = Y = C([0,1], \mathbb R)$ with 
+    the usual supremum norm, $\|y\| = \sup_{t\in[0,1]}|y(t)|$. 
+    Assume that $f : \mathbb R \to \mathbb R$ is a function 
+    whose derivative $f'$ is continuous and define 
+    $F : X \to Y$ by
+    \[
+        F(y)(x) = \displaystyle\int_{0}^{x}f(y(s)) \; ds
+    \]
+
+    a) Fine an expression for the directional derivative $F'(y;r)(x)$.
+    You need not give a formal proof - a heuristic derivation 
+    suffices. 
+
+    b) Prove that $F$ is differentiable, and find an 
+    expression for the derivative. This time a formal proof 
+    is required.
+\end{prob}
+\begin{proof}[Partial solution]
+    \textbf{a)} We compute (with some ``cheating''):
+    \begin{align*}
+        F'(a; r)(x)
+&= \lim_{t \to 0} \int_0^x \frac{f(a(s) + t r(s)) - f(a(s))}{t} 
+\, ds \\[6pt]
+&= \lim_{t \to 0} \int_0^x 
+\frac{f(a(s) + t r(s)) - f(a(s))}{t r(s)} \, r(s)\, ds \\[6pt]
+&= \int_0^x \lim_{t \to 0} 
+\frac{f(a(s) + t r(s)) - f(a(s))}{t r(s)} \, r(s)\, ds \\[6pt]
+&= \int_0^x f'(a(s))\, r(s)\, ds.
+    \end{align*}
+
+    The ``cheating'' occurs when we move the limit inside the 
+    integral. This is not always justified.
+    The interchange of limit and integral requires justification 
+    (e.g.\ dominated convergence).
+
+    \medskip
+    \noindent
+    \textbf{b)} Now, do the same thing as in step 2 in the 
+    previous exercise.
+\end{proof}
+
+\begin{prob}[Problem 2 Exam 2022]
+    The map $F : C([0,1], \mathbb R) \to \mathbb R$ is given by 
+    $F(x) = x(0)x(1)$. 
+
+    (a) Find the directional derivative $F'(x;r)$. 
+
+    (b) Show that $F$ is differentiable and find the derivative 
+    $F'(x)(r)$.
+\end{prob}
+\begin{proof}[Solution of (a)]
+    We compute the directional derivative from the definition:
+    \[
+        F'(x;r)=\lim_{t\to 0}\frac{F(x+tr)-F(x)}{t}.
+    \]
+    Since
+    \[
+        F(x+tr)=(x(0)+tr(0))(x(1)+tr(1)),
+    \]
+    we get
+    \begin{align*}
+        \frac{F(x+tr)-F(x)}{t}
+&= \frac{(x(0)+tr(0))(x(1)+tr(1)) - x(0)x(1)}{t} \\
+&= \frac{x(0)x(1)+t x(0)r(1)+t x(1)r(0)+t^2 r(0)r(1)-x(0)x(1)}{t} \\
+&= x(0)r(1)+x(1)r(0)+t r(0)r(1).
+    \end{align*}
+    Hence
+    \[
+        F'(x;r)=x(0)r(1)+x(1)r(0).
+    \]
+\end{proof}
+\begin{proof}[Proof of (b)]
+    The derivative should be the linear map 
+    \[
+        F'(x)(r) = x(0)r(1) + x(1)r(0).
+    \]
+    Then 
+    \[
+        F(x+r) - F(x) - F'(x)(r) = r(0)r(1).
+    \]
+    Using the sup-norm we get 
+    \[
+        |r(0)r(1)| \leq \|r\|_\infty^2.
+    \]
+    So the limit converges to 
+    \[
+        \|r\|_\infty \to 0.
+    \]
+    So $F$ is differentiable.
+\end{proof}
+
 \end{document}
