@@ -5226,5 +5226,77 @@ The opposite implication is not necessarily true.
     \]
     So $F$ is differentiable.
 \end{proof}
+\begin{prob}[Problem 1 Exam 2022kont]
+    The map $F : C([0,1], \mathbb R) \to \mathbb R$ is given by 
+    \[
+        F(x) = \int_0^1 e^{-s}x(s)^2 \; ds.
+    \]
+
+    a) Find the directional derivative $F'(x;r)$. 
+
+    b) Show that $F$ is differentiable and find $F'(x)(r)$.
+\end{prob}
+\begin{proof}[Solution of (a)]
+    Fix $x, r \in C([0,1], \mathbb R)$. The directional derivative is
+    \[
+        F'(x;r) = \lim_{t \to 0} \frac{F(x+tr) - F(x)}{t}.
+    \]
+    We compute
+    \begin{align*}
+        F(x+tr)
+        &= \int_0^1 e^{-s}(x(s) + t r(s))^2 \, ds \\
+        &= \int_0^1 e^{-s}\big(x(s)^2 + 2t x(s)r(s) + t^2 r(s)^2\big)\, ds.
+    \end{align*}
+    Hence
+    \begin{align*}
+        \frac{F(x+tr) - F(x)}{t}
+        &= \frac{1}{t} \int_0^1 e^{-s}\big(2t x(s)r(s) + t^2 r(s)^2\big)\, ds \\
+        &= \int_0^1 e^{-s}\big(2x(s)r(s) + t r(s)^2\big)\, ds.
+    \end{align*}
+    Letting $t \to 0$, we obtain
+    \[
+        F'(x;r) = \int_0^1 2e^{-s}x(s)r(s)\, ds.
+    \]
+\end{proof}
+
+\begin{proof}[Solution of (b)]
+    Define $A : C([0,1], \mathbb R) \to \mathbb R$ by
+    \[
+        A(r) = \int_0^1 2e^{-s}x(s)r(s)\, ds.
+    \]
+    This map is linear. Moreover,
+    \begin{align*}
+        |A(r)|
+        &= \left|\int_0^1 2e^{-s}x(s)r(s)\, ds\right| \\
+        &\le \int_0^1 2e^{-s}|x(s)||r(s)|\, ds \\
+        &\le 2 \|x\| \|r\| \int_0^1 e^{-s}\, ds,
+    \end{align*}
+    so $A$ is bounded.
+
+    We now check differentiability. We have
+    \begin{align*}
+        F(x+r)
+        &= \int_0^1 e^{-s}(x(s)+r(s))^2\, ds \\
+        &= \int_0^1 e^{-s}\big(x(s)^2 + 2x(s)r(s) + r(s)^2\big)\, ds.
+    \end{align*}
+    Hence
+    \begin{align*}
+        F(x+r) - F(x) - A(r)
+        &= \int_0^1 e^{-s}r(s)^2\, ds.
+    \end{align*}
+    Therefore
+    \begin{align*}
+        |F(x+r) - F(x) - A(r)|
+        &\le \int_0^1 e^{-s}|r(s)|^2\, ds \\
+        &\le \|r\|^2 \int_0^1 e^{-s}\, ds.
+    \end{align*}
+    Dividing by $\|r\|$, we get
+    \[
+        \frac{|F(x+r) - F(x) - A(r)|}{\|r\|}
+        \le \|r\| \int_0^1 e^{-s}\, ds \to 0
+        \quad \text{as } \|r\| \to 0.
+    \]
+    Thus $F$ is differentiable and $F'(x) = A$.
+\end{proof}
 
 \end{document}
