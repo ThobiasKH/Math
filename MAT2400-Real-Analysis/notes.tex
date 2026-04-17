@@ -5299,4 +5299,68 @@ The opposite implication is not necessarily true.
     Thus $F$ is differentiable and $F'(x) = A$.
 \end{proof}
 
+\begin{prob}[Exam problem 2 Exam 2023kont]
+    Let $X$ be a metric space equipped with a metric $d$. 
+    Let $\alpha \in \mathbb R$ be such that $0 < \alpha < 1$. 
+    Define a function $\rho : X\times X \to \mathbb R_+$ by, for all 
+    $x,y \in X$: 
+    \[
+        \rho(x,y) = (d(x,y))^\alpha.
+    \]
+
+    a) 
+
+    Check that for any $a,b \in \mathbb R$ such that 
+    $a,b \geq 0$ and $a+b > 0$, we have 
+    \[
+        1 \leq \left(\frac{a}{a+b}\right)^\alpha 
+        + \left(\frac{b}{a+b}\right)^\alpha.
+    \]
+
+    Show that $\rho$ is a metric on $X$.
+
+    b) 
+
+    Let $\operatorname{id}_X : X \to X$ be the identity 
+    map. Show that $\operatorname{id}_X$ is continuous from 
+    $(X,d)$ to $(X,\rho)$ and from $(X,\rho)$ to $(X,d)$.
+\end{prob}
+\begin{proof}[Proof of (a)]
+    \begin{align*}
+        \left(\frac{a}{a+b}\right)^\alpha 
+        + \left(\frac{b}{a+b}\right)^\alpha 
+        &= 
+        \left(\frac{a^\alpha}{(a+b)^\alpha}\right) 
+        + \left(\frac{b^\alpha}{(a+b)^\alpha}\right)
+        \\ 
+        &= \frac{a^\alpha + b^\alpha}{(a+b)^\alpha}
+    \end{align*}
+    For $\alpha \in (0,1)$ the quantity at the top is 
+    larger than or equal to the one of the bottom, with 
+    equality in the case where $a = 0$ or $b = 0$.
+    Therefore the fraction evaluates to $\geq 1$.
+
+    A similar argument is needed to show that the triangle 
+    inequality holds. The rest of the properties follow trivially 
+    from $d$.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Fix any $x,y \in X$.
+    Let $\varepsilon > 0$ and suppose $d(x,y) < \delta :=  
+    \varepsilon^{1/\alpha} $.
+    Then 
+    \[
+        \rho(x,y) = (d(x,y))^\alpha < 
+        (\varepsilon^{1/\alpha})^\alpha = \varepsilon.
+    \]
+
+    Now let $\varepsilon > 0$ and suppose 
+    $\rho(x,y) = (d(x,y))^\alpha < \delta := \varepsilon^{\alpha}$. 
+    Then 
+    \[
+        d(x,y) = (\rho(x,y))^{1/\alpha} < 
+        \varepsilon.
+    \]
+\end{proof}
+
 \end{document}

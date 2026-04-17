@@ -3999,5 +3999,141 @@ As we have seen earlier,
     is not an integral domain.
 \end{proof}
 
+\newpage 
+\section{Automorphisms of Field Extensions \& 
+Isomorphism Extension}
+\begin{defn}[Field Automorphism]
+    A \textbf{field automorphism} of $E$ is a bijection 
+    \[
+        \sigma : E \to E
+    \]
+    such that $\forall x,y \in E$: 
+    \begin{enumerate}
+        \item $\sigma (x+y) = \sigma(x) + \sigma(y)$ 
+        \item $\sigma(xy) = \sigma(x)\sigma(y)$
+        \item $\sigma(1) = 1$
+    \end{enumerate}
+\end{defn}
+If $F \subseteq E$ is a field extension we write 
+\[
+    \operatorname{Aut}(E/F) := 
+    \{\sigma : E \to E \bigm| \sigma 
+    \ \text{is a field automorphism and} \ 
+    \sigma|_F = \operatorname{id}_F\}.
+\]
+
+\begin{prop}
+    A field automorphism $\sigma$ preserves algebraic 
+    structure: 
+    \begin{enumerate}
+        \item $\sigma(0) = 0$ 
+        \item $\sigma(-x) = -\sigma(x)$ 
+        \item $\sigma(x^{-1}) = \sigma(x)^{-1}$ for 
+            $x \neq 0$
+    \end{enumerate}
+\end{prop}
+\begin{proof}[Proof Sketch]
+    Straightforward from homomorphism 
+    properties. For instance: 
+    \[
+        1 = \sigma(1) = \sigma(xx^{-1}) 
+        = \sigma(x)\sigma(x^{-1})
+    \]
+    and so on.
+\end{proof}
+
+\begin{prop}
+    $\operatorname{Aut}(E/F)$ is a group under composition.
+\end{prop}
+
+\begin{thm}
+    Let $E/F$ be an extension, and let $\alpha \in E$ be 
+    algebraic over $F$. Let $m_\alpha(x) \in F[x]$ be a 
+    minimal polynomial. 
+
+    Then for any $\sigma \in \operatorname{Aut}(E/F)$, 
+    \[
+        m_\alpha(\sigma(\alpha)) = 0.
+    \]
+\end{thm}
+\begin{proof}
+    Write $m_\alpha(x) = \sum_{i=0}^{n}a_ix^i, \ a_i \in F 
+    \ (a_n = 1)$. 
+
+    Since $\sigma$ fixes $F$, we have $\sigma(a_i) = a_i$. 
+    Then:
+    \[
+        0 = \sigma(m_\alpha(\alpha)) 
+        = \sigma\left(\sum a_i\alpha^i\right) 
+        = \sum a_i\sigma(\alpha)^i = m_\alpha(\sigma(\alpha))
+    \]
+\end{proof}
+
+\begin{prop}
+    Let $E = F(\alpha)$, and let $\sigma \in \operatorname{Aut}(E/F)$.
+    Then $\sigma$ is completely determined by $\sigma(\alpha)$.
+\end{prop}
+
+\begin{thm}
+    Let $E = F(\alpha)$, where $\alpha$ is algebraic over 
+    $F$ with minimal polynomial $m_\alpha(x)$. 
+
+    Then 
+    \[
+        |\operatorname{Aut}(E/F)| \leq \deg m_\alpha.
+    \]
+\end{thm}
+\begin{defn}
+    A field embedding 
+    \[
+        \sigma : F \to E
+    \]
+    is an injective field homomorphism.
+\end{defn}
+
+\begin{thm}
+    Let $F \subseteq E = F(\alpha)$, $\sigma : F \to K$ be 
+    a field homomorphism, $m_\alpha(x)$ the minimal 
+    polynomial of $\alpha$.
+    Then there exists an extension 
+    \[
+        \widetilde\sigma : E \to K
+    \]
+    with $\widetilde\sigma(\alpha) = \beta$ if and only if 
+    $\beta$ is a root of $\sigma(m_\alpha)(x)$.
+\end{thm}
+
+\begin{thm}[Isomorphism Extension Theorem]
+    Let $\sigma : F \to K$ be a field isomorphism and 
+    $\alpha$ algebraic over $F$ with minimal polynomial 
+    $m_\alpha(x)$.
+
+    Let $\beta \in \overline K$ be a root of 
+    $\sigma(m_\alpha)(x)$. 
+
+    Then $\sigma$ is extends to an isomorphism 
+    \[
+        \widetilde \sigma : F(\alpha) \to K(\beta)
+    \]
+    with 
+    \[
+        \widetilde \sigma(\alpha) = \beta.
+    \]
+\end{thm}
+\begin{thm}[Automorphisms of Finite Fields]
+    Let $E = \mathbb F_{p^n}$. Then 
+    \[
+        \operatorname{Aut}(E/\mathbb F_p) = \langle 
+        \phi \rangle
+    \]
+    where 
+    \[
+        \phi(x) = x^p
+    \]
+    and 
+    \[
+        |\operatorname{Aut}(E/\mathbb F_p)| = n.
+    \]
+\end{thm}
 
 \end{document}
