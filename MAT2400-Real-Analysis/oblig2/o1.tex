@@ -1,0 +1,108 @@
+\input{preamble.tex}
+
+\title{\huge{Oblig 2}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+\begin{prob*}[1]
+    We will prove the following statement:
+
+    \[ 
+        \text{Every separable Hilbert space} \ H \ \text{has an 
+        orthonormal basis.}
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Let $D = \{u_1,u_2,\ldots\}$ be a dense subset 
+            of $H$ (why does such a set exist?). 
+            Show that there is a subset $D' \subseteq D$ with 
+            elements $D' = \{v_1,v_2,\ldots\}$, where 
+            $(v_1,v_2,\ldots)$ is linearly independent and 
+            $\operatorname{span}(v_1,v_2,\ldots)$ is dense in 
+            $H$.
+        \item Apply the Gram-Schmidt orthogonalization procedure 
+            to the list $(v_1,v_2,\ldots)$. Explain why the resulting 
+            list $(e_1,e_2,\ldots)$ is orthonormal and its span 
+            is dense in $H$.
+        \item Prove that $(e_1,e_2,\ldots)$ is an orthonormal 
+            basis for $H$.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    Trivially, every hilbert space $H$ is dense in itself since 
+    $\overline H = H$. In our case we are given the assumption 
+    that $H$ is separable, so it follows that there exists 
+    a countable dense $D \subseteq H$.
+
+    We will construct $D' \subseteq D$ with the desired properties. 
+    Let $v_1$ be the first element of $D$ which is non-zero. 
+    Suppose we have chosen $n$ elements $D_n' = \{v_1,\ldots,v_n\}$. 
+    Let $D_{n+1}' = D_n' \cup \{u_i \in D\setminus D_n'\}$ where 
+    $u_i$ is the first element of $D \setminus D_n'$ which is 
+    not in $\operatorname{span}(D_n')$. Let 
+    \[
+        D' := \bigcup_{n \in \mathbb N} D'_{n}.
+    \]
+    Then $D'$ is linearly independent by construction.
+
+    Now $D \subseteq \operatorname{span}(D')$ because if 
+    $u_i \not\in D'$ then 
+    $u_i \in \operatorname{span}(D'_n)$ for some $n$, so 
+    $u_i \in \operatorname{span}(D')$. If $u_i \in D'$ the inclusion 
+    is trivial. 
+    Now we see that 
+    \[
+        H = \overline D \subseteq \overline{\operatorname{span}(D')} 
+        \subseteq H,
+    \]
+    so $D'$ is dense in $H$.
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    Apply the Gram-Schmidt procedure to the linearly independent list
+    $(v_1,v_2,\ldots)$. Define
+    \[
+        w_1 = v_1, \qquad e_1 = \frac{w_1}{\|w_1\|},
+    \]
+    and recursively
+    \[
+        w_n = v_n - \sum_{k=1}^{n-1} \langle v_n,e_k\rangle e_k,
+        \qquad
+        e_n = \frac{w_n}{\|w_n\|}.
+    \]
+    Since $(v_1,v_2,\ldots)$ is linearly independent, we have
+    $w_n \neq 0$ for every $n$, so each $e_n$ is well-defined.
+
+    By the Gram-Schmidt construction, the vectors $e_1,e_2,\ldots$
+    are orthonormal. Moreover, for every $n$,
+    \[
+        \operatorname{span}(e_1,\ldots,e_n)
+        =
+        \operatorname{span}(v_1,\ldots,v_n).
+    \]
+    Hence
+    \[
+        \operatorname{span}(e_1,e_2,\ldots)
+        =
+        \operatorname{span}(v_1,v_2,\ldots).
+    \]
+    But by part (a), $\operatorname{span}(v_1,v_2,\ldots)$ is dense
+    in $H$. Therefore $\operatorname{span}(e_1,e_2,\ldots)$ is also
+    dense in $H$.
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    We proved orthonormality in (b), and furthermore we showed 
+    $H = \operatorname{span}(D')$ in (a). 
+    Since $\operatorname{span}(D') = 
+    \operatorname{span}(e_1,e_2\ldots)$
+    we conclude that $(e_1,e_2,\ldots)$.
+\end{proof}
+
+
+
+\end{document}
