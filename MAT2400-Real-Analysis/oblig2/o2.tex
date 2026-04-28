@@ -382,7 +382,47 @@
     \end{enumerate}
 \end{prob*}
 \begin{proof}[Proof of (a)]
-    proof
+    We have a list $E_1,E_2,\ldots \in \mathcal A$.
+
+    We notice that 
+    \[
+        \bigcap_{n=1}^\infty 
+        \underbrace{\bigcup_{k=n}^\infty E_k}_{\text{meassurable}}, 
+    \]
+    since that part is a countably infinite union of meassurable 
+    sets. Taking the countable union of meassurable sets 
+    is meassurable, hence 
+    \[
+        \underset{n\to\infty}{\lim\sup}E_n
+    \]
+    is meassurable.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Let $x \in \underset{n\to\infty}{\lim\sup}E_n$.
+    Then $\forall n \in \mathbb N$, $x \in \cup_{k=n}^\infty E_k$, 
+    meaning $\forall n \in \mathbb N, \ \exists k \geq n$ such 
+    that $x \in E_k$. Therefore $x$ lies in infinitely many 
+    $E_k$. 
+
+    Conversely, if $x$ lies in infinitely many $E_k$, then for 
+    every $n$ there is some $k \geq n$ with $x \in E_k$, so 
+    $x \in \cup_{k=n}^\infty E_k$ for every $n$. 
+    Hence $x \in \underset{n\to\infty}{\lim\sup}E_n$.
+\end{proof}
+\begin{proof}[Proof of (c)]
+    $\mu(E_k) \geq 0$ so since the sum of all $\mu(E_k)$ is finite 
+    we conclude that 
+    \[
+        \sum_{k=n}^\infty \mu(E_k) \to 0.
+    \]
+    Then 
+    \[
+        \mu(\underset{n\to\infty}{\lim\sup}E_n) 
+        \leq 
+        \mu \left( \bigcup_{k=n}^\infty E_k \right)
+        \leq 
+        \sum_{k=n}^\infty \mu(E_k) \to 0.
+    \]
 \end{proof}
 
 
