@@ -5363,4 +5363,147 @@ The opposite implication is not necessarily true.
     \]
 \end{proof}
 
+\newpage 
+\section{Exam Practice}
+
+\begin{prob}[1 Exam 2021]
+    Let $(X,d)$ be the metric space $X = (0,1]$, $d(x,y) = |x-y|$, 
+    and let $T : X \to X$ be given by $Tx = x/2$.
+
+    Show that $T$ is a contraction. Does $T$ have a fixed point? 
+    Justify your answer.
+\end{prob}
+\begin{proof}
+    Let $x,y \in X$. Then 
+    \[ 
+        d(Tx,Ty) = d(x/2, y/2) = \frac{1}{2}d(x,y)
+    \]
+    so $T$ is a contraction mapping with $0 < c = 1/2 < 1$.
+
+    $T$ does not have a fixed point. Banach's fixed point theorem 
+    does not apply because $(0,1]$ is not complete and we can 
+    see that the fixed point of $T$ ought to be $0 \not\in X$ since 
+    \[
+        Tx = x \Rightarrow \frac{1}{2}x = x
+    \]
+    so $x = 0$.
+\end{proof}
+
+\begin{prob}[2 Exam 2021]
+    Let $(X,d)$ be a metric space and let $A \subseteq \mathbb R$
+    be closed. 
+    We define the metric space $C_b(X, A) = \{\text{all continuous,
+    bounded}\ f : X \to A\}$, equipped with the supremum metric 
+    \[
+        \rho(f,g) = \sup_{x\in X}|f(x) - g(x)|.
+    \]
+    Show that $C_b(X,A)$ is a closed subspace of $C_b(X,\mathbb R)$.
+\end{prob}
+\begin{proof}
+    $C_b(X,A) \subseteq C_b(X,\mathbb R)$ is trivial, so it 
+    remains to show that it is closed.
+    Let $\{f_n\}_{n\in\mathbb N}$ be a convergent sequence of 
+    functions 
+    in $C_b(X,A)$.
+    Fix $x \in X$. Then $\{f_n(x)\}_{n\in\mathbb N}$ defines a 
+    sequence in $A$. Then 
+    $f_n(x)$ converges to some $y \in A$, since $A$ is closed, 
+    and $f_n$ is continuous. So 
+    $f_n(x) \underset{n\to\infty}{\to} y \in A$, but 
+    by assumption $f_n \underset{n\to\infty}{\to} f \in 
+    C_b(X,\mathbb R)$. Then by sequential continuity and 
+    uniqueness of the limit
+    $f(x) = y \in A$. Since $x$ was chosen arbitrarly, 
+    $f(x)$ is in $A$ for any $x \in X$. Thus 
+    $f_n(x) - f(x) \to 0$ for any $x \in X$. Hence 
+    \[
+        \rho(f_n,f) = \sup_{x\in X}|f_n(x) - f(x)| \to 0,
+    \]
+    so $f_n \to f$ uniformly.
+\end{proof}
+
+\begin{prob}[4 Exam 2021]
+    Recall that a bounded linear operator $A$ is invertible if it 
+    is bijective and $A^{-1}$ is bounded.
+
+    Let $(X,\|\cdot\|)$ be a normed vector space and let 
+    $A : X \to X$ be an invertible linear operator. Define 
+    $\|x\|_A = \|Ax\|$ for every $x \in A$.
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $\|\cdot\|_A$ is a norm on $X$.
+        \item Show that a sequence $\{x_n\}_n$ in $X$ converges 
+            w.r.t $\|\cdot\|$ iff it converges w.r.t 
+            $\|\cdot\|_A$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    $\|x\|_A$ is non-negative since $\|Ax\| \geq 0$. 
+    Suppose $\|x\|_A = 0$. Then $\|Ax\| = 0$ so 
+    $Ax = 0$. Then, since $A$ is not the $0$-operator, 
+    $x = 0$. The converse is trivial.
+
+    Now let $\alpha$ be in the ground field. 
+    \[
+        \|\alpha x\|_A = \|A(\alpha x)\| = \|\alpha A x\| 
+        = \alpha \|Ax\| = \alpha \|x\|_A
+    \]
+
+    Lastly we check the triangleinequality holds 
+    \begin{align*}
+        \|x+y\|_A &= \|A(x+y)\| \\ 
+                  &= \|Ax + Ay\| \\ 
+                  &\leq \|Ax\| + \|Ay\| \\ 
+                  &= \|x\|_A + \|y\|_A
+    \end{align*}
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Suppose $\{x_n\}_n$ is a sequence in $X$.
+
+    Assume first that $\{x_n\}_n \underset{n\to\infty}{\to} x$ 
+    w.r.t $\|\cdot\|$.
+    Then $\forall \varepsilon > 0$ there is $N \in \mathbb N$ so that,
+    for $n \geq N$, we have 
+    \[
+        \|x_n - x\| < \varepsilon
+    \]
+    Recall that for bounded linear operator $A$ we have 
+    \[
+        \|A\|_{\mathcal L} := \sup_{x \neq 0} \frac{\|Ax\|}{\|x\|},
+    \]
+    so $\|x\|_A = \|Ax\| \leq \|A\|_{\mathcal L}\|x\|$.
+
+    Pick $N$ large enough so that 
+    \[
+        \|x_n - x\| < \varepsilon/\|A\|_{\mathcal L}.
+    \]
+    Then  
+    \[
+        \|x_n - x\|_A \leq 
+        \|x_n - x\| \cdot \|A\|_{\mathcal L} < \varepsilon.
+    \]
+
+    Now assume $\{x_n\}_n$ converges to $x$ w.r.t $\|x\|_A$,
+    i.e. $\forall \varepsilon > 0$ there exists 
+    $N$ large enough so that 
+    \[
+        \|x_n - x\|_A = \|A(x_n - x)\| < \varepsilon. 
+    \]
+    We will now use the fact that 
+    $x = AA^{-1}x = A^{-1}Ax$, so 
+    \[
+        \|x\| = \|A^{-1}Ax\| \leq 
+        \|A^{-1}\|_{\mathcal L}\|x\|_A.
+    \]
+    Pick $N$ large enough so that 
+    \[
+        \|x_n - x\|_A < \varepsilon/\|A^{-1}\|_{\mathcal L}. 
+    \]
+    Then 
+    \[
+        \|x_n - x\| \leq \|A^{-1}\|_{\mathcal L} \|x_n-x\|_A < 
+        \varepsilon.
+    \]
+\end{proof}
+
 \end{document}
