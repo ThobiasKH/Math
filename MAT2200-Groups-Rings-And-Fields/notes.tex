@@ -4318,6 +4318,14 @@ There will also probably be a lot of problems repeated.
             \]
             is a field.
             How many elements does it contain?
+        \item Find a polynomial $p(x) \in \mathbb Z_2[x]$ such that 
+            $\deg(p) \leq 2$ and 
+            \[
+                x^5 + \langle x^3 + x + 1 \rangle
+                = 
+                p(x) + \langle x^3 + x + 1\rangle
+            \]
+        in $\frac{\mathbb Z_2[x]}{\langle x^3 + x + 1 \rangle}$.
     \end{enumerate}
 \end{prob}
 \begin{proof}
@@ -4344,5 +4352,14 @@ There will also probably be a lot of problems repeated.
     $\mathbb Z_2$. Thus the quotient is a field.
     There are $2^3 = 8$ elements.
 \end{proof}
+\begin{proof}[Solution of (c)]
+    Since $x^3 + x + 1 = 0$ we have $x^3 = x + 1$. 
+    Then $x^5 = x^2x^3 = x^2(x+1) = x^3 + x^2$. 
+    Using the relation again we get 
+    $x^5 = x^2 + x + 1$. So let $p(x) := x^2 + x + 1$. Then 
+    $x^5 \langle x^3 + x + 1\rangle = p(x) + \langle x^3 + x 
+    + 1\rangle$.
+\end{proof}
+
 
 \end{document}
