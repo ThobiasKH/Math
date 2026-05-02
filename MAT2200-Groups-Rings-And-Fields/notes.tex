@@ -4361,5 +4361,159 @@ There will also probably be a lot of problems repeated.
     + 1\rangle$.
 \end{proof}
 
+\begin{prob}[1 Exam 2022, (Group Theory)]
+    \medskip 
+    \noindent
+    \begin{enumerate}
+        \item Let $G$ be a group of order $200$.  
+            What are the sizes of Sylow $p$-subgroups of $G$? 
+        \item Let $G = \mathbb Z_{12} \times \mathbb Z_8$. Find 
+            the order of the element $(4,2) \in G$. 
+            Determine the quotient group $G / \langle (4,2)\rangle$
+            up to isomorphism.
+        \item Let $p$ be a prime number. Suppose $G$ is a group 
+            of order $p^n$ acting on a set $X$ such that 
+            $p$ does not divide $|X|$. Show that the 
+            action of $G$ must have a fixed point, i.e. 
+            there exists an $x \in X$ such that $|\mathcal O| = 1$. 
+    \end{enumerate}
+
+    Note: Problem $1$ is not relevant to the current curriculum.
+\end{prob}
+\begin{proof}[Solution of (2)]
+    $4$ has order $3$ in $\mathbb Z_{12}$ and $2$ has order 
+    $4$ in $\mathbb Z_8$ so the order of $(4,2)$ in $\mathbb Z_{12} 
+    \times \mathbb Z_8$ is $\operatorname{lcm}(3,4) = 12$.
+
+    Thus there are $12$ elements in $\langle (4,2) \rangle$ which 
+    we will use to characterize the quotient group.
+
+    $G$ has $12 \cdot 8 = 96$ elements which by Lagrange's theorem 
+    gives $96/12 = 8$ elements in the quotient group.
+    Now since the quotient group is a finite abelian group 
+    it must be isomorphic to $\mathbb Z_8$ or $\mathbb Z_2 \times 
+    \mathbb Z_2$ or $\mathbb Z_2 \times \mathbb Z_2 \times 
+    \mathbb Z_2$.
+
+    We see quickly that $(0,1)$ has order $4$ in the quotient 
+    so it can't be $\mathbb Z_2^3$. Furthermore $4(a,b) \equiv (a,b)$
+    when taken mod $8$ so the maximum order of any element is 
+    $4$ so we conclude that the quotient is (up to isomorphism) 
+    \[
+        \mathbb Z_4 \times \mathbb Z_2.
+    \]
+\end{proof}
+\begin{proof}[Proof of (3)]
+    We particion $X$ into disjoint orbits 
+    $\mathcal O_1,\ldots, \mathcal O_j$. Assume, for contradiction,
+    that $|\mathcal O_x| > 1$ for all $x \in X$.
+    Since $|\mathcal O_x| = [G:G_x] = |G|/|G_x|$ we have that 
+    $|\mathcal O_x| = p^{n_x}$ for some $n_x > 0$. Then 
+    since 
+    \[
+        |X| = \sum_{i=1}^s |O_i|,
+    \]
+    we have that 
+    \[
+        |X| = \sum_{i=1}^s p^{n_i}.
+    \]
+    Then since $p$ divides every term we have 
+    \[
+        p \bigm| |X|
+    \]
+    which contradicts our assumption that $p$ does not divide 
+    $|X|$.
+\end{proof}
+
+\begin{prob}[2 Exam 2022, Ring Theory]
+    \medskip 
+    \noindent 
+    \begin{enumerate}
+        \item Show that $\mathbb Z_{12}$ is not an integral domain. 
+        \item Let $p$ be prime and $n > 1$. Find a maximal ideal 
+            $M$ of $\mathbb Z_{p^n}$ and identify the 
+            quotient $\mathbb Z_{p^n} / M$. 
+        \item Show that if an ideal $I$ of the polynomial ring 
+            $\mathbb Q[x]$ contains both $f(x) = x^3 - x^2 + x$ 
+            and $g(x) = x^2 - 1$ then $I = \mathbb Q[x]$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution sketch of (1)]
+    $\mathbb Z_{12}$ contains zero-divisors 
+    $3 \cdot 4 = 12 \equiv_{12} 0$ and is therefore not an 
+    integral domain.
+\end{proof}
+\begin{proof}[Proof attempt of (2)]
+    We need to find an ideal $M$ so that 
+    if $M \subseteq K \subseteq \mathbb Z_{p^n}$ then 
+    $K = M$ or $K = \mathbb Z_{p^n}$.
+
+    Let $M := \langle p \rangle$. Then $M$ is a maximal ideal.  
+
+    $M$ absorbs any power of $p$ so $|\mathbb Z_{p^n}|/M| < p^n - 
+    n$. Etc.   
+\end{proof}
+\begin{proof}[Proof of (3)]
+    We notice that 
+    \[
+        \frac{x^3 - x^2 + x}{x^2 - 1} 
+        = x - 1 - \frac{1}{x^2 - 1} =: r(x).
+    \]
+    Something, something use addition and multiplication with 
+    these polynomials to get scalars, $x$ and such to be able 
+    to make all polynomials over $\mathbb Q$.
+\end{proof}
+\begin{prob}[3, Exam 2022 (Finite Fields)]
+    Consider $F = \mathbb Z_3$ and the irreducible polynomial 
+    $f(x) = x^3 + 2x + 2 \in F[x]$.
+    Let $E$ be $F[x]/\langle f(x) \rangle$.
+    \begin{enumerate}
+        \item What is the size of $E$?
+        \item Let $\alpha \in \overline F$ denote a zero of 
+            $f(x)$ so that $E \cong F(\alpha)$. Let 
+            \[
+                \sigma_3 : F(\alpha) \to F(\alpha)
+            \]
+            denote the Frobenius automorphism defined by 
+            $\sigma_3(a) = a^3$ for all $a \in F(\alpha)$.
+            Write $\sigma_3(\alpha)$ and $\sigma_3(\alpha)^2$ in the 
+            basis $\{1,\alpha,\alpha^2\}$ for $F(\alpha)$ over 
+            $F$.
+        \item Assume $g(x) = x^3 + 2x + 1 \in F[x]$ is irreducible 
+            over $F$ and let $\beta \in \overline F$ be a zero of 
+            $g(x)$.
+
+            Prove that $F(\alpha)$ and $F(\beta)$ are isomorphic 
+            without giving an isomorphism. However explain why 
+            the map $\psi_{\alpha,\beta} : F(\alpha) \to F(\beta)$
+            which fixes $F$ and sends $\alpha$ to $\beta$ cannot 
+            be made into a field isomorphism.
+    \end{enumerate}
+
+\end{prob}
+\begin{proof}[Solution of (1)]
+    $\deg f = 3$ so $|E| = 3^3 = 27$.
+\end{proof}
+\begin{proof}[Solution of (2)]  
+    $f(\alpha) = \alpha^3 - 2 \alpha + 2 = 0$ so 
+    $\alpha^3 = 2\alpha - 2 = \alpha + 1$.
+
+    Then 
+    \[
+        \sigma_3(\alpha) = \alpha^3 = \alpha + 1.
+    \]
+    Next 
+    \[
+        \sigma_3^2(\alpha) = (\alpha + 1)^3 = \alpha^3 + 1 
+        = \alpha + 2.
+    \]
+\end{proof}
+\begin{proof}[Proof of (3)]
+    Since both are fields of size $27 = 3^3$ they are isomorphic.  
+
+    The map $\alpha \to \beta$ cannot be a field isomorphism because 
+    their respective minimal polynomials do not coincide.
+\end{proof}
+
 
 \end{document}
