@@ -4515,5 +4515,76 @@ There will also probably be a lot of problems repeated.
     their respective minimal polynomials do not coincide.
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^4 - 2 \in \mathbb Q[x].
+    \]
+    Find 
+    \begin{enumerate}
+        \item the roots of $f$, 
+        \item the splitting field $K$, 
+        \item the degree $[K:\mathbb Q]$, 
+        \item what the automorphism in $\operatorname{Gal}(K/\mathbb 
+            Q)$ can do to $\sqrt[4]2$ and $i$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution]
+    \begin{align*}
+        f(x) &= (x^2 - \sqrt 2)(x^2 + \sqrt 2) \\ 
+             &= (x - \sqrt[4]2)(x + \sqrt[4]2)(x^2 + \sqrt 2)
+    \end{align*}
+    so we apply the quadratic formula to the latter term: 
+    \begin{align*}
+        x &= \frac{\pm \sqrt{-4\sqrt{2}}}{2} \\ 
+          &= \pm \sqrt{-\sqrt{2}} \\ 
+          &= \pm i \sqrt[4]{2}
+    \end{align*}
+    yielding 
+    \[
+        f(x) = (x + \sqrt[4]2)(x - \sqrt[4]2)(x + i\sqrt[4]2)
+        (x - i\sqrt[4]2).
+    \]
+    which has roots 
+    \[
+        \pm \sqrt[4]2 \ \text{and} \ 
+        \pm i \sqrt[4]2. 
+    \]
+    Thus the splitting field is 
+    \[
+        K = \mathbb Q(\sqrt[4]2, i).
+    \]
+
+    As we can see $f$ is irreducible over $\mathbb Q$ by 
+    Eisenstein with $p = 2$ and in fact it is the minimal 
+    polynomial of $\sqrt[4]2$ so 
+    \[
+        [\mathbb Q(\sqrt[4]2) : \mathbb Q] = \deg f = 4.  
+    \]
+    We can also see that $i \not \in \mathbb R \supset 
+    \mathbb Q(\sqrt[4] 2)$ so $K$ has nontrivial degree over 
+    $\mathbb Q(\sqrt[4] 2)$ and since the minimal polynomial is 
+    $x^2 + 1$ we conclude that 
+    \[
+        [K : \mathbb Q(\sqrt[4]2)] = 2
+    \]
+    so 
+    \[
+        [K : \mathbb Q] = 8.
+    \]
+
+    Let $\alpha = \sqrt[4]2$. Then $K = \mathbb Q(\alpha, i)$ and 
+    every automorphism in the Galois group is determined by 
+    where it sends $\alpha$ and $i$.
+    For the roots to satisfy their respective polynomials we have 
+    \[
+        \sigma(\alpha) \in \{\alpha, -\alpha, i\alpha, -i\alpha\}
+    \]
+    and 
+    \[
+        \sigma(i) \in \{i,-i\}.
+    \]
+\end{proof}
+
 
 \end{document}
