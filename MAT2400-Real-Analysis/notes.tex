@@ -5506,4 +5506,353 @@ The opposite implication is not necessarily true.
     \]
 \end{proof}
 
+\begin{prob}[Problem 1]
+Let $(X,d)$ be a metric space.
+
+\begin{enumerate}[label=\alph*)]
+    \item Suppose $(x_n)$ is a Cauchy sequence in $X$, and suppose it has a subsequence $(x_{n_k})$ converging to $a\in X$. Prove that $x_n\to a$.
+
+    \item Let $A\subseteq X$ be compact. Show that $A$ is complete.
+
+    \item Let $A,B\subseteq X$ be compact. Show that $A\cup B$ is compact.
+\end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    Suppose $(x_n)$ is a cauchy sequence in $X$. Then 
+    for $\varepsilon > 0$ we can find $N_1 \in \mathbb N$ 
+    such that 
+    \[
+        d(x_n, x_m) < \varepsilon/2
+    \]
+    whenever $n,m \geq N_1$.
+    
+    Furthermore there is a sub-sequence $(x_{n_k}) \to a$ then 
+    for every $\varepsilon > 0$ we can find $N \in \mathbb N$
+    such that when $k \geq N$ we have  
+    \[
+        d(x_{n_k}, a) < \varepsilon/2, 
+    \]
+    and $n_k \geq N_1$. 
+    Then 
+    \[
+        d(x_n, a) \leq 
+        d(x_n, x_{n_k}) + d(x_{n_k}, a) < \varepsilon. 
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    $A \subseteq X$ is compact if every sequence 
+    $(x_n) \subset A$ has a convergent subsequence with 
+    $a \in A$. Then 
+    by (a) every Cauchy sequence converges to $a \in A$.
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    Let $(x_n)$ be a Cauchy sequence in $A \cup B$. 
+    Then denote the subsequences 
+    \[
+        (x_n)\bigm|_A = (x_n : x_n \in A), 
+    \]
+    and 
+    \[
+        (x_n)\bigm|_B = (x_n : x_n \in B).
+    \]
+    One of these will contain infinitely many terms $x_n$, since 
+    if we assume for instance that $A$ only contains finitely many 
+    then the pigeonhole principle yields infinitely many terms in 
+    $B$ and vice-versa. Thus we can assume, without loss of 
+    generality, that $A$ contains infinitely many terms. 
+    Then $(x_n)\bigm|_A$ is a Cauchy sequence in $A$ and thus 
+    converges to $a \in A \subseteq A \cup B$.
+    By (a) we get that 
+    \[
+        (x_n) \to a \in A \cup B.
+    \]
+    As $(x_n)$ was arbitrary we conclude that $A \cup B$ is 
+    complete.
+\end{proof}
+
+\begin{prob}[Problem 2]
+Let $X=\mathbb R^{n\times n}$ with the operator norm. Fix matrices $A,B\in X$, and define
+\[
+    F:X\to X,\qquad F(M)=AMB.
+\]
+
+\begin{enumerate}[label=\alph*)]
+    \item Show that $F$ is linear and bounded.
+
+    \item Now define
+    \[
+        G:X\to X,\qquad G(M)=MAM.
+    \]
+    Show that $G$ is differentiable and compute $DG(M)H$.
+
+    \item Show that $G$ is Lipschitz on every bounded subset of $X$.
+\end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    Let $M,N \in \mathbb R^{n\times n}$. Then 
+    \begin{align*}
+        F(M + N) &= A(M+N)B \\ 
+                 &= (AM + AN)B \\ 
+                 &= AMB + ANB \\ 
+                 &= F(M) + F(N).
+    \end{align*}
+    Now let $\lambda \in \mathbb R$, the ground-field. 
+    Then 
+    \begin{align*}
+        F(\lambda M) &= A\lambda M B \\ 
+                     &= \lambda A M B \\ 
+                     &= \lambda F(M)
+    \end{align*}
+        
+    It is trivial to see that 
+    \[
+        \|F(M)\| \leq \|A\|\|B\|\|M\|.  
+    \]
+    Hence bounded. 
+\end{proof}
+\begin{proof}[Solution and proof of (b)]
+    We compute 
+    \[
+        \lim_{\|h\| \to 0} \frac{\|G(M + h) - G(M) - A(h)\|}{\|h\|}. 
+    \]
+    First 
+    \begin{align*}
+        G(M + h) - G(M) 
+        &= (M + h)A(M+h) - (MAM) \\ 
+        &= (MA + hA)(M+h) - (MAM) \\ 
+        &= (MA(M+h) - hA(M+h)) - (MAM) \\ 
+        &= MAM + MAh - hAM - hAh - MAM \\ 
+        &= MAh - hAM - hAh 
+    \end{align*}
+    The linear part is $MAh - hAM =: A(h) = DG(M)h$. 
+
+    The remainder is $hAh$ so 
+
+    \begin{align*}
+        \lim_{\|h\| \to 0} \frac{\|G(M+h) - G(M) - A(h)\|}{\|h\|}  
+        &= \lim_{\|h\| \to 0} \frac{\|hAh\|}{\|h\|} \\ 
+        &\leq \lim_{\|h\|\to 0} \frac{\|h\|^2\|A\|}{\|h\|} \\  
+        &= \lim_{\|h\|\to 0} \|h\|\|A\| \\ 
+        &= 0
+    \end{align*}
+    so $F$ is differentiable. 
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    Let $A \subseteq X$ be bounded. Then there is $\lambda > 0$ so 
+    $\|M\|,\|N\| \leq \lambda$ when $M,N \in A$. 
+
+    Then 
+    \begin{align*}
+        \|G(M) - G(N)\| 
+        &= \|MAM - NAN\| \\              
+        &= \|MA(M - N) + (M-N)AN\| \\ 
+        &\leq \lambda \|A\| \|M - N\| + \|M-N\|\lambda \|A\| \\ 
+        &= 2 \lambda \|A\| \|M-N\|.
+    \end{align*}
+    Thus $G$ is Lipschitz with constant $2 \lambda \|A\|$.
+\end{proof}
+
+\begin{prob}[Problem 3]
+Let
+\[
+    X=C([0,1],\mathbb R)
+\]
+with the supremum norm, and let $k:[0,1]^2\to\mathbb R$ be continuous. Define
+\[
+    (Lu)(x)=\int_0^1 k(x,y)u(y)\,dy.
+\]
+
+\begin{enumerate}[label=\alph*)]
+    \item Show that $Lu\in X$ for every $u\in X$.
+
+    \item Show that $L:X\to X$ is bounded.
+
+    \item Assume now that
+    \[
+        k(x,y)=xy.
+    \]
+    Show that $I-L:X\to X$ is bijective and has bounded inverse.
+\end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    Let $x_1, x_2 \in [0,1]$. If $|x_1 - x_2| < \delta$ then 
+    \[
+        |k(x_1, y) - k(x_2, y)| < \varepsilon/\|u\|, \ \forall y,
+    \]
+    assuming $u$ is nonzero.
+    Then 
+    \[
+        |(Lu)(x_1) - (Lu)(x_2)| \leq 
+        \int_0^1 |k(x_1, y) - k(x_2, y)| \cdot |u(y)| \:dy 
+        \leq \varepsilon.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    Since $k$ is continuous on a closed and bounded (and thus 
+    compact) interval we have $|k(x,y)| \leq M$ for some 
+    $M > 0$. 
+
+    Then by the same approximation as in (a) we have 
+    \[
+        |(Lu)(x)| \leq \int_0^1 |k(x,y)| \cdot |u(y)| \: dy 
+        \leq M \|u\|.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    If $k(x,y) = xy$ then 
+    \[
+        (Lu)(x) = \int_0^1 xy \cdot u(y) \; dy
+    \]
+    and 
+    \[
+        ((I - L)(u))(x) = 
+        u(x) - \int_0^1 xy \cdot u(y) \; dy
+    \]
+
+    Now we observe that 
+    \[
+        ((I-L)(u))(x) = u(x) - x \cdot c_u
+    \]
+    where 
+    \[
+        c_u = \int_0^1 xy \cdot u(y) \; dy. 
+    \]
+    Solving $(I-L)(u) = f$ we get 
+    \[
+        u(x) = f(x) + c_u x. 
+    \]
+    Integrating $c_u$ we get 
+    \[
+        c_u = \int_0^1 f(x) \; dx + (1/3)c_u.
+    \]
+    Something something, unique solution...
+\end{proof}
+
+\begin{prob}[Problem 4]
+Let $(\Omega,\mathcal A,\mu)$ be a measure space.
+
+\begin{enumerate}[label=\alph*)]
+    \item Let $A_1,A_2,\ldots\in\mathcal A$. Prove countable subadditivity:
+    \[
+        \mu\left(\bigcup_{n=1}^{\infty}A_n\right)
+        \leq
+        \sum_{n=1}^{\infty}\mu(A_n).
+    \]
+
+    \item Suppose $A_n\uparrow A$, meaning
+    \[
+        A_1\subseteq A_2\subseteq\cdots,
+        \qquad
+        A=\bigcup_{n=1}^\infty A_n.
+    \]
+    Show that
+    \[
+        \mu(A)=\lim_{n\to\infty}\mu(A_n).
+    \]
+
+    \item Let $f_n:\Omega\to[0,\infty]$ be measurable and suppose
+    \[
+        f_n\uparrow f.
+    \]
+    State the Monotone Convergence Theorem and explain what it says about
+    \[
+        \int f_n\,d\mu
+        \quad\text{and}\quad
+        \int f\,d\mu.
+    \]
+\end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    Let $B_1 = A_1$ and define $B_n = A_n \setminus 
+    \cup_{k=1}^{n-1}A_k$. Then $B_1,B_2,\ldots$ are disjoint and 
+    furthermore: 
+    \[
+        \bigcup_{n=1}^\infty A_n = \bigcup_{n=1}^\infty B_n
+    \]
+    so their meassure is the same and in particular 
+    \[
+        \mu\left(\bigcup_{n=1}^\infty A_n\right) 
+        = \sum_{n=1}^\infty \mu(B_n).
+    \]
+    Since $B_n \subseteq A_n$ for all $n \in \mathbb N$ we have 
+    \[
+        \sum_{n=1}^\infty \mu(B_n) \leq 
+        \sum_{n=1}^\infty \mu(A_n).
+    \]
+    Combining the latter two results gives the desired result.
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    Similarily to (a) let $B_1 = A_1$ and define 
+    $B_n = A_n \setminus B_{n-1}$. Then as above $B_n$ are all 
+    disjoint and 
+    \[
+        A = \bigcup_{n=1}^\infty B_n
+    \]
+    so 
+    \[
+        \mu(A) = \sum_{n=1}^\infty \mu(B_n).
+    \]
+    Furthermore 
+    \[
+        \mu(A_N) = \sum_{n=1}^N \mu(B_n) 
+    \]
+    so for $N \to \infty$ we get 
+    \[
+        \lim_{N\to\infty}\mu(A_N) = 
+        \mu(A).
+    \]
+\end{proof}
+
+\begin{proof}[Solution to (c)]
+    Let $(X,\mathcal A, \mu)$ be a meassure space and let 
+    $(f_n)_n \in M_+(X,\mathcal A)$ be an increasing sequence, i.e.
+    $0 \leq f_n \leq f_{n+1}$ for all $n \in \mathbb N$.
+    Define 
+    \[
+        f(x) = \lim_{n\to\infty} f_n(x).
+    \]
+    Then $f$ is well-defined and meassurable, and 
+    \[
+        \int f \; d\mu = \int f_n \; d\mu.
+    \]
+
+    The implications are clear. 
+\end{proof}
+
+\begin{prob}[Problem 5]
+For $n\in\mathbb N$, define
+\[
+    f_n:[0,1]\to\mathbb R,\qquad f_n(x)=\frac{nx}{1+n^2x^2}.
+\]
+
+\begin{enumerate}[label=\alph*)]
+    \item Find the pointwise limit of $f_n$ on $[0,1]$.
+
+    \item Decide whether $f_n\to f$ uniformly on $[0,1]$.
+
+    \item Decide whether $f_n\to f$ uniformly on $[\delta,1]$ for every fixed $\delta>0$.
+\end{enumerate}
+\end{prob}
+\begin{proof}[Start of solution of (a)]
+    For $x = 0$, $f_n$ is $0$ for all $n$.  
+    For $x = 1$ we get 
+    \[
+        f_n(1) = \frac{n}{1 + n^2} \leq \frac{1}{n}
+    \]
+    which goes to $0$ for increasing $n$.
+
+    We can differentiate to get the rate of change on 
+    $[0,1]$.
+\end{proof}
+
 \end{document}
