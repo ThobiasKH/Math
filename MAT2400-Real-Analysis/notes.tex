@@ -5855,4 +5855,1130 @@ For $n\in\mathbb N$, define
     $[0,1]$.
 \end{proof}
 
+\subsection{Problem type set}
+Analyzing earlier relevant exam sets, ChatGPT came up with 
+problem "types" and has comprised the following problem set 
+with problem types which I personally struggle with. 
+So the following is a no aid attempt at solving those questions.
+
+The following list summarizes the main types of problems that seem relevant for MAT2400 practice. The goal is not to memorize solutions, but to recognize the structure of a problem and know which techniques are likely to apply.
+
+\subsection{Type 1: Basic metric-space structure}
+
+\subsubsection*{Type 1A: Subspaces as metric spaces / failure of vector-space structure}
+
+Typical task:
+\begin{quote}
+    Let $S\subseteq X$ inherit a metric from a metric space $(X,d)$. Explain why $(S,d)$ is a metric space. Then decide whether $S$ is a normed vector space.
+\end{quote}
+
+Typical trigger:
+\[
+    S\subseteq X \quad \Rightarrow \quad d|_{S\times S} \text{ is a metric.}
+\]
+But for a normed vector space, $S$ must be closed under addition and scalar multiplication.
+
+\subsubsection*{Type 1B: Cauchy sequence with convergent subsequence}
+
+Typical task:
+\begin{quote}
+    Suppose $(x_n)$ is Cauchy in a metric space and has a subsequence converging to $a$. Prove that $x_n\to a$.
+\end{quote}
+
+Typical trigger:
+\[
+    d(x_n,a)\leq d(x_n,x_{n_k})+d(x_{n_k},a).
+\]
+
+\subsubsection*{Type 1C: Completeness of unions}
+
+Typical task:
+\begin{quote}
+    Let $A,B\subseteq X$ be complete. Prove that $A\cup B$ is complete.
+\end{quote}
+
+Typical trigger: A Cauchy sequence in $A\cup B$ has infinitely many terms in $A$ or infinitely many terms in $B$.
+
+\subsubsection*{Type 1D: Closedness of function spaces}
+
+Typical task:
+\begin{quote}
+    Let $A\subseteq \mathbb R$ be closed. Show that $C_b(X,A)$ is closed in $C_b(X,\mathbb R)$ with the supremum metric.
+\end{quote}
+
+Typical trigger:
+\[
+    f_n\to f \text{ uniformly}, \quad f_n(x)\in A, \quad A \text{ closed}
+    \quad \Rightarrow \quad f(x)\in A.
+\]
+
+\subsection{Type 2: Compactness and extreme-value arguments}
+
+\subsubsection*{Type 2A: Compact set gives minimizing point}
+
+Typical task:
+\begin{quote}
+    Let $E\subseteq X$ be compact and nonempty. Show that for each $x\in X$, there exists $z\in E$ such that
+    \[
+        d(x,z)=\operatorname{dist}(x,E).
+    \]
+\end{quote}
+
+Typical trigger: The function
+\[
+    y\mapsto d(x,y)
+\]
+is continuous on compact $E$, hence attains a minimum.
+
+\subsubsection*{Type 2B: Counterexample when compactness fails}
+
+Typical task:
+\begin{quote}
+    Give an example where $\operatorname{dist}(x,E)$ is not attained.
+\end{quote}
+
+Typical trigger: Use an open set, for example
+\[
+    X=\mathbb R,\qquad E=(0,1),\qquad x=2.
+\]
+
+\subsubsection*{Type 2C: Compactness via sequences}
+
+Typical task:
+\begin{quote}
+    If $A$ and $B$ are compact subsets of a metric space, prove that $A\cup B$ is compact.
+\end{quote}
+
+Typical trigger: Every sequence in $A\cup B$ has infinitely many terms in either $A$ or $B$.
+
+\subsubsection*{Type 2D: Noncompactness by separated sequences}
+
+Typical task:
+\begin{quote}
+    Show that a set is not compact by constructing a sequence with no convergent subsequence.
+\end{quote}
+
+Typical trigger:
+\[
+    \|x_n-x_m\|\geq c>0 \quad \text{for all } n\neq m.
+\]
+
+Then no subsequence is Cauchy.
+
+\subsection{Type 3: Modified metrics and equivalent convergence}
+
+\subsubsection*{Type 3A: Max metric from two metrics}
+
+Typical task:
+\begin{quote}
+    Given two metrics $d_1,d_2$ on $X$, define
+    \[
+        \rho(x,y)=\max\{d_1(x,y),d_2(x,y)\}.
+    \]
+    Show that $\rho$ is a metric and characterize convergence in $\rho$.
+\end{quote}
+
+Typical trigger:
+\[
+    \max\{a_1+b_1,a_2+b_2\}
+    \leq
+    \max\{a_1,a_2\}+\max\{b_1,b_2\}.
+\]
+
+Convergence:
+\[
+    x_n\to x \text{ in } \rho
+    \quad \Longleftrightarrow \quad
+    x_n\to x \text{ in both } d_1 \text{ and } d_2.
+\]
+
+\subsubsection*{Type 3B: Snowflake metric}
+
+Typical task:
+\begin{quote}
+    Let $(X,d)$ be a metric space and $0<\alpha<1$. Define
+    \[
+        \rho(x,y)=d(x,y)^\alpha.
+    \]
+    Show that $\rho$ is a metric and compare continuity or Lipschitz properties of the identity maps.
+\end{quote}
+
+Typical trigger:
+\[
+    (a+b)^\alpha\leq a^\alpha+b^\alpha
+    \qquad (a,b\geq 0).
+\]
+
+On $[0,1]$:
+\[
+    |x-y|\leq |x-y|^\alpha,
+\]
+but generally there is no constant $C$ such that
+\[
+    |x-y|^\alpha\leq C|x-y|
+\]
+near $x=y$.
+
+\subsection{Type 4: Uniform continuity and Lipschitz estimates}
+
+\subsubsection*{Type 4A: Uniform continuity on unbounded domains}
+
+Typical task:
+\begin{quote}
+    Prove that a function such as $f(x)=e^{-x^2}$ is uniformly continuous on $\mathbb R$.
+\end{quote}
+
+Typical triggers:
+\[
+    f' \text{ bounded } \Rightarrow f \text{ Lipschitz } \Rightarrow f \text{ uniformly continuous}.
+\]
+Or split the real line into a compact middle region and small tails.
+
+\subsubsection*{Type 4B: Bounded derivative implies Lipschitz}
+
+Typical task:
+\begin{quote}
+    Show that a differentiable map is Lipschitz on a set because its derivative is bounded.
+\end{quote}
+
+Typical trigger:
+\[
+    \|f(x)-f(y)\|
+    \leq
+    \sup_{z}\|Df(z)\|\,\|x-y\|.
+\]
+
+\subsection{Type 5: Normed spaces and bounded linear maps}
+
+\subsubsection*{Type 5A: Show a map is linear and bounded}
+
+Typical task:
+\begin{quote}
+    Let $L:X\to Y$ be given by a formula. Show that $L$ is linear and bounded.
+\end{quote}
+
+Typical trigger:
+\[
+    \|Lf\|_Y\leq C\|f\|_X.
+\]
+
+\subsubsection*{Type 5B: Bounded bijection with unbounded inverse}
+
+Typical task:
+\begin{quote}
+    Show that a bounded linear bijection $L:X\to Y$ has an unbounded inverse.
+\end{quote}
+
+Typical trigger: Construct a sequence $(g_n)$ in $Y$ such that
+\[
+    \|g_n\|_Y \leq C,
+    \qquad
+    \|L^{-1}g_n\|_X\to\infty.
+\]
+
+\subsubsection*{Type 5C: Equivalent norms from invertible operators}
+
+Typical task:
+\begin{quote}
+    Let $A:X\to X$ be an invertible bounded linear operator. Define
+    \[
+        \|x\|_A=\|Ax\|.
+    \]
+    Show that this is a norm and that convergence in $\|\cdot\|_A$ is equivalent to convergence in $\|\cdot\|$.
+\end{quote}
+
+Typical trigger:
+\[
+    \|Ax\|\leq \|A\|\|x\|,
+\]
+and
+\[
+    \|x\|=\|A^{-1}Ax\|
+    \leq
+    \|A^{-1}\|\|Ax\|.
+\]
+
+\subsubsection*{Type 5D: Neumann-series inverse}
+
+Typical task:
+\begin{quote}
+    If $\|C\|<1$, prove that
+    \[
+        (I-C)^{-1}=\sum_{k=0}^\infty C^k.
+    \]
+\end{quote}
+
+Typical trigger:
+\[
+    (I-C)\sum_{k=0}^n C^k=I-C^{n+1}.
+\]
+
+If $\|C\|<1$, then $C^{n+1}\to 0$ in operator norm.
+
+\subsubsection*{Type 5E: Fixed-point iteration in Banach spaces}
+
+Typical task:
+\begin{quote}
+    Show that an iteration
+    \[
+        x_{n+1}=T(x_n)
+    \]
+    converges by proving that $T$ is a contraction.
+\end{quote}
+
+Typical trigger:
+\[
+    \|T(x)-T(y)\|\leq q\|x-y\|,
+    \qquad 0\leq q<1.
+\]
+
+Then Banach's fixed point theorem applies.
+
+\subsection{Type 6: Fréchet differentiability}
+
+\subsubsection*{Type 6A: Finite-dimensional Jacobian problems}
+
+Typical task:
+\begin{quote}
+    Compute $F'(x)$ for $F:\mathbb R^n\to\mathbb R^m$, and possibly use the inverse function theorem.
+\end{quote}
+
+Typical triggers:
+\[
+    F'(x)h=DF(x)h.
+\]
+If $DF(x_0)$ is invertible, then locally
+\[
+    (F^{-1})'(F(x_0)) = (F'(x_0))^{-1}.
+\]
+
+\subsubsection*{Type 6B: Matrix product differentiability}
+
+Typical task:
+\begin{quote}
+    Let
+    \[
+        F(M)=MJM.
+    \]
+    Show that $F$ is differentiable and compute $DF(M)H$.
+\end{quote}
+
+Typical trigger:
+\[
+    (M+H)J(M+H)-MJM
+    =
+    MJH+HJM+HJH.
+\]
+
+Therefore
+\[
+    DF(M)H=MJH+HJM.
+\]
+
+Remainder estimate:
+\[
+    \frac{\|HJH\|}{\|H\|}
+    \leq
+    \|J\|\|H\|\to 0.
+\]
+
+\subsubsection*{Type 6C: Functional differentiability on $C([0,1])$}
+
+Typical task:
+\begin{quote}
+    Show that a functional such as
+    \[
+        F(x)=x(0)x(1)
+    \]
+    or
+    \[
+        F(x)=\int_0^1 e^{-s}x(s)^2\,ds
+    \]
+    is Fréchet differentiable.
+\end{quote}
+
+Typical triggers:
+\[
+    F'(x)r=x(0)r(1)+r(0)x(1)
+\]
+for endpoint-product functionals, and
+\[
+    F'(x)r=\int_0^1 e^{-s}2x(s)r(s)\,ds
+\]
+for quadratic integral functionals.
+
+Always check:
+\begin{enumerate}
+    \item the candidate derivative is linear,
+    \item the candidate derivative is bounded,
+    \item the remainder is $o(\|r\|)$.
+\end{enumerate}
+
+\subsubsection*{Type 6D: Nonlinear maps on $C_b$}
+
+Typical task:
+\begin{quote}
+    Show that a nonlinear map such as
+    \[
+        F(f)(t)=2f(t)^2-e^{f(t)-t^2}
+    \]
+    is Fréchet differentiable.
+\end{quote}
+
+Typical trigger: Use Taylor expansion with uniform remainder estimates:
+\[
+    e^{f+r}-e^f-e^f r
+    =
+    e^f(e^r-1-r)
+    =
+    O(\|r\|^2).
+\]
+
+\subsubsection*{Type 6E: Directional derivatives but no Fréchet derivative}
+
+Typical task:
+\begin{quote}
+    Study differentiability at the origin for a function with a formula involving
+    \[
+        \frac{xy}{x^2+y^2}.
+    \]
+\end{quote}
+
+Typical trigger: Check values along lines or compute directional derivatives. If the directional derivative is not linear in the direction, then the Fréchet derivative cannot exist.
+
+\subsection{Type 7: Integral operators}
+
+\subsubsection*{Type 7A: Show $Lu\in C([0,1])$}
+
+Typical task:
+\begin{quote}
+    Let
+    \[
+        (Lu)(x)=\int_0^1 k(x,y)u(y)\,dy
+    \]
+    with $k$ continuous. Show that $Lu$ is continuous.
+\end{quote}
+
+Typical trigger: $k$ is uniformly continuous on compact $[0,1]^2$, and
+\[
+    |(Lu)(x)-(Lu)(x')|
+    \leq
+    \int_0^1 |k(x,y)-k(x',y)|\,|u(y)|\,dy.
+\]
+
+\subsubsection*{Type 7B: Show $L$ is bounded}
+
+Typical task:
+\begin{quote}
+    Show that the same integral operator is bounded on $C([0,1])$.
+\end{quote}
+
+Typical trigger:
+\[
+    \|Lu\|_\infty
+    \leq
+    \left(\sup_{x\in[0,1]}\int_0^1 |k(x,y)|\,dy\right)
+    \|u\|_\infty.
+\]
+
+\subsubsection*{Type 7C: Rank-one integral operator inverse}
+
+Typical task:
+\begin{quote}
+    For a separable kernel
+    \[
+        k(x,y)=a(x)b(y),
+    \]
+    show that $I\pm L$ is bijective and compute its inverse.
+\end{quote}
+
+Typical trigger:
+\[
+    Lu=a(x)c(u),
+    \qquad
+    c(u)=\int b(y)u(y)\,dy.
+\]
+
+Then solve
+\[
+    u\pm c(u)a=f
+\]
+by applying the functional $c$ to both sides.
+
+\subsubsection*{Type 7D: Volterra/exponential integral operators}
+
+Typical task:
+\begin{quote}
+    Let
+    \[
+        F(u)(t)=e^t\int_t^\infty e^{-\tau}\sin(u(\tau))\,d\tau.
+    \]
+    Prove boundedness, differentiability in $t$, and compute the Fréchet derivative.
+\end{quote}
+
+Typical triggers:
+\[
+    |F(u)(t)|
+    \leq
+    \int_t^\infty e^{t-\tau}\,d\tau
+    =
+    1.
+\]
+
+Also:
+\[
+    F'(u)r(t)
+    =
+    e^t\int_t^\infty e^{-\tau}\cos(u(\tau))r(\tau)\,d\tau.
+\]
+
+\subsection{Type 8: Series and sequences of functions}
+
+\subsubsection*{Type 8A: Power series radius and endpoints}
+
+Typical task:
+\begin{quote}
+    Determine the convergence set of a power series and of its derivative series.
+\end{quote}
+
+Typical trigger:
+\[
+    R^{-1}=\limsup_{n\to\infty}|a_n|^{1/n}.
+\]
+
+Then check endpoints separately.
+
+\subsubsection*{Type 8B: Geometric series with parameter}
+
+Typical task:
+\begin{quote}
+    Study
+    \[
+        \sum_{n=0}^\infty e^{-nx}.
+    \]
+    Find where it converges, prove uniform convergence on suitable intervals, and justify termwise integration.
+\end{quote}
+
+Typical trigger:
+\[
+    e^{-nx}\leq e^{-na}
+    \qquad x\in[a,\infty).
+\]
+
+Then use the Weierstrass M-test.
+
+\subsubsection*{Type 8C: Uniform convergence via M-test}
+
+Typical task:
+\begin{quote}
+    Prove uniform convergence of a series of functions using a summable numerical majorant.
+\end{quote}
+
+Typical trigger:
+\[
+    |f_n(x)|\leq M_n,
+    \qquad
+    \sum_{n=1}^\infty M_n<\infty.
+\]
+
+\subsubsection*{Type 8D: Pointwise versus uniform convergence}
+
+Typical task:
+\begin{quote}
+    For a sequence such as
+    \[
+        f_n(x)=x^n
+    \]
+    or
+    \[
+        f_n(x)=\frac{nx}{1+n^2x^2},
+    \]
+    find the pointwise limit and decide whether convergence is uniform.
+\end{quote}
+
+Typical trigger:
+\[
+    \sup_{x\in D}|f_n(x)-f(x)|.
+\]
+
+Often the bad behavior occurs near one endpoint or one moving point.
+
+\subsection{Type 9: Sequence spaces and completeness}
+
+\subsubsection*{Type 9A: Truncations in $\ell^p$}
+
+Typical task:
+\begin{quote}
+    For $x\in \ell^p$, define
+    \[
+        y_n=(x(1),\ldots,x(n),0,0,\ldots).
+    \]
+    Show that $(y_n)$ is Cauchy for $p<\infty$, and decide what happens for $p=\infty$.
+\end{quote}
+
+Typical trigger:
+\[
+    \|y_n-y_m\|_p^p
+    =
+    \sum_{i=m+1}^n |x(i)|^p,
+\]
+which is controlled by tails of a convergent series.
+
+For $p=\infty$, use
+\[
+    x=(1,1,1,\ldots)
+\]
+as a counterexample.
+
+\subsubsection*{Type 9B: Incomplete spaces via Cauchy sequences}
+
+Typical task:
+\begin{quote}
+    Construct a Cauchy sequence in a normed vector space that does not converge in the space.
+\end{quote}
+
+Typical trigger: Use partial sums that converge to an object outside the space.
+
+Example structure:
+\[
+    f_n=\sum_{m=0}^n 2^{-m}e_m,
+\]
+where the limit has infinite support, while the space only contains finite-support functions.
+
+\subsection{Type 10: Hilbert-space and orthonormal-system problems}
+
+\subsubsection*{Type 10A: Uniqueness of coefficients}
+
+Typical task:
+\begin{quote}
+    Suppose
+    \[
+        u=\sum_{n=1}^\infty \alpha_n e_n
+        =
+        \sum_{n=1}^\infty \beta_n e_n
+    \]
+    for an orthonormal system $(e_n)$. Prove that $\alpha_n=\beta_n$ for all $n$.
+\end{quote}
+
+Typical trigger:
+\[
+    \alpha_i=\langle u,e_i\rangle=\beta_i.
+\]
+
+\subsubsection*{Type 10B: Bessel inequality and convergence of orthogonal series}
+
+Typical task:
+\begin{quote}
+    Given $\alpha_n=\langle u,e_n\rangle$, show that
+    \[
+        \sum_{n=1}^\infty \alpha_n e_n
+    \]
+    converges.
+\end{quote}
+
+Typical trigger:
+\[
+    \sum_{n=1}^\infty |\alpha_n|^2\leq \|u\|^2.
+\]
+
+Then partial sums are Cauchy.
+
+\subsubsection*{Type 10C: Failure of completeness of an orthonormal system}
+
+Typical task:
+\begin{quote}
+    Explain how an orthonormal sequence can fail to be a basis.
+\end{quote}
+
+Typical trigger: There may exist $u$ such that
+\[
+    u\neq \sum_{n=1}^\infty \langle u,e_n\rangle e_n.
+\]
+
+\subsection{Type 11: Measure theory}
+
+\subsubsection*{Type 11A: Empirical measures}
+
+Typical task:
+\begin{quote}
+    Given real numbers $x_1,\ldots,x_N$, define
+    \[
+        \mu_N(A)=\frac1N\sum_{n=1}^N \mathbf 1_A(x_n).
+    \]
+    Show that $\mu_N$ is a measure and compute $\mu_N(\mathbb R)$.
+\end{quote}
+
+Typical trigger: For disjoint $A_i$,
+\[
+    \mathbf 1_{\cup_i A_i}(x_n)
+    =
+    \sum_i \mathbf 1_{A_i}(x_n).
+\]
+
+\subsubsection*{Type 11B: Integrating simple functions with respect to empirical measures}
+
+Typical task:
+\begin{quote}
+    If
+    \[
+        g=\sum_{i=1}^m a_i\mathbf 1_{A_i},
+    \]
+    compute
+    \[
+        \int g\,d\mu_N.
+    \]
+\end{quote}
+
+Typical trigger:
+\[
+    \int g\,d\mu_N
+    =
+    \frac1N\sum_{n=1}^N g(x_n).
+\]
+
+\subsubsection*{Type 11C: Continuous functions under empirical measures}
+
+Typical task:
+\begin{quote}
+    Show that for continuous $f$,
+    \[
+        \int f\,d\mu_N
+        =
+        \frac1N\sum_{n=1}^N f(x_n).
+    \]
+    If $x_n\to \bar x$, compute
+    \[
+        \lim_{N\to\infty}\int f\,d\mu_N.
+    \]
+\end{quote}
+
+Typical trigger:
+\[
+    \frac1N\sum_{n=1}^N f(x_n)\to f(\bar x)
+\]
+when $f(x_n)\to f(\bar x)$.
+
+\subsubsection*{Type 11D: Markov and Chebyshev inequalities}
+
+Typical task:
+\begin{quote}
+    Let $f\geq 0$ be integrable. Show that
+    \[
+        \mu(\{x:f(x)\geq t\})
+        \leq
+        \frac1t\int f\,d\mu.
+    \]
+\end{quote}
+
+Typical trigger:
+\[
+    \int f\,d\mu
+    \geq
+    \int_{\{f\geq t\}} f\,d\mu
+    \geq
+    t\mu(\{f\geq t\}).
+\]
+
+For $p$-integrable functions:
+\[
+    \mu(\{x:f(x)\geq t\})
+    =
+    \mu(\{x:f(x)^p\geq t^p\})
+    \leq
+    \frac1{t^p}\int f^p\,d\mu.
+\]
+
+\subsubsection*{Type 11E: Basic set identities for measures}
+
+Typical task:
+\begin{quote}
+    Prove that
+    \[
+        \mu(A\cup B)+\mu(A\cap B)=\mu(A)+\mu(B).
+    \]
+\end{quote}
+
+Typical trigger: Decompose into disjoint pieces:
+\[
+    A=(A\setminus B)\cup(A\cap B),
+\]
+\[
+    B=(B\setminus A)\cup(A\cap B),
+\]
+\[
+    A\cup B=(A\setminus B)\cup(A\cap B)\cup(B\setminus A).
+\]
+
+\subsubsection*{Type 11F: Countable subadditivity and continuity from below}
+
+Typical task:
+\begin{quote}
+    Prove
+    \[
+        \mu\left(\bigcup_{n=1}^\infty A_n\right)
+        \leq
+        \sum_{n=1}^\infty \mu(A_n),
+    \]
+    or prove that if $A_n\uparrow A$, then
+    \[
+        \mu(A_n)\to \mu(A).
+    \]
+\end{quote}
+
+Typical trigger: Disjointify the sets:
+\[
+    B_1=A_1,\qquad
+    B_n=A_n\setminus \bigcup_{k=1}^{n-1}A_k.
+\]
+
+For increasing sequences:
+\[
+    B_1=A_1,\qquad
+    B_n=A_n\setminus A_{n-1}.
+\]
+
+\subsubsection*{Type 11G: Monotone convergence theorem}
+
+Typical task:
+\begin{quote}
+    State and apply the monotone convergence theorem.
+\end{quote}
+
+Typical statement:
+If
+\[
+    0\leq f_1\leq f_2\leq \cdots
+\]
+and
+\[
+    f_n(x)\to f(x)
+\]
+pointwise, then
+\[
+    \int f\,d\mu
+    =
+    \lim_{n\to\infty}\int f_n\,d\mu.
+\]
+
+\subsection{Type 12: Compact operators and Arzelà--Ascoli}
+
+\subsubsection*{Type 12A: Show compactness using Arzelà--Ascoli}
+
+Typical task:
+\begin{quote}
+    Show that an operator $L$ maps bounded sets into relatively compact sets.
+\end{quote}
+
+Typical trigger:
+\begin{enumerate}
+    \item Show $\{Lu:\|u\|\leq 1\}$ is uniformly bounded.
+    \item Show $\{Lu:\|u\|\leq 1\}$ is equicontinuous.
+    \item Apply Arzelà--Ascoli.
+\end{enumerate}
+
+\subsection{Type 13: Banach fixed point theorem}
+
+\subsubsection*{Type 13A: Contraction without fixed point because of incompleteness}
+
+Typical task:
+\begin{quote}
+    Let $X=(0,1]$ and $T(x)=x/2$. Show $T$ is a contraction. Does it have a fixed point?
+\end{quote}
+
+Typical trigger:
+\[
+    d(Tx,Ty)=\frac12d(x,y).
+\]
+
+But the fixed point equation gives
+\[
+    x=0,
+\]
+which is not in $X$.
+
+\subsubsection*{Type 13B: Contraction iteration in a complete space}
+
+Typical task:
+\begin{quote}
+    Show that an iteration converges by proving that its defining map is a contraction.
+\end{quote}
+
+Typical trigger:
+\[
+    \|T(x)-T(y)\|\leq q\|x-y\|,
+    \qquad q<1.
+\]
+
+Then apply Banach's fixed point theorem.
+
+\subsection{Type 14: Almost-solvable equations and compactness}
+
+Typical task:
+\begin{quote}
+    Let $X$ be compact and $f:X\to\mathbb R$ continuous. Suppose that for every $\varepsilon>0$ there exists $x\in X$ such that
+    \[
+        |f(x)-a|<\varepsilon.
+    \]
+    Show that there exists $x_0\in X$ with $f(x_0)=a$.
+\end{quote}
+
+Typical trigger: Let
+\[
+    g(x)=|f(x)-a|.
+\]
+Then $g$ is continuous on compact $X$, so it attains a minimum. The almost-solvability assumption forces that minimum to be zero.
+
+\subsection{Recommended practice order}
+
+For current exam preparation, the most important types to drill are:
+
+\begin{enumerate}
+    \item Type 11: Measure theory.
+    \item Type 7: Integral operators.
+    \item Type 6: Fréchet differentiability.
+    \item Type 5: Normed spaces and bounded linear maps.
+    \item Type 8: Series and uniform convergence.
+    \item Type 1--2: Metric-space completeness and compactness.
+    \item Type 3: Modified metrics.
+    \item Type 13: Banach fixed point theorem.
+\end{enumerate}
+
+\begin{proof}[Solution attempt of (11A)]
+    \textbf{Nonnegativity.}
+
+    We're taking the sum of $\textbf{1}_A(x_n) \in \{0,1\}$ 
+    and dividing by a positive number hence 
+    $\mu_N(A) \geq 0$.
+
+    \textbf{Null Empty Set.}
+
+    \[
+        \mu_N(\emptyset) = \frac{1}{N}\sum_{n=1}^N 0 
+        = 0
+    \]
+
+    \textbf{$\sigma$-additivity.}
+
+    Let $A_1,A_2,\ldots$ be disjoint. 
+
+    Then 
+    \begin{align*}
+        \mu_N\left( \bigcup_{m=1}^\infty A_m \right)
+        &= 
+        \frac{1}{N}\sum_{n=1}^N \textbf{1}_{\cup_m A_m}(x_n) 
+        \\ 
+        &= 
+        \frac{1}{N}\sum_{n=1}^N \sum_{m=1}^\infty \textbf{1}_{A_m}
+        (x_n). 
+    \end{align*}
+    We can interchange the sums to get 
+    \begin{align*}
+        \mu_N\left(\bigcup_{m=1}^\infty A_m\right)
+        &= \sum_{m=1}^\infty \frac{1}{N} \sum_{n=1}^N 
+        \textbf{1}_{A_m}(x_n) \\ 
+        &= \sum_{m=1}^\infty \mu_N(A_m).
+    \end{align*}
+    Hence $\mu_N$ is a meassure. 
+\end{proof}
+
+\begin{proof}[Solution attempt of (11B)]
+    We have 
+    \[
+        g:= \sum_{i=1}^m a_i \textbf{1}A_i,
+    \]
+    and are asked to compute 
+    \[
+        \int g \; d\mu_N.
+    \]
+
+    For a simple measurable function with standard form 
+    \[
+        g = \sum_{i=1}^m a_i\textbf{1}A_i
+    \]
+    the the integral with respect to the measure $\mu_N$ is 
+    \[
+        \int g \; d\mu_N 
+        = 
+        \sum_{n=1}^m a_n \mu_N(A_n).
+    \]
+    So 
+    \begin{align*}
+        \int g \; d\mu_N 
+        &= \sum_{n=1}^m a_n \frac{1}{N} 
+        \sum_{i=1}^N \textbf{1}_{A_n} (x_i)
+        \\ 
+        &= 
+        \sum_{n=1}^m a_n \frac{1}{N} |A_n \cap \{x_1,\ldots, x_N\}|
+        \\ 
+        &= \frac{1}{N} \sum_{n=1}^m a_n \cdot |A_n \cap 
+        \{x_1,\ldots,x_N\}|
+        \\ 
+        &\leq \frac{1}{N} \sum_{n=1}^m a_n \cdot N \\ 
+        &\leq \sum_{n=1}^m a_n \\ 
+        &< \infty.
+    \end{align*}
+\end{proof}
+
+\begin{proof}[Solution attempt of (11E)]
+    We want to prove that 
+    \[
+        \mu(A \cup B) + \mu(A \cup B) = \mu(A) + \mu(B).
+    \]
+    $A = (A \setminus B) \cup (A \cap B)$ and 
+    $B = (B \setminus A) \cup (A \cap B)$. Then 
+    since $B \setminus A$ and $A \setminus B$ are disjoint we have 
+    \begin{align*}
+        \mu(A) + \mu(B) 
+        &= \mu( (A \setminus B) \cup (A \cap B) \cup 
+        (B \setminus A)) + 
+        \mu(A \cap B) \\ 
+        &= \mu(A \cup B) + \mu(A \cap B).
+    \end{align*}
+\end{proof}
+
+\begin{proof}[Solution attempt of (11F)]
+    We will prove that 
+    \[
+        \mu\left(\bigcup_{n=1}^\infty A_n\right)
+        \leq 
+        \sum_{n=1}^\infty \mu(A_n)
+    \]
+    and that if $A_1\subseteq A_2 \subseteq \cdots$ so that 
+    \[
+        \bigcup_{n=1}^\infty A_n = A
+    \]
+    then 
+    \[
+        \mu(A_n) \to \mu(A).
+    \]
+
+    \textbf{First.}
+
+    Let $B_1 := A_1$ and define $B_n := A_n \setminus 
+    \cup_{k=1}^{n-1} A_k$. 
+    Then $B_n$ are disjoin for all $n$ so 
+    \[
+        \mu\left(\bigcup_{n=1}^\infty B_n\right)
+        = 
+        \sum_{n=1}^\infty \mu(B_n),
+    \]
+    and furthermore $\cup_{n=1}^\infty A_n = \cup_{n=1}^\infty B_n$
+    and since $|B_n| \leq |A_n|$ for all $n$ we have 
+    \[
+        \sum_{n=1}^\infty \mu(B_n) \leq \sum_{n=1}^\infty \mu(A_n).
+    \]
+    Hence 
+    \[
+        \mu\left(\bigcup_{n=1}^\infty A_n\right)
+        = \mu\left(\bigcup_{n=1}^\infty B_n\right)
+        \leq \sum_{n=1}^\infty \mu(A_n).
+    \]
+
+    \textbf{Second.}
+
+    Let $B_1 := A_1$ and define $B_n := A_n \setminus A_{n-1}$.
+    Then all $B_n$ are disjoint and 
+    \[
+        A = \bigcup_{n=1}^\infty A_n = \bigcup_{n=1}^\infty B_n
+    \]
+    so their meassure is the same.
+
+    Also 
+    \[
+        \mu(A_N) = \sum_{n=1}^N \mu(B_n)
+    \]
+    and 
+    \[
+        \mu(A) = \sum_{n=1}^\infty \mu(B_n).
+    \]
+    Then 
+    \begin{align*}
+        \lim_{N\to\infty} \mu(A_N) 
+        &= \lim_{N\to\infty}\sum_{n=1}^N \mu(B_n) \\ 
+        &= \sum_{n=1}^\infty \mu(B_n) \\ 
+        &= \mu(A).
+    \end{align*}
+\end{proof}
+
+\begin{proof}[Solution attempt of (13A)]
+    If $X = [0,1]$ then Banach's fixed point theorem would 
+    apply, but $X = (0,1]$.
+
+    \[
+        |x/2 - y/2| = \frac{1}{2}|x - y|
+    \]
+    so $T$ is a contraction with constant $\frac{1}{2}$.
+
+    If we try to find the fixed-point we get 
+    \[
+        Tx = \frac{x}{2} = 0 \Rightarrow x = 0 \not\in X.
+    \]
+    We can also recall that to find the fixed-point of 
+    a function $T$, if it exists, can be done by taking 
+    \[
+        \lim_{n\to\infty} T^n x 
+    \]
+    for any $x \in X$. Then we observe that 
+    \[
+        \lim_{n\to\infty} T^n x = \lim_{n\to\infty} \frac{x}{2^n} 
+        = 0 \not\in X.
+    \]
+\end{proof}
+
+\begin{proof}[Solution attempt of (14A)]
+    Let $g := |f(x) - a|$. Then $g$ is a continuous function 
+    on a compact set $X$. 
+    By the Extreme Value Theorem there exists $x \in X$ such 
+    that 
+    \[
+        g(x) = \inf_{y \in X} |f(x) - a| < \varepsilon 
+    \]
+    for every $\varepsilon > 0$.
+    Since this has to hold for every positive $\varepsilon$ we have 
+    that 
+    \[
+        g(x) = |f(x) - a| = 0 
+    \]
+    which, since $|\cdot|$ is a norm, implies that 
+    \[
+        f(x) - a = 0 \Rightarrow f(x) = a.
+    \]
+
+    All of the above could (and probably should) 
+    be made more rigorous. 
+\end{proof}
+
+\begin{proof}[(Short) Solution attempt of (7a)]
+    Since $K$ is continuous we can find $\delta$ so that 
+    \[
+        |x_1 - x_2| < \delta 
+        \Rightarrow |k(x_1, y) - k(x_2, y)|  
+        < \varepsilon / \|u\|
+    \]
+    for every $y$.
+
+    Then 
+    \begin{align*}
+        |(Lu)(x_1) - (Lu)(x_2)| 
+        & \leq |k(x_1, y) - k(x-2, y)| \cdot 
+        \|u\|  \\ 
+        &< \varepsilon
+    \end{align*}
+\end{proof}
+
+\begin{proof}[(Short) Solution attempt of (7b)]
+    Let $x \in [0,1]$.
+    \begin{align*}
+        |(Lu)(x)| 
+        &= |\int_0^1 k(x,y)u(y) \; dy| \\ 
+        &\leq \|u\| \cdot \int_0^1 |k(x,y)| \; dy
+    \end{align*}
+    So taking the supremum over $x \in [0,1]$ we get 
+    \[
+        \|Lu\| \leq \|u\| \cdot \sup_{x\in[0,1]} \int_0^1 
+        |k(x,y)| \; dy.
+    \]
+\end{proof}
+
+
 \end{document}
