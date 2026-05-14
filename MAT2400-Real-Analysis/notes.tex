@@ -6980,5 +6980,224 @@ For current exam preparation, the most important types to drill are:
     \]
 \end{proof}
 
+\begin{prob}
+    Let $(X, \mathcal A, \mu)$ be a measure space, and 
+    let $f : X \to [0,\infty]$ be measurable.
+
+    Assume 
+    \[
+        \int_X f \; d\mu < \infty.
+    \]
+    
+    For $t > 0$, define 
+    \[
+        E_t = \{x \in X : f(x) \geq t\}.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Prove that 
+            \[
+                \mu(E_t) \leq \frac{1}{t} \int_X f \; d\mu.
+            \]
+        \item Use this to prove that 
+            \[
+                \mu(\{x : f(x) = \infty\}) = 0.
+            \]
+            In other words, prove that $f$ is finite 
+            $\mu$-almost-everywhere.
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    On $E_t$ we have $f(x) \geq t$. So for every 
+    $x \in X$ we have 
+    \[
+        f(x) \geq t \mathbb 1_{E_t}(x),
+    \]
+    since if $x \in E_t$ then $t\mathbb 1_{E_t}(x) = t \leq f(x)$ and 
+    otherwise $t \mathbb 1_{E_t}(x) = 0 \leq f(x)$.
+
+    By the properties of the Lebesgue integral we have 
+    \[
+        \int_X f \; d\mu \geq \int_X t \mathbb 1_{E_t}(x) \; d\mu.
+    \]
+    Then observe that 
+    \begin{align*}
+        \int_X t\mathbb 1 E_t(x) \; d\mu 
+        &= t \int_X \mathbb 1_{E_t}(x) \; d\mu
+        \\ 
+        &= 
+        t\mu(E_t).
+    \end{align*}
+    Then 
+    \[
+        \mu(E_t) \leq \frac{1}{t} \int_X f \; d\mu. 
+    \]
+\end{proof}
+\begin{proof}[Proof of (b)]
+    The set $\{x : f(x) = \infty\}$ is the set of 
+    $x \in X$ such that $\forall N \in \mathbb N$, 
+    $f(x) \geq N$.
+
+    Then, for every $N \in \mathbb N$, 
+    \[
+        \mu(\{x : f(x) = \infty\}) 
+        \leq \frac{1}{N} \int_X f \; d\mu. 
+    \]
+    Since this holds for every $N \in \mathbb N$, and 
+    the meassure is non-negative, we have 
+    \[
+        0 \leq \mu(\{x : f(x) = \infty\}) 
+        \leq \frac{1}{N} \int_X f \; d\mu = 0.
+    \]
+\end{proof}
+
+\begin{prob}
+    Define $F : \mathbb R^2 \to \mathbb R^2$ by 
+    \[
+        F(0,0) = 0, 
+    \]
+    and for $(x,y) \neq (0,0)$, 
+    \[
+        F(x,y) = \frac{x^3}{x^2 + y^2}.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Compute the directional derivative of $F$ at 
+            $(0,0)$ in direction $v = (a,b)$.
+
+        \item Do all directional derivatives exist?
+
+        \item Is $F$ frechet differentiable at $(0,0)$?
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution of (a/b/c)]
+    We compute 
+    \begin{align*}
+        D_vf(0,0)
+        &= \lim_{h\to0} \frac{f((0,0)+h(a,b)) - f(0,0)}{h}
+        \\ 
+        &= \lim_{h\to0} \frac{f(ha, hb)}{h} \\ 
+        &= \lim_{h\to0} \frac{\frac{(ha)^3}{(ha)^2 + (hb)^2}}{h}
+        \\ 
+        &= \lim_{h\to0} \frac{h^3 a^3}{h^3(a^2 + b^2)} \\ 
+        &= \frac{a^3}{a^2 + b^2} \\ 
+        &= f(a,b)
+    \end{align*}
+    Thus for any direction $v =(a,b) \in \mathbb R^2$ the directional 
+    derivative at $(0,0)$ is 
+    \[
+        D_vf(0,0) = f(a,b).
+    \]
+
+    Since $v$ was any arbitrary direction we conclude that 
+    all directional derivatives exist at $(0,0)$.
+    It takes some work to show, but if one computes 
+    \[
+        D_vf(a,b)
+    \]
+    for arbitrary $(a,b) \neq (0,0)$, then the one term 
+    will have factors of $h$ at the bottom of the fraction 
+    meaning it doesn't resolve nicely. 
+    So directional derivatives do not exist everywhere, and 
+    since Frechet differentiability implies Gateux differentiability
+    we conclude that $f$ is indeed not Frechet differentiable.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        X = C([0,1],\mathbb R)
+    \]
+    with the supremum norm. Define 
+    \[
+        \Phi : X \to \mathbb R
+    \]
+    by 
+    \[
+        \Phi(u) = \int_0^1 u(t)^2 \; dt.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Guess the derivative $D\Phi(u)h$. 
+        \item Prove that $\Phi$ is Frechet differentiable.
+        \item Show that $D\Phi(u) : X \to \mathbb R$ is bounded 
+            and linear.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution and proof to all]
+    I refuse to guess. 
+
+    We solve 
+    \[
+        \lim_{\|h \to 0\|} \frac{\|\Phi(u + h) - 
+        \Phi(u) - A(h)\|}{\|h\|}. 
+    \]
+    Compute 
+    \begin{align*}
+        \Phi(u + h) - \Phi(u) 
+        &= \int_0^1 (u+h)(t)^2 \; dt 
+        - \int_0^1 u(t)^2 \; dt
+        \\ 
+        &= \int_0^1 (u(t) + h(t))^2 - u(t)^2 \;dt  
+        \\ 
+        &= \int_0^1 u(t)^2 + h(t)^2 + 2u(t)h(t) - u(t)^2 \;dt
+        \\ 
+        &= \int_0^1 h(t)^2 + 2u(t)h(t) \; dt
+        \\ 
+        &= \int_0^1 h(t)^2 \; dt + \int_0^1 2u(t)h(t) \;dt
+    \end{align*}
+    Since we are working with continuous 
+    functions with compact domains they are bounded so we 
+    can bound these integrals 
+    by 
+    \begin{align*}
+        \int_0^1 h(t)^2 \; dt + \int_0^1 2u(t)h(t) \; dt
+        &\leq \|h\|^2 + \int_0^1 2u(t)h(t) \; dt
+    \end{align*}
+    Let $D\Phi(u)h = A(h) := \int_0^1 2u(t) h(t) \; dt$. Then 
+    \begin{align*}
+        \lim_{\|h\|\to 0} \frac{\|\Phi(u+h) - \Phi(u) - A(h)\|}{\|h\|}
+        &= 
+        \lim_{\|h\| \to 0} \frac{\|\int_0^1 h(t)^2 \; dt\|}{\|h\|}
+        &\leq 
+        \lim_{\|h\|\to 0} \frac{\|h\|^2}{\|h\|} \\ 
+        &= 0
+    \end{align*}
+    We have $D\Phi(u)h = A(h)$ and $A$ is a linear functional in 
+    $\mathcal L(X, \mathbb R)$.
+\end{proof}
+
+\begin{prob}
+    Let $X$ be a Banach space and $T \in \mathcal L(X)$ with 
+    \[
+        \|T\| \leq \frac{1}{2}.
+    \]
+    Show that $I - T$ is invertible and prove that 
+    \[
+        \|(I - T)^{-1}\| \leq 2.
+    \]
+\end{prob}
+\begin{proof}
+    For a linear operator $T$ on a Banach space $X$ we 
+    have $\|T\| < 1 \Rightarrow I - T$ invertible and 
+    \[
+        (I-T)^{-1} 
+        = \sum_{n=0}^\infty T^n.
+    \]
+    Then 
+    \begin{align*}
+        \|(I-T)^{-1}\| 
+        &= 
+        \|\sum_{n=0}^\infty T^n\| \\ 
+        &\leq 
+        \sum_{n=0}^\infty \|T^n\| \\ 
+        &\leq \sum_{n=0}^\infty \|T\|^n \\ 
+        &\leq \sum_{n=0}^\infty \frac{1}{2^n}
+        \\ 
+        &= 2.
+    \end{align*}
+\end{proof}
+
 
 \end{document}
