@@ -4766,5 +4766,45 @@ There will also probably be a lot of problems repeated.
     \]
 \end{proof}
 
+\begin{prob}[Problem 3 Exam 2021]
+    \ 
+    \medskip
+
+    \begin{enumerate}[label=\alph*)]
+        \item Determine if $\mathbb Z_2[x]/\langle x^4 + 1 \rangle$ 
+            is an integral domain.
+        \item Show that $f(x) = x^4 + x^3 + 1$ is 
+            irreducible in $\mathbb Z_2[x]$. Explain why 
+            $f(x)$ admits a zero $\theta$ in the field 
+            $\mathbb Z_{16}$, seen as an extension of 
+            $\mathbb Z_2$, with degree 
+            $[\mathbb Z_{16} : \mathbb Z_2] = 4$. Prove that 
+            $f(x)$ is the primitive polynomial in $\mathbb Z_2[x]$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution of (a)]
+    We notice that, in $\mathbb Z_2[x]$, 
+    \[
+        x^4 + 1 = x^4 - 1 = (x^2 + 1)(x^2 - 1)
+    \]
+    and so is the product of two lower-degree (yet non-zero) 
+    polynomials in $\mathbb Z_2[x]$, and is thus not 
+    irreducible. From this we can very quickly 
+    see that $\langle x^4 + 1 \rangle$ is not a 
+    prime ideal, meaning $\mathbb Z_2[x]/\langle x^4 + 1 \rangle$
+    is not an integral domain.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We see that $f$ has no zeros in $\mathbb Z_2$ and that 
+    any factorization into two 
+    degree-$2$ polynomials 
+    \[
+        f(x) = (x^2 + ax + b)(x^2 + cx + d)
+    \]
+    requires $b=d=1$, but then $1 = a+c = 0$.
+    Therefore $f$ is irreducible over the ground field.
+\end{proof}
+
+
 
 \end{document}
