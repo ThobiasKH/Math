@@ -7199,5 +7199,209 @@ For current exam preparation, the most important types to drill are:
     \end{align*}
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        X = C([0,1], \mathbb R)
+    \]
+    with the supremum norm, and define 
+    \[
+        L : X \to X
+    \]
+    by 
+    \[
+        (Lu)(x) = 
+        x\int_0^1 yu(y) \;dy.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $L$ is linear 
+            and bounded.
+        \item Show that $L$ has rank one, i.e. 
+            that the image of $L$ is contained 
+            in a one-dimensional subspace of $X$.
+        \item Solve 
+            \[
+                (I-L)u = f
+            \]
+            for arbitrary $f \in X$, or determine for 
+            which $f$ is solvable.
+        \item Is $I-L : X \to X$ bijective?
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Let $u,v \in X$ and let $\alpha \in \mathbb R$.
+    Then 
+    \begin{align*}
+        (L(u+v))(x) 
+        &= x\int_0^1 y(u(y) + v(y)) \;dy \\ 
+        &= x\int_0^1 yu(y) \;dy + x\int_0^1 yv(y) \;dy \\ 
+        &= (Lu)(x) + (Lv)(x)
+    \end{align*}
+    and 
+    \begin{align*}
+        (L(\alpha u))(x) 
+        &= x\int_0^1 y\alpha u(y) \; dy \\ 
+        &= \alpha x \int_0^1 y u(y) \; dy
+        \\ 
+        &= \alpha (Lu)(x)
+    \end{align*}
+    so $L$ is linear. 
+    
+    Next observe that 
+    \begin{align*}
+        |(Lu)(x)| 
+        &= \left|x \int_0^1 y u(y) \; dy \right| \\ 
+        &\leq |x| \cdot \int_0^1 \left|y u(y) \right| \; dy \\ 
+        &= \int_0^1 \left|y\right| \cdot \left|u(y)\right| dy \\ 
+        &\leq \|u\| \cdot \int_0^1 y \; dy \\ 
+        &= \frac{1}{2} \|u\|.
+    \end{align*}
+    Then 
+    \begin{align*}
+        \sup_{0 \leq x \leq 1} |(Lu)(x)| 
+        &= \left|\int_0^1 y u(y) \;dy\right| \\ 
+        &\leq \int_0^1 |y| \cdot |u(y)| \; dy \\ 
+        & \: \vdots \\ 
+        &= \frac{1}{2}\|u\|. 
+    \end{align*}
+    Thus $L$ is a bounded linear operator. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    For fixed $u \in X$, let 
+    \[
+        c := \int_0^1 yu(y) \;dy.
+    \]
+    $c$ is very clearly not dependent on $x$ and thus 
+    \[
+        (Lu)(x) = cx 
+    \]
+    is then a linear function of $x$. So 
+    \[
+        \operatorname{im}(L) 
+        \subseteq 
+        \{\alpha x : [0,1] \to \mathbb R \bigm| \alpha \in \mathbb R\}
+    \]
+    which is a one-dimensional subspace 
+    of $C([0,1], \mathbb R)$ with basis $x$. We have 
+    \[
+        0 < \dim \operatorname{im}(L) \leq \dim \{\alpha x : [0,1]
+        \to \mathbb R\}.
+    \]
+\end{proof}
+\begin{proof}[Solution of (c)]
+    We want to solve 
+    \[
+         (I-L)u = f, 
+    \]
+    meaning we want to find $f$ for which 
+    \[
+        u(x) - x \int_0^1 yu(y) \; dy = f(x)
+    \]
+    for every $x \in [0,1]$.
+
+    Letting 
+    \[
+        c := \int_0^1 yu(y) \; dy
+    \]
+    we are solving 
+    \[
+        u(x) - cx = f(x), 
+    \]
+    meaning 
+    \[
+        u(x) = f(x) + cx.
+    \]
+    Substituting for $u$ we get 
+    \[
+        c = \int_0^1 y(f(x) + cy) \;dy 
+    \]
+    so 
+    \[
+        c = \int_0^1 yf(y) \; dy + 
+        c\int_0^1 y^2 \; dy.
+    \]
+    Since $\int_0^1 y^2 \; dy = \frac{1}{3}$ we have 
+    \[
+        c = \int_0^1 y f(y) \; dy + \frac{1}{3}c.
+    \]
+    Rearranging we get 
+    \[
+        \frac{2}{3}c = \int_0^1 y f(y) \; dy.
+    \]
+    Then 
+    \[
+        u(x) = f(x) + \frac{2}{3}x \int_0^1 uf(y) \; dy.
+    \]
+    This does indeed work for any $f \in X$.
+\end{proof}
+
+\begin{proof}[Proof of (d)]
+    Since $(I-L)u = f(x)$ has a solution the 
+    map is surjective and since the kernel is trivial we 
+    get that the map is bijective.
+\end{proof}
+
+
+\begin{prob}
+    Let 
+    \[
+        \mathcal F = 
+        \{f \in C^1([0,1], \mathbb R) : 
+        |f(0)| \leq 3, \ f'(x)\leq 5 \ \text{for all} \ 
+        x \in [0,1]\}.
+    \]
+    Show that $\mathcal F$ is relatively compact in 
+    $C([0,1], \mathbb R)$.
+\end{prob}
+\begin{proof}
+    Let $f \in \mathcal F$. 
+    We have that $|f(0)| \leq 3$ and then 
+    $f(0) \leq 3$. Furthermore then 
+    \[
+        f(1) = 
+        f(0) + f'(0) \cdot 1 
+        \leq 3 + 5 = 8
+    \]
+    so $f(x) \leq 8$ for all $x \in [0,1]$ and 
+    $f$ was arbitrarily chosen from $\mathcal F$. 
+    Thus $\mathcal F$ is uniformly bounded. 
+
+    Now suppose, for a contradiction, that $\mathcal F$ is not 
+    equicontinuous. Then there is some 
+    $\varepsilon > 0$ such that 
+    for any choice of $\delta > 0$ there is some function 
+    $f \in \mathcal F$ so that 
+    \[
+        |x-y| < \delta,
+    \]
+    but 
+    \[
+        |f(x) - f(y)| \geq \varepsilon.
+    \]
+    Now since $f'(x) \leq 5$ we have 
+    \[
+        \frac{|f(x) - f(y)|}{|x-y|} \leq 5. 
+    \]
+    But if $\mathcal F$ is not equicontinuous then 
+    for $\varepsilon = 6$ and any choice of $\delta > 0$, 
+    say $\delta := 1$, there 
+    is $f \in \mathcal F$ so that 
+    \[
+        |f(x) - f(y)| \geq 6
+    \]
+    and $|x-y| < 1$. Then 
+    \[
+        5 \geq \frac{|f(x) - f(y)|}{|x-y|} \geq 6
+    \]
+    which is nonsense. 
+    Hence we conclude that $\mathcal F$ is equicontinuous.
+
+    Since $\mathcal F$ is a family of functions on compact 
+    intervals that is uniformly bounded and equicontinuous 
+    we can apply Arzela-Ascoli and conclude that 
+    $\mathcal F$ is relatively compact in 
+    $C([0,1], \mathbb R)$.
+\end{proof}
 
 \end{document}
