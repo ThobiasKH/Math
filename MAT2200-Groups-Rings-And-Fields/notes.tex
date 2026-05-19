@@ -4805,6 +4805,108 @@ There will also probably be a lot of problems repeated.
     Therefore $f$ is irreducible over the ground field.
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^3 + x + 1 \in \mathbb F_2[x],
+    \]
+    and let 
+    \[
+        K = \mathbb F_2[x]/\langle f \rangle.
+    \]
+    Let 
+    \[
+        \theta = x + \langle f \rangle \in K.
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f$ is irreducible over 
+            $\mathbb F_2$. Conclude $K$ is a field.
+        \item Use 
+            \[
+                f(\theta) = 0
+            \]
+            to express $\theta^3$
+            in terms of $1,\theta, \theta^2$.
+        \item Determine whether $\theta$ is a generator 
+            of $K^\times$. 
+        \item Write the factorization of $f$ into linear 
+            factors over $K$ using Frobenius conjugates.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Since $f$ is degree-$3$ we have irreducible if and only 
+    if no zeros. We notice that 
+    \[
+        f(0) = f(1) = 1.
+    \]
+    Thus $f$ is irreducible over $\mathbb F_2$.
+
+    Since $\mathbb F_2$ is a field we have that the quotient 
+    \[
+        \mathbb F_2/\langle f \rangle
+    \]
+    is a field if and only if $f$ is irreducible over 
+    $\mathbb F_2$. Thus $K$ is a field with 
+    \[
+        |K| = 2^3 = 8.
+    \]  
+\end{proof}
+\begin{proof}[Solution of (b)]
+    We have 
+    \[
+        \theta^3 + \theta + 1 = 0
+    \]
+    meaning 
+    \[
+        \theta^3 = -\theta - 1 = \theta + 1.
+    \]
+\end{proof}
+\begin{proof}[Solution of (c)]
+    $\langle f \rangle$ is maximal so 
+    \[
+        \frac{\mathbb F_2}{\langle f \rangle}
+    \]
+    can be viewed as a field-extension of $\mathbb F_2$ of 
+    degree $\deg f = 3$, with the 
+    basis $\{1, \theta, \theta^2\}$. We know 
+    \[
+        |K| = 8
+    \]
+    so 
+    \[
+        K \cong \mathbb F_8.
+    \]
+    Now the question is whether 
+    \[
+        \langle \theta \rangle 
+        \cong K^\times \cong \mathbb F_7.
+    \]
+    We compute the lowest $j$ such that
+    \[
+        \theta^j = 1.
+    \]
+    We see that 
+
+    \begin{align*}
+        \theta^7 
+        &= \theta^2\theta^2\theta^3 \\ 
+        &= \theta^4(\theta + 1) \\ 
+        &= \theta^5 + \theta^4 \\ 
+        &= \theta^2(\theta + 1) + \theta^4 \\ 
+        &= \theta^3 + \theta + 2\theta^2 \\ 
+        &= \theta^3 + \theta \\ 
+        &= -1 \\ 
+        &= 1. 
+    \end{align*}
+    Doing further computations for $\theta^j$ for $j < 7$ we see 
+    that this is indeed the order of $\theta$. Thus 
+    \[
+        |\langle \theta \rangle| = 7 = |\mathbb F_7|
+    \]
+    and we conclude that 
+    $\theta$ does indeed generate the multiplicative group.
+
+\end{proof}
 
 
 \end{document}
