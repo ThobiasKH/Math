@@ -4908,5 +4908,233 @@ There will also probably be a lot of problems repeated.
 
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^4 + x + 1 \in \mathbb F_2[x],
+    \]
+    and define 
+    \[
+        K = \mathbb F_2[x]/\langle f \rangle.
+    \]
+    Let 
+    \[
+        \alpha = x + \langle f(x) \rangle \in K.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f(x)$ is irreducible over 
+            $\mathbb F_2$.
+        \item Conclude that $K$ is a field. How many elements does 
+            $K$ have? 
+            Give a basis for $K$ as a vector space over 
+            $\mathbb F_2$.
+        \item Use $f(\alpha) = 0$ to compute 
+            \[
+                \alpha^4, \ \alpha^5, 
+                \ \alpha^6, \ \alpha^7.
+            \]
+            Write each in the basis from $b)$.
+        \item Determine whether $\alpha$ generates 
+            $K^\times$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose $f$ is reducible. Then it factors into two 
+    degree-$2$ polynomials 
+    \[
+        f(x) = x^4 + x + 1 = (x^2 + ax + b)(x^2 + cx + d).
+    \]
+    Then we require $bd = 1$ so $b = d = 1$, and 
+    \[
+        adx + bcx = (ad + bc)x = x, 
+    \]
+    so 
+    \[
+        ad + bc = 1
+    \]
+    and since $b = d = 1$ we then have 
+    \[
+        a + c = 1.
+    \]
+    Then either $a=1$ or $c = 1$ while the other 
+    is $0$. Suppose wlog $a = 1$ and $c = 0$. Then 
+    \[
+        x^4 + x + 1 = (x^2 + x + 1)(x^2 + 1) 
+        = x^4 + x^2 + x^3 + x + x^2 + 1 
+        = x^4 + x^3 + x + 1
+    \]
+    which is false. Our assumption was incorrect and 
+    $f$ is irreducible. 
+\end{proof}
+\begin{proof}[Solution of (b)]
+    As $f$ is irreducible we conclude 
+    $\langle f \rangle$ is a maximal ideal of 
+    $\mathbb F_2[x]$. Since $\mathbb F_2$ is a field 
+    (and therefore a commutative ring), we have that 
+    \[
+        \frac{\mathbb F_2[x]}{\langle f \rangle} 
+    \]
+    is a field. 
+    
+    Since $\mathbb F_2$ is a finite field, and any 
+    non-trivial quotient of the polynomial ring over a finite 
+    field by an irreducible polynomial is a finite field 
+    extension, we conclude 
+    \[
+        \frac{\mathbb F_2[x]}{\langle f \rangle} 
+    \]
+    must be a (finite) field extension.
+
+    The standard result is that 
+    \[
+        \left| \frac{\mathbb F_2[x]}{\langle f \rangle} \right| 
+        = |\mathbb F_2|^{\deg f} 
+        = 16.
+    \]
+    The standard basis is then 
+    \[
+        1, \alpha, \alpha^2, \alpha^3
+    \]
+    since 
+    \[
+        \left[\frac{\mathbb F_2[x]}{\langle f \rangle} : \mathbb F_2
+            \right] 
+        = 4.
+    \]
+\end{proof}
+\begin{proof}[Solution of (c)]
+    We have that 
+    \[
+        \alpha^4 + \alpha + 1 = 0, 
+    \]
+    so 
+    \[
+        \alpha^4 = \alpha + 1.
+    \]
+    Then 
+    \[
+        \alpha^5 = \alpha(\alpha + 1) = \alpha^2 + \alpha,
+    \]
+    and 
+    \[
+        \alpha^6 = \alpha(\alpha^2 + \alpha) = \alpha^3 + \alpha^2. 
+    \]
+    Lastly 
+    \[
+        \alpha^7 = \alpha^4 + \alpha^3 
+        = \alpha^3 + \alpha + 1.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (d)]
+    We have that 
+    \[
+        K := \frac{\mathbb F_2[x]}{\langle f \rangle} 
+        \cong \mathbb F_{16},  
+    \]
+    since the finite fields are classified up to isomorphism. 
+    Then the question is whether 
+    \[
+        \langle \alpha \rangle 
+        = K^\times \cong \mathbb F_{16}^\times \cong 
+        C_{15} \leq \mathbb F_{16}.
+    \]
+    Then if we find that $|\langle \alpha \rangle| = 15$ we 
+    will be finished. 
+    First we can check whether 
+    $\alpha^{15} = 1$ as we would expect. 
+
+    \begin{align*}
+        \alpha^{15} 
+        &= \alpha^8(\alpha^3 + \alpha + 1) \\ 
+        &= \alpha^{11} + \alpha^9 + \alpha^8 \\ 
+        &= (\alpha^5 \alpha^6) + \alpha^3\alpha^3 + (\alpha + 1)^2 \\ 
+        &= (\alpha^2 + \alpha)(\alpha^3 + \alpha^2) + 
+        \alpha^3 \alpha^3 + \alpha^2 + 1 \\ 
+        &= \alpha^5 + \alpha^4 + \cdots 
+    \end{align*}
+\end{proof}
+
+\begin{prob}
+    Let $G = C_4 = \langle r \rangle$ act on the set 
+    \[
+        X = \{0,1\}^4
+    \]
+    of binary strings of length $4$ by cyclic rotation.
+    Thus 
+    \[
+        r(a_1,a_2,a_3,a_4) = (a_4,a_1,a_2,a_3).
+    \]
+    In other words, two binary strings are considered 
+    equivalent if one can be obtained from the other by 
+    rotating the positions.
+
+    \begin{enumerate}[label=\alph*)]
+        \item Write down the elements of $G$ and describe how 
+            each acts on $X$. 
+        \item For each $g \in G$, compute the number of fixed 
+            points 
+            \[
+                |X^g| = \{x \in X : gx = x\}.
+            \]
+        \item Use Burnside's formula to determine the number 
+            of orbits. 
+        \item Interpret the answer: how many 
+            binary of necklaces of length $4$ are there, up to 
+            rotation?
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution and proof to all]
+    $G = \{e, r, r^2, r^3\}$.
+    Suppose $(a_1,a_2,a_3,a_4) \in X$. Then 
+    \[
+        r(a_1,a_2,a_3,a_4) = (a_4,a_1,a_2,a_3)
+    \]
+    and 
+    \[
+        r^2(a_1,a_2,a_3,a_4) = r(a_4,a_1,a_2,a_3) 
+        = (a_3,a_4,a_1,a_2)
+    \]
+    and 
+    \[
+        r^3(a_1,a_2,a_3,a_4) = (a_2,a_3,a_4,a_1)
+    \]
+    with $e$ acting on $X$ by doing nothing.
+
+    $X^e = X$ as always. 
+
+    $X^r = \{(a,a,a,a) : a \in \{0,1\}\} = \{(0,0,0,0),(1,1,1,1)\}$. 
+    This is quickly seen since we require $a_1 = a_4$ and 
+    $a_2 = a_1$, but then $a_2 = a_4$ and since $a_3 = a_2$ they 
+    must all be equal.
+    By a similar argument we get the same result for 
+    $X^{r^3}$. 
+
+    However, $X^{r^2}$ is different since it just swaps 
+    entries $1$ and $2$ with $3$ and $4$, respectively. 
+
+    Thus 
+    \[
+        X^{r^2} = \{(a,b,a,b) : a,b \in \{0,1\}\}
+    \]
+    which means $|X^{r^2}| = 2^2 = 4$.
+
+    The number of orbits, by Burnside's lemma/formula is given by 
+    \[
+        |X/G| = \frac{1}{|G|}\displaystyle\sum_{g \in G}
+        |X^g|.
+    \]
+    Meaning we get 
+    \[
+        |X/G| = \frac{1}{4} 
+        (\underbrace{|X^e|}_{|X|} + \underbrace{|X^r|}_{2} + 
+        \underbrace{|X^{r^2}|}_{4} + \underbrace{|X^{r^3}|}_{2})
+        = \frac{1}{4}(16 + 2 + 4 + 2) = 24/4 = 6.
+    \]
+
+    Thus there are $6$ necklaces unique, up to rotation, when 
+    you have two types of pearls, which is quick to verify mentally. 
+\end{proof}
 
 \end{document}
