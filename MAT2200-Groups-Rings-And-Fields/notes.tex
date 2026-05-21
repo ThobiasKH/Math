@@ -5137,4 +5137,157 @@ There will also probably be a lot of problems repeated.
     you have two types of pearls, which is quick to verify mentally. 
 \end{proof}
 
+\begin{prob}
+    Let $G = D_4$ be the symmetries of the square, 
+    acting on the set 
+    \[
+        X = \{\text{colorings of the four vertices of a 
+        square using red/blue}\}.
+    \]
+    We will say that two colorings are the same if 
+    one can be obtained from the other by rotating 
+    or reflecting the square. 
+
+    \begin{enumerate}[label=\alph*)]
+        \item List the elements of $D_4$, and describe their 
+            action on the vertices. 
+        \item Compute the number of fixed colorings 
+            $|X^g|$ for each type of symmetry $g \in D_4$.
+        \item Use Burnside's formula to compute 
+            the number of orbits.
+        \item Pick the coloring 
+            \[
+                x = (R,R,B,B)
+            \]
+            around the square. Find the orbit and stabilizer.
+            Verify orbit-stabilizer: 
+            \[
+                |Gx| = \frac{|G|}{|G_x|}. 
+            \]
+        \item Explain in words how the orbit-stabilizer theorem 
+            and Burnside's formula are related, but different.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof and solution of all]
+    $D_4$ is the set of rigid symmetries of the square. 
+    We can rotate the square $r$ and reflect it $s$. 
+    Rotating $4$ times is the same as doing something so 
+    $|r| = 4$. Then also $s^2 = e$ and $srs = r^{-1}$.
+    Then 
+    \[
+        D_4 = \{r,s \bigm| r^4 = e, \ s^2 = e, \ srs = r^{-1}\}
+        = 
+        \{e, r,r^2,r^3,s,rs, r^2s, r^3s\}.
+    \]
+    Rotating a square $(1,2,3,4)$ gives 
+    \[
+        r(1,2,3,4) = (4,1,2,3)
+    \]
+    and reflecting gives 
+    \[
+        s(1,2,3,4) = (2,1,4,3). 
+    \]
+    So we can think of these actions as the bijections 
+    acting on the indices of the vertices
+    $r : \mathbb Z_4 \to \mathbb Z_4$, 
+    $r(i) := i + 1 \mod 4$, 
+    \[
+        s(i) = 
+        \begin{cases}
+            i + 1 \mod 4, & \text{if odd}\ i \\ 
+            i - 1 \mod 4, & \text{if even}\ i
+        \end{cases}.
+    \]
+    Then $r^n(i) = i + n \mod 4$ and 
+    \[
+        s^n(i)
+        = 
+        \begin{cases}
+            s(i), & \text{if} \ n \ \text{odd} \\ 
+            i , & \text{if} \ n \ \text{even}
+        \end{cases}.
+    \]
+
+    The number of colorings for $e$ is $|X^e| = |X|$. 
+
+    For $g = r$ we, by the same argument as in the necklace problem,
+    \[
+        |X^r| = 2. 
+    \]
+
+    For $g = r^3 = r^{-1}$ we get the same result. 
+
+    For $r^2$ we get 
+    \[
+        X^{r^2} = \{(a,b,a,b) : a,b \in \{R,B\}\},
+    \]
+    so 
+    \[
+        |X^{r^2}| = 4.
+    \]
+
+    For $g = s$ we once again get 
+    \[
+        |X^s| = 4.
+    \]
+
+    For $g = rs$ we get 
+    \[
+        r \circ s(1,2,3,4) = r(2,1,4,3) = 
+        (3,2,1,4)
+    \]
+    which is fixed only if $1 = 3$. Meaning we have $2$ choices 
+    for indices $1$ and $3$ and $2$ for index $2$ and likewise for 
+    index $4$. Thus $|X^{rs}| = 2^3 = 8$.
+
+    For $g = r^2s$ we get 
+    \[
+        r^2 \circ s (1,2,3,4) = r(3,2,1,4) = (4,3,2,1). 
+    \]
+    Here we have $1 \mapsto 4$ and vice versa, likewise for 
+    $2$ and $3$. Thus we get $|X^{r^2s}| = 4$. 
+
+    Lastly for 
+    $g = r^3s$ we have 
+    \[
+        r^3 s(1,2,3,4) = r(4,3,2,1) = (1,4,3,2)
+    \]
+    for which $1$ and $3$ are fixed and $2$ and $4$ are swapped. 
+    Like with $g = rs$ we get 
+    $|X^{r^3s}| = 8$.
+
+    Then by Burnside's lemma, the number of orbits is 
+    \[
+        \#(G/X) = 
+        \frac{1}{8} (16 + 2 + 2 + 4 + 4 + 8 + 4 + 8) 
+        = \frac{48}{8} = 6.
+    \]
+
+    Let $x = (R,R,B,B)$. The orbit is 
+    \[
+        \{x, (B,R,R,B), (B,B,R,R), (R,B,B,R)\}
+    \]
+    with $|\operatorname{Orb}_G(x)| = 4$.
+    Then the stabilizer is 
+    \[
+        \{e,s\}.
+    \]
+    Then we have 
+    \[
+        |G| = 8 = 2 \cdot 4 = |\operatorname{Orb}_G(x)| \cdot 
+        |\operatorname{Stab}_G(x)|.
+    \]
+
+    Burnside's formula relates the number of orbits to 
+    the number of elements fixed by elements in $G$ while 
+    the orbit-stabilizer theorem relates 
+    elements of $G$ which fix $x \in X$, what 
+    elements can be reached by $x$ through the action of the group 
+    and states that the product of those will be the size of the 
+    group (when finite). The easiest example is a group acting on 
+    itself and seeing that $e$ can reach every element in the 
+    group ($|G|$ elements), but is only fixed by itself, 
+    $|\{e\}| = 1$. 
+\end{proof}
+
 \end{document}
