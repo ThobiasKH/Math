@@ -7623,4 +7623,77 @@ For current exam preparation, the most important types to drill are:
     \]
 \end{proof}
 
+\begin{prob}[Problem 1 Exam 2013, Translated]
+    Show that the sequence $f_n(x) = nxe^{-nx^2}$ converges 
+    pointwise on $[0,1]$ and determine whether it 
+    also does so uniformly.
+\end{prob}
+\begin{proof}
+    We notice that 
+    $f_n(0) = 0$ for every $n \in \mathbb N$, and 
+    \begin{align*}
+        f_n(1) 
+        &= ne^{-n}  
+        \\ 
+        &= \frac{n}{e^n} \underset{n\to\infty}{\to} 0. 
+    \end{align*}
+    Now we check for $0 < x < 1$. Then 
+    \begin{align*}
+        f_n(x) 
+        &= nxe^{-nx^2} \\ 
+        &= \frac{nx}{e^{nx^2}}. 
+    \end{align*}
+    As a Computer Scientist would say here, the 
+    function on top is $O(n)$ and the one on the bottom 
+    is $e^{O(n)}$ and thus the fraction will go to $0$ when 
+    $n \to \infty$. Thus the pointwise limit is 
+    \[
+        f_n(x) \to f(x) = 0 
+    \]
+    for any $x \in [0,1]$. 
+    Now to see if we have uniform convergence we must check whether 
+    \[
+        \rho(f_n,f) = \sup_{x\in[0,1]}|f_n(x) - f(x)| \to 0.
+    \]
+    Since $f(x) = 0$ we must check whether 
+    \[
+        \lim_{n\to\infty}\sup_{x\in[0,1]}
+        \left|\frac{nx}{e^{nx^2}}\right| = 0.
+    \]
+    We compute 
+    \[
+        \frac{d}{dx}f_n(x) = 
+        \frac{ne^{nx^2} - nx \cdot 
+        2nxe^{nx^2}}{e^{2nx^2}}
+        = \frac{ne^{nx^2}(1 - 2nx^2)}{e^{2nx^2}}.
+    \]
+    To find where this expression is $0$ we notice the 
+    the top must be $0$, bottom can't be $0$ so we're safe there. 
+    Thus we need $ne^{nx^2}(1-2nx^2) = 0$. The left-hand-side cannot
+    ever be $0$ so we need to find 
+    \begin{align*}
+        2nx^2 &= 1 \\ 
+        x^2 &= \frac{1}{2n} \\ 
+        x &= \frac{1}{\sqrt{2n}} \in [0,1].
+    \end{align*}
+    Then 
+    \begin{align*}
+        f_n\left(\frac{1}{\sqrt{2n}}\right)
+        &= \frac{n\cdot \frac{1}{\sqrt{2n}}}{e^{n\cdot \frac{1}{2n}}} 
+        \\ 
+        &= 
+        \frac{\frac{n}{\sqrt{2n}}}{e^{0.5}}
+        \\ 
+        &= \frac{n}{e^{0.5}\sqrt{2n}} \\ 
+        &= \frac{1}{e^{0.5}\sqrt{2}}\cdot n \cdot n^{-1/2} \\ 
+        &= \frac{1}{e^{0.5}\sqrt2}\cdot \sqrt{n} \\ 
+        &= \frac{\sqrt n}{e^{0.5}\sqrt 2}.
+    \end{align*}
+    This does not go to $0$ hence 
+    \[
+        \lim_{n\to\infty}\sup_{x\in[0,1]}\left|f_n(x)\right| \neq 0.
+    \]
+    Thus $f_n$ does not converge to $f$ uniformly.
+\end{proof}
+
 \end{document}
