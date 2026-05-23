@@ -7696,4 +7696,434 @@ For current exam preparation, the most important types to drill are:
     Thus $f_n$ does not converge to $f$ uniformly.
 \end{proof}
 
+\begin{prob}[Problem 4 Exam 2022]
+    Let $(H, \langle \cdot, \cdot \rangle)$ be a Hilbert space 
+    over $\mathbb R$, and assume that $\{e_n\}_{n\in\mathbb N}$ is 
+    an orthonormal set in $H$.
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that if $\{\alpha_n\}_{n\in\mathbb N}$ and 
+            $\{\beta_n\}_{n\in\mathbb N}$ are sequences of real 
+            numbers such that 
+            $\sum_{n=1}^\infty \alpha_ne_n = \sum_{n=1}^\infty 
+            \beta_ne_n$, then $\alpha_n = \beta_n$ for all 
+            $n$.
+        \item[] Assume from now on that $\{e_n\}_{n\in\mathbb N}$ is 
+            not a basis for $H$.
+        \item Explain that there is an element $u \in H$ such that 
+            $u \neq \sum_{n=1}^\infty \alpha_ne_n$, where 
+            $\alpha = \langle u,e_n\rangle$. 
+        \item Let $u$ and $\alpha_n$ be as in b). Show that there 
+            is another element $v \in H$ such that 
+            $v = \sum_{n=1}^\infty \alpha_ne_n$ and explain that 
+            $u$ and $v$ have the same "Fourier coefficients" with 
+            respect to $\{e_n\}_{n\in\mathbb N}$ 
+            ($\langle v, e_n\rangle = \langle u,e_n\rangle, \ 
+            \forall n$) even though $u \neq v$.
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    Let $n \in \mathbb N$ be arbitrarily chosen. Then 
+    since $\sum_{n=1}^\infty \alpha_n e_n = \sum_{n=1}^\infty 
+    \beta_n e_n$, we have 
+    \[
+        \left\langle \sum_{k=1}^\infty \alpha_k e_k, e_n 
+            \right\rangle 
+        = 
+        \left\langle \sum_{k=1}^\infty \beta_k e_k, e_n 
+            \right\rangle,
+    \]
+    but then 
+    \[
+        \sum_{k=1}^\infty \alpha_k \langle e_k, e_n \rangle 
+        = 
+        \sum_{k=1}^\infty \beta_k \langle e_k, e_n \rangle.  
+    \]
+    Since $\langle e_k, e_n\rangle = 0$ for all $k \neq n$ and 
+    $1$ otherwise we get
+    \[
+        \alpha_n = \beta_n.
+    \]
+    Since $n$ was chosen arbitrarily we conclude this holds for 
+    all $n \in \mathbb N$.
+\end{proof}
+\begin{proof}[Solution of (b)]
+    We assume that $\{e_n\}_n$ is not a basis for $H$. 
+    $\{e_n\}_n$ can fail to be a basis in two ways, either there 
+    is some $u \in H$ such that 
+    \[
+        u \neq \sum_{n=1}^\infty \alpha_ne_n 
+    \]
+    for any sequence $(\alpha_n)_{n\in\mathbb N} \subset \mathbb R$,
+    or there is $u \in H$ so that there exists two representations 
+    \[
+        u = \sum_{n=1}^\infty \alpha_n e_n \ \text{and} \ 
+        u = \sum_{n=1}^\infty \beta_n e_n,
+    \]
+    while $\alpha_k \neq \beta_k$ for some $k$, but by (a) this 
+    cannot be the case. Hence the former must be true. 
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Since $H$ is complete, the series $\sum_{n=1}^\infty \alpha_n 
+    e_n$ converges if the partial sums $s_k = \sum_{n=1}^k \alpha_n 
+    e_k$ for a Cauchy sequence. Note that since 
+    \[
+        \sum_{n=1}^\infty |\alpha_n|^2 < \|u\|^2
+    \]
+    by Bessel's inequality, the partial sums $s_k$ converge 
+    and hence form a Cauchy sequence. Given any $\varepsilon > 0$, 
+    we can find $N$ so that whenever $n,m \geq N$, we have 
+    $\|s_n - s_m\| < \varepsilon^2$. Assuming without loss 
+    of generality that $n \leq m$, we have 
+    \[
+        \|s_m - s_n\| = \|\sum_{k=n+1}^m \alpha_k e_k\| 
+        = \left(\sum_{k=n+1}^m |\alpha_k|^2\right)^{1/2} 
+        = \|s_m - s_n\|^{1/2} < \varepsilon.  
+    \]
+    Then the partial sums form a Cauchy sequence so 
+    the full sum converges to some element $v$. Then 
+    the coefficients of $v$, $\beta_n = \alpha_n$.
+\end{proof}
+
+\begin{prob}
+    Let $(X,\mathcal A, \mu)$ be a measure space, and let 
+    $M_+$ be the set of nonnegative measurable functions 
+    $X \to [0,\infty]$. 
+
+    Suppose 
+    \[
+        I : M_+ \to [0,\infty]
+    \]
+    satisfies 
+    \[
+        I(cf) = cI(f)
+    \]
+    for all $c \geq 0$, 
+    \begin{align*}
+        I(f+g) = I(f) + I(g), \\ 
+        I(\textbf{1}_A) = \mu(A)
+    \end{align*}
+    for all $A \in \mathcal A$, and whenever 
+    $f_n \uparrow f$, we have 
+    \[
+        I(f_n) \to I(f).
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Prove by induction that for nonnegative measurable 
+            functions $f_1,\ldots,f_n$ and constants 
+            $c_1,\ldots,c_n \geq 0$, 
+            \[
+                I\left(\sum_{i=1}^n c_if_i\right)
+                = 
+                \sum_{i=1}^n c_iI(f_i).
+            \]
+        \item Let 
+            \[
+                s = \sum_{i=1}^n a_i\textbf{1}_{A_i}
+            \]
+            be a nonnegative simple function, where 
+            $a_i \geq 0$ and $A_i \in \mathcal A$. Assume the 
+            $A_i$ are pairwise disjoint. Prove that 
+            \[
+                I(s) = \int_X s \; d\mu.
+            \]
+        \item Let $f \in M_+$. Assume you know there exists an 
+            increasing sequence of nonnegative simple functions 
+            $s_n$ such that 
+            \[
+                s_n \uparrow f. 
+            \]
+            Use part (b) and monotone convergence to prove 
+            \[
+                I(f) = \int_X f\; d\mu.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    The induction starts at $n = 1$. Then 
+    \[
+        I(c_1f_1) = c_1I(f_1)
+    \]
+    is immediate from the property 
+    \[
+        I(cf) = cI(f)
+    \]
+    for $c \geq 0$. 
+    Now suppose the result holds for $n = k$. Let $n := k + 1$. 
+    Then 
+    \[
+        I\left(\sum_{i=1}^n c_i f_i\right)
+        = 
+        I\left(c_nf_n + \sum_{i=1}^k c_i f_i\right). 
+    \]
+    By $I(f+g) = I(f) + I(g)$ we get 
+    \[
+        I\left(c_nf_n + \sum_{i=1}^k c_i f_i\right) 
+        = 
+        I(c_nf_n) + I\left(\sum_{i=1}^k c_if_i\right).
+    \]
+    By linearity in the scalars and our assumption about the 
+    $k$-term sum we can rewrite 
+    \[
+        I(c_nf_n) + I\left(\sum_{i=1}^k c_if_i\right)
+        = 
+        c_nI(f_n) + \sum_{i=1}^k c_i I(f_i) 
+        = \sum_{i=1}^n c_i I(f_i)
+    \]
+    completing the proof.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We assume $a_i \geq 0$ and that each $A_i$ are 
+    pairwise disjoint. Then 
+    \[
+        I(s) = 
+        I\left(\sum_{i=1}^n a_i \textbf{1}_{A_i}\right)
+        = 
+        \sum_{i=1}^n a_i I(\textbf{1}_{A_i})
+    \]
+    by (a). Now by $I(\textbf{1}_A) = \mu(A)$ we get 
+    \begin{align*}
+        \sum_{i=1}^n a_i I(\textbf{1}_{A_i})
+        &= 
+        \sum_{i=1}^n a_i \mu(A_i) \\ 
+        &= \int_X \sum_{i=1}^n a_i \textbf{1}_{A_i} \; d\mu \\ 
+        &= \int_X s \; d\mu.
+    \end{align*}
+\end{proof}
+\begin{proof}[Proof of (c)]
+    We assume we have a sequence of simple functions $s_n$ so 
+    that 
+    \[
+        s_1 \leq s_2 \leq \cdots \leq f.
+    \]
+    By the monotone convergence theorem we have 
+    \[
+        \lim_{n\to\infty} \int_X s_n \; d\mu 
+        = 
+        \int_X f \; d\mu.  
+    \]
+    By (b) we have 
+    \[
+        I(s_n) = \int_X s_n \; d\mu, \ \forall n \in \mathbb N
+    \]
+    so 
+    \[
+        \lim_{n\to\infty} I(s_n) = \int_X f\; d\mu. 
+    \]
+    For $s_n \uparrow f$ we have 
+    \[
+        \lim_{n\to\infty} I(s_n(x)) = I(f(x))
+    \]
+    by the axioms of $I$.
+    Then 
+    \[
+        I(f) = \lim_{n\to\infty} I(s_n) 
+        = \int_X f \; d\mu.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $H$ be a Hilbert space with orthonormal basis 
+    $(e_k)_{k\in\mathbb N}$. 
+
+    Let 
+    \[
+        u = \sum_{k=1}^\infty \alpha_k e_k, \ 
+        v = \sum_{k=1}^\infty \beta_k e_k.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that for finite partial sums 
+            \[
+                u_n = \sum_{k=1}^n \alpha_k e_k, \ 
+                v_n = \sum_{k=1}^n \beta_k e_k, 
+            \]
+            we have 
+            \[
+                \langle u_n, v_n \rangle 
+                = \sum_{k=1}^n \alpha_k \beta_k.
+            \]
+        \item Use continuity of the inner product to prove 
+            \[
+                \langle u,v \rangle = \sum_{k=1}^\infty  
+                \alpha_k \beta_k.
+            \]
+        \item Show that the coefficients are unique: if 
+            \[
+                u = \sum_{k=1}^\infty \gamma_k e_k, 
+            \]
+            then 
+            \[
+                \gamma_j = \langle u,e_j\rangle
+            \]
+            for every $j$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Since the Hilbert space is real we have that the inner 
+    product is commutative (since the complex conjugate satisfies
+    $\langle b, a \rangle = \overline{\langle a, b \rangle} = 
+    \langle a ,b \rangle$). Thus 
+    \begin{align*}
+        \langle u_n, v_n \rangle 
+        &= \left\langle \sum_{k=1}^n \alpha_k e_k, 
+        \sum_{k=1}^n \beta_k e_k\right\rangle \\ 
+        &= 
+        \sum_{k=1}^n \alpha_k 
+        \left\langle e_k, \sum_{k=1}^n \beta_k e_k \right\rangle 
+        \\ 
+        &= 
+        \sum_{k=1}^n \alpha_k 
+        \left\langle \sum_{k=1}^n \beta_k e_k, e_k \right\rangle
+        \\ 
+        &= 
+        \sum_{k=1}^n \alpha_k \sum_{k'=1}^n \beta_{k'} 
+        \langle e_{k'}, e_k \rangle. 
+    \end{align*}
+    Since $\langle e_{k'}, e_k \rangle = 0$ whenever $k' \neq k$ and 
+    $1$ otherwise we get 
+    \[
+        \langle u_n, v_n \rangle 
+        = \sum_{k=1}^n \alpha_k \beta_k.
+    \]
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Since $\langle \cdot, \cdot \rangle$ is continuous 
+    we have sequentialy continuity, meaning that if 
+    $a_n, b_n \to a, b$, respectively then 
+    \[
+        \langle a_n, b_n \rangle \to \langle a, b \rangle.
+    \] 
+    Since $u_n \to u$ and $v_n \to v$ we then have 
+    \[
+        \langle u_n, v_n \rangle 
+        \underset{n\to\infty}{\to} \langle u,v\rangle.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    A little note here is that if it were not the case 
+    that 
+    \[
+        \gamma_j = \langle u, e_j \rangle 
+        = \alpha_j 
+    \]
+    for every $j \in \mathbb N$ then $(e_k)_{k\in\mathbb N})$ would 
+    fail to be a basis for $H$. Nonetheless we can prove this 
+    rigorously.
+
+    Suppose 
+    \[
+        \sum_{k=1}^\infty \gamma_k e_k 
+        = u = 
+        \sum_{k=1}^\infty \alpha e_k.
+    \]
+    Fix $j \in \mathbb N$. Then
+    \begin{align*}
+        \left\langle \sum_{k=1}^\infty 
+        \gamma_k e_k, e_j \right\rangle
+        &= 
+        \left\langle \sum_{k=1}^\infty 
+        \alpha_k e_k, e_j \right\rangle \\ 
+        \sum_{k=1}^\infty \gamma_k \left\langle e_k, e_j \right\rangle
+        &= 
+        \sum_{k=1}^\infty \alpha_k \left\langle e_k, e_j \right\rangle
+        \\
+        \gamma_j &= \alpha_j
+    \end{align*}
+    since the inner product is $1$ at $k = j$ and $0$ everywhere 
+    else. Since $j$ was arbitrarily chosen we have $\gamma_j$ 
+    and $\alpha_j$ coinciding on every $j \in \mathbb N$.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        \ell^1 = 
+        \left\{x = (x_1,x_2,x_3,\ldots) : \sum_{k=1}^\infty 
+        |x_k| < \infty\right\}
+    \]
+    with norm 
+    \[
+        \|x\|_1 = \sum_{k=1}^\infty |x_k|.
+    \]
+    For each $n \in \mathbb N$, define 
+    \[
+        e_n = (0,\ldots,0,1,0,\ldots),
+    \]
+    where the $1$ is in the $n$-th coordinate.
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $e_n \in \ell^1$ and compute 
+            \[
+                \|e_n\|_1. 
+            \] 
+        \item Compute 
+            \[
+                \|e_n-e_m\|_1
+            \]
+            for $n \neq m$. 
+        \item Show that $(e_n)$ has no convergent subsequence 
+            in $\ell^1$. 
+        \item Let 
+            \[
+                B = \{x \in \ell^1 : \|x\|_1 \leq 1\}.
+            \]
+            Show that $B$ is closed and bounded, but not 
+            compact. 
+        \item Show that $B$ is not totally bounded
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    $\|e_k\|_1$ is the sum of the absolute values of all entries 
+    in $e_k$, but $e_k$ has entries $0$ everywhere except at 
+    $k$ so $\|e_k\|_1 = 1 < \infty$ for every $k \in \mathbb K$.
+    Thus $e_k \in \ell^1$.
+\end{proof}
+\begin{proof}[Solution of (b)]
+    Suppose $n \neq m$. Then 
+    $\|e_n-e_m\|_1$ is the sum of two $1$'s, i.e. $\|e_n-e_m\|_1 = 2$
+    whenever $n \neq m$.
+\end{proof}
+\begin{proof}[Proof of (c)]
+    This is intuitive from the fact that the 
+    difference between any two $e_n,e_m$ ($n \neq m$) has 
+    length $2$. Thus suppose you take some subsequence 
+    $(e_n(k))_{k\in\mathbb N}$. Then no matter how large you let 
+    $k$ be, any two $e_{n(k)}, e_{n(k')}$ will have 
+    \[
+        \|e_{n(k)} - e_{n(k')}\| = 2
+    \]
+    meaning the distance between them cannot be made arbitrarily 
+    small. 
+\end{proof}
+\begin{proof}[Proof of (d)]
+    $B$ is obviously closed and this can be shown by observing 
+    that $\ell^1 \setminus B$ is open, $B$ is the closure of 
+    $B' = \{x \in \ell^1 : \|x\|_1 < 1\}$ and 
+    you could give an argument for convergent sequences having 
+    their limit in the space. 
+    Boundedness is immediate from the definition.
+
+    The space is not compact. Consider the sequence 
+    $(e_n)_n$. As discussed in (c), this sequence has no convergent 
+    subsequences, hence $B$ is not compact. 
+\end{proof}
+\begin{proof}[Proof of (e)]
+    $B$ is totally bounded if for any $\varepsilon > 0$ we have 
+    finitely many $x_1,x_2,\ldots,x_n \in B$ so that
+    \[
+        B = \bigcup_{i=1}^n B(\varepsilon;x_i).
+    \]
+    Let $\varepsilon < 2$. Suppose $x_1$ is chosen so that 
+    $e_{k_1} \in B(\varepsilon, x_1)$. Then $e_{k_i} \not \in 
+    B(\varepsilon, x_1)$ for every $i \neq 1$. 
+    Suppose we have $x_1,\ldots,x_n$ chosen in this way. Then 
+    we will have $e_{k_i}\not\in \cup x_j$ for $i > n$. 
+
+\end{proof}
+
+
 \end{document}
