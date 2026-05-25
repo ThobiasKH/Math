@@ -1,5 +1,3 @@
-# Math & Theoretical Computer Science
+# Math & Theoretical Computer Science notes
 
-Math/TCS is my biggest interest and I derive a lot of happiness in writing nice notes. 
-
-To create the notes I use Neovim with the Vimtex plugin. Feel free to steal my preamble or use my notes for your own studying. 
+To create the notes I use Neovim with the Vimtex plugin. Feel free to steal my preamble or use my notes for your own studying, though beware they are quite messy at times. 
