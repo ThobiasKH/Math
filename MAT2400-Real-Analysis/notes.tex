@@ -8125,5 +8125,199 @@ For current exam preparation, the most important types to drill are:
 
 \end{proof}
 
+\begin{prob}
+    Let $X$ be a Banach space and let $T \in \mathcal L(X)$ 
+    satisfy 
+    \[
+        \|T\| < 1.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that the series 
+            \[
+                \sum_{k=0}^\infty T^k
+            \]
+            converges absolutely in $\mathcal L(x)$.
+        \item Show that 
+            \[
+                (I-T)^{-1}
+                = 
+                \sum_{k=0}^\infty T^k.
+            \]
+        \item Now let $A : X \to X$ and $B : X \to X$ be 
+            bounded linear operators, and suppose 
+            \[
+                \|I-AB\| < 1.
+            \] 
+            Show that $AB$ is invertible and find a 
+            formula for $(AB)^{-1}$.
+
+        \item Suppose $Ax = b$. Use (c) to express $x$ in 
+            terms of $B,I-AB$, and $b$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    For operator $T$, the series converges 
+    if $\sum_{k=0}^\infty \|T^k\| < \infty$.
+
+
+    Recall that 
+    \[
+        \sum_{k=0}^\infty \|T^k\|
+        \leq 
+        \sum_{k=0}^\infty \|T\|^k.
+    \]
+    Consider the difference of finite sums, and suppose 
+    wlog that $n \geq m$: 
+    \begin{align*}
+        \left|\sum_{k=0}^n \|T\|^k - \sum_{k=0}^m \|T\|^k\right|
+        &= 
+        \left| \sum_{k=m+1}^n \|T\|^k \right| \\ 
+        &\leq \|T\|^n \cdot (n - m). 
+    \end{align*}
+    Since $\|T\| < 1$ we have, for any $\varepsilon$, $N \in 
+    \mathbb N$ s.t. 
+    \[
+        \|T\|^n \cdot (n-m) < \varepsilon 
+    \]
+    whenever $n,m \geq N$ meaning we have a Cauchy sequence in 
+    $\mathbb R$, hence a convergent sequence. The limit is 
+    \[
+        \sum_{k=0}^\infty \|T\|^k 
+    \] 
+    meaning 
+    \[
+        \sum_{k=0}^\infty \|T^k\| < \infty. 
+    \]
+    Hence 
+    \[
+        \sum_{k=0}^\infty T^k
+    \]
+    converges, and in fact, it converges to 
+    a bounded linear operator $\in \mathcal L(X)$.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Let 
+    \[
+        S_n := \sum_{k=0}^n T^k. 
+    \]
+    Then we compute 
+    \begin{align*}
+        (I-T)S_n 
+        &= (I-T)\sum_{k=0}^\infty T^k \\ 
+        &= I + T + \cdots + T^n - (I + T + \cdots + T^{n+1}) \\ 
+        &= I - T^{n+1}.
+    \end{align*}
+    Since 
+    \[
+        \|T^{n+1}\| \leq \|T\|^{n+1} \to 0 
+    \]
+    we have 
+    \[
+        T^{n+1} \to 0.
+    \]
+
+    Let 
+    \[
+        S = \sum_{k=0}^\infty T^k. 
+    \]
+    Then $S_n \to S$ and 
+    \[
+        (I-T)S = S(I-T) = I. 
+    \]
+    Thus 
+    \[
+        (I-T)^{-1} = S.
+    \]
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Since $\|I-AB\| < 1$ we have the existence of 
+    \[
+        (I-(I-AB))^{-1}
+    \] 
+    with 
+    \[
+        (I-(I-AB))^{-1} = \sum_{k=0}^\infty (I-AB)^k,
+    \]
+    but 
+    \[
+        (I-(I-AB))^{-1} = (AB)^{-1}. 
+    \]
+    Thus $AB$ has the inverse 
+    \[
+        (AB)^{-1} = \sum_{k=0}^\infty (I-AB)^k.
+    \]
+\end{proof}
+\begin{proof}[Solution of (d)]
+    \begin{align*}
+        Ax &= b \\ 
+        (AB)^{-1}Ax &= (AB)^{-1}b \\ 
+        B^{-1}A^{-1}Ax &= (AB)^{-1}b \\ 
+        B^{-1}x &= (AB)^{-1}b \\ 
+        x &= B(AB)^{-1}b \\ 
+        x &= B\left(\sum_{k=0}^\infty (I-AB)^k\right)b.
+    \end{align*}
+\end{proof}
+
+\begin{prob}
+    Let $(X,d)$ be a metric space, let $K \subseteq X$ be 
+    compact and nonempty, and let 
+    \[
+        f : K \to \mathbb R
+    \]
+    be lower semicontinuous, meaning that for every $x \in K$ 
+    and every $\varepsilon > 0$, there exists $\delta > 0$ 
+    such that 
+    \[
+        y \in K, \ d(x,y) < \delta \Rightarrow 
+        f(x) < f(y) + \varepsilon.
+    \]
+    Show that $f$ attains a minimum on $K$.
+    That is, prove that there exists $\overline x \in K$ such that 
+    \[
+        f(\overline k) \leq f(x)
+    \]
+    for every $x \in K$.
+\end{prob}
+\begin{proof}
+    Let
+    \[
+        m=\inf\{f(x):x\in K\}.
+    \]
+    For every \(n\in\mathbb N\), by the definition of infimum, choose
+    \(x_n\in K\) such that
+    \[
+        m\leq f(x_n)\leq m+\frac1n.
+    \]
+    Then \(f(x_n)\to m\).
+
+    Since \(K\) is compact, the sequence \((x_n)\) has a convergent
+    subsequence \(x_{n_k}\to \bar x\) with \(\bar x\in K\).
+
+    Let \(\varepsilon>0\). By lower semicontinuity of \(f\) at \(\bar x\),
+    there exists \(\delta>0\) such that whenever \(y\in K\) and
+    \(d(y,\bar x)<\delta\), we have
+    \[
+        f(\bar x)<f(y)+\varepsilon.
+    \]
+    For sufficiently large \(k\), \(d(x_{n_k},\bar x)<\delta\), hence
+    \[
+        f(\bar x)<f(x_{n_k})+\varepsilon.
+    \]
+    Letting \(k\to\infty\), and using \(f(x_{n_k})\to m\), gives
+    \[
+        f(\bar x)\leq m+\varepsilon.
+    \]
+    Since \(\varepsilon>0\) was arbitrary,
+    \[
+        f(\bar x)\leq m.
+    \]
+    But \(m\leq f(\bar x)\), because \(\bar x\in K\). Therefore
+    \[
+        f(\bar x)=m.
+    \]
+    So \(f\) attains its minimum at \(\bar x\).
+\end{proof}
+
 
 \end{document}
