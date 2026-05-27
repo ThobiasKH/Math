@@ -5290,4 +5290,257 @@ There will also probably be a lot of problems repeated.
     $|\{e\}| = 1$. 
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^3 + x + 1 \in \mathbb F_2[x],
+    \]
+    and let 
+    \[
+        K = \mathbb F[x]/\langle f(x) \rangle.
+    \]
+    Let 
+    \[
+        \alpha = x + \langle f(x) \rangle.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f$ is irreducible over 
+            $\mathbb F_2$. Conclude that $K$ is a field.
+        \item Use 
+            \[
+                f(\alpha) = 0
+            \]
+            to compute 
+            \[
+                \alpha^3, \alpha^4, 
+                \alpha^5, \alpha^6, \alpha^7.
+            \]
+            in the basis $\{1,\alpha,\alpha^2\}$.
+        \item The Frobenius automorphism is
+            \[
+                \sigma_2 : K \to K, \ \sigma_2(a) = a^2.
+            \]
+            Compute 
+            \[
+                \sigma_2(\alpha), \ \sigma_2^2(\alpha), \ 
+                \sigma_2^3(\alpha).
+            \]
+        \item Use Frobenius conjugates to factor 
+            $f(x)$ into linear factors over $K$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Since $\deg f \in \{2,3\}$ we can use the fact that $f$ is 
+    irreducible over the ground field if and only if 
+    it has no zeros in said field. 
+    Since 
+    \[
+        f(0) = 1 = f(1)
+    \]
+    we have that $f$ is irreducible over $\mathbb F_2$.
+
+    As $\mathbb F_2[x]$ is a field and $\langle f \rangle$ is 
+    a maximal ideal by $f$ being reducible we have that 
+    \[
+        \mathbb F_2[x]/\langle f \rangle
+    \]
+    is a field. 
+\end{proof}
+\begin{proof}[Solution of (b)]
+    \begin{align*}
+        f(\alpha) 
+        &= 0 \\ 
+        \alpha^3 + \alpha + 1 
+        &= 0 \\ 
+        \alpha^3 
+        &= \alpha + 1. 
+    \end{align*}
+    Then 
+    \begin{align*}
+        \alpha^4 &= \alpha^2 + \alpha \\ 
+        \alpha^5 &= \alpha^3 + \alpha^2 \\ 
+                 &= \alpha^2 + \alpha + 1 \\ 
+        \alpha^6 &= \alpha(\alpha^2 + \alpha + 1) \\ 
+                 &= \alpha + 1 + \alpha^2 + \alpha \\ 
+                 &= \alpha^2 + 1  \\ 
+        \alpha^7 &= \alpha + 1 + \alpha \\ 
+                 &= 1.
+    \end{align*}
+\end{proof}
+\begin{proof}[Solution of (c)]
+    \begin{align*}
+        \sigma_2(\alpha) &= \alpha^2 \\ 
+        \sigma_2^2(\alpha) &= \sigma_2(\alpha^2) \\ 
+                           &= \alpha^4 \\ 
+                           &= \alpha^2 + \alpha \\ 
+        \sigma_2^3(\alpha) &= \sigma(\alpha^2 + \alpha) \\ 
+                           &= (\alpha^2 + \alpha)(\alpha^2 + \alpha)
+                           \\ 
+                           &= \alpha^4 + 2\alpha^3 + \alpha^2 \\ 
+                           &= \alpha^2 + \alpha + \alpha^2 \\ 
+                           &= \alpha.
+    \end{align*}
+\end{proof}
+\begin{proof}[Solution of (d)]
+    Since $f$ has coefficients in $\mathbb F_2$, Frobenius 
+    sends roots to roots. Therefore the roots of $K$ are 
+    \[
+        \alpha, \ \alpha^2, \ \alpha^4.
+    \]
+    Writing this in the basis we get roots 
+    \[
+        \alpha, \ \alpha^2, \ \alpha^2 + \alpha.
+    \]
+    Thus 
+    \[
+        f(x) = (x-\alpha)(x-\alpha^2)(x-\alpha^4) 
+        = (x+\alpha)(x+\alpha^2)(x+\alpha^4).
+    \]
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^3 - 5 \in \mathbb Q[x].
+    \]
+    Let 
+    \[
+        \alpha = \sqrt[3]5
+    \]
+    be the real cube root of $5$, and let 
+    \[
+        \zeta = \zeta_3 = e^{2i\pi/3}.
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f(x)$ is irreducible over the 
+            rationals. 
+        \item Find all roots of $f(x)$ in $\mathbb C$, and 
+            describe the splitting field $K$ of $f$ over 
+            $\mathbb Q$.
+        \item Compute 
+            \[
+                [K:\mathbb Q].
+            \]
+        \item Show that 
+            \[
+                \operatorname{Gal}(K/\mathbb Q) \cong S_3.
+            \]
+        \item Describe the two automorphisms of $K$ that generate 
+            the Galois group.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Since $f$ is over $\mathbb Q$ with integer coefficients we can 
+    use Eistenstein's criterion. Let $p = 5$. Then 
+    $p$ divides $5$, but not the leading coefficient $1$ and 
+    $p^2 = 25$ does not divide $5$. Thus $f$ is irreducible over 
+    $\mathbb Q$.
+\end{proof}
+\begin{proof}[Solution of (b) and (c)]
+    We have the obvious 
+    \[
+        f(\sqrt[3]5) = 0.
+    \]
+    Then we notice that 
+    \[
+        f(\zeta_3\sqrt[3]5) = 
+        e^{2\pi}\cdot 5 - 5 
+        = 0.
+    \]
+    Thus the roots in $\mathbb C$ are 
+    \[
+        \sqrt[3]5 \ \text{and} \ \zeta_3\sqrt[3]5.
+    \]
+    Thus the splitting field is 
+    \[
+        K = \mathbb Q(\sqrt[3]5, \zeta_3).
+    \]
+    Noticing that $f$ is actually the minimal polynomial of 
+    $\sqrt[3]5$ we have 
+    \[
+        [\mathbb Q(\sqrt[3]5) : \mathbb Q] = 3. 
+    \]
+    Furthermore, generally for an $n$-th root of unity the minimal 
+    polynomial is 
+    \[
+        \prod_{d|n} (x^{n/d})^\mu(d)
+    \]
+    where $\mu$ is the Möbius function. 
+    So the minimal polynomial of $\zeta_3$ over $\mathbb Q(\sqrt[3]
+    5)$ is 
+    \[
+        x^2 + x + 1
+    \]  
+    meaning, by the tower law,  
+    \[
+        [K:\mathbb Q] 
+        = 2 \cdot 3 = 6.
+    \]
+\end{proof}
+\begin{proof}[Solution of (d)]
+    For the splitting field for a degree $n$ polynomial we have 
+    \[
+        \operatorname{Gal}(K/F) \leq S_n
+    \]
+    so 
+    \[
+        \operatorname{Gal}(K/\mathbb Q) \leq S_3. 
+    \]
+    Since $K/\mathbb Q$ is Galois we have 
+    \[
+        |\operatorname{Gal}(K/\mathbb Q)|
+        = [K:\mathbb Q] = 6 = |S_3|. 
+    \]
+    The only subgroup of $S_3$ with $|S_3|$ elements is $S_3$ itself.
+    Hence 
+    \[
+        \operatorname{Gal}(K/\mathbb Q)
+        \cong S_3.
+    \]
+\end{proof}
+\begin{proof}[Solution of (e)]
+    Define $\sigma(\alpha) = \zeta\alpha$ and 
+    $\sigma(\zeta) = \zeta$. Then 
+    \[
+        \sigma(\alpha) = \zeta\alpha
+    \]
+    and
+    \[
+        \sigma(\zeta\alpha) = \zeta^2\alpha
+    \]
+    and 
+    \[
+        \sigma(\zeta^2\alpha) = \alpha.
+    \]
+    So $\sigma$ permutes the three roots, and has 
+    order $3$.
+
+    Define $\tau(\alpha) = \alpha$, and 
+    $\tau(\sigma) = \sigma^2$.
+    Then 
+    \[
+        \tau(\alpha) = \alpha, 
+    \]
+    and 
+    \[
+        \tau(\alpha\sigma) = \alpha\sigma^2
+    \]
+    and 
+    \[
+        \tau(\alpha\sigma^2) = \alpha\sigma.
+    \]
+    Thus $\tau$ is complex conjugation and since $\alpha$ is fixed 
+    it has order $2$.
+
+    If we label $\alpha = 1, \alpha\zeta = 2, \alpha\zeta^2 = 3$ 
+    we get 
+    \[
+        \sigma = (1 \ 2 \ 3), \ \tau = (2 \ 3)
+    \]
+    so a $3$-cycle and a transposition, which generate 
+    $S_3$.
+\end{proof}
+
+
 \end{document}
