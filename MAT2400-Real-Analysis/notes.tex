@@ -8319,5 +8319,345 @@ For current exam preparation, the most important types to drill are:
     So \(f\) attains its minimum at \(\bar x\).
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        X = C([0,1],\mathbb R)
+    \]
+    with the supremum norm 
+    \[
+        \|u\| = \sup_{[0,1]}|u(t)|.
+    \]
+    Define 
+    \[
+        F : X \to \mathbb R
+    \]
+    by 
+    \[
+        F(u) = u(0)u(1) + \int_0^1 u(t)^2 \; dt.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Guess the Frechet derivative $DF(u)h$.
+        \item Prove that $F$ is Frechet differentiable.
+        \item Show that $DF(u):X \to \mathbb R$ is 
+            bounded and linear. 
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[(a) and proof of (b) and solution of (c)]
+    I guess that the derivative is $DF(u)h = (uh)(0) + (uh)(1) 
+    + \int_0^1 (uh)(t) \; dt$.
+
+    We want to find some $A$ so that 
+    \[
+        \lim_{\|h\|\to0} \frac{|F(u + h) - F(u) - A(h)|}{\|h\|} 
+        = 0.
+    \]
+    We begin by computing 
+    \begin{align*}
+        F(u+h) 
+        &= (u+h)(0)(u+h)(1) + \int_0^1 (u+h)(t)^2 \; dt \\ 
+        &= (u(0) + h(0))(u(1) + h(1)) 
+        + \int_0^1 (u(t) + h(t))^2 \; dt \\ 
+        &= u(0)u(1) + u(0)h(1) + u(1)h(0) + h(0)h(1) 
+        \\ 
+        &+ \int_0^1 u(t)^2 + 2u(t)h(t) + h(t)^2 \; dt.
+    \end{align*}
+    Subtracting $F(u)$ we get 
+    \begin{align*}
+        F(u+h) - F(u) 
+        &= u(0)h(1) + u(1)h(0) + h(0)h(1) 
+        \\
+        &+ 2\int_0^1 u(t)h(t) \; dt + \int_0^1 h(t)^2 \; dt. 
+    \end{align*}
+    Let $A(h) := u(0)h(1) + u(1)h(0) + 2\int_0^1 u(t)h(t) \; dt$. 
+    Then 
+    \begin{align*}
+        F(u+h) - F(u) - A(h)  
+        &= h(0)h(1) + \int_0^1 h(t)^2 \;dt \\ 
+        &\leq \|h\|^2 + \|h\|^2 \int_0^1 \; dt, 
+    \end{align*}
+    meaning, for arbitrary $h \in X$, 
+    \[
+        0 \leq \lim_{\|h\|\to 0}\frac{|F(u+h)- F(h) - A(h)|}{\|h\|} 
+        \leq \lim_{\|h\|\to 0} 2\|h\| = 0.
+    \]
+    Thus the limit is $0$.  
+    
+    Linearity and boundedness are easy to show so the guess 
+    was slightly wrong and 
+    \[
+        DF(u) = A.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $H$ be a real Hilbert space with orthonormal basis 
+    $(e_k)_{k\in\mathbb N}$. 
+
+    Let 
+    \[
+        A : H \to \mathbb R
+    \]
+    be a bounded linear functional. That is, $A$ is linear 
+    and there exists $M > 0$ s.t. 
+    \[
+        |A(x)| \leq M\|x\|
+    \]
+    for all $x \in H$.
+
+    Define 
+    \[
+        \beta_k = A(e_k).
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that for every $n$, 
+            \[
+                A\left(\sum_{k=1}^n \beta_ke_k\right)   
+                = \sum_{k=1}^n \beta_k^2.
+            \]
+        \item Use boundedness of $A$ to prove that 
+            \[
+                \left(\sum_{k=1}^n \beta_k^2\right)^{1/2} 
+                \leq M
+            \]
+            for every $n$.
+            Conclude that 
+            \[
+                \sum_{k=1}^\infty \beta_k^2 < \infty.
+            \]
+        \item Show that 
+            \[
+                \sum_{k=1}^\infty \beta_k e_k
+            \]
+            converges in $H$. 
+        \item[] Let 
+            \[
+                y = \sum_{k=1}^\infty \beta_k e_k.
+            \]
+        \item Show that for every 
+            \[
+                x = \sum_{k=1}^\infty \alpha_k e_k \in H,
+            \]
+            we have 
+            \[
+                A(x) = \langle x,y \rangle.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    The key here is that $\beta_k = A(e_k) \in \mathbb R$, the 
+    ground-field, so by linearity we can pull it out at each 
+    term: 
+    \begin{align*}
+        A\left(\sum_{k=1}^n \beta_k e_k\right)
+        &= 
+        \sum_{k=1}^n \beta_k A(e_k) \\  
+        &= \sum_{k=1}^n \beta_k \beta_k \\ 
+        &= \sum_{k=1}^n \beta_k^2.
+    \end{align*}
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We have that 
+    \[
+        \sum_{k=1}^n \beta_k^2 = 
+        A\left(\sum_{k=1}^n \beta_k e_k \right)
+        \leq 
+        M \left\|\sum_{k=1}^n \beta_k e_k\right\|.
+    \]
+    Furthermore: 
+    \begin{align*}
+        \left\|\sum_{k=1}^n\beta_k e_k\right\|^2 
+        &= 
+        \left\langle 
+        \sum_{k=1}^n \beta_k e_k, 
+        \sum_{k=1}^n \beta_k e_k 
+        \right\rangle \\ 
+        &= \sum_{k=1}^n \beta_k^2.  
+    \end{align*}
+    This gives us the desired result. 
+
+    Then 
+    \[
+        S_n = \sum_{k=1}^n \beta_k^2 
+    \]
+    is bounded above by $M^2$, meaning 
+    \[
+        \sum_{k=1}^\infty \beta_k^2 < \infty.
+    \]
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Let 
+    \[
+        y_n = \sum_{k=1}^n \beta_ke_k. 
+    \]
+    Then for $m > n$, 
+    \[
+        \|y_m, y_n\|^2 = \sum_{k=n+1}^m \beta_k^2. 
+    \]
+    The right-hand side is the tail-end of a convergent series 
+    and thus tends to $0$. Hence $y_n$ is cauchy. $H$ is 
+    a Hilbert space and thus a Banach space and therefore complete. 
+    Hence $y_n$ converges to 
+    \[
+        y = \sum_{k=1}^\infty \beta_k e_k.
+    \]
+\end{proof}
+\begin{proof}[Proof sketch of (d)]
+    Define 
+    \[
+        x_n=\sum_{k=1}^n \alpha_k e_k.
+    \]
+    Use continuity of $A$ to get $A(x_n)\to A(x)$ and 
+    \[
+        A(x_n)
+        =
+        A\left(\sum_{k=1}^n \alpha_k e_k\right)
+        =
+        \sum_{k=1}^n\alpha_k A(e_k)
+        =
+        \sum_{k=1}^n\alpha_k\beta_k.
+    \]
+    Then 
+    \[
+        \langle x,y\rangle
+        =
+        \sum_{k=1}^\infty \alpha_k\beta_k.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $(X,\mathcal A, \mu)$ be a measure space, and let 
+    $(A_n)_{n\in\mathcal A}$ be measurable sets such that 
+    \[
+        \sum_{n=1}^\infty \mu(A_n) < \infty.
+    \]
+    
+    Define 
+    \[
+        A = \{x \in X : x \in A_n \ \text{for infinitely many} \ 
+        n\}.
+    \]
+
+    Equivalently, 
+    \[
+        A = \underset{n\to\infty}{\lim\sup}A_n.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that 
+            \[
+                A = \bigcap_{N=1}^\infty\bigcup_{n=N}^\infty A_n.
+            \]
+        \item Show that for every $N$, 
+            \[
+                \mu(A) \leq \sum_{n=N}^\infty \mu(A_n).
+            \]
+        \item Use this to prove that 
+            \[
+                \mu(A) = 0.
+            \] 
+            In words: if the sum of the measures is finite, then 
+            almost every $x$ belongs to only finitely many of 
+            the sets $A_n$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose $x \in A$. Then $x \in A_n$ for infinitely many 
+    indices $n$. Fix an arbitrary $N \geq 1$. Since $x$ belongs 
+    to infinitely many sets in the sequence, we can always find 
+    an index $m \geq N$ so that $x \in A_m$.
+    Since $x \in A_m$ we have 
+    \[
+        x \in \bigcup_{m=n}^\infty A_n.
+    \]
+    Since this holds for every $N \geq 1$ we must have that 
+    \[
+        x \in \bigcap_{N=1}^\infty \bigcup_{n=N}^\infty A_n.
+    \]
+    Thus 
+    \[
+        A \subseteq \bigcap_{N=1}^\infty \bigcup_{n=N}^\infty. 
+    \]
+
+    Suppose $x \in \bigcap_{N=1}^\infty \bigcup_{n=N}^\infty A_n$. 
+    Then, for every $N \in \mathbb N$ we have 
+    \[
+        x \in \bigcup_{n=N}^\infty A_n.  
+    \]
+    Meaning there is at least one $m \geq N$ so that $x \in A_m$. 
+    We use this to construct a sequence of sets. Let 
+    $N_1 = 1$. There is then $m_1 \geq 1$ so that $x \in A_{m_1}$. 
+    For $N_k$ choose $N_{k+1} = m_{k} + 1$. Then there is 
+    $m_{k+1} > m_k$ such that $x \in A_{m_k}$. Then we 
+    get an infinite sequence $m_1 < m_2 < \cdots$ so that 
+    \[
+        x \in A_{m_k} 
+    \]
+    for every $k$. Thus $x$ is in inifinitely many sets, i.e. 
+    \[
+        x \in A
+    \]
+    meaning 
+    \[
+        \bigcap_{N=1}^\infty \bigcup_{n=N}^\infty A_n \subseteq 
+        A. 
+    \]
+    The two inclusions yield equality. 
+
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We have 
+    \[
+        A = \bigcap_{N=1}^\infty \bigcup_{n=N}^\infty 
+        A_n \subseteq 
+        \bigcup_{n=N}^\infty A_n.
+    \]
+    For the union of $A_n$ (not necessarily disjoint) we have 
+    \[
+        \mu\left(\bigcup_{n=N}^\infty A_n\right)
+        \leq \sum_{n=N}^\infty \mu(A_n)
+    \]
+    and since $A$ is a subset of $\bigcup_{n\geq N} A_n$ we 
+    get 
+    \[
+        \mu(A) \leq 
+        \mu\left(\cup_{n=N}^\infty A_n\right) 
+        \leq \sum_{n=N}^\infty \mu(A_n).
+    \]
+\end{proof}
+\begin{proof}[Proof of (c)]
+    We have 
+    \[
+        \sum_{n=1}^\infty \mu(A_n) < \infty
+    \]
+    meaning it converges. Then 
+    define 
+    \[
+        S_K := \sum_{n=K}^\infty \mu(A_n) \to 0 
+    \]
+    since the tail end of a convergent sum necessarily goes to 
+    $0$. Then 
+    \begin{align*} 
+        \mu(A) 
+        &= 
+        \mu\left(\bigcap_{N=1}^\infty \bigcup_{n=N}^\infty A_n\right)
+        \\ 
+        &\leq  
+        \sum_{n=K}^\infty \mu(A_n)
+    \end{align*}
+    for every fixed $K$.
+    Since it holds for every $K$: 
+    \[
+        \mu(A) \leq \lim_{K\to\infty} S_K = 0. 
+    \]
+    As the measure is a nonnegative function we then have 
+    \[
+        \mu(A) = 0.
+    \]
+    
+\end{proof}
 
 \end{document}
