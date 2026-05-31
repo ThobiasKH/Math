@@ -8659,5 +8659,326 @@ For current exam preparation, the most important types to drill are:
     \]
     
 \end{proof}
+\newpage 
+
+\begin{prob}
+    Let $(X, \mathcal A, \mu)$ be a measure space. 
+    Suppose $f_n: X \to \mathbb R$ are measurable functions 
+    such that 
+    \[
+        f_n(x) \to f(x)
+    \]
+    for $\mu$-almost every $x \in X$.
+
+    Assume there exists an integrable function $g : X \to [0, 
+    \infty]$ such that 
+    \[
+        |f_n(x)| \leq g(x)
+    \]
+    for every $n$ and almost every $x \in X$, and 
+    \[
+        \int_X g \; d\mu < \infty. 
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f$ is integrable. 
+        \item Prove that 
+            \[
+                \int_X |f_n - f| \; d\mu \to 0. 
+            \]
+        \item Conclude that 
+            \[
+                \int_X |f_n - f| \; d\mu \to 
+                \int_X f \; d\mu.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We have that 
+    \[
+        \mu(X \setminus \{x \in X : f_n(x) \to f(x)\}) 
+        = \emptyset
+    \]
+    and 
+    \[
+        \mu(\{x \in X : g(x) < |f_n(x)|\}) = \emptyset.
+    \]
+    Then we can take, $\mu$-almost everywhere, 
+    \[
+        |f(x)| = \lim_{n\to\infty} |f_n(x)| \leq g(x)
+    \]
+    so since $g$ is integrable, 
+    \[
+        \int_X |f| \; d\mu \leq \int_X g \; d\mu < \infty.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    Let 
+    \[
+        h_n(x) := |f_n(x) - f(x)|. 
+    \]
+    Then since $f_n(x) \to f(x)$ we have 
+    $|f_n(x) - f(x)| \to 0$ $\mu$-almost everywhere. So 
+    \[
+        h_n(x) \to 0
+    \]
+    $\mu$-almost everywhere. 
+    We have $h_n(x) \leq |f_n(x)| + |f(x)| \leq 2g(x)$ by triangle 
+    inequality. Since $g$ is integrable then $2g$ is integrable 
+    so $h_n$ is integrable by the dominated convergence 
+    theorem. Since $h_n \to |f(x) - f(x)| = 0$ we have 
+    \[
+        \int_X |f_n - f| \; d\mu = \int_X h_n d\mu \to 
+        \int_X 0 \; d\mu = 0.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    We have 
+    \[
+        \left| \int_X f_n\; d\mu - \int_X f \; d\mu \right| 
+        = \left|\int_X (f_n - f) \; d\mu\right|. 
+    \]
+    Then 
+    \[
+        \left|\int_X (f_n - f) \; d\mu\right|
+        \leq 
+        \int_X |f_n - f| \; d\mu \to 0. 
+    \]
+    Thus 
+    \[
+        \int_X f_n \; d\mu \to \int_X f \; d\mu.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        X = C([0,1], \mathbb R)
+    \]
+    with the supremum norm. Define 
+    $L : X \to X$ by 
+    \[
+        (Lu)(x) = x \int_0^1 u(t) \; dt.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $L$ is linear and bounded. 
+        \item Show that $L$ has finite rank. 
+        \item Solve 
+            \[
+                (I - L)u = f
+            \]
+            for arbitrary $f \in X$, or determine for which $f$ it 
+            is solvable.
+        \item Is $I-L$ bijective?
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Let $u,v \in X$ and $\alpha \in \mathbb R$. 
+
+    Then 
+    \begin{align*}
+        (L(u + v))(x) 
+        &= x\int_0^1 u(t) + v(t) \; dt \\ 
+        &= x\left(\int_0^1 u(t) \; dt + \int_0^1 v(t)\; dt\right) \\ 
+        &= x\int_0^1 u(t) \; dt + x \int_0^1 v(t) \; dt \\ 
+        &= (Lu)(x) + (Lv)(x), 
+    \end{align*}
+    and 
+    \begin{align*}
+        (L(\alpha u))(x) 
+        &= x\int_0^1 \alpha u(t) \; dt \\ 
+        &= \alpha x \int_0^1 \alpha u(t) \; dt \\ 
+        &= \alpha (Lu)(x). 
+    \end{align*}
+    Thus $L$ is linear. 
+
+    Now to show boundedness we recall that $u \in X$ means that 
+    $u$ is continuous on a compact set, meaning the supremum norm 
+    is well-defined. So for any $x$ we have 
+    \begin{align*}
+        |L(\alpha u)(x)| 
+        &= \left|x \int_0^1 u(t) \; dt\right| \\ 
+        &\leq x \int_0^1 |u(t)| \;dt \\ 
+        &\leq x \int_0^1 \|u\| \; dt \\ 
+        &= x \|u\|.
+    \end{align*}
+    Then, taking the supremum over $[0,1]$ we get 
+    \[
+        \|Lu\| \leq \|u\|.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    We want to show finite rank, meaning the image of $L$ 
+    is a finite-dimensional space. 
+
+    Fix $u \in X$. Then 
+    \[
+        \int_0^1 u(t) \; dt
+    \]
+    is simply some scalar in $\mathbb R$. Thus 
+    \[        
+        (Lu)(x) = cx, \ x \in \mathbb [0,1]. 
+    \]
+    The space 
+    \[
+        \{cx : c \in \mathbb R\}
+    \]
+    is a subspace of $C([0,1],\mathbb R)$ with basis 
+    $\{x\}$. 
+\end{proof}
+\begin{proof}[Solution of (c) and (d)]
+    For $u \in X$ define
+    \[
+        c_u = \int_0^1 u(t)\; dt. 
+    \]
+    Then 
+    \[
+        (I-L)u(x) = u(x) - c_ux.  
+    \]
+    Then we want to solve 
+    \[
+        u(x) - c_ux = f(x) \Rightarrow u(x) = f(x) + c_ux.
+    \]
+    Substitute $u$ by $f(x) + cx$ to get 
+    \begin{align*}
+        c 
+        &= \int_0^1 f(t) + ct \; dt \\  
+        &= \int_0^1 f(t) \; dt + c \int_0^1 t \; dt \\ 
+        &= \int_0^1 f(t) \; dt + \frac{c}{2}.
+    \end{align*}
+    Thus 
+    \[
+        c = 2\int_0^1 f(t) \; dt. 
+    \]
+    Then 
+    \[
+        u(x) = f(x) + 2x \int_0^1 f(t) \; dt 
+    \]
+    which is well-defined for any $f \in X$ since $f$ is continuous
+    on $[0,1]$ so the integral is well-defined and then we have 
+    $f(x) + 2x \cdot c_f$ which is continuous on $[0,1]$. 
+
+    Surjectivity follows from the above since we found, for arbitrary 
+    $f \in X$, $u \in X$ such that $(I-L)u = f$. 
+    Suppose $(I-L) = 0$. Then $c = 2 \int_0^1 0 \; dt = 0$ and 
+    therefore $u(x) = 0 + xc = 0$ hence $(I-L)$ is injective. 
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        X = C([0,1],\mathbb R)
+    \]
+    with the supremum norm, and define 
+    \[
+        V : X \to X
+    \]
+    by 
+    \[
+        (Vu)(x) = \int_0^x u(t) \; dt. 
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $V$ is linear and bounded. Find a bound for $\|V\|$. 
+        \item Show that $V$ is compact. 
+        \item Let $f \in C([0,1]).$ Solve 
+            \[
+                u - Vu = f. 
+            \]
+            That is, 
+            \[
+                u(x) - \int_0^x u(t) \; dt = f(x). 
+            \]
+        \item Use the formula to decide whether 
+            \[
+                I - V : X \to X
+            \]
+            is bijective. 
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    Let $u,v \in X$ and $\alpha$ in the ground-field. 
+    \begin{align*}
+        V(u + v)(x)
+        &= \int_0^x u(t) + v(t) \; dt \\ 
+        &= \int_0^x u(t) \; dt + \int_0^x v(t) \; dt \\ 
+        &= V(u)(x) + V(v)(x). 
+    \end{align*}
+    Then 
+    \begin{align*}
+        V(\alpha u)(x)  
+        &= \int_0^x \alpha u(t) \; dt \\ 
+        &= \alpha \int_0^x u(t) \; dt \\ 
+        &= \alpha V(u)(x). 
+     \end{align*}
+     Thus $V$ is linear. 
+     Now notice that for arbitrary $x$, 
+    \begin{align*}
+         |V(u)(x)| 
+         &= \left|\int_0^x u(t) \; dt\right| \\ 
+         &\leq \int_0^x |u(t)| \; dt \\ 
+         &\leq \|u\|_\infty, 
+    \end{align*}
+    recalling that $u$ is continuous on 
+    compact domain thus bounded. This bound 
+    holds for every $x$ so 
+    \[
+        \|V\| = \sup_{u \neq 0}
+        \frac{\|Vu\|_\infty}{\|u\|_\infty} \leq 1.
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    As showin in (a) we have 
+    \[
+        |V(u)(x)| \leq \|u\|_\infty. 
+    \]
+    Thus for some bounded set 
+    \[
+        \{u \in X : \|u\|_\infty \leq R\}
+    \]
+    we have 
+    \[
+        |V(u)(x)| \leq R. 
+    \]
+    Second we see that 
+    \begin{align*}
+        |Vu(x) - Vu(y)| 
+        &= \left|\int_y^x u(t) \; dt\right|
+        \\ 
+        &\leq R|x-y|. 
+    \end{align*}
+    Thus for any $\varepsilon > 0$ we can find 
+    $\delta := \varepsilon / R$ 
+    \[
+        |x-y| < \delta \Rightarrow 
+        |Vu(x) - Vu(y)| < \varepsilon
+    \]
+    for any $u \in \{v \in X : \|v\|_\infty \leq R\}$. 
+    Thus $V$ sends bounded sets to equicontinuous 
+    and equibounded sets. By Arzela-Ascoli, $V$ then 
+    sends bounded sets to relatively compact sets. 
+    Hence $V$ is a compact operator. 
+\end{proof}
+\begin{proof}[Solution of (c)]
+    We want to solve 
+    \[
+        u(x) - \int_0^x u(t) \; dt = f(x). 
+    \]
+    Let 
+    \[
+        c(x) := \int_0^x u(t).    
+    \]
+    Then $u(x) = c'(x)$ by the fundamental theorem of 
+    calculus, so 
+    \[
+        c'(x) - c(x) = f(x), 
+    \]
+    with $c(0) = 0$. 
+\end{proof}
 
 \end{document}
