@@ -9470,6 +9470,171 @@ For current exam preparation, the most important types to drill are:
     A bit messy, but correct idea. 
 \end{proof}
 
+\begin{prob}[2024 1a]
+    \  
+
+    \begin{enumerate}[label=\alph*)]
+        \item Consider the series 
+            \[
+                S(x) = \sum_{n=1}^\infty \frac{x}{n^2 + x}, 
+                \ x \in [0,a], 
+            \]
+            for fixed $a > 0$. Show that the series converges 
+            uniformly on $[0,a]$ and find the derivative of 
+            the series with respect to $x$.
+        \item Consider a nonempty $F \subset \mathbb R$ which is 
+            closed and bounded with respect to the standard 
+            metric. Show that $\inf F \in F$. Also, present an 
+            example of a set $F$ that is bounded, but not closed 
+            in which $\inf F \not\in F$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We have for $a \in [0,a]$, 
+    \[
+        \left|\frac{a}{n^2 + a}\right|
+        \leq \frac{a}{n^2}.
+    \]
+    Since 
+    \[
+        \sum_{n=1}^\infty \frac{a}{n^2} 
+    \]
+    converges we have that $S(x)$ converges absolutely and uniformly.
+    The derivative is 
+    \[
+        S'(x) = \sum_{n=1}^\infty \frac{n^2}{(n^2 + x)^2}.
+    \]
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Let $f : F \to \mathbb R$ be the continuous function 
+    \[
+        f(x) = x. 
+    \]
+    $F$ is compact by the Heine-Borel theorem. 
+    Then $f$ is continuous on compact domain and thus by the extreme 
+    value theorem $f$ attains it's minimum. I.e. there exists 
+    $x \in F$ such that 
+    \[
+        f(x) \leq f(y)  
+    \]
+    for all $y \in F$. Since $\operatorname{im} f = F$ we have 
+    \[
+        F \ni x = f(x) = \inf F. 
+    \]
+    Thus $\inf F \in F$.
+\end{proof}
+\begin{prob}[2 Exam 2024]
+    \
+    \begin{enumerate}[label=\alph*)]
+        \item Let $\{f_n\}_n$ be a sequence of functions in 
+            $C([0,1], \mathbb R)$, where $\|\cdot\|_\infty$ is the 
+            sup norm. Suppose there exists $M > 0$ such that for 
+            all $n$, we have 
+            \begin{itemize}
+                \item $\|f_n\|_\infty \leq M$, 
+                \item $f_n$ is differentiable, and 
+                \item $\|f'_n\|_\infty \leq M$.
+            \end{itemize}
+            Prove that $\{f_n\}$ has a convergent subsequence.
+        \item Consider the operator $K$ defined by 
+            \[
+                K(g)(x) = \int_0^x g(y) \; dy, \ x \in [0,1].
+            \]
+            Explain that $K$ maps $C([0,1])$ to $C([0,1])$, where 
+            $C([0,1])$ is equipped with the sup-norm.
+            Provide the definition of the operator-norm. 
+            Prove that $\|K\| \leq 1$.
+        \item Let $K$ be the operator from (b). 
+            Prove that $K$ is a compact operator.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We will show that 
+    \[
+        \mathcal F := \{f_n : n \in \mathbb N\}
+    \]
+    is a uniformly bounded and equicontinuous 
+    family. Then, since 
+    \[
+        \{f_n\} \in \overline{\mathcal F},
+    \]
+    and $\mathcal F$ is relatively compact
+    we have that $\{f_n\}$ has a convergent subsequence. 
+
+    We have, by definition that $\|f_n\|_\infty \leq M$ for 
+    all $f_n \in \mathcal F$ thus it is uniformly bounded. 
+
+    We have that $\|f_n'\| \leq M$. Hence for any $x,y \in [0,1]$ 
+    we have 
+    \[
+        |f_n(x) - f_n(y)| \leq M|x-y|. 
+    \]
+    Thus $\mathcal F$ is a family of Lipschitz continuous functions 
+    with fixed $M$ for all $f_n$ which implies equicontinuity since 
+    $\forall \varepsilon > 0$ we can choose $\delta := \varepsilon / 
+    M$ and then 
+    \[
+        |x-y| < \delta 
+        \Rightarrow 
+        |f_n(x) - f_n(y)| < \varepsilon. 
+    \]
+
+    Therefore $\mathcal F$ is relatively compact and thus 
+    $\{f_n\}$ has a convergent subsequence. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We have, by the fundamental theorem of calculus, 
+    \[
+        \frac{d}{dx} K(g)(x) = g(x). 
+    \]
+    Thus $f := K(g)(x)$ is differentiable and thus continuous. 
+    The operator-norm has multiple equivalent formulations, one 
+    useful of which is the following. 
+    Let $T : X \to Y$ then the operator-norm is 
+    \[
+        \|T\| = \sup_{x \in X\setminus\{0\}}\frac{\|Tx\|_Y}{\|x\|_X}.
+    \]
+    Lastly, fix $x$. Then 
+    \begin{align*}
+        |K(g)(x)|
+        &= \left|\int_0^x g(y) \; dy\right| \\ 
+        &\leq \int_0^x |g(y)| \; dy \\ 
+        &\leq \|g\|_\infty \int_0^1 1 \; dy \\ 
+        &= \|g\|_\infty. 
+    \end{align*} 
+    Thus 
+    \[
+        \|K\| \leq 1.
+    \]
+\end{proof}
+\begin{proof}[Proof of (c)]
+    For $R \geq 0$, let 
+    \[
+        B_R = \{u \in C([0,1]) : \|u\|_\infty \leq R\}.
+    \]
+    We will prove that $K$ sends this set to a relatively compact 
+    subset of $C([0,1])$ by applying Arzela-Ascoli.
+
+    Let $u \in B_R$.
+    Then 
+    \begin{align*}
+        \|K(u)\|_\infty \leq \|u\|_\infty \leq R.   
+    \end{align*}
+    Thus $K[B_R]$ is uniformly bounded. 
+
+    Now let $x,y \in [0,1]$, and suppose without loss 
+    of generality that 
+    $x \geq y$. Then 
+    \begin{align*}
+        |K(u)(x) - K(u)(y)|
+        &= \left|\int_0^x u(z) \; dz - \int_0^y u(z) \; dz\right| \\
+        &= \left|\int_y^x u(z) \; dz\right| \\
+        &\leq \int_y^x |u(z)| \; dz \\
+        &\leq |u|_\infty \int_y^x 1 \; dz \\
+        &\leq R |x - y|.
+    \end{align*}
+    By a similar argument as from (a) we get equicontinuity. 
+\end{proof}
 
 
 \end{document}
