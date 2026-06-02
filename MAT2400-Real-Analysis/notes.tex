@@ -8981,4 +8981,495 @@ For current exam preparation, the most important types to drill are:
     with $c(0) = 0$. 
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        X = C_b([0,\infty), \mathbb R)
+    \]
+    be the space of bounded continuous functions 
+    $u : [0,\infty) \to \mathbb R$, with norm 
+    \[
+        \|u\|_\infty = \sup_{t\geq 0} |u(t)|. 
+    \]
+
+    Let 
+    \[
+        Y = \{v \in X : v \ \text{is differentiable and} \ 
+        v' \in X\} 
+    \]
+    with norm 
+    \[
+        \|v\|_Y = \|v\|_\infty + \|v'\|_\infty. 
+    \]
+    You may assume $Y$ is a Banach space. 
+
+    Define 
+    \[
+        F : X \to Y
+    \]
+    by 
+    \[
+        F(u)(t) = \int_t^\infty e^{-2(s-t)}\tanh(u(s))\;ds.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that for every $u \in X$, 
+            \[
+                \|F(u)\|_\infty \leq \frac{1}{2}.
+            \]
+            Also show that $F(u)$ is differentiable and 
+            that 
+            \[
+                \frac{d}{dt} F(u)(t) = 2F(u)(t) - \tanh(u(t)). 
+            \]
+        \item Find the Frechet derivative 
+            \[
+                F'(u)r 
+            \]
+            for $u,r \in X$. 
+        \item Compute $F'(0)r$. Then show that 
+            \[
+                F'(0) : X \to Y
+            \]
+            is invertible. 
+        \item Assume that the map 
+            \[
+                u\mapsto F'(u)
+            \]
+            is continuous from $X$ to $\mathcal L(X,Y)$. 
+            Use the inverse function theoremto explain why 
+            $F$ has a local inverse near $0$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We have $|\tanh(x)| \leq 1$. 
+    Thus 
+    \[
+        |F(u)(t)| 
+        \leq 
+        \left|\int_t^\infty e^{-2(s-t)} \; ds\right| 
+    \]
+    and it is easy to see that 
+    \[
+        \left|\int_t^\infty e^{-2(s-t)} \; ds\right| 
+        \leq 
+        \left|\int_0^\infty e^{-2s} \; ds\right| = 1/2.
+    \]
+    Thus $\|F(u)\|_\infty \leq 1/2$. 
+    
+    Differentiability follows from the fundamental theorem 
+    of calculus / Leibniz rule. Then 
+    \[
+        F(u)(t) = e^{2t}I(t) 
+        = -e^{2t}\tanh(u(t)). 
+    \]
+    By product rule we have 
+    \[
+        F(u)'() = 2e^{2t}I(t) + e^{2t}I'(t). 
+    \]
+    SUbstitute  
+    \[
+        F(u)'(t) = 2e^{2t}I(t) -e^{2t}e^{-2t}\tanh(u(t)). 
+    \]
+    Finally we get 
+    \[
+        F(u)'(t) = 2F(u)(t) - \tanh(u(t)). 
+    \]
+\end{proof}
+
+\begin{proof}
+    We compute 
+    \[
+        F(u + h) - F(u)
+    \]
+    as follows 
+    \begin{align*}
+        F(u+h)(t) - F(u)(t) 
+        &= \int_{t + h}^\infty e^{-2(s-t + h)} \tanh(u(s)) \; ds 
+        - \int_t^\infty e^{-2(s-t)} \tanh(u(s)) \; ds \\ 
+        &= \int_{t+h}^\infty (e^{-2(s-t+h)} - e^{-2(s-t)})\tanh(u(s)) 
+        \; ds \\  &+ \int_t^{t+h} e^{-2(s-t)} \tanh(u(s)) \; ds.
+    \end{align*}
+\end{proof}
+
+\begin{prob}
+    Let $X,Y$ be Banach spaces. Let 
+    $A : X \to Y$ be a bounded linear bijection and 
+    let $B : Y \to X$ be a bounded linear map such that 
+    \[
+        \|I_Y - AB\| < 1. 
+    \]
+    You may also assume 
+    \[
+        \|I_X - BA\| < 1. 
+    \]
+    We want to solve $Ax = b$.
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that 
+            \[
+                (AB)^{-1} = \sum_{k=0}^\infty (I_Y - AB)^k. 
+            \]
+            Explain why the series converges absolutely in 
+            $\mathcal L(Y)$. 
+        \item Show that the solution of $Ax = b$ is 
+            \[
+                x = B\left(\sum_{k=0}^\infty (I_Y - AB)^k\right)b.
+            \]
+        \item Define $T : X \to X$ by 
+            \[
+                T(x) = x + B(b-Ax). 
+            \]
+            Show that $T$ is a contraction. 
+        \item Let 
+            \[
+                x_0 = Bb, x_{n+1} = T(x_n). 
+            \]
+            Show that $x_n \to x$, where $x$ is the unique 
+            solution of $Ax = b$. 
+        \item Let 
+            \[
+                S_n = \sum_{k=0}^n (I_Y - AB)^k
+            \]
+            and 
+            \[
+                s_n = BS_nb. 
+            \]
+            Show by induction that 
+            \[
+                x_n = s_n
+            \]
+            for every $n$. 
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    We have $I_Y - AB : Y \to Y$ with 
+    \[
+        \|I_Y - AB\| < 1. 
+    \]
+    Then the Neumann series theorem gives us 
+    that $I_Y - (I_Y - AB) = AB$ is invertible with 
+    \[
+        (AB)^{-1} = \sum_{k=0}^\infty (I_Y - AB)^k. 
+    \]
+    This can easily be proven and the useful bound for 
+    Neumann series that gives absolute convergence is 
+    \[
+        \|\sum_{k=0}^\infty (I_Y - AB)^k\|  
+        \leq 
+        \sum_{k=0}^\infty \|I_Y - AB\|^k. 
+    \]
+    So the sum is dominated above by the right-hand sum 
+    which is a geometric sum which converges since 
+    $\|I_Y - AB\| < 1$. Therefore we have absolute convergence. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We want to solve 
+    \[
+        Ax = b. 
+    \]
+    We have 
+    \[
+        Ax = AB(AB)^{-1}Ax = AB(AB)^{-1}b. 
+    \]
+    Now take $A^{-1}$ on the left in each to get 
+    \[
+        x = B(AB)^{-1}b = B\left(\sum_{k=0}^\infty 
+        (I_Y - AB)^k\right)b.
+    \]
+\end{proof}
+\begin{proof}[Proof of (c)]
+    We have 
+    \[
+        T(x) - T(y) = x-y + B(b-Ax) - B(b-Ay). 
+    \]
+    By linearity of $B$ we have 
+    \[
+        B(b-Ax) - B(b-Ay) = B(A(x-y)). 
+    \]
+    Thus 
+    \[
+        T(x)-T(y) = (I_X - BA)(x-y). 
+    \]
+    Hence
+    \[
+        \|T(x) - T(y)\| \leq \|I_X - BA\|\|x-y\| < \|x-y\|
+    \]
+    since $\|I_X - BA\| < 1$.
+\end{proof}
+\begin{proof}[Proof of (d)]
+    Since $T$ is a contraction, repeated application to any 
+    point $x_0$ will get closer to a fixed point, i.e. 
+    \[
+        \lim_{n\to\infty} T^n(x_0) = x^*
+    \]
+    which is such that 
+    \[
+        T(x^*) = x^*. 
+    \]
+    If $x^*$ satisfies this we have 
+    \[
+        B(b - Ax^*) = 0 
+    \]
+    i.e. 
+    \[
+        Ax^* = b. 
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (e)]
+    Let 
+    \[
+        S_n = \sum_{k=0}^\infty (I_Y - AB)^k, 
+    \]
+    and 
+    \[
+        s_n = BS_nb. 
+    \]
+    For $n = 0$, 
+    \[
+        S_0 = I_Y, 
+    \]
+    so 
+    \[
+        s_0 = Bb = x_0. 
+    \]
+    Assume $x_n = s_n = BS_nb$. 
+    Then 
+    \[
+        x_{n+1} = T(x_n) = x_n + B(b-Ax_n). 
+    \]
+    Using the hypothesis 
+    \[
+        x_{n+1} = BS_nb + B(b-ABS_n b). 
+    \]
+    So  
+    \[
+        x_{n+1} = BS_nb + Bb - BABS_nb. 
+    \]
+    Factoring out $B$ we get 
+    \[
+        x_{n+1} = B(S_n + I_Y - ABS_n)b. 
+    \]
+    Now \[
+        S_n + I_y - ABS_n = I_Y + (I_Y - AB)S_n. 
+    \]
+    Since 
+    \[
+        S_n = \sum_{k=0}^n (I_y - AB)^k, 
+    \]
+    we get 
+    \[
+        I_Y + (I_Y - AB)S_n = \sum_{k=0}^{n+1}(I_Y - AB)^k 
+        = S_{n+1}. 
+    \]
+    Therefore $x_{n+1} = s_{n+1}$. 
+\end{proof}
+
+\begin{prob}
+    Let $H$ be a real Hilbert space with orthonormal basis 
+    $(e_k)_{k\in\mathbb N}$. Every $x \in H$ can be 
+    written as 
+    \[
+        x = \sum_{k=1}^\infty \alpha_k e_k. 
+    \]
+    Define $T$ on $H$ as 
+    \[
+        Tx = \sum_{k=1}^\infty \frac{\alpha_k}{k}e_k. 
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $T$ is a bounded linear operator, 
+            and find and upper bound for $\|T\|$.
+        \item Show that $T$ is compact. 
+        \item Solve, or determine when solvable, 
+            \[
+                (I-T)x = y, 
+            \]
+            where 
+            \[
+                y = \sum_{k=1}^\infty \beta_k e_k. 
+            \]
+        \item Decide whether $I-T$ is injective, surjective,  
+            bijective. 
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[Proof of (a)]
+    Let $x,y\in H$ such that 
+    \[
+        x = \sum_{k=1}^\infty \alpha_k e_k, \ \text{and} \ 
+        y = \sum_{k=1}^\infty \beta_k e_k 
+    \]
+    and $\gamma \in \mathbb R$, the ground-field. Before 
+    we show linearity note that 
+    \[
+        x + y = \sum_{k=1}^\infty (\alpha_k + \beta_k) 
+    \]
+    Then 
+    \begin{align*}
+        T(x+y) 
+        &= \sum_{k=1}^\infty \frac{(\alpha_k + \beta_k)}{k} e_k \\ 
+        &= \sum_{k=1}^\infty \frac{\alpha_k}{k} e_k + 
+        \frac{\beta_k}{k} e_k \\ 
+        &= \sum_{k=1}^\infty \frac{\alpha_k}{k} e_k + 
+        \sum_{k=1}^\infty 
+        \frac{\beta_k}{k} e_k \\ 
+        &= Tx + Ty. 
+    \end{align*}
+    Now we check linearity in scalars: 
+    \begin{align*}
+        T(\gamma x) 
+        &= \sum_{k=1}^\infty \frac{\gamma \alpha_k}{k} e_k \\ 
+        &= \gamma \sum_{k=1}^\infty \frac{\alpha_k}{k} e_k \\ 
+        &= \gamma Tx.
+    \end{align*}
+
+    We have 
+    \[
+        \|Tx\| = \sqrt{\left\|\sum_{k=1}^\infty 
+        \frac{\alpha^2}{k^2} \right\|}
+        \leq 
+        \sqrt{\left\|\sum_{k=1}^\infty 
+        \alpha^2 \right\|} = \|x\|. 
+    \]
+    Thus $\|T\| \leq 1$.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Fix $R \geq 0$. 
+    Let 
+    \[
+        \mathcal R := 
+        \{x \in H : \|x\| \leq R\}. 
+    \]
+    Since $H$ is a hilbert space, it suffices to show that 
+    $T[\mathcal R]$ is totally bounded. 
+
+    For $N \in \mathbb N$ define the truncation 
+    \[
+        P_NTx = \sum_{k=1}^N \frac{\alpha_k}{k} e_k. 
+    \]
+    Then 
+    \[
+        Tx - P_NTx = \sum_{k=N+1}^\infty \frac{\alpha_k}{k} e_k.
+    \]
+    By orthonormality we have 
+    \[
+        \|Tx - P_NTx\|^2 = \sum_{k=N+1}^\infty \frac{\alpha^2_k}{k^2}.
+    \]
+    Since $k \geq N + 1$ in the tail, 
+    \[
+        \frac{1}{k^2} \leq \frac{1}{(N+1)^2}.
+    \]
+    Therefore 
+    \[
+        \|Tx - P_N Tx\|^2 \leq \frac{1}{(N+1)^2} \|x\|^2. 
+    \]
+    Suppose $x \in \mathcal R$. Then 
+    \[
+        \|x\| \leq R, 
+    \]
+    so 
+    \[
+        \|Tx - P_NTx\| \leq \frac{R}{N+1}. 
+    \]
+    Now let $\varepsilon > 0$. Choose $N$ sufficient for 
+    \[
+        \frac{R}{N+1} < \frac{\varepsilon}{2}. 
+    \]
+    Then every $Tx \in T[\mathcal R]$ is within 
+    $\varepsilon / 2$ of its finite-dimensional truncation $P_NTx$. 
+    Now observe that 
+    \[
+        P_nT[\mathcal R] \subseteq \operatorname{span}(e_1,\ldots, 
+        e_N). 
+    \]
+    This is finite-dimensional. Also $P_NT[\mathcal R]$ is bounded, 
+    since 
+    \[
+        \|P_NTx\| \leq \|Tx\| \leq \|x\| \leq R.
+    \]
+    In finite-dimensional normed spaces, bounded sets 
+    are totally bounded. Hence there exist finitely many 
+    \[
+        z_1, \ldots, z_m \in \operatorname{span}(e_1,\ldots, e_N)
+    \]
+    such that 
+    \[
+        P_NT[\mathcal R] \subseteq \bigcup_{j=1}^m B(z_j,  
+        \varepsilon/2). 
+    \]
+    Now take any $Tx \in T[\mathcal R]$. Choose $z_j$ such that 
+    \[
+        \|P_NTx - z_j\| < \varepsilon/2. 
+    \]
+    Then 
+    \[
+        \|Tx - z_j\| \leq \|Tx - P_nTx\| + 
+        \|P_nTx - z_j\| < \varepsilon. 
+    \]
+    Thus 
+    \[
+        T[\mathcal R] \subseteq \bigcup_{j=1}^\infty B(z_j, 
+        \varepsilon). 
+    \]
+    So the image of $\mathcal R$ is totally bounded and 
+    hence compact since $H$ is complete. Thus 
+    it is relatively compact. Since $T$ sends bounded sets 
+    to relatively compact ones we have that $T$ is compact. 
+\end{proof}
+
+\begin{prob}
+    Let $(f_n)$ be a sequence of continuous functions 
+    $f_n : [0,1] \to \mathbb R$ such that 
+    $f_n \to f$ uniformly on $[0,1]$. 
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f$ is continuous. 
+        \item Show that 
+            \[
+                \lim_{n\to\infty} \int_0^\infty f_n(x) \; dx 
+                = \int_0^1 f(x) \; dx.
+            \]
+        \item Give an example of continuous functions 
+            $f_n : [0,1] \to \mathbb R$ such that 
+            \[
+                f_n(x) \to 0
+            \]
+            pointwise for every $x \in [0,1]$, but 
+            \[
+                \int_0^1 f_n(x) \; dx \not\to 0.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We have $(f_n)$ such that 
+    \[
+        \sup_{x\in[0,1]} |f_n(x) - f(x)| \to 0. 
+    \]    
+    Suppose $f$ is not continuous. Then there exists 
+    $\varepsilon > 0$ for which every choice of $\delta > 0$ 
+    we have $|x-y| < \delta$, but 
+    \[
+        |f(x) - f(y)| \geq \varepsilon. 
+    \]
+    Then we have 
+    \[
+        |f(x) - f_n(x)| + |f_n(x) - f_n(y)| + |f_n(y) - f(y)| \geq 
+        \varepsilon.
+    \]
+    We can pick $N$ large enough so that  
+    $|f(x) - f_n(x)|, |f_n(y) - f(y)| < \varepsilon$ and 
+    so in particular 
+    we have (taking $|f(x) - f_n(x)| \to 0$), 
+    \[
+        |f_n(x) - f_n(y)| > \varepsilon
+    \]
+    which is obviously not correct since $f_n$ is continuous. 
+
+    A bit messy, but correct idea. 
+\end{proof}
+
+
+
 \end{document}
