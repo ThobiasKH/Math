@@ -5542,5 +5542,648 @@ There will also probably be a lot of problems repeated.
     $S_3$.
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^3 + x + 1 \in \mathbb F_2[x],
+    \]
+    and let 
+    \[
+        K = \frac{\mathbb F_2[x]}{\langle f(x) \rangle}.
+    \]
+    Write 
+    \[
+        \alpha = x + \langle f(x) \rangle \in K.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f(x)$ is irreducible over 
+            $\mathbb F_2$.
+        \item Conclude that $K$ is a field. How many elements 
+            does $K$ have? Give a basis for $K$ as a vector space 
+            over $\mathbb F_2$.
+        \item Use $f(\alpha) = 0$ to compute 
+            \[
+                \alpha^3, \ \alpha^4, \ \alpha^5, \ \alpha^6, 
+                \ \alpha^7.
+            \]
+            Write each in the basis. 
+        \item Show that $\alpha$ generates $K^\times$. 
+        \item Let $\sigma : K \to K$, $\sigma(a) = a^2$. 
+            Show that $\sigma$ is an automorphism of $K$ and 
+            compute 
+            \[
+                \sigma(\alpha), \ \sigma^2(\alpha), 
+                \ \sigma^3(\alpha).
+            \]
+        \item Determine the Galois group 
+            \[
+                \operatorname{Gal}(K/\mathbb F_2).
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Since $\deg f \in \{2,3\}$ we have that 
+    $f$ is irreducible if and only if it 
+    has no zeros in the ground-field 
+    $\mathbb F_2$. 
+    We quickly see that 
+    \[
+        f(0) = 1 = f(1)
+    \]
+    so $f$ has no zeros 
+    in $\mathbb F_2$ and is 
+    thus irreducible. 
+\end{proof}
+\begin{proof}[Solution of (b)]
+    Since $\mathbb F_2[x]$ is a PID 
+    we have that each ideal is generated 
+    by some $f$, and every non-zero prime ideal 
+    is a maximal ideal. Thus $\langle f \rangle$ is 
+    a maximal ideal if and only if $f$ is 
+    irreducible, which we have shown. 
+    Since $\langle f \rangle$ is maximal we 
+    then have that $K$ is a field. 
+
+    We have $|K| = |\mathbb F_2|^{\deg f} = 8$.
+    This is because since, for $g(x) \in \mathbb F_2[x]$, 
+    we have $g(x) = f(x)q(x) + r(x)$ where 
+    $\deg r < \deg f$. Therefore every 
+    element in the quotient can be written 
+    as a linear combination of 
+    \[
+        1, x, x^2 
+    \]
+    with scalars in $\mathbb F_2$. 
+    So we have $2$ choices for $1$, 
+    $2$ for $x$ and $2$ for $x^2$. 
+    Hence $|K| = 2^3 = 8$.
+
+    If $\alpha = x + \langle f(x) \rangle$, we have 
+    the standard basis 
+    $\{1, \alpha, \alpha^2\}$. 
+\end{proof}
+\begin{proof}[Solution of (c)]
+    We have 
+    \[
+        \alpha^3 + \alpha + 1 = 0
+    \]
+    so rearranging, and recalling that 
+    addition and subtraction are interchangable 
+    in $\mathbb F_2$ we get 
+    \[
+        \alpha^3 = \alpha + 1. 
+    \]
+    Then 
+    \[
+        \alpha^4 = \alpha^2 + \alpha. 
+    \]
+    Next 
+    \[
+        \alpha^5 = \alpha^3 + \alpha^2 = \alpha^2 + \alpha + 1. 
+    \]
+    Next 
+    \[
+        \alpha^6 = \alpha^3 + \alpha^2 + \alpha 
+        = \alpha^2 + 1. 
+    \]
+    Last 
+    \[
+        \alpha^7 = \alpha^3 + \alpha 
+        = 1. 
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (d)]
+    We have that $|\alpha| = 7$ by (c), so 
+    $|\langle \alpha \rangle| = 7$.
+    We have that $|K| = 8$ and since 
+    the finite fields are characterized up 
+    to isomorphism we have 
+    \[
+        K \cong \mathbb F_8
+    \]
+    which means that $K^\times \cong C_7 
+    \leq \mathbb F_8$ (as groups).
+    Since $\alpha$ generates 
+    a subgroup of $\mathbb F_8$ which has 
+    $7$ elements and the only subgroup of 
+    $\mathbb F_8$ with $7$ elements is 
+    $C_7$ we conclude that 
+    \[
+        \langle \alpha \rangle 
+        \cong C_7 
+        \cong K.
+    \]
+\end{proof}
+\begin{proof}[e]
+    We confirm the homomorphism properties first. 
+    \begin{align*}
+        \sigma(a+b) 
+        &= (a+b)^2 \\ 
+        &= a^2 + 2ab + b^2 \\ 
+        &= a^2 + b^2 \\ 
+        &= \sigma(a) + \sigma(b)
+    \end{align*}
+    since $2 \equiv 0$. 
+    Then 
+    \begin{align*}
+        \sigma(ab) 
+        &= (ab)^2 \\ 
+        &= a^2b^2 \\ 
+        &= \sigma(a)\sigma(b).
+    \end{align*}
+
+    Let $\phi : \mathbb F_8 \to \mathbb F_8$ defined 
+    by $\phi(a) = a^2$. Then suppose 
+    $\phi(a) = 0$. Then $a^2 = 0$ so 
+    $a = 0$. This means the map is injective since 
+    $\ker \phi = \{0\}$. Furthermore we se see that 
+    \[
+        0 \mapsto 0, \ 1 \mapsto 1, \ 2 \mapsto 4, \ldots
+    \] 
+    and we can confirm for ourselves in this way that 
+    the map is indeed bijective. 
+    Now let $\psi$ be the isomorphism from 
+    $K$ to $\mathbb F_8$. Such a map exists since 
+    we have established that $K \cong \mathbb F_8$. 
+    Then $\sigma : K \to K = \psi \circ \phi \circ \psi^{-1}$, i.e. 
+    a composition of isomorphisms and therefore an isormorphism 
+    on $K$. Hence $\sigma$ is an automorphism of 
+    $K$.
+
+    Then 
+    \begin{align*}
+        \sigma(\alpha) 
+        &= \alpha^2 \\ 
+        \sigma^2(\alpha ) 
+        &= \alpha^4 = \alpha^2 + \alpha \\ 
+        \sigma^3(\alpha) &= 
+        \alpha^8 = \alpha(\alpha^7) = \alpha. 
+    \end{align*}
+\end{proof}
+\begin{proof}[Solution of (f)]
+    We use the standard result that 
+    for $\operatorname{Gal}
+    (\mathbb F_{q^n}/\mathbb F_q)$, we have 
+    that the galois group is generated by the 
+    $s$-th power of the 
+    Frobenius automorphism where $s$ is the 
+    characteristic of the field. 
+    Thus 
+    \[
+        \operatorname{Gal}(K/\mathbb F_2) 
+        = \langle \sigma \rangle.
+    \]
+    As we saw we have 
+    $|\sigma^2| = 3$ which is actually 
+    inline with $[K : \mathbb F_2]$ even 
+    though the extension is not automatically 
+    Galois as it would be if we we're working over 
+    $\mathbb Q$ for instance.
+
+    In particular we have 
+    \[
+        \operatorname{Gal}(K/\mathbb F_2) 
+        = \mathbb Z/3 \mathbb Z.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        \phi : \mathbb Z[x] \to \mathbb Z_6
+    \]
+    be the ring homomorphism defined by 
+    \[
+        \phi(f(x)) = f(2) \mod 6. 
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $\phi$ is a ring homomorphism. 
+        \item Find $\ker \phi$. 
+            Try to describe it as an ideal generated by 
+            simple elements of $\mathbb Z[x]$. 
+        \item Identify 
+            \[
+                \mathbb Z[x] / \ker \phi. 
+            \]
+        \item Is $\ker \phi$ prime? 
+        \item Is $\ker \phi$ maximal? 
+        \item Replace $\mathbb Z_6$ with $\mathbb Z_5$. Define 
+            \[
+                \psi : \mathbb Z[x] \to \mathbb Z_5
+            \]
+            by 
+            \[
+                \psi(f(x)) = f(2) \mod 5. 
+            \]
+            Find the kernel, and decide whether it is 
+            prime or maximal.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution of (b)]
+    $\ker \phi = \{f(x) \in \mathbb Z[x] : \phi(f(x)) = 0\}$. This set includes 
+    $f(x) = 6n \cdot g(x), \ n \in \mathbb Z, \ g(x) \in \mathbb Z[x]$,
+    $(x-2) \cdot g(x), \ g(x) \in \mathbb Z[x]$. 
+    It is therefore not hard to see that 
+    \[
+        \ker \phi = \langle x-2, 6 \rangle, 
+    \]
+    since $x-2, 6 \in \ker \phi$ and for some 
+    $f(x) \in \ker \phi$ we have that 
+    $f(x) = 0$ for $x = 2$ or $f(x) \equiv 0$ 
+    modulo $6$. 
+\end{proof}
+\begin{proof}[Solution of (c)]
+    By the first isomorphism theorem we have 
+    \[
+        \mathbb Z[x] / \ker \phi \cong \operatorname{im} \phi
+    \]
+    and since $\phi$ is trivially surjective 
+    (for $n \in \mathbb Z_6$ consider the plynomial 
+    $f(x) = n$), we have that 
+    \[
+        \mathbb Z[x] / \ker \phi \cong \mathbb Z_6.
+    \]
+\end{proof}
+\begin{proof}[Proof of (d) and (e)]
+    Since $\mathbb Z[x]$ is a commutative ring 
+    we have that $\mathbb Z[x]/\ker \phi$ is 
+    an integral domain iff $\ker \phi$ is 
+    prime and said quotient ring is 
+    a field iff $\ker \phi$ is maximal.
+    As we have identified the quotient ring 
+    to be isomorphic to $\mathbb Z_6$ we can 
+    answer no to both of these questions since 
+    $2 \cdot 3 = 6 \equiv 0$ which disqualifies 
+    the quotient ring from being an integral domain 
+    which disqualifies it from being a field. 
+    
+    Thus $\ker \phi$ is neither maximal nor prime. 
+\end{proof}
+\begin{proof}[Proof of (f)]
+    By the first isomorphism theorem and the same 
+    arguments as earlier we have 
+    \[
+        \mathbb Z[x]/\ker \psi \cong \mathbb Z_5
+    \]
+    and $\mathbb Z_5$ is indeed a field 
+    (since $\mathbb Z_q$ is a field when $q$ 
+    is prime) and thus $\ker \psi$ is maximal 
+    which implies that it is also prime.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^3 - 2 \in \mathbb Q[x]. 
+    \]
+    Let 
+    \[
+        \alpha = \sqrt[3]2
+    \]
+    be the real cube root of $2$, 
+    and let 
+    \[
+        \omega = e^{2\pi/3}
+    \]
+    be a primitive third root of unity. 
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f(x)$ is irreducible over 
+            $\mathbb Q$.
+        \item Find all roots of $f$ in 
+            $\mathbb C$, and show that the splitting 
+            field is 
+            \[
+                K = \mathbb Q(\alpha, \omega). 
+            \]
+        \item Compute 
+            \[
+                [\mathbb Q(\alpha) : \mathbb Q].
+            \]
+        \item Conclude that 
+            \[
+                [K : \mathbb Q] = 6.
+            \]
+        \item Show that every $\mathbb Q$-automorphism 
+            of $K$ is determined by the images 
+            of $\alpha$ and $\omega$.
+        \item Construct two automorphisms $\sigma,\tau 
+            \in \operatorname{Gal}(K/\mathbb Q)$ by 
+            \[
+                \sigma(\alpha) = \omega\alpha, \ \sigma(\omega) = \omega, 
+            \]
+            and 
+            \[
+                \tau(\alpha) = \alpha, \ \tau(\omega) = \omega^2.
+            \]
+            Show that these are valid automorphisms. 
+        \item Compute 
+            \[
+                \sigma^3, \ \tau^2, \tau\sigma\tau^{-1}.
+            \]
+            Conclude that 
+            \[
+                \operatorname{Gal}(K/\mathbb Q)\cong S_3.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    $f$ is a polynomial with integer coefficients so 
+    we can use Eisenstein's criterion. 
+    We see that for $p = 2$ we have 
+    \[
+        p \mid a_0 = -2 
+    \]
+    and the other terms 
+    which are $0$
+    while 
+    \[
+        p \nmid a_3 = 1, 
+    \]
+    and 
+    \[
+        4 = p^2 \nmid a_0 = 2.
+    \]
+    Thus, by Eisenstein's criterion, $f$ is irreducible 
+    over $\mathbb Q$.
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Over $\mathbb C$ we have 
+    \[
+        f(\alpha) = f(\sqrt[3]2) = (\sqrt[3]2)^3 - 2 = 0, 
+    \]
+    and 
+    \[
+        f(\omega\alpha) = f(\omega\sqrt[3]2) = 0.  
+    \]
+    These are the obvious ones. Next up we see that 
+    \[
+        f(\omega^2\alpha) = 0
+    \]
+    as well.
+    Then, we have 
+    \[
+        K \subseteq \mathbb Q(\alpha, \omega),
+    \]
+    since $\alpha,\omega\alpha,\omega^2\alpha \in 
+    \mathbb Q(\alpha,\omega)$.
+    
+    For the other direction we can see that 
+    $\omega,\alpha$ generate $K$ when 
+    adjoining to $\mathbb Q$ so 
+    $E \subseteq K$. 
+\end{proof}
+\begin{proof}[Proof of (c)]
+    We have that 
+    $f$ is the minimal polynomial 
+    of $\sqrt[3]2$ over $\mathbb Q$ so 
+    \[
+        [\mathbb Q(\alpha) : \mathbb Q] = 
+        \deg f = 3. 
+    \]
+    Now since $\omega \in \mathbb C$ 
+    we have $\omega \not\in \mathbb Q(\alpha)$ 
+    because $\mathbb Q(\alpha)$. 
+    We can see that this is the case because 
+    \[
+        \mathbb Q(\alpha) 
+        = \{a + b\sqrt[3]2 \bigm| a,b \in \mathbb Q\}, 
+    \]
+    and $a,b,\sqrt[3]2 \in \mathbb R$. 
+    Since $\mathbb C \supset 
+    \mathbb R\supset \mathbb Q(\alpha)$ we conclude 
+    that the claim is true.
+
+    The minimal polynomial of an 
+    $n$-th root of unity is 
+    \[
+        \prod_{d| n}(x^d - 1)^{\mu(n/d)}
+    \]
+    which, for prime $n$ works out nicely to 
+    \[
+        \sum_{0 \leq k \leq n-1} x^n. 
+    \]
+    In this case the primitive polynomial is 
+    \[
+        x^2 + x + 1
+    \]
+    and thus 
+    \[
+        [\mathbb Q(\alpha,\omega) : \mathbb Q(\alpha)] = 2. 
+    \]
+    Therefore, by the tower law, we have 
+    \[
+        [\mathbb K : \mathbb Q] = 2 \cdot 3 = 6.
+    \]
+\end{proof}
+\begin{proof}[Proof of (d)]
+    A $\mathbb Q$-automorphism of $K$ 
+    is $\psi : K \to K$ such that 
+    \[
+        \psi[\mathbb Q] = \mathbb Q. 
+    \]
+    Thus, for every nonidentity $\mathbb Q$-automorphism 
+    on $K$ we have 
+    \[
+        \psi(\alpha) = \beta
+    \]
+    where $\alpha,\beta$ are roots of $f$. 
+
+    We have every root is sent to some root so 
+    the images of $\omega$ must be fixed 
+    or sent to $\omega^2$. If $\omega \mapsto 
+    \alpha$, for instance we would have 
+    $\psi(\omega\alpha) = \psi(\alpha^2) \neq 0$. 
+    $\alpha$ can be sent to $\alpha\omega$. 
+\end{proof}
+\begin{proof}[Proof of (f)]
+    We will show $\operatorname{Gal}(K/\mathbb Q) \cong 
+    S_3$ first. 
+    First since $K$ is algebraic over $\mathbb Q$ and 
+    the splitting field of 
+    a $\mathbb Q[x]$ polynomial and 
+    $\mathbb Q$ is characteristic $0$ we get 
+    that $K$ is a normal- (by the former) and 
+    separable (by the latter) extension, since 
+    every algebraic axtension of a characteristic $0$  
+    field is separable.
+    
+    Thus $K/\mathbb Q$ is Galois and therefore 
+    \[
+        [K:\mathbb Q] = |\operatorname{Gal}(K/\mathbb Q)|. 
+    \]
+    Since $\operatorname{Gal}(K/\mathbb Q) \leq S_3$ (from $K$ being 
+    splitting field over $\deg f = 3$ polynomial) we have 
+    \[
+        \operatorname{Gal}(K/\mathbb Q) \cong S_3.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        K = \mathbb Q(\sqrt 2, \sqrt 3).
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Prove carefully that 
+            \[
+                [\mathbb Q(\sqrt 2):\mathbb Q] = 2.
+            \]
+            Then prove that 
+            \[
+                \sqrt 3 \not\in \mathbb Q(\sqrt 2). 
+            \]
+            Conclude that 
+            \[
+                [K : \mathbb Q] = 4. 
+            \]
+        \item Show that 
+            \[
+                K
+            \] 
+            is the splitting field over $\mathbb Q$ of 
+            \[
+                f(x) = (x^2 - 2)(x^2 - 3).
+            \]
+            Conclude that 
+            \[
+                K/\mathbb Q
+            \]
+            is Galois.
+        \item Show that every $\mathbb Q$-automorphism 
+            of $K$ is determined by the images 
+            of $\sqrt 2$, and $\sqrt 3$. 
+            Show the possible images and conclude 
+            that 
+            \[
+                \operatorname{Gal}(K/\mathbb Q) \leq 4.  
+            \]
+            Construct all $4$ automorphisms and 
+            conclude that  
+            \[
+                \operatorname{Gal}(K/\mathbb Q)
+                \cong C_2 \times C_2.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We have that, for $f(x) = x^2 - 2 \in 
+    \mathbb Q[x]$, 
+    $\sqrt 2$ is a $0$. 
+    This polynomial is monic, and furthermore 
+    no lower degree nonzero polynomial can have 
+    $\sqrt 2$ as a zero. If we suppose 
+    that $f'$ is such a polynomial, then 
+    \[
+        f'(x) = x - a 
+    \]
+    such that $\sqrt 2 - a = 0$, meaning 
+    $\sqrt 2 = a$, but then $f'(x)\not\in 
+    \mathbb Q[x]$.
+    Thus $f$ is the minimal polynomial of 
+    $\sqrt 2$.
+    Then 
+    \[
+        [\mathbb Q(\sqrt 2) : \mathbb Q] 
+        = \deg f = 2.
+    \]
+
+    Suppose $\sqrt 3 \in \mathbb Q(\sqrt 2)$. 
+    Then, since $\sqrt 3 \not \in \mathbb Q$, we 
+    have $\sqrt 3 \in \mathbb Q(\sqrt 2) \setminus 
+    \mathbb Q$.
+    Then $\sqrt 3 = a + b\sqrt 2$ such that 
+    $b \neq 0$. Then 
+    \[
+        3 = a^2 + 2ab\sqrt 2 + b^2. 
+    \]
+    If $a \neq 0$ we have 
+    \[
+        3 - a^2 - b^2 = 2ab\sqrt 2, 
+    \]
+    but the left-hand-side is rational and 
+    the right-hand side is not, a contradiction. 
+    Suppose $a = 0$. Then 
+    \[
+        3 = b^2 
+    \]
+    so $b = \sqrt 3 \not\in \mathbb Q$. 
+    Thus $\sqrt 3 \not\in \mathbb Q(\sqrt 2)$.
+    By a similar argument as earlier, the minimal 
+    polynomial of $\sqrt 3$ over $\mathbb Q(\sqrt 2)$ is 
+    $x^2 - 3$. 
+    Thus, by the tower law, we have 
+    \[
+        [\mathbb Q(\sqrt 2, \sqrt 3) : \mathbb Q] = 2 \cdot 2 = 4. 
+    \]
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Let $L$ be the splitting field of $f$. 
+    It is trivial to see that 
+    \[
+        f(\pm\sqrt 2) = f(\pm\sqrt 3) = 0
+    \]
+    are the zeros of $f$ in $\mathbb C \supset 
+    \overline{\mathbb Q}$.  
+    Therefore $L \subseteq K$.
+    The basis of $K$ is $\{1,\sqrt 2, \sqrt 3, \sqrt 6\}$, 
+    and so the first $3$ are contained in $L$ and furthermore 
+    \[
+        \sqrt 6 = \frac{3\sqrt 2}{\sqrt 3} \in L.
+    \]
+    Therefore $K = L$. 
+
+    $L = K$ is algebraic over $\mathbb Q$ as 
+    it contains $\mathbb Q$ and elements which 
+    are the zeros of $f \in \mathbb Q[x]$. 
+    Furthermore since $L=K$ is the splitting field 
+    of a polynomial in $\mathbb Q[x]$ it is a 
+    normal extension. Lastly since 
+    $\mathbb Q$ is characteristic $0$, 
+    we have that all algebraic extensions are 
+    separable. 
+
+    All three properties give us that 
+    $L=K$ is Galois as an extension of 
+    $\mathbb Q$.
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    The $\mathbb Q$-autmorphisms of $K$ are 
+    those which fix $\mathbb Q$ and 
+    preserve 
+    \[
+        f(a) = 0
+    \]
+    iff 
+    \[
+        f(\psi(a)) = 0. 
+    \]
+    We require 
+    \[
+        (x^2 - 2)(\sqrt 2) = 0
+    \]
+    so $\sqrt 2 \mapsto \pm 2$ since 
+    \[
+        (x^2 - 2)(a) = 0
+    \]
+    if $a \in \{\sqrt 2, -\sqrt 2\}$. 
+    Similarly for $\sqrt 3 \mapsto \pm \sqrt 3$. 
+
+    Then we have a maximum of $4$ possible 
+    isomorphisms from $K \to K$ which 
+    respect this. 
+
+
+    There are two choices to make 
+    with two options each. For each 
+    valid $\mathbb Q$-automorphism we have 
+    send each of $\sqrt 2$ and $\sqrt 3$ 
+    to themselves or their additive inverse. 
+    Thus $\operatorname{Gal}(K/\mathbb Q) \cong C_2 \times C_2$. 
+\end{proof}
+
 
 \end{document}
