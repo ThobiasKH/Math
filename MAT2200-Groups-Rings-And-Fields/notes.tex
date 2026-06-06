@@ -8197,4 +8197,204 @@ G/H \cong \mathbb{Z}_4 \times \mathbb{Z}_2
 \]
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        \phi : \mathbb Z[x] \to \mathbb F_7
+    \]
+    be defined by 
+    \[
+        \phi(f) = f(2) \mod 7. 
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Prove that $\phi$ is a ring homomorphism.  
+        \item Prove that $\ker \phi = \langle 7, x-2\rangle$. 
+        \item Identify 
+            \[
+                \mathbb Z[x]/\langle 7, x-2\rangle. 
+            \]
+        \item Decide whether $\langle 7, x-2\rangle$ is 
+            prime, maximal, both or neither. 
+        \item Define $\psi: \mathbb Z[x] \to \mathbb F_7$ 
+            by 
+            \[
+                \psi(f) = f(2)^2 \mod 7. 
+            \]  
+            Is this a ring homomorphism? 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    We have 
+    \begin{align*}
+        \phi(f + g) 
+        &= (f+g)(2) \mod 7 \\ 
+        &\equiv f(2) \mod 7 + g(2) \mod 7 \ \text{in} \ \mathbb Z_7 \\ 
+        \phi(fg) 
+        &= (fg)(2) \mod 7 \\ 
+        &\equiv f(2) \mod 7 \cdot g(2) \mod 7 \ \text{in} \ \mathbb Z_7. 
+    \end{align*}
+    Lastly, the polynomial $f(x) = 1$ is sent to $1$
+    so that is preserved as well. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We have $\phi(7) = 0$ and $\phi(x-2) = 0$ so 
+    \[
+        \langle 7,x-2 \rangle \subseteq \ker \phi. 
+    \]
+    Now suppose $f \in \ker \phi$. Then 
+    $f(2) \equiv 0$ in $\mathbb Z_7$, meaning 
+    $f(x) = (x-2)q(x) + f(2)$ so 
+    \[
+        f(x) = (x-2)q(x) + 7m, \ m \in \mathbb Z
+    \]
+    so $f(x) \in \langle 7, x-2 \rangle$. 
+    Thus 
+    \[
+        \ker \phi \subseteq \langle 7, x-2 \rangle. 
+    \]
+    Hence $\ker \phi = \langle 7, x-2 \rangle$. 
+\end{proof}
+\begin{proof}[Solution of (c)]
+    For $n \in \mathbb Z_7$ notice that $f(x) := n$
+    is sent to $f(x) \mapsto n$ meaning $\phi$ is 
+    surjective, so $\operatorname{im} \phi = \mathbb Z_7$. 
+    Therefore, by the first isomorphism theorem 
+    \[
+        \frac{\mathbb Z[x]}{\ker \phi} 
+        \cong \mathbb Z_7.
+    \]
+\end{proof}
+\begin{proof}[Solution of (d)]
+    Since $\mathbb Z[x]/\ker \phi$ is a field 
+    we have that $\ker \phi$ is maximal, because 
+    a commutative ring quotiented by some ideal $I$ is 
+    a field if and only if $I$ is maximal (and 
+    an integral domain if and only if $I$ is prime). 
+    Since every maximal ideal is prime we may also conclude 
+    that $\ker \phi$ is prime.
+\end{proof}
+\begin{proof}[Solution of (e)]
+    Let $f(x) = 3$. Then 
+    \[
+        2\psi(f) = 2\cdot3^2 \equiv  4,
+    \]
+    while
+    \[
+        \psi(2f) = 6^2 = 36 \equiv 1. 
+    \]
+    Thus $\psi$ is not a homomorphism.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^3 - 2 \in \mathbb Q[x], 
+    \]
+    let 
+    \[
+        \alpha = \sqrt[3]2,
+    \]
+    and let 
+    \[
+        \omega = e^{2\pi i / 3}. 
+    \]
+    Let $E = \mathbb Q(\alpha, \omega)$. 
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $E$ is the splitting field of 
+            $x^3 - 2$ over $\mathbb Q$ and compute 
+            \[
+                [E : \mathbb Q]. 
+            \]
+        \item Let $\sigma : E \to E$ be defined on generators 
+            by 
+            \[
+                \sigma(\alpha) = \omega\alpha, \ \sigma(\omega) 
+                = \omega. 
+            \]
+            Explain carefully why this defines a $\mathbb Q$-automorphism 
+            on $E$. Then compute 
+            \[
+                \sigma^2(\alpha), \ \sigma^3(\alpha), \ \sigma^3(\omega). 
+            \]
+        \item[f)] Let $H = \langle \sigma \rangle$.  
+            Find $E^H$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Let $L$ be the splitting field of $f(x) = x^3 - 2$. 
+    $f(x)$ has roots $\alpha, \omega \alpha, \omega^2\alpha$ in 
+    $\mathbb C$. 
+
+    $L$ is then the smallest extension of $\mathbb Q$ so that 
+    these roots are contained in the extension.  
+
+    Clearly, $\alpha, \omega \in \mathbb Q(\alpha, \omega) = E$. 
+    Since $\alpha, \omega \in E$ we must have that their products 
+    $\alpha \omega, \alpha\omega^2 \in E$. Therefore $L \subseteq E$. 
+
+    The generators of E are $\alpha, \omega$ and 
+    $\alpha \in L$. Now since we have $\alpha, \alpha\omega \in L$ we have 
+    \[
+        \frac{\alpha\omega}{\alpha} \in L.
+    \]
+    Thus $E \subseteq L$. Hence $E = L$. 
+
+    The minimal polynomial of $\alpha$ over $\mathbb Q$ is 
+    $f$ so 
+    \[
+        [\mathbb Q(\alpha) : \mathbb Q] = \deg f = 3. 
+    \]
+    Now, since $\omega \in \mathbb C \setminus \mathbb R$ and 
+    $\mathbb Q(\alpha) \subset \mathbb R$ we have $\omega \not 
+    \in \mathbb Q(\alpha)$. 
+    The minimal polynomial over $\mathbb Q(\alpha)$ of 
+    $\omega$ is the cyclotomic polynomial for $n = 3$ which 
+    we compute as 
+    \[
+        \prod_{d|n}(x^d - 1)^{\mu(n/d)}
+    \]
+    which for prime $n = 3$ is 
+    \[
+        \sum_{n=0}^2 x^n = x^2 + x + 1.
+    \]
+    Therefore 
+    \[
+        [E : \mathbb Q(\alpha)] = 2.
+    \]
+    Using the tower law we get 
+    \[
+        [E:\mathbb Q] = 2 \cdot 3 = 6. 
+    \]
+\end{proof}
+\begin{proof}[Solution (f)]
+    We have $H = \langle \sigma \rangle \subseteq S_3$ and 
+    we will find the fixed field and 
+    confirm that $[E:E^H] = |H|$. 
+
+    We have $|H| = 3$ so $[E^H:\mathbb Q] = [E:\mathbb Q] / |H| = 2$ so 
+    $E^H$ is a quadratic extension of $\mathbb Q$.
+
+    By definition, $\omega$ is explicitly fixed by $\sigma$. 
+    Thus 
+    \[
+        \mathbb Q(\omega) \subseteq E^H.
+    \]
+    From before, 
+    \[
+        [\mathbb Q(\omega) : \mathbb Q] 
+        = \deg(x^2 + x + 1) = 2.
+    \] 
+    By the tower law, 
+    \[
+        2 = [E^H : \mathbb Q]
+        = [E^H : \mathbb Q(\omega)]\cdot [\mathbb Q(\omega) : \mathbb Q] 
+    \]
+    with the latter term being $2$ hence $[E^H : \mathbb Q(\omega)] = 1$ 
+    and thus 
+    \[
+        E^H = \mathbb Q(\omega).
+    \]
+\end{proof}
+
 \end{document}
