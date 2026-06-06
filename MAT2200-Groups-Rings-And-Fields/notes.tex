@@ -7432,18 +7432,769 @@ There will also probably be a lot of problems repeated.
     $s_{\nearrow} = (2 \ 4)$ and $s_{\searrow} = (1 \ 3)$.
 \end{proof}
 
-\begin{proof}[Proof of (c)]
-    It is evident that this works for a single $4$-cycle as 
-    no vertex is fixed hence only the colorings where every 
-    vertex are the same color works ($2$ such colorings exist), but 
-    the claim does not hold in general. 
-    We have that the reflection along the bottom-left to top-right 
-    diagonal is $(2 \ 4)$ as it swaps the vertex in the top-left and 
-    bottom-right. However there exists much more than 
-    two colorings which are fixed by this map. 
-    Notice that there are similtaneously $2$ choices for 
-    vertex $1$, $2$ for $3$, and $2$ choices for $2,4$ which 
-    must be the same color. 
+
+\begin{prob}
+    Let $R = \mathbb Z[x]$. 
+    Define $\phi : R \to \mathbb F_3$ by 
+    \[
+        \phi(f) = f(1) \mod 3. 
+    \]
+    \begin{enumerate}
+        \item Prove that $\phi$ is a ring 
+            homomorphism and find 
+            \[
+                \ker \phi.
+            \]
+        \item Use the first isormorphism theorem 
+            to identify the quotient 
+            $\mathbb Z[x]/\langle 3, x-1 \rangle$.
+            Decide whether $\langle 3, x-1 \rangle$ is 
+            prime or maximal.
+        \item[] Now let $J = \langle 3, x^2 + 1 \rangle 
+            \subseteq \mathbb Z[x]$.
+        \item Show that 
+            \[
+                \mathbb Z[x]/J \cong 
+                \mathbb F_3[x]/\langle x^2 + 1 \rangle.
+            \]
+            Decide whether $J$ is prime or maximal.
+        \item[] Let 
+            \[
+                K = \mathbb F_3[x]/\langle x^2 + 1\rangle,
+            \]
+            and let 
+            \[
+                \alpha = x + \langle x^2 + 1\rangle \in K.
+            \]
+        \item Show that $K$ is a field with $9$ 
+            elements and basis $\{1,\alpha\}$ 
+            over $\mathbb F_3$.
+            Compute $\alpha^2, \alpha^3, \alpha^4$ and 
+            determine the order of $\alpha$ in $K^\times$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of a few problems]
+    We have 
+    \begin{align*}
+        \phi(f+g) 
+        &= (f+g)(1) \mod 3 \\ 
+        &= (f(1) \mod 3 + g(1) \mod 3) \mod 3 \\ 
+        &= \phi(f) + \phi(g). 
+    \end{align*} 
+    Similarly, 
+    \begin{align*}
+        \phi(fg) 
+        &= f(1)g(1) \mod 3 \\ 
+        &= f(1) \mod 3 \cdot g(1) \mod 3 \\ 
+        &= \phi(f)\phi(g).
+    \end{align*}
+    We can also check $\phi(1) = 1$ is trivial.
+
+    We want to find those $f \in R$ such 
+    that $\phi(f) = 0$. Equivalently those 
+    $f$ for which $f \equiv 0 \mod 3$ or 
+    those $f$ which are divisible by $x-1$ 
+    as $f(x) = g(x)(x-1) = 0$ for $x = 1$. 
+    Thus 
+    \[
+        \langle 3, x-1\rangle \subseteq \ker \phi.
+    \]
+    Suppose $f \in \ker \phi$. 
+    Then $\phi(f) \equiv 0 \mod 3$ so $f$ is 
+    divisible by $3$ or $x-1$ so 
+    \[
+        \ker \phi \subseteq \langle 3, x-1\rangle. 
+    \]
+
+    Moving on... 
+
+    \medskip 
+
+    $\phi$ is surjective. Consider some 
+    $n \in \mathbb F_3$. Then $f(x) = n$ 
+    is sent to $n$ by $\phi$. 
+    Therefore, by the first isomorphism theorem, 
+    \[
+        \frac{\mathbb Z[x]}{\langle 3, x-1\rangle} 
+        \cong \mathbb F_3.
+    \]
+    Since $\mathbb F_3$ is a field we conclude 
+    that $\langle 3,x-1 \rangle$ is maximal, because 
+    a commutative ring (which $\mathbb Z[x]$ is) quotiented 
+    by an ideal is a field if and only if 
+    the ideal is maximal. 
+
+    Moving on... 
+
+    \medskip
+
+    We will compare $\langle x^2 + 1 \rangle$ as an 
+    ideal of $\mathbb R[x]$ vs. $\mathbb C[x]$.
+
+    It is well known that 
+    \[
+        \frac{\mathbb R[x]}{\langle x^2 + 1 \rangle} 
+        \cong \mathbb C 
+    \]
+    via the first isomorphism theorem applied to 
+    the homomorphism $f \mapsto f(i)$.
+
+    Over $\mathbb C$, $x^2 + 1$ splits 
+    into $(x + i)(x-i)$ both of which 
+    are polynomials in $\mathbb C[x]$ so 
+    $\langle x^2 + 1 \rangle$ is not even 
+    prime and thus $\mathbb C/\langle x^2 + 1 \rangle$ is 
+    not an integral domain and hence ceirtainly not 
+    isomorphic to $\mathbb C$.
+\end{proof}
+
+\begin{prob}
+    Let $G,H$ be finite groups and let 
+    $\phi : G \to H$ be a group homomorphism.
+
+    Prove that 
+    \[
+        \frac{|G|}{|\ker \phi|} 
+    \]
+    divides $H$.
+
+    Then prove that if $\gcd(|G|,|H|) = 1$, then 
+    $\phi$ is the trivial homomorphism
+\end{prob}
+\begin{proof}
+    By the first isomorphism theorem/fundamental theorem 
+    of group homomorphisms, we have 
+    \[
+        \frac{|G|}{|\ker \phi|} 
+        = \left|\frac{G}{\ker \phi}\right| 
+        = |\operatorname{im} \phi|. 
+    \]
+    We note that $\operatorname{im}\phi$ is a subgroup 
+    of $H$ (this can be proven by observing 
+    that $\phi(e_G) = e_H$, $\phi(a), \phi(b) \in H 
+    \Rightarrow \phi(a)\phi(b) = \phi(ab) \in H$, and so on), 
+    so by Lagrange's theorem we have 
+    that $|\operatorname{im} \phi|$ divides 
+    $|H|$, which by the previous equalities, 
+    gives the desired result.
+
+    Assume $\gcd(|G|,|H|) = 1$.
+    Then $|G|$ does not divide $|H|$, but 
+    \[
+        \frac{|G|}{|\ker \phi|}
+    \]
+    does divide $|H|$.
+    Then $|G|$ does not split into factors 
+    $a,b$ such that either divides $|H|$.
+    Since  
+    \[
+        |G| = |\ker \phi| \cdot |\operatorname{im} \phi|
+    \]
+    and $|\operatorname{im} \phi|$ does divide $|H|$, it must 
+    be the case that one of these factors is $1$ 
+    and the other is $|G|$. We cannot not 
+    have $|\operatorname{im} \phi| = |G|$ by assumption. Hence 
+    $|\ker \phi| = |G|$ and $\phi$ is then the 
+    trivial homomorphism $g \mapsto e_H$ for ever 
+    $g \in G$.
+\end{proof}
+
+\begin{prob}
+    List all finite abelian groups of 
+    order $45 = 3^2 \cdot 5$ up to 
+    isomorphism. Which are cyclic?
+\end{prob}
+\begin{proof}[Solution]
+    By the classification theorem for finite 
+    abelian groups, which is a special case of the 
+    fundamental theorem of finitely generated abelian 
+    groups, we have 
+    \[
+        G \cong \prod_{i}\mathbb Z_{p_i^{e_i}}
+    \]
+    such that 
+    \[
+        \prod_{i} p_i^{e_i} = 45.
+    \]
+    Then the unique ways to factor $45$ gives 
+    us 
+    \begin{align*}
+        \mathbb Z_{3}^2 \times \mathbb Z_5 \\ 
+        \mathbb Z_9 \times \mathbb Z_5. 
+    \end{align*}
+    For 
+    \[
+        H = \prod_i \mathbb Z_{q_i}
+    \]
+    we have that $H$ is cyclic only if 
+    all $q_i$ are relatively prime. 
+    Thus $\mathbb Z_9 \times \mathbb Z_5$ is 
+    the only one that is cyclic, and 
+    we can quickly see that it is 
+    indeed generated by $(1,1)$. 
+\end{proof}
+\begin{prob}
+    Let 
+    \[
+        \sigma = (1 \ 2 \ 5)(3 \ 4) \in S_5.
+    \]
+    Find the order of $\sigma$, decide whether 
+    $\sigma \in A_5$ and decide whether 
+    \[
+        \langle \sigma \rangle \trianglelefteq 
+        S_5.
+    \]
+\end{prob}
+\begin{proof}
+    Since $\sigma$ is the composition of 
+    two disjoint cycles of lengths $2$ and 
+    $3$ respectively we have 
+    $\operatorname{ord}(\sigma) = 
+    \operatorname{lcm}(2,3) = 6$.
+
+    We have that $(1 \ 2 \ 5) = (1 \ 2)(2 \ 5)$ so 
+    \[
+        \sigma = (1 \ 2)(2 \ 5)(3 \ 4) \not\in A_5.
+    \]
+    If $\sigma$ was an element of the alternating group 
+    we would automatically rule out normality. 
+
+    We have $\sigma^3 = (3 \ 4) \in \langle \sigma \rangle$ 
+    and we do the all-or-nothing test and ask whether 
+    the subgroup contains all transpositions in $S_5$. 
+    In $S_5$ there are $\binom{5}{2} = 10$ transpositions 
+    and the only pure transposition in the subgroup is 
+    the afforementioned $(3 \ 4)$ and the subgroup is 
+    therefore not normal.
+\end{proof}
+
+\begin{prob}
+    Let $D_4$ act on $X$ the set of colorings 
+    of the vertices of a square using $m$ colors.   
+
+    Use Burnside's formula to show that the number of 
+    distinct (up to the equivalence class generated by 
+    the action) colorings is 
+    \[
+        \frac{m^4 + 2m^3 + 3m^2 + 2m}{8}.
+    \]
+\end{prob}
+\begin{proof}
+Let the vertices of the square be labeled $1, 2, 3, 4$ in counterclockwise order. The dihedral group $D_4$ acts on the vertices as a subgroup of $S_4$, and this action induces an action on the set $X$ of all $m^4$ possible vertex colorings. 
+
+By Burnside's Lemma, the number of distinct colorings up to symmetry (orbits) is given by:
+\[
+|X/D_4| = \frac{1}{|D_4|} \sum_{g \in D_4} |X^g|
+\]
+where $|D_4| = 8$, and $X^g$ denotes the set of colorings fixed by the group element $g$. A coloring is fixed by $g$ if and only if all vertices belonging to the same cycle in the disjoint cycle decomposition of $g$ are assigned the exact same color. If a permutation decomposes into $k$ disjoint cycles (including $1$-cycles), there are $m^k$ independent choices of colors, so $|X^g| = m^k$.
+
+We analyze the $8$ elements of $D_4$ by their geometric actions and corresponding cycle structures:
+
+\begin{enumerate}
+    \item \textbf{The Identity ($e$):} 
+    The identity element leaves all vertices fixed. Its cycle structure is $(1)(2)(3)(4)$, which yields $k = 4$ disjoint cycles. 
+    \[ |X^e| = m^4 \]
+
+    \item \textbf{Rotations by $\pm 90^\circ$ ($r, r^3$):} 
+    A rotation by $90^\circ$ maps $1 \to 2 \to 3 \to 4 \to 1$. Both $r$ and its inverse $r^3$ form a single $4$-cycle: $(1\,2\,3\,4)$ and $(1\,4\,3\,2)$ respectively. Each has $k = 1$ cycle, requiring all 4 vertices to share a single color.
+    \[ |X^r| = |X^{r^3}| = m^1 = m \]
+
+    \item \textbf{Rotation by $180^\circ$ ($r^2$):} 
+    This rotation maps opposite vertices to each other ($1 \leftrightarrow 3$ and $2 \leftrightarrow 4$). Its cycle structure is $(1\,3)(2\,4)$, giving $k = 2$ disjoint cycles. Vertices $1$ and $3$ must share a color, and vertices $2$ and $4$ must share a color.
+    \[ |X^{r^2}| = m^2 \]
+
+    \item \textbf{Reflections across Diagonal Axes ($s, r^2s$):} 
+    There are $2$ reflections whose axes pass through opposite pairs of vertices. 
+    \begin{itemize}
+        \item One reflection fixes vertices $1$ and $3$ while swapping $2 \leftrightarrow 4$, yielding the cycle type $(1)(3)(2\,4)$.
+        \item The other reflection fixes vertices $2$ and $4$ while swapping $1 \leftrightarrow 3$, yielding the cycle type $(2)(4)(1\,3)$.
+    \end{itemize}
+    Both elements yield $k = 3$ disjoint cycles.
+    \[ |X^s| = |X^{r^2s}| = m^3 \]
+
+    \item \textbf{Reflections across Midpoint Axes ($rs, r^3s$):} 
+    There are $2$ reflections whose axes pass through the midpoints of opposite edges. These reflections leave no vertices fixed, instead swapping adjacent pairs of vertices simultaneously ($1 \leftrightarrow 2$ and $3 \leftrightarrow 4$, or $1 \leftrightarrow 4$ and $2 \leftrightarrow 3$). Their cycle structures are of the form $(\bullet\,\bullet)(\bullet\,\bullet)$, yielding $k = 2$ disjoint cycles.
+    \[ |X^{rs}| = |X^{r^3s}| = m^2 \]
+\end{enumerate}
+
+Summing the sizes of the fixed-point sets across all $8$ elements yields:
+\begin{align*}
+\sum_{g \in D_4} |X^g| &= |X^e| + |X^r| + |X^{r^3}| + |X^{r^2}| + |X^s| + |X^{r^2s}| + |X^{rs}| + |X^{r^3s}| \\
+&= m^4 + m + m + m^2 + m^3 + m^3 + m^2 + m^2 \\
+&= m^4 + 2m^3 + 3m^2 + 2m
+\end{align*}
+
+Applying Burnside's formula by dividing this sum by $|D_4| = 8$, we find that the total number of distinct colorings up to symmetry is:
+\[
+|X/D_4| = \frac{m^4 + 2m^3 + 3m^2 + 2m}{8}
+\]
+\end{proof}
+
+\begin{prob}
+    Let $R = \mathbb Z \times \mathbb Z$.
+    Find all units and zero divisors in 
+    $R$.
+    Decide whether the ideal 
+    \[
+        \mathbb Z \times \{0\}
+    \]
+    is prime and/or maximal.
+\end{prob}
+\begin{proof}
+    The set of units in $\mathbb Z^2$ are 
+    the $2$-combinations of units in 
+    $\mathbb Z$, of which there are $1,-1$ 
+    both of which are their own inverse. 
+    Therefore the units of $\mathbb Z^2$ are 
+    $(-1,-1), (-1,1), (1,-1), (1,1)$, all 
+    with themselves as their multiplicative inverse. 
+
+    Let $\phi : \mathbb Z^2 \to \mathbb Z$ by 
+    \[
+        \phi(a,b) = b. 
+    \]
+    Then $\phi$ is a surjection and $\ker \phi$ is 
+    \[
+        \ker \phi = \mathbb Z \times \{0\}.
+    \]
+    Then, by the first isomorphism theorem: 
+    \[
+        \frac{\mathbb Z^2}{\mathbb Z\times \{0\}} 
+        \cong \mathbb Z. 
+    \]
+    $\mathbb Z$ is an integral domain so $\mathbb Z 
+    \times \{0\}$ is prime, but not maximal as 
+    $\mathbb Z$ is not a field. 
+\end{proof}
+\begin{prob}
+    Define 
+    \[
+        \phi : \mathbb Z[x] \to \mathbb Z_5
+    \]
+    by 
+    \[
+        \phi(f) = f(3) \mod 5.  
+    \]
+    Prove that 
+    \[
+        \ker \phi = \langle 5, x-3\rangle. 
+    \]
+    Then identify $\mathbb Z[x]/\ker \phi$ and 
+    decide whether $\ker \phi$ is prime or 
+    maximal.
+\end{prob}
+\begin{proof}
+    Suppose $f \in \ker \phi$. 
+    Then $\phi (f) = 0$, equivalently 
+    $f(3) \equiv 0$ in $\mathbb Z_5$.   
+    Then $f(x) = q(x)(x-3)$ or 
+    $f(x) = 5q(x)$ so 
+    \[
+        \ker \phi \subseteq \langle 5, x-3\rangle.
+    \]
+    Suppose $f(x) = q(x)(x-3)$. Then 
+    $f(3) \equiv 0$, likewise if 
+    $f(x) = 5q(x)$. Then 
+    \[
+        \langle 5,x-3 \rangle \subseteq \ker \phi.
+    \]
+
+    $\phi$ is surjective since, for $n \in \mathbb Z_5$ we have 
+    $f(x) := n \Rightarrow \phi(n) \equiv n$. Thus by the first 
+    isomorphism theorem: 
+    \[
+        \frac{\mathbb Z[x]}{\ker \phi} 
+        \cong \mathbb Z_5.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        f(x) = x^3 + x + 1 \in \mathbb F_2[x].
+    \]
+    Show that $f$ is irreducible over $\mathbb F_2$. 
+    Let 
+    \[
+        K = \mathbb F_2[x]/\langle f \rangle, \ 
+        \alpha = x + \langle f \rangle. 
+    \]
+    Show that $K$ is a field with $8$ elements and 
+    basis 
+    \[
+        \{1, \alpha, \alpha^2\} 
+    \]
+    over $\mathbb F_2$.
+
+    Compute $\alpha^n$ for $3 \leq n \leq 7$.
+\end{prob}
+\begin{proof}
+    $f$ is degree $3$ and is thus irreducible if and 
+    only if it has no zeros in the ground-field. Checking: 
+    \[
+        f(0) = f(1) = 1
+    \]
+    we see that $f$ is irreducible over $\mathbb F_2$.
+
+    Since $\mathbb F_2$ is a field we have that 
+    the polynomial ring is a PID. Then, 
+    $\langle f \rangle$ is maximal if and 
+    only if it is prime. Thus, since all PID's 
+    are commutative rings we get that 
+    $K = \mathbb F_2[x]/\langle f \rangle$ is 
+    a field if and only if $f$ is irreducible over 
+    $\mathbb F_2$. Therefore $K$ is a field. 
+
+    Now let $g(x) \in \mathbb F_2[x]$ so 
+    $g(x) = q(x)f(x) + r(x)$ where 
+    $0 \leq \deg r < \deg f$. 
+    Then sinec $q(x)f(x)$ vanishes 
+    over $\langle f \rangle$ we get that 
+    $g$ is a linear combination of 
+    $1,x,x^2$ with scalars in $\mathbb F_2$. 
+    Thus there are $|\mathbb F_2|^{\deg f} = 2^3 = 8$ possibilities. 
+
+    \begin{align*}
+        \alpha^3 + \alpha + 1 
+        &= 0 \\ 
+        \alpha^3 
+        &= \alpha + 1 \\ 
+        \alpha^4 &= \alpha(\alpha + 1) = \alpha^2 + \alpha \\ 
+        \alpha^5 &= \alpha(\alpha^2 + \alpha) = \alpha^2 + \alpha + 1 \\ 
+        \alpha^6 &= \alpha^3 + \alpha^2 + \alpha = \alpha^2 + 1 \\ 
+        \alpha^7 &= \alpha^3 + \alpha = \alpha + \alpha + 1 = 1.
+    \end{align*}
+\end{proof}
+
+\begin{prob}
+    Let $K$ be the field from the previous problem.
+    Define $\sigma : K \to K$, $\sigma(a) = a^2$.
+
+    Show that $\sigma$ is an automorphism. 
+    Compute 
+    \[
+        \sigma(\alpha), \ \sigma^2(\alpha), \ \sigma^3(\alpha).
+    \]
+    Determine $\operatorname{Gal}(K/\mathbb F_2)$.
+\end{prob}
+
+\begin{proof}
+    We have $K \cong \mathbb F_8$ since $|K| = 8$ and 
+    $K$ is a field and finite field are classified 
+    up to isomorphism. 
+
+    Let $\psi : \mathbb F_8 \to \mathbb F_8$ by 
+    \[
+        \psi(a) = a^2. 
+    \]
+    Then suppose 
+    \[
+        \psi(a) = 0. 
+    \]
+    Then $a = 0$ so $\ker \psi = \{0\}$ and 
+    is thus injective and since the domain 
+    equals the codomain and they are finite bijectivity 
+    follows. Now we show that this is indeed a homomorphism: 
+    \begin{align*}
+        \psi(ab) &= (ab)^2 \\ 
+                 &= a^2b^2 \\ 
+                 &= \psi(a)\psi(b) \\ 
+        \psi(a+b)&= (a+b)^2 \\ 
+                 &= a^2 + 2ab + b^2 \\ 
+                 &\equiv a^2 + b^2 \\ 
+                 &= \psi(a) + \psi(b) \\
+        \psi(1)  &= 1^2 \\  &= 1.
+    \end{align*}
+    Let $\theta : \mathbb F_8 \to K$ be a field isomorphism, which 
+    necessarily exists.
+    Then $\sigma = \theta \circ \psi \circ \theta^{-1}$ is then 
+    an automorphism on $K$.
+
+    Now, 
+    \begin{align*}
+        \sigma(\alpha) 
+        &= \alpha^2 \\ 
+        \sigma^2(\alpha) \\ 
+        &= \sigma(\alpha^2) \\ 
+        &= \alpha^4 \\ 
+        &= \alpha^2 + \alpha \\ 
+        \sigma^3(\alpha) 
+        &= \sigma(\alpha^4) \\ 
+        &= \alpha^8 \\ 
+        &= \alpha \cdot 1 \\ 
+        &= \alpha. 
+    \end{align*}
+    Then $\operatorname{ord}(\sigma) = 3$. 
+
+    For $\mathbb F_{q^n} / \mathbb F_q$ we have 
+    that the extension is Galois with 
+    $\operatorname{Gal}(K/\mathbb Q) = \mathbb Z/n\mathbb Z$ 
+    generated by the Frobenious automorphism 
+    $a \mapsto a^n$, and in fact 
+    \[
+        \langle \sigma \rangle = 
+        \operatorname{Gal}(K/\mathbb F_2), 
+    \]
+    as we can see that $\sigma$ fixes $\{0,1\}$ and 
+    $f(\sigma(\alpha)) = \sigma(f(\alpha)) = 0$. 
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        K = \mathbb Q(\sqrt 2, \sqrt 7).
+    \]
+    Prove that 
+    \[
+        [K : \mathbb Q] = 4. 
+    \]
+\end{prob}
+\begin{proof}
+    We will first show that $\mathbb Q(\sqrt 2)$ is the 
+    splitting field of $x^2 - 2$ over 
+    $\mathbb Q$. 
+
+    Let $L_{\sqrt 2}$ be the splitting field of $x^2 - 2$ over 
+    $\mathbb Q$. Then 
+    \[
+        L_{\sqrt 2} \subseteq K
+    \]
+    since $K$ contains the roots $\pm \sqrt 2 \in L$ of $x^2 - 2$.
+
+    Now since $\pm \sqrt 2 \in L_{\sqrt 2}$ and 
+    $\mathbb Q\subseteq L_{\sqrt 2}$ we have that 
+    $a + b\sqrt 2 \in L_{\sqrt 2}$ for any 
+    $a,b \in \mathbb Q$ since $L_{\sqrt 2}$ is a field 
+    and must therefore be closed under addition and multiplication 
+    in a way which allows this. Therefeore 
+    \[
+        K \subseteq L_{\sqrt 2}. 
+    \]
+
+    For $\sqrt 2$, we have that $x^2 - 2$ is the minimal 
+    polynomial and thus irreducible (can be shown with using 
+    Eistenstein's criterion). Hence 
+    \[
+        [\mathbb Q(\sqrt 2) : \mathbb Q] = \deg(x^2 - 2) = 2. 
+    \]
+
+    We proceed now by showing that $\sqrt 2 \not \in \mathbb Q(\sqrt 2)$. 
+    Sppose $\sqrt 7 \in \mathbb Q(\sqrt 2)$. Then 
+    \begin{align*}
+        \sqrt 7 &= a + b\sqrt 2 \\ 
+        7 &= a^2 + 2ab\sqrt2 + 2b^2. 
+    \end{align*}
+    We cannot have $b = 0$ since then 
+    \[
+        7 = a^2, 
+    \]
+    but $7$ is not the square of any 
+    element $\in \mathbb Q$. 
+    If $a = 0$, then 
+    \[
+        7 = 2b^2 
+    \]
+    and 
+    \[
+        \frac{7}{2} = b^2,
+    \]
+    but once again $7/2$ is not the 
+    square of any element $\in\mathbb Q$.
+    Otherwise if both are non-zero then 
+    \[
+        \frac{7 - a^2 - 2b^2}{2ab} = \sqrt 2
+    \]
+    meaning $\sqrt 2 \in \mathbb Q$ which is 
+    not the case. Therefore $\sqrt 7 \not \in 
+    \mathbb Q(\sqrt 2)$, so $[K:\mathbb Q(\sqrt 2)] \neq 1$. 
+    
+    We use a similar argument as before that the minimal 
+    polynomial of $\sqrt 7$ over $\mathbb Q(\sqrt 2)$ is 
+    $x^2 - 7$ and therefore 
+    \[
+        [K : \mathbb Q(\sqrt 2)] = 2. 
+    \]
+    Using the tower law we get 
+    \[
+        [K : \mathbb Q] = 2 \cdot 2 = 4. 
+    \]
+\end{proof}
+\begin{prob}
+    Let  
+    \[
+        f(x) = x^3 - 5 \in \mathbb Q[x], 
+    \]
+    let 
+    \[
+        \alpha = \sqrt[3]5, 
+    \]
+    and let 
+    \[
+        \omega = e^{2i\pi/3}. 
+    \]
+    For the splitting field of $f$ over 
+    $\mathbb Q$, compute it's degree over 
+    $\mathbb Q$ and determine 
+    \[
+        \operatorname{Gal}(f/\mathbb Q).
+    \]
+\end{prob}
+\begin{proof}
+    The roots of $f$ over $\mathbb C$ are 
+    \[
+        \alpha, \omega \alpha, \omega^2 \alpha. 
+    \]
+    The splitting field is 
+    $\mathbb Q(\alpha, \omega\alpha)$.
+
+    Then $f$ is still the minimal polynomial of 
+    $\alpha$ over $\mathbb Q$ so 
+    \[
+        [\mathbb Q(\alpha) : \mathbb Q] = 3. 
+    \]
+
+    We remark that $\omega \not\in \mathbb Q(\alpha)$ since 
+    $\omega \in \mathbb C \supset \mathbb R \supset \mathbb Q(\alpha)$. 
+
+    Now for $\omega$, the cube root of unity we compute 
+    \[
+        \prod_{d|n} (x^d - 1)^{\mu(n/d)}  
+    \]
+    which since $n = 3$ is prime simply gives 
+    \[
+        \sum_{n=0}^2 x^n = x^2 + x^1 + 1 
+    \]
+    as the minimal polynomial. 
+    Therefore 
+    \[
+        [\mathbb Q(\alpha, \omega) : \mathbb Q(\alpha)]
+        = 2. 
+    \]
+    Using the tower law we get 
+    \[
+        [\mathbb Q(\alpha,\omega): \mathbb Q] = 6. 
+    \]
+    The Galois group of a splitting field of 
+    a degree $n$-polynomial is a subgroup of 
+    $S_n$. The extension $f/\mathbb Q$ is Galois since 
+    it is algebraic, normal (since all splitting fields are) and 
+    sperable (since every extension of a characteristic $0$ field 
+    which is algebraic is separable). 
+    Then 
+    \[
+        [\mathbb Q(\alpha, \omega) : \mathbb Q] = 
+        \operatorname{Gal}(f/\mathbb Q)
+    \]
+    so the Galois group is a subgroup of $S_3$ with 
+    $6$ elements hence it is $S_3$.
+\end{proof}
+
+\begin{prob}
+    Suppose $E/\mathbb Q$ is a finite Galois extension and 
+    \[
+        \operatorname{Gal}(E/\mathbb Q) \cong S_4.
+    \]
+    Prove that there exists an intermediate field $K$ with 
+    \[
+        [K : \mathbb Q] = 6. 
+    \]
+    Then decide whether $K$ is necessarily Galois 
+    for your construction. 
+\end{prob}
+\begin{proof}
+    For a subgroup $H \leq G := \operatorname{Gal}(E/\mathbb Q)$  
+    we have that $[E:E^H] = |H|$. 
+    We have $H:= \langle (1 \ 2 \ 3 \ 4) \leq S_4$ with 
+    order $4 = 24/6$. Then since $E/\mathbb Q$ is 
+    Galois we have
+    \[
+        [E : \mathbb Q] = |G| = 24. 
+    \]
+    Then 
+    \[
+        [E:E^{H}] = |H| = 4. 
+    \]
+    Then, by the tower law we have 
+    \[
+        [E^{H}:\mathbb Q] 
+        = \frac{[E:\mathbb Q]}{[E:E^H]} = \frac{24}{4} = 6.
+    \]
+    Lastly $E^H/\mathbb Q$ is Galois if and only if 
+    $H \trianglelefteq G$, which it is not. 
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        G = \mathbb Z_{12} \times \mathbb Z_8
+    \]
+    and let 
+    \[
+        H = \langle (4,2) \rangle.
+    \]
+    Determine $G/H$ up to isomorphism.
+\end{prob}
+
+\begin{proof}
+Let $G = \mathbb{Z}_{12} \times \mathbb{Z}_8$ and $H = \langle (4,2) \rangle$. To determine the structure of the quotient group $G/H$ using the First Isomorphism Theorem, we seek a surjective group homomorphism $\phi: \mathbb{Z}_{12} \times \mathbb{Z}_8 \to \mathbb{Z}_4 \times \mathbb{Z}_2$ such that $\ker(\phi) = H$.
+
+First, let us analyze the cyclic subgroup $H$. By computing successive multiples of the generator $(4,2)$ in $G$, we find:
+\begin{align*}
+1 \cdot (4,2) &= (4,2) \\
+2 \cdot (4,2) &= (8,4) \\
+3 \cdot (4,2) &= (0,6) \\
+4 \cdot (4,2) &= (4,0) \\
+5 \cdot (4,2) &= (8,2) \\
+6 \cdot (4,2) &= (0,4) \\
+7 \cdot (4,2) &= (4,6) \\
+8 \cdot (4,2) &= (8,0) \\
+9 \cdot (4,2) &= (0,2) \\
+10 \cdot (4,2) &= (4,4) \\
+11 \cdot (4,2) &= (8,6) \\
+12 \cdot (4,2) &= (0,0)
+\end{align*}
+Thus, $H$ is a subgroup of order $12$. By Lagrange's Theorem, the order of the quotient group must be:
+\[
+|G/H| = \frac{|G|}{|H|} = \frac{12 \times 8}{12} = 8
+\]
+
+We define a map $\phi: \mathbb{Z}_{12} \times \mathbb{Z}_8 \to \mathbb{Z}_4 \times \mathbb{Z}_2$ by:
+\[
+\phi(x, y) = (x - 2y \pmod{4}, \, y \pmod{2})
+\]
+We must check that $\phi$ satisfies the required properties:
+
+\begin{enumerate}
+    \item \textbf{Well-defined and Homomorphism:}
+    The map is well-defined because if $x \equiv x' \pmod{12}$, then $x \equiv x' \pmod{4}$, and if $y \equiv y' \pmod{8}$, then $y \equiv y' \pmod{4}$ and $y \equiv y' \pmod{2}$. Furthermore, because reduction modulo $n$ and linear combinations are additive operations, it easily follows that for any $(x_1, y_1), (x_2, y_2) \in G$:
+    \[
+    \phi((x_1, y_1) + (x_2, y_2)) = \phi(x_1+x_2, y_1+y_2) = \phi(x_1, y_1) + \phi(x_2, y_2)
+    \]
+    Thus, $\phi$ is a group homomorphism.
+
+    \item \textbf{Surjectivity:}
+    Let $(a, b) \in \mathbb{Z}_4 \times \mathbb{Z}_2$. We can find a preimage $(x, y) \in G$ by setting $y = b \in \{0, 1\}$. Then we need $x - 2b \equiv a \pmod{4}$, which means we can choose $x = a + 2b \pmod{4}$. Since any value modulo $4$ can be trivially lifted to a valid residue modulo $12$, a preimage always exists, proving $\phi$ is surjective.
+
+    \item \textbf{Kernel Verification:}
+    By definition, $\ker(\phi) = \{ (x,y) \in G \mid \phi(x,y) = (0,0) \}$. This yields the system of congruences:
+    \begin{align*}
+    y &\equiv 0 \pmod{2} \implies y \in \{0, 2, 4, 6\} \\
+    x - 2y &\equiv 0 \pmod{4} \implies x \equiv 2y \pmod{4}
+    \end{align*}
+    We check which elements $(x, y) \in \mathbb{Z}_{12} \times \mathbb{Z}_8$ satisfy this:
+    \begin{itemize}
+        \item If $y = 0$, then $x \equiv 0 \pmod{4} \implies x \in \{0, 4, 8\}$. This yields $(0,0), (4,0), (8,0)$.
+        \item If $y = 2$, then $x \equiv 4 \equiv 0 \pmod{4} \implies x \in \{0, 4, 8\}$. This yields $(0,2), (4,2), (8,2)$.
+        \item If $y = 4$, then $x \equiv 8 \equiv 0 \pmod{4} \implies x \in \{0, 4, 8\}$. This yields $(0,4), (4,4), (8,4)$.
+        \item If $y = 6$, then $x \equiv 12 \equiv 0 \pmod{4} \implies x \in \{0, 4, 8\}$. This yields $(0,6), (4,6), (8,6)$.
+    \end{itemize}
+    Comparing this list of $12$ elements to our explicit generation of $H$, we see they are completely identical. Thus, $\ker(\phi) = H$.
+\end{enumerate}
+
+By the First Isomorphism Theorem, $G/\ker(\phi) \cong \text{Im}(\phi)$. Substituting our found structures yields:
+\[
+G/H \cong \mathbb{Z}_4 \times \mathbb{Z}_2
+\]
 \end{proof}
 
 \end{document}
