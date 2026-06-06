@@ -7030,5 +7030,420 @@ There will also probably be a lot of problems repeated.
     $G \cong C_2 \times C_2$. 
 \end{proof}
 
+\begin{proof}[Solution of (c)]
+    The nontrivial subgroups of $G$ are those which 
+    one root is fixed, i.e. 
+    \[
+        \{0\} \times C_2, \ 
+        C_2 \times \{0\}.
+    \]
+\end{proof}
+
+\begin{proof}[Solution of (d)]
+    For each $\psi \in G$ we have 
+    \[
+        \psi[\mathbb Q] = \mathbb Q.
+    \]
+    If $\psi$ fixes a basiselement $\alpha$ of 
+    $K$, then $\psi$ will fix $\mathbb Q(\alpha)$. 
+    Suppose $\alpha$ is a basiselement and 
+    $\psi(\alpha) = \alpha$. Then 
+    for each $a + b\alpha \in \mathbb Q(\alpha)$, we have 
+    (since $\psi$ is a homomorphism), 
+    \[
+        \psi(a + b\alpha) 
+        = \psi(a) + \psi(b)\psi(\alpha) 
+        = a + b\alpha.
+    \]
+    Thus $\psi$ fixes $\mathbb Q(\alpha)$. 
+
+    Then the fixed fields are 
+    \[
+        K, \ \mathbb Q(\sqrt 2), \
+        \mathbb Q(\sqrt 5), \
+        \mathbb Q(\sqrt{10}), \
+        \mathbb Q.
+    \]
+\end{proof}
+\begin{proof}[Solution of (e)]
+    $G \cong C_2 \times C_2$ is abelian, hence 
+    every subgroup is normal. Thus every 
+    intermediate extension is Galois.
+\end{proof}
+
+\begin{prob}
+    Work over $\mathbb F_2$. Let 
+    \[
+        f(x) = x^3 + x + 1, 
+        g(x) = x^3 + x^2 + 1
+    \]
+    in $\mathbb F_2[x]$.
+
+    Let 
+    \[
+        K = \mathbb F_2[x]/\langle f \rangle, \
+        L = \mathbb F_2[x]/\langle g \rangle.
+    \]
+
+    Write 
+    \[
+        \alpha = x + \langle f \rangle \in K, 
+        \ \beta = x + \langle g \rangle \in L.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $f$ and $g$ are irreducible over 
+            $\mathbb F_2$.
+            Conclude that they are fields. 
+        \item Show that $K \cong L$ as fields. 
+        \item Does the assignment $\alpha \mapsto \beta$ 
+            necessarily define a $\mathbb F_2$-field homomorphism 
+            \[
+                K \to L? 
+            \]
+            Decide in this specific case. That is, check whether 
+            there exists an $\mathbb F_2$-field homomorphism 
+            $\phi : K \to L$ such that 
+            \[
+                \phi(\alpha) = \beta. 
+            \]
+        \item Find an explicit element of $L$ to which 
+            $\alpha$ can be sent. In other words, find 
+            $\gamma \in L$ such that 
+            \[
+                f(\gamma) = 0.
+            \]
+            Then explain why $\alpha \mapsto \gamma$ does 
+            define a $\mathbb F_2$-field homomorphism $K \to L$.
+        \item Let 
+            \[
+                \sigma : K \to K, \ \sigma(a) = a^2.
+            \]
+            Compute 
+            \[
+                \sigma(\alpha), \ \sigma^2(\alpha), \ 
+                \sigma^3(\alpha).
+            \]
+            Then determine $\operatorname{Gal}(K/\mathbb F_2)$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Both $f,g$ have degree $3 \in \{2,3\}$ and are 
+    thus irreducible over $\mathbb F_2$ if and only if they 
+    have no zeros in $\mathbb F_2$.
+
+    We quickly check that 
+    \[
+        f(0) = f(1) = g(0) = g(1) = 1.
+    \]
+
+    Since $\mathbb F_2$ is a field, the polynomial ring (in 
+    one variable) is a 
+    PID and thus a commutative ring. Therefore the 
+    quotient ring is a field if and only if 
+    the ideal we quotient by is maximal. 
+    As $\mathbb F_2[x]$ is a PID we have that 
+    the ideals are maximal if and only if they are prime. 
+    Thus irreducibility implies the ideal is maximal which 
+    in turn implies the quotient ring is a field. 
+
+    Therefore we conclude that $\mathbb F_2[x]/\langle f \rangle$ 
+    and $\mathbb F_2[x]/\langle g \rangle$ are fields. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We have that $f,g$ are irreducible and there is a standard 
+    result which says that in this case 
+    \[
+        \left|\frac{\mathbb F_2[x]}{\langle f \rangle}\right|
+        = |\mathbb F_2|^{\deg f} 
+        = |\mathbb F_2|^{\deg g} = 
+        \left|\frac{\mathbb F_2[x]}{\langle g \rangle}\right|
+    \]
+    and from here we can apply the classification of finite fields 
+    to conclude that both quotient rings are then isomorphic.
+
+    For the $|\mathbb F_2|^{\deg f}$ part we can elucidate the 
+    claim as follows. We will do this for the quotient with 
+    $\langle f \rangle$, and the approach is the same for 
+    $g$. 
+
+    Suppose $l(x) \in \mathbb F_2[x]$. Then 
+    $l(x) = f(x)q(x) + r(x)$ where $0 \leq \deg r(x) < \deg f$. 
+    Therefore each element in the quotient can be written 
+    as a linear combination of $1, x, x^2$ with scalars in 
+    $\mathbb F_2$, since the $f(x)q(x)$ term vanishes. 
+    Thus there are $2^3$ choices. 
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    Suppose $\phi : K \to L$ is a map such that 
+    $\phi(\alpha) = \beta$. 
+    The question is then if 
+    \[
+        f(\phi(\alpha)) = 0. 
+    \]
+    We have 
+    \[
+        f(\beta) = \beta^3 + \beta + 1,
+    \]
+    and
+    \[
+        \beta^3 = \beta^2 + 1 
+    \]
+    so the question is whether 
+    \[
+        \beta(\beta + 1) = 0.  
+    \]
+    This cannot be since $L$ is a field and 
+    this would imply $\beta = 1$ or 
+    $\beta = 0$, neither of which can be the case. 
+
+    Thus $\alpha \mapsto \beta$ does not 
+    constitute a $\mathbb F_2$-fixing homomorphism from $K \to L$.
+     
+\end{proof}
+\begin{proof}[Solution of (d)]
+    We need $\gamma \in L$ such that 
+    $f(\gamma) = 0$.
+
+    Let $\gamma := \beta^3$. 
+    Then 
+    \[
+        f(\gamma) 
+        = f(\beta^3) 
+        = \beta^2 + (\beta^2 + 1) + 1 
+        = 0.
+    \]
+    Define $\Phi : K \to L$ by 
+    \[
+        \Phi(h(\alpha)) = h(\gamma)
+    \]
+    for $h \in \mathbb F_2[x]$.
+\end{proof}
+\begin{proof}[Solution of (e)]
+    We have 
+    \[
+        \sigma(\alpha) = \alpha^2.
+    \]
+    Then 
+    \[
+        \sigma^2(\alpha) = 
+        \sigma(\alpha^2) = \alpha^4  
+        = \alpha^2 + \alpha.
+    \]
+    Lastly 
+    \[
+        \sigma^3(\alpha) 
+        = \sigma(\alpha^2 + \alpha) 
+        = \alpha^4 + \alpha^2 
+        = \alpha. 
+    \]
+
+    We always have that 
+    $\mathbb F_{q^n} / \mathbb F_{q}$ is Galois 
+    with $[\mathbb F_{q^n} : \mathbb F_q] = n$, 
+    and furthermore the Galois group is 
+    always the cyclic group of order $n$ generated 
+    by the Frobenious automorphism $a \mapsto a^q$. 
+    Thus 
+    \[
+        \operatorname{Gal}(K/\mathbb F_2) 
+        = C_3 = \langle \sigma \rangle.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        G = \mathbb Z_{12} \times \mathbb Z_8.
+    \]
+    Let 
+    \[
+        H = \langle (4,2) \rangle \leq G.
+    \]
+    We want to determine $G/H$ up to isomorphism.
+
+    \begin{enumerate}[label=\alph*)]
+        \item Find the order of $(4,2) \in 
+            \mathbb Z_{12} \times \mathbb Z_8$. 
+            Conclude $|H|$ and compute 
+            \[
+                |G/H|.
+            \]
+        \item Show that in $G/H$, we have the relation 
+            \[
+                4 \overline{e_1} + 2 \overline{e_2} = 0, 
+            \]
+            where 
+            \[
+                \overline{e_1} = (1,0) + H, 
+                \ \overline{e_2} = (0,1) + H.
+            \]
+            Record the original relations so 
+            $G/H$ is generated by $\overline{e_1},\overline{e_2}$ 
+            with $12\overline{e_1} = 0, 8 \overline{e_2} = 0$ and 
+            the above relation.
+        \item Prove that $G/H$ is not cyclic.
+        \item Conclude that $G/H \cong \mathbb Z_4 \times 
+            \mathbb Z_2$.
+        \item Construct a surjective homomorphism 
+            \[
+                \phi : \mathbb Z_{12} \times 
+                \mathbb Z_8 \to \mathbb Z_4 \times \mathbb Z_2 
+            \]
+            such that 
+            \[
+                \ker \phi = H.
+            \]
+            Use the first isomorphism theorem to conclude 
+            the previous result.
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[Solution of (a)]
+    We have that $4$ has order $3$ in $\mathbb Z_{12}$ and 
+    $2$ has the order $4$ in $\mathbb Z_8$.
+    Then $|(4,2)| = \operatorname{lcm}(3,4) = 12$. 
+    Thus $|H| = 12$. 
+
+    Then, by Lagrange's theorem we have 
+    \[
+        |G/H| = 12 \cdot 8 / 12 = 8.
+    \]
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Because LaTeX is annoying we will denote 
+    $\overline{e_1} =: e_1$ and likewise for $\overline{e_2}$. 
+    We have $H = \langle 4,2 \rangle$ so 
+    $(4,2) H = H$, equivalently $(4,2) \in H$, equivalently 
+    $(4,2)H = 0$ in the quotient. Then, since $(4,2)H = 
+    4e_1 + 2e_2$ we see that the relation holds.
+\end{proof}
+\begin{proof}[Proof of (c)]
+    If $G/H$ was cyclic it must contain some element of 
+    order $|G/H| = 8$. Suppose $(a,b)H \in G/H$.  
+    Then $(a,b) = ae_1 + be_2$. Then it is evident that 
+    $(a,b)$ cannot have order $8$ since we already have the 
+    relation given in (b).
+\end{proof}
+\begin{proof}[Proof of (d)]
+    By the classification theorem for finite abelian groups we have 
+    that the groups of order $|G/H| = 8$, up to isomorphism are 
+    \[
+        \prod_{i}\mathbb Z_{p_i^{e_i}}
+    \]
+    such that 
+    \[
+        \prod_{i} p_i^{e_i} = 8.
+    \]
+    These are $\mathbb Z_2^3, \ \mathbb Z_2 \times \mathbb Z_4, \ 
+    \mathbb Z_8$.
+    
+    We have that $G/H$ has no element of order $8$ hence 
+    $\mathbb Z_8$ is out of the question. 
+    Furthermore, $(1,1)$ has order $4$ so $\mathbb Z_2^3$ is also 
+    out of the question. Therefore 
+    \[
+        G \cong \mathbb Z_2 \times \mathbb Z_4.
+    \]
+\end{proof}
+\begin{proof}[Proof of (e)]
+    Let $\phi : \mathbb Z_{12} \times \mathbb Z_8 
+    \to \mathbb Z_4 \times \mathbb Z_2$, by 
+    \[
+        \phi(a,b) = (a \mod 4, b \mod 2). 
+    \]
+    Then this map is clearly surjective and 
+    \[
+        \ker \phi = H. 
+    \]
+    Thus, by the first isomorphism theorem we have the desired 
+    result.
+\end{proof}
+
+\begin{prob}
+    Let $G = D_4$ be the symmetry group of the square. It has 
+    $8$ elements: four rotations and four reflections. 
+
+    We color the four vertices using black and white. 
+    Two colorings are considered equivalent if you can obtain 
+    one from the other by a symmetry of the square. 
+
+    Let $X$ be the set of all such colorings. 
+    Then $|X| = 16$.
+
+    The group $D_4$ acts on $X$ by permuting the vertices. 
+
+    We want to count the number of different colorings up to 
+    the equivalence class created by this action.
+
+    \begin{enumerate}[label=\alph*)]
+        \item State Burnside's formula. 
+        \item Label the vertices $1,2,3,4$ cyclically. 
+            List the cycle of each symmetry of the square 
+            as the permutation across vertices. 
+        \item For a permutation $g$ of the vertices
+            prove that the number of colorings fixed by $g$ is 
+            $2^{c(g)}$ where $c(g)$ is the number of disjoint cycles 
+            in the cycle decomposition of $g$.
+        \item Use Burnside's formula to compute the number of  
+            essentially different colorings of the square. 
+        \item Now color the square using $m$ colors instead of $2$. 
+            Find a formula for the number of essentially different 
+            colorings in terms of $m$.
+    \end{enumerate}
+\end{prob}
+
+\begin{proof}[Solution of (a)]
+    Burnside's formula is 
+    \[
+        \#(X/G) = \frac{1}{|G|}\sum_{g\in G}|X^g|,
+    \]
+    where  
+    \[
+        X^g = \{x \in X : g \cdot x = x\}.
+    \]
+    $X^g$ is the set of $x \in X$ such that $g$ fixes $x$, meaning 
+    it is like the opposite of $\operatorname{Stab}_G(x)$. Instead 
+    of the $g \in G$ which leave $x$ untouched, it is the set 
+    of $x$ which $g \in G$ leave untouched.
+\end{proof}
+\begin{proof}[Solution of (b)]
+    Denote $r_{90}$ as rotating $90$ degrees, $r_{180}$ for 
+    $180$, etc. 
+    Then $r_{90}(1, 2, 3, 4) = (4,1,2,3)$ and 
+    $r_{180}(1,2,3,4) = (3,4,1,2)$ and $r_{270}(1,2,3,4) 
+    = (2,3,4,1)$. 
+
+    For reflections we denote $s_{\uparrow}$ as a reflection 
+    along vertical center-line, $s_{\rightarrow}$ as a reflection 
+    along the horizontal, $s_{\nearrow}$ as one diagonal and 
+    $s_{\searrow}$ as the other. 
+    Then $s_{\uparrow}(1,2,3,4) = (3,4,2,1)$, 
+    $s_{\rightarrow}(1,2,3,4) = (2,1,4,3)$, 
+    $s_{\nearrow}(1,2,3,4) = (1,4,3,2)$ and 
+    $s_{\searrow}(1,2,3,4) = (3,2,1,4)$.
+
+    In cycle notation we get $r_{90} = (1 \ 2 \ 3 \ 4)$ and then 
+    $r_{180} = r_{90}^2 = (1 \ 3)(2 \ 4)$ and similarly for $270$ we 
+    get $r_{270} = r_{90} \circ r_{180} = (1 \ 4 \ 3 \ 2)$. 
+    Then reflections are $s_{\uparrow} = (1 \ 4 \ 2 \ 3)$, 
+    $s_{\rightarrow} = (1 \ 2)(3 \ 4)$, 
+    $s_{\nearrow} = (2 \ 4)$ and $s_{\searrow} = (1 \ 3)$.
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    It is evident that this works for a single $4$-cycle as 
+    no vertex is fixed hence only the colorings where every 
+    vertex are the same color works ($2$ such colorings exist), but 
+    the claim does not hold in general. 
+    We have that the reflection along the bottom-left to top-right 
+    diagonal is $(2 \ 4)$ as it swaps the vertex in the top-left and 
+    bottom-right. However there exists much more than 
+    two colorings which are fixed by this map. 
+    Notice that there are similtaneously $2$ choices for 
+    vertex $1$, $2$ for $3$, and $2$ choices for $2,4$ which 
+    must be the same color. 
+\end{proof}
 
 \end{document}
