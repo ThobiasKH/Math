@@ -8397,4 +8397,322 @@ G/H \cong \mathbb{Z}_4 \times \mathbb{Z}_2
     \]
 \end{proof}
 
+\begin{prob}[4, Exam 2021]
+    Let $f(x) = (x^2 - 2)(x^2 - 5)$ in $\mathbb Q[x]$. 
+
+    \begin{enumerate}[label=\alph*)]
+        \item Find the zeros of 
+            $f(x)$ in $\mathbb C$ and determine 
+            the splitting field $K$ of $f(x)$ over 
+            $\mathbb Q$. Show that $[K : \mathbb Q] = 4$.  
+            You may use without proof that 
+            $x^4 - 14x^2 - 9$ is irreducible in $\mathbb Q[x]$.
+        \item Find the Galois group $\operatorname{Gal}(K/\mathbb Q)$,
+            and write down the diagrams of subgroups $H$ of 
+            the Galois group and subfields $E$ of $K$ with 
+            $\mathbb Q \subset E \subset K$ obtained 
+            as fixed fields. Explain which subgroup is carried to 
+            what subfield under the Galois correspondence. 
+            
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution of (a)]
+    Since $\mathbb Q$ is a field we have that 
+    $\mathbb Q[x]$ is a PID. Thus 
+    $f(x) = (x^2 - 2)(x^2 - 5) = 0$ if and only if 
+    $x^2 - 2 = 0$ or $x^2 - 5 = 0$. For each of these 
+    polynomial we have the zeros $\pm \sqrt 2$ and 
+    $\pm \sqrt 5$ respectively. 
+
+    The splitting field of $x^2 - 2$ over $\mathbb Q$ 
+    is $\mathbb Q(\sqrt 2)$ and 
+    $\sqrt 5 \not\in \mathbb Q(\sqrt 2)$ so 
+    the splitting field of $f$ which is 
+    $K=\mathbb Q(\sqrt 2, \sqrt 5) \not\subseteq \mathbb Q(\sqrt 2)$. 
+    This can be ovserved by supposing, for a contradiction, 
+    that $\sqrt 5 \in \mathbb Q(\sqrt 2)$. Then 
+    \[
+        \sqrt 5 = a+b\sqrt 2, \ a,b \in \mathbb Q. 
+    \]
+    Squaring both sides: 
+    \[
+        5 = a^2 + 2ab\sqrt 2 + 2b^2, 
+    \]
+    so 
+    \[
+        5 - a^2 - 2b^2 = 2ab\sqrt 2. 
+    \]
+    If $a = 0$ then $5/2 = b^2$, but $5/2$ is not the square 
+    of any element in $\mathbb Q$. If $b = 0$ then similarly 
+    $5 = a^2$ for $a \in \mathbb Q$ which is impossible and 
+    if neither are $0$ then 
+    \[
+        \underbrace{\frac{5-a^2 - 2b^2}{2ab}}_{\text{rational}}
+        =\sqrt 2, 
+    \]
+    but then $\sqrt 2 \in \mathbb Q$, a contradiction.
+
+    The minimal polynomial of $\sqrt 5$ over 
+    $\mathbb Q(\sqrt 2)$ is $x^2 - 5$ so 
+    \[
+        [K : \mathbb Q] = [K : \mathbb Q(\sqrt 2)] 
+        \cdot [\mathbb Q(\sqrt 2) : \mathbb Q]
+        = 2 \cdot 2 = 4. 
+    \]
+\end{proof}
+\begin{proof}[Proof of (b)]
+    The Galois group is the set of $\mathbb Q$-automorphisms 
+    on $K$. I.e. 
+    \[
+        G:= \operatorname{Gal}(K/\mathbb Q) 
+        \subseteq \{\sigma : K \to K : K[\mathbb Q] = \mathbb Q\}
+    \]
+    and we also require the minimal polynomial 
+    of any root $\alpha$ is the minimal polynomial of 
+    $\sigma(\alpha)$. 
+    Let $f(x) = x^2 - 2$ and $g(x) = x^2 - 5$. 
+
+    Then we require $f(\sigma(\sqrt 2)) = 0$ so the 
+    image of $\sqrt 2$ can be $\{\sqrt 2, -\sqrt 2\}$ and 
+    similarly $\sqrt 5$ can be $\{\sqrt 5, -\sqrt 5\}$. 
+
+    Denote $\sigma_{\alpha, \beta} : K \to K$ as the automorphism 
+    which sends $\sqrt 2 \mapsto \alpha$, $\sqrt 5 \mapsto \beta$. 
+
+    Then $\operatorname{id}_K = \sigma_{\sqrt 2, \sqrt 5}$.
+    We will now show that all valid choices of where 
+    to send the roots does in fact constitute valid 
+    automorphisms, meaning they are bijective homomorphisms. 
+    
+    Consider some element $x \in K$. Then $x = a + b\sqrt 2 + 
+    c \sqrt 5 + d \sqrt2 \sqrt 5$. 
+    The identity map $\sigma_{\sqrt 2, \sqrt 5}$ is obviously valid.
+    Linearity in $\sigma(x+y)$ follows from the fact that 
+    $x,y \in K$ are linear combinations over 
+    $\mathbb Q\cup\{\sqrt 2, \sqrt 5\}$. 
+    After confirming that linearity holds for 
+    multiplication we conclude that 
+    all automorphisms which sends $\sqrt 2, \sqrt 5 \mapsto 
+    \pm \sqrt 2, \pm \sqrt 5$ are valid. Thus 
+    \[
+        G \cong C_2 \times C_2
+    \]
+    the Klein-$4$ group. This aligns with $[K : \mathbb Q]$ which 
+    we expected since $K$ is Galois as an extension over 
+    $\mathbb Q$ since it is algebraic, normal and separable. 
+\end{proof}
+
+\begin{prob}[2, Exam 2019]
+    \  
+
+    \begin{enumerate}
+        \item[b)] Show that if $\sigma \in S_n$ is a cycle of 
+            odd length $2k+1$ then $\sigma^2$ is also a cycle of 
+            length $2k + 1$.
+        \item[c)] Let $G$ be a subgroup of $S_n$ such that there 
+            exists permutations $\sigma_2, \ldots, \sigma_n \in G$ 
+            satisfying $\sigma_i(1) = i$ for $2 \leq i \leq n$. 
+            Show that $G$ acts transitively on $[n]$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (b)]
+    Suppose $\sigma \in S_n$ with odd length $2k+1$. Then 
+    \[
+        \sigma = (a_1 \ a_2 \ \cdots \ a_{2k+1})
+    \]
+    so that $\sigma(a_i) = a_{i+1}$ for $i \in [2k]$, and 
+    $\sigma(a_{2k+1}) = a_1$.
+
+    Then the composition 
+    \[
+        \sigma \circ \sigma 
+        = (a_1 \ a_2 \ \cdots \ a_{2k+1})
+        (a_1 \ a_2 \ \cdots \ a_{2k+1}).
+    \]
+    Let us consider how this acts on some $a_i \in 
+    \{a_i : i \in [2k+1]\}$.
+    $\sigma^2$ sends $a_i \to a_{i+1} \to a_{i+2}$ modulo 
+    $2k+1$ so that 
+    \[
+        \sigma^2(a_1) = a_3, \ 
+        \sigma^2(a_2) = a_4, 
+        \ldots, \ 
+        \sigma^2(a_{2k+1}) = a_2. 
+    \]
+    We notice that odd elements are sent to odd elements 
+    with the preimage of $a_1$ being $a_{2k}$ and the preimage 
+    of $a_{2k+1}$ being $a_{2k - 1}$. Then 
+    \[
+        \sigma^2 
+        = (a_1 \ a_3 \ \cdots \ a_{2k+1} \ a_2 \ 
+        a_4 \ \cdots \ a_{2k}), 
+    \]
+    which is a cycle of length $2k+1$.
+\end{proof}
+\begin{proof}[Proof of (c)]
+    For $1 \leq i,j \leq n$ we have that 
+    \[
+        \sigma_j\sigma_i^{-1}(i) = \sigma_j(1) = j. 
+    \]
+    Thus $G$ acts transitively on $[n]$.
+\end{proof}
+
+\begin{prob}[3, Exam 2019]
+    \
+    \begin{enumerate}[label=\alph*)]
+        \item Show that if $n$ is not prime then $n\mathbb Z$ is 
+            not a prime ideal of $\mathbb Z$. 
+        \item Show that the quotient 
+            \[
+                \frac{\mathbb Z_2[x]}{\langle x^3 + x + 1\rangle}
+            \]
+            is a field. How maby elements does this field have? 
+        \item Find a polynomial $p(x) \in \mathbb Z_2[x]$ such 
+            that $\deg(p(x)) \leq 2 $ and 
+            \[
+                x^5 + \langle x^3 + x + 1\rangle = 
+                p(x) + \langle x^3 + x + 1\rangle.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Let $n$ be some non-prime number. 
+    Then $n$ factors uniquely into primes: 
+    \[
+        n = \prod_{i = 1}^N p_i^{e_i}   
+    \]
+    Let 
+    \[
+        a := \prod_{i=1}^{\lfloor N/2 \rfloor} p_i^{e_i}
+    \]
+    and 
+    \[
+        b := \prod_{i=\lceil N/2 \rceil}^N p_i^{e_i}.
+    \]
+    Then $n = ab \in n \mathbb Z$, but 
+    neither $a$ nor $b$ is in $n\mathbb Z$. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    $\mathbb Z_2$ is a field so $\mathbb Z_2[x]$ is a PID and 
+    thus a commutative ring. Then $\mathbb Z_2[x]/\langle 
+    x^3 + x + 1 \rangle$ is a field if and only if 
+    $\langle x^3 + x +1\rangle$ is a maximal ideal. 
+
+    Since $\mathbb Z_2[x]$ is a PID we have that an ideal 
+    is maximal if and only if it is prime thus $\langle x^3 + x + 
+    1\rangle$ is maximal if $x^3 + x + 1$ is irreducible over 
+    $\mathbb Z_2$. Since the polynomial is degree $3$ it is  
+    irreducible if and only if it has no zeros in $\mathbb F_2$. 
+    We check that 
+    \[
+        f(0) = f(1) = 1 \neq 0
+    \]
+    and thus $x^3 + x + 1$ is irreducible. The above then gives 
+    that 
+    \[
+        \frac{\mathbb Z_2[x]}{\langle x^3 + x + 1\rangle}
+    \]
+    is a field. 
+
+    We have $|\mathbb F_2|^{\deg(x^3 + x + 1)}$ is the order. 
+    Consider some $q(x) \in \mathbb Z_2[x]/\langle x^3 + x + 1  
+    \rangle$. Then $q(x) = g(x)(x^3 + x + 1) + r(x)$ with 
+    $0 \leq \deg r < \deg(x^3 + x + 1) = 3$. Thus 
+    the elements of the quotient ring are the linear 
+    combinations of $1,x,x^2$ over $\mathbb F_2$ which gives 
+    $2^3 = 8$ elements. 
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Let $\alpha = x + \langle x^3 + x + 1\rangle$. Then 
+    \[
+        \alpha^3 = \alpha + 1
+    \]
+    so 
+    \[
+        \alpha^5 = \alpha^3 + \alpha^2 = 
+        \alpha^2 + \alpha + 1. 
+    \]
+    Let $p(x) := x^2 + x + 1$. Then $p \equiv x^5$ modulo 
+    $x^3 + x + 1$. 
+    Thus 
+    \[
+        x^5 + \langle x^3 + x + 1 \rangle 
+        = p(x) + \langle x^3 + x + 1 \rangle. 
+    \]
+\end{proof}
+
+\begin{prob}[4, Exam 2019]
+    \ 
+    \begin{enumerate}[label=\alph*)]
+        \item Let $K$ be the splitting field of $f(x) = x^3 - 2 
+            \in \mathbb Q[x]$ over $\mathbb Q$. Find 
+            $[K:\mathbb Q]$ and the Galois group $G :=  
+            \operatorname{Gal}(K/\mathbb Q)$.
+        \item Let $K$ be the splitting field of an irreducible 
+            $f(x) \in \mathbb Q$ of degree $3$. 
+            Let $A_3$ denote the alternating group on $[3]$. 
+            Show that $G:= \operatorname{Gal}(K/\mathbb Q) = A_3$ if 
+            and only if $K = \mathbb Q(\alpha)$ where 
+            $\alpha$ is a root of $f(x)$. 
+        \item Conclude that all roots of the polynomial from 
+            $(b)$ must be in $\mathbb R$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution of (a)]
+    The roots of $f(x)$ in $\mathbb C$ are 
+    $\sqrt[3] 2, \zeta \sqrt[3] 2, \zeta^2 \sqrt[3] 2$ where 
+    \[
+        \zeta = e^{2i\pi/3}.
+    \]
+    We have that $f$ is the minimal polynomial of $\sqrt 2$ over 
+    $\mathbb Q$ so 
+    \[
+        [\mathbb Q(\sqrt[3] 2) : \mathbb Q] = \deg f = 3. 
+    \]
+    Now for $\zeta$, the primitive $n$-th root of unity for 
+    $n = 3$, the minimal polynomial is 
+    \[
+        \prod_{d|n} (x^d - 1)^{\mu(n/d)}
+    \]
+    which for prime $n = 3$ simplifies to 
+    \[
+        \sum_{k=0}^2 x^k = x^2 + x + 1. 
+    \]
+    We remark that $\zeta \not\in \mathbb Q(\sqrt[3]2)$ because 
+    $\zeta \in \mathbb C\setminus \mathbb R$ while 
+    $\mathbb Q(\sqrt 3[2]) \subset \mathbb R \not\supseteq 
+    \mathbb C$. 
+    The afforementioned minimal polynomial of $\zeta$ over 
+    $\mathbb Q(\sqrt[3] 2)$ is degree $2$ so 
+    \[
+        [K : \mathbb Q] 
+        = 2 \cdot 3 = 6. 
+    \]
+
+    Since $K$ is the splitting field over a degree $3$ polynomial 
+    we have, for the Galois group $G$, $G \leq S_3$. 
+    Since $K$ is the splitting field of a $\mathbb Q[x]$ polynomial 
+    we have that $K$ is normal and algebraic, and all algebraic 
+    extensions of a characteristic $0$ field are separable so 
+    hence it is separable. All of the above give that $K$ is 
+    Galois so $|G| = [K:\mathbb Q] = 6$ hence 
+    \[
+        G \cong S_3. 
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    Suppose $K$ is the splitting field of some 
+    degree $3$ polynomial $f(x)$ over $\mathbb Q$. 
+
+    $K$ is Galois and by the Galois correspondence we have 
+    $[K:\mathbb Q] = |G| = |A_3| = 3 \deg f$. 
+
+    Supposing $K$ splits $f$. Then $[Q(\alpha) : \mathbb Q] = 
+    3$ and the only subgroup of $S_3$ with $3$ elements is $A_3$. 
+    Supposing the Galois group of $K$ is $G = A_3$ we have 
+    $3 = |A_3| = [K:\mathbb Q]$ so $K$ must be the adjoining of 
+    $\mathbb Q$ and the root of $f$, $K = \mathbb Q(\alpha)$.
+\end{proof}
+
 \end{document}
