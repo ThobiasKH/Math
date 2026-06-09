@@ -1,0 +1,631 @@
+\input{preamble.tex}
+
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\im}{im}
+
+
+\title{\huge{Commutative Algebra}}
+\author{\LARGE{Thobias Høivik}}
+\date{Fall 2026?}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section*{Intro}
+These are my own personal notes in commutative algebra, 
+a course I will hopefully be taking in the fall of 2026. 
+Note that as these are for myself there might be gaps, inconsistencies
+and whatnot which might make it hard to follow so 
+keep that in mind if you are considering using my notes for 
+yourself. 
+
+\section{Rings}
+Throughout the course, and these notes, a ring means 
+a commutative ring with unity (meaning multiplicative 
+identity).
+So every ring $R$ has distinguished elements 
+$1_R, 0_R \in R$ and multiplication satisfies 
+$ab = ba$. 
+
+\begin{defn}[(Commutative Unital) Ring]
+    A ring is a set $A$ together with binary 
+    operations $+,\cdot : A \times A \to A$ such that 
+    \begin{enumerate}
+        \item $(A,+)$ is an abelian group with 
+            identity $0$, 
+        \item multiplication is associative, 
+        \item multiplication is commutative, 
+        \item multiplication distributes over addition, 
+        \item there exists $1 \in A$ such that 
+            $1a = a$ for all $a \in A$. 
+    \end{enumerate}
+\end{defn}
+\begin{ex}
+    Examples of familiar rings include 
+    \[
+        \mathbb Z, \ \mathbb Q, \ \mathbb R, \ \mathbb C
+    \]
+    with the usual addition and multiplication. 
+\end{ex}
+If $A$ is a ring, then the polynomial ring $A[x]$ is 
+also a ring. More generally, 
+$A[x_1,\ldots,x_n]$ is the ring of polynomials in $n$ commuting 
+variables with coefficients in $A$. 
+
+\begin{defn}[Ring homomorphism]
+    Let $A$ and $B$ be rings. A function 
+    \[
+        \phi : A \to B
+    \]
+    is a ring homomorphism if 
+    \begin{enumerate}
+        \item $\phi(1_A) = 1_B$, 
+        \item $\phi(a + a') = \phi(a) + \phi(a')$, 
+        \item $\phi(aa') = \phi(a) \phi(a')$. 
+    \end{enumerate}
+    If $\phi$ is a bijection, then it is 
+    called an isomorphism. 
+\end{defn}
+The condition $\phi(1_A) = 1_B$ is a convention that 
+one may or may not choose, but in this course it is 
+not optional, and we say all homomorphisms must explicitly 
+satisfy this. 
+
+\begin{prop}
+    Let $A$ be a ring. There exists a unique ring homomorphism 
+    \[
+        \iota : \mathbb Z \to \mathbb A.
+    \]
+    It is given by 
+    \[
+        \iota(n) = n \cdot 1_A.
+    \]
+\end{prop}
+\begin{proof}
+    Since $\iota$ is a rinh homomorphism, it must satisfy 
+    \[
+        \iota(1) = 1_A. 
+    \]
+    Then additivity forces 
+    \[
+        \iota(2) = \iota(1+1) = \iota(1) + \iota(1) 
+        = 1_A + 1_A, 
+    \]
+    and similarly 
+    \[
+        \iota(n) = \sum_{k=1}^n 1_A = 
+        \underbrace{1_A + \cdots + 1_A}_{\text{n times}} 
+    \]
+    for $n > 0$. Also, 
+    \[
+        \iota(-n) = -\iota(n).
+    \]
+    This there is at most one such homomorphism. 
+    It is straightforward to check that the function 
+    $n \mapsto n \cdot 1_A$ preserves addition, multiplication, 
+    and sends $1$ to $1_A$. Hence it is a ring homomorphism. 
+\end{proof}
+
+\begin{defn}[Characteristic]
+    The characteristic of a ring $A$, denoted $\Char(A)$,
+    is the unique integer $n \geq 0$ such that 
+    \[
+        \ker(\mathbb Z \to A) = (n). 
+    \]
+\end{defn}
+\begin{ex}
+    Here are the characteristics of a few familiar 
+    rings: 
+    \begin{itemize}
+        \item $\Char(\mathbb Z) = 0$,  
+        \item $\Char(\mathbb F_p) = p$, 
+        \item $\Char(\mathbb Q) = 0$. 
+    \end{itemize}
+\end{ex}
+
+Intuitively, the characteristic is the smallest 
+$n \in \mathbb Z^+$ such that $n \cdot 1_A = 0_A$ with 
+$n := 0$ if no such $n$ exists, and in fact, the characteristic 
+is usually defined as such in a first course in abstract 
+algebra. 
+
+\begin{prop}[Universal property of $\mathbb Z$-polynomials]
+    Let $A$ be a ring and let $a \in A$. There exists 
+    a unique ring homomorphism 
+    \[
+        \phi_a : \mathbb Z[x] \to A
+    \]
+    such that 
+    \[
+        \phi_a(x) = a. 
+    \]
+    It is given by 
+    \[
+        \phi_a\left(\sum_{k=0}^n c_kx^k\right) = c_0 \cdot 1_A 
+        + c_1 a + \cdots + c_n a^n.
+    \]
+\end{prop}
+\begin{proof}
+    A ring homomorphism $\phi : \mathbb Z[x] \to A$ must agree 
+    with the unique homomorphism $\mathbb Z \to A$ on constant 
+    polynomials. 
+
+    If $\phi(x) = a$, then multiplicativity forces 
+    \[
+        \phi(x^n) = a^n. 
+    \]
+    Additivity then forces 
+    \[
+        \phi(c_0 + c_1x + \cdots + c_nx^n) 
+        = c_0 \cdot 1_A + c_1a + \cdots + c_na^n. 
+    \]
+    Thus there is at most one such homomorphism. 
+
+    Conversely, the formula above defines a ring homomorphism, by 
+        the usual rules for polynomial addition and multiplication.
+\end{proof}
+So homomorphism $\mathbb Z[x] \to A$ are the same thing as 
+choices of an element $a \in A$. Intuitively, $\mathbb Z[x]$ is 
+the "freest" ring generated by one element. 
+
+\begin{defn}[Ideal]
+    Let $A$ be a ring. An ideal $I \subseteq A$ is a subset 
+    such that: 
+    \begin{enumerate}
+        \item $I$ is an additive subgroup of $A$, 
+        \item for every $a \in A$ and every $x \in I$, we have 
+            \[
+                ax \in I. 
+            \]
+    \end{enumerate}
+\end{defn}
+
+\begin{defn}[Principal ideal]
+    Let $A$ be a ring and $a \in A$. The principal ideal 
+    by $a$ is 
+    \[
+        (a) = \{ra \bigm| r \in A\}. 
+    \]
+    An ideal is called principal if it is of the form 
+    $(a)$ for some $a \in A$.
+\end{defn}
+More generally, if $a_1, \ldots, a_n \in A$, then 
+\[
+    (a_1,\ldots,a_n) = 
+    \{r_1a_1 + \cdots + r_na_n \bigm| r_i \in A\}.
+\]
+This is the smallest ideal containing all of $a_1,\ldots,a_n$. 
+\begin{ex}
+    $(x,y) \subseteq k[x,y]$ is such an ideal. 
+    \[
+        (x,y) = 
+        \{f(x,y)x + g(x,y)y \bigm| f,g \in k[x,y]\}. 
+    \]
+    It is not the whole ring. It consists precisely of 
+    polynomials with zero constant term: 
+    \[
+        (x,y) = \{h \in k[x,y] \bigm| h(0,0) = 0\}.
+    \]
+\end{ex}
+
+\begin{ex}
+    $(0) = \{0\}$ is a (very uninteresting) ideal. 
+    $(1) = A$ is another (very uninteresting) ideal. 
+    For $n \in \mathbb Z$ we have that $(n) = n\mathbb Z$ is 
+    an ideal of $\mathbb Z$. 
+\end{ex}
+
+\begin{prop}
+    Let $\phi : A \to B$ be a ring homomorphism. Then 
+    \[
+        \ker \phi = \{a \in A \bigm| \phi(a) = 0\}
+    \]
+    is an ideal of $A$.
+\end{prop}
+
+\begin{proof}
+    First we show that $\ker \phi$ is an additive subgroup. 
+    Since $\phi(0) = 0$, we have $0 \in \ker \phi$. 
+    If $x,y \in \ker \phi$, then 
+    \[
+        \phi(x-y) = \phi(x) - \phi(y) = 0 - 0 = 0. 
+    \]
+    Hence $x-y \in \ker \phi$. 
+    Now let $a \in A$ and $x \in \ker \phi$. Then 
+    \[
+        \phi(ax) = \phi(a)\phi(x) = \phi(a) \cdot 0 = 0. 
+    \]
+    Thus $ax = \ker \phi$. Therefore $\ker \phi$ is an ideal. 
+\end{proof}
+
+\begin{defn}[Quotient ring]
+    Let $I \subseteq A$ be an ideal. The quotient ring 
+    $A/I$ is the set of additive cosets 
+    \[
+        a + I
+    \]
+    with addition and multiplication defined by 
+    \[
+        (a+I) + (b+I) = (a+b) + I
+    \]
+    and 
+    \[
+        (a+I)(b+I) = ab + I. 
+    \]
+\end{defn}
+\begin{prop}
+    If $I \subseteq A$ is an ideal, then $A/I$ is a ring. 
+\end{prop}
+\begin{proof}
+    The quotient $A/I$ is already an abelian group under addition because $I$ is an additive subgroup.
+
+    We need to check multiplication is well-defined.
+
+    Suppose
+
+    $$a+I=a'+I$$
+
+    and
+
+    $$b+I=b'+I.$$
+
+    Then
+
+    $$a-a'\in I,\qquad b-b'\in I.$$
+
+    We want to prove
+
+    $$ab+I=a'b'+I,$$
+
+    i.e.
+
+    $$ab-a'b'\in I.$$
+
+    Compute:
+
+    $$ab-a'b'=ab-a'b+a'b-a'b'=(a-a')b+a'(b-b').$$
+
+    Since $a-a'\in I$, and $I$ absorbs multiplication by elements of $A$, we have
+
+    $$(a-a')b\in I.$$
+
+    Similarly,
+
+    $$a'(b-b')\in I.$$
+
+    Since $I$ is closed under addition,
+
+    $$ab-a'b'\in I.$$
+
+    Therefore multiplication is well-defined.
+
+    The ring axioms for $A/I$ then follow from the ring axioms in $A$.
+\end{proof}
+The quotient map is 
+\[
+    \pi : A \to A/I, \ a \mapsto a + I.
+\]
+Its kernel is exactly $I$: 
+\[
+    \ker \pi = I. 
+\]
+
+\begin{thm}[Fundamental homomorphism theorem]
+    Let 
+    \[
+        \phi : A \to B
+    \]
+    be a ring homomorphism. Then 
+    \[
+        \im \phi
+    \]
+    is a subring of $B$, and there is an isomorphism 
+    \[
+        A / \ker \phi \cong \im \phi 
+    \]
+    given by 
+    \[
+        a + \ker \phi \mapsto \phi(a). 
+    \]
+\end{thm}
+\begin{proof}
+    Define 
+    \[
+        \overline{\phi} : A/\ker \phi \to \im \phi
+    \]
+    by 
+    \[
+        \overline \phi(a + \ker \phi) = \phi(a). 
+    \]
+
+    We first check well-definedness.
+
+    Suppose
+
+    $$a+\ker\varphi=b+\ker\varphi.$$
+
+    Then
+
+    $$a-b\in\ker\varphi.$$
+
+    Thus
+
+    $$\varphi(a-b)=0.$$
+
+    So
+
+    $$\varphi(a)-\varphi(b)=0,$$
+
+    and hence
+
+    $$\varphi(a)=\varphi(b).$$
+
+    Therefore $\overline{\varphi}$ is well-defined.
+
+    It is a ring homomorphism because $\varphi$ is.
+
+    It is surjective onto $\operatorname{im}\varphi$ by definition.
+
+    Finally, its kernel is trivial. Indeed,
+
+    $$\overline{\varphi}(a+\ker\varphi)=0$$
+
+    if and only if
+
+    $$\varphi(a)=0,$$
+
+    if and only if
+
+    $$a\in\ker\varphi,$$
+
+    if and only if
+
+    $$a+\ker\varphi=0+\ker\varphi.$$
+
+    Thus $\overline{\varphi}$ is injective. 
+    Hence it is an isomorphism.
+\end{proof}
+\begin{ex}
+    \[
+        \mathbb Z[x]/(x^2 + 1) \cong \mathbb Z(i) = 
+        \{a + bi \bigm| a,b \in \mathbb Z\}
+    \]
+    by $f \mapsto f(i)$. 
+
+    We also have 
+    \[
+        k[x,y]/(x) \cong k(y) 
+    \]
+    by $f \mapsto f(0,y)$. 
+
+    Lastly 
+    \[
+        k[x,y] / (x,y) \cong k
+    \]
+    by $f \mapsto f(0,0)$.
+\end{ex}
+
+\begin{thm}
+    Let $I \subseteq A$ be an ideal. There is a bijection 
+    \[
+        \{\text{ideals of} \ A/I\} 
+        \leftrightarrow \{\text{ideals} \ J 
+        \subseteq A \ \text{such that} \ I \subseteq J\}. 
+    \]
+    The maps are 
+    \[
+        K \subseteq A/I \mapsto \pi^{-1}(K) \subseteq A, 
+    \]
+    and 
+    \[
+        J \subseteq A, I \subseteq J \mapsto 
+        J/I \subseteq A/I. 
+    \]
+\end{thm}
+
+\begin{proof}
+    Let 
+    \[
+        \pi : A \to A/I
+    \]
+    be the quotient map. First, if $K \subseteq A/I$ is an ideal, 
+    then $\pi^{-1}(K)$ is an ideal of $A$. Since $0 \in K$, and 
+    $\ker \pi = I$, we have 
+    \[
+        I \subseteq \pi^{-1}(K).
+    \]
+    Conversely, suppose $J \subseteq A$ is an ideal with 
+    $I \subseteq J$. Then 
+    \[
+        J/I = \{j + I \bigm | j \in J\}
+    \]
+    is an ideal of $A/I$. Now check that these constructions are 
+    inverse. If $K \subseteq A/I$, then 
+    \[
+        \pi(\pi^{-1}(K)) = K
+    \]
+    because $\pi$ is surjective. If $J \subseteq A$ contains $I$, 
+    then 
+    \[
+        \pi^{-1}(J/I) = J. 
+    \]
+    Indeed, $a \in \pi^{-1}(J/I)$ if and only if 
+    \[
+        a + I \in J/I, 
+    \]
+    which happens if and only if there exists $j \in J$ such that 
+    \[
+        a + I = j + I.
+    \]
+    This means 
+    \[
+        a - j \in I. 
+    \]
+    Since $I \subseteq J$ and $j \in J$, we get 
+    $a \in J$. Hence 
+    \[
+        \pi^{-1}(J/I) = J. 
+    \]
+    Therefore the two maps are inverse bijections. 
+\end{proof}
+\begin{ex}
+    The ideals of $\mathbb Z / 12 \mathbb Z$ correspond 
+    to ideals of $\mathbb Z$ containing $(12)$. 
+    The ideals of $\mathbb Z$ are precisely 
+    $(n)$ for $n \geq 0$. We need 
+    $(12) \subseteq (n)$. This happens precisely when 
+    $n \bigm| 12$. So the ideals of $\mathbb Z/12\mathbb Z$ are 
+    \[
+        (1), (2), (3), (4), (6), (12) = (0). 
+    \]
+\end{ex}
+
+\begin{prop}
+    Let $k$ be a field. The ideal 
+    \[
+        (x,y) \subseteq k[x,y]
+    \]
+    is not principal. 
+\end{prop}
+\begin{proof}
+    Suppose for a contradiction that 
+    \[
+        (x,y) = (f)
+    \]
+    for some $f \in k[x,y]$. 
+    Since 
+    \[
+        x \in (x,y) = (f),
+    \]
+    we have $f \bigm| x$. Since 
+    \[
+        y \in (x,y) = (f), 
+    \]
+    we have $f \bigm| y$. However, $x$ and $y$ have no common 
+    non-unit factor in $k[x,y]$. Hence $f$ must be a unit. If 
+    $f$ is a unit, then 
+    \[
+        (f) = (1) = k[x,y].
+    \]
+    But this is impossible, because 
+    \[
+        1 \not\in (x,y). 
+    \]
+    Therefore $(x,y)$ is not principal. 
+\end{proof}
+Thus $k[x]$ is a principal ideal domain when $k$ is a field, 
+but $k[x,y]$ is not. 
+
+\subsection*{Exercises}
+
+\begin{prob}
+    Prove that if $A$ is a ring with $1 = 0$, then 
+    $A$ is the trivial ring. 
+\end{prob}
+\begin{proof}
+    Let $a \in A$. Then 
+    \begin{align*}
+        a &= a \\ 
+        1 \cdot a &= 0 \cdot a \\ 
+        a &= 0. 
+    \end{align*}
+    Thus 
+    \[
+        A = \{0\}.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $A$ be a ring. Prove that there is a unique 
+    homomorphism $\mathbb Z \to A$. 
+\end{prob}
+\begin{proof}
+    Let $A$ be a ring and 
+    let $\phi, \psi : \mathbb Z \to A$ be homomorphisms. 
+
+    Then we require 
+    \[
+        \phi(1) = \psi(1) = 1_A. 
+    \]
+    Therefore, for $n > 0$, we have 
+    \[
+        \phi(n) = \phi\left(\sum_{k=1}^n 1\right) 
+        = \sum_{k=1}^n 1_A 
+        = \psi\left(\sum_{k=1}^n 1\right) 
+        = \psi(n). 
+    \]
+    For $n < 0$ we have $n = -m$ for some 
+    $m > 0$. Then 
+    \[
+        \phi(n) = \phi(-m) = -\phi(m) 
+        = - \sum_{k=1}^n 1_A 
+        = -\psi(m) = \psi(-m) = \psi(n).
+    \]
+    Lastly, 
+    \[
+        \phi(0) = 0 = \psi(0). 
+    \]
+    Thus $\phi$ and $\psi$ agree on all 
+    of $\mathbb Z$ and hence 
+    \[
+        \psi = \phi. 
+    \]
+\end{proof}
+
+\begin{prob}
+    Identify $k[x,y] / (x,y-1)$. 
+\end{prob}
+\begin{proof}[Solution]
+    Let $\phi : k[x,y] \to k$ by 
+    \[
+        \phi(f) = f(0,1). 
+    \]
+    Then $\phi$ is a ring homomorphism and 
+    furthermore it is surjective since, for 
+    $a \in k$ we have $f(x,y) := a \mapsto a$. 
+
+    Now we show that 
+    $\ker \phi = (x,y-1)$. First of all 
+    $x, y-1 \in \ker \phi$ since $x(0,1) = 0$ and 
+    $y-1(0,1) = 0$. Thus 
+    \[
+        (x,y-1) \subseteq \ker \phi.
+    \]
+    Now suppose $f \in \ker \phi$. Then 
+    $f(0,1) = 0$ so $f(x,y) = xg(x,y) + (y-1)h(x,y) + 
+    f(0,1)$. Since $f(0,1) = 0$ we have $f(x,y) = xg(x,y) + 
+    (y-1)h(x,y)$ so $f(x,y) \in (x, y-1)$. Thus 
+    $\ker \phi \subseteq (x,y-1)$. The two together give 
+    $(x,y-1) = \ker \phi$. 
+    Thus, by the fundamental theorem of ring homomorphisms (
+    or first isomorphism theorem, if you prefer), we have 
+    \[
+        \frac{k[x,y]}{(x,y-1)} \cong 
+        k.
+    \]
+\end{proof}
+
+\begin{prob}
+    List all ideals of $\mathbb Z/18\mathbb Z$. 
+\end{prob}
+\begin{proof}[Solution]
+    The ideals are 
+    \begin{itemize}
+        \item $(0)$, 
+        \item $(1)$,
+        \item $(2)$, 
+        \item $(3)$, 
+        \item $(6)$, 
+        \item $(9)$,  
+    \end{itemize}
+    i.e. $(n)$ where $n \bigm| 18$. 
+    Note that $(0) = (18)$ and $18$ divides $18$.
+\end{proof}
+
+
+
+\end{document}
