@@ -601,8 +601,8 @@ but $k[x,y]$ is not.
     (y-1)h(x,y)$ so $f(x,y) \in (x, y-1)$. Thus 
     $\ker \phi \subseteq (x,y-1)$. The two together give 
     $(x,y-1) = \ker \phi$. 
-    Thus, by the fundamental theorem of ring homomorphisms (
-    or first isomorphism theorem, if you prefer), we have 
+    Thus, by the fundamental theorem of ring homomorphisms 
+    (or first isomorphism theorem, if you prefer), we have 
     \[
         \frac{k[x,y]}{(x,y-1)} \cong 
         k.
@@ -626,6 +626,883 @@ but $k[x,y]$ is not.
     Note that $(0) = (18)$ and $18$ divides $18$.
 \end{proof}
 
+\section{Special ideals and rings}
+
+\begin{defn}
+    Let $A$ be a ring. 
+
+    An element $u \in A$ is a \textbf{unit} if there 
+    exists $v \in A$ such that 
+    \[
+        uv = 1.
+    \]
+    An element $x \in A$ is a \textbf{zero-divisor} 
+    if there exists a nonzero element $y \in A$ 
+    such that 
+    \[
+        xy = 0.
+    \]
+    A ring $A$ is an \textbf{integral domain} if 
+    \[
+        A \neq 0
+    \]
+    and $0$ is the only zero-divisor. 
+
+    Equivalently, $A$ is an integral domain if 
+    \[
+        ab = 0 \Rightarrow a = 0 \ \text{or} \ b = 0. 
+    \]
+    A ring $A$ is a \textbf{field} if 
+    \[
+        A \neq 0
+    \]
+    and every nonzero element of $A$ is a unit. 
+\end{defn}
+\begin{ex}
+    $\mathbb Z$ is an integral domain, but not a field. 
+    The rings 
+    \[
+        \mathbb Q, \ \mathbb R, \ \mathbb C
+    \]
+    are fields. 
+    The ring $\mathbb Z/4 \mathbb Z$ is not an integral 
+    domain. 
+\end{ex}
+
+\begin{prop}
+    Let $A$ be a ring and $x \in A$. Then 
+    \[
+        x \ \text{is a unit}
+    \]
+    if and only if 
+    \[
+        (x) = (1).
+    \]
+\end{prop}
+\begin{proof}
+    Suppose first $x$ is a unit. Then $\exists y \in A$ 
+    s.t. 
+    \[
+        xy = 1. 
+    \]
+    Therefore $1 \in (x)$. Since every ideal 
+    containing $1$ is the whole ring, we get 
+    \[
+        (x) = A = (1).
+    \]
+    Conversely, suppose $(x) = (1)$. 
+    Then 
+    \[
+        1 \in (x). 
+    \]
+    By definition of the principal ideal $(x)$, there exists 
+    $y \in A$ such that 
+    \[
+        1 = yx. 
+    \]
+    Since $A$ is commutative, 
+    \[
+        xy = 1.
+    \]
+    Therefore $x$ is a unit.
+\end{proof}
+
+\begin{thm}
+    Let $A$ be a ring. Then $A$ is a field if and only if 
+    $A$ has exactly two ideals: 
+    \[
+        (0) \neq (1). 
+    \]
+\end{thm}
+\begin{proof}
+    Suppose $A$ is a field. 
+
+    Let $I \subseteq A$ be a nonzero ideal. Choose 
+    \[
+        0 \neq x \in I. 
+    \]
+    Since $A$ is a field, $x$ is a unit. Then 
+    \[
+        (x) = (1). 
+    \]
+    But 
+    \[
+        (x) \subseteq I. 
+    \]
+    Therefore 
+    \[
+        (1) = A \subseteq I
+    \]
+    so 
+    \[
+        I = (1). 
+    \]
+    So the only ideals are 
+    \[
+        (0), \ (1). 
+    \]
+
+    Conversely, suppose $A$ has two ideals 
+    \[
+        (0) \neq (1). 
+    \]
+    Let $0 \neq x \in A$. Then 
+    \[
+        (x) \neq (0). 
+    \]
+    Since the only nonzero ideal is $(1)$, we have 
+    \[
+        (x) = (1). 
+    \]
+    Then $x$ is a unit and thus since every nonzero element of 
+    $A$ is a unit, $A$ is a field. 
+\end{proof}
+
+\begin{defn}[Prime ideal]
+    Let $A$ be a ring and let $I\subseteq A$ be an ideal. 
+    We say $I$ is a \textbf{prime ideal} if
+
+    $$I\neq(1)$$
+
+    and whenever
+
+    $$ab\in I,$$
+
+    we have
+
+    $$a\in I\quad\text{or}\quad b\in I.$$
+
+    Equivalently,
+
+    $$a,b\notin I\implies ab\notin I.$$
+
+    The set of all prime ideals of $A$ is denoted
+
+    $$\operatorname{Spec}(A).$$
+\end{defn}
+
+\begin{ex}
+    The prime ideals of $\mathbb Z$ are 
+    $(0)$ and $(p)$ where $p$ is a prime number. 
+\end{ex}
+
+\begin{defn}[Maximal ideal]
+    Let $A$ be a ring and let $I\subseteq A$ be an ideal. 
+    We say $I$ is a \textbf{maximal ideal} if
+
+    $$I\neq(1)$$
+
+    and the only ideals $J$ satisfying
+
+    $$I\subseteq J\subseteq A$$
+
+    are
+
+    $$J=I$$
+
+    and
+
+    $$J=A.$$
+
+    Equivalently, there is no ideal strictly between $I$ and $A$.
+
+    The set of maximal ideals of $A$ is denoted
+
+    $$\operatorname{Specm}(A).$$
+\end{defn}
+\begin{ex}
+    The maximal ideals of $\mathbb Z$ are $(p)$. 
+\end{ex} 
+
+\begin{thm}
+    Let $A$ be a ring and let $I \subseteq A$ be an ideal. 
+    Then 
+    \[
+        I \ \text{is prime}
+    \]
+    if and only if 
+    \[
+        A/I \ \text{is an integral domain}.
+    \]
+    Also, 
+    \[
+        I \ \text{is maximal}
+    \]
+    if and only if 
+    \[
+        A/I \ \text{is a field}. 
+    \]
+\end{thm}
+
+\subsection*{Exercises}
+
+\begin{prob}
+    Decide whether $(2) \subseteq \mathbb Z/6\mathbb Z$ 
+    is prime, maximal, both, or neither. 
+\end{prob}
+\begin{proof}[Solution]
+    It is maximal. 
+    Let $\phi : \mathbb Z/6\mathbb Z \to \mathbb Z/2\mathbb Z$ 
+    by 
+    \[
+        \phi(a) = a \mod 2. 
+    \]
+    Then this map is surjective and 
+    $\ker \phi = (2)$. By the first isomorphism theorem we 
+    have 
+    \[
+        \mathbb Z_6/\ker \phi \cong \mathbb Z_2
+    \]
+    which is a field and thus $\ker \phi$ is maximal.  
+\end{proof}
+
+\begin{prob}
+    Decide whether $(x-1) \subseteq k[x]$ is prime or maximal. 
+\end{prob}
+\begin{proof}[Solution]
+    Let $\phi : k[x] \to k$ by 
+    \[
+        \phi(f) = f(1). 
+    \]
+    Then $\ker \phi = (x-1)$, the map is surjective so 
+    it follows as from before that $(x-1)$ is maximal. 
+\end{proof}
+
+\section{Krull's theorem, PIDs/UFDs, local rings}
+
+\begin{thm}[Krull's theorem]
+    Let $A$ be a nonzero ring. Then $A$ has a maximal 
+    ideal. 
+
+    Equivalently: 
+    \[
+        A \neq 0 
+        \Rightarrow \operatorname{Specm}(A) \neq \emptyset. 
+    \]
+\end{thm}
+This is not at all obvious for arbitrary rings, because 
+rings may have infinitely many ideals and no obvious "largest" 
+proper ideal. To prove Krull's theorem we will need 
+the following set-theoretic principle. 
+
+\begin{lem}[Zorn's lemma]
+    Let $S$ be a partially ordered set. Suppose 
+    every chain in $S$ has an upper bound in $S$. 
+    Then $S$ has a maximal element. 
+\end{lem}
+
+Here: 
+\begin{itemize}
+    \item a \textbf{chain} is a subset where any 
+        two elements are comparable, 
+    \item an \textbf{upper bound} for a chian 
+        $C \subseteq S$ is an element $u \in S$ such 
+        that $c \leq u$ for all $u \in C$, 
+    \item a \textbf{maximal element} is an element 
+        $m \in S$ such that there is no $s \in S$ 
+        with $m < s$. 
+\end{itemize}
+
+\begin{proof}[Proof of Krull's theorem]
+    Let $A \neq 0$. Consider the set 
+    \[
+        S = \{I \subseteq A \bigm| I \ \text{is an ideal and} \ 
+        I \neq A\}.
+    \]
+    So $S$ is the set of all proper ideals of $A$. 
+    We partially order $S$ by inclusion: 
+    \[
+        I \leq J \Leftrightarrow I \subseteq J. 
+    \]
+    We want to apply Zorn's lemma. 
+
+    Let $\{I_\lambda\}_{\lambda \in \Lambda}$ be a chain in 
+    $S$. Define 
+    \[
+        I = \bigcup_{\lambda \in \Lambda} I_\lambda.
+    \]
+    We claim $I \in S$, meaning $I$ is a proper ideal. 
+
+    First, $I$ is an ideal. 
+
+    Let $a,b \in I$. Then there exists $\lambda, \mu \in \Lambda$ 
+    such that 
+    \[
+        a \in I_\lambda, \ b \in I_\mu. 
+    \]
+    Since $I_\mu$ is an ideal, 
+    \[
+        a - b \in I_\mu \subseteq I. 
+    \]
+    Thus $I$ is an additive subgroup. 
+    Now let $r \in A$ and $a \in I$. Then $a \in I_\lambda$ for 
+    some $\lambda$, so 
+    \[
+        ra \in I_\lambda \subseteq I. 
+    \]
+    Thus $I$ absorbs multiplication from $A$ and is therefore 
+    an ideal. Second $I \neq A$. 
+    If $I = A$, then in particular 
+    \[
+        1 \in I.
+    \]
+    So $1 \in I_\lambda$ for some $\lambda$, but then 
+    \[
+        I_\lambda = A,
+    \]
+    contradicting $I_\lambda \in S$. Hence $I \neq A$. 
+
+    So $I \in S$, and $I$ is an upper bound for the chain. 
+    Therefore every chain in $S$ has an upper bound. 
+    By Zorn's lemma, $S$ has a maximal element $m$. 
+    This $m$ is a proper ideal of $A$, and no proper ideal 
+    strictly contains it. Hence $m$ is a maximal ideal. 
+
+    Thus every nonzero ring has a maximal ideal. 
+\end{proof}
+
+\begin{cor}
+    Let $I \subseteq A$ be a proper ideal. 
+    Then there exists a maximal ideal $m \subseteq A$ such 
+    that 
+    \[
+        I \subseteq m. 
+    \]
+\end{cor}
+\begin{proof}
+    Since $I \neq A$, the quotient 
+    \[
+        A/I
+    \]
+    is nonzero. By Krull's theorem, $A/I$ has a maximal ideal 
+    $\mathfrak m$. 
+    Let 
+    \[
+        \pi : A \to A/I   
+    \]
+    be the quotient map. Then 
+    \[
+        m = \pi^{-1}(\mathfrak m)
+    \]
+    is a maximal ideal of $A$ containing $I$, by 
+    the correspondence theorem. 
+\end{proof}
+\begin{cor}
+    Let $A$ be a ring and $x \in A$. Then 
+    \[
+        x \ \text{is a unit}
+    \]
+    if and only if 
+    \[
+        x \not\in m
+    \]
+    for every maximal ideal $m \subseteq A$. 
+
+    Equivalently: 
+    \[
+        x \ \text{is not a unit} 
+        \Leftrightarrow x \in m \ \text{for some maximal ideal} \ 
+        m. 
+    \]
+\end{cor}
+\begin{proof}
+    We have: 
+    \[
+        x \ \text{is not a unit} \Leftrightarrow 
+        (x) \neq A. 
+    \]
+    By the previous Corollary, 
+    \[
+        (x) \neq A \Leftrightarrow (x) \subseteq m
+    \]
+    for some maximal ideal $m$. 
+    But 
+    \[
+        (x) \subseteq m \Leftrightarrow x \in m. 
+    \]
+    Therefore 
+    \[
+        x \ \text{is not a unit} 
+        \Leftrightarrow x \in m
+    \]
+    for some maximal ideal $m$. 
+\end{proof}
+
+\begin{defn}[PID]
+    An integral domain $A$ is a 
+    \textbf{principal ideal domain}, or PID, if every ideal 
+    of $A$ is principal. 
+\end{defn}
+\begin{ex}
+    Some examples of PIDs include 
+    \begin{itemize}
+        \item $k[x]$ for any field $k$, 
+        \item any field $k$, 
+        \item $\mathbb Z$. 
+    \end{itemize}
+\end{ex}
+
+\begin{defn}
+    Let $A$ be an integral domain. Let $f \in A$ be neither 
+    $0$ nor a unit. We say $f$ is \textbf{irreducible} 
+    if whenever 
+    \[
+        f = gh, 
+    \]
+    then either $g$ is a unit or $h$ is a unit, 
+    meaning $f$ cannot be factored nontrivially. 
+\end{defn}
+\begin{defn}[UFD]
+    An integral domain $A$ is a \textbf{unique factorization domain},
+    or UFD, if every nonzero nonunit $f \in A$ can be written as 
+    a finite product of irreducibles, 
+    \[
+        f = p_1 \cdots p_n,
+    \]
+    and this factorization is unique up to reordering and  
+    multiplication by units. 
+\end{defn}
+\begin{ex}
+    Some examples include: 
+    \begin{itemize}
+        \item $\mathbb Z$, 
+        \item $k[x]$ for any field $k$, 
+        \item $k[x_1,\ldots,x_n]$ for any field $k$. 
+    \end{itemize}
+\end{ex}
+
+We remark that PID $\Rightarrow$ UFD and that if 
+$A$ is a UFD then $A[x]$ is a UFD. 
+
+\begin{defn}[Local ring]
+    A ring $A$ is \textbf{local} if it has exactly 
+    one maximal ideal. 
+    That maximal ideal is usually denoted 
+    \[
+        \mathfrak m. 
+    \]
+    So a local ring is a pair $(A, \mathfrak m)$, 
+    where $\mathfrak m$ is the unique maximal ideal. 
+\end{defn}
+
+\begin{ex}
+    Every field $k$ is local since the only maximal ideal 
+    is $(0)$. 
+
+    $\mathbb Z$ is a nonexample as it has maximal ideals 
+    $(p)$ for every prime $p$. 
+\end{ex}
+
+\begin{prop}
+    Let $A$ be a local ring with unique maximal ideal 
+    $\mathfrak m$. Then the set of units in $A$ is 
+    \[
+        A \setminus \mathfrak m. 
+    \]
+    Equivalently: 
+    \[
+        x \in \mathfrak m 
+        \Leftrightarrow x \ \text{is not a unit}. 
+    \]
+\end{prop}
+\begin{proof}
+    By the corollary to Krull's theorem, an element $x \in A$ 
+    is a unit if and only if it is contained in no maximal ideal. 
+    But $A$ has exactly one maximal ideal, namely 
+    $\mathfrak m$. 
+    Therefore 
+    \[
+        x \ \text{is a unit} \Leftrightarrow 
+        x \not\in \mathfrak m. 
+    \]
+    So the units are exactly 
+    \[
+        A \setminus \mathfrak m. 
+    \]
+\end{proof}
+
+\begin{prop}
+    Let $A$ be a ring. Suppose the set of nonunits 
+    \[
+        \mathfrak m = \{x \in A \bigm| x \ \text{is not 
+        unit}\}
+    \]
+    is an ideal. 
+    Then $A$ is local, and $\mathfrak m$ is its unique 
+    maximal ideal. 
+\end{prop}
+\begin{proof}
+    Let $I \subseteq A$ be a proper ideal. 
+    We claim 
+    \[
+        I \subseteq \mathfrak m. 
+    \]
+    Indeed, if $x \in I$ were a unit, then 
+    \[
+        1 \in I,
+    \]
+    because 
+    \[
+        x^{-1}x = 1. 
+    \]
+    Then $I = A$, contradicting that $I$ is proper. 
+    So every element of $I$ is a nonunit, hence 
+    \[
+        I \subseteq \mathfrak m. 
+    \]
+    Thus every proper ideal of $A$ is contained in 
+    $\mathfrak m$. 
+    Since $\mathfrak m$ is itself a proper ideal, 
+    it is the unique maximal ideal. Therefore $A$ is local. 
+\end{proof}
+
+\subsection*{Exercises}
+
+\begin{prob}
+    \ 
+    \begin{enumerate}[label=(\alph*)]
+        \item Let $A$ be a ring, and let 
+            $f = a_nx^n + \cdots + a_0 \in A[x]$. Prove 
+            that if $f$ is a unit of $A[x]$, then 
+            $a_0$ is a unit of $A$.
+        \item Show that if $a$ is a unit of $A$, then the 
+            constant polynomial $a \in A[x]$ is a unit of 
+            $A[x]$. 
+        \item Show that if $A$ is an integral domain, 
+            then the units of $A[x]$ are exactly the constant 
+            polynomials $a$ with $a$ a unit of $A$. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose 
+    \[
+        f = \sum_{k=0}^n a_kx^k
+    \]
+    is a unit of $A[x]$. Then there exists 
+    \[
+        g = \sum_{k=0}^m b_kx^k
+    \]
+    such that 
+    \[
+        fg = 1. 
+    \]
+    Let $\phi : A[x] \to A$ by 
+    \[
+        \phi(f) = f(0).
+    \]
+    Then $\phi$ is a ring homomorphism, and thus 
+    \[
+        1_A = \phi(1_{A[x]}) 
+        = \phi(fg) = a_0 b_0 
+    \]
+    so $a_0$ is a unit in $A$. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Suppose $a \in A$ is a unit. Then there 
+    exists $b \in A$ so that 
+    \[
+        ab = 1_A. 
+    \]
+    Then $a,b \in A[x]$ as constant polynomials. 
+    Once again 
+    \[
+        1_{A[x]} = 1_A = 
+        ab = \phi(a)\phi(b) 
+        = \phi(ab). 
+    \]
+\end{proof}
+\begin{proof}
+    From the above we have that 
+    units in $A$ as constant polynomials 
+    are units in $A[x]$.  
+
+    Now let $f \in A[x]$ be a unit. Then 
+    there is $g \in A[x]$ so 
+    \[
+        fg = 1. 
+    \]
+    Then since $\deg(g\cdot h) = \deg(g) + \deg(h)$ we have 
+    \[
+        \deg(f) + \deg(g) = \deg(f\cdot g) = \deg(1) = 0. 
+    \]
+    Then $\deg(f) = \deg(g) = 0$ so they are constant polynomials. 
+
+    We require $A$ to be an integral domain because otherwise 
+    we could take $A = \mathbb Z_4$ and $f = 2x + 1$. 
+    Then $f^2 = 1$. 
+\end{proof}
+
+\begin{prob}
+    Prove that a ring $A$ is a field if and only if 
+    the following holds: $A \neq 0$ and every homomorphism 
+    from $A$ to a non-zero ring is injective. 
+\end{prob}
+\begin{proof}
+    Let $A$ and $B \neq 0$ be rings. 
+
+    First assume $A$ is a field. 
+    Then $\ker \phi$ is $A$ or $(0)$ for every homomorphism 
+    $\phi : A \to B$. If $\ker \phi = A$ then 
+    $\psi(x) = 0_B$ for all $x \in A$ and in particular 
+    $1_B = \phi(1_A) = 0_B$ so $B$ is the trivial ring, but 
+    this contradicts our assumption. Thus 
+    $\ker \phi = (0)$, meaning $\phi$ is injective. Furtheremore, 
+    by definition, $A \neq 0$.
+    
+    Now assume $A \neq 0$ and every homomorphism 
+    $\phi : A \to B$ has $\ker \phi = \{0_A\}$ when $B$ is nonzero. 
+
+    Let $I \subseteq A$ is some ideal. Consider the canonical 
+    quotient homomorphism 
+    \[
+        \pi : A \to A/I \ \text{defined by} \ 
+        \pi(a) = a+I. 
+    \]
+    Now either $A/I$ is nonzero or not. If it is the zero ring 
+    then $\ker \pi = A$. 
+    Otherwise if $A/I$ is nonzero, then by assumption 
+    $\ker \pi = (0)$. By construction, 
+    \[
+        \ker \pi = I
+    \]
+    so every ideal $I$ of $A$ is either $(0)$ or $A$. Hence 
+    $A$ is a field. 
+\end{proof}
+
+\begin{prob}
+    Let $A$ be a ring, and let $x \in A$. Consider 
+    the map $m_x : A \to A$ given by $m_x(y) = xy$ for 
+    some $x \in A$. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that $m_x$ is a ring homomorphism if 
+            and only if $x = 1$. 
+        \item Show that $x$ is a $0$-divisor if and only if 
+            $m_x$ is non-injective. 
+        \item Show that $x$ is a unit if and only if $m_x$ 
+            is surjective. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose $x = 1$. Then $m_x : A \to A$ is the 
+    identity map $\operatorname{id} : A \to A$, 
+    \[
+        \operatorname{id}(y) = y,  
+    \]
+    which is a homomorphism. 
+
+    Now suppose $m_x$ is a ring homomorphism and suppose 
+    for a contradiction that $x \neq 1$. 
+    Then 
+    \[
+        m_x(1) = x \neq 1 
+    \]
+    so $m_x$ does not preserve the multiplicative 
+    identity and thus fails to be a homomorphism. 
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    Suppose $x$ is a $0$-divisor, meaning $x \neq 0$ and there  
+    exists $\xi \in A\setminus \{0\}$ so that 
+    \[
+        x \cdot \xi = 0.
+    \]
+    Then $\xi \in \ker m_x$ and $\xi \neq 0$ so 
+    $m_x$ cannot be injective. 
+
+    Suppose $m_x$ is not injective. 
+    So $|\ker m_x| > 1$. Then there exists 
+    $\xi \in \ker m_x \setminus \{0\}$. 
+    Then 
+    \begin{align*}
+        m_x(\xi) &= m_x(0) \\ 
+        x \cdot \xi = x \cdot 0 = 0
+    \end{align*}
+    so $x$ is a $0$-divisor.
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Suppose $x$ is a unit. Then there exists 
+    $x^{-1} \in A$ so that 
+    $xx^{-1} = 1$. 
+    Then, for any $a \in A$ we see that 
+    \[
+        xx^{-1}a \overset{m_x}{\mapsto} a
+    \]
+    so $m_x$ is surjective. 
+
+    Now suppose $m_x$ is surjective. Then, for 
+    any $a \in A$ there exists $b \in A$ so that 
+    \[
+        m_x(b) = xb = a. 
+    \]
+    In particular this holds 
+    for $1 \in A$ so there exists $x^{-1} \in A$ so that 
+    \[
+        m_x(x^{-1}) = xx^{-1} = 1. 
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $A$ be a ring, and let $\{P_i\}_{i\in I}$ be a 
+    non-empty chain of prime ideals (where "chain" ,eans 
+    that for every two $i,j \in I$ either $P_i \subseteq P_j$ 
+    or $P_j \subseteq P_i$). Prove that 
+    $\bigcup_{i\in I}P_i$ and $\bigcap_{i\in I}P_i$
+    are prime ideals. 
+\end{prob}
+\begin{proof}
+    Let 
+    \[
+        J = \bigcup_{i \in I} P_i
+    \]
+    and 
+    \[
+        K = \bigcap_{i \in I} P_i.
+    \]
+
+    We begin with $J$. 
+    Since the chain is nonempty, pick any $P_i$. Since 
+    $P_i$ is an ideal, $0 \in P_i$ so $0 \in J \neq \emptyset$. 
+    Let $x \in J$ and $r \in A$. Since $x \in J$, 
+    $x \in P_i$ for some specific index $i$. Since $P_i$ is 
+    an ideal we have $rx \in P_i$ so $rx \in J$. 
+    Let $x,y \in J$. Then $x \in P_i$ and $y \in P_j$ for 
+    some specific indicies $i,j\in I$. The chain-condition 
+    gives us that $P_i \subseteq P_j$ or vice-versa. Assume 
+    wlog the former holds. Then 
+    $x,y \in P_j$ so $x+y \in P_j \subseteq J$. Thus 
+    $J$ is closed under addition. 
+
+    Now since every $P_i$ is prime we have $1 \not\in P_i$ for 
+    every $i \in I$ so $1 \not \in J$. Thus $J \neq A$ and is 
+    therefore a proper ideal. Let $a,b \in A$ such 
+    that $ab \in J$. Then there is some $P_i$ so that 
+    $ab \in P_i$. Since $P_i$ is prime we have 
+    $a \in P_i$ or $b \in P_i$. 
+
+    Now we do $K$. 
+    Similar as before $0 \in P_i$ for all $i \in I$ so 
+    $0 \in K \neq \emptyset$. 
+    Let $x \in J$ and $r \in A$. Since $x \in J$ we have that 
+    $x \in P_i$ for every $i$ so $ax \in P_i$ for every 
+    $i$ hence $ax \in K$. Let $x,y \in K$. Then 
+    $x,y \in P_i$ for every $i$ hence 
+    $x +y \in P_i$ for every $i$ so $x+ y \in K$. 
+    Thus $K$ is closed under addition. 
+
+    Now supose $ab \in K$. Then $ab \in P_i$ for every 
+    $i$ so $a \in P_i$ or $b \in P_i$ for every $i$. 
+    Thus $a \in K$ or $b \in K$. 
+\end{proof}
+
+\begin{prob}
+    Let $X$ be a topological space and $x \in X$. 
+    We consider pairs $(U,f)$, where $U \subseteq X$ is an open 
+    set with $x \in U$ and $f : U \to \mathbb R$ is a 
+    continuous function. 
+
+    Two pairs $(U,f)$ and $(V,g)$ are called equivalent if 
+    there exists an open neighborhood $W$ of $x$ with 
+    $W \subseteq U \cap V$ such that 
+    $f\bigm|_W = g\bigm|_W$. An equivalence class is called 
+    a germ of a function at $x$. We denote by $\mathcal O_{X,x}$ 
+    the set of all such germs. 
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that addition and multiplication of germs 
+            are well defined by 
+            \[
+                (U,f) + (V,g) 
+                := (U \cap V, f\bigm|_{U\cap V} 
+                + g\bigm|_{U\cap V}), 
+            \]
+            \[
+                (U,f) + (V,g) 
+                := (U \cap V, f\bigm|_{U\cap V} 
+                g\bigm|_{U\cap V}). 
+            \]
+            Verify that $\mathcal O_{X,x}$ is a ring 
+            with these operations, and describe the 
+            elements $0,1 \in \mathcal O_{X,x}$ as germs. 
+        \item Show that a germ $(U,f)$ is a unit in 
+            $\mathcal O(X,x)$ if and only if $f(x) \neq 0$. 
+        \item Show that $\mathcal O_{X,x}$ is a local ring, 
+            with maximal ideal 
+            \[
+                \mathfrak m = \{(U,f)\in \mathcal O_{X,x} 
+                \bigm| f(x) = 0\}, 
+            \]
+            and residue field 
+            \[
+                \mathcal O_{X,x}/\mathfrak m \cong \mathbb R.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose $(U_1,f_1) = (U_2, f_2)$ and 
+    $(V_1, g_1) = (V_2, g_2)$. By definition of the equivalence 
+    relation 
+    \begin{itemize}
+        \item there exists an open neighborhood 
+            $W_1 \subseteq U_1\cap U_2$ of $x$ such that 
+            $f_1\bigm|_{W_1} = f_2\bigm|_{W_1}$, and 
+        \item there exists an open neighborhood 
+            $W_2 \subseteq V_1\cap V_2$ of $x$ such that 
+            $g_1\bigm|_{W_2} = g_2\bigm|_{W_2}$.
+    \end{itemize}
+    Define $W = W_1 \cap W_2$. Since open neighborhoods 
+    are closed under finite intersections we have that 
+    $W$ is an open neighborhood of $x$. Furthermore, 
+    $W \subseteq (U_1 \cap v_1) \cap (U_2 \cap V_2)$. 
+    Restricting the sum to $W$ we get 
+    \[
+        (f_1 + g_2) \bigm|_W 
+        = f_1\bigm|_W + g_1\bigm|_W 
+        + f_2\bigm|_W + g_2\bigm|_W 
+        = 
+        (f_2 + g_2) \bigm|_W. 
+    \]
+    Thus addition is well-defined and this approach works  
+    for multiplication as well. 
+
+    The ring properties of associativity, commutativity and 
+    distributivity are inherited from the pointwise operations 
+    of $\mathbb R$. 
+
+    The additive itentity is $(X,\textbf{0})$ where 
+    $\textbf{0} : X \to \mathbb R$ is the constant 
+    function $0$. 
+
+    The multiplicative identity is 
+    $(X, \textbf{1})$ where $\textbf{1} : X \to \mathbb R$ is 
+    the constant $1$. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Suppose $(U,f)$ is a unit. Then there exists 
+    $(V,g)$ such that $(U,f)\cdot (V,g) = (X,\textbf{1})$. 
+    Then there is an open neighborhood $W \subseteq U \cap V$ 
+    of $x$ where $f(k)g(k) = 1$ for all $k \in W$. 
+    Evaluated at $x$ we get 
+    \[
+        f(x)g(x) = 1. 
+    \]
+    Since $f(x),g(x) \in \mathcal R$ we cannot have 
+    $f(x) = 0$ as $0^{-1}$ does not exist.  
+
+    Suppose $f(x) \neq 0$. Since $f: U \to \mathbb R$ is 
+    continuous and $\{0\}^c = \mathbb R \setminus \{0\}$ is 
+    an open subset of $\mathbb R$, the preimage 
+    $V = f^{-1}(\{0\}^c)$ is open in $U$ and thus open 
+    in $X$. 
+
+    Since $f(x) \neq 0$ we have $x \in V$ so we can define 
+    a continuous $g : V \to \mathbb R$ by 
+    \[
+        g(k) = \frac{1}{f(k)} \ \text{for all} \ k \in V.
+    \]
+    Then, on the open neighborhood $V$, we have 
+    $f\bigm|_V \cdot g = 1\bigm|_V$. Thus 
+    $[U,f]$ is a unit. 
+\end{proof}
 
 
 \end{document}
