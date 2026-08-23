@@ -1504,5 +1504,521 @@ $A$ is a UFD then $A[x]$ is a UFD.
     $[U,f]$ is a unit. 
 \end{proof}
 
+\newpage 
+
+\section{A step back}
+Everything thus far has been loosely covering 
+Jørgen V. Rennemo's notes as I was planing 
+to take this course at UiO as I usually do. 
+Now I will be taking the equivalent 
+MAT224 course at UiB instead! 
+Thus I think it is fitting to go back, as 
+there are some pretty big differences 
+in the flavour of this course when compared with 
+MAT4200 of UiO. 
+
+Gathmann motivates commutative algebra 
+by telling us that commutative rings 
+provide a common algebraic language for things 
+that initially look number-theoretic. In particular, 
+polynomial equations define geometric objects, and 
+the functions on those objects form commutative rings. 
+
+The philosophy is that instead of studying geometric 
+objects directly, study the ring of polynomial functions 
+on it. This is quite a bit more algebraic geometry esque. 
+Very cool! 
+
+\begin{defn}
+    Let $K$ be a field. The affine $n$-space over $K$ is 
+    the set 
+    \[
+        \mathbb A^n_K = \{(a_1,\ldots,a_n) \bigm| a_i \in K\}.
+    \]
+    
+\end{defn}
+As a set, 
+\[
+    \mathbb A_K^n = K^n.
+\]
+The different notation emphasizes that we are not interested 
+in the set as a vector space. We are thinking 
+of it simply as a set of points on which 
+polynomial equations can be imposed. 
+
+For instance $\mathbb A^2_{\mathbb R}$
+is simply the real plane. 
+
+Let $f\in K[x_1,\ldots,x_n]$. 
+Write 
+\[
+    f = \sum_{(i_1,\ldots,i_n) \in \mathbb N^n} 
+    a_{i_1\ldots,i_n}x_1^{i_1}\cdots x_n^{i_n},
+\]
+where only finitely many coefficients are nonzero. 
+
+Given $a = (a_1,\ldots,a_n) \in \mathbb A^n_K$, 
+we evaluate $f$ at $a$ by 
+\[
+    f(a) = \sum a_{i_1, \ldots, i_n} a_1^{i_1} \cdots a_n^{i_n}.
+\] 
+The distinction is simply between the formal 
+variables $x_j$ and a point with coordinates $a_j$ at 
+which we substitute values.
+
+\begin{defn}
+    Let 
+    \[
+        S \subseteq K[x_1,\ldots,x_n]
+    \]
+    be any set of polynomials. Its zero locus is 
+    \[
+        V(S) = \{a \in \mathbb A^n_K \bigm| f(a) = 0 \ 
+        \text{for every} \ f \in S\}.
+    \]
+    A subset of $\mathbb A^n_K$ that can be 
+    written as $V(S)$ is called an \textbf{affine variety} 
+    using Gathmann's terminology. 
+\end{defn}
+
+If $S = (f_1, \ldots, f_r)$ we normally write 
+$V(f_1,\ldots,f_r)$. 
+
+\begin{ex}
+    Over $\mathbb R$, 
+    \[
+        V(x^2 + y^2 - 1) \subseteq \mathbb A^2_{\mathbb R}
+    \]
+    is the unit circle. 
+    Indeed, 
+    \[
+        (a,b) \in V(x^2 + y^2 - 1)
+    \]
+    if and only if 
+    \[ 
+        a^2 + b^2 = 1. 
+    \]
+\end{ex}
+\begin{ex}
+    Consider 
+    $$ 
+        V(xy) \subseteq \mathbb A^2_{\mathbb K}.
+    $$ 
+    A point $(a,b)$ lies in $V(xy)$ iff 
+    $ab = 0$. 
+    Since $K$ is a field, this means 
+    $a = 0$ or $b = 0$. 
+    Hence 
+    \[
+        V(xy) = V(x) \cup V(y). 
+    \]
+    Geometrically this is the union of the $x$ and $y$ 
+    axes. 
+    This notion will appear later algebraically through 
+    prime ideals and primary decomposition. How exciting!
+\end{ex}
+
+Now, why can't we simply go through equations themselves? 
+Suppose $X = V(f)$. It would be tempting to say that 
+$f$ is the equations of $X$. However, there is an immediate 
+problem: 
+\[
+    V(f) = V(f^2). 
+\]
+Many entirely different collectioons of polynomials 
+can have exactly the same zero locus. Gathmann uses 
+this ambiguity to motivate replacing a 
+chosen set of equations by all equations 
+that vanish on the object. 
+
+\begin{defn}
+    Let $X \subseteq \mathbb A_K^n$. 
+    We do not actuaklly need to assume $X$ is a variety 
+    yet. 
+
+    The ideal of $X$ is 
+    \[
+        I(X) = \{f \in K[x_1,\ldots,x_n] : f(a) = 0 \ 
+        \text{for every} \ a \in X\}. 
+    \]
+\end{defn}
+
+\begin{prop}
+    \[
+        I(x) \triangleleft K[x_1,\ldots,x_n]. 
+    \]
+\end{prop}
+\begin{proof}
+    Ceirtainly $0 \in I(X)$. 
+
+    Let $f,g \in I(X)$. 
+    For every $a\in X$, 
+    \[ 
+        (f-g)(a) = f(a) - g(a) = 0 - 0 = 0. 
+    \]
+    Hence $f - g \in I(X)$. 
+    Thus $I(X)$ is an additive subgroup. 
+    Now let $h \in K[x_1,\ldots,x_n]$ and 
+    $f \in I(X)$. For every $a \in X$, 
+    \[
+        (hf)(a) = h(a)f(a) = h(a) \cdot 0 = 0. 
+    \]
+    Thus $hf \in I(X)$. 
+    Therefore $I(X)$ is an ideal.
+\end{proof}
+
+We now take the quotient 
+\[
+    A(X) = K[x_1,\ldots,x_n]/I(X). 
+\]
+This is called the \textbf{coordinate ring} of $X$, or 
+the ring of polynomials functions on $X$. 
+
+Why quotient by $I(X)$? 
+
+Suppose $f,g \in K[x_1,\ldots,x_n]$. 
+In the quotient, $f + I(X) = g + I(X)$ if and only if 
+$f-g \in I(X)$ so $f(a) = g(a)$ for every $a\in X$. 
+
+Thus $f=g$ in $A(X)$ if and only if $f$ and $g$ define the 
+same function on $X$. 
+
+\begin{ex}
+    Let $X = V(y-x^2) \subseteq \mathbb A^n_K$. 
+    
+    On $X$ we have $y = x^2$. Thus as polynomial functions on 
+    $X$, y and $x^2$ are the same function. 
+    
+    Algebraically this is encoded by $A(X) = K[x,y]/I(X)$. 
+\end{ex}  
+
+There is some nuance here when working over finite fields, 
+but Gathmann says the course will largely 
+surpress this as we will be working over infinite fields 
+like $\mathbb R$ and $\mathbb C$ for the most part. 
+
+We will now introduce the ideal of a point. 
+
+Take $a = (a_1,\ldots,a_n)$ in the affine $n$-space over some 
+field $K$. Then 
+\[
+    I(a) = I(\{a\}) 
+    = (x_1 - a_1, \ldots, x_n - a_n). 
+\]
+
+\begin{prop}
+    For $a$ as above, we have 
+    \[
+        I(a) = (x_1 - a_1, \ldots, x_n - a_n). 
+    \]
+\end{prop}
+\begin{proof}
+    First suppose $f \in (x_1 - a_1, \ldots, x_n - a_n)$. 
+
+    Then there exist polynomials $g_1,\ldots,g_n$ such that 
+    \[
+        f = \sum_{i=1}^n (x_i - a_i)g_i. 
+    \]
+    Evaluating at a, 
+    \[
+        f(a) = \sum_{i=1}^n (a_i - a_i)g_i(a) = 0. 
+    \]
+
+    Hence $f \in I(a)$. 
+    Therefore 
+    \[
+        (x_1 - a_1,\ldots,x_n - a_n) \subseteq I(a). 
+    \]
+
+    For the reverse, let $f \in I(a)$, so 
+    \[
+        f(a_1,\ldots,a_n) = 0. 
+    \]
+    We can write 
+    \begin{align*}
+        f(x_1,\ldots,x_n) - f(a_1,\ldots,a_n)
+        &= (f(x_1, x_2,\ldots,x_n) - f(a_1,x_2,\ldots,x_n)) \\ 
+        &+ (f(a_1,x_2, \ldots, x_n) - f(a_1, a_2, x_3, \ldots, x_n)) \\ 
+        &+ \cdots \ \
+        &+ (f(a_1,\ldots,a_{n-1},x_n) - f(a)). 
+    \end{align*}
+    The first summand is divisible by $x_1 - a_1$, the second 
+    by $x_2 - a_2$, and so on. 
+    Therefore 
+    \[ 
+        f - f(a) \in (x_1 - a_1, \ldots, x_n - a_n). 
+    \]
+    But $f(a) = 0$, so 
+    \[ 
+        f \in (x_1-a_1, \ldots, x_n - a_n)
+    \]
+    giving us the inclusion. 
+    Together 
+    \[
+        I(a) = (x_1-a_1,\ldots,x_n - a_n).
+    \]
+
+\end{proof}
+
+Immediately, the evaluation map 
+\[ 
+    \operatorname{ev}_a : K[x_1,\ldots,x_n] \to K, \ 
+    f \mapsto f(a) 
+\]
+has 
+\[
+    \ker \operatorname{ev}_a = I(a). 
+\]
+It is surjective so 
+\[
+    \frac{K[x_1,\ldots,x_n]}{I(a)} \cong K. 
+\]
+
+So far our ideals lived in $K[x_1,\ldots,x_n]$. 
+Suppose $X$ is already a variety. 
+
+If $Y \subseteq X$, we can define 
+\[
+    I_X(Y) = \{f \in A(X) \bigm| f(y) = 0 \ \text{for every} \ 
+    y \in Y\}. 
+\] 
+Conversely, if $S \subseteq A(X)$, define 
+\[ 
+    V_X(S) = \{x \in X \bigm| f(x) = 0 \ \text{for every} \ 
+    f \in S\}. 
+\]
+We surpress subscripts when the variety is clear. 
+
+\begin{prop}
+    If $Y \subseteq Y' \subseteq X$, 
+    then 
+    \[ 
+        I(Y') \subseteq I(Y). 
+    \]
+\end{prop}
+The proof of this is quite short so I won't bother writing it. +
+
+Likewise, if 
+\[
+    S \subseteq S' \subseteq A(X), 
+\]
+then 
+\[
+    V(S') \subseteq V(S). 
+\]
+
+Intuitively, larger geometry has a direct correspondence 
+with a smaller ideal, and at the extremes 
+\[ 
+    \mathbb A^n_K = (0)
+\]
+in the usual infinite-field situation, while 
+\[ 
+    I(\emptyset) = K[x_1,\ldots,x_n] = (1),
+\]
+since every polynomials vacuously vanishes on the 
+empty set. 
+
+Suppose $Y \subseteq X$. 
+
+We can form 
+\[
+    Y \mapsto I(Y) \mapsto V(I(Y)). 
+\]
+
+Ceirtainly, 
+\[
+    Y \subseteq V(I(Y)).
+\]
+Every polynomials in $I(Y)$ was defined precisely 
+to vanish on $Y$. 
+Similarly, for $S\subseteq A(X)$, 
+\[
+    S \subseteq I(V(S)). 
+\]
+
+If $Y$ is already a subvariety, something stronger holds. 
+
+\begin{prop}
+    If $Y \subseteq X$ is a subvariety, then 
+    \[
+        V(I(Y)) = Y. 
+    \]
+\end{prop}
+\begin{proof}
+    We know $Y \subseteq V(I(Y))$. 
+    Because $Y$ is a subvariety, there exists some 
+    $S \subseteq A(X)$ such that 
+    \[
+        Y = V(S). 
+    \]
+    Every element of $S$ vanishes on $Y$, so 
+    \[
+        S \subseteq I(Y). 
+    \]
+    Since taking zero loci reverses inclusion, 
+    \[ 
+        V(I(Y)) \subseteq V(S) = Y. 
+    \]
+\end{proof}
+
+Now for a really nice result. 
+
+Let $Y \subseteq X$ be a subvariety. 
+
+Any polynomial function on $X$ can be restricted to $Y$. 
+Thus we get a ring homomorphism 
+\[
+    \rho A(X) \to A(Y), \ f \mapsto f\bigm|_{Y}. 
+\]
+
+\begin{prop}
+    The map $\rho$ is surjective and 
+    \[
+        \ker \rho = I(Y). 
+    \]
+    Hence 
+    \[
+        A(X) / I(X) \cong A(Y).
+    \]
+\end{prop}
+\begin{proof}
+    By the definition of polynomial functions on 
+    $Y$, every polynomial function on $Y$ is obtained by 
+    restricting a polynomial function from the ambient 
+    space, so $\rho$ is surjective. 
+    Furthermore, 
+    \[
+        f \in \ker \rho 
+    \]
+    if and only if 
+    \[ 
+        f\bigm|_Y = 0, 
+    \]
+    which means precisely that 
+    \[
+        f(y) = 0
+    \]
+    for every $y\in Y$. 
+
+    Thus $\ker \rho = I(Y)$. 
+    The first isomorphism theorem then gives 
+    \[
+        A(X)/I(Y) 
+        = \frac{K[x_1,\ldots,x_n]/I(X)}{I(Y)} 
+        \cong A(Y).
+    \]
+\end{proof}
+
+The last major thing now concerns maps between 
+varieties. 
+
+Let $X \subseteq \mathbb A_K^n$ and $Y \subseteq \mathbb A_K^m$
+be varieties. 
+
+\begin{defn}
+    A \textbf{morphism of varieties} 
+    \[
+        f : X \to Y
+    \]
+    is a map given by polynomials: 
+    \[
+        f(x) = (f_1(x), \ldots, f_m(x)),
+    \]
+    where 
+    \[
+        f_i \in K[x_1,\ldots,x_n]. 
+    \]
+    Gathmann then associates to $f$ a ring homomorphism 
+    \[
+        f^* : A(Y) \to A(X)
+    \]
+    defined by 
+    \[
+        f^*(g) = g \circ f. 
+    \]
+    Notice the direction: 
+    \[
+        X \overset{f}{\to} Y 
+    \]
+    produces 
+    \[
+        A(Y) \overset{f^*}{\to} A(X). 
+    \]
+\end{defn}
+
+The cool thing now is that the arrow reverses. 
+
+Suppose you have an ordinary function 
+$f: X \to Y$ and a real-valued function $g : Y \to \mathbb R$. 
+Composition gives $g \circ f : X \to \mathbb R$. 
+
+So a map of spaces $X \to Y$ naturally lets you 
+pull functions backwards 
+\[
+    \{\text{functions on} \ Y\} 
+    \to 
+    \{\text{functions on} \ X\}.
+\]
+This is called \textbf{pullback}. 
+
+Hence the notation $f^*$. 
+This contravariance is very important further into algebraic 
+geometry. 
+
+\subsection{A few practice problems}
+
+\begin{prob}
+    Determine geometrically 
+    \[
+        V(xy, xz) \subseteq \mathbb A_K^3. 
+    \]
+    Try to describe it as a union of familiar linear pieces. 
+\end{prob}
+
+\begin{proof}[Solution]
+    We have 
+    \[
+        V(xy, xz) = \{(x,y,z) \in K^3 : xy = 0, xz = 0\}. 
+    \]
+    Both equations share a common factor of $x$. 
+    If $x = 0$, then both equations vanish, so 
+    this gives the plane 
+    \[
+        V(x). 
+    \]
+    If $x \neq 0$, then since $K$ is a field we may cancel 
+    $x$ to get $y = 0$, $z = 0$, giving us the 
+    $x$-axis $V(y,z)$. Therefore 
+    \[
+        V(xy,xz) = V(x) \cup V(y,z).
+    \]
+    Geometrically this is the union of the 
+    $yz$-plane and $x$-axis.
+\end{proof}
+
+\begin{prob}
+    Let $a = (2,-1) \in \mathbb A^2_{\mathbb R}$.
+    Without a long proof, determine $I(a)$ and identify 
+    \[
+        \mathbb R[x,y]/I(a)
+    \]
+\end{prob}
+\begin{proof}[Solution]
+    We showed earlier that 
+    $$
+        I(a) = (x-2, y + 1).
+    $$
+    Define the ring homomorphism 
+    $$
+        \phi : \mathbb R[x,y] \to \mathbb R, \
+        f \mapsto f(2,-1). 
+    $$
+    The map is surjective and $\ker \phi = I(a)$. 
+    Thus 
+    \[
+        \mathbb R[x,y] / I(a) \cong \mathbb R.
+    \]
+\end{proof}
 
 \end{document}
