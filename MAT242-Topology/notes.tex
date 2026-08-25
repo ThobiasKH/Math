@@ -2,7 +2,7 @@
 
 \title{\huge{Topology}}
 \author{\LARGE{Thobias Høivik}}
-\date{Fall 2026?} 
+\date{Fall 2026} 
 
 \begin{document}
 \maketitle
@@ -462,6 +462,224 @@ So the closed subsets are controlled by equations and ideals.
     \[
         \tau_2 \subseteq \tau_1.
     \]
+\end{proof}
+
+\subsection{Some exercises from Section 13 of Munkres}
+\begin{prob}[Problem 1]
+    Let $X$ be a topological space; let $A$ be a subspace of 
+    $X$. Suppose that for each $x \in A$ there is an open set 
+    $U$ containing $x$ such that $U \subset A$. Show that 
+    $A$ is open in $X$. 
+\end{prob}
+\begin{proof}
+    For each $x\in A$, let $U_x$ denote the open 
+    set containing $x$ such that $U_x \subset A$. 
+    We claim that 
+    \[
+        A = \bigcup_{x \in A} U_x.
+    \]
+    For each $x \in A$, $U_x \subset A$ so 
+    \[
+        \bigcup_{x \in A} U_x \subseteq A.
+    \]
+    Now, for some arbitrary $x \in A$, 
+    there exists an open set $U_x$ such that 
+    $x \in U_x$. Thus 
+    \[ 
+        A \subseteq \bigcup_{x \in A} U_x.
+    \] 
+    The two inclusions give the result.
+\end{proof}
+
+\begin{prob}[Problem 3]
+    Show that the collection $\mathcal T_c$ given in 
+    Example 4 of \S{}12 (of Munkres) is a topology 
+    on the set $X$. 
+
+    Is the collection 
+    \[
+        \mathcal T_\infty = \{U \bigm| X \setminus U \ 
+        \text{is infinite or empty or all of} \ X\}
+    \]
+    a topology on $X$?
+
+    Note: For a set $X$, define 
+    $\mathcal T_c$ to be the collection of all 
+    subsets $U$ of $X$ such that $X \setminus U$ is 
+    either countable or all of $X$. 
+\end{prob} 
+\begin{proof}
+    Since $X \setminus \emptyset = X$ so 
+    $\emptyset \in \mathcal T_c$. 
+    Furthermore, since $X - X = \emptyset$ which is 
+    finite and thus countable, we have 
+    $X \in \mathcal T_c$. 
+
+    Let $\{U_\alpha\}$ be a family of open sets 
+    (ignoring the trivial case where $U_\alpha = \emptyset$ for 
+    every such $U_\alpha$)
+    in $\mathcal T_c$. By definition, 
+    for each $U$, we have that 
+    \[
+        |X \setminus U_\alpha| \leq \aleph_0. 
+    \]
+    Since 
+    \[
+        \left|\bigcup_{\alpha} U_\alpha\right| \geq |U_\alpha|
+    \]
+    for any $\alpha$, we have 
+    \[
+        \left|X \setminus \bigcup_{\alpha}U_\alpha\right| 
+        \leq |X \setminus U_\alpha| \leq \aleph_0. 
+    \]
+    Hence $\bigcup_{\alpha} U_\alpha \in \mathcal T_c$ so 
+    $\mathcal T_c$ is closed under arbitrary unions. 
+
+    Now let $\{U_i\}_{i\in[n]}$ be a finite family of open sets. 
+    Assume also that $U_i \neq \emptyset$ for every $i$ as that 
+    case is trivial. Then 
+    \[
+        X \setminus \bigcap_{i=1}^n U_i 
+        = \bigcup_{i=1}^n (X\setminus U_i). 
+    \]
+    By assumption, $X\setminus U_i$ is countable and since the 
+    union of countable sets is countable we have 
+    that $\mathcal T_c$ is closed under finite intersections. 
+
+    Now to answer the second question, $\mathcal T_\infty$ is 
+    absolutely not a topology on $X$. Take for instance 
+    $X = \mathbb N$. Then $\{n\} \in \mathcal T_\infty$, 
+    but 
+    \[
+        \mathbb N \setminus \bigcup_{n \in \mathbb N \setminus \{7\}} \{n\}  
+    \]
+    is $\{7\}$ which is neither infinite, empty, or all of $X$. 
+\end{proof}
+
+\begin{prob}[Problem 4]
+    \medskip 
+    \
+    \begin{enumerate}[label=\alph*)]
+        \item If $\{\mathcal T_\alpha\}$ is a 
+            family of topologies on $X$, show that $\bigcup \mathcal T_\alpha$
+            is a topology on $X$. Is $\bigcup \mathcal T_\alpha$ 
+            a topology on $X$? 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Suppose $\{\mathcal T_\alpha\}$ is a family of 
+    topologies on $X$. Then 
+    $\emptyset, X \in \mathcal T_\alpha$ for all $\alpha$ so 
+    \[
+        \emptyset, X \in \bigcap \mathcal T_\alpha. 
+    \]
+
+    Let $\{U_\beta\}$ be a family of open sets in 
+    $\bigcap \mathcal T_\alpha$. Then 
+    every $U_\beta$ lies in $\mathcal T_\alpha$ for every $\alpha$. 
+    Thus 
+    \[
+        \bigcup U_\beta \in \mathcal T_\alpha, \ \forall \alpha
+    \]
+    and hence $\bigcup U_\beta$ lies in the intersection. 
+
+    Now let $\{U_i\}_{i\in[n]}$ be a finite family of open sets in 
+    $\bigcap \mathcal T_\alpha$. 
+
+    Again, $U_i \in \mathcal T_\alpha$ for every $i$ and $\alpha$ and 
+    the argument is analogous to the one above. 
+
+    The same does not hold for $\bigcup \mathcal T_\alpha$. 
+    Suppose $X = \{1,2,3\}$ with 
+    $\mathcal T_1 = \{\emptyset, X, 1\}$ and $\mathcal T_2 = 
+    \{\emptyset, X, 2\}$. Then 
+    $\{1\}$ and $\{2\}$ lie in their union, but $\{1,2\}$ does not. 
+\end{proof}
+
+\begin{prob}[Problem 6]
+    Show that the topologies $\mathbb R_\ell$ and $\mathbb R_K$ 
+    are not comparable. 
+\end{prob}
+\begin{proof}
+    Recall that the topology of $\mathbb R_\ell$ is 
+    \[
+        \mathcal B_\ell = \{[a,b) \bigm| a < b\},
+    \]
+    and that the topology of $\mathbb R_K$ is 
+    \[
+        \mathcal B_K = \{(a,b) : a < b\} \cup \{(a,b) \setminus K 
+        : a < b\} 
+    \]
+    where 
+    \[
+        K = \left\{\frac{1}{n} \biggm| n \in \mathbb Z_+\right\}.
+    \]
+    These are not comparable. Take for instance 
+    $(-1,1) \setminus K \in \mathcal B_K$. If $\mathcal B_K \leq 
+    \mathcal B_\ell$ we should be able to find some $\varepsilon > 0$ so that 
+    $[0,\varepsilon) \subseteq (-1,1) \setminus K$, but 
+    for every $\varepsilon > 0$ we can choose $n$ sufficiently large 
+    so that 
+    \[
+        \frac{1}{n} < \varepsilon. 
+    \]
+    Then $1/n \in [0,\varepsilon)$ implying $[0,\varepsilon) \not\subseteq 
+    (-1,1) \setminus K$. Thus $\mathcal B_K \not\subseteq \mathcal B_\ell$ 
+
+    For the other way consider $[0,1) \in \mathcal B_\ell$. 
+    Every $K$-neighbourhood at $0$ is either $(a,b)$ or $(a,b) \setminus K$ 
+    with $a < 0 < b$. Either way it contains some negative real numbers so 
+    no such basic neighborhood of $0$ can fit in $[0,1)$. 
+\end{proof}
+
+\begin{prob}[Problem 8]
+    \medskip 
+    \ 
+    \begin{enumerate}[label=\alph*)]
+        \item Apply Lemma 13.2 to show that the 
+            countable collection 
+            \[
+                \mathcal B = \{(a,b) \bigm| a < b, \ a,b \in \mathbb Q\}
+            \]
+            is a basis that generates the standard topology on 
+            $\mathbb R$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Recall that Lemma 13.2 says that if $X$ is a topological space, and 
+    $\mathcal C$ is a collection of open sets such that for each 
+    open set $U$ of $X$ and each $x \in U$ there is some element  
+    $C \in \mathcal C$ such that $x \in C \subset U$, then $\mathcal C$ 
+    is a basis for the topology on $X$.
+
+    Let $U$ be open in the canonical topology on $\mathbb R$. Then 
+    $U = (a_0,b_0)$ for some $a_0,b_0 \in \mathbb R$ such that 
+    $a_0 < b_0$. By virtue of $\mathbb Q$ being dense in $\mathbb R$
+    we can, for each $\varepsilon > 0$ find some $a,b \in \mathbb Q$ 
+    suitably close: 
+    \[
+        a - a_0 < \varepsilon, \ b_0 - b < \varepsilon. 
+    \]
+    For any $x \in U = (a,b)$ let $\varepsilon = \min\{x - a_0, b_0-x\} > 0$. 
+    Choose rational $a$ and $b$ (with $a < b$) so that 
+    $a - a_0, b_0 - b < \varepsilon$. 
+    Then 
+    \begin{align*}
+        a - a_0 &< \varepsilon \\ 
+                &\leq x - a_0 \\ 
+        a       &< x, 
+    \end{align*}
+    and 
+    \begin{align*}
+        b_0 - b &< \varepsilon \\
+                &\leq b_0 - x \\ 
+        -b      &\leq -x \\ 
+        b       &> x. 
+    \end{align*}
+    Thus, by Lemma 13.2, $\mathcal B$ is a basis for the standard 
+    $\mathbb R$ topology. 
+
+    This is a bit imprecise in places, but the idea is right.
 \end{proof}
 
 \end{document}
