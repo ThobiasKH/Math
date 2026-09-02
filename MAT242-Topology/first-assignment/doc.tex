@@ -1,0 +1,352 @@
+\input{preamble.tex}
+
+\title{\huge{First assignment}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+This is the first assignment for MAT242. As the 
+course materials, announcements, etc. are in English, I 
+will be writing this in English. That is my preference anyways. 
+Hopefully the use of the word "write-up" doesn't necessitate 
+this being super-duper structured and dull, but that I am free 
+to share my exploratory thought process. Still I will strive 
+to be as rigorous as possible, of course.  
+
+Note: I am submitting one day late as I thought the deadline was 
+the $7$th. My mistake, I have been away at a conference 
+and things got a bit hectic. 
+
+
+\section*{The problem}
+If I understood the problem correctly, I am to show 
+that the sort of "canonical" way of defining a topology 
+on the cartesian product of some sets $X_i$ is the only way 
+of doing it when we want to satisfy that universal property, 
+whatever that means!
+
+I have heard enough waffling on Category Theory to know that 
+this term is relevant there and I was immediately confused by 
+the "there is only one way to do it" line. A cursory 
+google search on "product topology vs. box topology" immediately 
+brought up how this so-called "universal property" fails to 
+be satisfied by the box topology when looking at the cartesian 
+product of infinitely many $X_i$. 
+
+\section*{The universal property}
+
+This property is stated for the cartesian product 
+of two sets so I will begin there. 
+I will denote the projection $\operatorname{pr}_i$ 
+by $\pi_i : X_1 \times X_2 \to X_i$ because it looks cooler and 
+writing \verb|\operatorname| a bunch is tedious.
+
+Let $X_1,X_2$ be sets. The cartesian product has the property 
+that for any function $f : Z \to X_1 \times X_2$, 
+$f$ is uniquely defined by the two projections 
+\[
+    f_1 := \pi_1 f : Z \to X_1 \ \text{and} \ 
+    f_2 := \pi_2 f : Z \to X_2, 
+\]
+where $\pi_i : X_1 \times X_2 \to X_i$ is the projection 
+$(x_1,x_2) \overset{\pi_i}{\mapsto} x_i$ for $i = 1,2$.
+
+This essentially says something quite trivial which is that 
+"to specify where $z$ goes in $X_1 \times X_2$, specify its 
+$X_1$-coordinate and its $X_2$-coordinate". 
+
+We would want the same to hold for topological spaces. 
+If $X_1,X_2, Z$ are topological spaces, then a function 
+$f : Z \to X_1 \times X_2$ is continuous if and only if 
+$f_1$ and $f_2$ are. 
+
+There is probably some nice way to formulate the above 
+as requiring the some diagram commutes or something, but I 
+don't know Category Theory as of right now. 
+
+What we now want to do is to show that this requirement forces 
+a unique topology on $X_1\times X_2$ called the product topology. 
+
+\section*{The product topology}
+So we are essentially given that this is the product topology. 
+That means that what we should try to do now is to prove that 
+for arbitrary spaces $X_1,X_2,Z$, the product topology has the 
+desired property. 
+
+\begin{defn*}[Product topology]
+    Let $X_1$ and $X_2$ (for notational consistency) be topological  
+    spaces, meaning there exist some $\tau_1 \subseteq \mathcal P(X_1)$
+    and $\tau_2 \subseteq \mathcal P(X_2)$ such that 
+    $(X_1,\tau_1)$ and $(X_2, \tau_2)$ are topological spaces. 
+
+    Consider 
+    \[
+        \mathcal B 
+        = \{U \times V \bigm| U \subseteq X_1 \ \text{open}, \ 
+        \text{and} \ V \subseteq X_2 \ \text{open}\}.
+    \]
+    The product topology on $X_1 \times X_2$ is the 
+    topology having $\mathcal B$ as a basis. 
+
+    So an arbitrary open set of $X_1\times X_2$ is a union 
+    of $U\times V$: 
+    \[
+        W = \bigcup_{\alpha \in A} U_\alpha \times V_\alpha. 
+    \]
+\end{defn*}
+Munkres also gives an equivalent definition using projections, 
+very exciting. 
+
+Now suppose are given some continuous function 
+$f : Z \to X_1 \times X_2$, meaning that 
+for every open set $W \in X_1 \times X_2$ we have that 
+\[
+f^{-1}(W) = \{z \in Z \bigm| f(z) \in W\}
+\]
+is open in $Z$. 
+
+Now we should think back to what this means under the universal 
+property of the cartesian product, since this must necessarily 
+hold for $f$.  
+Let $f_i := \pi_if : Z \times X_i, \ (i = 1,2)$. Then 
+$f(z) = (f_1(z), f_2(z))$. The idea now becomes quite clear. 
+We assume $f$ is continuous, we know the projections are continuous 
+(though we should probably prove so) and continuity is preserved 
+under composition (maybe we ought to prove that aswell or maybe 
+it won't be necessary) so 
+$f$ continuous $\Rightarrow$ $f_1,f_2$ continuous. Then we must prove 
+the converse which isn't that bad either. 
+
+\begin{lem*}
+    Let $X_1,X_2,Z$ be topological spaces and 
+    endow $X_1 \times X_2$ with the product topology. If 
+    \[
+        f : Z \to X_1 \times X_2
+    \]
+    is continuous, then 
+    \[
+        f_1 = \pi_1 \circ f, \ f_2 = \pi_2 \circ f
+    \]
+    are continuous. 
+\end{lem*}
+\begin{proof}
+    Suppose $f : Z \to X_1 \times X_2$ is continous. 
+    Then, for any open set 
+    in $X_1 \times X_2$, 
+    \[
+        f^{-1}(W) = \{z \in Z \bigm| f(z) \in W\}
+    \]
+    is open in $Z$. 
+
+    Take $f_1$. Suppose $U \subseteq X_1$ is open. Then 
+    \begin{align*}
+        f_1^{-1}(U) &= (\pi_1 \circ f)^{-1}(U) \\ 
+                    &= f^{-1}(\pi_1^{-1}(U)). 
+    \end{align*}
+    Then since 
+    \[
+        \pi_1^{-1}(U) = U \times X_2,
+    \]
+    and $U$ is open in $X_1$ by assumption, and $X_2$ is 
+    open in itself, we have that $U \times X_2$ is open 
+    in the product topology. 
+
+    Therefore since $f$ is continuous, we have that 
+    \[
+        f_1^{-1}(U) = f^{-1}(U\times X_2) 
+    \]
+    is open in $Z$. 
+
+    The proof of continuity for $f_2$ is effectively identical. 
+\end{proof}
+Perhaps it would have been good enough to remark that 
+$f_i$ is the composition of continuous functions, but who knows. 
+\begin{lem*}
+    Let $X_1,X_2,Z$ be topological spaces and again 
+    give $X_1\times X_2$ the product topology. If 
+    \[
+        f_1 = \pi_1 \circ f, \ f_2 = \pi_2 \circ f
+    \]
+    are continuous then 
+    \[
+        f(z) = (f_1(z), f_2(z))
+    \]
+    is continuous. 
+\end{lem*}
+\begin{proof}
+    Suppose $W \subseteq X_1 \times X_2$ is open. 
+
+    We want to show that 
+    \[
+        f^{-1}(W) 
+    \]
+    is open. 
+
+    Recall that 
+    \[
+        f^{-1}(W) = f^{-1}\left(\bigcup_{\alpha \in A}U_\alpha 
+        \times V_\alpha\right),
+    \]
+    where $U_\alpha, V_\alpha$ are open in $X_1, X_2$, respectively, 
+    and for all $\alpha$.
+
+    Recall also that 
+    \begin{align*}
+        f^{-1}\left(\bigcup_{\alpha} U_\alpha \times V_\alpha\right)
+        &= \bigcup_{\alpha} f^{-1}(U_\alpha \times V_\alpha) \\ 
+        &= \bigcup_{\alpha} f_1^{-1}(U_\alpha) \cap f_2^{-1}(V_\alpha),
+    \end{align*}
+    since 
+    \begin{align*}
+        z\in f^{-1}(U_\alpha\times V_\alpha)
+            &\iff f(z)\in U_\alpha\times V_\alpha\\
+            &\iff (f_1(z),f_2(z))\in U_\alpha\times V_\alpha\\
+            &\iff f_1(z)\in U_\alpha\text{ and }f_2(z)\in V_\alpha\\
+            &\iff z\in f_1^{-1}(U_\alpha)\cap f_2^{-1}(V_\alpha).
+    \end{align*}
+    Thus the preimage of an open set in $X_1 \times X_2$ is 
+    the union of preimages (under $f_1,f_2$) of 
+    open sets in $X_1$ and $X_2$. Since $f_1,f_2$ are continuous 
+    by assumption, 
+    $f^{-1}(W)$ is a union of open sets in $Z$ and therefore open.
+\end{proof}
+
+\begin{thm*}
+    For topological spaces $X_1,X_2,Z$ where we once again 
+    endow $X_1\times X_2$ with the product topology, 
+    \[
+        f : Z \to X_1 \times X_2
+    \]
+    is continuous if and only if 
+    \[
+        \pi_1 \circ f, \ \pi_2 \circ f
+    \]
+    are continuous. 
+\end{thm*}
+\begin{proof}
+    Apply the previous two lemma. 
+\end{proof}
+
+If Category Theory has a more compact way of showing 
+that the product topology indeed has this property I shall 
+work tirelessly against those who label it as "abstract nonesense". 
+
+\section*{It has to be the product topology!}
+Again we are still working with simple 
+cartesian products of only two topological spaces. 
+
+Now what should the intuition be here, I wonder? 
+Say we have some spaces $X_1, X_2$ and some topology on 
+$X_1 \times X_2$. Why must it be that for any $Z$ and 
+any 
+functions $f : Z \to X_1 \times X_2$, 
+$f$ cont. iff $f_1,f_2$ cont. must necessarily imply 
+that $X_1\times X_2$ has the product topology? 
+
+Well, this condition must hold for every $Z$ and $f$. So let 
+$Z = X_1\times X_2$ with the product topology (which we 
+now knows satisfies the nice property itself), and let 
+$f = \operatorname{id}$. 
+
+From here we can get a simple argument! 
+
+\begin{thm*}
+    Let $\tau$ be a topology on $X_1 \times X_2$. Suppose that 
+    for every topological space $Z$ and every 
+    $f : Z \to X_1 \times X_2$, $f$ is continuous iff 
+    $\pi_1 f, \pi_2 f$ are continuous. Then 
+    $\tau = \tau_{\mathrm{prod}}$. 
+\end{thm*}
+\begin{proof}
+    Let $\tau_{\mathrm{prod}}$ denote the product topology on
+    $X_1\times X_2$.
+
+    We first show that
+    \[
+        \tau \subseteq \tau_{\mathrm{prod}}.
+    \]
+    Consider
+    \[
+        Z=(X_1\times X_2,\tau_{\mathrm{prod}})
+    \]
+    and the identity map
+    \[
+        \operatorname{id}:
+        (X_1\times X_2,\tau_{\mathrm{prod}})
+        \to
+        (X_1\times X_2,\tau).
+    \]
+    Its coordinate maps are
+    \[
+        \pi_1\circ\operatorname{id}=\pi_1,
+        \qquad
+        \pi_2\circ\operatorname{id}=\pi_2.
+    \]
+    The projections $\pi_1$ and $\pi_2$ are continuous with respect
+    to the product topology. Hence, by the assumed property of $\tau$,
+    the identity map is continuous.
+
+    Therefore every $\tau$-open set is
+    $\tau_{\mathrm{prod}}$-open, and so
+    \[
+        \tau\subseteq\tau_{\mathrm{prod}}.
+    \]
+
+    We now prove the reverse inclusion. Consider
+    \[
+        Z=(X_1\times X_2,\tau)
+    \]
+    and the identity map
+    \[
+        \operatorname{id}:
+        (X_1\times X_2,\tau)
+        \to
+        (X_1\times X_2,\tau_{\mathrm{prod}}).
+    \]
+    By applying the assumed property of $\tau$ to the identity map
+    \[
+        \operatorname{id}:
+        (X_1\times X_2,\tau)
+        \to
+        (X_1\times X_2,\tau),
+    \]
+    we see that the projections
+    \[
+        \pi_1:(X_1\times X_2,\tau)\to X_1,
+        \qquad
+        \pi_2:(X_1\times X_2,\tau)\to X_2
+    \]
+    are continuous.
+
+    Since the product topology satisfies the universal property,
+    continuity of these two coordinate maps implies that
+    \[
+        \operatorname{id}:
+        (X_1\times X_2,\tau)
+        \to
+        (X_1\times X_2,\tau_{\mathrm{prod}})
+    \]
+    is continuous. Hence
+    \[
+        \tau_{\mathrm{prod}}\subseteq\tau.
+    \]
+
+    Therefore
+    \[
+        \tau=\tau_{\mathrm{prod}}.
+    \]
+\end{proof}
+Very cool! 
+
+After this I was thinking back to the box topology thing which, 
+to be honest, I haven't looked into that much. I was curious though 
+to what I found about the box topology not satisfying this property 
+when the cartesian product is infinite. After a quick search I found 
+out that this topology is apparently the same as the product topology 
+for finite cartesian product so that turned out to be relatively 
+uninteresting. 
+
+\end{document}
+
