@@ -682,4 +682,68 @@ So the closed subsets are controlled by equations and ideals.
     This is a bit imprecise in places, but the idea is right.
 \end{proof}
 
+\section{Some problems to recap}
+
+\begin{prob}[Munkres \S 16, Exercise 3]
+    Let 
+    \[
+        [-1,1] \subseteq \mathbb R
+    \]
+    with the subspace topology inherited from 
+    the standard topology on the reals. 
+
+    For each of the following sets, determine: 
+    \begin{enumerate}
+        \item Is it open in $Y$? 
+        \item Is it open in $\mathbb R$? 
+    \end{enumerate} 
+    \begin{itemize}
+        \item $A = \left\{x \biggm| \frac{1}{2} < |x| < 1\right\}$, 
+        \item $B = \left\{x \biggm| \frac{1}{2} < |x| \leq 1\right\}$, 
+        \item $C = \left\{x \biggm| \frac{1}{2} \leq |x| < 1\right\}$, 
+        \item $D = \left\{x \biggm| \frac{1}{2} \leq |x| \leq 1\right\}$, 
+    \end{itemize}
+    and 
+    \begin{itemize}
+        \item $E = \{x \bigm| 0 < |x| < 1 \ \text{and} \ 1/x
+        \not\in \mathbb Z_+\}$.
+    \end{itemize}
+\end{prob}
+\begin{proof}[Sol]
+    A set $X$ is open in $\mathbb R$ if for every 
+    $x \in X$, there is some $\varepsilon > 0$ 
+    such that $(x-\varepsilon, x + \varepsilon) \subseteq X$. 
+    This is the same behavior inherited by $Y$. 
+
+    We begin with $A$. 
+    We claim 
+    that this set is indeed open. 
+
+    We have that 
+    \[
+        \frac{1}{2} < x < 1 \ \text{or} \ 
+        -1 < x < -\frac{1}{2}.  
+    \]
+    Hence $A = (-1,-1/2) \cup (1/2, 1)$. The union of 
+    open sets is open hence $A$ is open. 
+
+    Now we do $B$. We claim that this set is not open. 
+    Let $x = 1$. There would have to exist $\varepsilon > 0$
+    so that $(x - \varepsilon, x + \varepsilon) \subseteq X$, but 
+    $x + \varepsilon > 1$ and hence not in $B$. 
+
+    Now we do $C$. We also claim this set is not open 
+    using the same argument. 
+    An open $\varepsilon$-ball of $1/2$ would include 
+    $1-\varepsilon/2 < 1/2$. 
+
+    $D$ fails for the same reason. 
+
+    \[
+        E = (-1,0) \cup \bigcup_{n=1}^\infty 
+        \left(\frac{1}{n+1}, \frac{1}{n}\right),
+    \]
+    a union of open sets, hence $E$ is open.
+\end{proof}
+
 \end{document}
