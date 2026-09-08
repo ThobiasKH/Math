@@ -1,0 +1,53 @@
+\input{preamble.tex}
+
+\title{\huge{Assignment 1}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+Jeg pleier generellt sett å gjøre matematikk 
+på Engelsk. Jeg skal prøve å 
+følge ordboken, men viss det 
+er noen litt feil begrep beklager 
+jeg dette. 
+
+\begin{prob*}[1]
+    Let $M$ be an $R$-module of finite length, i.e. 
+    an $R$-module that admits a composition of series. 
+    Show that: 
+    \begin{enumerate}[label=\alph*)]
+        \item If $N < M$ is a proper submodule of $M$, then
+            $l(N) < l(M)$.  
+        \item Every composition series for $M$ has length 
+            $l(M)$. 
+        \item Every chain $0 = M_0 \subsetneq M_1 \subsetneq 
+            M_2 \subsetneq \cdots \subsetneq M_n = M$ of 
+            submodules of $M$ can be refined to a composition 
+            of series for $M$. 
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Bevis for (a)]
+    La $N < M$ være en ekte undermodul av $M$. 
+    Siden $M$ har endelig lengde, så har vi at 
+    vi kan finne en komposisjon 
+    \[
+        0 = M_0 < M_1 < \cdots < M_n = M. 
+    \]
+    Siden $N \subseteq M$, har vi da at 
+    \[
+        N \cap M = N, 
+    \]
+    så 
+    \[
+        0 = N \cap M_0 \subseteq N \cap M_1 \subseteq \cdots 
+        \subseteq N \cap M_n = N. 
+    \]
+
+
+\end{proof}
+
+
+\end{document}
