@@ -4,9 +4,9 @@
 \DeclareMathOperator{\im}{im}
 
 
-\title{\huge{Commutative Algebra}}
+\title{\huge{MAT224 - Commutative Algebra}}
 \author{\LARGE{Thobias Høivik}}
-\date{Fall 2026?}
+\date{Fall 2026}
 
 \begin{document}
 \maketitle
@@ -2854,6 +2854,196 @@ Let $R = K[x,y]$.
     As $\psi$ is surjective, 
     \[
         (R/I)/(J/I) \cong R/I. 
+    \]
+\end{proof}
+
+\begin{prob}
+    View $\mathbb Z$ as a $\mathbb Z$-module. Prove that 
+    $2\mathbb Z$ is a submodule. 
+
+    Then, determine whether $2\mathbb Z \cup 3\mathbb Z$ is 
+    a submodule of $\mathbb Z$.
+\end{prob}
+\begin{proof}[Proof \& solution]
+    We have that $2\mathbb Z = \{\ldots, -2, 0, 2, \ldots\} \neq 
+    \emptyset$. 
+    Furthermore take any $x,y \in 2 \mathbb Z$. Then 
+    there are some $n,m$ so that 
+    \[
+        x = 2n, \ y = 2m
+    \]
+    so 
+    \[
+        x - y = 2n - 2m = 2(n-m) \in 2\mathbb Z
+    \]
+    hence the subgroup criterion is satisfied. 
+    Now take $r \in \mathbb Z$. 
+    Then 
+    \[
+        r \cdot x = r \cdot 2n = 2(rn) \in 2\mathbb Z. 
+    \]
+    Thus $2\mathbb Z$ is a $\mathbb Z$-module and, of course 
+    \[
+        2\mathbb Z \subseteq \mathbb Z.
+    \]
+
+    The latter is not a submodule as it is not even a group: 
+    \[
+        2 + 3 = 5 \not\in2\mathbb Z \cup 3\mathbb Z.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        M = \mathbb Z/12\mathbb Z
+    \]
+    viewed as a $\mathbb Z$-module, and let 
+    \[
+        N = (\overline 4). 
+    \]
+    \begin{enumerate}
+        \item Determine $N$, 
+        \item Determine the elements of the quotient module 
+            \[
+                M/N,
+            \]
+        \item Find a familiar $\mathbb Z$-module isomorphic 
+            to $M/N$.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Sol]
+    \[
+        (\overline 4) = \{\overline 0,\overline 4,\overline 8\}. 
+    \]
+    \[
+        M/N = \{m + N \bigm| m = 0,1,2,\ldots,12\} 
+        = \{\overline m + N \bigm| \overline m = 0,1,2,3\}. 
+    \]
+
+    Let $\phi : M \to N \to \mathbb Z_4$ by 
+    $\phi(m) = m \mod 4$. Then $\ker \phi = N$ and it is 
+    indeed surjective so the first isomorphism theorem gives us 
+    \[
+        M/N \cong \mathbb Z_4. 
+    \]
+\end{proof}
+
+\begin{prob}
+    View 
+    \[
+        M = \mathbb Z/12\mathbb Z
+    \]
+    as a $\mathbb Z$-module. 
+    Find a composition series 
+    \[
+        0 = M_0 \subsetneq M_1 \subsetneq \cdots \subsetneq M_n = M.
+    \]
+    For each $i$ determine the quotient 
+    \[
+        \frac{M_i}{M_{i-1}}.
+    \]
+    Finally, use this to determine $\ell(M)$.
+\end{prob}
+\begin{proof}
+    We find the series 
+    \[
+        0 \subsetneq \mathbb Z/6\mathbb Z \subsetneq 
+        \mathbb Z/2\mathbb Z \subsetneq \mathbb Z/12\mathbb Z.
+    \]
+    We have 
+    \[
+        \frac{\mathbb Z/12\mathbb Z}{\mathbb Z/2\mathbb Z}
+        \cong \mathbb Z/2\mathbb Z, 
+    \]
+    \[
+        \frac{\mathbb Z/2\mathbb Z}{\mathbb Z/6\mathbb Z} 
+    \]
+    has size $6/2 = 3$ and since $\mathbb Z$-modules are abelian 
+    groups we must have that it is isomorphic to $\mathbb Z_3$. 
+    Lastly 
+    \[
+        \frac{\mathbb Z/6\mathbb Z}{(0)} \cong \mathbb Z/6\mathbb Z 
+        \cong 2 \mathbb Z.
+    \]
+    All of the above are simple so this is a composition series 
+    with $\ell(M) = 3$. 
+\end{proof}
+
+\begin{prob}
+    Suppose $M$ has finite length and $N \subseteq M$ is a 
+    submodule. Assume you already know that both $N$ and 
+    $M/N$ have finite length. 
+    Suppose 
+    \[
+        0 = N_0 \subsetneq N_1 \subsetneq \cdots \subsetneq N_r = N
+    \]
+    is a composition series for $N$, and 
+    \[
+        0 = Q_0 \subsetneq Q_1 \subsetneq \cdots \subsetneq Q_s = M/N
+    \]
+    is a composition series for $M/N$. 
+    Let 
+    \[
+        \pi : M \to M/N
+    \]
+    be the quotient map. 
+
+    Construct a composition series for $M$ using the $N_i's$ inverse 
+    images 
+    \[
+        \pi^{-1}[Q_j]. 
+    \]
+    Deduce then that 
+    \[
+        \ell(M) = \ell(N) + \ell(M/N).
+    \]
+\end{prob}
+\begin{proof}
+    For each $j \in \{0, 1, \dots, s\}$, since $Q_j$ is a submodule of $M/N$, its preimage under the quotient map $\pi$, denoted $\pi^{-1}[Q_j]$, is a submodule of $M$ containing $\ker \pi = N$. 
+
+    Evaluating the preimages at the endpoints of the composition series for $M/N$, we have:
+    \[
+        \pi^{-1}[Q_0] = \pi^{-1}[\{0\}] = \ker \pi = N, \quad \text{and} \quad \pi^{-1}[Q_s] = \pi^{-1}[M/N] = M.
+    \]
+    Furthermore, because $Q_{j-1} \subsetneq Q_j$ is a strict inclusion for each $1 \le j \le s$, their preimages must also satisfy strict inclusion:
+    \[
+        \pi^{-1}[Q_{j-1}] \subsetneq \pi^{-1}[Q_j].
+    \]
+    Concatenating the composition series of $N$ with the preimages of the composition series of $M/N$ gives the chain of submodules in $M$:
+    \[
+        0 = N_0 \subsetneq N_1 \subsetneq \cdots \subsetneq N_r = N = \pi^{-1}[Q_0] \subsetneq \pi^{-1}[Q_1] \subsetneq \cdots \subsetneq \pi^{-1}[Q_s] = M.
+    \]
+    To verify that this chain forms a composition series for $M$, we must check that every successive quotient is simple:
+    \begin{enumerate}
+        \item For $1 \le i \le r$, the quotient $N_i / N_{i-1}$ is simple by the assumption that $(N_i)_{i=0}^r$ is a composition series for $N$.
+        \item For $1 \le j \le s$, define the map
+        \[
+            \tilde{\varphi}_j : \pi^{-1}[Q_j] \longrightarrow \frac{Q_j}{Q_{j-1}} \quad \text{by} \quad \tilde{\varphi}_j(m) = \pi(m) + Q_{j-1}.
+        \]
+        This is an $R$-module homomorphism, being the composition of the quotient map $\pi$ with the canonical projection $Q_j \to Q_j / Q_{j-1}$.
+        
+        \begin{itemize}
+            \item \textbf{Surjectivity:} Take any element $x + Q_{j-1} \in Q_j / Q_{j-1}$ with $x \in Q_j$. Since $\pi$ is surjective, there exists $m \in M$ such that $\pi(m) = x$. By definition, $m \in \pi^{-1}[Q_j]$, and $\tilde{\varphi}_j(m) = x + Q_{j-1}$. Thus, $\tilde{\varphi}_j$ is surjective.
+            \item \textbf{Kernel:} An element $m \in \pi^{-1}[Q_j]$ lies in $\ker \tilde{\varphi}_j$ if and only if $\pi(m) + Q_{j-1} = 0 \in Q_j / Q_{j-1}$. This is equivalent to $\pi(m) \in Q_{j-1}$, which means $m \in \pi^{-1}[Q_{j-1}]$. Thus, $\ker \tilde{\varphi}_j = \pi^{-1}[Q_{j-1}]$.
+        \end{itemize}
+
+        By the First Isomorphism Theorem, $\tilde{\varphi}_j$ induces an isomorphism of $R$-modules:
+        \[
+            \frac{\pi^{-1}[Q_j]}{\pi^{-1}[Q_{j-1}]} \cong \frac{Q_j}{Q_{j-1}}.
+        \]
+        Since $Q_j / Q_{j-1}$ is simple by the definition of the composition series for $M/N$, the factor module $\pi^{-1}[Q_j] / \pi^{-1}[Q_{j-1}]$ is also simple.
+    \end{enumerate}
+
+    Every factor in the spliced chain is simple, so the sequence of submodules
+    \[
+        0 = N_0 \subsetneq N_1 \subsetneq \cdots \subsetneq N_r = \pi^{-1}[Q_0] \subsetneq \pi^{-1}[Q_1] \subsetneq \cdots \subsetneq \pi^{-1}[Q_s] = M
+    \]
+    is a valid composition series for $M$.
+
+    Finally, by the Jordan--Hölder Theorem, all composition series of $M$ have the same length $\ell(M)$, which is equal to the number of simple factors. Counting the factors in our constructed series gives:
+    \[
+        \ell(M) = r + s = \ell(N) + \ell(M/N).
     \]
 \end{proof}
 
