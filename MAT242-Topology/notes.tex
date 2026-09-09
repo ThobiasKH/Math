@@ -1,6 +1,6 @@
 \input{preamble.tex}
 
-\title{\huge{Topology}}
+\title{\huge{MAT242 - Topology}}
 \author{\LARGE{Thobias Høivik}}
 \date{Fall 2026} 
 
@@ -744,6 +744,147 @@ So the closed subsets are controlled by equations and ideals.
         \left(\frac{1}{n+1}, \frac{1}{n}\right),
     \]
     a union of open sets, hence $E$ is open.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        f : X \to Y
+    \]
+    and suppose $\mathcal B$ is the 
+    basis for the topology on $Y$.
+
+    Prove that $f$ is continuous if 
+    and only if 
+    \[
+        f^{-1}(B)
+    \]
+    is open for every $B \in \mathcal B$.
+\end{prob}
+\begin{proof}
+    Suppose $f$ is continuous. 
+    Since $B \in \mathcal B$ are necessarily 
+    open in the topology they induce it is trivial 
+    that 
+    \[
+        f^{-1}(B)
+    \]
+    is open, by definition. 
+
+    Now suppose 
+    \[
+        f^{-1}(B) = \{x \in X \bigm| f(x) \in B\}
+    \]
+    is open for every $B \in \mathcal B$. 
+    Recall that every open set $U \subseteq Y$ can be 
+    written as 
+    \[
+        U = \bigcup_{\alpha} B_\alpha, \ B_\alpha \in \mathcal B. 
+    \]
+    Then 
+    \[
+        f^{-1}\left(\bigcup_\alpha B_\alpha\right) 
+        = \{x \in X \bigm| x \in f(B_\alpha) \ \text{for at least one} \ \alpha\}. 
+    \]
+    In particular 
+    \[
+        f^{-1}\left(\bigcup_\alpha B_\alpha\right)
+        = \bigcup_\alpha f^{-1}\left(B_\alpha\right)
+    \]
+    and the preimage of $B_\alpha$ is, by assumption, 
+    open in $X$. As topologies are closed under arbitrary 
+    unions we get that $f^{-1}(U)$ is open in $X$. 
+    As $U$ was arbitrary, this holds for any open $U \subseteq Y$. 
+
+\end{proof}
+
+\begin{prob}
+    Let $X,Y,Z$ be topological spaces and let 
+    \[
+        f : Z \to X \times Y. 
+    \]
+    Write 
+    \[
+        f(z) = (f_1(z), f_2(z)) 
+    \]
+    where $f_1,f_2$ are the projections 
+    to coordinates $1$ and $2$ respectively. 
+
+    Prove that $f$ is continuous if and only if 
+    $f_1,f_2$ are continuous.
+\end{prob}
+\begin{proof}
+    The basis of the product topology is 
+    \[
+        \{U \times V \bigm| U \subseteq X \ 
+        \text{is open, and} \ V \subseteq Y \ \text{is open}\}.
+    \]
+
+    Suppose $f$ is continuous. Then 
+    \[
+        f_1 = \pi_1 \circ f, \ \text{and} \ 
+        f_2 = \pi_2 \circ f
+    \]
+    where $\pi_1,\pi_2$ are projections. 
+    Thus $f_1,f_2$ are compositions of continuous functions 
+    which is continuous. 
+
+    Now suppose $f_1,f_2$ are continuous. 
+
+    An open set $W \in Y$ can be written as 
+    \[
+        W = \bigcup_{\alpha} U_\alpha \times V_\alpha
+    \]
+
+    Then 
+    $f^{-1}(W)$ is the set of all $z \in Z$ 
+    such that $f_1(z) \in U_\alpha$ for at least one 
+    $\alpha$ and $f_2(z) \in V_\alpha$ for at least one 
+    alpha so 
+    \[
+        f^{-1}(W) = \bigcup_\alpha f_1^{-1}(U_\alpha) \cap f^{-1}_2(V_\alpha). 
+    \]
+    As the $f_1^{-1}(U_\alpha), f_2^{-1}(V_\alpha)$ are open 
+    in $Z$, their finite union is open in $Z$ and 
+    hence the union of $f_1^{-1}(U_\alpha), 
+    f_2^{-1}(V_\alpha)$ over $\alpha$ is 
+    open in $Z$.
+\end{proof}
+
+\begin{prob}
+    Let $\mathcal T, \mathcal T'$ be topologies on a set 
+    $X$ with $\mathcal T \subseteq \mathcal T'$, meaning 
+    $\mathcal T$ is finer than $\mathcal T'$. 
+    Considering the identity map 
+    \[
+        \operatorname{id}: X \to X
+    \]
+    we can regard it in two ways, the one 
+    where $\mathcal T'$ is carried to $\mathcal T$ 
+    or the other way. 
+    For which of these is the identity map always 
+    continuous?
+\end{prob}
+\begin{proof}
+    The map 
+    \[
+        \operatorname{id} : (X, \mathcal T') \to 
+        (X, \mathcal T)
+    \]
+    is always continuous, the other doesn't 
+    need to be. 
+
+    Let $U \in \mathcal T$ be open. Then 
+    \[
+        \operatorname{id}^{-1}(U) = U \in \mathcal T'. 
+    \]
+
+    Consider $\mathcal T = \{\emptyset, X\} \subseteq 
+    \mathcal T' = \{\emptyset, X, A\}$. 
+    Then the other identity map has 
+    \[
+        \operatorname{id}(A)^{-1} = A \not\in \mathcal T. 
+    \]
 \end{proof}
 
 \end{document}
