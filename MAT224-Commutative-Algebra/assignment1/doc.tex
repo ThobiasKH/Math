@@ -45,6 +45,127 @@ jeg dette.
         0 = N \cap M_0 \subseteq N \cap M_1 \subseteq \cdots 
         \subseteq N \cap M_n = N. 
     \]
+    Siden kjeden for $M$ utgjør en komposisjonsserie 
+    har vi at 
+    \[
+        \frac{M_i}{M_{i-1}}
+    \]
+    er simpel for alle $i \in [m] $. 
+
+    Vi vil argumentere 
+    ved å bruke isomorfi teoremet. 
+
+    La $\varphi : N \cap M_i \to \frac{M_i}{M_{i-1}}$ være 
+    \[
+        \varphi(n) = n + M_{i-1}. 
+    \]
+    Da har vi at 
+    \begin{align*}
+        \varphi(n + m) 
+        &= (n + m) + M_{i-1} \\ 
+        &= n + M_{i-1} + M_{i-1} \\ 
+        &= \varphi(n) + \varphi(m). 
+    \end{align*}
+    Deretter, for $r \in R$, 
+    \begin{align*}
+        \varphi(rn) 
+        &= (rn) + M_{i-1} \\ 
+        &= r (n + M_{i-1}), 
+    \end{align*}
+    så $\varphi$ utgjør en $R$-modul 
+    homomorfi. 
+
+    \[
+        \ker \varphi = \{x \in N \cap M_i \bigm|
+        x + M_i = 0 + M_{i-1}\}.
+    \]
+    Vi har $x + M_i = 0$ modulo $M_{i-1}$ viss og bare 
+    viss 
+    \[
+        x \in M_{i-1}
+    \]
+    så 
+    \[
+        \ker \varphi = (N\cap M_i) \cap M_{i-1} 
+        = N \cap M_{i-1}.
+    \]
+
+    $\operatorname{Im}(\varphi) \subseteq \frac{M_i}{M_{i-}}$ 
+    en undermodul, så siden $\frac{M_i}{M_{i-1}}$ er 
+    simpel er bildemengden til $\varphi$ triviell eller 
+    $\frac{M_i}{M_{i-1}}$. 
+
+    Dermed har vi at 
+    \[
+        \frac{N \cap M_i}{M_{i-1}} 
+        \cong 
+        \operatorname{Im}(\varphi) 
+        \begin{cases}
+            0, \\ 
+            M_{i}/M_{i-1}
+        \end{cases}.
+    \]
+    
+    Med dette har vi $l(N) \leq l(M)$. 
+    
+    Siden $M_n \not\subseteq N$ har vi at 
+    \[
+        \{i \in [n] \bigm| M_i \not\subseteq N\} \neq \emptyset.  
+    \]
+    For den minste $j$ i denne mengden har vi at 
+    \[
+        M_{j-1} \subseteq N 
+    \]
+    og at 
+    \[
+        M_j \not\subseteq N. 
+    \]
+    Vi sletter alle $M_j$ der dette er tilfellet og 
+    sitter fortsatt igjen med en komposisjonsserie for 
+    $N$ så $l(N) < l(M)$.
+\end{proof}
+
+\begin{proof}[Bevis av (b)]
+    Vi vil bevise at alle komposisjonsserier for 
+    $M$, altså kjeder 
+    \[
+        0 = M_0 \subsetneq M_1 \subsetneq 
+        \cdots \subsetneq M_n = M,
+    \]
+    hvor $M_i$ er $R$-moduler og 
+    \[
+        M_i/M_{i-1}
+    \]
+    er simpel,
+    har $n = l(M)$. 
+
+    For $l(M) = 1$, har vi at 
+    \[
+        M_1 / M_0 = M/0 = M
+    \]
+    med antagelsen at $M_1/M_0$ er simpel så 
+    $M$ er simpel. Dermed kan vi ikke ha en 
+    komposisjonsserie med lengde $k > 1$ siden 
+    det ville være en motsigelse om at 
+    $M$ har ingen ikke-trivielle ekte undermoduler. 
+
+    Anta at denen påstanded holder for $l(M) = n$. 
+
+    Betrakt de to komposisjonsseriene
+    \[
+        0 = M_0 < M_1 < \cdots < M_n < M_k = M
+    \]
+    og 
+    \[
+        0 = M_0 < M_1 < \cdots < M_m = M. 
+    \]
+    Se på undermodulene. Viss
+    \[
+        M_n = M_{m-1}, 
+    \]
+    ved induksjonshypotesen har vi at påstanden holder 
+    for $n$, så $n = m-1 \Rightarrow k = m$. 
+
 
 
 \end{proof}
