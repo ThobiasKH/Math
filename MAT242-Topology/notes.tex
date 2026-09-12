@@ -887,4 +887,322 @@ So the closed subsets are controlled by equations and ideals.
     \]
 \end{proof}
 
+\section{Quotient spaces and quotient topology}
+
+Quotient topology will be in spirit antithetical to 
+the product topology. The fundamental question 
+is: if we glue points of some space $X$ together, what 
+topology should the space have? 
+
+We begin by recapping what equivalence relations are. 
+
+\begin{defn}
+    Let $X$ be a set. 
+
+    An equivalence relation, 
+    on $X$ is relation $\sim$ satisfying reflexivity: 
+    \[
+        x \sim x
+    \]
+    for every $x\in X$, 
+    
+    symmetry: 
+    \[
+        x \sim y \Leftrightarrow y \sim x, 
+    \]
+    and 
+
+    transitivity: 
+    \[
+        x \sim y, \ y \sim z \Rightarrow x \sim z. 
+    \]
+
+    For $x \in X$ we denote the equivalence class 
+    \[
+        [x] = \{y \in X \bigm| y \sim x\}. 
+    \]
+\end{defn}
+
+Equivalence classes partition $X$. 
+
+The quotient set is 
+\[
+    X/\sim \ = \{[x] \bigm| x \in X\}. 
+\]
+
+There is a canonical map 
+\[
+    q : X \to X/\sim \ , \ q(x) = [x].
+\]
+This map is automatically surjective. 
+
+This is a nice construction in topology because 
+these relations give us a sort of 
+language for gluing. 
+
+Take $X = [0,1]$. Suppose we identify two endpoints 
+$0\sim 1$, while every other endpoint is 
+equivalent to only itself. Then the quotient 
+\[
+    [0,1]/\sim
+\]
+is like a circle. 
+
+Likewise starting from a square 
+\[
+    [0,1]\times [0,1]
+\]
+and identifying the left and right edges 
+appropriately gives a cylinder. 
+
+Now the natural question is what topology should be endowed 
+on this space? 
+
+Suppose $X$ is a topological space and let 
+\[
+    q : X \to Y
+\]
+be a surjection. 
+
+We want to make $Y$ a topological space. 
+
+Since $q$ tells us which points of $X$ collapse onto 
+the same point in $Y$, the natural idea is 
+a set downstairs should be open exactly when its 
+full preimage upstairs is open. 
+
+\begin{defn}[Quotient topology]
+    The quotient topology on $Y$ is 
+    \[
+        \tau_Y = \{U \subseteq Y \bigm| q^{-1}(U) \ \text{open 
+        in} \ X\}. 
+    \]
+\end{defn} 
+
+
+\begin{prop}
+    The quotient topology is indeed a topology. 
+\end{prop}
+\begin{proof}
+    First, 
+    \[
+        q^{-1}(\emptyset), \ q^{-1}(Y) = X. 
+    \]
+    Both are open in $X$. 
+
+    Let $\{U_\alpha\}_\alpha \subseteq \tau_Y$. Then 
+    \[
+        q^{-1}\left(\bigcup_\alpha U_\alpha\right) 
+        = \bigcup_\alpha q^{-1}(U_\alpha). 
+    \]
+    Each $q^{-1}(U\alpha)$ is open in $X$ so 
+    the union of these is open in $X$. 
+
+    If $U_1,\ldots,U_n \in \tau_Y$, than 
+    \[
+        q^{-1}\left(\bigcup_{i=1}^n U_i\right)
+        = \bigcap_{i=1}^n q^{-1}(U_i)
+    \]
+    which is the finite intersection of open sets in 
+    the domain and thus open. 
+\end{proof}
+
+We need the map to be surjective otherwise 
+there could be points in the codomain which 
+are never seen. 
+
+A surjective continuous map $q : X \to Y$ is called 
+a quotient map if $U \subseteq Y$ if and only if $q^{-1}(U)$
+is open in $X$. 
+
+A quotient space, on the other hand, is 
+typically a space 
+\[
+    X/\sim
+\]
+equipped with the quotient topology induced by 
+the canonical projection $q : X \to X/\sim$. 
+
+It is tempting to think that 
+\[
+    U \subseteq X \ \text{open} 
+    \Rightarrow q(U) \subseteq Y \ \text{open}.
+\]
+This is false in general.
+
+The definition works with the preimage not with the 
+image. Just like how topology in general behaves quite 
+nicely with preimages. 
+
+\begin{defn}
+    A subset $A \subseteq X$ is called saturated 
+    with respect to $q$ if it contains 
+    every fibre that it touches. 
+    Formally, 
+    \[
+            A = q^{-1}(q(A)). 
+    \]
+    In the case of an equivalence relation this means 
+    \[
+        \text{If} \ x \in A, \ \text{then every 
+        point is equivalent to} \ x \ \text{is also in} \ A.
+    \]
+\end{defn}
+
+Every set of the form $q^{-1}(A)$ is saturated. 
+
+Thus the quotient topology is really controlled by 
+open saturated subsets of $X$. 
+
+\begin{ex}
+    Let $X$ be the closed unit interval. 
+    Define $0 \sim 1$ with no other nontrivial identifications.
+
+    Then $Y = X/\sim$ has one special point 
+    \[
+        [0] = [1]. 
+    \]
+
+    Suppose $U \subseteq Y$ contains $[0]$. 
+    Its preimage must contain both $0$ and $1$. 
+    For $U$to be open in $Y$ it must be open in 
+    the subspace $[0,1]$. So it must contain 
+    something like 
+    \[
+            [0,\varepsilon) \cup (1-\varepsilon, 1].
+    \] 
+
+    After quotienting, these two pieces become 
+    one neighborhood around the glued point. 
+
+    That is exactly what neighborhoods around a point 
+    on the circle look like. 
+\end{ex}
+
+Now we arrive at the universal property. 
+
+Suppose 
+\[
+    q : X \to Y
+\]
+is a quotient map. 
+
+Let $Z$ be another topological space and 
+\[
+    f : X \to Y. 
+\]
+
+Then 
+\[
+    f \ \text{is continuous} \Leftrightarrow 
+    f \circ g \ \text{is continuous}.
+\]
+
+You can illustrate the difference between 
+this- and the product topology's universal property 
+particularly nice with diagrams in a category theory-esque 
+way, but I'm lazy. 
+
+Now we pose a natural question. 
+
+Suppose 
+\[
+    q : X \to X/\sim
+\]
+is the quotient map. 
+Imagine we have a continuous function 
+\[
+    g : X \to Z.
+\]
+
+When can it descend to a function $\overline g: X/\sim \to Z$
+such that $g = \overline g \circ q$? 
+
+Set-theoretically, this is possible exactly when 
+$g$ is constant on equivalence classes: 
+\[
+    x \sim y \Rightarrow g(x) = g(y). 
+\]
+
+If that happens, define 
+\[
+    \overline g([x]) = g(x). 
+\]
+
+Because $g$ is constant on equivalence classes, 
+this is well-defined. 
+
+Then the quotient universal property gives 
+\[
+    g = \overline g \circ q
+\]
+continuous 
+\[
+    \Rightarrow \overline g \ \text{continuous}. 
+\]
+
+So quotient spaces let you convert functions on $X$ 
+that respect the identification into functions 
+on the glued space. 
+
+This is perhaps the most useful operational idea: 
+
+\begin{align*}
+    \text{If a continuous map cannot distinguish points 
+    you glue together,} \\  
+    \text{it descends continuously 
+    to the quotient}. 
+\end{align*}
+
+\begin{prob}
+    Let $X = [0,1]$ and define $0 \sim 1$ with 
+    all other equivalence classes singletons. 
+    Let 
+    \[
+        q : X \to X/\sim
+    \]
+    be the quotient map. 
+    Consider 
+    \[
+        A = q([0,1/4) \cup (3/4,1]). 
+    \]
+    Try to determine whether $A$ is open 
+    in the quotient space. 
+\end{prob}
+
+\begin{proof}[Sol.]
+    Let $B = [0,1/4) \cup (3/4, 1]$. The forward inclusion 
+    \[
+        B \subseteq q^{-1}(q(B)) 
+    \]
+    is always true. Indeed, if $x \in B$ then $q(x) \in q(B)$ 
+    so 
+    \[
+        x \in q^{-1}(q(B)).
+    \]
+
+    For the reverse, suppose $x \in q^{-1}(q(B))$. 
+    Then 
+    \[
+        q(x) \in q(B), 
+    \]
+    so there exists $b \in B$ such that 
+    \[
+        q(x) = q(b). 
+    \]
+    But $q(x) = q(b)$ means that 
+    \[
+        x \sim b. 
+    \]
+    The only nontrivial class is $\{0,1\}$. 
+    Since $B$contains both $0,1$ whenever 
+    $b \in B$ every point is equivalent to $b$ in $B$ 
+    so $x \in B$. 
+    
+    The two inclusions
+    mean that $B$ is staurated under the equivalence 
+    relation. Hence $A$ is open in the 
+    quotient space. 
+\end{proof}
+
 \end{document}
