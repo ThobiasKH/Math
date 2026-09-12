@@ -169,6 +169,106 @@ jeg dette.
 
 
 \end{proof}
+\begin{proof}[Bevis av (c)]
+    Vi vil bevis at viss vi har en vilkårlig kjede 
+    \[
+        0 = M_0 \subsetneq M_1 \subsetneq \cdots 
+        \subsetneq M_n = M 
+    \]
+    så kan vi rafinere dette til en komposisjons serie 
+    for $M$, altså at 
+    \[
+        M_i/M_{i-1}
+    \]
+    er simpel. 
+
+    Viss vi har at 
+    \[
+        M_i/M_{i-1}
+    \]
+    ikke er simpel, må det finnes en 
+    maksimal undermodul $N$ 
+    \[
+        M_{i-1} \subsetneq N \subsetneq M_i 
+    \]
+    siden $M_i$ ikke er simpel. 
+    Vi kan gjøre dette for alle $i$ hvor $M_i/M_{i-1}$
+    ikke er simpel. Det som gjennstår er at 
+    vi må vise at gjenntatte applikasjoner av denne prosedyren 
+    på den nye kjeden vi får må til slutt stoppe. 
+    Ved hver $M_i$ har vi at $M_i$ har endelig lengde 
+    $\ell(M_i)$ og at 
+    \[
+        \ell(M_{i-1}) < \ell(M_i) 
+    \]
+    og 
+    \[
+        \ell(M_i) \leq \ell(M) \neq \infty 
+    \]
+    så hver $M_i$ kan ikke ha mer enn $\ell(M)$ 
+    ekte undermoduler så prosedyren vil produsere 
+    en endelig kjede hvor kvotienten av $M_i$ med $M_{i-1}$
+    er simpel. 
+\end{proof}
+
+\begin{prob*}[2]
+    \medskip 
+    \   
+    
+    \begin{enumerate}[label=\alph*)]
+        \item Find a composition series for 
+            $\mathbb Z_{60}$. 
+        \item Let $k$ be a field, and find a composition 
+        series for the $k[x,y]$-module $M = k[x,y]/(x^2,xy,y^3)$.
+        \item For $M = \mathbb Z_{126}$, give two distinct 
+        series 
+        \[
+            (0) = M_0 \subsetneq M_1 \subsetneq M_2 \subsetneq M_3 = M
+        \] 
+        and show how each of them may be extended to a composition series.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Løsning til (a)]
+    En maksimal undermodule for $\mathbb Z_{60}$ er 
+    \[
+        \langle \overline 2 \rangle \cong \mathbb Z_{30}. 
+    \]
+    Deretter er $\mathbb Z_{15} \cong 
+    \langle \overline 4 \rangle$ en maksimal undermodul 
+    av $\mathbb Z_{30}$. Deretter har vi $\mathbb Z_5 < 
+    \mathbb Z_{15}$ som har kun den trivielle undermodulen 
+    $0$. 
+    Vi får da en komposisjonsserie der hvert ledd 
+    er lik, eller isomorf til 
+    \[
+        0 < \mathbb Z_5 < \mathbb Z_{15} < \mathbb Z_{30}
+        < \mathbb Z_{60}.
+    \]
+    Den faktiske serien blir da 
+    \[
+        0 < \langle \overline{12} \rangle 
+        < \langle \overline 4 \rangle 
+        < \langle \overline 2 \rangle 
+        < \mathbb Z_{60}. 
+    \]
+\end{proof}
+
+\begin{proof}[Løsning for (b)]
+    Som et $k$-vektorrom har vi 
+    \[
+        \frac{k[x,y]}{(x^2, xy, y^3)} 
+        = \operatorname{span}_k\{\overline 1, \overline x, 
+        \overline y, \overline{y^2}\}
+    \]
+    så lengden (dimensjonen i konteksten av vektorrom) 
+    er $4$. 
+
+    $k \overline{y^2}$er en undermodul siden 
+    $x\overline{y^2} = \overline{y(xy)} = 0$,
+    og $y\overline{y^2} = \overline{y^3} = 0$. 
+
+    *IKKE FERDIG*
+\end{proof}
 
 
 \end{document}

@@ -3047,4 +3047,131 @@ Let $R = K[x,y]$.
     \]
 \end{proof}
 
+\begin{prob}
+    Let $M = \mathbb Z/36\mathbb Z$ as a 
+    $\mathbb Z$-module and let 
+    $$
+        N = \langle \overline 6 \rangle \leq M. 
+    $$
+    Determine $N$ then identify it up to isomorphism. 
+
+    Find $\ell (N), \ \ell(M/N), \ \ell(M)$. 
+
+    Finally check that 
+    $$
+        \ell(M) = \ell(N) + \ell(M/N).
+    $$
+\end{prob}
+\begin{proof}
+    Firstly we have 
+    \[
+        N = \langle \overline 6\rangle 
+        = \{\overline 0, \overline 6, 
+        \overline{12}, \ldots, \overline{30}\}, 
+    \] 
+    as this is an abelian group, we can use the 
+    classification theorem for finitely generated abelian 
+    groups to get 
+    \[
+        N \cong \mathbb Z_2 \times \mathbb Z_3 
+        \cong \mathbb Z_6. 
+    \]
+    Now we want to find a maximal submodule of $M$. 
+    Clearly 
+    \[
+        \langle \overline 2\rangle 
+        = \{\overline 0, \overline 2, \ldots, 
+        \overline{34}\}
+    \]
+    is such a submodule and it is isomorphic to 
+    $\mathbb Z_{18}$ since it is a cyclic 
+    abelian group of order $18$. 
+
+    Lastly if we take $\langle \overline{18}\rangle$ we get 
+    a composition chain 
+    \[
+        0 < \langle \overline{18} \rangle < 
+        N < \langle \overline 2 \rangle < M. 
+    \]
+    So $\ell(M) = 4$. 
+    Now 
+    \[
+        M/N = \frac{\mathbb Z/36\mathbb Z}{\mathbb Z_6}
+        \cong \mathbb Z_6
+    \]
+    so $M/N \cong N$.  
+    
+    $\ell(M/N) = \ell(N) = 2$ since 
+    \[
+        0 < \langle \overline 3 \rangle < \langle \overline 
+        2 \rangle < N = M/N
+    \]
+    is a valid chain. 
+
+    Then $4 = \ell(M) = \ell(M/N) + \ell(N) = 2 + 2$ is 
+    satisfied. 
+\end{proof}
+
+\begin{prob}
+    Let $M$ be an $R$-module of finite length, and 
+    let     
+    \[
+        f : M \to M 
+    \]
+    be an $R$-module homomorphism (endomorphism). 
+
+    Prove that 
+    $f$ is injective if and only if 
+    $f$ is surjective. 
+
+    You may use 
+    \[
+        M/\ker f \cong \im f 
+    \]
+    but no assumptions about exact sequences. 
+\end{prob}
+\begin{proof}
+    $M$ has finite length so we can 
+    find some composition series 
+    \[
+        0 = M_0 < M_1 < \cdots < M_n = M. 
+    \]
+    We are given that 
+    \[
+        M/\ker f \cong \im f. 
+    \]
+    
+    Suppose $f$ is injective. Then $\ker f = \{0\}$. 
+    Since 
+    \[
+        M/\ker f \cong \im f 
+    \]
+    we have 
+    \[
+        M = M/\ker f \cong \im f  
+    \]
+    and conversely $M = \im f$ would imply 
+    \[
+        M/\ker f \cong M, 
+    \]
+    but isomorphism doesn't necessarily imply equality.
+    
+    Suppose first $f$ is injective. Then 
+    $\ker f = 0$ so 
+    \[
+        \ell(M) = \ell(0) + \ell(\im f) = \ell(\im f). 
+    \]
+    But $\im f \leq M.$ If $f$ were a proper submodule 
+    it would have strictly less length. 
+    Since their length are equal we have $\im f = M$. 
+    So $f$ is surjective. 
+    
+    Conversely, suppose $f$ is surjective. Then 
+    $\im f = M$ so we get 
+    \[
+        \ell(M) = \ell(\ker f) + \ell(M) 
+    \]
+    so $\ker f$ has length $0$, hence $\ker f = 0$. 
+\end{proof}
+
 \end{document}
