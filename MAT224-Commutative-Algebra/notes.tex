@@ -1,7 +1,10 @@
 \input{preamble.tex}
 
+\usepackage{tikz-cd}
+
 \DeclareMathOperator{\Char}{char}
 \DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
 
 
 \title{\huge{MAT224 - Commutative Algebra}}
@@ -3173,5 +3176,393 @@ Let $R = K[x,y]$.
     \]
     so $\ker f$ has length $0$, hence $\ker f = 0$. 
 \end{proof}
+
+\newpage 
+
+\section{Exact sequences}
+
+An exact sequence records, in one line, how 
+kernels, images, submodules, quotients, injections, 
+and surjections fit together. 
+
+Gathmann introduces exact sequences as a 
+unified graphical language for module constructions 
+that would otherwise require a lot of repetitive 
+prose. 
+
+\begin{defn}
+    Suppose we have $R$-modules and 
+    $R$-module homomorphisms 
+    \[
+        M_1 \overset{\phi_1}{\to} M_2 
+        \overset{\phi_2}{\to} M_3. 
+    \]
+    We say that the sequence is exact at $M_2$ 
+    if 
+    \[
+        \im \phi_1 = \ker \phi_2. 
+    \] 
+    A longer sequence 
+    \[
+        M_1 \to M_2 \to \cdots \to M_n
+    \]
+    is exact if this equality holds at every 
+    interior module. 
+\end{defn}
+
+So if 
+\[
+    A \overset{f}{\to} B \overset{g}{\to} C
+\]
+is exact at $B$, then 
+\[
+    \im f = \ker g. 
+\]
+
+In particular, 
+\[
+    g(f(a)) = 0
+\]
+for every $a \in A$, because 
+\[
+    \im f \subseteq \ker g. 
+\]
+But exactness says something stronger than 
+merely $g \circ f = 0$. It says every element killed 
+by $g$ must have come from $A$. 
+
+\subsection{Exactness and the zero module}
+
+The zero module $0$ is very useful in exact sequences 
+as there is only one homomorphism to or from it. 
+
+Consider 
+\[
+    0 \to M \overset{\varphi}{\to} N. 
+\]
+Exactness at $M$ says 
+\[
+    \im(0 \to M) = \ker \varphi. 
+\]
+But 
+\[
+    \im(0 \to M) = 0. 
+\]
+Therefore 
+\[
+    \ker \varphi = 0. 
+\]
+So $\varphi$ is injective. 
+
+Thus 
+\[
+    0 \to M \overset{\varphi}{\to} N 
+\]
+is exact if and only if 
+$\varphi$ is injective. 
+
+Similarly, 
+\[
+    M \overset{\varphi}{\to} N \to 0
+\]
+is exact if and only if $\im \varphi = N$ 
+which is that $\varphi$ is surjective. 
+
+Thus exactness of  
+\[
+    0 \to M \overset{\varphi}{\to} N \to 0
+\]
+holds if and only if $\varphi$ is an isomorphism. 
+
+\subsection{Short exact sequences}
+
+The most important exact sequences are the 
+short exact sequences 
+\[
+    0 \to M \overset{\varphi}{\to} N 
+    \overset{\psi}{\to} P \to 0. 
+\]
+Exactness tells us three things: 
+\begin{align*}
+    \varphi \ \text{is injective}, \\ 
+    \im \varphi = \ker \psi, 
+\end{align*}
+and 
+\[
+    \psi \ \text{is surjective}. 
+\]
+
+This has a rather nice interpretation. 
+
+Because $\varphi$ is injective, we know 
+\[
+    M \subseteq N. 
+\]
+Because 
+\[
+    \ker \psi = \im \varphi \cong M, 
+\]
+the map $\psi$ kills exactly the copy of $M$ inside 
+$N$. 
+
+And because $\psi$ is surjective, 
+\[
+    P \cong N / \ker \psi. 
+\]
+Therefore 
+\[
+    P \cong N/M. 
+\]
+So conceptually, a short exact sequence 
+\[
+    0 \to M \to N \to P \to 0
+\]
+means $N$ contains a copy of $M$, and after 
+quotienting $N$ by that copy, what remains is $P$. 
+
+\subsection{The canonical short exact sequence}
+
+Suppose $N \leq M$ is a submodule. 
+
+Then there is always a short exact sequence 
+\[
+    0 \to N \overset{\iota}{\to} M 
+    \overset{\pi}{\to} M/N \to 0. 
+\]
+
+Here $\iota(n) = n$ 
+is the inclusin map and 
+\[
+    \pi(m) = m+N
+\]
+is the quotient map. 
+
+The inclusion is injective, the quotient map 
+is surjective and 
+\[
+    \ker \pi = N. 
+\]
+
+Since $\im(\iota) = N$ we have 
+\[
+    \im \iota = \ker \pi. 
+\]
+
+\subsection{A homomorphism produces 
+exact sequences}
+
+Take any module homomorphism $\varphi : M \to N$. 
+We always have 
+\[
+    0 \to \ker \varphi \to M \overset{\varphi}{\to} 
+    \im \varphi \to 0. 
+\]
+And also 
+\[
+    0 \to \im \varphi \to N \to N/\im \varphi \to 0. 
+\]
+Gluing them gives 
+\[
+    0 \to \ker \varphi \to M \overset{\varphi}{\to}
+    N \to N/\im\varphi \to 0. 
+\]
+
+The last module 
+\[
+    N/\im \varphi
+\]
+is called the cokernel of $\varphi$: 
+\[
+    \operatorname{coker} \varphi := N/\im \varphi. 
+\]
+
+So another very useful way to package a map is 
+\[
+    0 \to \ker \varphi \to 
+    M \overset{\varphi}{\to} N \to \operatorname{coker} 
+    \to 0. 
+\]
+This tells us that the map has two kinds of failure. 
+
+$\ker \varphi$ measures failure of injectivity, while 
+$\operatorname{coker}\varphi$ measures failure of surjectivity.
+
+\subsection{Splitting and gluing exact sequences}
+
+
+Suppose 
+\[
+    M_1 \overset{\varphi_1}\to M_2 
+    \overset{\varphi_2}\to M_3 
+    \overset{\varphi_3}\to M_4
+\]
+is exact. 
+
+Then at $M_3$, 
+\[
+    \im \varphi_2 = \ker \varphi_3.
+\] 
+
+Let $N := \im \varphi_2 = \ker \varphi_3$. 
+
+Then we can split the sequence into 
+\[
+    M_1 \to M_2 \to N \to 0 
+\]
+and 
+\[
+    0 \to N \to M_3 \to M_4. 
+\]
+
+Conversely, those pieces can be glued back together. 
+
+\subsection{Exactness and length}
+
+If 
+\[
+    0 \to M \to N \to P \to 0 
+\]
+is exact and all modules have finite length, 
+then 
+\[
+    \ell(N) = \ell(M) + \ell(P). 
+\]
+
+For a longer exact sequence 
+\[
+    0 \to M_1 \to M_2 \to \cdots \to M_n \to 0, 
+\]
+Gathmann derives the alternating-sum formula 
+\[
+    \sum_{i=1}^n (-1)^i\ell(M_i) = 0. 
+\]
+
+\subsection{Can the middle module be determined}
+
+Suppose 
+\[
+    0 \to M \to N \to P \to 0. 
+\]
+
+A tempting guess is 
+\[
+    N \overset{\text{?}}{\cong} M \oplus P. 
+\]
+This is sadly not always true. 
+
+There is ceirtanly always the obvious 
+example 
+\[
+    0 \to M \to M \oplus P \to P \to 0, 
+\]
+where the first map is the inclusion 
+$m \mapsto (m,0)$ and the second
+is the projection $(m,p) \mapsto p$. 
+
+Gathmann produces a counter-example to 
+this idea. 
+
+\subsection{Split exact sequences}
+
+A short exact sequence 
+\[
+    0 \to M \overset{\varphi}\to N \overset{\psi}\to P 
+    \to 0 
+\]
+is called split exact when 
+\[
+    N \cong M \oplus P
+\]
+in a way compatible witht the maps. 
+
+Gathmann's Splitting Lemma says the 
+following conditions 
+are equivalent: 
+\[
+    N \cong M \oplus P,
+\]
+$\varphi$ has a left inverse 
+\[
+    \alpha : N \to M, \ \alpha \circ \varphi = \operatorname{id}_M,
+\]
+or $\psi$ has a right inverse 
+\[
+    \beta: P \to N, \ \psi \circ \beta = \operatorname{id}_P. 
+\]
+ 
+The map $\beta : P \to N$ is often called a section. 
+
+It means that we can choose, in a homomorphic way, 
+one representative in $N$ for every element of $P$. 
+
+Then $N$ decomposes into 
+the kernel part of $M$ plus a copy of $P$.  
+
+For vector spaces, an exact sequence 
+always splits. 
+
+\subsection{Commutative diagrams}
+
+\begin{defn}
+    A commutative diagram is a diagram of modules 
+    and maps in which every path from 
+    one objects to another gives the same map. 
+\end{defn}
+
+For example, 
+\[
+\begin{tikzcd}
+A \arrow[r, "f"] \arrow[d, "g"'] & B \arrow[d, "h"] \\
+C \arrow[r, "k"']                 & D
+\end{tikzcd}
+\]
+is commutative when 
+\[
+    h \circ f = k \circ g. 
+\]
+
+Suppose we have two exact rows and vertical 
+homomorphisms 
+
+\[
+\begin{tikzcd}
+M \arrow[r, ""] \arrow[d, "\alpha"] & N \arrow[d, "\beta"] 
+\arrow[r, ""] & P \arrow[d, "\gamma"] \arrow[r,""] & 0 \\
+0 \arrow[r, ""] & M' \arrow[r, ""] & N' \arrow[r, ""] 
+& P' 
+\end{tikzcd}
+\]
+with the squares commutative. 
+
+The Snake Lemma manufactures a new exact sequence 
+involving the kernels and cokernels of the 
+vertical maps: 
+\[
+    \ker \alpha \to \ker \beta 
+    \to \ker \gamma \overset{\delta}\to M'/\im\alpha 
+    \to N'/\im\beta \to P'\im\gamma. 
+\]
+
+In the notation introduced earlier we write 
+\[
+    \ker \alpha \to \ker \beta \to \ker \gamma 
+    \overset{\delta}\to \coker \alpha 
+    \to \coker \beta \to \coker \gamma. 
+\]
+The map $\delta : \ker \gamma \to \coker \alpha$ is 
+called the connecting homomorphism. 
+
+Conceptually, if you have 
+two exact rows linked by vertical maps, 
+the Snake Lemma relates the failures of those 
+vertical maps to be injective and surjective. 
+
+Kernels measure failure of injectivity, cokernels 
+measure the failure of surjectivity. The Snake Lemma 
+ties them nicely together. 
+
+Gathmann constructs $\gamma$ by doing a diagram
+chase: life an element backwards through one map, 
+move vertically and life backwards again. 
 
 \end{document}
