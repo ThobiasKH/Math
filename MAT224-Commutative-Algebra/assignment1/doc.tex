@@ -75,10 +75,6 @@ jeg dette.
     så $\varphi$ utgjør en $R$-modul 
     homomorfi. 
 
-    \[
-        \ker \varphi = \{x \in N \cap M_i \bigm|
-        x + M_i = 0 + M_{i-1}\}.
-    \]
     Vi har $x + M_i = 0$ modulo $M_{i-1}$ viss og bare 
     viss 
     \[
@@ -126,48 +122,126 @@ jeg dette.
 \end{proof}
 
 \begin{proof}[Bevis av (b)]
-    Vi vil bevise at alle komposisjonsserier for 
-    $M$, altså kjeder 
-    \[
-        0 = M_0 \subsetneq M_1 \subsetneq 
-        \cdots \subsetneq M_n = M,
-    \]
-    hvor $M_i$ er $R$-moduler og 
-    \[
-        M_i/M_{i-1}
-    \]
-    er simpel,
-    har $n = l(M)$. 
+    Vi vil bevise ved induksjon på $l(M)$ at alle 
+    komposisjonsserier for $M$ har samme lengde.
 
-    For $l(M) = 1$, har vi at 
+    Hvis $l(M)=0$, så er $M=0$, og påstanden er triviell.
+
+    Anta nå at påstanden holder for alle moduler med lengde 
+    mindre enn $l(M)$.
+
+    La
     \[
-        M_1 / M_0 = M/0 = M
+        0=M_0\subsetneq M_1\subsetneq\cdots
+        \subsetneq M_{n-1}\subsetneq M_n=M
     \]
-    med antagelsen at $M_1/M_0$ er simpel så 
-    $M$ er simpel. Dermed kan vi ikke ha en 
-    komposisjonsserie med lengde $k > 1$ siden 
-    det ville være en motsigelse om at 
-    $M$ har ingen ikke-trivielle ekte undermoduler. 
-
-    Anta at denen påstanded holder for $l(M) = n$. 
-
-    Betrakt de to komposisjonsseriene
+    og
     \[
-        0 = M_0 < M_1 < \cdots < M_n < M_k = M
+        0=N_0\subsetneq N_1\subsetneq\cdots
+        \subsetneq N_{m-1}\subsetneq N_m=M
     \]
-    og 
+    være to komposisjonsserier for $M$.
+
+    Siden
     \[
-        0 = M_0 < M_1 < \cdots < M_m = M. 
+        M/M_{n-1}
+        \qquad\text{og}\qquad
+        M/N_{m-1}
     \]
-    Se på undermodulene. Viss
+    er simple, er $M_{n-1}$ og $N_{m-1}$ maksimale
+    undermoduler av $M$.
+
+    Hvis
     \[
-        M_n = M_{m-1}, 
+        M_{n-1}=N_{m-1},
     \]
-    ved induksjonshypotesen har vi at påstanden holder 
-    for $n$, så $n = m-1 \Rightarrow k = m$. 
+    så er de to trunkerte seriene
+    \[
+        0\subsetneq M_1\subsetneq\cdots\subsetneq M_{n-1}
+    \]
+    og
+    \[
+        0\subsetneq N_1\subsetneq\cdots\subsetneq N_{m-1}
+    \]
+    komposisjonsserier for samme modul $M_{n-1}$.
+    Siden
+    \[
+        l(M_{n-1})<l(M),
+    \]
+    gir induksjonshypotesen at
+    \[
+        n-1=m-1,
+    \]
+    og dermed $n=m$.
 
+    Anta derfor at
+    \[
+        M_{n-1}\neq N_{m-1}.
+    \]
+    Siden $M_{n-1}$ er maksimal og
+    $N_{m-1}\not\subseteq M_{n-1}$, får vi
+    \[
+        M_{n-1}+N_{m-1}=M.
+    \]
 
+    Sett
+    \[
+        K=M_{n-1}\cap N_{m-1}.
+    \]
+    Ved andre isomorfiteorem har vi
+    \[
+        \frac{M_{n-1}}{K}
+        \cong
+        \frac{M_{n-1}+N_{m-1}}{N_{m-1}}
+        =
+        \frac{M}{N_{m-1}},
+    \]
+    og tilsvarende
+    \[
+        \frac{N_{m-1}}{K}
+        \cong
+        \frac{M}{M_{n-1}}.
+    \]
+    Begge kvotientene er simple.
 
+    Siden $K$ er en ekte undermodul av $M$, har vi
+    \[
+        l(K)<l(M).
+    \]
+    La
+    \[
+        0=K_0\subsetneq K_1\subsetneq\cdots
+        \subsetneq K_r=K
+    \]
+    være en komposisjonsserie for $K$.
+
+    Siden $M_{n-1}/K$ er simpel, får vi en
+    komposisjonsserie
+    \[
+        0=K_0\subsetneq\cdots\subsetneq K_r=K
+        \subsetneq M_{n-1}
+    \]
+    for $M_{n-1}$.
+    Ved induksjonshypotesen må denne ha samme lengde som
+    \[
+        0=M_0\subsetneq\cdots\subsetneq M_{n-1}.
+    \]
+    Dermed
+    \[
+        n-1=r+1.
+    \]
+
+    På samme måte får vi
+    \[
+        m-1=r+1.
+    \]
+    Følgelig
+    \[
+        n=m.
+    \]
+
+    Dermed har alle komposisjonsserier for $M$ samme lengde,
+    nemlig $l(M)$.
 \end{proof}
 \begin{proof}[Bevis av (c)]
     Vi vil bevis at viss vi har en vilkårlig kjede 
@@ -267,7 +341,161 @@ jeg dette.
     $x\overline{y^2} = \overline{y(xy)} = 0$,
     og $y\overline{y^2} = \overline{y^3} = 0$. 
 
-    *IKKE FERDIG*
+    Vi fortsetter deretter med $k\bar y + k\overline{y^2}$. 
+    Der har vi $x\bar y = \overline{xy} = 0$, 
+    $y\bar y = \overline{y^2} = 0$, 
+    $x\overline{y^2} = 0$, $y\overline{y^2} = 0$. 
+
+    Til slutt har vi modulen 
+    $k\bar x + k\bar y + k \overline{y^2}$. 
+
+    \[
+        0
+        <
+        M_1 := k\overline{y^2}
+        <
+        M_2 := k\bar y+k\overline{y^2}
+        <
+        M_3 := k\bar x+k\bar y+k\overline{y^2}
+        <
+        M.
+    \]
+
+    Vi har $M_1/0$ generert av $\overline{y^2}$, 
+    $M_2/M_1$ generert av $\bar y$, $M_3/M_2$ generert av 
+    $\bar x$ og $M/M_3$ generert av $1$, så 
+    dette er en komposisjonsserie. 
+\end{proof}
+
+\begin{proof}[Løsning til (c)]
+    Vi har $\langle \overline 2 \rangle \cong 
+    \mathbb Z_{63}< \mathbb Z_{126}$ 
+    og $\langle \overline 3 \rangle \cong 
+    \mathbb Z_{42} < \mathbb Z_{126}$ er maksimale undermoduler. 
+
+        Deretter har vi $\langle \overline 6 \rangle 
+        \cong \mathbb Z_{21} < \langle \overline 2 \rangle$ 
+        er maksimal og 
+        $\langle \overline 6 \rangle \cong 
+        \mathbb Z_{21} < \langle \overline 3 
+        \rangle $ 
+        er maksimal. 
+
+        Så vi får de to kjedene 
+        \[
+            0 \subsetneq \langle \overline 6 \rangle 
+            \subsetneq \langle \overline 2 \rangle 
+            \subsetneq \mathbb Z_{126},
+        \]
+        og 
+        \[
+            0 \subsetneq \langle \overline 6 \rangle 
+            \subsetneq \langle \overline 3 \rangle 
+            \subsetneq \mathbb Z_{126}.
+        \]
+        $\langle \overline 6 \rangle / 0 = \langle \overline 6 
+        \rangle \cong \mathbb Z_{21}$ er ikke simpel.  
+
+        En maksimal undermodul av den er $\langle \overline{18} 
+        \rangle \cong \mathbb Z_{7}$ som er simpel. 
+
+        Så de to kjedene kan rafineres 
+        til komposisjonsserier 
+        begge med lengde $4$. 
+\end{proof}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{./macaulay-printout.png}
+    \caption{Problem 3.1 \& 3.2}
+    \label{fig:macaulay}
+\end{figure}
+
+\newpage 
+
+\begin{proof}[Løsning (a,b,c)]
+    Vi har $I = (x-yz, xz-y^2)$. 
+    For å finne $V(I)$ trenger vi alle 
+    \[
+        (x,y,z) \in k^3
+    \]
+    hvor $x-yz = 0$ og $xz-y^2 = 0$. 
+
+    Fra første ligning: 
+    \[
+        x=yz. 
+    \]
+    Dette lar oss fjerne $x$. Substituter inn 
+    i denne andre ligningen: 
+    \[
+        xz - y^2 = 0.
+    \]
+    Siden $x = yz$, 
+    \[
+        (yz)z - y^2 = 0,
+    \]
+    så 
+    \[
+        y(z^2 - y) = 0. 
+    \]
+    $k$ er en kropp så $y = 0$ eller $z^2 = y$. 
+
+    Case 1: 
+
+    Siden 
+    \[
+        x = yz, 
+    \]
+    har vi 
+    \[
+        x = 0. 
+    \]
+    Men $z$ kan være hva som helst. 
+    Dermed får vi hele linjen: 
+    \[
+        (0,0,t), \ t \in k. 
+    \]
+
+    Case 2: 
+
+    Viss $y = z^2$, 
+    har vi (siden $x=yz$) 
+    \[
+        x = z^3. 
+    \]
+    Så vi får en parameterisert kurve 
+    \[
+        (t^3, t^2, t), \ t \in k. 
+    \]
+    Sammen: 
+    \[
+        V(I) = \{(0,0,t) \bigm| t \in k\} 
+        \cup \{(t^3,t^2,t) \bigm| t \in k\}. 
+    \]
+
+    Nå ser vi på $V(J)$. 
+    \[
+        J=(x-yz,\;xz-y^2,\;y-z^2).
+    \]
+    Igjen, $x = yz$ og vi vet 
+    $y = z^2$. 
+    Dermed har vi 
+    \[
+        x = yz = z^3. 
+    \]
+    Så alle punkt har formen 
+    \[
+        (x,y,z) = (t^3,t^2,t). 
+    \]
+    $xz-y^2 = 0$ er da automatisk tilfredsstilt siden 
+    \[
+        xz - y^2 = (t^3)t - (t^2)^2 = t^4 - t^4 = 0. 
+    \]
+
+    Ligningen i idealet som ikke var prim 
+    splitter til to uavhengige muligheter, mens 
+    for $J$ er det en enkelt parameterisert kurve som 
+    tilfredsstiller ligningene vi får av $J$. 
 \end{proof}
 
 
