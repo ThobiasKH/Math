@@ -1,0 +1,98 @@
+\input{preamble.tex}
+
+\title{\huge{Hand in}}
+\author{\LARGE{Thobias Høivik}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+\begin{prob*}[1]
+    Let $X = [-1,1] \times \{-1,+1\} \subseteq \mathbb R^2$ have 
+    the usual metric topology and define a relation 
+    $\sim$ on $X$ saying that $(a,-1) \sim (a,1)$ for all 
+    $a \in [-1,0) \cup (0,1]$. Let $Y = X /\sim$ have 
+    the quotient topology 
+
+    \begin{itemize}
+        \item Check that $\sim$ is an equivalence relation 
+        \item Is $Y$ Hausdorff? 
+        \item Does $Y$ have a countable basis for its 
+            topology? 
+        \item Check up the definition of connectedness in 
+            section 23: is $Y$ connected? 
+        \item Check up the definition of compact in section 
+            $26$: is $Y$ compact? 
+    \end{itemize}
+\end{prob*}
+
+
+\begin{proof}[Solution and proof of all]
+    Let
+    \[
+        q:X\longrightarrow Y=X/{\sim}
+    \]
+    denote the quotient map. It is useful to write
+    \[
+        0_-:=q(0,-1),\qquad 0_+:=q(0,1),
+    \]
+    and, for $a\neq 0$,
+    \[
+        \overline a:=q(a,-1)=q(a,1).
+    \]
+    Thus, intuitively, $Y$ is the interval $[-1,1]$ where every
+    point except $0$ has been identified between the two copies, while
+    the origin occurs twice.
+
+    \medskip
+
+    \textbf{The relation $\sim$ is an equivalence relation.}
+
+    More explicitly, for $(a,s),(b,t)\in X$, we may write
+    \[
+        (a,s)\sim(b,t)
+        \quad\Longleftrightarrow\quad
+        a=b\text{ and either }s=t\text{ or }a\neq 0.
+    \]
+
+    We check the three conditions.
+
+    \begin{itemize}
+        \item \emph{Reflexivity:}
+        For every $(a,s)\in X$, clearly
+        \[
+            (a,s)\sim(a,s).
+        \]
+
+        \item \emph{Symmetry:}
+        If $(a,s)\sim(b,t)$, then $a=b$. If $s=t$, symmetry is
+        immediate. Otherwise $a=b\neq0$, and by the definition of the
+        relation we also have
+        \[
+            (b,t)\sim(a,s).
+        \]
+
+        \item \emph{Transitivity:}
+        Suppose
+        \[
+            (a,s)\sim(b,t)
+            \qquad\text{and}\qquad
+            (b,t)\sim(c,u).
+        \]
+        Then necessarily $a=b=c$. If this common value is nonzero,
+        the two copies are identified, so
+        \[
+            (a,s)\sim(c,u).
+        \]
+        If the common value is $0$, the only equivalences at $0$ are
+        the reflexive ones. Hence $s=t=u$, and again
+        \[
+            (a,s)\sim(c,u).
+        \]
+    \end{itemize}
+
+    Therefore $\sim$ is an equivalence relation.
+\end{proof}
+
+\end{document}
