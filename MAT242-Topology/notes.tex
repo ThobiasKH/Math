@@ -1205,4 +1205,149 @@ This is perhaps the most useful operational idea:
     quotient space. 
 \end{proof}
 
+\begin{prob}
+    \medskip 
+    \ 
+
+    \begin{enumerate}[label=\alph*)]
+        \item Let $p : X \to Y$ be a continuous map. 
+            Show that if there is a continuous map 
+            $f : Y \to X$ such that $p \circ f$ equals
+            the identity map of $Y$, then $p$ is a quotient map. 
+        \item If $A \subset X$, a retraction of 
+            $X$ onto $A$ is a continuous map $r : X \to A$
+            such that $r(a) = a$ for each $a \in A$. Show 
+            that a retraction is a quotient map. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Recall that a quotient map $g : X \to Y$ is a 
+    surjection such that $U \subseteq Y$ 
+    is open if and only if $f^{-1}(U)$ is open. 
+
+    Condition two is partially satisfied 
+    by $p$ since, by assumption, 
+    $p^{-1}(U)$ is open when $U \subseteq Y$ is open. 
+
+    Suppose $p$ is not a surjection. 
+    Then there are $y \in Y$ such that, 
+    for every $x \in X$, 
+    \[
+        p(x) \neq y. 
+    \]
+    Then, $p \circ f \neq \operatorname{id}_Y$. 
+    $\operatorname{im} f \subseteq X$ so there is 
+    no $x \in \operatorname{im} f$ so that
+    \[
+        p(x) = y. 
+    \]
+    In particular, 
+    $f(y) \in \operatorname{im} f \subseteq X$ so 
+    $f(y) \neq y$. 
+
+    Thus we require that $p$ is a surjection. 
+
+    Now it remains to show that $p$ carries 
+    open sets to open sets. 
+    Suppose $V \subseteq X$ is open. 
+    Then since $f$ is continuous, 
+    $f^{-1}(V) \subseteq Y$ is open. 
+
+    We have that 
+    \[
+        p\circ f(f^{-1}(V)) = f^{-1}(V)
+    \]
+    so 
+    \[
+        p(V) = f^{-1}(V). 
+    \]
+    Thus $p$ carries open sets to open sets. 
+
+    Summing up, we have that $p$ is 
+    a quotient map. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+
+Let $r: X \to A$ be a retraction, and let
+\[
+    i\hookrightarrow X
+\]
+denote the inclusion map, defined by $i(a)=a$.
+
+Since $A$ has the subspace topology, $i$ is continuous. Moreover, since $r$ is a retraction,
+\[
+    (r\circ i)(a)=r(a)=a
+\]
+for every $a\in A$. Hence
+\[
+    r\circ i=\operatorname{id}_A.
+\]
+
+Thus $r$ has a continuous right inverse. By part $a$, $r$ is a quotient map.
+\end{proof}
+
+\begin{prob}
+    \medskip 
+    \ 
+    \begin{enumerate}[label=\alph*)]
+        \item Define an equivalence relation on the plane 
+            $X = \mathbb R^2$ as follows: 
+            \[
+                x_0 \times y_0 \sim x_1 \times y_1 \ \text{if} \ 
+                x_0 + y_0^2 = x_1 + y_1^2. 
+            \]
+            Let $X^*$ be the corresponding quotient space. It is homeomorphic 
+            to a familiar space; what is it? 
+        \item Repeat for the equivalence relation 
+            \[
+                (x_0, y_0) \sim (x_1,y_1) \ \text{if} \ 
+                x_0^2 + y_0^2 = x_1^2 + y_1^2. 
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution to (a)]
+    Define $g([x,y]): X^* \to \mathbb R, \ g([x,y]) = x+y^2$. 
+
+    Then, 
+    \[
+        (x_0,y_0) \sim (x_1,y_1) 
+        \Leftrightarrow 
+        g([x_0,y_0]) = g([x_1,y_1]). 
+    \]
+    Thus the equivalence classes are 
+    the fibres of $g$.
+    
+    We claim this map is the continuous 
+    inverse of the quotient map 
+    $q : \mathbb R^2 \to \mathbb R$. 
+
+    Well-definedness of the map is 
+    immediate. 
+
+    It is also injective immediately from the definition. 
+
+    For surjectivity, given $t \in \mathbb R$, simply take 
+    $(t,0)$. Then $g([t,0]) = t$. 
+
+    Notice $x + y^2 = g \circ q$ is continuous. 
+    By the definining property of the quotient topology, 
+    $g$ is continuous exactly when $g \circ q$ is. 
+    Thus $g$ is continuous. 
+
+    Define $s : \mathbb R \to \mathbb R^2$ 
+    by $s(t) = (t,0)$. Then $s$ is continuous. 
+
+    Now $(q \circ s) (t) = [(t,0)]$, but this is 
+    exactly the inverse of $g$.
+    So $g^{-1}$ is continuous. 
+
+    Thus $X^* \cong \mathbb R$. 
+\end{proof}
+\begin{proof}[Solution sketch of (b)]
+    Proceed as above and define 
+    $g : \mathbb R^2 \to [0,\infty)$ by 
+    $g(x,y) = x^2 + y^2$ to 
+    get $X^* \cong [0,\infty)$.
+\end{proof}
+
 \end{document}
