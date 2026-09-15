@@ -3565,4 +3565,181 @@ Gathmann constructs $\gamma$ by doing a diagram
 chase: life an element backwards through one map, 
 move vertically and life backwards again. 
 
+\subsection{Some problems to see if I understand what the hell is going on}
+
+\begin{prob}
+    Let 
+    \[
+        A \overset{f}\to B \overset{g}\to C 
+    \]
+    be a sequence of $R$-modules. 
+    Suppose 
+    \[
+        \im f = \ker g. 
+    \]
+    Answer the following: 
+    \begin{enumerate}
+        \item At which module is the sequence exact? 
+        \item Must $f$ be injective? 
+        \item Must $g$ be surjective? 
+        \item Prove that 
+            \[
+                g \circ f = 0. 
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution and proof sketch]
+    The sequence is exact at 
+    $B$. 
+
+    $f$ needs not be injective and $g$ 
+    needs not be surjective. 
+
+    We have $\im f = \ker g$. 
+    Then $g(x) = 0$ for all $x = f(a) \in \im f$. 
+    Then $g \circ f = 0$. 
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        0 \to M \overset{\varphi}\to N 
+    \]
+    be exact. 
+
+    Prove directly from the definition that 
+    $\varphi$ is injective. 
+
+    Then let 
+    \[
+        M \overset{\psi}\to N \to 0 
+    \]
+    be exact and prove that $\psi$ is surjective.
+    
+    Finally explain why 
+    \[
+        0 \to M \overset{\alpha}\to N \to 0 
+    \]
+    is exact if and only if $\alpha$ is an isomorphism. 
+\end{prob}
+\begin{proof}[Proof sketch]
+    There exists precisely 
+    one homomorphism from $0 \to M$, that 
+    being the $0$-homomorphism. 
+    Thus $\im(0 \to M) = \{0\}$. 
+    Then, if the sequence is exact, then 
+    $\{0\} = \im(0 \to M) = \ker \varphi$ 
+    so $\varphi$ is injective. 
+
+    Likewise, there exists one and only one 
+    homomorphism from $N$ to $0$, that being 
+    the $0$-homomorphism. 
+    Thus, if $\im \psi = \ker (N \to 0) = N$ so 
+    $\psi$ is surjective. 
+    
+    Summing up the previous two it is easy to see 
+    that we require 
+    $\ker \alpha = \{0\}$ and $\im \alpha = N$ 
+    so it is bijective and thus an isomorphism. 
+
+    Suppose now that $\alpha$ is an isomorphism. 
+    Then $\ker \alpha = \{0\}$ and 
+    $\im \alpha = N$ which, together with the fact 
+    that only the $0$-homomorphism is valid from 
+    $0 \to M$ and $N \to 0$ gives the 
+    equivalence we want. 
+\end{proof}
+
+\begin{prob}
+    Let $N \leq M$ be a submodule. 
+    Consider 
+    \[
+        0 \to N \overset{\iota}\to M 
+        \overset\pi\to M/N \to 0, 
+    \]
+    where $\iota(n) = n$ and $\pi(m) = m+N$. 
+    Prove this sequence is exact. 
+\end{prob}
+\begin{proof}
+    Trivially, 
+    $\im (0 \to N) = \{0\}$ and 
+    $\ker (M/N \to 0) = M/N$. 
+
+    If $\ker \iota \supsetneq \{0\}$ then 
+    there would be nonzero $n \in M$ 
+    such that $n = 0$ which would imply $M = N = 0$, 
+    which in turn would imply $\ker \iota = \{0\}$. 
+    (This was a really dumb argument, but it is obvious 
+    that $\ker \iota = 0$). 
+
+    Next, $\pi$ is surjective ($\im \pi = M/N$) 
+    as we have seen before.   
+
+    It remains to show that 
+    $\im \iota = \ker \pi$. 
+
+    Suppose $\pi m = 0$. Then $\overline m + N 
+    = 0 + N$ so 
+    $m \in N$ so $\ker \iota = N$. 
+    
+    $\im \iota = N$ is trivial to see. 
+\end{proof}
+
+\begin{prob}
+    Consider 
+    \[
+        0 \to \mathbb Z/2\mathbb Z 
+        \overset\varphi\to \mathbb Z/4\mathbb Z 
+        \overset\psi\to \mathbb Z/2\mathbb Z \to 0,
+    \]
+    where $\varphi(\overline 1) = \overline 2$ and 
+    $\psi$ is reduction modulo $2$. 
+    Prove it is exact. 
+
+    Decide whether it is split exact. 
+\end{prob}
+\begin{proof}
+    We have 
+    $\ker \varphi = \overline 0 = \im(0 \to \mathbb Z/
+    2\mathbb Z)$.  Next, 
+    $\im \varphi = \{\overline 0, \overline 2\} = \ker \psi$ 
+    since $\psi$ is reduction modulo $2$. 
+    Lastly $\im \psi = \mathbb Z/2\mathbb Z = 
+    \ker(\mathbb Z/2\mathbb Z \to 0)$. 
+    
+    This sequence is not split 
+    exact because $\mathbb Z/2\mathbb Z 
+    \oplus \mathbb Z/2\mathbb Z 
+    \not\cong \mathbb Z/4\mathbb Z$. (The 
+    latter has an element of order $4$, the former 
+    does not). 
+\end{proof}
+
+\begin{prob}
+    Let $I,J \triangleleft R$ be ideals. 
+    Prove there is a short exact sequence 
+    \[
+        0 \to I \cap J 
+        \to I \oplus J \to I+J \to 0. 
+    \]
+\end{prob}
+\begin{proof}
+    Consider $\varphi : I \cap J \to I \oplus J$
+    and $\psi : I \oplus J \to I + J$ by 
+    \[
+        \varphi(x) = (x, -x), 
+    \] 
+    and 
+    \[
+        \psi(x,y) = x+y. 
+    \]
+
+    $\im(0 \to I \cap J) = \{0\}$ and 
+    $\ker \varphi = \{0\}$. 
+    Also $\im \varphi = \{(n,n) \bigm| n \in I \ \text{and} \ 
+    n \in J\}$. Then it is easy to see that 
+    $\ker \psi = \im \varphi$. The final 
+    correspondence is similarly easy. 
+\end{proof}
+
 \end{document}
