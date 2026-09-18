@@ -1350,4 +1350,177 @@ Thus $r$ has a continuous right inverse. By part $a$, $r$ is a quotient map.
     get $X^* \cong [0,\infty)$.
 \end{proof}
 
+\subsection{Some more problems}
+
+\begin{prob}
+    Let $q: X \to Y$ be a surjection. 
+    Prove that for every $A \subseteq X$, 
+    \[
+        A \subseteq q^{-1}(q(A)). 
+    \]
+    Show that equality holds if and only if 
+    $A$ is a union of fibers of $q$. 
+    In the equivalence-relation setting, formulate 
+    this as ''$A$ is a union of equivalence classes''. 
+\end{prob}
+\begin{proof}
+    Let $A \subseteq X$. 
+    Then $q(A) \subseteq Y$. 
+    We look at the preimage 
+    \[
+        q^{-1}(q(A)) = \{x \in X \bigm| q(x) \in q(A)\}. 
+    \]
+    Clearly, this must include $A$. Otherwise 
+    there would be at least one $a \in A$ such that 
+    $q(a)\not\in q(A)$, but $q(A) = \{q(a) \bigm| a \in A\}$ 
+    (Arguing about sets is ridiculous).
+
+    Suppose the preimage is exactly $A$, meaning 
+    $A$ is saturated w.r.t $q$. 
+    Take any $a \in A$. Consider the fiber of $q$ 
+    through $a$: 
+    \[
+        q^{-1}(\{q(a)\}). 
+    \]
+    We claim this entire fiber lies in $A$. 
+    
+    Indeed, if 
+    \[
+        x \in 
+        q^{-1}(\{q(a)\}), 
+    \]
+    then 
+    \[
+        q(x) = q(a). 
+    \]
+    Since $a \in A$, 
+    \[
+        q(a) \in q(A),  
+    \]
+    so $q(x) \in q(A)$. 
+
+    Thus 
+    \[
+        x \in q^{-1}(q(A)). 
+    \]
+
+    By assumption, $q^{-1}(q(A)) = A$, so $x \in A$. 
+
+    Conversely, suppose $A$is a union of 
+    fibers. 
+    Then it remains to prove that 
+    \[
+        q^{-1}(q(A)) \subseteq A. 
+    \]
+    Take $x \in q^{-1}(q(A))$. 
+    Then $q(x) \in q(A)$, 
+    so by definition of the image there is some 
+    $a \in A$ such that $q(x) = q(a)$. 
+    Thus $x$ and $a$ lie in the same fiber. 
+    Hence 
+    \[
+        q^{-1}(q(A)) \subseteq A. 
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $X \subseteq \mathbb R$ be the 
+    closed unit interval with $0 \sim 1$ 
+    and define $g : [0,1] \to \mathbb R^2$ as 
+    \[
+        g(t) = (\cos 2\pi t, \sin 2\pi t). 
+    \]
+    Show that $g$ is constant on equivalence classes, 
+    so it induces a well-defined map 
+    \[
+        \overline g : X / \sim \to S^1.
+    \]
+    Then use the quotient universal property to 
+    prove $\overline g$ is continuous. 
+\end{prob}
+
+\begin{proof}[Proof sketch]
+    $\cos$ and $\sin$ are $2\pi$-periodic so that 
+    \[
+        \cos(2\pi \cdot 0) = \cos(2\pi \cdot 1) \ \text{and} 
+        \ \sin(2\pi \cdot 0) = \sin(2\pi \cdot 1). 
+    \]
+    This, together with the rest of the equivalence classes 
+    being singletons, makes $g$ constant on 
+    all the equivalence classes. 
+    Thus $\overline g : X / \sim \ \to S^1$ is well-defined. 
+    
+    As this map is the composition of 
+    $g$ (continuous) 
+    with the canonical projection $x \overset\pi\mapsto 
+    [x]$ then, by the universal property of quotient topology, 
+    $\overline g$ is continuous. 
+
+    Furthermore $\overline g$ is invertible (I will not 
+    rigorously prove this) so 
+    \[
+        X/ \sim \ \cong S_1
+    \]
+    the $1$-dimensional loop. 
+\end{proof}
+
+\begin{prob}
+    Let $X = \mathbb R$ and identify 
+    all integers to a single point, leaving all 
+    nonintegers equivalent only to themselves. 
+    Give $X / \sim$ the quotient topology. 
+    Decide whether the quotient is Hausdorff. 
+\end{prob}
+\begin{proof}
+    For the quotient map $q : X \to X/\sim$ we 
+    have $A \subseteq X/\sim$ is open if and only 
+    its preimage is open in $X$. 
+
+    The Hausdorff property is that 
+    for any two distinct points $x,y$ we can 
+    find open neighborhoods for each which are disjoint.
+
+    We split it into two cases. 
+
+    Case 1: $[\mathbb Z]$ and a noninteger point 
+
+    Let $x \not\in \mathbb Z$. Since $\mathbb Z$ is 
+    closed and discrete in $\mathbb R$, we can choose 
+    $\varepsilon > 0$ such that 
+    \[
+        [x - \varepsilon, x +\varepsilon] \cap 
+        \mathbb Z = \emptyset. 
+    \]
+    Put 
+    \[
+        V = (x - \varepsilon/2, x + \varepsilon / 2)
+    \]
+    and
+    \[
+        U = R / [x - \varepsilon, x + \varepsilon].
+    \]
+    Then $U$ and $V$ are disjoint w.r.t $q$. 
+    Therefore 
+    \[
+        q^{-1}(q(U)) = U, \ 
+        q^{-1}(q(V)) = V. 
+    \]
+    Since $U,V$are open, the quotient topology 
+    implies that $Q(U), Q(V)$are open in 
+    $\mathbb R/ \sim$. 
+    They are also disjoint, because $U,V$ are disjoint 
+    saturated sets. Finally 
+    \[
+        [\mathbb Z] \in q(U)
+    \]
+    and 
+    \[
+        [x] \in q(V). 
+    \]
+    Thus $[\mathbb Z], [x]$ have disjoint open neighborhoods. 
+
+    The case for two nonintegers is easy from 
+    the typical topology on $\mathbb R$. 
+\end{proof}
+
 \end{document}

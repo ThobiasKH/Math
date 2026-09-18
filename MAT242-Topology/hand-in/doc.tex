@@ -2,7 +2,7 @@
 
 \title{\huge{Hand in}}
 \author{\LARGE{Thobias Høivik}}
-\date{}
+\date{for September 25, 2026}
 
 \begin{document}
 \maketitle
@@ -89,7 +89,7 @@
     the rationals. 
 
     Let $\mathcal B = \{B_1,B_2,\ldots\}$ be such a basis. 
-    Since $q$ is open, 
+    Since $q$ is open ($q^{-1}q(B)$ is open), 
     \[
         \mathcal C = \{q(B) \bigm| B \in \mathcal B\}
     \]
@@ -102,8 +102,108 @@
     \]
     Therefore $Y \in q(B) \subseteq U$. SO 
     $\mathcal C$ is a countable basis for $Y$. 
+
+    \textbf{Connected?}
+    
+    The space is indeed connected. 
+    I like to use the following procedure. 
+
+    Let $f : Y \to \{0,1\}$ be any continuous function 
+    where the codomain has the discrete topology. 
+
+    Let $X_+ = [-1,1] \times \{1\}$ and 
+    $X_- = [-1,1] \times \{-1\}$. 
+    $f \circ q$ is continuous so the restrictions 
+    \[
+        f \circ q \bigm|_{X_+} : X_+ \to \{0,1\}
+    \]
+    and 
+    \[
+        f \circ q\bigm|_{X_-} : X_- \to \{0,1\}
+    \]
+    are continuous. $X_+$ and $X_-$ are homeomorphic to 
+    $[-1,1]$ and therefore connected so
+    these maps must be constant. 
+    For convenience write  
+    \[
+        f \circ q\bigm|_{X_+} \equiv c_+, 
+        \ \text{and} \ 
+        f \circ q\bigm|_{X_-} \equiv c_- 
+    \]
+    where $c_+,c_- \in \{0,1\}$. 
+
+    Recall that $X_+ \ni a_+ \sim a_- \in X_-$ so 
+    $q(a_+) = q(a_-)$. Hence 
+    \[
+        c_+ = f(q(a_+)) = f(q(a_-)) = c_-. 
+    \]
+
+    As $Y = q(X_+) \cup q(X_-)$ the map $f$ must be constant
+    on the whole domain. 
+
+    Hence the space is 
+    connected!
+
+    \textbf{Compact?} 
+
+    The space is indeed compact. 
+
+    We know that $[-1,1] \times \{1\}, \ 
+    [-1,1] \times \{-1\} \cong [-1,1]$ are compact. 
+    So for a covering of $X$ reduce 
+    the open covers on each copy of the line to a finite 
+    cover. 
+
+    Now take some open cover $\bigcup_{\alpha} U_\alpha$ 
+    of $Y$. Then 
+    \[
+        q^{-1}\left(\bigcup_\alpha U_\alpha \right) 
+        = \bigcup_\alpha q^{-1}(U_\alpha)
+    \]
+    is a cover of $X$. Since $X$ is compact we can 
+    take a finite number of these 
+    \[
+        \bigcup_{\alpha_i, \ i \in [n]} q^{-1}(U_\alpha)
+    \]
+    to cover $X$. Meaning, every $a_+$ is contained in 
+    some $U_{\alpha_i}$ and every $a_-$ is contained in 
+    some $U_{\alpha_j}$. Then $q(a_+), \ q(a_-) \in 
+    U_{\alpha_i} \cup U_{\alpha_j}$ so the image of this 
+    finite cover suffices as a finite covering of $Y$. 
+    
+    It would also have sufficed to point out that 
+    the continuous image of a compact space is 
+    compact!
 \end{proof}
 
+\begin{prob*}[2]
+    Let $\mathbb R^\omega$ be the countably infinite 
+    product of $\mathbb R$ with itself. Let 
+    $\mathbb R^\infty \subset \mathbb R^\omega$ be the 
+    subset of all sequences $(x_1,x_2,\ldots)$ that 
+    are eventually zero (i.e., there exists an 
+    $N$ such that $x_n = 0$ for all $n > N$). 
 
+    \begin{enumerate}[label=\alph*)]
+        \item What is the interior and closure of $\mathbb R^\infty$ 
+            in $\mathbb R^\omega$ if $\mathbb R^\omega$ is given the 
+            product topology? Is $\mathbb R^\infty$ (with this topology) 
+            Hausdorff?
+        \item What is the interior and closure of 
+            $\mathbb R^\infty$ in $\mathbb R^\omega$ if 
+            $\mathbb R^\omega$ is given the box topology? 
+            Is $\mathbb R^\infty$ (with this topology)
+            Hausdorff? 
+        \item What is the interior and closure of 
+            $\mathbb R^\infty$ in $\mathbb R^\omega$ if 
+            $\mathbb R^\omega$ is given the uniform topology? 
+            Is $\mathbb R^\infty$ (with this topology)
+            Hausdorff?  
+    \end{enumerate}
+\end{prob*}
+
+\begin{proof}[Solution and proof to (a)]
+    
+\end{proof}
 
 \end{document}
