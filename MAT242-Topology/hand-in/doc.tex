@@ -17,6 +17,7 @@
 
     \begin{itemize}
         \item Check that $\sim$ is an equivalence relation 
+            (nevermind I guess?) 
         \item Is $Y$ Hausdorff? 
         \item Does $Y$ have a countable basis for its 
             topology? 
@@ -29,70 +30,80 @@
 
 
 \begin{proof}[Solution and proof of all]
-    Let
-    \[
-        q:X\longrightarrow Y=X/{\sim}
-    \]
-    denote the quotient map. It is useful to write
-    \[
-        0_-:=q(0,-1),\qquad 0_+:=q(0,1),
-    \]
-    and, for $a\neq 0$,
-    \[
-        \overline a:=q(a,-1)=q(a,1).
-    \]
-    Thus, intuitively, $Y$ is the interval $[-1,1]$ where every
-    point except $0$ has been identified between the two copies, while
-    the origin occurs twice.
-
     \medskip
+    \
 
-    \textbf{The relation $\sim$ is an equivalence relation.}
+    \textbf{Hausdorff?}
 
-    More explicitly, for $(a,s),(b,t)\in X$, we may write
+    Recall that $Y$ is Hausdorff if 
+    any two distinct points have some open neighborhoods 
+    that are disjoint. 
+
+    We will use the fact that open sets in 
+    $X$ correspond exactly with open sets in $Y$.  
+
+    For $Y$ to have the Hausdorff property
+    we would require that, as 
+    $(0,1)$ and $(0,-1)$ are distinct, 
+    they have some open disjoint neighborhoods 
+    that are disjoint. 
+
+    Denote $(a,1) = a_+$ and $(0,-1) = a_-$. 
+    Let $U$ be an open neighborhood of $0_+$ and 
+    $V$ an open neighborhood of $0_-$. 
+
+    Then $q^{-1}(U), q^{-1}(V)$ are open neighborhoods of $X$. 
+    As $X$ has the metric topology we know there are 
+    $\varepsilon_+, \varepsilon_- > 0$ such that 
     \[
-        (a,s)\sim(b,t)
-        \quad\Longleftrightarrow\quad
-        a=b\text{ and either }s=t\text{ or }a\neq 0.
+        (-\varepsilon_+, \varepsilon_+) \times \{1\} 
+        \subseteq q^{-1}(U)
     \]
+    and 
+    \[
+        (-\varepsilon_-, \varepsilon_-) \times \{-1\} 
+        \subseteq q^{-1}(V). 
+    \]
+    Choose $0 < a < \min\{\varepsilon_-, \varepsilon_+\}$. 
+    Then $a_+ \in q^{-1}(U)$ and $a_- \in q^{-1}(V)$, but 
+    \[
+        a_+ \sim a_-
+    \]
+    so 
+    \[
+        q(a_+) = q(a_-) \in Y. 
+    \]
+    Call this point $y$. 
+    Then $y \in U \cap V$, meaning they are not disjoint. 
+    This violates the Hausdorff property. 
+    Intuitively, we will use the fact that some open 
+    neighborhood of $(0,1)$ will have elements whose fibers  
+    
+    \textbf{Countable basis?} 
 
-    We check the three conditions.
+    Indeed it does have a countable basis. 
 
-    \begin{itemize}
-        \item \emph{Reflexivity:}
-        For every $(a,s)\in X$, clearly
-        \[
-            (a,s)\sim(a,s).
-        \]
+    $X$ has a countable basis since it is just 
+    two copies of $[-1,1] \subseteq \mathbb R$ which 
+    has a countable basis which we can construct using 
+    the rationals. 
 
-        \item \emph{Symmetry:}
-        If $(a,s)\sim(b,t)$, then $a=b$. If $s=t$, symmetry is
-        immediate. Otherwise $a=b\neq0$, and by the definition of the
-        relation we also have
-        \[
-            (b,t)\sim(a,s).
-        \]
-
-        \item \emph{Transitivity:}
-        Suppose
-        \[
-            (a,s)\sim(b,t)
-            \qquad\text{and}\qquad
-            (b,t)\sim(c,u).
-        \]
-        Then necessarily $a=b=c$. If this common value is nonzero,
-        the two copies are identified, so
-        \[
-            (a,s)\sim(c,u).
-        \]
-        If the common value is $0$, the only equivalences at $0$ are
-        the reflexive ones. Hence $s=t=u$, and again
-        \[
-            (a,s)\sim(c,u).
-        \]
-    \end{itemize}
-
-    Therefore $\sim$ is an equivalence relation.
+    Let $\mathcal B = \{B_1,B_2,\ldots\}$ be such a basis. 
+    Since $q$ is open, 
+    \[
+        \mathcal C = \{q(B) \bigm| B \in \mathcal B\}
+    \]
+    consists of open sets in $Y$. Moreover, if 
+    $y \in U$ for some open set in $Y$, choose 
+    $x \in q^{-1}(U)$. Since $q^{-1}(U)$ is open, there 
+    is some $B \in \mathcal B$ with 
+    \[
+        x \in B \subseteq q^{-1}(U). 
+    \]
+    Therefore $Y \in q(B) \subseteq U$. SO 
+    $\mathcal C$ is a countable basis for $Y$. 
 \end{proof}
+
+
 
 \end{document}
