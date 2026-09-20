@@ -3742,4 +3742,34 @@ move vertically and life backwards again.
     correspondence is similarly easy. 
 \end{proof}
 
+\begin{prob}
+    Let $R = \mathbb Z$ with ideal 
+    $I = (5)$. Let $M = \mathbb Z_{12}$. 
+    Show that $M = IM$. Can you find an 
+    element $a \in I$ such that 
+    $am = m$ for every $m \in M$. 
+\end{prob}
+\begin{proof}[Solution and proof]
+    Recall that $IM$ is the 
+    set of all finite sums $\sum a_im_i$ where 
+    $a_i \in I, \ m_i \in M$. 
+
+    First we find an 
+    $a \in I$ so that $am = m$. 
+    Notice that $a:= 25 \in I$ is 
+    $1$ modulo $12$ so 
+    \[
+        am \equiv 1 \cdot m = m. 
+    \]
+
+    This means that for every 
+    $m \in M$ we have 
+    \[
+        m = 25m \in IM  
+    \]
+    so $M \subseteq IM$. 
+    The reverse inclusion is automatic from 
+    the definition of an $R$-module. 
+\end{proof}
+
 \end{document}
