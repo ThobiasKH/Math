@@ -202,8 +202,288 @@
     \end{enumerate}
 \end{prob*}
 
-\begin{proof}[Solution and proof to (a)]
+\begin{proof}[Solution and proof of (a)]
+    A basic open neighborhood 
+    of $x = (x_1,x_2,\ldots)$ looks like 
+    \[
+        \left(\prod_{i \in [N]} U_i \right)
+        \times \mathbb R \times \mathbb R \times \cdots, 
+    \]
+    so only finitely many coordinates are 
+    restricted. 
+
+    For the interior, take any $x \in \mathbb R^\infty$. 
+    Any neighborhood of $x$leaves all sufficiently 
+    large coordinates completely unrestriced. Hence 
+    inside that neighboorhood we can find a sequence 
+    $y$ with, e.g. $y_n = 1$ for infinitely many 
+    unrestriced coordinates. 
+
+    Then $y$ is not eventualyl zero. Therefore no open neighborhood 
+    of $x$ lies entirely inside $\mathbb R^\infty$. 
+    Hence the interior $\operatorname{Int}(\mathbb R^\infty) = 
+    \emptyset$. 
+
+    For closure, take an arbitrary $x = (x_1,x_2, \ldots) 
+    \in \mathbb R^\omega$. 
+    Take a neighborhood resttricting only 
+    the first $N$ coordinates. 
+    Choose $y = (x_1,\ldots,x_n, 0, 0, \ldots).$ 
+    Then 
+    \[
+        y \in \mathbb R^\infty
+    \]
+    and $y$ lies in the given neighborhood of $x$. 
+    Thus every open neighborhood of every 
+    $x \in \mathbb R^\omega$ intersects $\mathbb R^\infty$. 
+    So $\overline{\mathbb R^\infty} = \mathbb R^\omega$, 
+    meaning $\mathbb R^\infty$ is dense in 
+    $\mathbb R^\omega$ under the product topology.
+\end{proof}
+
+\begin{proof}[Solution and proof of (b)]
+    Now a neighborhood is much smaller 
+    \[
+        \prod_{n=1}^\infty U_n, 
+    \]
+    where every $U_n \subseteq \mathbb R$ is open. 
+
+    Suppose $x \in \mathbb R^\infty$, so for 
+    some $N$, $x_n = 0 \ (n > N)$. 
     
+    Take any box neighborhood 
+    \[
+        \prod_{n=1}^\infty U_n 
+    \]
+    of $x$. 
+    For every $n > N$, $0 \in U_n$. 
+    Since $U_n$ is an open neighborhood of $0$, it contains 
+    some nonzero $y_n$. Then the resulting sequence 
+    lies in the box neighborhood, but is not eventually 
+    zero. 
+    Therefore the interior is empty. 
+
+    Now suppose $x \not\in \mathbb R^\infty$. Then 
+    $x_n \neq 0$ for infinitely many $n$. 
+    Let $I = \{x \bigm| x_n \neq 0\}$. 
+
+    For every $n \in I$, chjoose an open interval 
+    $U_n$ around $x_n$ such that $0 \not\in U_n$. 
+    For $n \not\in I$ just take $U_n = \mathbb R$. 
+    Then 
+    \[
+        U = \prod_{n=1}^\infty U_n 
+    \]
+    is an open neighborhood of $x$. 
+
+    Every $y \in U$ satisfies $y_n \neq 0$ for every 
+    $n \in I$, and $I$ is infinite. Hence no 
+    $y \in U$ is eventually zero. 
+
+    So 
+    \[
+        U \cap \mathbb R^\infty = \emptyset. 
+    \]
+    Therefore every point outside $\mathbb R^\infty$ 
+    has a neighborhood avoiding $\mathbb R^\infty$. 
+    Thus $\overline{\mathbb R^\infty} = \mathbb R^\infty$. 
+    So in the box topology it is closed, but still 
+    has empty interior. 
+\end{proof}
+
+\begin{prob*}[3]
+    Let $X$ be a topological space, $Y$ a set 
+    and let $f: X \to Y$ be a surjection. 
+
+    Show that the quotient topology on $Y$ is the 
+    unique topology so that 
+    \begin{flalign*}
+        &\text{if} \ Z \ \text{is a topological space and}
+        \ g : Y \to Z \ \text{is a function} \\ &\text{then}\ g 
+        \ \text{is continuous if and only if} \ gf \ \text{is continuous}.
+    \end{flalign*}
+\end{prob*}
+
+\begin{proof}
+    With $f : X \to Y$ some surjection, the 
+    quotient topology on $Y$ is the collection 
+    \[
+        \tau_f = \{U \subseteq Y \bigm| f^{-1}(U) \ \text{is 
+        open in} \ X\}. 
+    \]
+    Equivalently, $U$ is open in $Y$ if and only if 
+    its preimage under $f$ is open in $X$. 
+
+    We first prove existence. 
+    Assume $Y$ has the quotient topology and 
+    let $g : Y \to Z$. 
+    
+    \[
+        g \ \text{continuous} 
+        \Rightarrow g \circ f \ \text{continuous}
+    \]
+    is immediate as $f$ is continuous and the 
+    composition of continuous functions is continuous. 
+
+    For the converse, suppose the composition $g \circ f$ is 
+    continuous. Then for an open set in $U$ in $Z$ 
+    the preimage 
+    \[
+        (g\circ f)^{-1}(U) = f^{-1}(g^{-1}(U)) \subseteq X 
+    \]
+    is open. Then, by assumption, 
+    $g^{-1}(U) \subseteq Y$ is open. So the preimage of 
+    open sets under $g$ is open, hence it is continuous.
+
+    For uniqueness, suppose $\tau$ is some 
+    other topology on $Y$ having the property. 
+
+    Let $Z = (Y,\tau_f)$ and 
+    $g = \operatorname{id}_{Y} : (Y,\tau) \to (Y,\tau_f)$. 
+    Then 
+    \[
+        g \circ f = f : X \to (Y,\tau_f) 
+    \]
+    which is continuous. 
+
+    Since $\tau$ has the stated property, $g$ is therefore continuous. Hence every $\tau_f$-open set is $\tau$-open, so \[ \tau_f\subseteq\tau. \] For the opposite inclusion, observe first that \[ f:X\to(Y,\tau) \] is continuous. Indeed, taking \[ g=\operatorname{id}_Y:(Y,\tau)\to(Y,\tau) \] in the assumed property, $g$ is continuous, and hence $g\circ f=f$ is continuous. Now consider \[ h=\operatorname{id}_Y:(Y,\tau_f)\to(Y,\tau). \] Since \[ h\circ f=f:X\to(Y,\tau) \] is continuous, the universal property already proved for the quotient topology implies that $h$ is continuous. Therefore every $\tau$-open set is $\tau_f$-open, and hence \[ \tau\subseteq\tau_f. \] Consequently, \[ \tau=\tau_f, \] so the quotient topology is unique.
+\end{proof}
+
+\begin{prob*}[Munkres 17.12]
+    Show that a subspace of a Hausdorff space 
+    is Hausdorff. 
+\end{prob*}
+\begin{proof}
+    Let $X$ be a Hausdorff space and let 
+    $A \subseteq X$ be a subspace, i.e. 
+    having the topology 
+    \[
+        \tau_A = \{U \cap A \bigm| U \subseteq X \ \text{open}\}. 
+    \]
+
+    Take any two distinct 
+    $x,y \in A$. Then there exist open 
+    $U_x, \ U_y \subseteq X$ such that 
+    $x \in U_x, \ y \in U_y$ and 
+    $U_x \cap U_y = \emptyset$. 
+
+    Then 
+    \[
+        A \cap U_x \subseteq U_x
+    \]
+    and 
+    \[
+        A \cap U_y \subseteq U_y
+    \]
+    with 
+    \[
+        (A \cap U_x) \cap (A \cap U_y) 
+        = A \cap (U_x \cap U_y) = A \cap \emptyset = \emptyset. 
+    \]
+    Thus we have found disjoint open sets in $A$ 
+    $A \cap U_x, \ A \cap U_y$ containing 
+    $x$ and $y$, respectively. 
+
+    As $x,y$ were arbitrary, the Hausdorff property is satisfied. 
+\end{proof}
+
+\begin{prob*}[Munkres 17.13]
+    Show that $X$ is Hausdorff if and only if 
+    the diagonal $\Delta = \{x \times x \bigm| x \in X\}$ is 
+    closed in $X \times X$. 
+\end{prob*}
+
+\begin{proof}
+    Suppose $X$ is Hausdorff. Then 
+    for any $x, y \in X$ we can find 
+    disjoint open neighborhoods $U_x, \ U_y$ for them.  
+ 
+    Take $(x,y) \in X\times X \setminus \Delta$. 
+    Since $x \neq y$ there are disjoint 
+    open sets $U_x, \ U_y$ for the points. 
+    Then $U_x \times U_y$ cannot contain 
+    a point of the form $(z,z)$. Suppose $(z,z) \in U_x \times U_y$. 
+    Then $z \in U_x$ and $z \in U_y$ so $U_x \cap U_y \neq \emptyset$
+    which is a contradiction. 
+    Thus every point outside $\Delta$ has an open 
+    neighborhood disjoint from $\Delta$ so 
+    $X\times X \setminus \Delta$ is open and 
+    hence $\Delta$ is closed. 
+
+    Now suppose $\Delta$ is closed, meaning 
+    $X \times X \setminus \Delta$ is open. 
+    Take distinct $x,y \in X$. Then $(x,y) \not\in \Delta$ 
+    so there is an open set 
+    $U \times V \subseteq X \times X \setminus \Delta$ 
+    containing $(x,y)$. 
+    
+    The claim then is that $U \cap V = \emptyset$. 
+    Suppose not. If some $z \in U \cap V$, then 
+    $(z,z) \in U \times V$, but $(z,z) \in \Delta$ so 
+    we arrive at a contradiction. 
+    Since $U,V$ are open neighborhoods of $x$ and $y$, respectively 
+    and those points were arbitrary, the space is Hausdorff. 
+\end{proof} 
+
+
+\begin{prob*}[Munkres 20.3]
+    Let $X$ be a metric space with metric 
+    $d$. 
+    \begin{enumerate}[label=\alph*)]
+        \item Show that $d : X \times X \to \mathbb R$ is continuous. 
+        \item Let $X'$ denote a space having the 
+            same underlying set as $X$. Show that 
+            if $d : X' \times X' \to \mathbb R$ is continuous, 
+            then the topology of $X'$ is finer than 
+            the topology of $X$.
+    \end{enumerate}
+\end{prob*}
+
+\begin{proof}[Proof of (a)]
+    The metric $d$ satisfies 
+    \begin{align*}
+        d(x,y) &\geq 0 \\ 
+        d(x,y) = 0 &\Leftrightarrow x = y \\ 
+        d(x,y) &= d(y,x) \\ 
+        d(x,z) &\leq d(x,y) + d(y,z). 
+    \end{align*}
+    In particular, 
+    \[
+        |d(x,y) - d(x',y')| \leq d(x,x') + d(y,y'). 
+    \]
+    Fix some $(x_0,y_0) \in X\times X$. 
+    Let $\varepsilon > 0$ and consider 
+    the product neighborhood 
+    \[
+        B_{\varepsilon/2}(x_0) \times B_{\varepsilon/2}(y_0).
+    \]
+    If $(x,y) \in B_{\varepsilon/2}(x_0) 
+    \times B_{\varepsilon/2}(y_0)$, 
+    then 
+    \[
+        d(x,x_0) < \frac{\varepsilon}{2}, \ 
+        d(y,y_0) < \frac{\varepsilon}{2}. 
+    \]
+    By the triangle-inequality, 
+    \[
+        d(x,y) \leq d(x,x_0) + d(x_0, y_0) 
+        + d(y_0, y), 
+    \]
+    so 
+    \[
+        d(x,y) - d(x_0,y_0) 
+        \leq d(x,x_0) + d(y,y_0). 
+    \]
+    Therefore 
+    \[
+        |d(x,y) - d(x_0,y_0)| 
+        \leq d(x,x_0) + d(y,y_0) < \varepsilon. 
+    \]
+    Hence 
+    \[
+        d(x,y) \in d(x_0,y_0) \pm \varepsilon 
+    \]
+    which is open in $\mathbb R$. 
 \end{proof}
 
 \end{document}
