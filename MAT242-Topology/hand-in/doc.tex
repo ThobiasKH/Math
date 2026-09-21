@@ -239,6 +239,11 @@
     So $\overline{\mathbb R^\infty} = \mathbb R^\omega$, 
     meaning $\mathbb R^\infty$ is dense in 
     $\mathbb R^\omega$ under the product topology.
+
+    The space is Hausdorff since distinct sequences 
+    differ in at least one coordinate and $\mathbb R$, as well 
+    as subspaces of $\mathbb R$, are 
+    Hausdorff. 
 \end{proof}
 
 \begin{proof}[Solution and proof of (b)]
@@ -289,6 +294,85 @@
     Thus $\overline{\mathbb R^\infty} = \mathbb R^\infty$. 
     So in the box topology it is closed, but still 
     has empty interior. 
+
+    The space is Hausdorff for the same reason as in 
+    (a). 
+\end{proof}
+
+\begin{proof}[Solution and proof of (c)]
+    For $0 < \varepsilon < 1$ and $\varepsilon$-ball 
+    around $x$ is 
+    \[
+        B_\varepsilon(x) = \{y = (y_n) \in 
+        \mathbb R^\omega\bigm| |x_n - y_n| < \varepsilon \ \text{
+            for every
+    } \ n\}. 
+    \]
+
+    Take any $x \in \mathbb R^\infty$. Then there is sufficiently 
+    large $N$ so that $x_n = 0$ whenever $n \geq N$. 
+    Let $\varepsilon > 0$. We want to show 
+    $B_\varepsilon(x)$ contains some point not in 
+    $\mathbb R^\infty$. 
+    Define $y_n$ as 
+    \[
+        y_n = 
+        \begin{cases}
+            x_n, & n \leq N, \\ 
+            \varepsilon/2, & \text{otherwise}. 
+        \end{cases}
+    \]  
+    Then for every $n$, 
+    \[
+        |x_n - y_n| < \varepsilon, 
+    \]
+    so $y \in B_\varepsilon(x)$, but $y_n = \varepsilon / 2 > 0$ 
+    for $n > N$ so $y \not\in \mathbb R^\infty$. 
+    Therefore the interior is empty. 
+
+    We claim the closure is 
+    \[
+        \overline{\mathbb R^\infty} = \{x = (x_n) \bigm| 
+        x_n \to 0\}. 
+    \]
+    Call the set on the right $\Omega$.
+
+    If $x_n \to 0$ then $x$ is in the closure. 
+    Take any $\varepsilon > 0$. Since $x_n \to 0$ there is 
+    $N$ such that $|x_n| < \varepsilon$ for $n > N$. 
+    Truncate $x$ to 
+    \[
+        y = (x_1,\ldots,x_N, 0, 0, \ldots). 
+    \]
+    Then $y \in \mathbb R^\infty$. Also 
+    \[
+        |x_n - y_n| = |x_n| < \varepsilon, \ n > N
+    \]
+    and $0$ otherwise. Therefore $y \in B_\varepsilon(x)$.
+    Therefore every uniform neighborhood of $x$ intersects 
+    $\mathbb R^\infty$ so $x \in \overline{\mathbb R^\infty}$. 
+
+    We conclude $\Omega \subseteq \mathbb R^\infty$. 
+
+    Now suppose $x_n \not\to 0$. Then there is some 
+    $\varepsilon > 0$ so that $|x_n| \geq \varepsilon$.  
+    Consider $B_{\varepsilon/2}(x)$. 
+    Suppose $y\in \mathbb R^\infty$. Then there is $N$ so that 
+    $y_n = 0$ for $n > N$, but there are infinitely many $n$ 
+    for which $|x_n| \geq \varepsilon > \varepsilon/2$ so 
+    \[
+        y_n \not\in B_{\varepsilon/2}(x). 
+    \]
+
+    Then $B_{\varepsilon/2} \cap \mathbb R^\infty = \emptyset$ so 
+    $x \not\in \overline{\mathbb R^\infty}$. Therefore 
+    \[
+        \overline{\mathbb R^\infty} = \Omega.
+    \]
+
+    $\mathbb R^\omega$ is Hausdorff since the uniform topology 
+    is induced by a metric. The subspace $\mathbb R^\infty$ 
+    is therefore Hausdorff. 
 \end{proof}
 
 \begin{prob*}[3]
@@ -484,6 +568,46 @@
         d(x,y) \in d(x_0,y_0) \pm \varepsilon 
     \]
     which is open in $\mathbb R$. 
+\end{proof}
+
+\begin{proof}[Proof of (b)]
+    Write $X = (S, \tau_d)$ where $\tau_d$ is the 
+    induced topology from $d$ and $X' = (S,\tau')$ be 
+    the same underlying set $S$, but with some other 
+    topology $\tau'$. 
+    We assume $d: X' \times X' \to \mathbb R$ is 
+    continuous. 
+
+    Fix $a \in X$ and $\varepsilon > 0$. Consider the map 
+    $i_a : X' \to X' \times X'$ by $i_a(x) = (x,a)$. 
+    The map is continuous and by assumption 
+    $d : X' \times X' \to \mathbb R$ is continuous so 
+    \[
+        d \circ i_a : X' \to \mathbb R
+    \]
+    is aswell. 
+    Then 
+    \[
+        (d\circ i_a)(x) = d(x,a). 
+    \]
+
+    Consider now $(\infty,\varepsilon) \subseteq \mathbb R$. 
+    The preimage under $(d\circ i_a)$ is $B_d(a,\varepsilon) = 
+    \{x \in X \bigm| d(x,a) < \varepsilon\}$. Thus the metric 
+    ball $B_d(a,\varepsilon)$ is open in $X'$. 
+
+    Now let $U$ be any open set in $X$. Since $X$ has the 
+    metric topology, for all $x \in U$ there exists 
+    $\varepsilon_x > 0$ such that 
+    \[
+        B_d(x,\varepsilon_x) \subseteq U.
+    \]
+    Hence 
+    \[
+        U = \bigcup_{x \in U}B_d(x,\varepsilon_x).
+    \]
+    Each ball is oepn in $X'$, so $U$ is open in $X$. 
+    Therefore $\tau_d \subseteq \tau'$. 
 \end{proof}
 
 \end{document}
