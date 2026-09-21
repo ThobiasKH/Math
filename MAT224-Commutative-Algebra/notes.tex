@@ -4147,5 +4147,145 @@ Then this sequence is exact.
 
 Interestingly, tensor products are not left exact. 
 
+\subsection{Some practice problem}
+
+\begin{prob}
+    Work over $\mathbb Z$. Simplify as 
+    far as possible: 
+    \[
+        (3a + 2b) \otimes n, 
+    \]
+    and show directly from 
+    the tensor rules that 
+    \[
+        6 \otimes \overline 1 = 0
+    \]
+    in 
+    \[
+        \mathbb Z \otimes_{\mathbb Z} \mathbb Z/3\mathbb Z. 
+    \]
+    Then decide whether 
+    \[
+        2 \otimes \overline 1 
+    \]
+    is zero in the same tensor products. 
+\end{prob}
+\begin{proof}[Solution]
+    We have 
+    \begin{align*}
+        (3a + 2b) \otimes n 
+        &= 3a \otimes n + 2b \otimes n \\ 
+        &= 3(a \otimes n) + 2(b\otimes n).  
+    \end{align*}
+    We have 
+    \begin{align*}
+        6 \otimes \overline 1 
+        &= 2 \cdot 3 \otimes \overline 1 \\ 
+        &= 1 \otimes (2 \cdot 3) \overline 1 \\ 
+        &= 1 \otimes (2) \overline 0 \\ 
+        &= 1 \otimes \overline 0 \\ 
+        &= 0
+    \end{align*}
+    in $\mathbb Z \otimes \mathbb Z/3\mathbb Z$. 
+
+    No we do not have $2\otimes \overline 1 = 0$. 
+
+    We have 
+    \[
+        \mathbb Z \otimes_{\mathbb Z} 
+        \mathbb Z/3\mathbb Z 
+        \cong \mathbb Z/3\mathbb Z 
+    \]
+    via $a\times \overline b \mapsto a \overline b$ 
+    so we get 
+    \[
+        2 \otimes \overline 1 
+        \mapsto \overline 2 \neq \overline 0. 
+    \]
+\end{proof}
+
+\begin{prob}
+    Define 
+    \[
+        \alpha : k[x] \times k[y] 
+        \to k[x,y], \ 
+        \alpha(f,g) = fg. 
+    \]
+    Prove $\alpha$ is bilinear. Use the universal 
+    property to obtain 
+    a linear map 
+    \[
+        \varphi : k[x] \otimes_k k[y] 
+        \to k[x,y]
+    \]
+    satisftying 
+    \[
+        \varphi(f \otimes g) = fg. 
+    \]
+    Finally argue that $\varphi$ is 
+    an isomorphism by looking at the elements 
+    \[
+        x^i \otimes y^j. 
+    \]
+\end{prob}
+\begin{proof}
+    Fix $g$. Then 
+    \begin{align*}
+        \alpha(f+h,g) 
+        &= (f+h)g \\ 
+        &= fg + hg \\ 
+        &= \alpha(f,g) + \alpha(h,g)  
+    \end{align*}
+    and 
+    \begin{align*}
+        a\alpha(f,g) 
+        &= 
+        \alpha(af,g) \\   
+        &= (af)g \\ 
+        &= f(ag) \\ 
+        &= \alpha(f,ag) 
+    \end{align*}
+    so for fixed $g$ this is linear. 
+    The procedure is the same for 
+    showing linearity in the second argument. 
+
+    For the tensor product we have a map 
+    $\tau : k[x] \times k[y] \to k[x] \otimes_k 
+    k[y]$ 
+    for every bilinear map, such as $\alpha : 
+    k[x] \times k[y] \to k[x,y]$, so that it factors uniquely 
+    through a linear map 
+    $\varphi : k[x] \otimes_k k[y] \to k[x,y]$ 
+    such that 
+    \[
+        \begin{tikzcd}
+            k[x] \times k[y] \arrow[r, "\alpha"]
+            \arrow[dr, "\tau"] & 
+            k[x,y] \\ 
+            & k[x] \otimes_k k[y] \arrow[u, "\varphi"]
+        \end{tikzcd}
+    \] 
+    commutes, meaning 
+    $\alpha = \varphi \circ \tau$. Recalling that 
+    $\alpha(f,g) = fg$, and 
+    $\tau(f,g) = f \otimes g$, we know that 
+    $\varphi(f \otimes g) = fg$. 
+
+    The basis for $k[x] \otimes k[y]$ as an 
+    $R$-algebra is $x^i \otimes y^j$ for $i,j \geq 0$ 
+    and the basis for $k[x,y]$ is 
+    \[
+        \{1, x, y, x^2y, xy^2, \ldots\}
+    \]
+    so since elements in each 
+    can be written in these bases we have the 
+    correspondence: 
+    \[
+        \varphi\left(\sum_{i,j} 
+        a_{ij} x^i \otimes y^j\right) 
+        = \sum_{i,j} a_{ij}x^ib^j 
+    \]
+    both with finitely many $a_{ij}$ nonzero. 
+\end{proof}
 
 \end{document}
