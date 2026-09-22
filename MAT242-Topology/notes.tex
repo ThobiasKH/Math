@@ -1523,4 +1523,320 @@ Thus $r$ has a continuous right inverse. By part $a$, $r$ is a quotient map.
     the typical topology on $\mathbb R$. 
 \end{proof}
 
+\newpage 
+\section{Connectedness, components, compactness}
+
+From $\S 23$ of Munkres recall that a space 
+$X$ is connected if we cannot write 
+$X = U \sqcup V$ where $U,V$ are disjoint, nonempty, 
+open subsets of $X$. 
+
+Equivalently, 
+$X$ is connected if and only if the only 
+clopen subsets of $X$ are $X$ and $\emptyset$. 
+
+Also, $X$ connected and $f : X \to Y$ continuous 
+implies $f(X)$ connected. 
+
+\subsection{\S 24, Connected subsets of the real line}
+The main theorem we will be keeping in mind is 
+$A \subseteq \mathbb R$ is connected if and only if 
+$A$ is an interval, which is perhaps unsurprising.  
+
+Interval should be understood in the broad order-theoretic 
+sense, meaning 
+\[
+    x,z \in A, \ x < y < z \Rightarrow y \in A. 
+\]
+Such sets are also called convex subsets of 
+the ordered set $\mathbb R$ in some contexts. 
+Munkres develops this more generally for linear continua 
+later, I believe. 
+
+The claim now is that connected subsets must be intervals.
+
+Suppose $A \subseteq \mathbb R$ is connected. 
+Take $x,z \in A, \ x < z$. 
+Suppose some $y$ satisfies $x < y < z$, but does 
+not belong to $A$. 
+
+Then 
+\[
+    A \cap (-\infty, y)
+\]
+and 
+\[
+    A \cap (y,\infty)
+\]
+are disjoint nonempty open subsets of $A$, and 
+together they cover $A$. 
+
+They are nonempty because $x$ is in the 
+first and $z$ is in the second. 
+
+Hence they give a separation of $A$, contradicting 
+connectedness. 
+Therefore every point between $x$ and $z$ lies in $A$. 
+So $A$ is an interval. 
+
+\subsection{The intermediate Value Theorem in topology}
+Now suppose $X$ is connected and 
+$f : X \to \mathbb R$ is continuous. 
+Because continuous images of connected spaces 
+are connected we have that $f(X)$ is connected, 
+but connected subsets of $\mathbb R$ are intervals. 
+
+Therefore if 
+\[
+    f(a) < r < f(b), 
+\]
+then 
+\[
+    r \in f(X). 
+\]
+So there exists $c \in X$ with $f(x) = r$. 
+
+\subsection{Path connectedness}
+Path connectedness is a strictly stronger 
+notion that connectedness. 
+
+A path from $x$ to $y$ in $X$ is a continuous 
+map 
+\[
+    \gamma : [0,1] \to X
+\]
+such that 
+\[
+    \gamma(0) = x, \ \gamma(1) = y. 
+\]
+A space $X$ is path connected if every pair 
+$x,y \in X$ can be joined by a path. 
+Intuitively, connected says we cannot split the space, 
+while path connected means we can travel 
+continuously beetween all distinct points. 
+
+\begin{prop}
+    Path connectedness implies connectedness. 
+\end{prop}
+\begin{proof}
+    Suppose $X$ is path connected, but disconnected. 
+    Then $X = U \cup V$ is a separation. 
+    Choose $x \in U$ and $y\in V$. 
+    There is a path $\gamma : [0,1] \to X$ from 
+    $x$ to $y$, but $[0,1]$ is connected, so its 
+    continuous image $\gamma([0,1])$ is connected. 
+    Yet this image intersects both $U$ and $V$, which 
+    would separate it, a contradiction.  
+\end{proof}
+
+\subsection{\S 25, Components: how a disconnected space splits}
+Connectedness is a yes/no question asking "Is the whole space 
+connected?". 
+Components are slightly more refined and instead ask 
+"What are the largest connected chunks of the space?". 
+
+For $x \in X$ define the components of $x$ to be the 
+union of all connected subsets of $X$ containing $x$. 
+
+Equivalently, define $x \sim y$ if there exists 
+a connected subset of $X$ containing both $x$ and $y$. 
+The equivalence classes are the components of $X$. So 
+a component is a maximal connected subspace. 
+
+Suppose 
+\[
+    C_x = \bigcup_\alpha A_\alpha, 
+\]
+where each $A_\alpha$ is connected and contains $x$. 
+Every $A_\alpha$ has the common point $x$. 
+
+The union of connected sets having a common point is 
+connected. 
+
+Therefore $C_x$ is connected. 
+And since it contains every connected set 
+containing $x$, it is maximal. 
+
+Furthermore, components partition the space. 
+
+Every point lies in its own component. Two components 
+are either disjoint or equal. 
+Suppose $C_1, C_2$ intersect. Then 
+$C_1 \cup C_2$ is connected because the 
+two connected sets have a common point. 
+However, both $C_1,C_2$ are maximal connected sets so 
+$C_1 = C_2$. 
+
+Thus $X$ is partitioned into connected pieces. 
+
+\subsection{Components are closed}
+This is an important theorem: 
+Every component of a space is closed. 
+
+The main ingredient in this is an important one, 
+namely that $A$ connected $\Rightarrow$ $\overline A$ connected. 
+If $C$ is a component, then its closure $\overline C$ is connected, 
+but $C \subseteq \overline C$ and $C$ was maximal so 
+$\overline C = C$. Hence it is closed.  
+
+\subsection{Path components} 
+Similarly, define $x \sim_{p} y$ if there 
+exists a path joining $x$ and $y$. 
+The equivalence classes are called path components. 
+Every path component lies inside a component because 
+path connected $\Rightarrow$ connected. 
+
+So conceptually, path components $\subseteq$ components and 
+they can be strictly smaller. 
+
+\subsection{Local connectedness} 
+
+A space can faily to be connected globally, but look 
+connected locally. 
+
+A space $X$ is locally connected at $x$ if every 
+neighborhood $U$ of $x$ contains a connected neighborhood 
+$V$ of $x$. 
+
+That is, 
+\[
+    x \in V \subseteq U
+\]
+with $V$ connected and a neighborhood of $x$. 
+
+It is locally connected if this holds at every $x \in X$. 
+Munkres gives an analogous definition for local path connectedness. 
+For example, $\mathbb R \setminus \{0\}$ is not connected, 
+but it is locally connected, meaning around every point 
+you can choose a sufficiently small interval not crossing $0$. 
+
+\subsection{Local theorem}
+
+Munkres gives the useful characterization,  
+\[
+    X \ \text{is locally connected} 
+\]
+\[
+    \Updownarrow 
+\]
+\[
+    \text{every component of 
+    every open subset of} \ X \ \text{is open in} \ X. 
+\]
+
+There is, of course, an analogous statement with 
+path components and locally path connected spaces. 
+
+Now, why should this make sense? 
+
+Suppose $X$ is locally connected, $U \subseteq X$ is 
+open, and $C$ is a component of $U$. Take $x\in C$. 
+
+Because $U$ is a neighborhood of $x$, local connectednes 
+gives a connected neighborhood $V_x$ with 
+$x \in V_x \subseteq U$. 
+
+Since $V_x$ is connected and intersects $C$, maximality 
+of $C$ gives $V_x \subseteq C$. 
+Do this for every $x \in C$. Then 
+\[
+    C = \bigcup_{x \in C} V_x. 
+\]
+Hence $C$ is open. 
+
+Also, $X$ locally path connected $\Rightarrow$ components 
+$=$ path components. 
+
+\subsection{\S 26, Compactness}
+
+Connectedness asks whether the space can be pulled 
+apart, while compactness asks whether infinitely 
+much local information can be reduced to finitely much 
+information. 
+Let $\mathcal U = \{U_\alpha\}_{\alpha \in A}$ be a collectioon 
+of open sets in $X$. 
+
+It is an open cover of $X$ if 
+\[
+    X \subseteq \bigcup_{\alpha \in A} U_{\alpha}. 
+\]
+
+The space $X$ is compact if every open cover has a 
+finite subcover, meaning 
+\[
+    X \subseteq \bigcup_{\alpha \in A} U_{\alpha}
+    \Rightarrow 
+    X \subseteq U_{\alpha_1} \cup \cdots 
+    \cup U_{\alpha_n}
+\]
+for some finite choice of indices. 
+
+As a first example, recall from analysis that 
+$[0,1]$ is compact, but $(0,1)$ is not. 
+For example, $U_n = (1/n, 1)$ cannot be reduced to a 
+finite cover. 
+
+\subsection{Closed subsets of compact spaces}
+\begin{thm}
+    $X$ is compact and $A \subseteq X$ closed 
+    implies that $A$ is compact. 
+\end{thm}
+\begin{proof}
+    Let $\{U_\alpha\}$ be an open cover of $A$. 
+    Because $A$ is closed, $X \setminus A$ is open. 
+    Then $\{U_\alpha\} \cup \{X\setminus A\}$ covers $X$ 
+    and can thus be reduced to a finite cover. 
+    Discard $X \setminus A$ if it was chosen. The 
+    remaining finitely many $U_\alpha$'s cover $A$. 
+\end{proof}
+
+\subsection{Compact subsets of Hausdorff spaces are closed} 
+The converse is generally not true. 
+
+In a Hausdorff space, $A \subseteq X$, $A$ compact, $X$ 
+Hausdorff $\Rightarrow$ $A$ closed. 
+
+Take $x \in X \setminus A$. For every $a \in A$, 
+Hausdorffness gives disjoint open 
+$U_a \ni a$ and $V_a \ni x$. 
+The sets $U_a$ cover $A$. 
+Compactness gives finitely many $U_{a_1}, \ldots, U_{a_n}$. 
+
+Let 
+\[
+    V = V_{a_1} \cap \cdots \cap V_{a_n}. 
+\]
+This is open, contains $x$, and is disjoint 
+from $U_{a_1} \cup \cdots \cup U_{a_n}$, which 
+contains $A$. Thus $V \cap A = \emptyset$. So 
+every point outside $A$ has an open neighborhood 
+not intersecting with $A$. 
+Therefore $X \setminus A$ is open, hence $A$ is closed. 
+
+\subsection{Two nice theorems}
+Another nice theorem I'll state informally: 
+\[
+    X \ \text{compact}, \ f: X \to Y \ \text{continuous} 
+    \Rightarrow f(X) \ \text{compact. }
+\]
+Let $\{U_\alpha\}$ be an open cover of $f(X)$. 
+Then $\{f^{-1}(U_\alpha)\}$ covers $X$. 
+Compactness lets us reduce to finitely many and therefore 
+we can find a finite cover of the image od $f$. 
+
+\begin{thm}
+    Suppose $f: X \to Y$ is continuous 
+    and bijective with $X$ compact and $Y$ Hausdorff. 
+    Then $f$ is a homeomorphism. 
+\end{thm}
+\begin{proof}[Proof sketch]
+    Take a closed set $C \subseteq X$. Since 
+    $X$ is compact, $C$ is compact. Continuous images 
+    preserve that property so $f(C)$ is compact in $Y$. 
+    Since $Y$ is Hausdorff, $f(C)$ is closed. Thus 
+    $f$ maps closed sets to closed sets. 
+    Since $f$ is a bijection, this implies $f^{-1}$ is continuous.
+\end{proof}
+
+
 \end{document}
