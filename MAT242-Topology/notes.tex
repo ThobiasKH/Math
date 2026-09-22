@@ -1838,5 +1838,122 @@ we can find a finite cover of the image od $f$.
     Since $f$ is a bijection, this implies $f^{-1}$ is continuous.
 \end{proof}
 
+\subsection{Some problems}
+\begin{prob}[Munkres 24.1]
+    \medskip
+    \ 
+    \begin{enumerate}[label=\alph*)]
+        \item Show that no two of the spaces $(0,1), \ (0,1], 
+            \ [0,1]$ are homeomorpnic. 
+
+        \item Suppose there exist imbedddings $f : X \to Y$ and 
+            $g : Y \to X$. Show by means of an 
+            example that $X,Y$ need not be homeomorphic. 
+        \item Show $\mathbb R^n$ and $\mathbb R$ 
+            are not homeomorphic if $n > 1$. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of (a)]
+    Notice that $[0,1]$ is compact 
+    while $(0,1)$ is not. 
+    The latter is not since, if 
+    we take for instance the cover 
+    \[
+        \{(1/n, 1)\}_{n\in \mathbb N}
+    \]
+    of $(0,1)$ this cannot be reduced to a 
+    finite cover since for every $n$ we 
+    can find some $m > n$ such that 
+    \[
+        0 < \underbrace{1/m}_{\in (0,1)} < 1/n.  
+    \]
+    So $[0,1]$ and $(0,1)$ cannot be homeomorphic since 
+    continuous images would preserve compactness. 
+
+    $[0,1]$ and $(0,1]$ cannot be homeomorphic for the same 
+    reason. 
+
+    Lastly $(0,1)$ is not homeomorphic to $(0,1]$. 
+    Suppose they were. Let $f : (0,1] \to (0,1)$ be 
+    the corresponding homeomorphism. 
+    Then 
+    \[
+        f\bigm|_{(0,1] \setminus \{1\}} : 
+        (0,1) \to (0,1) \setminus f(\{1\})  
+    \]
+    would be a homeomorphism. Let $x = f(1)$.  
+    For any point in $y \in (0,1)$, its removal leaves  
+    \[
+        (0,1) \setminus \{y\} = (0,y) \cup (y,1)
+    \]
+    and in particular 
+    \[
+        (0,1) \setminus f(\{1\}) = (0,f(1)) \cup (f(1), 1)
+    \]
+    so the space is disconnected, while 
+    $(0,1] \setminus \{1\} = (0,1)$ is connected, a 
+    contradiction. 
+\end{proof}
+
+\begin{prob}[Munkres 25.4]
+    Let $X$ be locally path connected. 
+    Show that every connected open set in $X$ 
+    is path connected.
+\end{prob}
+
+\begin{proof}
+Let $U\subseteq X$ be open and connected. We show that
+$U$ is path connected.
+
+Fix $x\in U$ and let
+\[
+    P_x
+    =
+    \{z\in U : \text{there exists a path in $U$ from $x$ to $z$}\}.
+\]
+Thus $P_x$ is the path component of $x$ in $U$.
+
+We first show that $P_x$ is open in $U$. Let $z\in P_x$.
+Since $U$ is an open neighborhood of $z$ and $X$ is locally
+path connected, there exists an open path-connected set
+$V_z$ such that
+\[
+    z\in V_z\subseteq U.
+\]
+For every $w\in V_z$, there is a path from $z$ to $w$ inside
+$V_z$. Since $z\in P_x$, there is also a path from $x$ to $z$
+inside $U$. Composing these paths gives a path from $x$ to $w$,
+so $w\in P_x$. Hence
+\[
+    V_z\subseteq P_x,
+\]
+and therefore $P_x$ is open.
+
+We similarly show that $U\setminus P_x$ is open. Let
+$z\in U\setminus P_x$. Again choose an open path-connected
+neighborhood
+\[
+    z\in V_z\subseteq U.
+\]
+Suppose that $V_z\cap P_x\neq\emptyset$, and choose
+$w\in V_z\cap P_x$. There is a path from $x$ to $w$, and since
+$V_z$ is path connected, there is a path from $w$ to $z$.
+Composing them would give a path from $x$ to $z$, contradicting
+$z\notin P_x$. Hence
+\[
+    V_z\subseteq U\setminus P_x.
+\]
+Thus $U\setminus P_x$ is also open.
+
+Therefore $P_x$ is both open and closed in $U$. Since $U$ is
+connected and $P_x$ is nonempty, we must have
+\[
+    P_x=U.
+\]
+Hence every point of $U$ can be joined to $x$ by a path, so
+$U$ is path connected.
+
+\end{proof}
+
 
 \end{document}
