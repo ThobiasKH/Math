@@ -1,5 +1,7 @@
 \input{preamble.tex}
 
+\DeclareMathOperator{\im}{\operatorname{im}}
+
 \title{\huge{MAT242 - Topology}}
 \author{\LARGE{Thobias Høivik}}
 \date{Fall 2026} 
@@ -1954,6 +1956,220 @@ Hence every point of $U$ can be joined to $x$ by a path, so
 $U$ is path connected.
 
 \end{proof}
+
+\begin{prob}
+    Let $X$ be a topological space, and let 
+    $A,B \subseteq X$ be connected subspaces such that 
+    $A \cap B \neq \emptyset$. 
+    Prove that $A \cup B$ is connected. 
+\end{prob}
+\begin{proof}
+    We are free to discard the trivial case where 
+    $A = B$. 
+
+    Since $A,B$ are connected, 
+    the only continuous functions $f : A \to \{0,1\}$ 
+    and $g : B \to \{0,1\}$ are constant functions. 
+
+    Suppose $A \cup B$ is not connected, meaning 
+    we can find a continuous $h : A \cup B\to \{0,1\}$ which 
+    is non-constant. 
+
+    Necessarily, 
+    \[
+        h\bigm|_A = c_A \in \{0,1\}
+    \]
+    is constant, and 
+    \[
+        h\bigm|_B = c_B \in \{0,1\}
+    \]
+    is constant, since they are connected spaces. 
+
+    We assume $h$ is non-constant. So there exists 
+    some $x,y \in A \cup B$ such that 
+    \[
+        h(x) \neq h(y). 
+    \]
+
+    Then, necessarily, these points cannot be in 
+    the intersection of $A$ and $B$. 
+    So one of these points are in $A \setminus B$ or 
+    $B \setminus A$. Without loss of generality, 
+    suppose $x \in A \setminus B$. 
+    Then we require $y \in B \setminus A$ since otherwise 
+    we would have 
+    \[
+        c_A = h(x) \neq h(y) = c_A. 
+    \]    
+    From this we deduce $c_A \neq c_B$, but then, for 
+    $z \in A \cap B$, we would have 
+    \[
+        h(z) = h\bigm|_A(z) = h\bigm|_B(z) 
+    \]
+    so 
+    \[
+        c_A = c_B, 
+    \]
+    a contradiction.
+\end{proof}
+
+\begin{prob}
+    Let $\{A_\alpha\}_{\alpha \in I}$ be a 
+    collection of connected subspaces of $X$. Suppose 
+    there exists a point $p \in X$ such that 
+    $p \in A_\alpha$ for every $\alpha \in I$. 
+
+    Prove that 
+    \[
+        \bigcup_{\alpha \in I} A_\alpha 
+    \]
+    is connected. 
+\end{prob}
+
+\begin{proof}
+    We suppose $A_\alpha$ are all connected, so 
+    for any continuous $f_\alpha : A_\alpha \to \{0,1\}$, 
+    the function must be constant. 
+
+    Let $\varphi : \bigcup_{\alpha} A_\alpha \to \{0,1\}$ 
+    be continuous. 
+
+    Then, necessarily, 
+    \[
+        \varphi \bigm|_{A_\alpha} : A_\alpha \to     
+        \{0,1\}
+    \]
+    is constant (also the restriction remains 
+    continuous). 
+
+    We have 
+    \[
+        \varphi(p) = c \in \{0,1\}
+    \]
+    and in particular, 
+    since $p \in A_\alpha$ for every $\alpha \in I$, and 
+    the restriction to $A_\alpha$ is constant, 
+    we have 
+    \[
+        \im\varphi\bigm|_{A_\alpha} = \{c\} 
+    \]
+    for every $\alpha \in I$. Thus 
+    \[
+        \im\varphi = \{c\} 
+    \]
+    is constant, and hence 
+    \[
+        \bigcup_\alpha A_\alpha
+    \]
+    is connected.
+\end{proof}
+
+\begin{prob}
+    Let $A\subseteq X$ be connected. Prove that its 
+    closure $\overline A$ is connected. 
+\end{prob}
+
+\begin{proof}
+    Suppose $A$ is a connected subspace of some 
+    space $X$. Then any continuous function $f : A \to \{0,1\}$ 
+    must be constant.  
+
+    Recall that $\overline A$ is the smallest 
+    closed set containing $A$, equivalently it is 
+    the intersection of all closed 
+    subsets of $X$ containing $A$.  
+    Denote $f(A) = \{c_A\}$. 
+
+    Let $f : \overline A \to \{0,1\}$ be some continuous 
+    function. 
+
+    Suppose, $x,y \in \overline A$ with 
+    \[
+        f(x) = c_x, \ f(y) = c_y. 
+    \] 
+    
+    The fiber of $c_x$ is an open set $V_x$ of $\overline A$ 
+    containing $x$.     
+    Likewise, the fiber of $c_y$ is an open set
+    $V_y$ of $\overline A$ containing $y$. 
+    
+    Then $f(V_x \cap A) = \{c_x\}$ and 
+    $f(V_y \cap A) = \{c_y\}$, but since 
+    these are subsets of $A$, and 
+    \[
+        \im f\bigm|_A = \{c_A\},
+    \]
+    we must have 
+    \[
+        c_x = c_A = c_y. 
+    \]
+
+    Therefore the space is connected. 
+
+    Note: I should have been more rigorous 
+    in explaining that we can do this by arguing that 
+    since the points were in the closure, any open 
+    neighborhood necessarily intersects $A$. 
+    
+\end{proof}
+
+\begin{prob}
+    Let $C$ be a connected component of a topological 
+    space $X$. Prove that $C$ is closed in $X$. 
+
+    You may use $A$ connected 
+    $\Rightarrow$ $\overline A$ connected. 
+\end{prob}
+\begin{proof}
+    $C$ is a maximal connected subset. 
+
+    Thus there does not exist any 
+    $D \subseteq X$ containing $C$ which is also connected. 
+    
+    In particular, since $C \subseteq \overline C$ 
+    we must have that 
+    \[
+        C = \overline C. 
+    \]
+    Otherwise, $\overline C$ would be a larger connected 
+    subspace ($C$ connected $\Rightarrow$ 
+    $\overline C$ connected) containing all of $C$,  
+    contradicting the maximality of $C$. 
+\end{proof}
+
+\begin{prob}
+    Let $X$ be locally connected. Let $U \subseteq X$ 
+    be open, and let $C$ be a connected component 
+    of $U$. 
+
+    Prove that $C$ is open in $X$. 
+\end{prob}
+\begin{proof}
+    Since $X$ is locally connected, then for every  
+    $x \in X$ we can, for every open 
+    neighborhood $U_x \supseteq x$, find an open 
+    connected set $V_x \supseteq x$ contained in $U_x$. 
+
+    We suppose $U$ is an open set in $X$ and 
+    that $C$ is a maximal connected subset of $U$. 
+
+    For any $x \in C$, we can find a connected open 
+    neighborhood 
+    $V_x$ with $V_x \subseteq U$. 
+
+    Since $C$ is maximal, $x \in C$, and $V_x$ is connected 
+    we have $V_x \subseteq C$ for every $x$ (might 
+    need one more step to be completely 
+    justified). 
+    Then 
+    \[
+        \bigcup_{x} V_x = C. 
+    \]
+    Since open sets are closed under arbitrary unions, 
+    $C$ is open. 
+
+\end{proof}
+
 
 
 \end{document}

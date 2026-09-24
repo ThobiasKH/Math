@@ -4288,5 +4288,127 @@ Interestingly, tensor products are not left exact.
     both with finitely many $a_{ij}$ nonzero. 
 \end{proof}
 
+\begin{prob}
+    Prove that 
+    \[
+        M \otimes_R R \cong M
+    \]
+    from the universal property. 
+\end{prob}
+\begin{proof}
+    Let $\alpha : M \times R \to M$ by 
+    \[
+        \alpha(m,r) = rm. 
+    \]
+    This is a well defined, bilinear homomorphism for obvious 
+    reasons (trust me bro). 
+
+    Thus, by the universal property, there is a 
+    $\varphi : M \otimes_R R \to M$ 
+    making 
+    \[
+        \begin{tikzcd} 
+            M \times R \arrow[dr, "\tau"] 
+            \arrow[r, "\alpha"] & M \\ 
+            & M \otimes_R R \arrow[u, "\varphi"]
+        \end{tikzcd}
+    \]
+    commute, 
+    where $(m,r) \overset\tau\mapsto m \otimes r$.
+
+    So $\varphi$ is the homomorphism sending 
+    $m \otimes r$ to $rm$. 
+
+    Let $\psi : M \to M \otimes_R R$ by 
+    \[
+        \psi(m) = m \otimes 1. 
+    \]
+    Clearly, this is a homomorphism. 
+    For the isomorphism argument observe the following. 
+
+    Then $(\varphi \circ \psi)(m) = m$. 
+    For the other direction we look at pure 
+    tensors: 
+    \[
+        (\psi\circ \varphi)(m\otimes r) 
+        = \psi(rm) = rm \otimes 1 = m\otimes r. 
+    \]
+
+    Thus 
+    \[
+        M \otimes_R R \cong M.
+    \]
+\end{proof}
+
+\begin{prob}
+    Consider 
+    \[
+        \mathbb Z/4\mathbb Z \otimes_{\mathbb Z} 
+        \mathbb Z/6\mathbb Z.
+    \]
+    Define $\alpha : \mathbb Z/4\mathbb Z \times 
+    \mathbb Z/6\mathbb Z \to \mathbb Z/2\mathbb Z$ by 
+    \[
+        \alpha(\overline a, \overline b) 
+        = \overline{ab} \mod 2. 
+    \]
+    
+    Show $\alpha$ is well-defined, 
+    $\mathbb Z$-bilinear, derive 
+    a homomorphism from the tensor product into 
+    $\mathbb Z/2\mathbb Z$ and finally prove that 
+    \[
+        \overline 1 \otimes \overline 1 \neq 0. 
+    \]
+\end{prob}
+\begin{proof}
+    Clearly, $\alpha$ is well-defined since 
+    taking the product of some integers $a,b$ and reducing 
+    modulo $2$ yields a value in $\mathbb Z/2\mathbb Z$. 
+
+    Next we check bilinearity. 
+    \begin{align*}
+        \alpha(\overline{a_1} + \overline{a_b}, b) 
+        &= \overline{(a_1 + a_2)b} \mod 2 \\ 
+        &= \overline{a_1b + a_2b} \mod 2 \\ 
+        &= \overline{a_1b} + \overline{a_2b} \mod 2 \\ 
+        &= \alpha(a_1, b) + \alpha(a_2,b). 
+    \end{align*}
+    The check for linearity in the second argument is analogous. 
+
+    Let $\tau$ be the map which sends $(\overline a, \overline b) 
+    \overset\tau\mapsto \overline a \otimes \overline b$. 
+
+    Then there exists $\varphi : \mathbb Z/4\mathbb Z 
+    \otimes_{\mathbb Z} \mathbb Z/6\mathbb Z \to 
+    \mathbb Z/2\mathbb Z$ such that 
+    \[
+        \begin{tikzcd}
+            \mathbb Z/4\mathbb Z \times \mathbb Z/6\mathbb Z 
+            \arrow[dr, "\tau"] \arrow[r, "\alpha"] 
+            & \mathbb Z/2\mathbb Z \\ 
+            & \mathbb Z/4\mathbb Z \otimes_{\mathbb Z} 
+            \mathbb Z/6\mathbb Z \arrow[u,"\varphi"]
+        \end{tikzcd}
+    \]
+    commutes. 
+
+    Then $\varphi$ is the homomorphism sending 
+    $\overline a \otimes \overline b \overset\varphi\mapsto 
+    \overline{ab}$ reduced modulo $2$. 
+
+    Then 
+    \begin{align*}
+        \varphi(\overline 1 \otimes \overline 1) 
+        &= \alpha(\overline 1,\overline 1) \\ 
+        \varphi(\overline 1 \otimes \overline 1) 
+        &= \overline{1 \cdot 1} \mod 2 \\ 
+        \varphi(\overline 1 \otimes \overline 1)
+        &= \overline 1 \mod 2 \\  
+        \varphi(\overline 1\otimes \overline 1)   
+        &\neq 0.
+    \end{align*}
+\end{proof}
+
 
 \end{document}
