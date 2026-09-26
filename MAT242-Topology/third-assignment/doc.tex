@@ -1,0 +1,51 @@
+\input{preamble.tex}
+
+\title{\huge{Assignment 3}}
+\author{\LARGE{Remote grp}}
+\date{for September 26, 2026}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+\begin{prob}[Munkres 16.9]
+    Show that 
+    the dictionary order topology on the set 
+    $\mathbb R \times \mathbb R$ is the 
+    same as the product topology $\mathbb R_d 
+    \times \mathbb R$ where $\mathbb R_d$ renotes 
+    $\mathbb R$ in the discrete topology. 
+    Compare this topology with the standard 
+    topology on $\mathbb R^2$. 
+\end{prob}
+\begin{proof}
+    We recall that the 
+    dictionary order on $\mathbb R^2$, $\prec$, compares 
+    the first coordinate, 
+    \[
+        (x_1,x_2) \prec (y_1,y_2) \ \text{if} \ x_1 < x_2, 
+    \]  
+    and if $x_1 = x_2$, we compare the 
+    second coordinate, concluding $(x_1,x_2) \prec (y_1,y_2)$ 
+    if $y_1 < y_2$.
+
+    Then, the dictionary order topology is generated 
+    by open intervals $(a \times b, c \times d)$ where 
+    $(a,c) \prec (b,d)$. 
+    In particular the basiselements are 
+    \[
+        \{x_1\} \times (y_1,y_2)  
+    \]
+    and 
+    \[
+        \{x_1\} \times (y_1,\infty)
+        \cup 
+        (x_1,x_2) \times \mathbb R
+        \cup 
+        \{x_2\} \times (-\infty, y_2). 
+    \]
+\end{proof}
+
+
+\end{document}
