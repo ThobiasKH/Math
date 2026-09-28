@@ -4410,5 +4410,327 @@ Interestingly, tensor products are not left exact.
     \end{align*}
 \end{proof}
 
+\section{Localization} 
+
+We begin by motivating localization 
+with something familiar. 
+
+We know $\mathbb Z \subseteq \mathbb Q$. 
+To get from the integers to the rationals we 
+allow division by all nonzero elements of the former. 
+
+Localization can be seen as a generalization of 
+this. Given a ring $R$, choose a set 
+$S \subseteq R$ whose elemennts you want to make 
+invertible. 
+
+Then construct a new ring, 
+\[
+    S^{-1}R 
+\]
+whose elements look like fractions 
+$a/s$ with $a\in R, \ s \in S$. 
+
+Gathmann gives this algebraic motivation as well as 
+similtaneously giving a geometric interpretation 
+in terms of rational functions defined near a 
+point. 
+
+The important point is that we are 
+now interested in a structure $S^{-1}R \approx$ the 
+ring obtained from $R$ by making every $s \in S$ invertible. 
+
+\subsection{$S$ must be multiplicatively closed}
+Suppose we want fractions 
+\[
+    \frac{a}{s}, \ \frac{b}{t}. 
+\]
+Then their product should be 
+\[
+    \frac{ab}{st}. 
+\]
+So if $s,t$ are allowed denominators, $st$ must also 
+be an allowed denominator. 
+
+Thus $S$ must be multiplicatively closed, meaning 
+$1 \in S$, $s,t \in S \Rightarrow st \in S$. 
+
+The first condition ensures that the 
+original ring embeds, at least superficially, by 
+$a \mapsto a/1$. 
+
+\subsection{Recognizing same fractions}
+If $R$ were an integral domain, we'd expect 
+\[
+    \frac{a}{s} = \frac{a'}{s'}
+\]
+if and only if 
+\[
+    as' = a's. 
+\]
+However, rings can have zero divisors, so we modify 
+this. 
+
+Define $(a,s) \sim (a',s')$ if there exists 
+$u \in S$ such that 
+\[
+    u(as' - a's) = 0. 
+\]
+The fraction notation $\frac{a}{s}$ then means the 
+equivalence class $(a,s)$. 
+
+The point of the extra $u$ is, because when zero 
+divisors exist, ordinary cross-multiplication does 
+not give a transitive equivalence relation. The extra $u$ 
+roughly says that the two fractions become equal 
+after multiplying by some denominator that 
+we are going to make invertible anyways. 
+
+If $S$ contains no zero divisors, this reduces 
+to the typical $as' = a's$. 
+
+The resulting ring is 
+\[
+    S^{-1}R = \left\{\frac{a}{s} \biggm| a \in R, \
+     s \in S\right\}.
+\]
+
+Addition and multiplication behave exactly how you'd expect. 
+
+\subsection{Geometrically} 
+
+Suppose $R = A(X)$ is the coordinate ring 
+of an affine variety $X$, and fix a point $p \in X$. 
+A fraction 
+\[
+    \frac{f}{g}
+\]
+might not define a function on all of $X$, since 
+$g$ might vanish somewhere, but if $g(p) \neq 0$, 
+then $g$ is nonzero at the point we care 
+about, so $f/g$ makes sense at least around $p$. 
+
+Thus choose 
+\[
+    S = \{g \in A(X) \bigm| g(p) \neq 0\}. 
+\]
+
+Then $S^{-1}A(X)$ is the ring of functions that 
+are defined locally around $p$. 
+
+\subsection{Important choices of $S$}
+
+There are several standard localizations, but two 
+are much more important than others. 
+
+First, if $R$ is an integral domain, take 
+\[
+    S = R \setminus \{0\}. 
+\]
+Then every nonzero element becomes invertible, so 
+\[
+    S^{-1}R 
+\]
+is a field, namely the field of fractions, 
+often denoted 
+\[
+    \operatorname{Quot}(R). 
+\]
+Obviously, 
+\[
+    \operatorname{Quot}(\mathbb Z) 
+    = \mathbb Q. 
+\]
+Second, fix an element $a \in R$ and take 
+$S = \{1,a,a^2,\ldots\}$. Then we invert $a$ and write 
+the resulting localization as $R_a$. 
+
+Importantly, if $P$ is a prime ideal, take $S = R\setminus P$. 
+Because $P$ is prime, $R\setminus P$ is multiplicatively closed. 
+We write $R_P$ for this localization. 
+
+Thus in $R_P$, every element outside $P$ becomes 
+invertible. 
+
+Concretely, 
+localizing $\mathbb Z$ at the prime ideal $(p)$ gives
+\[
+    \mathbb Z_{(p)} 
+    = \left\{\frac{a}{b} \biggm| p \nmid b\right\}. 
+\]
+
+So denominators are allowed precisely 
+when they are not divisible by $p$. 
+For instance, 
+\[
+    \frac{1}{7} \in \mathbb Z_{(3)}, 
+\]
+but 
+\[
+    \frac{1}{3} \not\in \mathbb Z_{(3)}. 
+\]
+
+\subsection{Prime ideals} 
+
+Prime ideals of $S^{-1}R$ correspond exactly 
+to prime ideals of $R$ that do not meet $S$, meaning 
+the prime ideals of $S^{-1}R$ correspond one-to-one 
+with the prime ideals $P$ of $R$ satisfying 
+$P \cap S = \emptyset$. 
+
+Now let 
+$S = R \setminus P$. The primes surviving localization are 
+precisely primes $Q$ satisfying $Q \subseteq P$. 
+
+In particular, $P$ becomes the unique largest surviving 
+prime. 
+Consequently, 
+$R_P$ has exactly one maximal ideal. 
+
+A ring with exactly one maximal ideal is called a 
+local ring. 
+Thus $R_P$ is a local ring. 
+
+The unique maximal ideal is 
+\[
+    PR_P = \left\{\frac{a}{s} \biggm| a \in P; s \not\in 
+    P\right\}. 
+\]
+
+Geometrically, after zooming all the way in around 
+one point, that point becomes the only maximal ideal left. 
+
+\subsection{The universal property (yippee, another one)}
+
+Localization has a universal property. 
+
+Suppose $\alpha : R \to R'$ is a ring homomorphism 
+such that every element of $S$ becomes a unit in $A'$. 
+Then there exists a unique map 
+\[
+    \varphi : S^{-1}R \to R' 
+\]
+extending $\alpha$. 
+
+This is inevitable because once $s$ becomes invertible, 
+there is only one sensible possible definition, namely 
+\[
+    \varphi\left(\frac{a}{s}\right) = 
+    \alpha(a) \alpha(s)^{-1}. 
+\]
+
+So $S^{-1}R$ is the universal ring in which every 
+element of $S$ has been made invertible. 
+
+This is analogous to the tensor product, 
+\[
+    M \otimes N 
+\]
+is the universal object for turning bilinear maps into 
+linear maps while 
+\[
+    S^{-1}R 
+\]
+is the universal object for making the elements of $S$ 
+inveritble. 
+
+\subsection{Localization of modules}
+If $M$ is an $R$-module, we can localizie it as well. 
+Its elements look like 
+\[
+    \frac{m}{s}, \ m \in M, \ s \in S. 
+\]
+
+We denote this module by $S^{-1}M$. 
+The equivalence relation is the obvious module 
+analogue 
+\[
+    \frac{m}{s} = \frac{m'}{s'} 
+\]
+if some $u \in S$ satisfies $u(s'm - sm') = 0$. 
+
+Then
+\[
+    S^{-1}M 
+\]
+is naturally a module over $S^{-1}R$. 
+
+If $P$ is prime, we write $M_P$. Geometrically 
+we can think of this as retaining the behavior of $M$
+only near $P$. 
+
+\subsection{Tensor products again}
+
+Gathmann proves that 
+\[
+    S^{-1}M \cong M \otimes_R S^{-1}R. 
+\]
+So localization of a module is just extension of 
+scalars 
+\[
+    R \longrightarrow S^{-1}R. 
+\]
+We had an $R$-module $M$. We enlarge the scalar 
+ring to $S^{-1}R$. 
+The corresponding module becomes 
+\[
+    M \otimes_R S^{-1}R. 
+\]
+
+The correspondence is nice also: 
+\[
+    \frac{m}{s} \leftrightarrow m \otimes \frac{1}{s}.  
+\]
+
+\subsection{Localization is exact} 
+
+Suppose 
+\[
+    0 \to M_1 \overset\varphi\to M_2 
+    \overset\psi\to M_3 \to 0 
+\]
+is short exact. 
+
+Then localization gives an exact sequence 
+\[
+    0 \to S^{-1}M_1 \to S^{-1}M_2 \to 
+    S^{-1}M_3 \to 0. 
+\]
+
+Nicely, this is stronger than tensoring since 
+the tensor product is onkly right exact in general. 
+
+But localiztaion is tensoring with 
+$S^{-1}R$, and for this special tensor factor 
+injectivity is always preserved so 
+\[
+    - \otimes_R S^{-1}R 
+\]
+is actually exact. 
+
+Later terminology would say that 
+$S^{-1}R$ is a flat $R$-module. 
+
+Immediate consequences include 
+\begin{align*}
+    S^{-1}(\ker\varphi) &= \ker(S^{-1}\varphi), \\ 
+    S^{-1}(\im\varphi) &= \im(S^{-1}\varphi), \\ 
+    S^{-1}(N/M) &\cong S^{-1}N/S^{-1}M. 
+\end{align*}
+
+\subsection{Punchline}
+
+Suppose $M$ is an $R$-module. 
+If $M_P = 0$, for every maximal ideal $P$, then 
+$M = 0$. 
+Even more importantly, a sequence is exact if and only if 
+it is exact after localization at every 
+maximal ideal. 
+
+So we can prove some global algebraic fact by looking 
+at each maximal ideal separately, almost like proving 
+continuity for a function. 
 
 \end{document}
+
+
