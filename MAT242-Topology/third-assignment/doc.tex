@@ -2,14 +2,13 @@
 
 \title{\huge{Assignment 3}}
 \author{\LARGE{Remote grp}}
-\date{for September 26, 2026}
+\date{for September 29, 2026}
 
 \begin{document}
 \maketitle
 
-\newpage
 
-\begin{prob}[Munkres 16.9]
+\begin{prob*}[Munkres 16.9]
     Show that 
     the dictionary order topology on the set 
     $\mathbb R \times \mathbb R$ is the 
@@ -18,33 +17,100 @@
     $\mathbb R$ in the discrete topology. 
     Compare this topology with the standard 
     topology on $\mathbb R^2$. 
-\end{prob}
-\begin{proof}
-    We recall that the 
-    dictionary order on $\mathbb R^2$, $\prec$, compares 
-    the first coordinate, 
-    \[
-        (x_1,x_2) \prec (y_1,y_2) \ \text{if} \ x_1 < x_2, 
-    \]  
-    and if $x_1 = x_2$, we compare the 
-    second coordinate, concluding $(x_1,x_2) \prec (y_1,y_2)$ 
-    if $y_1 < y_2$.
+\end{prob*}
 
-    Then, the dictionary order topology is generated 
-    by open intervals $(a \times b, c \times d)$ where 
-    $(a,c) \prec (b,d)$. 
-    In particular the basiselements are 
+\begin{proof}
+    Recall that the dictionary order on $\mathbb R^2$ is defined by
     \[
-        \{x_1\} \times (y_1,y_2)  
+        (x_1,x_2)\prec (y_1,y_2)
     \]
-    and 
+    if either $x_1<y_1$, or $x_1=y_1$ and $x_2<y_2$.
+
+    Let $\mathcal T_{\mathrm{dict}}$ denote the dictionary order topology
+    and let $\mathcal T_{\mathrm{prod}}$ denote the product topology on
+    $\mathbb R_d\times \mathbb R$.
+
+    Since $\mathbb R_d$ is discrete, a basis for
+    $\mathcal T_{\mathrm{prod}}$ is given by sets of the form
     \[
-        \{x_1\} \times (y_1,\infty)
-        \cup 
-        (x_1,x_2) \times \mathbb R
-        \cup 
-        \{x_2\} \times (-\infty, y_2). 
+        \{x\}\times (a,b),
     \]
+    but
+    \[
+        \{x\}\times(a,b)
+        =
+        ((x,a),(x,b))
+    \]
+    in the dictionary order. Hence every basis element of
+    $\mathcal T_{\mathrm{prod}}$ is open in
+    $\mathcal T_{\mathrm{dict}}$. Therefore
+    \[
+        \mathcal T_{\mathrm{prod}}
+        \subseteq
+        \mathcal T_{\mathrm{dict}}.
+    \]
+
+    Conversely, consider a basic open interval
+    \[
+        ((a,b),(c,d))
+    \]
+    in the dictionary order.
+
+    If $a=c$, then
+    \[
+        ((a,b),(a,d))
+        =
+        \{a\}\times(b,d),
+    \]
+    which is open in $\mathbb R_d\times\mathbb R$.
+
+    If $a<c$, then
+    \[
+        ((a,b),(c,d))
+        =
+        \bigl(\{a\}\times(b,\infty)\bigr)
+        \cup
+        \bigl((a,c)\times\mathbb R\bigr)
+        \cup
+        \bigl(\{c\}\times(-\infty,d)\bigr).
+    \]
+    Since $\mathbb R_d$ is discrete, every subset of $\mathbb R_d$
+    is open, so each of these sets is open in
+    $\mathbb R_d\times\mathbb R$.
+
+    Thus every basic open set in the dictionary order topology is open
+    in the product topology, and hence
+    \[
+        \mathcal T_{\mathrm{dict}}
+        \subseteq
+        \mathcal T_{\mathrm{prod}}.
+    \]
+
+    Therefore
+    \[
+        \mathcal T_{\mathrm{dict}}
+        =
+        \mathcal T_{\mathrm{prod}}.
+    \]
+
+    Finally, we compare this with the usual topology on $\mathbb R^2$.
+    Since the discrete topology on $\mathbb R$ is finer than the usual
+    topology,
+    \[
+        \mathbb R_d\times\mathbb R
+    \]
+    has a topology finer than the usual product topology on $\mathbb R^2$.
+
+    The inclusion is strict. For example,
+    \[
+        \{0\}\times(-1,1)
+    \]
+    is open in $\mathbb R_d\times\mathbb R$, hence in the dictionary
+    order topology, but it is not open in the usual topology on
+    $\mathbb R^2$.
+
+    Hence the dictionary order topology is strictly finer than the
+    standard topology on $\mathbb R^2$.
 \end{proof}
 
 
