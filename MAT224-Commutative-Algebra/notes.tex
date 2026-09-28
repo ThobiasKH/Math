@@ -4732,6 +4732,78 @@ at each maximal ideal separately, almost like proving
 continuity for a function. 
 
 
+\subsection{Some problems}
+
+\begin{prob}
+    Consider  
+    \[
+        \mathbb Z_{(3)} = \left\{\frac{a}{b} 
+        \biggm| a,b \in \mathbb Z, 3 
+        \nmid b\right\}. 
+    \]
+    Recall that this means we invert every 
+    integer outside $(3)$. 
+
+    Answer the following: 
+    \begin{enumerate}
+        \item Decide which of the following 
+            are elements of $\mathbb Z_{(3)}$: 
+            \[
+                \frac{1}{2}, \ 
+                \frac{1}{3}, \ 
+                \frac{6}{7}, \ 
+                \frac{9}{15}.  
+            \]
+        \item Which of the following are 
+            units in $\mathbb Z_{(3)}$? 
+            \[
+                2, \ 
+                3, \
+                6, \
+                \frac{3}{7}, \
+                \frac{10}{21}.    
+            \]
+        \item Show that 
+            \[
+                \frac{6}{3} = \frac{2}{1} 
+            \]  
+            is not a legitimate equality to use 
+            inside $\mathbb Z_{(3)}$ by simply 
+            treting $6/3$ as an element there. 
+            Explain why. 
+        \item Describe the unique maximal ideal of 
+            $\mathbb Z_{(3)}$. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution]
+    $1/2$ is an element of $\mathbb Z_{(3)}$ as 
+    $2$ is not divisible by $3$. 
+
+    The same is true for $6/7$, while $1/3$  
+    is not in $\mathbb Z_{(3)}$. 
+    $9/15 = 3/5$ so is in $\mathbb Z_{(3)}$. 
+
+    $2$ is a unit since $1/2 \in \mathbb Z_{(3)}$ is 
+    the multiplicative inverse. 
+
+    The same does not hold for the rest. 
+
+    $3, \ 6$ are divisible by $3$, $3/7$ has no inverse.  
+    The last element is not an element in $\mathbb Z_{(3)}$.  
+
+    I believe $6/3$ is not a valid representative in the 
+    construction. 
+
+    The unique maximal ideal is 
+    $(3) \mathbb Z_{(3)}$ which is 
+    \[
+        \left\{\frac{a}{b} \bigm| 3 \mid a, \ 3 \nmid b   
+        \right\}, 
+    \]
+    the set of nonunits. 
+\end{proof}
+
+
 
 \end{document}
 
