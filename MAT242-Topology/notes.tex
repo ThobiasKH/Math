@@ -2545,4 +2545,71 @@ homeomorphic to $S^2$ and more generally,
     $X^*$ is compact. 
 \end{proof}
 
+\begin{prob}
+    Let $X$ be a noncompact locally compact Hausdorff 
+    space, and let 
+    \[
+        X^* = X \cup \{\infty\}
+    \]
+    have the one-point compactification topology. 
+
+    Prove that $X^*$ is Hausdorff. 
+\end{prob}
+\begin{proof}
+    $X$ is already Hausdorff so 
+    separating two points $x,y \in X$ is not an issue. 
+
+    Fix $x\in X^* \setminus \{\infty\}$. 
+    We will look at separating 
+    $x$ and $\infty$. 
+
+    A set $U \subseteq X^*$ containing 
+    $\infty$ is open if and only 
+    if $X^* \setminus U$ is compact in $X$. 
+
+    Ideally we would want to prove that there 
+    must exist some open set 
+    $U$ with $x \not\in U$ for our arbitrary $x \in X = 
+    X^* \setminus \{\infty\}$, for which 
+    $X^* \setminus U$ is compact. 
+    
+    Since $X$ is locally compact (and Hausdorff), 
+    we can, for any 
+    open neighborhood $V$ of $x$ find 
+    $W \subseteq V$ containing $x$ such that 
+    $\overline W$ is compact. 
+    
+    Since $X$ is Hausdorff and $\overline W$ is compact, 
+    we have that $\overline W$ is closed. 
+
+    Thus $X \setminus \overline W$ is open in $X$. 
+    Therefore, $X^* \setminus \overline W$ is 
+    open in $X^*$.  
+    We don't really need to make this observation, since 
+    it suffices that $\overline W$ is compact 
+    $\Rightarrow X^* \setminus \overline W$ is 
+    open in $X^*$. 
+
+    Furthermore, $\infty \in X^* \setminus \overline W$ while, 
+    clearly, $x\not\in X^* \setminus \overline W$.
+    
+    Since $X^* \setminus \overline W$ and $\overline W$ is 
+    disjoint, and $W \subseteq \overline W$, we have that 
+    $W \cap X^* \setminus \overline W = \emptyset$. 
+
+    So $X^* \setminus \overline W$ is an open 
+    neighborhod of $\infty$, while $W$ is an open neighborhood 
+    of $x$. 
+
+    Furthermore, they are disjoint. 
+
+    As $x$ was arbitrarily chosen, we can 
+    separate any $x \in X^* \setminus \{\infty\}$ from 
+    $\infty$. 
+
+    This together with the fact that $X$ on its own is 
+    Hausdorff, gives Hausdorffness for $X^*$. 
+\end{proof}
+
+
 \end{document}
