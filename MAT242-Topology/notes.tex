@@ -2169,7 +2169,380 @@ $U$ is path connected.
     $C$ is open. 
 
 \end{proof}
+ 
+
+\section{\S 27 and 29} 
+
+In $\mathbb R$, we can study compactness in a 
+more familiar setting (more Real Analysis, damn it). 
+
+We recall, from Real Analysis, that in $\mathbb R$, 
+compactness corresponds to being closed and bounded. 
+
+However, this equivalence is special 
+to Euclidian-like spaces. We have seen that 
+this does not generally hold. 
+
+\subsection{Closed intervals are compact}
+
+The first major result is that 
+\[
+    [a,b] \subseteq \mathbb R 
+\]
+is compact, always. 
+
+Essentially, this is just Heine-Borel in one dimension. 
+Munkres uses the least upper bound property of 
+$\mathbb R$. 
+
+Suppose $\mathcal U$ is some open cover of 
+$[a,b]$. 
+
+Define 
+\[
+    C = \{x \in [a,b] \bigm| [a,x] \ \text{can be 
+    covered by finitely many members of} \ \mathcal U\}. 
+\] 
+
+Tge strategy is to show that this set is 
+nonempty, let $c = \sup C$, and prove that 
+$c = b$. 
+
+Suppose instead $c < b$. Since $\mathcal U$ covers 
+$[a,b]$, some $U \in \mathcal U$ contains $c$. 
+
+Because $U$ is open it contains an interval 
+$(c - \varepsilon, c + \varepsilon)$. 
+
+Since $c = \sup C$, there is some $x \in C$ with 
+$c - \varepsilon < x \leq c$. 
+
+Now $[a,b]$ already has a finite subcover, and 
+$U$ extends that finite cover beyond $c$. 
+
+So some point larger than $c$ belongs to $C$, a contradiction. 
+So we conclude $c = b$, so the interval has a finite subcover. 
+
+\subsection{Heine-Borel (again)}
+From the previous result, together with 
+the general compactness results from $\S 26$, we get 
+that 
+\[
+    A \subseteq \mathbb R^n \ \text{is compact} 
+    \Leftrightarrow A \ \text{is closed and bounded}. 
+\]
+
+\begin{proof}[Proof sketch]
+    $\Rightarrow$. 
+
+    Since $\mathbb R^n$ is Hausdorff, $A$ compact 
+    implies that $A$ is closed. 
+
+    For unboundedness, suppose $A$ were unbounded. 
+    Then 
+    \[
+        \{B(0,n) \bigm| n \in \mathbb N\}
+    \]
+    is an open cover of $A$. 
+
+    Any finite subcollection is contained in one largest ball 
+    \[
+        B(0,N), 
+    \]
+    which cannot cover unbounded $A$. 
+
+    Contradiction, meaning $A$ is bounded. 
+
+    $\Leftarrow$. 
+
+    If $A \subseteq \mathbb R^n$ is bounded, then 
+    for some $M$, 
+    \[
+        A \subseteq [-M,M]^n. 
+    \]
+    The box is compact. 
+    Since $A$ is closed in $\mathbb R^n$ it is closed 
+    and compact in the box. 
+    Closed subsets of compact spaces are compact 
+    so compactnjess of $A$ follows. 
+\end{proof}
+
+\subsection{Extreme Value Theorem}
+
+Suppose $X$ is compact and $f : X \to \mathbb R$ 
+is continuous. 
+
+Then $f(X)$ has a maximum and minimum. 
+So there exists $x_{\min}, x_{\max} \in X$ 
+such that $f(x_{\min}) \leq f(x) \leq f(x_{\max})$ 
+for all $x \in X$.  
+
+So what we learned in calculus, 
+\[
+    \text{continuous function on closed bounded interval 
+    attains max/min}
+\]
+is generalized to 
+\[
+    \text{continous images preserve compactness}. 
+\]
+
+\subsection{Uniform continuity}
+
+Recall that continuity in Real Analysis meant 
+\[
+    \forall x, \ \forall \varepsilon > 0, \
+    \exists \delta_x > 0 : d(x,y) < \delta_x  
+    \Rightarrow d'(f(x), f(y)) < \varepsilon 
+\]
+with the distinction that 
+$\delta_x$ may depend on $x$. 
+
+Recall that uniform continuity requires that 
+for every $\varepsilon > 0$ we can find some 
+point-independent $\delta > 0$ such that the 
+condition holds. 
+
+\begin{thm}
+    If $X$ is compact and $f: X \to Y$ is 
+    continuous between metric spaces, then 
+    $f$ is uniformly continuous. 
+\end{thm}
+
+Intuitively this makes sense, since 
+the compactness allows us to have finitely 
+many local choices of $\delta$ for which we can 
+simply take the minimum. 
+
+\subsection{Distance from a point to a set} 
+
+We define $d(x,A) = \inf\{d(x,a) \bigm| a \in A\}$. 
+
+If $A$ is compact, the infinmum is achieved, meaning 
+there is actually some $a_0 \in A$ such that 
+$d(x,A) = d(x,a_0)$. 
+
+With the previous fact this is trivial to prove, as 
+$a \mapsto d(x,a)$ is continuous on compact $A$, hence 
+attains its minimum. 
+
+\subsection{Closed and bounded does not imply compact in general}
+
+In $\mathbb R^n$, compact coincides precisely with being 
+closed and bounded, but in arbitrary metric spaces this fails. 
+
+For instance, an infinite set with the discrete 
+metric $d(x,y) = 0$ whenver $x = y$ and $1$ otherwise, 
+is nicely bounded and the whole space 
+is closed. 
+However, the singleton cover $\{\{x\} \bigm| x \in X\}$ 
+has no finite subcover, meaning $X$ is not compact. 
+
+\section{\S 29 Local compactness}
+\begin{defn}
+    A space $X$ is locally compact at $x$ if there 
+    exists a compact subspace $C \subseteq X$ 
+    that contains a neighborhood of $x$. 
+
+    Equivalently, there exists an open neighborhood 
+    $U$ of $x$ such that $x \in U \subseteq C$ for 
+    some compact $C$. 
+
+    If it holds for every $x\in X$ we say the 
+    space $X$ is locally compact. 
+\end{defn}
+
+Take for example $\mathbb R$. This space is 
+not compact, but it is obviously locally compact since 
+every point $x$ lies in 
+\[
+    (x-1, x+1) \subseteq [x-1,x+1],
+\]
+and the closed interval is compact. 
+
+Similarly, $\mathbb R^n$ is not compact, though it is 
+locally compact. 
+
+\subsection{Compact implies locally compact}
+
+Unsurprisingly, compactness of $X$ implies that 
+every point $x \in X$ has the neighborhood $X$ contained 
+in the compact set $X$. Not terribly complicated. 
+
+The converse fails. Also not very surprising. 
+
+\subsection{$\mathbb Q$ is not locally compact}
+
+In a useful contrast with the reals, the rationals 
+is not locally compact. 
+
+Take $x \in \mathbb Q$. 
+
+Any neighborhood in $\mathbb Q$ contains somethign like 
+$(a,b) \cap \mathbb Q$. Its closure is 
+roughly $[a,b] \cap \mathbb Q$, but this is 
+not compact. 
+
+One way to see why is that there are rational 
+sequences convering in $\mathbb R$ to irrational numbers. 
+
+For instance, $q_n \to \sqrt 2$ with all $q_n \in \mathbb Q$. 
+
+Suhc a sequence has no convergent subsequence in the rationals 
+with a limit in the rationals. 
+So $\mathbb Q$ has no compact neighborhood around a 
+point. 
+
+\subsection{Stronger local form in Hausdorff spaces}
+
+Munkres proves that if $X$ is Hausdorff, then local 
+compactness is equivalent to the following more 
+natural statement: 
+
+For every $x \in X$ and every neighborhood $U$ of 
+$x$, there exists a neighborhood $V$ of 
+$x$ such that $\overline V$ is compact, and 
+\[
+    \overline V \subseteq U. 
+\]
+
+As per usual, Hausdorff spaces are nicely behaved. 
+
+In particular, we can find arbitrarily small 
+relatively compact neighborhoods. 
+
+\subsection{One-point compactification}
+
+Suppose $X$ is locally compact Hausdorff, but not 
+compact. 
+
+Add a new point 
+\[
+    X^* = X \cup \{\infty\}. 
+\]
+How should neighborhood of $\infty$ look? 
+
+The idea will be that being close to $\infty$ means 
+being outside of some compact part of $X$. 
+
+So define neighborhood of $\infty$ by sets of 
+the form $X^* \setminus K$, where $K \subseteq X$ is 
+compact. 
+
+Together with the original open sets of $X$, these 
+generate a topology on $X^*$. 
+
+Then $X^*$ is compact Hausdorff. 
+
+This is called the one-point compactification of $X$. 
+
+It sounds weird, but it makes sense (trust me bro). 
+
+Suppose we have an open cover of 
+$X^*$. Some open set $U$ contains $\infty$. 
+By definition, $X^* \setminus U$ is a compact 
+subset $K \subseteq X$. 
+
+So $U$ already covers everything except a compact chunk. 
+
+The rest of the open cover covers $K$. 
+
+Compactness of $K$ gives finitely many sets covering it. 
+
+Add $U$. Then we are done. 
+
+\subsection{Some examples and then practice problems}
+
+The one-point compactification of $\mathbb R$ is 
+homeomorphic to $S^1$. 
+
+Likewise, $\mathbb R^2 \cup \{\infty\}$ is 
+homeomorphic to $S^2$ and more generally, 
+\[
+    (\mathbb R^n)^* \cong S^n. 
+\]
+
+\begin{prob}
+    Let $X$ be a compact space and let 
+    $f : X \to \mathbb R$ be continuous. 
+    Prove that $f$ attains a maximum and minimum. 
+
+    Prove it using only the fact that 
+    continuious images of compact spaces are compact 
+    and what compact subsets of $\mathbb R$ look like. 
+\end{prob}
+\begin{proof}
+    We let $X$ be compact and 
+    $f: X \to \mathbb R$ be continuous. 
+
+    Then 
+    \[
+        f(X)
+    \]
+    is compact. By the Heine-Borel theorem, 
+    $f(X)$ is closed and bounded. 
+
+    Then for any $x$ in the fiber of $\arg\max f$, 
+    $f(x) \geq f(y)$ for every $y \in X$ and similarly, 
+    any $x$ in the fiber of $\arg\min f$ satisfies 
+    $f(x) \leq f(y)$ for all $y \in X$. 
+    
+    Importantly, $\arg\max f = \sup f(X)$ which is finite 
+    (from boundedness) and in $f(X)$ since $f(X)$ is closed. 
+    Analogously, $\arg\min f = \inf f(x)$ which, once again, 
+    is finite and in $f(X)$. 
+\end{proof}
 
 
+\begin{prob}
+    Let $X$ be a noncompact locally compact 
+    Hausdorff space. 
+    Define $X^* = X \cup \{\infty\}$, 
+    and declare a set $U \subseteq X^*$ open if either: 
+    \begin{itemize}
+        \item $U \subseteq X$ and $U$ is open in $X$, or 
+        \item $\infty \in U$ and $X^* \setminus U$ is compact 
+            in $X$. 
+    \end{itemize}
+    Prove that $X^*$, the one-point compactification of $X$, 
+    is compact. 
+\end{prob}
+\begin{proof}
+    Let $U \subseteq X^*$ be some open set. 
+
+
+    Then, recall throughout that we either have that 
+    $U$ is open in $X$ or 
+    $\infty \in U$ and $X^* \setminus U$ is compact 
+    in $X$. 
+  
+    Let $\mathcal U = \{U_\alpha\}_{\alpha}$ 
+    be some cover of $X^*$, 
+    \[
+        \bigcup_\alpha U_\alpha = X^*. 
+    \]
+
+    Necessarily, one of these $U_\alpha$ must 
+    contain $\infty$. Then 
+    \[
+        X^* \setminus U_\alpha
+    \]
+    is compact, meaning $\mathcal U$, as a 
+    cover of $X^* \setminus U_\alpha$ can be reduced 
+    to a finite cover 
+    \[
+        \bigcup_{i=1}^n U_i = X^* \setminus U_\alpha. 
+    \]
+
+    Then, 
+    \[
+        U_\alpha \cup \bigcup_{i=1}^n U_i 
+        = U_\alpha \cup X^* \setminus U_\alpha 
+        = X^*. 
+    \]
+    So we have found a finite cover from 
+    the general cover, meaning 
+    $X^*$ is compact. 
+\end{proof}
 
 \end{document}
