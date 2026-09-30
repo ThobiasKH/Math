@@ -4803,6 +4803,224 @@ continuity for a function.
     the set of nonunits. 
 \end{proof}
 
+\begin{prob}
+    Let $R = k[x]$ and $P = (x)$ where 
+    $k$ is a field. Consider the localization 
+    \[
+        R_P = k[x]_{(x)}. 
+    \]
+    Since $P=(x)$, the denominators 
+    are the polynomials not divisible by $x$. 
+
+    Work out the following: 
+    \begin{enumerate}
+        \item Decide which of these are elements of $R_P$: 
+            \[
+                \frac{1}{1+x}, \ 
+                \frac{1}{x}, \ 
+                \frac{x^2 + 1}{x^2 + x + 1}, \ 
+                \frac{x}{x+x^2}.   
+            \]
+        \item Decide which of the following elements 
+            are units in $R_P$: 
+            \[
+                x, \ 1+x, \ x(1+x), \ \frac{x}{1+x}, \ 
+                \frac{1+x}{1+x^2}. 
+            \]
+        \item Describe the unique maximal ideal of 
+            $R_P$. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution]
+    \medskip 
+    \
+
+    \textbf{1.}
+
+    $1/x+1$ is an element of $R_P$ because 
+    $x+1 \not\in (x)$ since otherwise we 
+    would have $x+1 - x = 1 \in (x)$ which would 
+    imply that $(x) = k[x]$. 
+    
+    \[
+        \frac{1}{x}
+    \]
+    is not in $R_P$ since $x \in (x)$, clearly. 
+
+    We have $x^2, x \in (x)$ so, for the 
+    same reason as earlier, $x^2 + x + 1 \not\in (x)$, meaning 
+    \[
+        \frac{x^2 + 1}{x^2 + x + 1} \in R_P. 
+    \]
+
+    Lastly, $x+x^2 \in (x)$ so $x/(x+x^2) \not\in R_P$. 
+
+    \textbf{2.}
+
+    $x$ is not a unit since it's inverse would be 
+    $1/x$. 
+
+    Meanwhile, $x+1$ has the inverse 
+    \[
+        \frac{1}{x+1}. 
+    \]
+
+    $x(1+x)$ is not a unit since its inverse 
+    would have $x^2 + x$ in its denominator. 
+    We know that no representative can satisfy this. 
+
+    The fourth is not a unit, and the fifth is. 
+
+    \textbf{3.}
+
+    The unique maximal ideal is 
+    $PR_P = (x)k[x]_{(x)}$. 
+\end{proof} 
+
+\begin{prob}
+    Let $S = \{1,6,6^2,6^3,\ldots\}$. 
+    Localize $\mathbb Z$ by 
+    \[
+        R_6 = S^{-1}\mathbb Z 
+        = \left\{\frac{a}{6^n} \biggm| 
+        a \in \mathbb Z, \ n \geq 0\right\}. 
+    \]
+    Work out the following: 
+    \begin{enumerate}
+        \item Which of the following are units in 
+            $R^6$? 
+            \[
+            2,\ 3, \ 5, \ 6, \ 10, \ \frac{5}{6}. 
+            \]
+        \item For each prime ideal 
+            \[
+                (2), \ (3), \ (5), \ (7) 
+            \]
+            decide whetehr it is a 
+            prime ideal after localization. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution]
+    
+    \medskip 
+    \ 
+
+    \textbf{1.}
+
+    In general, we use that 
+    $r/s \in R^6$ has an inverse if 
+    $r$ is in the saturation of $S$, 
+    meaning there is some $q \in \mathbb Z$ 
+    such that $qr \in S$. 
+
+    $2$ is a unit with inverse 
+    \[
+        \frac{3}{6}. 
+    \]
+    
+    $3$ is a unit with inverse 
+    \[
+        \frac{2}6. 
+    \]
+
+    $5$ is not a unit as there does 
+    not exist any integer $q$ such that 
+    $q \cdot 5 = 6^n$ for some $n$ since 
+    $5$ is not a factor of $6$. 
+
+    $6$ is a unit with inverse 
+    \[
+        \frac{1}{6}. 
+    \]
+
+    If $10$ had an inverse then, since 
+    \[
+        10 = 2\cdot 5 
+    \]
+    and $2^{-1} \in R_6$, we would 
+    require, by 
+    \[
+        (ab)^{-1} = b^{-1}a^{-1}, 
+    \]
+    that $5$ has an inverse, which it 
+    does not. Therefore $10$ is not a 
+    unit. 
+
+    We can also see that 
+    \[
+        \frac56
+    \]
+    has no inverse since $5$ is not 
+    in the saturation of $S$. 
+
+    \textbf{2.}
+
+    $2 \mid 6$ so 
+    $(2) \cap S \neq \emptyset$ 
+    and is therefore not prime in the 
+    localization. 
+    
+    Similarly, $3 \mid 6$ so 
+    $(3)$ is not prime in the localization. 
+
+    $5 \nmid 6^n$ for any $n \in \mathbb N$ 
+    so $(5) \cap S = \emptyset$ and 
+    is therefore prime. 
+    
+    Any $6^n$ is has a unique 
+    prime factor decomposition 
+    $(2\cdot 3)^n$ so $7$ cannot divide 
+    any power of $6$ and thus 
+    $(7) \cap S = \emptyset$, meaning 
+    $(7)$ must be prime. 
+\end{proof}
+
+
+% \begin{prob}
+%     We work over the 
+%     ring $\mathbb Z$, let 
+%     $S = \{1,2,2^2, 2^3, \ldots\}$, 
+%     and $M = \mathbb Z/12\mathbb Z$. 
+
+%     Consider the localization 
+%     \[
+%         S^{-1}M. 
+%     \]
+%     Recall that elements 
+%     look like 
+%     \[
+%         \frac{\overline a}{2^n}, 
+%     \]
+%     and that 
+%     \[
+%         \frac{m}{s} = 0
+%     \]
+%     when there exists some $u \in S$ 
+%     such that $um = 0$ in 
+%     $M$. 
+
+%     \begin{enumerate}
+%         \item Determine which of the following 
+%             elements become $0$ in 
+%             $S^{-1}M$: 
+%             \[
+%                 \frac{\overline 1}1, \ 
+%                 \frac{\overline 3}1, \ 
+%                 \frac{\overline 4}1, \ 
+%                 \frac{\overline 6}1. 
+%             \]
+%         \item Show that in the localized 
+%             module, 
+%             \[
+%                 \frac{\overline 4}1 
+%                 = 
+%                 \frac{\overline 1}1. 
+%             \]
+%         Or, if that statement is false, 
+%         determine what the correct relation is. 
+%         \item 
+%     \end{enumerate}
+% \end{prob}
 
 
 \end{document}
