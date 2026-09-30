@@ -1,0 +1,83 @@
+\input{preamble.tex}
+
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+\title{\huge{Assignment 4}}
+\author{\LARGE{Thobias Høivik | Remote group}}
+\date{for October 6, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{prob*}[Munkres 23.10]
+    Let $\{X_\alpha\}_{\alpha \in J}$ 
+    be an indexed family of 
+    connected spaces; 
+    let $X$ be the product space 
+    \[
+        X = \prod_{\alpha \in J} X_\alpha. 
+    \]
+
+    Let $a = (a_\alpha)$ be a fixed point 
+    of $X$. 
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Given any finite subset 
+            $K$ of $J$, let $X_K$ 
+            denote the subspace of $X$ 
+            consisting of all 
+            points $x = (x_\alpha)$ 
+            such that $x_\alpha = a_\alpha$ 
+            for $\alpha \not\in K$. 
+            Show that $X_K$ is connected. 
+        \item Show that the union $Y$
+            of the spaces $X_K$ is connected. 
+        \item Show that $X$ equals the 
+            closure of $Y$. Conclude 
+            that $X$ is connected. 
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    For $K \subseteq J$, finite, 
+    points in $X_K$ coincide with 
+    $a_\alpha$ on all but finitely many 
+    $\alpha$.   
+    
+    Let $f : X_K \to \{0,1\}$ 
+    be any continuous function. 
+    We will work to show that 
+    $f$ must be constant to conclude 
+    that $X_K$ is connected. 
+
+    Suppose there are two points 
+    $x = (x_\alpha), \ y = (y_\alpha) \in 
+    X_K$ such that $f(x) \neq f(y)$. 
+
+    We suppose, without loss of generality, 
+    that $f(x) = 0$ and $f(y) = 1$. 
+
+    As $\{0\}, \ \{1\}$ are open in the 
+    codomain, the fibers of $0$ and $1$ are 
+    open sets in $X_K$ who happen to contain 
+    $x$ and $y$, respectively.  
+
+    Then, 
+    \[
+        f^{-1}(x) = \prod_{\alpha} 
+        U_\alpha
+    \]
+    where finitely many $U_\alpha \neq X_\alpha$. 
+    Similarly 
+    \[
+        f^{-1}(y) = \prod_\alpha U_\alpha 
+    \]
+    with finitely many $U_\alpha \neq X_\alpha$.
+
+    Note: This is way to complicated to be 
+    correct, find another way. 
+\end{proof} 
+
+
+
+\end{document}
