@@ -3,6 +3,8 @@
 \usepackage{tikz}
 \usepackage{tikz-cd}
 
+\DeclareMathOperator{\id}{\operatorname{id}}
+
 \title{\huge{Assignment 4}}
 \author{\LARGE{Thobias Høivik | Remote group}}
 \date{for October 6, 2026}
@@ -39,43 +41,100 @@
     \end{enumerate}
 \end{prob*}
 \begin{proof}[Proof of (a)]
-    For $K \subseteq J$, finite, 
-    points in $X_K$ coincide with 
-    $a_\alpha$ on all but finitely many 
-    $\alpha$.   
+    $K\subseteq J$ is a finite subset, say 
+    \[
+        K = \{\alpha_1,\ldots,\alpha_n\}. 
+    \]
+    Then $x = (x_\alpha) \in X_K$ coincides with 
+    $a$ on all, but finitely many $x_\alpha$, namely 
+    the indices 
+    \[
+        \{x_{\alpha_i}\}_{i\in[n]}. 
+    \]
+    More importantly, $x,y \in X_K$ coincide on all 
+    but these finitely many indices. 
+
+    The most straightforward approach for 
+    connectedness is to show that 
+    \[
+        X_K \cong \prod_{i\in [n]} X_{\alpha_i}. 
+    \]
+    Connectedness is preserved under homeomorphism.
+
+    Let $\varphi : X_K \to \prod_{i\in[n]} X_\alpha$ by 
+    be the map that sends 
+    \[
+        (x_\alpha) \to (x_{\alpha_1}, x_{\alpha_2}, \ldots, 
+        x_{\alpha_n}).  
+    \]
     
-    Let $f : X_K \to \{0,1\}$ 
-    be any continuous function. 
-    We will work to show that 
-    $f$ must be constant to conclude 
-    that $X_K$ is connected. 
+    Since, for all $x,y \in X_K$, they coincide 
+    on all but these finitely many indices. 
 
-    Suppose there are two points 
-    $x = (x_\alpha), \ y = (y_\alpha) \in 
-    X_K$ such that $f(x) \neq f(y)$. 
+    Thus there is a 
+    natural inverse $\varphi^{-1} : \prod_{i\in[n]} \to X_K$ 
+    which sends $(x_{\alpha_{1}}, \ldots, x_{\alpha_n})$ 
+    to the $x = (x_\alpha) \in X_K$ for 
+    which the finitely many nonfixed indices are 
+    $x_{\alpha_1}, x_{\alpha_2}, \ldots, x_{\alpha_n}$. 
 
-    We suppose, without loss of generality, 
-    that $f(x) = 0$ and $f(y) = 1$. 
+    For rigor, define the injection 
+    $\iota : [n] \to J$ 
+    which sends $i$ to the index in $J$ corresponding 
+    to $\alpha_i$. 
 
-    As $\{0\}, \ \{1\}$ are open in the 
-    codomain, the fibers of $0$ and $1$ are 
-    open sets in $X_K$ who happen to contain 
-    $x$ and $y$, respectively.  
+    Then $\varphi^{-1}$ is the function mapping 
+    \[
+        (x_{\alpha_1}, \ldots, x_{\alpha_n}) 
+        \mapsto y = (y_\alpha)_{\alpha \in J} 
+    \]
+    where $y_{\iota_i} = x_{\alpha_i}$ and 
+    $y_\alpha = a_\alpha$ otherwise. 
+
+    This map is well-defined since 
+    $y = \varphi^{-1}(x_{\alpha_1}, \ldots, x_{\alpha_n})$ 
+    coincides with $a$ on all, but the finitely 
+    many indices. 
+
+    It is not terribly hard to see 
+    that $\varphi^{-1}\circ \varphi \equiv \id_{K_X}$ 
+    and that $\varphi \circ \varphi^{-1} \equiv \id_{\prod X_\alpha}$. 
+
+    It remains to prove that these maps are continuous.
+
+    Let $U \subseteq \prod_{i\in[n]} X_{\alpha_i}$ be 
+    an open set. 
 
     Then, 
     \[
-        f^{-1}(x) = \prod_{\alpha} 
-        U_\alpha
+        U = \bigcup_{\beta} 
+        \prod_{i=1}^n U_i, \ U_i \ \text{open in} \ X_{\alpha_i}, 
     \]
-    where finitely many $U_\alpha \neq X_\alpha$. 
-    Similarly 
-    \[
-        f^{-1}(y) = \prod_\alpha U_\alpha 
-    \]
-    with finitely many $U_\alpha \neq X_\alpha$.
+    which is annoying. 
 
-    Note: This is way to complicated to be 
-    correct, find another way. 
+    Luckily, it suffices to show the 
+    preimage of 
+    basis elements are open in the domain. 
+
+    The basiselements of the topology on $\prod_{i\in [n]} 
+    X_{\alpha_i}$ are 
+    \[
+        \prod_{i=1}^n U_i, \ U_i \ \text{open in}\ X_{\alpha_i},  
+    \]
+    and the ones in $X_K$ are 
+    \[
+        \prod_{\alpha} U_\alpha, 
+    \]
+    where $U_\alpha$ are open in $X_K$ and 
+    only finitely many $U_\alpha \neq X_K$. 
+
+    For a basis element $\prod U_i$ of $\prod_i X_{\alpha_i}$, 
+    we have 
+    \[
+        \varphi^{-1}\left(\prod_{i=1}^n U_i\right) 
+        = \prod_{\alpha} U_\alpha
+    \]
+    where only those $U_\beta$ for which 
 \end{proof} 
 
 
