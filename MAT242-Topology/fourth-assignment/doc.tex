@@ -61,7 +61,7 @@
     \]
     Connectedness is preserved under homeomorphism.
 
-    Let $\varphi : X_K \to \prod_{i\in[n]} X_\alpha$ by 
+    Let $\varphi : X_K \to \prod_{i\in[n]} X_{\alpha_i}$ by 
     be the map that sends 
     \[
         (x_\alpha) \to (x_{\alpha_1}, x_{\alpha_2}, \ldots, 
@@ -72,71 +72,219 @@
     on all but these finitely many indices. 
 
     Thus there is a 
-    natural inverse $\varphi^{-1} : \prod_{i\in[n]} \to X_K$ 
+    natural inverse $\varphi^{-1} : \prod_{i\in[n]} X_{\alpha_i} 
+    \to X_K$ 
     which sends $(x_{\alpha_{1}}, \ldots, x_{\alpha_n})$ 
     to the $x = (x_\alpha) \in X_K$ for 
     which the finitely many nonfixed indices are 
     $x_{\alpha_1}, x_{\alpha_2}, \ldots, x_{\alpha_n}$. 
 
-    For rigor, define the injection 
-    $\iota : [n] \to J$ 
-    which sends $i$ to the index in $J$ corresponding 
-    to $\alpha_i$. 
 
     Then $\varphi^{-1}$ is the function mapping 
     \[
         (x_{\alpha_1}, \ldots, x_{\alpha_n}) 
         \mapsto y = (y_\alpha)_{\alpha \in J} 
     \]
-    where $y_{\iota_i} = x_{\alpha_i}$ and 
+    where $y_{\alpha_i} = x_{\alpha_i}$ and 
     $y_\alpha = a_\alpha$ otherwise. 
 
     This map is well-defined since 
     $y = \varphi^{-1}(x_{\alpha_1}, \ldots, x_{\alpha_n})$ 
     coincides with $a$ on all, but the finitely 
     many indices. 
-
+    
     It is not terribly hard to see 
-    that $\varphi^{-1}\circ \varphi \equiv \id_{K_X}$ 
+    that $\varphi^{-1}\circ \varphi \equiv \id_{X_K}$ 
     and that $\varphi \circ \varphi^{-1} \equiv \id_{\prod X_\alpha}$. 
-
+    
     It remains to prove that these maps are continuous.
 
-    Let $U \subseteq \prod_{i\in[n]} X_{\alpha_i}$ be 
-    an open set. 
-
-    Then, 
+    For the continuity of $\varphi$, consider a basis element
     \[
-        U = \bigcup_{\beta} 
-        \prod_{i=1}^n U_i, \ U_i \ \text{open in} \ X_{\alpha_i}, 
+        \prod_{i=1}^n U_i
     \]
-    which is annoying. 
 
-    Luckily, it suffices to show the 
-    preimage of 
-    basis elements are open in the domain. 
+    of $\prod_{i=1}^n X_{\alpha_i}$, where each
+    $U_i$ is open in $X_{\alpha_i}$. Then
 
-    The basiselements of the topology on $\prod_{i\in [n]} 
-    X_{\alpha_i}$ are 
     \[
-        \prod_{i=1}^n U_i, \ U_i \ \text{open in}\ X_{\alpha_i},  
+        \varphi^{-1}\left(\prod_{i=1}^n U_i\right)
     \]
-    and the ones in $X_K$ are 
-    \[
-        \prod_{\alpha} U_\alpha, 
-    \]
-    where $U_\alpha$ are open in $X_K$ and 
-    only finitely many $U_\alpha \neq X_K$. 
 
-    For a basis element $\prod U_i$ of $\prod_i X_{\alpha_i}$, 
-    we have 
+    consists of those points of $X_K$ whose
+    $\alpha_i$-coordinate lies in $U_i$ for each $i\in[n]$.
+    Thus
+
     \[
-        \varphi^{-1}\left(\prod_{i=1}^n U_i\right) 
-        = \prod_{\alpha} U_\alpha
+        \varphi^{-1}\left(\prod_{i=1}^n U_i\right)
+        =
+        X_K \cap \prod_{\alpha\in J} U_\alpha,
     \]
-    where only those $U_\beta$ for which 
+
+    where
+
+    \[
+        U_{\alpha_i}=U_i
+    \]
+    for $i\in[n]$, and
+    \[
+        U_\alpha=X_\alpha
+    \]
+
+    otherwise. This is open in $X_K$ by the subspace topology.
+    Hence $\varphi$ is continuous.
+
+    For the continuity of $\varphi^{-1}$, consider a basis element
+    
+    \[
+        X_K\cap\prod_{\alpha\in J}U_\alpha
+    \]
+
+    of $X_K$, where each $U_\alpha$ is open in $X_\alpha$
+    and $U_\alpha=X_\alpha$ for all but finitely many $\alpha$.
+
+    If $a_\alpha\notin U_\alpha$ for some $\alpha\notin K$, then
+    
+    \[
+        (\varphi^{-1})^{-1}
+        \left(
+        X_K\cap\prod_{\alpha\in J}U_\alpha
+        \right)
+        =
+        \emptyset,
+    \]
+
+    which is open.
+
+    Otherwise, $a_\alpha\in U_\alpha$ for every
+    $\alpha\notin K$, and
+    \[
+        (\varphi^{-1})^{-1}
+        \left(
+        X_K\cap\prod_{\alpha\in J}U_\alpha
+        \right)
+        =
+        \prod_{i=1}^n U_{\alpha_i},
+    \]
+
+    which is open in
+    $\prod_{i=1}^n X_{\alpha_i}$.
+
+    Therefore $\varphi^{-1}$ is continuous. Hence
+    \[
+        X_K\cong\prod_{i=1}^n X_{\alpha_i}.
+    \]
+
+    Since each $X_{\alpha_i}$ is connected and a finite product
+    of connected spaces is connected,
+    
+    \[
+        \prod_{i=1}^n X_{\alpha_i}
+    \]
+    is connected. Therefore $X_K$ is connected.
 \end{proof} 
 
+\begin{proof}[Proof of (b)]
+    For each finite $K \subseteq J$, let 
+    \[
+        Y = \bigcup_{K \subseteq J} X_K. 
+    \]
+
+    Let $f : Y \to \{0,1\}$ be any continuous function. 
+
+    We will work to show that this function is 
+    necessarily constant. 
+
+    For $K \subseteq J$, let $f_K$ denote 
+    the restriction $f \bigm|_{X_K}$. 
+    
+    Then, since $X_K$ is connected, $f_K$ 
+    must necessarily be constant. 
+
+    We suppose, for a contradiction, that $f$ is 
+    nonconstant. 
+
+    Then, necessarily, there are some $K,K' \subseteq J$ 
+    such that 
+    \[
+        \operatorname{im} f_K \neq 
+        \operatorname{im} f_{K'}. 
+    \]
+    Suppose, without loss of generality, that 
+    $\operatorname{im} f_K = 0$ and 
+    $\operatorname{im} f_{K'} = 1$. 
+
+    Every $X_K$ contains the fixed point $a$, since 
+    $a_\alpha = a_\alpha$ for every coordinate 
+    outside $K$. 
+    
+    So 
+    \[
+        a \in X_K \cap X_{K'}. 
+    \]
+
+    Then 
+    \[
+        f(a) = f_K(a) \neq f_{K'}(a) = f(a), 
+    \]
+    a contradiction. 
+
+    Thus $Y$ must be connected. 
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    Take an arbitrary point 
+    $x = (x_\alpha) \in X$. 
+
+    We want to show that every open neighborhood of 
+    $x$ intersects $Y$. 
+
+    Consider a basic open neighborhiood 
+    \[
+        U = \prod_{\alpha \in J} U_\alpha 
+    \]
+    of $x$, where $U_\alpha = X_\alpha$ for all 
+    but finitely many $\alpha$. 
+
+    Let 
+    \[
+        K = \{\alpha \in J \bigm| U_\alpha \neq X_\alpha\}. 
+    \]
+    $K \subseteq J$ is finite. 
+
+    Let $y \in X_K \subseteq Y$ coincide with $x$ on 
+    all indices $\alpha \in K$. 
+    
+    Then, for $\alpha \in K$ we have 
+    \[
+        y_\alpha = x_\alpha 
+    \]
+    while for $\alpha \not\in K$, 
+    \[
+        U_\alpha = X_\alpha 
+    \]
+    so $y_\alpha = a_\alpha \in U_\alpha$. 
+
+    Thus 
+    \[
+        U \cap Y \neq \emptyset. 
+    \]
+
+    Since $x$ and its neighborhood were arbitrary, 
+    every point of $X$ lies in $\overline Y$. 
+
+    Thus 
+    \[
+        \overline Y = X. 
+    \]
+
+    Since the closure of a connected subspace is connected, 
+    we have that 
+    \[
+        X = \overline Y 
+    \]
+    is connected.
+\end{proof}
 
 
 \end{document}
