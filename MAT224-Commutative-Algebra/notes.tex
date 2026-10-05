@@ -5195,6 +5195,281 @@ continuity for a function.
     $\dim_k V = n+m$.  
 \end{proof}
 
+\section{Tying chapters 6 and 7 together}
+
+The main construction in chapter $6$ is 
+$R \rightsquigarrow S^{-1}R$, where 
+$S \subseteq R$ is multiplicatively closed and 
+you formally make every element of $S$ invertible. 
+
+Algebraically, elements are fractions 
+\[
+    \frac{a}{s}, \ a \in R, \ s \in S, 
+\]
+with 
+\[
+    \frac{a}{s} = \frac{a'}{s'}
+\]
+when some $u\in S$ satisfies 
+$u(as' - a's) = 0$. 
+
+The extra $u$ is required for rings with zero divisors. 
+
+The important special cases are 
+\[
+    R_a = S^{-1}R, \ S = \{1,a,a^2,a^3,\ldots\},
+\]
+and especially 
+\[
+    R_P, \ S = R\setminus P 
+\]
+for prime ideal $P$. In $R_P$, everything outside 
+$P$ becomes a unit. Gathmann emphasizes these as standard 
+forms of localization. 
+
+The first major theorem to understand is that 
+\[
+    \operatorname{Spec}(S^{-1}R) \Leftrightarrow 
+    \{P \in \operatorname{Spec}R \bigm| P \cap S = \emptyset\}.  
+\]
+So localization removes the primes that 
+meet $S$. 
+
+For localization at a prime $P$, the surviving 
+primes are precisely the primes contained in $P$. 
+Hence $R_P$ has a unique maximal ideal 
+\[
+    PR_P,
+\]
+so $R_P$ is a local ring. 
+
+Then modules enter 
+\[
+    S^{-1}M = \left\{\frac{m}s \biggm| m\in M, \ s \in S\right\}.
+\]
+This connects directly back to tensors 
+\[
+    S^{-1}M \cong M \otimes_R S^{-1}R.
+\]
+So localization is extension of scalars from 
+$R$ to $S^{-1}R$. 
+
+Then exact sequences return, 
+\[
+    0 \to M_1 \to M_2 \to M_3 \to 0
+\]
+remains exact after localization, 
+\[
+    0 \to S^{-1}M_1 \to 
+    S^{-1}M_2 \to S^{-1}M_3 \to 0. 
+\]
+The payoff is the notion of a local property. 
+
+For example, 
+\[
+    M = 0 \Leftrightarrow M_P = 0
+\]
+for all maximal $P$, and exactness can also 
+be checked after localizing at every maximal ideal. 
+
+\subsection{Chapter 7}
+
+Here we introduce the notion of avoiding 
+infinite complexity. 
+
+The two definitions are 
+\begin{defn}[Notherian and Artinian]
+    \[
+        M_0 \subseteq M_1 \subseteq M_2 \subseteq \cdots 
+    \]
+    must eventually stop for a \textbf{Notherian} module, 
+    while 
+    \[
+        M_0 \supseteq M_1\supseteq M_2\supseteq \cdots
+    \]
+    must eventually stop for an \textbf{Artinian} module. 
+\end{defn} 
+
+Crucially, 
+\[
+    M \ \text{is Notherian} \Leftrightarrow 
+    \text{every submodule of} \ M \ \text{is finitely generated}, 
+\]
+a more useful characterization. 
+Gathmann notes that there is no equivalent notion for 
+Artinian modules. 
+
+Some useful examples to know are the following. 
+
+$\mathbb Z$ is Noetherian, but not Artinian since 
+\[
+    \mathbb Z \supsetneq 2\mathbb Z \supsetneq 
+    4\mathbb Z \supsetneq \cdots. 
+\]
+Meanwhile, an infinite polynomial ring $k[x_0,x_1,\ldots]$ 
+is not Notherian because 
+\[
+    (x_0) \subsetneq (x_0,x_1) \subsetneq (x_0,x_1,x_2) 
+    \subsetneq \cdots. 
+\]
+
+Then exact sequences return once more. 
+If 
+\[
+    0 \to N \to M \to M/N \to 0
+\]
+is exact, then $M$ is Noetherian if and only if $N$ and 
+$M/N$ are Noetherian, and similarly for Artinian.  
+
+A useful fact is that 
+\[
+    M \ \text{has finite length} \Leftrightarrow 
+    M \ \text{is both Noetherian and Artinian}. 
+\]
+
+Then we get to one of the most useful theorems. 
+
+\begin{thm}{Hilbert's basis theorem}
+    \[
+        R \ \text{Noetherian} 
+        \Rightarrow R[x] \ \text{Noetherian}.
+    \]
+\end{thm}
+
+From this we can deduce that $R[x_1,\ldots,x_n]$ is Noetherian 
+whenever $R$ is, and every finitely generated algebra over 
+a Noetherian ring is Noetherian.
+In particular, coordinate rings of affine varieties are 
+Noetherian. 
+
+This is a foundational result explaining, in part, why 
+finite polynomial descriptions are so well-behaved. 
+
+The Artinian half is stronger and more rigid. 
+For an Artinian ring, 
+\begin{itemize}
+    \item there are only finitely many prime ideals, 
+    \item every prime ideal is maximal, 
+    \item some product of maximal ideals is zero. 
+\end{itemize}
+
+Then another useful theorem. 
+
+\begin{thm}[Hopkins' theorem]
+    \[
+        R \ \text{Artinian} \Leftrightarrow 
+        R \ \text{Noetherian and every prime ideal is maximal}.
+    \]
+\end{thm}
+
+Finally, every Artinian ring decompose as a finite 
+product of Artinian rings 
+\[
+    R \cong \prod_{i=1}^n R_{P_i},  
+\]
+where $P_i$ are its maximal ideals. 
+
+\subsection{Some problems}
+
+\begin{prob}
+    Let $R = k[x]$ where $k$ is a field. 
+
+    Prove that $R$ is Noetherian, but not Artinian. 
+\end{prob}
+\begin{proof}
+    Since $k$ is a field, it has only two ideals $0$ and $k$. 
+
+    Thus $k$ is Noetherian, since a chain of ideals 
+    terminates finitely, 
+    \[
+        0 \subsetneq k = k. 
+    \]
+
+    Since $k$ is Noetherian, $k[x] = R$ is Noetherian.  
+
+    It is not Artinian since 
+    \[
+        (x) \supsetneq (x^2) \supsetneq (x^4) 
+        \supsetneq \cdots 
+    \]
+    does not terminate finitely. 
+\end{proof}
+
+\begin{prob}
+    Let $R$ be a Noetherian ring and let $S \subseteq R$ be 
+    multiplicatively closed. 
+
+    Prove that 
+    \[
+        S^{-1}R \ \text{is Noetherian}. 
+    \]
+\end{prob}
+\begin{proof}
+    We will use the characterization that 
+    $R$ is Noetherian if and only if every ideal 
+    of $R$ is finitely generated.
+
+    Let $J$ be some ideal of $S^{-1}R$. 
+
+    Then 
+    \[
+        J^c = (r \in R \bigm| r/1 \in J)
+    \]
+    is an ideal of $R$. 
+    Since $R$ is Noetherian, 
+    \[
+        J^c = (a_1,\ldots,a_n)
+    \]
+    is finitely generated. 
+
+    We claim that 
+    \[
+        J = (a_1/1, \ldots, a_n/1). 
+    \]
+    First, since $a_i \in J^c$, by definition 
+    \[
+        \frac{a_i}1 \in J. 
+    \]
+    Hence 
+    \[
+        (a_1/1,\ldots,a_n/1) \subseteq J. 
+    \]
+    For the other inclusion, 
+    take 
+    \[
+        \frac{r}{s} \in J. 
+    \]
+    Because $J$ is an ideal and $s/1 \in S^{-1}R$,
+    \[
+        \frac{r}{1} = \frac{r}1 \cdot \frac{r}s \in J. 
+    \]
+    Therefore $r \in J^c$. 
+
+    Since $J^c = (a_1,\ldots,a_n)$, there are 
+    $c_1,\ldots,c_n \in R$ such that 
+    \[
+        r = c_1a_1 + \cdots + c_na_n.
+    \]
+    Therefore, 
+    \[
+        \frac{r}{s} 
+        = \frac{c_1a_1+\cdots+c_na_n}{s} 
+        = \sum_{i=1}^n \frac{c_i}{s}\frac{a_i}1. 
+    \]
+    Thus 
+    \[
+        \frac{r}{s} \in \left(\frac{a_1}1, \ldots, \frac{a_n}1 
+        \right). 
+    \]
+    So 
+    \[
+        J = \left(\frac{a_1}1, \ldots, \frac{a_n}1 
+        \right). 
+    \]
+
+    Since $J$ was arbitrary, $S^{-1}R$ is Noetherian. 
+\end{proof}
+
 \end{document}
 
 
