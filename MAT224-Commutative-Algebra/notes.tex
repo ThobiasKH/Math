@@ -5470,6 +5470,225 @@ where $P_i$ are its maximal ideals.
     Since $J$ was arbitrary, $S^{-1}R$ is Noetherian. 
 \end{proof}
 
+\begin{prob}
+    Let $R = k[x]/(x^4)$, where $k$ is a field. 
+
+    Prove that $R$ is both Noetherian and Artinian. 
+\end{prob}
+\begin{proof}
+    Suppose $J$ is an ideal of $R$. 
+    Then $J$ is an ideal of $k[x]$ 
+    satisfying 
+    \[
+        (x^4) \subseteq J. 
+    \]
+
+    For the Noetherian property, we make 
+    the observation that $k[x]$ is a 
+    principal ideal domain so all ideals 
+    are principal and thus finitely generated. 
+    
+    Then, ideals $J$ of $R$ have 
+    $(x^4) \subseteq J$, as mentioned so 
+    \[
+        f \mid x^4. 
+    \]
+    Up to multiplication by a unit, the only divisors 
+    are $1,x,x^2,x^3,x^4$ so the ideals of 
+    $R$ are exactly 
+    \[
+        R, \ (\overline x), \ (\overline x^2), 
+        \ (\overline x^3), \ (0). 
+    \]
+    Thus no decsending chain can be infinite since 
+    \[
+        R, \supsetneq (\overline x), \supsetneq (\overline x^2), 
+        \supsetneq (\overline x^3), \supsetneq (0).
+    \]
+
+    So $R$ is Artinian and, sicne all ideals 
+    are finitely generated, Noetherian. 
+
+    The only prime ideal is $(\overline x)$. 
+\end{proof}
+
+\begin{prob}
+    Let $R = \mathbb Z/12\mathbb Z$. 
+
+    \begin{enumerate}
+        \item Determine all ideals of $R$. 
+        \item Use the list to prove $R$ is Noetherian and Artinian. 
+        \item Determine all prime ideals of $R$, and check that 
+            each prime ideal is maximal. 
+        \item Pick one of the prime ideals $P$, localize $R$ 
+            at $P$, and try to identify 
+            $R_P$ with a familiar quotient of $\mathbb Z$. 
+    \end{enumerate}
+\end{prob}
+\begin{proof}
+    The ideals are those generated 
+    by divisors of $12$, namely
+    \[
+        0, \ R, \ (\overline 2), \ (\overline 3), \
+        (\overline 4), \ 
+        (\overline 6). 
+    \]
+    Then there are no infinite ascending 
+    or descending chains of ideals, clearly. 
+
+    Therefore $R$ is Noetherian and Artinian. 
+
+    The prime ideals of $R$ are those generated 
+    by the prime factors of $12$, 
+    \[
+        (2) \ \text{and} \ (3). 
+    \]
+
+    These are indeed maximal. 
+    Observe that 
+    \[
+        R/(\overline 2) \cong \mathbb Z/2\mathbb Z 
+    \]
+    and 
+    \[
+        R/(\overline 3) \cong \mathbb Z/3\mathbb Z, 
+    \]
+    both of which are fields. 
+
+    Let us localize at $(\overline 2)$. 
+
+    We make $S = R \setminus (\overline 2)$ 
+    making 
+    \[
+        R_P = S^{-1}R 
+        = \left\{\frac{a}{b} \biggm| 
+        a \in R, \ 2 \nmid b\right\}.  
+    \]
+
+    Here we have the integers modulo $12$ where all 
+    odd $\overline x$ are invertible.  
+
+    In particular, $\overline 3 \not\in P$ so 
+    $\overline 3$ becomes a unit in $R_P$, but 
+    $\overline 3 \cdot \overline 4 = 0$ already. 
+    
+    Then 
+    \[
+        \overline 3^{-1} \cdot \overline 3 \cdot 
+        \overline 4 = 0 
+    \]
+    so 
+    \[
+        \overline 4 = 0. 
+    \]
+    Thus 
+    \[
+        R_P \cong \mathbb Z/4\mathbb Z. 
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $R = k[x,y]/(xy)$, and write 
+    $\overline x, \overline y$ for the residue 
+    classes of $x$ and $y$. 
+    Let 
+    \[
+        P = (\overline x) \triangleleft R. 
+    \]
+
+    Work through the following. 
+
+    \begin{enumerate}
+        \item Show that $P$ is a prime ideal. 
+        \item Consider the localization $R_P$. 
+            Explain why $\overline y/1$ is a unit in $R_P$. 
+        \item Use the relation $\overline x \overline y = 0$ 
+            to prove that 
+            \[
+                \overline x/1 = 0. 
+            \]
+        \item Use this to identify $R_P$ with a familiar 
+            field. 
+        \item Finally, explain why $R$ is Noetherian, 
+            and hence why $R_P$ is Noetherian as well.
+    \end{enumerate}
+\end{prob}
+\begin{proof}
+    First we note that the residue 
+    class $\overline x$ is
+    \[
+        x + (xy). 
+    \]
+
+    So 
+    \[
+        (\overline x) 
+        = \{\overline{xf} \bigm| f \in k[x,y]\}. 
+    \]
+
+    We will use the characterization that 
+    $P$ is prime if and only if $R/P$ is an integral domain. 
+
+    By the third isomorphism theorem, 
+    \[
+        \frac{k[x,y]/(xy)}{(\overline x)} 
+        \cong \frac{k[x,y]}{(xy,x)}, 
+    \]
+    but since $xy \in (x)$ we have 
+    \[
+        (xy,x) = (x). 
+    \]
+    Therefore 
+    \[  
+        R/(\overline x) \cong k[x,y]/(x) 
+        \cong k[y]. 
+    \] 
+    $k[y]$ is an integral domain since $k$ is a field. 
+    Hence $(\overline x)$ is prime. 
+
+    Set $S = R \setminus (\overline x)$. We 
+    consider the localization, 
+    \[
+        R_P = S^{-1}R = \left\{\frac{a}{b} \biggm| 
+        a \in R, \ b \not\in (\overline x)\right\}. 
+    \]
+
+    We have $1 \not\in (\overline x)$ since otherwise we 
+    would have $(\overline x) = R$. Thus 
+    $\overline y/1$ is in the localization, and since 
+    $\overline y$ is not divisible by $\overline x$ 
+    we have 
+    \[
+        \frac{1}{\overline y} \in R_P. 
+    \]  
+    So $\overline y/1$ is a unit in $R_P$. 
+
+    In $R$, we have that 
+    \[
+        \overline x \overline y = 0, 
+    \]
+    so in the localization 
+    \[
+        0 = 0 \cdot \frac{1}{\overline y} = 
+        \frac{\overline x}1 \cdot \frac{\overline y}1  
+        \cdot \frac{1}{\overline y} = 
+        \frac{\overline x}1. 
+    \]
+    
+    Then 
+    \[
+        R_P \cong \frac{k[x,y]}{(x)} = k[y]. 
+    \]
+
+    As $k$ is Noetherian we have that 
+    $k[y] \cong R_P$ is Noetherian. 
+    We could also make this conclusion from observing 
+    that $k[x,y]$ is Noetherian (for the same reason) 
+    and since quotienting preserves this the 
+    quotient $R$ is, implying that $R_P$ is Noetherian 
+    since localizing also preserves this property.
+\end{proof}
+
 \end{document}
 
 
