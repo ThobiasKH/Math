@@ -2611,6 +2611,335 @@ homeomorphic to $S^2$ and more generally,
     Hausdorff, gives Hausdorffness for $X^*$. 
 \end{proof}
 
+\section{Countability- and Separation Axioms}
 
+\subsection{Why do we need these axioms?}
+
+A topology can be quite large. 
+
+For instance, to know that $f : X \to Y$ is continuous, 
+in principle we have to understand all open sets in $Y$. 
+To understand what happens near $x$, we might 
+have to consider all neighborhoods of $x$. 
+
+Countability axioms let us ask whether 
+we can replace this potentially gigantic amount of 
+information by a countable amount. 
+
+There are two fundamentally different notions, those 
+being 
+\[
+    \text{first countable} \ = \ \text{countably 
+    manageable locally}
+\]
+and 
+\[
+    \text{second countable} \ = \ \text{countably 
+    manageable globally}. 
+\]
+
+\subsection{A basis at a point}
+Before first countability, we distinguish two 
+concepts. 
+
+A basis for the topology is a family $\mathcal B$ 
+such that every open set is a union of 
+elements of $\mathcal B$, as we already know. 
+
+A \textbf{basis at a point} $x$, or local basis 
+at $x$, is a collection $\mathcal B_x$ of neighborhoods 
+of $x$ such that for every neighborhood $U$ of $x$, there 
+exists 
+\[
+    B \in \mathcal B 
+\]
+with 
+\[
+    x \in B \subseteq U. 
+\]
+
+We can think of this as being arbitrarily close to 
+$x$, as we often pondered in analysis. 
+
+\subsection{First countability}
+
+A space $X$ is \textbf{first countable} 
+if every point $x \in X$ has a countable local basis. 
+
+Thus for each $x$, 
+\[
+    \mathcal B_x = \{B_1,B_2,\ldots\}
+\]
+is enough to probe every neighborhood of $x$. 
+
+Every metric space is firstr countable, perhaps 
+unsurprisingly. 
+
+Indeed, at $x$ take 
+\[
+    \mathcal B_x = \{B_{1/n}(x) \bigm| n \in \mathbb N\}. 
+\] 
+
+Given any neighborhood $U \ni x$, because $U$ is 
+metric-open there is some $\varepsilon > 0$ with 
+\[
+    B_{\varepsilon}(x) \subseteq U. 
+\]
+Choose $n$ sufficiently large that 
+\[
+    \frac{1}{n} < \varepsilon. 
+\]
+Then 
+\[
+    B_{1/n}(x) \subseteq B_{\varepsilon} \subseteq U. 
+\]
+
+So metric spaces are first countable. 
+
+\subsection{Sequences}
+
+Recall that $x \in \overline A$ means 
+every neighborhood of $x$ intersects $A$. 
+
+Suppose there is a sequence 
+\[
+    a_n \in A 
+\]
+with 
+\[
+    a_n \to x. 
+\]
+Then necessarily 
+\[
+    x \in \overline A. 
+\]
+This is because every neighborhood $U$ of $x$ 
+contains all sufficiently large $a_n$, hence 
+intersects $A$. 
+
+That direction holds in every topological space 
+\[
+    a_n \in A, \ a_n \to x \Rightarrow x \in \overline A. 
+\]
+However, the converse fails in arbitrary topological spaces. 
+
+First countability, however, makes it hold. 
+
+\subsection{The sequence lemma}
+
+If $X$ is first countable, then 
+\[
+    x \in \overline A \Leftrightarrow \exists a_n \in A, 
+    \ a_n \to x.  
+\]
+
+Let 
+\[
+    B_1,B_2,\ldots 
+\]
+be a countable local basis at $x$. 
+
+It is convenient to make it nested, 
+\[
+    C_n = \bigcap_{i\in[n]} B_i. 
+\]
+Then 
+\[
+    C_1 \supseteq C_2 \supseteq C_3 \supseteq \cdots 
+\]
+and $\{C_n\}$ is still a local basis. 
+
+Since $x \in \overline A$, every $C_n$ intersects $A$. 
+Choose $a_n \in C_n \cap A$. Now let $U$ be any neighborhood 
+of $x$. Since $\{C_n\}$ is a local basis, some 
+\[
+    C_N \subseteq U. 
+\]
+For $n \geq N$, 
+\[
+    a_n \in C_n \subseteq C_N \subseteq U. 
+\]
+Therefore 
+\[
+    a_n \to x. 
+\]
+
+\subsection{Continuity can also be tested by sequences}
+
+Recall from analysis, that 
+\[
+    f \ \text{continuous} \Rightarrow x_n \to x \Rightarrow 
+    f(x_n) \to f(x). 
+\]
+
+That implication is true in arbitrary topological spaces. 
+
+But once again, the converse generally fails. 
+
+If the domain $X$ is first countable, the conserse holds. 
+
+So all the sequential reasoning from analysis works 
+so smoothly largely because metric spaces are first 
+countable. 
+
+\subsection{Second countability}
+
+Now we make countability global. 
+
+A space $X$ is \textbf{second countable} if 
+its topology has a countable basis, 
+\[
+    \mathcal B = \{B_1, B_2,\ldots\}. 
+\]
+
+This is substantially stronger than first countability, 
+and obviously implies first countability. 
+
+It should not be terribly surprising that the 
+converse fails. 
+
+\subsection{$\mathbb R$ is second countable}
+
+The usual topology on $\mathbb R$ has the basis 
+\[
+    \mathcal B = \{(p,q) \bigm| p,q\in \mathbb Q, \ p < q\}. 
+\]
+Since $\mathbb Q \times \mathbb Q$ is countable, 
+the basis $\mathcal B$ is countable. 
+
+\subsection{Two or more countability properties} 
+
+A space $X$ is \textbf{separable} if it has a 
+countable dense subset 
+\[
+    \exists D = \{d_1,d_2,\ldots\} \subseteq X 
+\]
+such that 
+\[
+    \overline D = X. 
+\]
+
+Intuitively, countably many points 
+come arbitrarily close to every point of the 
+space. 
+
+For instance $\mathbb Q$ is dense in $\mathbb R$, so 
+$\mathbb R$ is separable. 
+
+A space $X$is \textbf{Lindel{\"o}f} if every open 
+cover has a countable subcover.  
+
+Comparatively, 
+\[
+    \text{compact} \ = \ \text{every open cover 
+    has a finite subcover}, 
+\]
+while 
+\[
+    \text{Lindel{\"o}f} \ = \ \text{every open 
+    cover has a countable subcover}. 
+\]
+Thus 
+\[
+    \text{compact} \Rightarrow \text{Lindel{\"o}f}.
+\]
+
+\subsection{The central implication picture}
+
+Second countability is very strong, as it implies 
+first countable, separable and Lindel{\"o}f. 
+
+The latter two are worth understanding. 
+
+\textbf{Second countable $\Rightarrow$ separable.}
+
+Let 
+\[
+    \mathcal B = \{B_1,B_2,\ldots\}
+\]
+be a countable basis. 
+
+For every nonempty $B_n$, choose 
+\[
+    x_n \in B_n. 
+\]
+
+Let 
+\[  
+    D = \{x_n\}. 
+\]
+
+Then $D$ is countable. 
+
+If $U \subseteq X$ is nonempty open, $U$ contains 
+some basis element $B_n$, and therefore 
+\[
+    x_n \in U \cap D. 
+\]
+
+So every nonempty open set intersects $D$. 
+
+Hence 
+\[
+    \overline D = X. 
+\]
+
+Thus $X$ is separable. 
+
+\textbf{Second countable $\Rightarrow$ Lindel{\"o}f.}
+
+Let $\mathcal U$ be an open cover. 
+
+For each basis element $B_n$ that is contained 
+in some member of $\mathcal U$, choose one such member 
+\[
+    U_n \in \mathcal U. 
+\]
+There are only countably many $B_n$, hence only 
+countably many selected $U_n$. 
+
+These cover $X$. If $x \in X$, choose 
+some $U \in \mathcal U$ containing $x$. 
+SInce $\mathcal B$ is a basis, there 
+exists 
+\[
+    x \in B_n \subseteq U. 
+\]
+
+So the selected $U_n$ corresponding to $B_n$ contains 
+$x$. 
+
+Therefore $X$ is Lindel{\"o}f. 
+
+\subsection{In metric spaces, many of these notions collapse}
+
+For a metric space, 
+\[
+    \text{second countable} 
+    \ \Leftrightarrow 
+    \text{separable} 
+    \ \Leftrightarrow 
+    \text{Lindel{\"o}f}. 
+\]
+
+First countability is automatic. 
+
+One useful direction is separable $\Rightarrow$ second 
+countable. 
+
+Suppose 
+\[
+    D = \{d_1,d_2,\ldots\}
+\]
+is countable and dense. 
+
+Consider all balls 
+\[
+    B_r(d), \ d \in D, \ r \in \mathbb Q_{>0}. 
+\]
+
+There are countably many and they form a basis.
+
+Note: Separation axioms next. 
 
 \end{document}
