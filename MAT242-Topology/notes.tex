@@ -2940,6 +2940,122 @@ Consider all balls
 
 There are countably many and they form a basis.
 
-Note: Separation axioms next. 
+\subsection{Separation axioms}
+
+We now introduce a notion of how 
+effectively a topology can distinguish different 
+objects, with a hierarchy. 
+
+At the weakest level we can separate points and 
+at the strongest levels we can separate 
+a point from a closed set, as well as two disjoint 
+closed sets. 
+
+\subsection{$T_1$}
+
+A space $X$ is a $T_1$-space if, for distinct 
+$x,y \in X$, there exists a neighborhood of 
+$x$ not containing $y$, and vice versa. 
+
+Equivalently, 
+\[  
+    X \ \text{is} \ T_1 \Leftrightarrow 
+    \{x\} \ \text{is closed for every} \ x \in X. 
+\]
+
+This is because, if 
+singletons are closed, then 
+\[
+    X \setminus \{y\}
+\]
+is an open neighborhood of $x$ not containing $y$. 
+
+Conversely, if $y \neq x$ has a neighborhood 
+not containing $x$, then 
+\[
+    X \setminus \{y\}
+\]
+is the union of all those neighborhoods, hence 
+open. 
+
+Thus $\{x\}$ is closed. 
+
+\subsection{Hausdorff is stronger}
+
+Hausdorff says distinct points can be 
+separated by disjoint open neighborhoods, 
+\[
+    x \neq y \Rightarrow \exists U \ni x, 
+    \ V \ni y, \ U \cap V = \emptyset. 
+\]
+
+Therefore Hausdorff implies $T_1$. 
+
+\subsection{Regular spaces}
+
+In Munkres' terminology, $X$ is regular if 
+\begin{enumerate}
+    \item $X$ is $T_1$, and 
+    \item whenver $x \not\in C$ and $C \subseteq X$ is 
+    closed, there are disjoint open sets 
+    \[
+        U \ni x, \ V \supseteq C. 
+    \]
+\end{enumerate}
+
+So Hausdorffness separates point from point, while 
+regularity separates points from closed sets. 
+
+Because singleton sets are closed in a regular 
+space, regularity implies Hausdorffness. 
+
+\subsection{Characterization of regularity}
+
+A $T_1$ space $X$ is regular if and only if: 
+
+for every point $x$ and every open 
+neighborhood $U \ni x$, there exists and 
+open neighborhood $V \ni x$ such that 
+\[
+    \overline V \subseteq U. 
+\]
+
+We have already encountered this in 
+locally compact Hausdorff spaces. 
+
+\textbf{Why regularity gives shrinking.}
+
+Suppose $x \in U$. 
+Then $C = X \setminus U$ is closed and does not 
+contain $x$. 
+
+Regularity gives disjoint open sets 
+\[
+    V \ni x, \ W \supseteq C. 
+\]
+
+Since $V \cap W = \emptyset$, 
+\[
+    \overline V \cap W = \emptyset. 
+\]
+
+Therefore, 
+\[
+    \overline V \subseteq X \setminus W. 
+\]
+
+But since 
+\[
+    C = X \setminus U \subseteq W, 
+\]
+we have 
+\[
+    X \setminus W \subseteq U. 
+\]
+
+Hence 
+\[
+    \overline V \subseteq U. 
+\]
 
 \end{document}
