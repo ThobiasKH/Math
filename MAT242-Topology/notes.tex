@@ -3058,4 +3058,175 @@ Hence
     \overline V \subseteq U. 
 \]
 
+\subsection{Normal spaces}
+
+A $T_1$ space is \textbf{normal} if whenever 
+\[
+    A,B \subseteq X
+\]
+are disjoint closed sets, there exist 
+disjoint open sets 
+\[
+    U \supseteq A, \ V \supseteq B.
+\]
+
+So now, 
+\begin{itemize}
+    \item $T_1$ : points individually visible, 
+    \item $T_2/\text{Hausdorff}$ : point vs. point, 
+    \item regular: point vs. closed set, 
+    \item normal: closed set vs. closed set.
+\end{itemize}
+
+Much like regularity, we can 
+characterize normality as "shrinking". 
+
+A $T_1$ space is normal if and only if, 
+for every closed set $A \subseteq U$ where $U$ is open, 
+there exists an open $V$ such that 
+\[
+    A \subseteq V \subseteq \overline V \subseteq U. 
+\]
+
+\subsection{Metric spaces are very well behaved (of course)}
+Every metric space is regular. 
+
+Suppose $x \not\in C$ with $C$ closed. 
+Because $C$ is closed, 
+\[
+    X \setminus C
+\]
+is open and contains $x$, so some ball 
+$B_{\varepsilon}(x)$ avoids $C$. 
+
+Then something like 
+\[
+    B_{\varepsilon/3}(x)
+\]
+and the appropriate neighborhood around $C$ 
+can be made disjoint. 
+
+In fact, every metric space is normal. 
+
+A nice way is to use distance-to-a-set functions 
+\[
+    d(x,A), \ d(x,B). 
+\]
+
+For disjoint closed $A,B$ define 
+\[
+    U = \{x \bigm| d(x,A) < d(x,B)\}, \ 
+    V = \{x \bigm| d(x,B) < d(x,A)\}. 
+\]
+
+\subsection{Compact Hausdorff spaces are normal}
+
+We know that compact Hausdorff spaces lets us 
+use compactness to turn infinitely many 
+pointwise separations into finitely many. 
+
+To separate two disjoint closed sets $A,B$ in 
+compact Hausdorff,
+\begin{itemize}
+    \item $A,B$ are compact since they are closed subsets of compact space, 
+    \item $\forall a \in A, \ \forall b \in B$, Hausdorffness separates $a,b$, 
+    \item compactness lets us make finitely many choices and combine them. 
+\end{itemize}
+
+So Compact Hausdorff $\Rightarrow$ normal. 
+
+\subsection{Some problems}
+
+\begin{prob}
+    Let $X$ be a first-countable 
+    topological space, let $A \subseteq X$, 
+    and let $x \in \overline A$. 
+
+    Prove there exists a sequence 
+    $(a_n)_{n\in\mathbb N} \subseteq A$ 
+    such that 
+    \[
+        a_n \to x. 
+    \]
+\end{prob}
+\begin{proof}
+    From first countability, we know that 
+    for each $x \in X$ we have a countable set 
+    \[
+        \mathcal B_x = \{B_1,B_2,\ldots\}
+    \]
+    such that for every open neighborhood $U$ of $x$, 
+    there is some $i$ for which 
+    $B_i \subseteq U \neq \emptyset$. 
+
+    Make the basis nested by setting 
+    \[
+        C_n = \bigcap_{i=1}^n B_i.
+    \]
+    Then 
+    \[
+        C_1 \supseteq C_2 \supseteq C_3 \supseteq \cdots 
+    \]
+    and $\{C_n\}$ is still a local basis. 
+    Since $x \in \overline A$, every $C_n$ intersects $A$. 
+    Choose $a_n \in C_n \cap A$. 
+    
+    Now let $U$ be any neighborhood of $x$. Since 
+    $\{C_n\}$ is a local basis, some 
+    \[
+        C_N \subseteq U. 
+    \]
+    For $n \geq N$, 
+    \[
+        a_n \in C_n \subseteq C_N \subseteq U. 
+    \]
+    Therefore $a_n \to x$. 
+\end{proof}
+
+\begin{prob}
+    Let $X$ be first-countable and $Y$ some topological space. 
+    Suppose $f : X \to Y$ has the property that whenever 
+    $x_n \to x$ in $X$, we have 
+    \[
+        f(x_n) \to f(x)
+    \]
+    in $Y$. 
+
+    Prove that $f$ is continuous. 
+\end{prob}
+\begin{proof}
+To show that $f$ is continuous, it suffices to prove that for every point $x \in X$ and every open neighborhood $V$ of $f(x)$ in $Y$, there exists an open neighborhood $U$ of $x$ in $X$ such that $f(U) \subseteq V$.
+
+We proceed by contradiction. Fix an arbitrary point $x \in X$ and assume that $f$ is not continuous at $x$. Then there exists an open neighborhood $V$ of $f(x)$ in $Y$ such that for every open neighborhood $U$ of $x$ in $X$, 
+\[
+f(U) \nsubseteq V.
+\]
+Equivalently, for every open neighborhood $U$ of $x$, there exists a point $x_U \in U$ such that $f(x_U) \notin V$.
+
+Since $X$ is first-countable, the point $x$ possesses a countable nested local basis. That is, there exists a sequence of open neighborhoods $\{U_n\}_{n=1}^\infty$ of $x$ such that:
+\begin{enumerate}
+    \item $U_1 \supseteq U_2 \supseteq U_3 \supseteq \dots$
+    \item Every open neighborhood $W$ of $x$ contains $U_N$ for some $N \in \mathbb{N}$.
+\end{enumerate}
+
+Using the assumption of non-continuity, for each $n \in \mathbb{N}$, we can choose a point $x_n \in U_n$ such that 
+\[
+f(x_n) \notin V.
+\]
+
+We claim that the sequence $(x_n)_{n=1}^\infty$ converges to $x$ in $X$. To verify this, let $W$ be any open neighborhood of $x$. By the definition of a local basis, there exists $N \in \mathbb{N}$ such that $U_N \subseteq W$. Since the local basis is nested, for all $n \ge N$, we have
+\[
+x_n \in U_n \subseteq U_N \subseteq W.
+\]
+Thus, $x_n \to x$ in $X$.
+
+By hypothesis, sequential continuity implies that $f(x_n) \to f(x)$ in $Y$. Therefore, for the open neighborhood $V$ of $f(x)$, there must exist an integer $K \in \mathbb{N}$ such that 
+\[
+f(x_n) \in V \quad \text{for all } n \ge K.
+\]
+However, this contradicts our choice of $x_n$, where $f(x_n) \notin V$ for all $n \in \mathbb{N}$.
+
+By contradiction, $f$ must be continuous at $x$. Since $x \in X$ was chosen arbitrarily, $f$ is continuous on $X$.
+\end{proof}
+
 \end{document}
