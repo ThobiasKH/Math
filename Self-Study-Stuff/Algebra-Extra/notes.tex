@@ -1,5 +1,10 @@
 \input{preamble.tex}
 
+\usepackage{tikz-cd}
+
+\DeclareMathOperator{\im}{\operatorname{im}}
+\DeclareMathOperator{\coker}{\operatorname{coker}}
+
 \title{\huge{Extra study and consolidation in Algebra}}
 \author{\LARGE{Thobias Høivik}}
 \date{}
@@ -19,7 +24,7 @@ notes for me to work through a lot of
 problems. 
 Basically, there will probably not be any pedagogical value here. 
 
-\section{Repeating some stuff about ideals}
+\section{Repeating some stuff about ideals, exact sequences and so forth}
 
 \begin{prob}
     Let 
@@ -164,4 +169,341 @@ Basically, there will probably not be any pedagogical value here.
     \end{itemize}
 \end{proof}
 
+\begin{prob}
+    Let $R$ be a commutative ring, $I$ an ideal of 
+    $R$, and $M$ an $R$-module. 
+
+    You have three objects 
+    \[
+        IM, \ M, \ M/IM. 
+    \]
+
+    \textbf{Part A.}
+
+    Identify the two most natural $R$-linear maps 
+    between these objects and use them to construct 
+    a short exact sequence. 
+
+    Give the maps explicitly and check exactness 
+    at every nonzero term. 
+
+    \textbf{Part B.}
+
+    Now consider $R/I$ as an $R$-module. 
+
+    There is a canonical isomorphism 
+    \[
+        M \otimes_R R/I \cong M/IM. 
+    \]
+
+    Answer: 
+    \begin{itemize}
+        \item What should the natural map 
+            \[
+                M \times R/I \to M/IM 
+            \]
+            probably be? 
+        \item Why is there an immediate well-definedness issue? 
+        \item What property would allow that bilinear map 
+            to induce a map from 
+            \[
+                M \otimes_R R/I? 
+            \]
+    \end{itemize}
+
+    \textbf{Part C.}
+
+    Suppose $N \subseteq M$. 
+    There is an obvious short exact sequence 
+    \[
+        0 \to N \to M \to M/N \to 0. 
+    \]
+
+    Tensor all with $R/I$. 
+
+    You might hope to get 
+    \[
+        0 \to N \otimes_R R/I \to M \otimes_R R/I 
+        \to (M/N) \otimes_R R/I \to 0. 
+    \]
+
+    Is that always exact? 
+\end{prob}
+
+\begin{proof}[Proof of A]
+    $IM$ is the collection of finite sums of 
+    $i_jm_j$ where $i_j \in I$ and $m_j \in M$. 
+
+    $M/IM$ is then the collection of 
+    \[
+        \overline x = x + IM, \ x \in M, 
+    \]
+    meaning the residue classes of elements in $M$ modulo 
+    $IM$. 
+
+    The most natural map from $M$ to $M/IM$ is the 
+    projection $\pi : M \to M/IM$, 
+    \[
+        \pi(x) = \overline x 
+    \]
+    sending elements $x$ into their residue classes. 
+    
+    The natural map from $IM$ to $M$ is the inclusion 
+    $\iota : IM \to M$ simply sending 
+    \[
+        \iota(x) = x
+    \]
+    since $IM \subseteq M$. 
+
+    $R$-linearity of $\iota$ is essentially 
+    trivial since 
+    \[
+        \iota(rx+y) = rx + y = r\iota(x) + \iota(y). 
+    \]
+
+    For $\pi$ observe that 
+    \begin{align*}
+        \pi(rx + y) 
+        &= \overline{rx + y} \\ 
+        &= (rx + y) + IM \\ 
+        &= (rx + IM) + y + IM \\ 
+        &= r(x+IM) + (y + IM) \\ 
+        &= r\overline{x} + \overline y \\ 
+        &= r\pi(x) + \pi(y).   
+    \end{align*}
+
+    This gives a natural sequence  
+    \[
+        0 \to IM \overset\iota\to M \overset\pi\to M/IM \to 0. 
+    \]
+
+    Then 
+    \[
+        \ker \pi = IM 
+    \]
+    since elements in $IM$ are $0$ modulo $IM$ 
+    when you take the quotient, and 
+    $IM \subseteq M$.  
+
+    Then 
+    \[
+        \im \iota = IM,          
+    \]   
+    since $\iota$ maps $x$ to $x$ with $IM \subseteq M$. 
+    
+    We have $\im \pi = M/IM$ since 
+    a residue class $\overline x \in M/IM$ has 
+    at least one representative $x\in M$. 
+
+    The only map from $M/IM \to 0$ is the trivial map, 
+    so 
+    \[
+        \ker(M/IM \to 0) = M/IM. 
+    \]
+
+    For the other side of the sequence there is once 
+    again only the trivial map from 
+    $0 \to IM$ with $\im(0 \to IM) = 0$, and 
+    \[
+        \ker \iota = 0,  
+    \] 
+    since $\iota(x) = 0_M$ implies $x = 0_M$, but 
+    as $IM \subseteq M$ we have that $0_{IM} = 0_M$. 
+
+    Thus we have shown exactness 
+    at each point in the sequence, so this 
+    short sequence is exact.
+\end{proof}
+
+\begin{proof}[Proof of B]
+    A natural map $\beta : M \times R/I \to M/IM$ 
+    might be 
+    \[
+        (m, \overline x) \overset\beta\mapsto 
+        \overline{mx}, 
+    \]
+    meaning 
+    \[
+        (m, r + I) \mapsto (mr) + IM 
+    \]
+
+    Notice that $(m,\overline x) \mapsto \overline{m + x}$ 
+    would very obviously create issues if 
+    we try to apply it to the tensor product since 
+    we require that $m \otimes 0$ is $0$. 
+    Furthermore, $m + r$ is generally not an element 
+    of $M$ for arbitrary $r \in R$. 
+
+    For well-definedness suppose 
+    $r + I = s + I$. 
+    Then $r-s \in I$. 
+
+    Then $(r-s)m \in IM$ since 
+    $r-s \in I$ and $m \in M$. 
+
+    Thus we have that 
+    \begin{align*}
+        \beta(m, r) - \beta(m, s) 
+        &= (mr + IM) - (ms + IM) \\ 
+        &= (m(r-s)) + IM, 
+    \end{align*}  
+    bit $m(r-s) \in IM$ so this is $0_{IM}$. 
+
+    Lastly 
+    \begin{align*}
+        \beta(m_1 + m_2, \overline r) 
+        &= ((m_1 + m_2)r) + IM \\ 
+        &= (m_1r + m_2r) + IM \\ 
+        &= (m_1r + IM) + (m_2r + IM) \\ 
+        &= \beta(m_1, \overline r) + \beta(m_2, \overline r),  
+    \end{align*}
+    and 
+    \begin{align*}
+        \beta(m, \overline r + \overline s) 
+        &= (m(r + s)) + IM \\ 
+        &= (mr + ms) + IM \\
+        &= (mr + IM) + (ms + IM) \\  
+        &= \beta(m, \overline r) + \beta(m, \overline s), 
+    \end{align*}
+    and 
+    \begin{align*}
+        \beta(am, \overline r) 
+        &= ((am)r) + IM \\ 
+        &= (m(ar)) + IM \\ 
+        &= \beta(m, a\overline r).  
+    \end{align*}
+
+    Thus, by the universal property of 
+    the tensor product, we 
+    can factor through a unique map so that 
+    \[
+        \begin{tikzcd}
+            M \times R/I \ar[dr] 
+            \ar[r, "\beta'"] & M/IM \\ 
+                & M \otimes_R R/I \ar[u,dashed, "\exists!"]
+        \end{tikzcd}
+    \]
+    commutes. 
+\end{proof}
+
+\begin{proof}[Proof of C]
+    We begin with the short exact sequence 
+    \[
+        0 \to N \overset\iota\to M 
+        \overset\pi\to M/N \to 0. 
+    \]
+
+    Tensoring with $R/I$ induces maps 
+    $\iota_R : N \otimes_R R/I \to M \otimes_R R/I$ 
+    sending
+    \[
+        n \otimes \overline r
+        \overset{\iota_R}\mapsto n \otimes \overline r  
+    \]
+    by 
+    \[
+        \iota_R(n\otimes \overline r) 
+        = \iota(n) \otimes r, 
+    \]
+    and
+    $\pi_R : M \otimes_R R/I \to (M/N) \otimes_R R/I$ sending
+    \[
+        m \otimes \overline r \overset{\pi_R}\mapsto 
+        \overline m \otimes \overline r 
+    \]
+    by 
+    \[
+        \pi_R(m\otimes \overline r) 
+        = \pi(m) \otimes \overline r 
+        = (m+N) \otimes \overline r. 
+    \]
+
+    In general tensoring is right exact, meaning 
+    \[
+        M' \otimes L 
+        \to M'' \otimes L 
+        \to M''' \otimes L \to 0 
+    \]
+    would remaing exact if 
+    \[
+        M' \to M'' \to M''' \to 0 
+    \]
+    was. 
+    
+    Take for instance
+    \[
+        0 \to 2\mathbb Z \to \mathbb Z 
+        \to \mathbb Z/2\mathbb Z \to 0
+    \]
+    and tensor with $\mathbb Z/2\mathbb Z$. 
+
+    Then we imagine we get an exact sequence  
+    \[
+        0 \to 2 \mathbb Z \otimes_{\mathbb Z} 
+        \mathbb Z/2\mathbb Z 
+        \to \mathbb Z \otimes_{\mathbb Z} \mathbb Z / 
+        2 \mathbb Z \to \mathbb Z/2\mathbb Z 
+        \otimes_{\mathbb Z} \mathbb Z/2\mathbb Z
+        \to 0. 
+    \]
+    However, there is no such exact sequence, 
+    with the 
+    \[
+        0 \to 2\mathbb Z \otimes_{\mathbb Z} 
+        \mathbb Z/2\mathbb Z
+    \]
+    term being the problem.
+
+    Consider $2\mathbb Z \otimes_{\mathbb Z} 
+    \mathbb Z/2 \to \mathbb Z \otimes_{\mathbb Z} 
+    \mathbb Z/2$. 
+    Take $2 \otimes \overline 1$. Then the image 
+    is $2 \otimes \overline 1$, but 
+    in $\mathbb Z \otimes \mathbb Z/2$ we have 
+    \[
+        (2\cdot 1) \otimes \overline 1 
+        = 1 \otimes(2\overline 1) = 0. 
+    \]
+
+    In $2\mathbb Z \otimes \mathbb Z/2$, however, 
+    $2 \otimes \overline 1$ is nonzero. 
+    Take the $\mathbb Z$-bilinear map 
+    $B : 2\mathbb Z \times \mathbb Z/2 \to \mathbb Z_2$ 
+    given by $B(2m, \overline n) = mn \ (\mod 2)$ and 
+    take the unique map factoring through 
+    the tensor product $\beta : 2\mathbb Z \otimes 
+    \mathbb Z/2 \to \mathbb Z_2$. 
+
+    As an asside, the map $B$ is well defined 
+    since taking the product of two 
+    integers modulo $2$ gives an element in 
+    $\mathbb Z/2\mathbb Z \cong \mathbb Z_2$. 
+    
+    It is linear since 
+    \begin{align*}
+        B(2m + 2m', n) 
+        &= (2m + 2m')n \mod 2 \\ 
+        &= 2mn + 2m'n \mod 2 \\ 
+        &= B(2m, n) + B(2m'n) 
+    \end{align*}    
+    in $\mathbb Z/2\mathbb Z$. 
+    The argument for linearity in the second 
+    coordinate and for scalar multipliaction 
+    from $\mathbb Z$ on the coordinates 
+    is analogous.
+    
+    Then 
+    \[
+        \beta(2\otimes 1) = 1 \neq 0. 
+    \]
+
+    Thus there is a nonzero element sent to $0$, so 
+    \[
+        \ker(\iota_R) \neq 0. 
+    \]
+
+
+\end{proof}
+
 \end{document}
+
