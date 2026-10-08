@@ -5680,6 +5680,7 @@ where $P_i$ are its maximal ideals.
         R_P \cong \frac{k[x,y]}{(x)} = k[y]. 
     \]
 
+
     As $k$ is Noetherian we have that 
     $k[y] \cong R_P$ is Noetherian. 
     We could also make this conclusion from observing 
@@ -5687,6 +5688,125 @@ where $P_i$ are its maximal ideals.
     and since quotienting preserves this the 
     quotient $R$ is, implying that $R_P$ is Noetherian 
     since localizing also preserves this property.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        R = k[x], \ M = R/(x^2) \oplus R/(x-1), 
+    \]
+    and let 
+    \[
+        P = (x) \triangleleft R. 
+    \]
+    Consider the localization $M_P$. 
+
+    Show the following: 
+    \begin{enumerate}
+        \item Using localization commuting with direct sums, 
+            \[
+                M_P \cong (R/(x^2))_P \oplus (R/(x-1))_P. 
+            \]
+        \item Prove that 
+            \[
+                (R/(x-1))_P = 0. 
+            \]
+        \item Show that 
+            \[
+                (R/(x^2))_P \cong R_P/(x^2)R_P. 
+            \]
+        \item Conclude that 
+            \[
+                M \cong R_P/(x^2)R_P.
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}
+    In general, for a commutative ring $R$ and some 
+    finite collection of $R$-modules $\{M_i\}_{i=1}^n$ 
+    we have that 
+    \[
+        \bigoplus_{i=1}^n S^{-1}M_i 
+        \cong S^{-1} \left(\bigoplus_{i=1}^n M_i \right). 
+    \]
+
+    As $R/(x^2)$ and $R/(x-1)$ are themselves rings, and 
+    thus modules, we have a canonical isomorphism 
+    \[
+        M = R/(x^2)_P \oplus R/(x-1)_P 
+        \cong (R/(x^2) \oplus R/(x-1))_P. 
+    \]
+
+    We have 
+    \[
+        (R/(x-1))_P 
+        = \left\{\frac{f(x) + p(x)(x-1)}{q(x)} \biggm| 
+        x \nmid q(x)\right\}. 
+    \]
+    Since $x - 1 = 0$ in $R/(x-1)$ we have 
+    $x \equiv 1$, meaning every element is divisible 
+    by $x$, so the localization is trivial.  
+
+    In $(R/(x^2))_P$ we have that we make 
+    polynomials not divisible by $x$ 
+    invertible, meaning constant polynomials (which 
+    are already invertible), as well as polynomials 
+    of degree $\geq 2$. 
+
+    For $3.$ consider the exact sequence 
+    \[
+        0 \to (x^2) \overset\iota\to R \overset\pi\to R/(x^2) \to 0
+    \]
+    where $\iota$ is the inclusion map and $\pi$ is the 
+    projection into the quotient. 
+
+    Then, since localization preserves exactness, 
+    \[
+        0 \to (x^2)_P \to R_P \to (R/(x^2))_P \to 0 
+    \]
+    is exact. Then, since the image of the 
+    homomorphism from $(x^2)_P$ into $R_P$ (the inclusion) 
+    is $(x^2)_P$ itself, 
+    \[
+        \frac{R_P}{(x^2)_P} \cong (R/x^2)_P. 
+    \]
+
+    Since $(R/(x-1))_P$ was trivial, the projection 
+    homomorphism 
+    \[
+        (R/(x^2))_P \oplus (R/(x-1))_P 
+        \to (R/(x^2))_P
+    \]
+    is an isomorphism, 
+    hence 
+    \[
+        M \cong (R/(x^2))_P \cong R_P/(x^2)R_P.
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $A = k[x,y]/(x^2 - 1, y^2 - 1)$. 
+
+    \begin{enumerate}[label=\alph*)]
+        \item Is $A$ an Artinian ring? 
+        \item What are the maximal ideals of $A$? 
+        \item Write $A$ as a direct product of artinian local rings.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Solution]
+    AS $x^2 = 1$ and $y^2 = 1$, we have 
+    that polynomials in $A$ 
+    have maximum degree $1$ in both $x$ and $y$, meaning 
+    \[
+        f(x,y) = a + bx + cy + dxy, \ a,b,c,d \in k. 
+    \]
+    We can observe that this can be interpreted 
+    as a finite dimensional $k$-algebra spanned by the images 
+    of the polynomials $\{1,x,y,xy\}$, meaning 
+    it is necessarily Artinian. 
+
+    Since the ring is Artinian the maximal 
+    ideals correspond to the prime ideals. 
 \end{proof}
 
 \end{document}
