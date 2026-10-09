@@ -1,0 +1,273 @@
+% Chromatic Notes — mathematics-first academic notes with a PDF layer theme switch
+% Compile with XeLaTeX (recommended) or LuaLaTeX.
+% Usage: \usepackage{chromaticnotes}           % dark, switchable PDF
+%        \usepackage[light]{chromaticnotes}    % static light PDF, ideal for printing
+%        \usepackage[serif]{chromaticnotes}    % serif body instead of Inter
+%        \usepackage[notoggle]{chromaticnotes} % static dark PDF
+%        \usepackage[zathura]{chromaticnotes} % dark PDF; use viewer recoloring
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{chromaticnotes}[2026/10/09 Modern colorful mathematical notes]
+
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=cn,prefix=cn@}
+\DeclareBoolOption[false]{light}
+\DeclareBoolOption[false]{serif}
+\DeclareBoolOption[true]{toggle}
+\DeclareComplementaryOption{notoggle}{toggle}
+\DeclareBoolOption[false]{zathura}
+\ProcessKeyvalOptions*
+\ifcn@zathura\cn@togglefalse\fi
+
+% ---- Page geometry, spacing and typography -----------------------
+\RequirePackage[a4paper,margin=26mm,headheight=24pt,headsep=13pt]{geometry}
+\RequirePackage{xcolor}
+\RequirePackage{fontspec}
+\RequirePackage{microtype}
+\RequirePackage{setspace}
+\RequirePackage{enumitem}
+\RequirePackage{mathtools}
+\RequirePackage{unicode-math}
+\RequirePackage{amsthm}
+\RequirePackage{tikz}
+\RequirePackage{tikz-cd}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{titlesec}
+\RequirePackage{titling}
+\RequirePackage{fancyhdr}
+\RequirePackage{etoolbox}
+
+\ifcn@serif
+  \IfFontExistsTF{Libertinus Serif}{\setmainfont{Libertinus Serif}}{\setmainfont{TeX Gyre Pagella}}
+\else
+  \IfFontExistsTF{Inter}{\setmainfont{Inter}}{\setmainfont{TeX Gyre Pagella}}
+\fi
+\IfFontExistsTF{Inter}{\setsansfont{Inter}}{\setsansfont{TeX Gyre Heros}}
+\IfFontExistsTF{JetBrains Mono}{\setmonofont[Scale=MatchLowercase]{JetBrains Mono}}{\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}}
+\IfFontExistsTF{LibertinusMath-Regular.otf}
+  {\setmathfont[Scale=1.16]{LibertinusMath-Regular.otf}}
+  {\IfFontExistsTF{Libertinus Math}
+    {\setmathfont[Scale=1.16]{Libertinus Math}}
+    {\setmathfont[Scale=1.16]{Latin Modern Math}}}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.48\baselineskip}
+\setstretch{1.13}
+\setlist[itemize]{topsep=0.35em,itemsep=0.18em,parsep=0pt,leftmargin=1.5em}
+\setlist[enumerate]{topsep=0.35em,itemsep=0.18em,parsep=0pt,leftmargin=1.6em}
+\emergencystretch=2em
+
+% ---- Two carefully chosen palettes ------------------------------
+\ifcn@light
+  \definecolor{cnbg}{HTML}{F7F9FC}
+  \definecolor{cnsurface}{HTML}{FFFFFF}
+  \definecolor{cntext}{HTML}{263448}
+  \definecolor{cnmuted}{HTML}{5E7189}
+  \definecolor{cnrule}{HTML}{DAE2EB}
+  \definecolor{cnaccent}{HTML}{007C86}
+  \definecolor{cncoral}{HTML}{BD3858}
+  \definecolor{cnviolet}{HTML}{7551B3}
+  \definecolor{cnmint}{HTML}{187954}
+  \definecolor{cnamber}{HTML}{9C6100}
+  \definecolor{cnblue}{HTML}{355FB2}
+\else
+  \definecolor{cnbg}{HTML}{181E2B}
+  \definecolor{cnsurface}{HTML}{222A3A}
+  \definecolor{cntext}{HTML}{E7EDF6}
+  \definecolor{cnmuted}{HTML}{A0AEC4}
+  \definecolor{cnrule}{HTML}{384357}
+  \definecolor{cnaccent}{HTML}{5DDED2}
+  \definecolor{cncoral}{HTML}{FF829C}
+  \definecolor{cnviolet}{HTML}{C6A6FF}
+  \definecolor{cnmint}{HTML}{80E6B3}
+  \definecolor{cnamber}{HTML}{FFC777}
+  \definecolor{cnblue}{HTML}{92B6FF}
+\fi
+\colorlet{bgcolor}{cnbg}   % Backward compatibility with old preamble
+\colorlet{textcolor}{cntext}
+\colorlet{thmcolor}{cnaccent}
+\colorlet{defcolor}{cncoral}
+\colorlet{lemcolor}{cnblue}
+\colorlet{corcolor}{cnviolet}
+\colorlet{probcolor}{cnamber}
+\colorlet{excolor}{cnmint}
+\colorlet{propcolor}{cnblue}
+\pagecolor{cnbg}
+\color{cntext}
+
+% ---- Section hierarchy and running furniture -------------------
+\titleformat{\section}
+  {\sffamily\bfseries\Large\color{cntext}}
+  {\color{cnaccent}\thesection}{0.75em}{}
+  [\vspace{0.35em}{\color{cnrule}\titlerule[0.65pt]}]
+\titlespacing*{\section}{0pt}{2.1em}{0.8em}
+\titleformat{\subsection}
+  {\sffamily\bfseries\large\color{cnaccent}}
+  {\thesubsection}{0.65em}{}
+\titlespacing*{\subsection}{0pt}{1.45em}{0.45em}
+\titleformat{\subsubsection}
+  {\sffamily\bfseries\normalsize\color{cntext}}
+  {\thesubsubsection}{0.5em}{}
+
+\setlength{\droptitle}{-3.0em}
+\pretitle{\begin{flushleft}\sffamily\bfseries\color{cntext}\huge}
+\posttitle{\par\end{flushleft}\vspace{-1.0em}}
+\preauthor{\begin{flushleft}\sffamily\color{cnmuted}\normalsize}
+\postauthor{\par\end{flushleft}\vspace{-1.2em}}
+\predate{\begin{flushleft}\sffamily\color{cnmuted}\small}
+\postdate{\par\end{flushleft}\vspace{-1.0em}}
+
+% ---- Hyperlinks / references -----------------------------------
+\RequirePackage[unicode,colorlinks=true,linkcolor=cnaccent,urlcolor=cnblue,citecolor=cnviolet]{hyperref}
+\RequirePackage{bookmark}
+\RequirePackage[nameinlink,noabbrev]{cleveref}
+
+% ---- Optional Content Group: one-click, full-page inversion ------
+% The document's actual colors are compiled dark. PDF's Difference blend mode
+% with an optional white layer inverts all pixels, including figures.
+% Requires a PDF viewer that supports layers and transparency blend modes.
+\ifcn@light
+  \newcommand{\ThemeSwitch}{{\sffamily\footnotesize\color{cnmuted}LIGHT EDITION}}
+\else
+  \ifcn@toggle
+    \RequirePackage{ocgx2}
+    \AddToHook{shipout/foreground}{%
+      \begin{ocg}{Light mode — click to toggle}{cn-light-overlay}{0}%
+        \begin{tikzpicture}[overlay]
+          \begin{scope}[blend mode=difference]
+            % At the shipout origin, y=0 is the top of the page.
+            \fill[white] (0,-\paperheight) rectangle (\paperwidth,0);
+          \end{scope}
+        \end{tikzpicture}%
+      \end{ocg}%
+    }
+    \newcommand{\ThemeSwitch}{%
+      \switchocg{cn-light-overlay}{{\sffamily\footnotesize\color{cnaccent}\textbf{\ensuremath{\circ}}\, THEME}}%
+    }
+  \else
+    \newcommand{\ThemeSwitch}{{\sffamily\footnotesize\color{cnmuted}DARK EDITION}}
+  \fi
+\fi
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\quad #1}}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{cnrule}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{{\small\sffamily\color{cnmuted}\nouppercase{\rightmark}}}
+\fancyhead[R]{\ThemeSwitch}
+\fancyfoot[L]{{\footnotesize\sffamily\color{cnmuted}MATHEMATICAL NOTES}}
+\fancyfoot[R]{{\small\sffamily\bfseries\color{cnaccent}\thepage}}
+\apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}
+
+% ---- Theorems: preserve previous names, optional titles, labels -
+\newtheoremstyle{cn-plain}{5pt}{5pt}{\itshape}{}% space / body / indent
+  {\sffamily\bfseries\color{cntext}}{.}{0.65em}{}
+\newtheoremstyle{cn-upright}{5pt}{5pt}{\normalfont}{}
+  {\sffamily\bfseries\color{cntext}}{.}{0.65em}{}
+
+\theoremstyle{cn-plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{thm*}{Theorem}
+\newtheorem{lem}{Lemma}[section]
+\newtheorem*{lem*}{Lemma}
+\newtheorem{prop}{Proposition}[section]
+\newtheorem*{prop*}{Proposition}
+\newtheorem{cor}{Corollary}[section]
+\newtheorem*{cor*}{Corollary}
+\newtheorem{theorem}[thm]{Theorem}
+\newtheorem*{theorem*}{Theorem}
+
+\theoremstyle{cn-upright}
+\newtheorem{definition}{Definition}[section]
+\newtheorem*{definition*}{Definition}
+\newtheorem{defn}[definition]{Definition}
+\newtheorem*{defn*}{Definition}
+\newtheorem{prob}{Problem}[section]
+\newtheorem*{prob*}{Problem}
+\newtheorem{ex}{Example}[section]
+\newtheorem*{ex*}{Example}
+\newtheorem{remark}{Remark}[section]
+\newtheorem*{remark*}{Remark}
+
+% Side-bar boxes: restrained surfaces + genuinely distinctive accents.
+\tcbset{cn-card/.style={
+  enhanced jigsaw,breakable,
+  colback=#1!7!cnsurface,
+  colframe=#1!34!cnsurface,
+  coltext=cntext,
+  boxrule=0.42pt,arc=3.2pt,
+  borderline west={2.7pt}{0pt}{#1},
+  boxsep=0pt,left=12pt,right=12pt,top=10pt,bottom=10pt,
+  before skip=13pt,after skip=13pt,
+}}
+\newcommand{\cnboxpair}[2]{%
+  \tcolorboxenvironment{#1}{cn-card=#2}%
+  \tcolorboxenvironment{#1*}{cn-card=#2}%
+}
+\cnboxpair{thm}{cnaccent}
+\cnboxpair{theorem}{cnaccent}
+\cnboxpair{lem}{cnblue}
+\cnboxpair{prop}{cnblue}
+\cnboxpair{cor}{cnviolet}
+\cnboxpair{definition}{cncoral}
+\cnboxpair{defn}{cncoral}
+\cnboxpair{prob}{cnamber}
+\cnboxpair{ex}{cnmint}
+% Remarks intentionally stay unboxed to reduce visual fatigue.
+\newtcolorbox{aside}[1][]{cn-card=cnblue,#1}
+\renewcommand{\qedsymbol}{{\color{cnmint}\rule[0.15ex]{0.62em}{0.62em}}}
+
+\crefname{thm}{theorem}{theorems}             \Crefname{thm}{Theorem}{Theorems}
+\crefname{theorem}{theorem}{theorems}         \Crefname{theorem}{Theorem}{Theorems}
+\crefname{definition}{definition}{definitions}\Crefname{definition}{Definition}{Definitions}
+\crefname{defn}{definition}{definitions}     \Crefname{defn}{Definition}{Definitions}
+\crefname{lem}{lemma}{lemmas}                \Crefname{lem}{Lemma}{Lemmas}
+\crefname{cor}{corollary}{corollaries}       \Crefname{cor}{Corollary}{Corollaries}
+\crefname{prop}{proposition}{propositions}   \Crefname{prop}{Proposition}{Propositions}
+\crefname{prob}{problem}{problems}           \Crefname{prob}{Problem}{Problems}
+\crefname{ex}{example}{examples}            \Crefname{ex}{Example}{Examples}
+\crefname{remark}{remark}{remarks}           \Crefname{remark}{Remark}{Remarks}
+
+% ---- Small, memorable math macros; no overwriting standard names
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\FF}{\mathbb{F}}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator*{\colim}{colim}
+\DeclareMathOperator*{\hocolim}{hocolim}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\set}{\lbrace}{\rbrace}
+% unicode-math installs a symbol called \angles at begin-document time.
+% Keep the original user-facing delimiter macro after that initialization.
+\AddToHook{begindocument/end}{%
+  \let\angles\relax
+  \DeclarePairedDelimiter{\angles}{\langle}{\rangle}%
+}
+\DeclarePairedDelimiter{\paren}{\lparen}{\rparen}
+\DeclarePairedDelimiter{\bracks}{\lbrack}{\rbrack}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+\newcommand{\cat}[1]{\mathsf{#1}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\restr}[2]{\left.#1\right|_{#2}}
+\newcommand{\keyterm}[1]{{\color{cnaccent}\bfseries #1}}
+\endinput

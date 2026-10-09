@@ -3,7 +3,7 @@ import shutil
 import sys
 
 def copy_latex_files(target_dir):
-    files = ['template.tex', 'preamble.tex']
+    files = ['template.tex', 'styling.sty']
     
     os.makedirs(target_dir, exist_ok=True)
 

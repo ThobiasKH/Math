@@ -2,7 +2,7 @@
 
 import os
 
-extensions = {".toc", ".out",".aux", ".fdb_latexmk", ".fls", ".log", ".synctex.gz", ".xdv"}
+extensions = {".toc", ".out",".aux", ".fdb_latexmk", ".fls", ".log", ".synctex.gz", ".xdv", ".synctex(busy)"}
 
 def find_and_delete_latex_files():
     latex_files = []

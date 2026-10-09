@@ -1,112 +1,140 @@
-\input{preamble.tex}
+% Keep styling.sty beside this file. Compile with:
+% latexmk -xelatex -synctex=1 template.tex (or, 
+% for my purposes, compile to preview with VimtexCompile in neovim)
+% if youre using VSC with some built in plugin you'll probably need to add 
+% {
+%   "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+%   "latex-workshop.latex.autoBuild.run": "onSave",
+%   "latex-workshop.view.pdf.viewer": "tab",
+%   "latex-workshop.view.pdf.invertMode.enabled": "never"
+% }
+% also it is necessary to download the right fonts. Just look 
+% at error messages to find which ones or something
 
-\title{\huge{My Math Notes}}
-\author{\LARGE{Thobias Høivik}}
-\date{\Large{\today}}
+\documentclass[11pt]{article}
+\usepackage{styling} % Dark by default, with the clickable THEME switch.
+% \usepackage{graphicx} % Uncomment if adding external images.
+
+\title{Title of the Notes}
+\author{Thobias K. H\o ivik}
+\date{\today} % Use \date{} to hide the date.
 
 \begin{document}
 \maketitle
+% \tableofcontents
+% \newpage
 
-\newpage
-\tableofcontents
+\section{Introduction}\label{sec:intro}
+Some text with \emph{emphasis}, \textbf{bold text}, a
+\keyterm{key term}, and inline mathematics \(f:M\to N\).
+% Leave a blank line to start a new paragraph.
 
-\newpage
-\section{Introduction}
+\subsection{A subsection}
+\subsubsection{A smaller heading}
+% \section*{An unnumbered section}
 
-\begin{defn}[Sets]
-\label{def:sets}
-A \emph{set} is a collection of distinct elements.
-\end{defn}
-
-As discussed in \cref{def:sets}, elements must be distinct.
-
-\begin{thm}[Sum of evens]\label{thm:sum}
-The sum of two even numbers is even.
-\begin{proof}
-Let the even numbers be \(2a\) and \(2b\). Their sum is
+\section{Statements and proofs}
+% Optional titles go in [brackets]; labels go inside the environment.
+% Add * to any statement name for an unnumbered version: thm*, prob*, etc.
+\begin{definition}[Kernel]\label{definition:kernel}
+For an \(R\)-linear map \(f:M\to N\), define
 \[
-2a + 2b = 2(a+b),
+    \ker f=\set{m\in M\mid f(m)=0}.
 \]
-which is even.
-\end{proof}
+\end{definition}
+
+\begin{thm}[First isomorphism theorem]\label{thm:first}
+The map \(M/\ker f\to\im f\), \(m+\ker f\mapsto f(m)\),
+is an isomorphism of \(R\)-modules.
 \end{thm}
+\begin{proof}
+The map is well-defined and linear, injective, and surjective.
+% For a proof ending in a display, put \qedhere inside that display.
+\end{proof}
 
-As described in \cref{thm:sum}. 
-
-\begin{lem}[Parity of sum]\label{lem:parity}
-If \(x\) and \(y\) are integers, then \(x + y\) is even if and only if \(x\) and \(y\) have the same parity.
+\begin{lem}[Zero kernel]\label{lem:kernel}
+A module homomorphism is injective if and only if its kernel is zero.
 \end{lem}
 
-As seen in \cref{lem:parity}, you are a very nice person.
+\begin{prop}[Cokernel]\label{prop:coker}
+The quotient \(\coker f=N/\im f\) is an \(R\)-module.
+\end{prop}
 
-\begin{proof}
-Assume \(x\) and \(y\) are both even or both odd.
-
-- If both even, \(x=2m\), \(y=2n\), then \(x+y=2(m+n)\) is even.
-
-- If both odd, \(x=2m+1\), \(y=2n+1\), then
-\[
-x+y = 2m + 1 + 2n + 1 = 2(m+n+1),
-\]
-also even.
-
-Conversely, if \(x+y\) is even and \(x\) is even, then \(y\) must be even; similarly for odd.
-\end{proof}
-
-\section{Model Theory}
-
-\begin{prob}[Satisfiability]
-Let \(\mathfrak{M} \models \phi\). Show that \(\phi\) is satisfiable.
-\end{prob}
-
-\begin{proof}[Proof of Problem 2.1]
-Since \(\mathfrak{M} \models \phi\), by definition \(\phi\) is true in some model (namely \(\mathfrak{M}\)). Therefore, \(\phi\) is satisfiable.
-
-More explicitly,
-\[
-\phi = \psi \wedge \theta,
-\]
-where \(\psi\) and \(\theta\) are formulas satisfied by \(\mathfrak{M}\). Hence \(\phi\) is satisfiable.
-\end{proof}
-
-\begin{cor}[Consequence of satisfiability]
-If \(\phi\) is satisfiable, then \(\neg \phi\) is not valid.
+\begin{cor}[Injective maps]\label{cor:injective}
+If \(f\) is injective, then \(M\cong\im f\).
 \end{cor}
 
-\begin{proof}
-If \(\neg \phi\) were valid, then \(\phi\) would be false in every model. This contradicts the satisfiability of \(\phi\).
-\end{proof}
+\begin{ex}[Multiplication by two]
+For \(f:\ZZ\to\ZZ\), \(n\mapsto2n\), we have
+\(\ker f=0\), \(\im f=2\ZZ\), and \(\coker f\cong\ZZ/2\ZZ\).
+\end{ex}
 
-\section{Fourier Analysis}
+\begin{prob*}[An exercise]
+Write down the isomorphism in \cref{thm:first} for the preceding example.
+\end{prob*}
 
-\begin{defn}[Fourier Transform]
-The Fourier transform of a function \(f \in L^1(\mathbb{R})\) is defined as
+\begin{remark*}
+Use \verb|\cref{thm:first}| within a sentence and
+\verb|\Cref{thm:first}| at its beginning.
+For example: \Cref{thm:first} implies \cref{cor:injective}.
+\end{remark*}
+
+\section{Common mathematical layouts}
+% Numbered display: equation. Unnumbered display: \[ ... \].
+\begin{equation}\label{eq:homology}
+    H_n(C_\bullet)=\frac{\ker d_n}{\im d_{n+1}}.
+\end{equation}
+Refer back using \cref{eq:homology} or \eqref{eq:homology}.
+
+% Use align for numbered lines; align* for unnumbered lines.
+\begin{align*}
+    \Ann_R(M)&=\set{r\in R\mid rm=0\text{ for all }m\in M},\\
+    \Hom_R(R,M)&\cong M.
+\end{align*}
 \[
-\hat{f}(\xi) = \int_{\mathbb{R}} f(x) e^{-2\pi i x \xi} \, dx.
+    A=\begin{pmatrix}1&2\\0&1\end{pmatrix},
+    \qquad
+    g(x)=\begin{cases}x^2,&x\geq0,\\-x,&x<0.\end{cases}
 \]
-\end{defn}
+% Delimiters: \abs{x}, \norm{v}, \set{x,y}, \angles{v,w},
+% \paren{x}, \bracks{x}, \floor{x}, \ceil{x}.
+% Automatic sizing: \norm*{\frac{v}{2}}. Manual sizing: \norm[\Big]{v}.
+% Numbers: \NN, \ZZ, \QQ, \RR, \CC, \FF.
+% Operators: \Hom, \End, \Aut, \Spec, \Ann, \im, \coker, \rank,
+% \supp, \Tor, \Ext. Maps: M \xto{f} N, \restr{f}{U}.
 
-\begin{thm}[Fourier Inversion]
-If \(f\) and \(\hat{f}\) are both in \(L^1(\mathbb{R})\), then for almost every \(x\),
+\subsection{A commutative diagram}
+% tikz-cd is already loaded. Rows end with \\ and columns use &.
+% Other arrow styles: hook (injection), two heads (surjection), dashed.
 \[
-f(x) = \int_{\mathbb{R}} \hat{f}(\xi) e^{2\pi i x \xi} \, d\xi.
+\begin{tikzcd}[row sep=large,column sep=large]
+    M \arrow[r,"f"] \arrow[d,two heads,"\pi"'] & N \\
+    M/\ker f \arrow[r,"\bar f","\cong"'] & \im f \arrow[u,hook,"\iota"']
+\end{tikzcd}
 \]
-\end{thm}
 
-\begin{proof}[Sketch of proof]
-This theorem follows from Plancherel's theorem and properties of the Fourier transform on Schwartz functions. The full proof is beyond this note.
-\end{proof}
+\section{Lists and useful extras}
+\begin{enumerate}[label=\alph*)]
+    \item First task.
+    \item Second task.
+\end{enumerate}
+\begin{itemize}
+    \item First observation.
+    \item Second observation.
+\end{itemize}
 
-\begin{prop}
-    \label{prop:life}
-    The meaning of life is $42$
-\end{prop}
-\begin{proof}
-    This is trivial.
-\end{proof}
+\begin{aside}
+A short note, reminder, or intuition. Color a phrase with
+\textcolor{cncoral}{coral} or \textcolor{cnviolet}{violet}.
+\end{aside}
 
-As put forth in \Cref{prop:life}, the meaning 
-is clear to us now.
-
+% External link: \href{https://example.org}{Link text}.
+% Literal URL: \url{https://example.org}.
+% Image (requires graphicx):
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.7\linewidth]{figure.pdf}
+%     \caption{Caption.}\label{fig:example}
+% \end{figure}
 
 \end{document}

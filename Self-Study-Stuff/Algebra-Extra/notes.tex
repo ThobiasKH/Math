@@ -1,10 +1,5 @@
-\input{preamble.tex}
-
-\usepackage{tikz-cd}
-
-\DeclareMathOperator{\im}{\operatorname{im}}
-\DeclareMathOperator{\coker}{\operatorname{coker}}
-\DeclareMathOperator{\Ann}{\operatorname{Ann}}
+\documentclass[11pt]{article}
+\usepackage{styling}
 
 \title{\huge{Extra study and consolidation in Algebra}}
 \author{\LARGE{Thobias Høivik}}
@@ -13,7 +8,6 @@
 \begin{document}
 \maketitle
 
-\newpage
 \tableofcontents
 
 \newpage
@@ -880,9 +874,61 @@ Basically, there will probably not be any pedagogical value here.
         \overset{\pi \circ \varphi}\to \mathbb Z/4 
         \mathbb Z \to 0.  
     \]
-
-
 \end{proof}
+
+\newpage
+
+\begin{prob}
+    Let $f:M\to N$ be an $R$-module homomorphism, and let
+    $A\le M$ and $B\le N$ be submodules.
+    Consider the candidate map
+    \[
+        \overline f : M/A \to N/B,
+        \qquad
+        \overline f(m+A)=f(m)+B.
+    \]
+    \begin{enumerate}
+        \item Determine a necessary and sufficient condition on
+        $A$, $B$, and $f$ for $\overline f$ to be well-defined.
+    
+        \item Assume that condition holds. Prove that
+        $\overline f$ is an $R$-module homomorphism.
+    
+        Determine
+        \[
+            \ker \overline f
+        \]
+        as a quotient involving $f^{-1}(B)$ and $A$, and determine
+        \[
+            \im \overline f
+        \]
+        as a quotient involving $f(M)$ and $B$.
+    
+        \item Specialize to the case
+        \[
+            A=\ker f,
+            \qquad
+            B=0.
+        \]
+        Recover the first isomorphism theorem from the formulas above.
+    
+        \item Specialize instead to
+        \[
+            A=f^{-1}(B).
+        \]
+        Analyze the induced map
+        \[
+            M/f^{-1}(B)\to N/B.
+        \]
+        Determine whether it is injective and describe its image.
+    \end{enumerate}
+\end{prob}
+\begin{proof}[Proof of 1]
+    
+\end{proof}
+
+
+
 
 \end{document}
 
