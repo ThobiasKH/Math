@@ -505,5 +505,127 @@ Basically, there will probably not be any pedagogical value here.
 
 \end{proof}
 
+\begin{prob}
+    Let $M$ be an $R$-module and let 
+    $A,B \leq M$ be submodules. 
+    You are given 
+    \[
+        A \cap B, \ A, \ B, \ A + B. 
+    \]
+    Construct a natural short exact 
+    sequence involving all. 
+\end{prob}
+\begin{proof}[Sol.]
+    We note that 
+    \[
+        A + B \supseteq A \supseteq A \cap B 
+    \]
+    and similarly, 
+    \[
+        A + B \supseteq B \supseteq A \cap B. 
+    \]
+
+    Thus there are very natural inclusion maps 
+    \[
+        A \cap B \to A, \ A \cap B \to B, \ 
+        A \to A + B, \ B \to A + B.  
+    \] 
+
+    However, these are not what we are looking for exactly. 
+
+    The observation that 
+    \[
+        \frac{A+B}{B} \cong \frac{A}{A \cap B }
+    \]
+    gives us what we need. 
+
+    Let $\iota: A \cap B \to A$ be the inclusion, which is 
+    well-defined since $A \cap B \subseteq A$.  
+
+    Then define $\pi : A \to (A+B)/B$ to be the map 
+    \[
+        \pi(a) = a + B. 
+    \]
+    This feels like the projection map since for $a+b$ in 
+    $A+B$ we have $(a+b) + B = a + B$ since $b \in B$. 
+
+    It is not terribly hard to see that these are 
+    homomorphisms. 
+
+    Then 
+    \[
+        \im(0 \to A \cap B) = 0 = \ker \iota, 
+    \]
+    and 
+    \[
+        \im \iota = A \cap B = \ker \pi 
+    \]
+    since the $A \cap B \subseteq A$ go to $0$ modulo $B$, 
+    and 
+    \[
+        \im \pi = \frac{A+B}{B} = \ker (A + B/B \to 0), 
+    \]
+    since $\pi$ is surjective: 
+    take $(a+b) + B \in (A+B)/B$, then 
+    \[
+        (a+b) + B = a + B 
+    \]
+    since $b \in B$, which is mapped to by $a \in A$. 
+
+    Thus 
+    \[
+        0 \to A \cap B \overset\iota\to A \overset\pi\to 
+        \frac{A+B}{B} \to 0
+    \]
+    is exact, reaffirming 
+    the fact that, for exact sequence 
+    \[
+        0 \to A \to B \to C \to 0 
+    \]
+    we have 
+    \[
+        C \cong \frac{B}{\im(A \to B)}. 
+    \]
+
+    Another natural route is to look at 
+    $\psi : A \oplus B \to A + B$ by 
+    \[
+        \psi(a, b) = a+b. 
+    \] 
+    Then the kernel forces
+    \begin{align*}
+        a + b &= 0 \\ 
+        a &= -b 
+    \end{align*}
+    so $a,b \in A \cap B$. This points to the natural map 
+    $\varphi : A \cap B \to A \oplus B$ by 
+    \[
+        \varphi(x) = (x,-x). 
+    \]
+    Then the sequence 
+    \[
+        0 \to A \cap B \overset\varphi\to A \oplus B 
+        \overset\psi\to A + B \to 0
+    \]
+    is exact. 
+
+    This is not hard to prove as 
+    \[
+        \im(0 \to A\cap B) = 0 = \ker\varphi 
+    \]
+    since $(x,-x) = 0$ iff $x = 0$. Then 
+    \[
+        \im\varphi = \{(x,-x) \bigm| x \in A \cap B\} 
+        = \ker \psi 
+    \]
+    by the earlier argument. 
+    Lastly 
+    \[
+        \im \psi = A + B = \ker (A + B \to 0)   
+    \]
+    since $\psi$ is surjective (for $a+b \in A+B$ there 
+    is $(a,b) \in A \oplus B$). 
+\end{proof}
+
 \end{document}
 
