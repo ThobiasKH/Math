@@ -4,6 +4,7 @@
 
 \DeclareMathOperator{\im}{\operatorname{im}}
 \DeclareMathOperator{\coker}{\operatorname{coker}}
+\DeclareMathOperator{\Ann}{\operatorname{Ann}}
 
 \title{\huge{Extra study and consolidation in Algebra}}
 \author{\LARGE{Thobias Høivik}}
@@ -625,6 +626,262 @@ Basically, there will probably not be any pedagogical value here.
     \]
     since $\psi$ is surjective (for $a+b \in A+B$ there 
     is $(a,b) \in A \oplus B$). 
+\end{proof}
+
+\begin{prob}
+    Let $M$ be an $R$-module and let 
+    $r \in R$. Consider only 
+    \[
+        M, \ \Ann_M(r) = \{m \in M \bigm| rm = 0\}, 
+        \ M/rM. 
+    \]
+
+    There is a very natural endomorphism 
+    \[
+        M \to M 
+    \]
+    associated with $r$. 
+
+    Discover an exact sequence involving 
+    \[
+        \Ann_M(r), \ M, \ M, \ M/rM.
+    \]
+\end{prob}
+\begin{proof}[Solution and proof]
+    A natural endomorphism on $M$ associated 
+    with $r$ could be $\rho : M \to M$ by 
+    \[
+        \rho(m) = rm. 
+    \] 
+    Since modules are closed under multiplication 
+    from the ring, this is well defined. 
+    It is not terribly hard to see that it is 
+    indeed a homomorphism since 
+    \begin{align*}
+        \rho(am_1 + m_2) 
+        &= r(am_1 + m_2) \\ 
+        &= ram_1 + rm_2 \\ 
+        &= a(rm_1) + rm_2 \\ 
+        &= a\rho(m_1) + \rho(m_2). 
+    \end{align*}
+
+    This map need not be injective, and 
+    it need not be surjective either. 
+    Take for instance $R$ to be $\mathbb Z$ and 
+    $M$ to be $\mathbb Z/2\mathbb Z$ with $r = 2$. 
+    Then the image does not include $\overline 1$. 
+    
+    The first useful fact is that for 
+    $m \in \Ann_M(r) \subseteq M$ we have 
+    $m \overset\rho\mapsto 0$. 
+
+    Which gives a candidate:
+    \[
+        0 \to \Ann_M(r) \overset\iota\to M 
+        \overset\rho\to M \overset\pi\to M/rM \to 0. 
+    \]
+
+    Let $\iota : \Ann_M(r) \to M$ be the inlcusion map, 
+    which is well-defined since 
+    $\Ann_M(r) \subseteq M$. 
+
+    Then let $\pi : M \to M/rM$ be the projection map 
+    \[
+        m \overset\pi\mapsto \overline m. 
+    \]
+
+    Then 
+    \[
+        \im(0\to\Ann_M(r)) = 0_{\Ann_M(r)}, 
+    \]
+    but $\Ann_M(r) \subseteq M$ so 
+    \[
+        0_{\Ann_M(r)} = 0_M, 
+    \]
+    hence 
+    \[
+        \im(0\to\Ann_M(r)) = \ker\iota. 
+    \]
+    Next, we have that 
+    \[
+        \im\iota = \Ann_M(r). 
+    \]
+    By definition, for $m \in M$, 
+    \[
+        mr = \rho(m) = 0 
+    \]
+    if and only if 
+    \[
+        m \in \Ann_M(r), 
+    \]
+    so 
+    \[
+        \ker\rho = \Ann_M(r) = \im\iota. 
+    \]
+    Next 
+    \[
+        \im\rho  
+    \]
+    is $rM = \{rm \bigm| m \in M\}$, 
+    but this is just kernel $\ker \pi$ 
+    since $x = 0$ in $M/rM$ if and only if 
+    $x \in rM$ if and only if 
+    \[
+        x = rm, \ m \in M. 
+    \]     
+    Thus 
+    \[
+        \im\rho = \ker\pi. 
+    \]
+    Lastly, 
+    \[
+        \im\pi = M/rM 
+    \]
+    as the projection is always surjective sicne 
+    there is at least one representative 
+    $m \in M$ for each residue class modulo $rM$. 
+    
+    Now we take a look at a concrete 
+    example with $R = \mathbb Z$, $M = \mathbb Z/12\mathbb Z$ 
+    and $r = 8$. 
+
+    Then 
+    \[
+        \Ann_M(8) = \{\overline m \in \mathbb Z/12\mathbb Z 
+        \bigm| m \cdot 8 = n \cdot 12, \ n \in 
+        \mathbb Z\}. 
+    \]. 
+    The annihilators (worked out concretely 
+    further down) are then  
+    \[
+        \overline 0, \ \overline 3, \ \overline 6, \ \overline 9,
+    \]
+    meaning 
+    \[
+        \Ann_M(8) = (3). 
+    \]
+
+    Then 
+    \[
+        8M
+    \] 
+    is the residue classes modulo $12$ 
+    after being multiplied by $8 = 2\cdot 2 \cdot 2$.
+    Concretely, 
+    \begin{align*}
+        8 \cdot \overline 0  &= \overline 0 \\ 
+        8 \cdot \overline 1  &= \overline 8 \\ 
+        8 \cdot \overline 2  &= \overline 4 \\ 
+        8 \cdot \overline 3  &= \overline 0 \\ 
+        8 \cdot \overline 4  &= \overline 8 \\ 
+        8 \cdot \overline 5  &= \overline 4 \\ 
+        8 \cdot \overline 6  &= \overline 0 \\ 
+        8 \cdot \overline 7  &= \overline 8 \\ 
+        8 \cdot \overline 8  &= \overline 4 \\ 
+        8 \cdot \overline 9  &= \overline 0 \\ 
+        8 \cdot \overline 10 &= \overline 8 \\ 
+        8 \cdot \overline 11 &= \overline 4, 
+    \end{align*} 
+    meaning 
+    \[
+        8M = (4)
+    \]
+    in this scenario.
+
+    Note: 
+    We could also have worked out 
+    the annihilator by observing that 
+    \[
+        8m \cong 0 (\mod 12) 
+    \]
+    if and only if 
+    \[
+        12 \mid 8m 
+    \]
+    if and only if 
+    \[
+        3 \mid 2m 
+    \]
+    if and only if (because $2$ and $3$ are coprime) 
+    \[
+        3 \mid m. 
+    \]
+
+    For the maps we have that the 
+    $0$ map has image $\overline 0$, 
+    with the kernel of the inclusion from 
+    the annihilator being $\overline 0$ as well. 
+
+    Furthermore the image of the inclusion, which 
+    I will here also denote $\iota$ is itself 
+    the annihilator 
+    \[
+        (3). 
+    \] 
+    The kernel of the endomorphism sending 
+    $m \mapsto 8m$ is the 
+    elements for which $8m$ is $0$, namely 
+    \[
+        \overline 0, \ \overline 3, \ \overline 6, \ \overline 9.  
+    \]
+
+    The image of the endomorphism is 
+    \[
+        8M = (4) 
+    \]
+    and the kernel of the 
+    projection $\pi$ is $8M$. 
+    The image of the projection is the whole 
+    module $M/8M$ so the last term 
+    \[
+        \overset\pi\to M/8M \to 0
+    \]
+    is exact. 
+
+    We have that 
+    \[
+        \frac{\mathbb Z/12\mathbb Z}{(4)}
+        \cong \mathbb Z/4\mathbb Z. 
+    \] 
+    You can show this by 
+    taking the surjective homomorphism 
+    $\varphi : \mathbb Z/12\mathbb Z \to (4)$ 
+    by 
+    \[
+        \varphi(\overline n_{12}) = \overline n_{4}
+    \]
+    and applying the first isomorphism theorem. 
+
+    For well-definedness we observe that 
+    if $n_1 \equiv n_2$ modulo $12$ then, since $4 \mid 12$, 
+    we have that $n_1 \equiv n_2$ modulo $4$. 
+
+    Is is a homomorphism since 
+    \begin{align*}
+        \varphi(r\overline n_{12} + \overline m_{12}) 
+        &= r\overline n_4 + \overline m_4 \\ 
+        &= r\varphi(\overline n_{12} + \overline m_{12}). 
+    \end{align*}
+    For surjectivity, observe that 
+    \[
+        \overline 0 \mapsfrom \overline 0, 
+        \ \overline 1 \mapsfrom \overline 1, 
+        \ \overline 2 \mapsfrom \overline 2, \
+        \ \overline 3 \mapsfrom \overline 3.  
+    \]
+    Note: We surpress the earlier used 
+    subscripts denoting which modulo we're taking, but 
+    the point is it's obvious.
+
+    Then we get an exact sequence 
+    \[
+        0 \to (3) \overset\iota\to \mathbb Z/12\mathbb Z 
+        \overset{\times8}{\to} \mathbb Z/12\mathbb Z 
+        \overset{\pi \circ \varphi}\to \mathbb Z/4 
+        \mathbb Z \to 0.  
+    \]
+
+
 \end{proof}
 
 \end{document}
