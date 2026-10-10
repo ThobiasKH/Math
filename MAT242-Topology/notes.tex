@@ -3580,4 +3580,243 @@ By contradiction, $f$ must be continuous at $x$. Since $x \in X$ was chosen arbi
     \end{align*}
 \end{proof}
 
+\begin{prob}
+    Let $X$ be a normal space. Prove that 
+    whenever $A \subseteq X$ is closed and 
+    $U \subseteq X$ is open with 
+    \[
+        A \subseteq U, 
+    \]
+    there exists an open set $V$ such that 
+    \[
+        A \subseteq V \subseteq \overline V \subseteq U. 
+    \]
+\end{prob}
+\begin{proof}
+    Recall that $X$ normal means that 
+    $X$ is $T_1$ and whenever 
+    \[
+        A, B \subseteq X 
+    \]
+    are disjoint closed sets, there exist 
+    disjoint open sets 
+    \[
+        U \supseteq A, \ V \supseteq B. 
+    \]
+
+    We have that $A \subseteq X$ is closed 
+    and 
+    \[
+        U \supseteq A 
+    \]
+    is open. 
+    Then 
+    \[
+        X \setminus U 
+    \]
+    is closed and disjoint to $A$. Thus 
+    there are disjoint open sets 
+    \[
+        U_A \supseteq A, \ U_{X\setminus U} 
+        \supseteq X\setminus U. 
+    \]
+
+    Since they are disjoint, we must have that 
+    \[
+        A \subseteq U_A \subseteq U,  
+    \]
+    since otherwise there would be some 
+    $x \in U_A$ for which $x \not\in U$, but then 
+    \[
+        x \in X \setminus U \subseteq U_{X\setminus U}, 
+        \ \Rightarrow U_A \cap U_{X\setminus U} 
+        \neq \emptyset. 
+    \]
+    Now it remains to show that 
+    \[
+        \overline{U_A} \subseteq U. 
+    \]
+
+    Recall that $\overline{U_A}$ is the set 
+    of points $y$ where every open neighborhood of 
+    $y$ intersects $U_A$. 
+    Suppose there is some $y \in \overline{U_A}$ such that 
+    $y \not\in U$. 
+    
+    Then every open neighborhood of $y$ intersects 
+    $U_A$. 
+
+    In particular, $U_{X \setminus U}$ is 
+    an open neighborhood of $y$, but then 
+    \[
+        U_{X \setminus U} \cap U_A \neq \emptyset, 
+    \] 
+    a contradiction. 
+    Therefore, we must have 
+    \[
+        A \subseteq U_A \subseteq \overline{U_A} 
+        \subseteq U. 
+    \]
+\end{proof}
+
+\begin{prob}
+    Let $X$ be a $T_1$-space such that 
+    whenever $A \subseteq X$ is closed and 
+    $U \subseteq X$ is open with 
+    \[
+        A \subseteq U, 
+    \]
+    there exists an open set $V$ such that 
+    \[
+        A \subseteq V \subseteq \overline V 
+        \subseteq U. 
+    \]
+    Prove that $X$ is normal. 
+\end{prob}
+\begin{proof}
+    Suppose $X$ is a $T_1$-space with the 
+    property above. 
+
+    We wish to show that we can separate 
+    disjoint closed sets into 
+    disjoint open sets.
+
+    Suppose $A,B \subseteq X$ are disjoint 
+    closed sets. 
+    
+    Then $X \setminus B$ is open and 
+    \[
+        (X\setminus B) \supseteq A. 
+    \]
+    Thus there are exists some open set 
+    $V$ for which 
+    \[
+        A \subseteq V \subseteq \overline V 
+        \subseteq X\setminus B. 
+    \]
+    Using standard laws of set theory, 
+    \[
+        X \setminus \overline V 
+        \supseteq B 
+    \]
+    and $X \setminus \overline V$ is open. 
+
+    Then $V \supseteq A$ is disjoint 
+    to $X \setminus \overline V$ since $V \subseteq \overline V$. 
+
+    Thus we have disjoint open sets 
+    \[
+        V \supseteq A, \ X \setminus \overline V \supseteq 
+        B. 
+    \]
+    
+    As $A,B$ were arbitrarily chosen closed sets, the 
+    space is normal.
+
+\end{proof}
+
+\begin{prob}
+    Let $X$ be a second-countable regular 
+    space. 
+
+    Prove that $X$ is normal. 
+\end{prob}
+\begin{proof}
+    Let $X$ be a regular topological space with a countable basis $\mathcal{B} = \{B_1, B_2, B_3, \dots\}$. Let $A$ and $B$ be two disjoint closed subsets of $X$.
+
+    We begin by covering $A$ with open sets whose closures do not intersect $B$. For each point $x \in A$, the set $X \setminus B$ is an open neighborhood of $x$. Since $X$ is regular, there exists an open set $U_x$ such that $x \in U_x$ and $\overline{U_x} \subseteq X \setminus B$. 
+
+    Since $\mathcal{B}$ is a basis for $X$, we can find a basis element $B_n \in \mathcal{B}$ such that $x \in B_n \subseteq U_x$. Taking the closure, we have $\overline{B_n} \subseteq \overline{U_x} \subseteq X \setminus B$, which implies $\overline{B_n} \cap B = \emptyset$. 
+
+    By collecting these basis elements for all $x \in A$, we obtain a countable subcollection of $\mathcal{B}$ that covers $A$. We index this collection as $\{U_n\}_{n \in \mathbb{N}}$. Thus, we have:
+    \[
+    A \subseteq \bigcup_{n=1}^{\infty} U_n \quad \text{and} \quad \overline{U_n} \cap B = \emptyset \text{ for all } n \in \mathbb{N}.
+    \]
+
+    By a completely symmetric argument, we can construct a countable collection of open basis elements $\{V_n\}_{n \in \mathbb{N}}$ that covers $B$ such that:
+    \[
+    B \subseteq \bigcup_{n=1}^{\infty} V_n \quad \text{and} \quad \overline{V_n} \cap A = \emptyset \text{ for all } n \in \mathbb{N}.
+    \]
+
+    The open sets $\bigcup U_n$ and $\bigcup V_n$ are not necessarily disjoint. To eliminate overlapping points, we define two new collections of open sets, $\{U_n'\}_{n \in \mathbb{N}}$ and $\{V_n'\}_{n \in \mathbb{N}}$, by subtracting the closures of the opposing sets up to index $n$:
+    \[
+    U_n' = U_n \setminus \bigcup_{i=1}^{n} \overline{V_i} \quad \text{and} \quad V_n' = V_n \setminus \bigcup_{i=1}^{n} \overline{U_i}
+    \]
+    Since each $\overline{V_i}$ and $\overline{U_i}$ is closed, their finite unions are closed. Therefore, $U_n'$ and $V_n'$ are open sets.
+
+    Now, define $U$ and $V$ as the unions of these modified sets:
+    \[
+    U = \bigcup_{n=1}^{\infty} U_n' \quad \text{and} \quad V = \bigcup_{n=1}^{\infty} V_n'
+    \]
+    Being unions of open sets, both $U$ and $V$ are open. We now verify that $U$ and $V$ satisfy the conditions for normality:
+
+    \begin{enumerate}
+        \item \textbf{Containment ($A \subseteq U$):} Let $x \in A$. Since $\{U_n\}$ covers $A$, there is some integer $n$ such that $x \in U_n$. Furthermore, since $\overline{V_i} \cap A = \emptyset$ for all $i$, the point $x$ cannot belong to $\bigcup_{i=1}^{n} \overline{V_i}$. Thus, $x \in U_n \setminus \bigcup_{i=1}^{n} \overline{V_i} = U_n' \subseteq U$. Hence, $A \subseteq U$.
+
+        \item \textbf{Containment ($B \subseteq V$):} By a symmetric argument, if $y \in B$, then $y \in V_n$ for some $n$. Since $\overline{U_i} \cap B = \emptyset$ for all $i$, $y \notin \bigcup_{i=1}^{n} \overline{U_i}$. Thus, $y \in V_n' \subseteq V$. Hence, $B \subseteq V$.
+
+        \item \textbf{Disjointness ($U \cap V = \emptyset$):} Suppose for contradiction that there exists a point $z \in U \cap V$. Then $z \in U_n'$ for some $n \in \mathbb{N}$ and $z \in V_m'$ for some $m \in \mathbb{N}$. We analyze the two possible relations between indices $n$ and $m$:
+        \begin{itemize}
+            \item If $n \le m$: By definition, $V_m' = V_m \setminus \bigcup_{i=1}^{m} \overline{U_i}$. Since $n \le m$, $\overline{U_n}$ is included in this subtracted union, meaning $V_m' \cap \overline{U_n} = \emptyset$. Since $z \in U_n' \subseteq U_n \subseteq \overline{U_n}$, $z$ cannot be in $V_m'$, which is a contradiction.
+            \item If $m < n$: By definition, $U_n' = U_n \setminus \bigcup_{i=1}^{n} \overline{V_i}$. Since $m < n$, $\overline{V_m}$ is included in this subtracted union, meaning $U_n' \cap \overline{V_m} = \emptyset$. Since $z \in V_m' \subseteq V_m \subseteq \overline{V_m}$, $z$ cannot be in $U_n'$, which is a contradiction.
+        \end{itemize}
+        In either case, a contradiction arises. Thus, $U \cap V = \emptyset$.
+    \end{enumerate}
+
+    Since we have found disjoint open sets $U$ and $V$ such that $A \subseteq U$ and $B \subseteq V$, the space $X$ is normal.
+\end{proof}
+
+\begin{prob}
+    Let $X$ be a \keyterm{regular Lindel{\"o}f space}. 
+
+    Prove that $X$ is normal. 
+\end{prob}
+
+\begin{proof}
+    % $X$ is regular Lindel{\"o}f, so 
+    % regularity gives that for $x \not\in D$ for 
+    % some closed $D\subseteq X$ we can find 
+    % disjoint open 
+    % \[
+        % U \ni x, \ V \supseteq D, 
+    % \]    
+    % while Lindel{\"o}f says that 
+    % every conver can be reduced to a 
+    % finite subcover. 
+% 
+    % Let $A,B \subseteq X$ be closed sets. 
+    % Then $X \setminus B$ is an open neighborhood 
+    % of $x$ for which, 
+    % by regularity, we can find open $V_x$ such that 
+    % \[
+        % x \in V_x \subseteq \overline{V_x} 
+        % \subseteq X \setminus B. 
+    % \]
+    % Then 
+    % \[
+        % \bigcup_{x \in A} V_x 
+    % \]
+    % is a cover of $A$ with 
+    % \[
+        % \left(\bigcup_{x\in A} V_x\right) 
+        % \cap B = \emptyset. 
+    % \]
+    % Since $X$ is Lindel{\"o}f, we can reduce 
+    % this to a countable subcover 
+    % \[
+        % \bigcup_{x(n) \in A} V_x 
+    % \]
+    % still disjoint to $B$.
+% 
+    % Symetrically, 
+    % \[
+        % \bigcup{x \in A} (X \setminus \overline{V_x})
+    % \]
+    % is a cover of $B$ which we can reduce 
+    % to a countable subcover 
+    % \[
+        % \bigcup{x(m) \in A} (X \setminus \overline{V_x}). 
+    % \]
+\end{proof}
+
 \end{document}
