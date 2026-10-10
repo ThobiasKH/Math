@@ -1,10 +1,5 @@
-\input{preamble.tex}
-
-\usepackage{tikz-cd}
-
-\DeclareMathOperator{\Char}{char}
-\DeclareMathOperator{\im}{im}
-\DeclareMathOperator{\coker}{coker}
+\documentclass[11pt]{article}
+\usepackage{styling}
 
 
 \title{\huge{MAT224 - Commutative Algebra}}
@@ -114,7 +109,8 @@ satisfy this.
 \end{proof}
 
 \begin{defn}[Characteristic]
-    The characteristic of a ring $A$, denoted $\Char(A)$,
+    The characteristic of a ring $A$, denoted 
+    $\operatorname{Char}(A)$,
     is the unique integer $n \geq 0$ such that 
     \[
         \ker(\mathbb Z \to A) = (n). 
@@ -124,9 +120,9 @@ satisfy this.
     Here are the characteristics of a few familiar 
     rings: 
     \begin{itemize}
-        \item $\Char(\mathbb Z) = 0$,  
-        \item $\Char(\mathbb F_p) = p$, 
-        \item $\Char(\mathbb Q) = 0$. 
+        \item $\operatorname{Char}(\mathbb Z) = 0$,  
+        \item $\operatorname{Char}(\mathbb F_p) = p$, 
+        \item $\operatorname{Char}(\mathbb Q) = 0$. 
     \end{itemize}
 \end{ex}
 
@@ -5793,7 +5789,7 @@ where $P_i$ are its maximal ideals.
         \item Write $A$ as a direct product of artinian local rings.
     \end{enumerate}
 \end{prob}
-\begin{proof}[Solution]
+\begin{proof}[Solution to a]
     AS $x^2 = 1$ and $y^2 = 1$, we have 
     that polynomials in $A$ 
     have maximum degree $1$ in both $x$ and $y$, meaning 
@@ -5807,6 +5803,149 @@ where $P_i$ are its maximal ideals.
 
     Since the ring is Artinian the maximal 
     ideals correspond to the prime ideals. 
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        R = k[x,y] / (x^2, xy, y^3), 
+    \]
+    where $k$ is a field. Write $\overline x, \overline y$ 
+    for the classes of $x,y$ in $R$. 
+
+    Prove the following, 
+    \begin{enumerate}
+        \item Every element of $R$ can be written 
+            uniquely in the form 
+            \[
+                a + b\overline x + c \overline y + 
+                d \overline y^2, \ a,b,c,d\in k. 
+            \]
+        \item Show that $\mathfrak m = (\overline x, 
+        \overline y)$ is the unique maximal ideal of $R$. 
+        \item Compute $\mathfrak m^2, \mathfrak m^3$. 
+        \item Use this to prove that $R$ is Artinian. 
+        \item Find a composition series for $R$ as an 
+            $R$-module and determine it's length 
+            \[
+                \ell_R(R). 
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}
+    Suppose 
+    \[
+        f \in R. 
+    \]
+    Then 
+    \[
+        f = q + (x^2, xy, y^3).  
+    \]
+    For $q \in k[x,y]$ we have that 
+    any terms involving 
+    both $x$ and $y$ will be in $(x^2, xy, y^3)$. 
+    
+    For $y$ degree $\geq 3$ is zero 
+    and for $x$ degree $\geq 2$ is 
+    zero. 
+    The same holds for terms including only $x$ or 
+    $y$.
+
+    Thus any $f \in R$ can be written in the form 
+    described. 
+
+    We begin by proving that it is maximal by observing that 
+    \[
+        \frac{R}{(\overline x, \overline y)}
+    \]
+    is a field. 
+
+    For $f \in R$ we have 
+    \[
+        f = a + b\overline x + c \overline y + 
+        d \overline y^2 
+    \]
+    so since all nonconstant terms are in 
+    $(\overline x, \overline y)$ we intuitvely 
+    see that this should be isomorphic to $k$. 
+
+    We have that, as ideals of $k[x,y]$, 
+    \[
+        (x^2, xy, y^3) \subseteq (x,y). 
+    \]
+    Furthermore, 
+    \[
+        \frac{(x,y)}{(x^2, xy, y^3)} 
+        = (\overline x, \overline y)
+    \]
+    so 
+    we can use the third isomorphism theorem, 
+    \[
+        \frac{R}{(\overline x, \overline y)} 
+        = \frac{k[x,y]/(x^2, xy, y^3)}{(x,y)/(x^2, xy, y^3)}
+        \cong \frac{k[x,y]}{(x,y)} \cong k. 
+    \]
+    Thus $(\overline x, \overline y)$ is maximal. 
+    For uniqueness, suppose another ideal 
+    $I$ of $R$ is maximal. 
+
+    For uniqueness we will show that every element 
+    in $R \setminus (\overline x, \overline y)$ is 
+    a unit. 
+
+    Take 
+    \[
+        f = a + b\overline x + c \overline y + 
+        d\overline y^2 \in R\setminus(\overline x, \overline y). 
+    \]
+    Then, since 
+    \[
+        \overline x, \ \overline y, \ \overline y^2  
+    \]
+    are all multiples of either $\overline x$ or $\overline y$, 
+    we get that they are in the maximal ideal and thus 
+    $\overline 0$, so 
+    \[
+        f = a \in k 
+    \]
+    which is necessarily invertible since $k$ is a field. 
+
+    An element of $(\overline x, \overline y)$ is 
+    of the form 
+    \[
+        a\overline x + b \overline y. 
+    \]
+    Then $\mathfrak m^2$ is the ideal of 
+    all $2$-fold products 
+    \begin{align*}
+        (a \overline x + b \overline y)
+        (c \overline x + d \overline y) 
+        &= ac\overline x^2 + 
+        ad\overline x \overline y + 
+        bc\overline x \overline y + 
+        bd\overline y^2 \\ 
+        &= 0 + 0 + 0 + bd\overline y^2 
+    \end{align*}
+    so we simply have that 
+    \[
+        \mathfrak m^2 = (\overline y^2). 
+    \]
+
+    For $\mathfrak m^3$ this is similar 
+    \begin{align*}
+        a\overline y^2(b\overline x + c \overline y) 
+        &= ab\overline y^2\overline x + ac\overline y^3 \\ 
+        &= 0. 
+    \end{align*}
+
+    Thus, as an a module over itself, 
+    we get a chain 
+    \[
+        0 = \mathfrak m^3 \subsetneq \mathfrak m^2 
+        \subsetneq \mathfrak m \subsetneq R 
+    \]
+    making $R$ have finite length, implying its 
+    Artinian.
 \end{proof}
 
 \end{document}
