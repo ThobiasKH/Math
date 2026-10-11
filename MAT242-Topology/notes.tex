@@ -3773,50 +3773,303 @@ By contradiction, $f$ must be continuous at $x$. Since $x \in X$ was chosen arbi
 \end{prob}
 
 \begin{proof}
-    % $X$ is regular Lindel{\"o}f, so 
-    % regularity gives that for $x \not\in D$ for 
-    % some closed $D\subseteq X$ we can find 
-    % disjoint open 
-    % \[
-        % U \ni x, \ V \supseteq D, 
-    % \]    
-    % while Lindel{\"o}f says that 
-    % every conver can be reduced to a 
-    % finite subcover. 
-% 
-    % Let $A,B \subseteq X$ be closed sets. 
-    % Then $X \setminus B$ is an open neighborhood 
-    % of $x$ for which, 
-    % by regularity, we can find open $V_x$ such that 
-    % \[
-        % x \in V_x \subseteq \overline{V_x} 
-        % \subseteq X \setminus B. 
-    % \]
-    % Then 
-    % \[
-        % \bigcup_{x \in A} V_x 
-    % \]
-    % is a cover of $A$ with 
-    % \[
-        % \left(\bigcup_{x\in A} V_x\right) 
-        % \cap B = \emptyset. 
-    % \]
-    % Since $X$ is Lindel{\"o}f, we can reduce 
-    % this to a countable subcover 
-    % \[
-        % \bigcup_{x(n) \in A} V_x 
-    % \]
-    % still disjoint to $B$.
-% 
-    % Symetrically, 
-    % \[
-        % \bigcup{x \in A} (X \setminus \overline{V_x})
-    % \]
-    % is a cover of $B$ which we can reduce 
-    % to a countable subcover 
-    % \[
-        % \bigcup{x(m) \in A} (X \setminus \overline{V_x}). 
-    % \]
+    $X$ is regular Lindel{\"o}f, so 
+    regularity gives that for $x \not\in D$ for 
+    some closed $D\subseteq X$ we can find 
+    disjoint open 
+    \[
+        U \ni x, \ V \supseteq D, 
+    \]    
+    while Lindel{\"o}f says that 
+    every conver can be reduced to a 
+    countable subcover. 
+
+    Let $A,B \subseteq X$ be closed sets. 
+    Then $X \setminus B$ is an open neighborhood 
+    of $x$ for which, 
+    by regularity, we can find open $V_x$ such that 
+    \[
+        x \in V_x \subseteq \overline{V_x} 
+        \subseteq X \setminus B. 
+    \]
+    Then 
+    \[
+        \bigcup_{x \in A} V_x 
+    \]
+    is a cover of $A$ with 
+    \[
+        \left(\bigcup_{x\in A} V_x\right) 
+        \cap B = \emptyset. 
+    \]
+    Since $X$ is Lindel{\"o}f, we can reduce 
+    this to a countable subcover 
+    \[
+        \bigcup_{x(n) \in A} V_x 
+    \]
+    still disjoint to $B$.
+
+    Now, for each $ \in B$, regularity gives 
+    an open $W_y$ with 
+    \[
+        y \in W_y \subseteq \overline{W_y} 
+        \subseteq X \setminus A. 
+    \]
+
+    Reduce this to a countable cover of $B$, 
+    \[
+        \bigcup_{y(m) \in B} W_y  
+    \]
+    disjoint to $A$. 
+
+    Now these need not be disjoint. 
+
+    So set 
+    \[
+        V'_n = V_{x(n)} \setminus \bigcup_{i=1}^n 
+        \overline{W_{y(i)}} \ \text{and} \ 
+        W'_n = W_{y(n)} \setminus 
+        \bigcup_{i=1}^n \overline{V_{x(i)}}. 
+    \]
+
+    Recalling then that 
+    \[
+        V'_n = V_{x(n)} \cap \bigcap_{i=1}^n X
+        \setminus \overline{W_{y(i)}} \ \text{and} \  
+        W'_n = W_{y(n)} \cap \bigcap_{i=1}^n X \setminus 
+        \overline{V_{x(i)}}
+    \] 
+    which is open. 
+
+    Then, for each of these, 
+    \[
+        A \subseteq \bigcup_{n=1}^\infty V_{n}', \ \text{and} \ 
+        B \subseteq \bigcup_{n=1}^\infty W'_{n} 
+    \]
+    since we only removed 
+    elements which were disjoint to 
+    $A$ and $B$ anyways. 
+    Furthermore, these sets are open since arbitary 
+    unions of open sets are open. 
+
+    These sets are disjoint by design since if 
+    we suppose $z \in V_{n}' \cap W_{m}'$, then if 
+    $n \leq m$ then $W'_m$ was defined 
+    by removing $\overline{V_n}$, but 
+    \[
+        z \in V_n' \subseteq V_n \subseteq \overline{V_n}, 
+    \]
+    a contradiction. 
+    Applying the symmetric argument for $m < n$ we 
+    get a similar contradiciton so 
+    the collections are disjoint. 
+
+
+\end{proof}
+
+\begin{prob}
+    Let $X$ be un uncountable set equipped with 
+    the discrete topology. 
+
+    Determine which of the following properties 
+    $X$ has, and prove every claim: 
+    \begin{flalign*}
+        T_1, \ \text{Hausdorff}, \ \text{regular}, \ 
+        \text{normal}, \\ 
+        \text{first countable}, \ \text{second countable}, \ 
+        \text{separable}, \ \text{Lindel{\"o}f}.     
+    \end{flalign*}
+\end{prob}
+\begin{proof}[Solution and proof]
+    \medskip 
+
+    \
+
+    We will have a lot of opportunities 
+    here to assert that the space does or 
+    does not have some property using 
+    implications from properties we prove 
+    along the way, but for simplicity we 
+    will prove or disprove all claims 
+    from their definition. 
+
+    \keyterm{$T_1$.}
+
+    The discrete topology makes $X$ $T_1$ since 
+    for distinct $x,y \in X$ we have that 
+    \[
+        X \setminus \{y\}
+    \]
+    is an open set, containing $x$ and not 
+    containing $y$. 
+
+    \keyterm{Hausdorff.}
+
+    The space is indeed Hausdorff. 
+    
+    Take distinct $x,y \in X$. 
+    Then $\{x\}, \ \{y\}$ are open neighborhoods 
+    of $x$ and $y$ with 
+    \[
+        \{x\} \cap \{y\} = \emptyset. 
+    \]
+
+    \keyterm{Regular.}
+
+    Take $C \subseteq X$ to be some closed 
+    set not containing $x \in X$. 
+
+    We want to know whether we can always find some 
+    open sets $U \ni x$ and $V \supseteq C$ such that 
+    \[
+        U \cap V = \emptyset. 
+    \]
+
+    We can very obviously do this since 
+    $x \in \{x\}$ and $X \setminus \{x\}$ are open sets 
+    satisfying the condition. 
+    
+    \keyterm{Normal.}
+
+    Once again this is quite trivial. 
+
+    Suppose $A,B \subseteq X$ are disjoint closed sets. 
+
+    Then 
+    \[
+        A \supseteq A, \ B \supseteq B 
+    \]
+    are disjoint open sets containing $A$ and 
+    $B$, respectively. 
+
+    \keyterm{First countable.}
+
+    The space is first countable. 
+
+    Take 
+    \[
+        \mathcal B_x = \left\{\{x\}\right\}
+    \]
+    for all $x \in X$. 
+
+    Then, for fixed $x \in X$, any neighborhood of 
+    of $x$ intersects $\{x\}$ by definition. 
+
+    \keyterm{Second countable.}
+
+    The space is not second countable.
+
+    Some basis $\mathcal B$ must be able 
+    to recreate every open set, but 
+    \[
+        \{x\}
+    \]
+    is open, so $\mathcal B \ni \{x\}$ for every $x$, 
+    of which there are uncountably many. 
+
+    \keyterm{Separable.}
+
+    A space is separable if it contains a 
+    dense countable subset, meaning 
+    we need some countable $D \subseteq X$ 
+    for which 
+    \[
+        \overline D = X. 
+    \] 
+
+    Since $X$ has the discrete topology, 
+    the closure of any set is the set itself. 
+    
+    For a closed set $Y \subseteq X$, $Y$ is itself open. 
+
+    And for an open set $Y \subseteq X$, $Y$ is closed 
+    since $X \setminus Y$ is open. 
+
+    Thus the only subset $D \subseteq X$ for which 
+    $\overline D = X$ is $X$ itself, which is uncountable. 
+
+    \keyterm{Lindel{\"o}f.}
+
+    The space is not Lindel{\"o}f. 
+
+    We have that 
+    \[
+        \bigcup_{x\in X} \{x\} = X, 
+    \]
+    but if we remove any $\{x\}$ it won't cover the 
+    space anymore so this cannot be reduced to a 
+    countable subcover.  
+
+\end{proof}
+
+\begin{prob}
+    Let $X$ be a compact Hausdorff space. 
+
+    Prove that $X$ is normal. 
+\end{prob}
+\begin{proof}
+    $X$ is Hausdorff so for distinct 
+    $x,y \in X$ we can find 
+    open 
+    \[
+        U_x \ni x, \ U_y \ni y, 
+    \]
+    disjoint. 
+
+    The space is compact so every cover has a 
+    finite subcover. 
+
+    We want to prove that the space is normal, meaning 
+    for disjoint closed $A,B \subseteq X$, 
+    we can find disjoint open sets 
+    \[
+        U_A \supseteq A, \ U_B \supseteq B. 
+    \]
+    
+    Now, let $A,B \subseteq X$ be closed sets. 
+
+    For $x \in A$ and $y \in B$ these are 
+    distinct since $A,B$ are disjoint. 
+
+    So we can find disjoint open sets 
+    \[
+        U_x \ni x, \ U_y \ni y. 
+    \]
+
+    In particular, for $x \in A$ and every $y \in B$ we 
+    can find disjoint open sets 
+    \[
+        U_x \ni x, \ U_{x,y} \ni y. 
+    \]
+
+    The collection $\{U_x\}_{x\in A}$ forms an 
+    open cover of $A$. 
+    Reduce this to a finite cover 
+    \[
+        U = \bigcup_{i=1}^n U_{x_i} \supseteq A. 
+    \]
+
+    Corresponding to each $U_{x_i}$ we have 
+    the open set 
+    \[
+        V_{x_i} = \bigcup_{y\in B} U_{x,y}, \ x \in U_{x_i}.   
+    \]
+    Defibne the open set 
+    \[
+        V = \bigcap_{i=1} V_{x_i}. 
+    \]
+    We have $B \subseteq V$ and 
+    $V$ and $U$ are disjoint since 
+    \[
+        U \cap V = \left(\bigcup_i U_{x_i}\right) 
+        \cap \left(\bigcap_j V_{x_j}\right) 
+        \subseteq \bigcup_{i=1}^n (U_{x_i} \cap V_{x_i}) 
+        = \emptyset. 
+    \]
+    
+
+
+    
+
 \end{proof}
 
 \end{document}
