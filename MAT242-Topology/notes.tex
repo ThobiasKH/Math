@@ -4271,4 +4271,308 @@ algebraic topology}
     
 \end{proof}
 
+\begin{prob}
+    Let $q : X \to Y$ be a quotient map and let 
+    $A \subseteq X$. 
+
+    Prove that 
+    \[
+        q^{-1}(q(A))
+    \]
+    is the smallest saturated subset of $X$ 
+    containing $A$. 
+\end{prob}
+\begin{proof}
+    We first note that $q^{-1}(q(A))$ is 
+    a saturated subset of $X$ containing $A$. 
+
+    For containment, let $x \in A$. 
+    Then 
+    \[
+        q(x) \in q(A), 
+    \]
+    but 
+    \[
+        q^{-1}(q(A)) = \{x \in A \bigm| x \in q(A)\} 
+    \]
+    so 
+    \[
+        x \in q^{-1}(q(A)). 
+    \]
+    Thus 
+    \[
+        A \subseteq q^{-1}(q(A)). 
+    \]
+
+    For saturation, we prove the 
+    backwards direction, since 
+    the forward one is trivial. 
+
+    Set $C := f^{-1}(f(A))$. 
+
+    Let $x \in C$. 
+    Then 
+    \[
+        f(c) \in f(C). 
+    \]
+    Since $C = f^{-1}(f(A))$ we have 
+    \[
+        f(x) \in f(f^{-1}(f(A))). 
+    \]
+    Notice that for any set $A$, the image of its 
+    preimage satisfies $f(f^{-1}(f(A))) = f(A)$. 
+
+    Therefore $f(x) \in f(A)$. 
+    By the definition of the preimage, since $f(x) \in f(A)$, 
+    we hav $x \in f^{-1}(f(A)) = C$. 
+
+    So $C$ is saturated. 
+
+    Now suppose some other set is saturated and 
+    containing $A$, meaning we 
+    have some $B \subseteq X$ for which 
+    $A \subseteq B$ with 
+    \[
+        B = f^{-1}(f(B)). 
+    \]
+
+    Let $x \in C = f^{-1}(f(A))$. 
+
+    Then, as  
+    \[
+        A \subseteq B, 
+    \]
+    we have that 
+    \[
+        f(x) \in f(B).  
+    \]
+    Since $B$ is saturated, we then have that 
+    \[
+        x \in f^{-1}(f(x)) \subseteq 
+        f^{-1}(f(B)) = B. 
+    \]  
+    Thus 
+    \[
+        C \subseteq B, 
+    \]
+    meaning $C$ is the smallest saturated set 
+    containing $A$. 
+\end{proof}
+
+\begin{prob}
+    Let $q : X \to X/\sim \ $ be 
+    the quotient map associated to 
+    an equivalence relation. 
+
+    Suppose $f : X \to Z$ is continuous and 
+    constant on equivalence classes. 
+
+    Prove there exists a unique continuous 
+    map $\widetilde{f} : X /\sim \ \to Z$ 
+    such that 
+    \[
+        f = \widetilde f \circ q. 
+    \]
+\end{prob}
+\begin{proof}
+    We wish to prove, that there exists 
+    a unique map $\widetilde f : X/\sim \ \to Z$ making 
+    \[
+        \begin{tikzcd}
+            X \ar[dr, "q"] 
+            \ar[r, "f"] & Z \\ 
+            & X/\sim \ar[u, dashed, "\widetilde{f}"']
+        \end{tikzcd}
+    \]
+    commute. 
+
+    Suppose $f : X \to Z$ is constant on 
+    equivalence classes. 
+    For 
+    \[
+        f(x) = z 
+    \]
+    the map $\widetilde f : X/\sim \ \to f$, by  
+    \[
+        \widetilde f([x]) = z 
+    \]
+    is well-defined, since $f$ is constant on equivalence 
+    classes.
+    
+    Then, 
+    \[
+        f = \widetilde f \circ q, 
+    \] 
+    since 
+    \[
+        f(x) = z 
+    \]
+    and 
+    \[
+        (\widetilde f \circ q)(x) 
+        = \widetilde f([x]) = z. 
+    \]
+
+    The map is continuous by the universal property, 
+    but without that we can observe that since 
+    if $A \subseteq Z$ is open, then 
+    \[
+        f^{-1}(A) = (\widetilde f \circ q)^{-1} 
+        = q^{-1}(\widetilde f^{-1}(A)) 
+    \]
+    is open. Since $q$ has the property that 
+    $q^{-1}(B)$ is open if and only if $B$ is open, 
+    it must be the case that $\widetilde f^{-1}(A)$ 
+    is open in $X / \sim$. 
+
+    What remains, is to prove that this map is unique. 
+
+    Suppose there exists some other map 
+    $\mathcal f : X/\sim \ \to Z$ making the 
+    triangle above commute. 
+
+    Then 
+    \[
+        \widetilde f \circ q = f = 
+        \mathcal f \circ q. 
+    \]
+
+    Then, for every $x \in X$ we have 
+    \[
+        \widetilde f(q(x)) = f(x) = 
+        \mathcal f(q(x)). 
+    \]
+    Therefore, 
+    \[
+        \widetilde f(q(x)) = \mathcal f(q(x)), \ \forall x \in X. 
+    \]
+    Since the map is surjective we can write 
+    $y = q(x)$ for every $y \in X/\sim$ for some 
+    $x \in X$. 
+
+    Eveluating the functions at $y$, give 
+    \[
+        \widetilde f(y) = 
+        \widetilde f(q(x)) = \mathcal f(q(x)) 
+        = \mathcal f(x). 
+    \]
+    Thus $\widetilde f = \mathcal f$, 
+    so the map is unique. 
+
+\end{proof}
+
+
+\begin{prob}[Problem for H{\aa}kon]
+    Let $X$ be a compact space, 
+    and $Y$ a Hausdorff space. 
+
+    Let $f : X \to Y$ be a continuous 
+    bijective function. 
+
+    Prove that $f$ is a homeomorphism, meaning 
+    \[
+        X \cong Y. 
+    \]
+\end{prob}
+\begin{proof}
+    Since $X$ is compact, 
+    any cover 
+    \[
+        \bigcup_{\alpha}  U_\alpha = X. 
+    \]
+
+    We will prove that 
+    for a closed set $C \subseteq X$, 
+    the image 
+    \[
+        f(C) \subseteq Y  
+    \]
+    is closed.
+    Then we will conclude that $f^{-1}$ (which 
+    exists, since $f$ is bijective) is continuous. 
+
+    Take $C \subseteq X$ to be closed. 
+    Then $C$ is compact, since closed subspaces of 
+    compact spaces are compact. 
+
+    Then 
+    \[
+        f(C) \subseteq Y 
+    \]
+    is compact, since continuous functions preserve 
+    compactness. 
+
+    Thus $f(C)$ is closed, since compact subspaces 
+    of Hausdorff spaces are closed. 
+
+    As $f$ is a closed function, $f^{-1}$ is continuous. 
+
+    Thus $f$ is a homeomorphism. 
+\end{proof}
+
+\begin{prob}
+    Define an equivalence relation on 
+    $[0,1]$ by identifying $0 \sim 1$, 
+    with all other equivalence classes trivial. 
+
+    Let $X = [0,1]/\sim$. 
+    Prove that 
+    \[
+        X \cong S^1. 
+    \]
+\end{prob}
+\begin{proof}
+    Set theoretically, the 
+    $1$-sphere, $S^1$, is defined by 
+    \[
+        S^1 = \{(x,y) \in \mathbb R^2 \bigm| 
+        x^2 + y^2 = 1\}. 
+    \]
+
+    Let $f : [0,1] \to S^1$, by 
+    \[
+        f(x) = (\cos(2\pi x), \sin(2\pi x)). 
+    \]
+
+    Then $f$ is constant on equivalence classes since 
+    \[
+        f(0) = 0 \equiv_{2\pi} 2\pi = f(1). 
+    \]
+    This map is obviously continuous.
+
+    Thus this induces a 
+    unique continuous map $\widetilde f : X 
+    \to S^1$.  
+
+    We note that $X$ is compact and $S^1$ is Hausdorff. 
+
+    Since $\widetilde f^{-1}$ by 
+    \[
+        \widetilde f^{-1}(2\pi) = 
+        \widetilde f^{-1}(0) = [0] = [1] 
+    \]
+    with the fibers of all other elements singleton 
+    classes being 
+    \[
+        \widetilde f^{-1}(\cos \theta, \sin \theta) 
+        = \frac{\cos \theta + 1}{2} 
+    \]
+    writing $(x,y) = (\cos \theta, \sin \theta)$. 
+
+    We have that the $\widetilde f$ is 
+    continuous bijective. 
+    Since $X$ is compact, and $S^1$ is Hausdorff, 
+    the function $\widetilde f$ is a homeomorphism. 
+\end{proof}
+
+% \begin{prob}
+    % Let $X$ be a locally connected space, and 
+    % let $C$ be a connected component of $X$. 
+% 
+    % Prove that $C$ is open in $X$. 
+% \end{prob}
+% \begin{proof}
+    % 
+% \end{proof}
+
 \end{document}
