@@ -9,7 +9,6 @@
 \begin{document}
 \maketitle
 
-\newpage
 \tableofcontents
 
 \newpage
@@ -5946,6 +5945,97 @@ where $P_i$ are its maximal ideals.
     \]
     making $R$ have finite length, implying its 
     Artinian.
+\end{proof}
+
+\begin{prob}
+    Let $R$ be a Noetherian ring, and let $M$ be a 
+    finitely generated $R$-module. 
+
+    Prove that 
+    \[
+        M \ \text{is Noetherian}. 
+    \]
+
+\end{prob}
+\begin{proof}
+    Choose generators $m_1,\ldots,m_n$ for 
+    $M$ and define 
+    \[
+        \varphi : R^n \to M, \ (a_1,\ldots,a_n) 
+        \mapsto \sum_{i=1}^n a_im_i.
+    \]
+
+    This map is surjective, since 
+    for any $m \in M$ we have 
+    \[
+        m = \sum_{i=1}^n a_im_i 
+    \]  
+    since $M$ is finitely generated. 
+
+    Thus we have $(a_i)_{i=1}^n \subseteq R^n$ 
+    mapping to $m$ by $\varphi$. 
+
+    We do not note $\ker \varphi = 0$ since,  
+    \[
+        \sum_{i=1}^n a_im_i = 0 
+    \]
+    does not impliy $a_i = 0$ for all $i$, given 
+    that the module is not specified to be free. 
+
+    We get a short exact sequence 
+    \[
+        0 \to \ker \varphi 
+        \to R^n \to M \to 0 
+    \]
+    by $(\ker \varphi \to R^n)(x) = x$. 
+
+    Thus 
+    \[
+        \im(0\to \ker \varphi) = 0 = 
+        \ker (\ker \varphi \to R^n). 
+    \]    
+    Next 
+    \[
+        \im(\ker \varphi) = \ker \varphi.  
+    \]
+    Next 
+    \[
+        \im \varphi = M 
+    \]
+    since $\varphi$ is surjecitve. Lastly, 
+    \[
+        \ker(M \to 0) = M. 
+    \]
+
+    So the sequence is exact. 
+
+    We have that $R$ is Noetherian. 
+    Arguing inductively we can suppose that 
+    $R^k$ is Noetherian and construct a short 
+    exact sequence of $R$-modules 
+    \[
+        0 \to R \to R^{k+1} \to R^k \to 0 
+    \]
+    where $R$ embeds into the first coordinate 
+    and the quotient 
+    \[
+        R^{k+1}/R \cong R^k. 
+    \]
+    Since submodules and quotient modules 
+    remain Noetherian, the middle module is 
+    Noetherian. 
+
+    Thus we can use this to conclude that $M$ 
+    is Noetherian. 
+
+    We have that, for  
+    \[
+        0 \to A \to B \to C \to 0 
+    \]
+    exact, $A,C$ are exact if and only if 
+    $B$ is exact, so since $R^n$ is Noetherian 
+    and the previous sequence is short exact, 
+    $M$ is Noetherian. 
 \end{proof}
 
 \end{document}
