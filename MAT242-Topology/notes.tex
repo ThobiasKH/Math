@@ -4065,11 +4065,210 @@ By contradiction, $f$ must be continuous at $x$. Since $x \in X$ was chosen arbi
         \subseteq \bigcup_{i=1}^n (U_{x_i} \cap V_{x_i}) 
         = \emptyset. 
     \]
+\end{proof}
+
+\begin{prob}
+    Let $X$ be a \keyterm{second-countable 
+    regular space}, and let 
+    \[
+        Y \subseteq X 
+    \]
+    be an arbitrary subspace. 
+
+    Prove that $Y$ is normal. 
+\end{prob}
+\begin{proof}
+    $X$ is second countable, so it has a 
+    countable basis 
+    \[
+        \mathcal B = \{B_1,B_2,\ldots\}, 
+    \]
+    and it is regular so for 
+    $C \subseteq X$ closed and $x\not\in C$, we have that 
+    there exist disjoint open sets $U_x, \ U_C$ for which  
+    \[
+        U_x \ni x, \ \text{and} \ U_C \supseteq C. 
+    \]
+
+    We wish to prove that for disjoint closed subsets of 
+    $Y$, we can divide them into disjoint open sets.  
+
+    We first note that 
+    $Y$ is second countable, with basis 
+    \[
+        \mathcal B_Y = \{B_1 \cap Y, B_2 \cap Y, \ldots\},  
+    \]
+    and $Y$ is regular. 
+
+    For regularity we note that $X$ is $T_1$ and 
+    thus $Y$ is $T_1$. 
+
+    Let $F \subseteq Y$ be closed with $y \in Y \setminus F$. 
+    Then $F = Y \cap C$ for some closed set $C \subseteq X$ so 
+    if $y \not\in F$ then $y\not\in C$. Since $X$ is regular there 
+    are disjoint open sets $U_y, \ U_C$ containing 
+    $y$ and $C$, respectively. Then 
+    $U_y \cap Y$ and $U_C \cap Y$ are disjoint open neighborhoods 
+    in $Y$ with $y$ and $F$, respectively. 
     
+    $Y$ is also Lindel{\"o}f, since 
+    second countable implies Lindel{\"o}f. 
 
+    Lastly, second countable $+$ Lindel{\"o}f implies 
+    normal, as we have proven previously. 
+\end{proof}
 
+\section{Some recap before doing last 
+part of point-set Munkres and proceeding to 
+algebraic topology}
+
+\begin{prob}
+    Let $q : X \to Y$ be a surjective map, where 
+    $X$ is a topological space. 
+    Suppose $Y$ is equipped with 
+    the quotient topology induced by $q$. 
+
+    Let $Z$ be another topological space and let 
+    \[
+        g : Y \to Z
+    \]
+    be a function. 
+
+    Prove that $g$ is continuous if and only if 
+    $g \circ q : X \to Z$ is continuous. 
+\end{prob}
+\begin{proof}
+    The quotient topology is the finest topology making 
+    $q$ continuous. I.e. 
+    \[
+        A \subseteq Y \ \text{open} \Leftrightarrow 
+        f^{-1}(A) \ \text{open}. 
+    \]
+
+    Suppose $g$ is continuous. 
+    Then, since $q$ is continuous, 
+    $g \circ q$ is continuous as composition 
+    preserves continuity. 
+
+    Now suppose $g \circ q : X \to Y$ is continuous. 
+
+    Then for some open set $B \subseteq X$, 
+    we have that 
+    \[
+        (g \circ q)^{-1}(B) \subseteq X  
+    \]
+    is open. 
+
+    Now, 
+    \[
+        (g\circ q)^{-1} = q^{-1} \circ g^{-1}. 
+    \]
+
+    So 
+    \[
+        (g\circ q)^{-1}(B) = q^{-1}(g^{-1}(B)). 
+    \]
+    By virtue of $Y$ having the quotient topology, 
+    \[
+        q^{-1}(g^{-1})(B) 
+    \]
+    open, implies that 
+    \[
+        q(q^{-1}(g^{-1}(B))) = g^{-1}(B) 
+    \]
+    is open. 
+    As $B \subseteq Z$ was arbitrary, 
+    \[
+        g^{-1}(B) 
+    \]
+    is open for any open $B \subseteq Z$, making 
+    $g$ continuous. 
+\end{proof}
+
+\begin{prob}
+    Let $q : X \to Y$ be a quotient map, and let 
+    $A \subseteq X$ be saturated. 
+
+    Assume $A$ is open in $X$. 
+
+    Prove that 
+    \[
+        q(A) 
+    \]
+    is open in $Y$.
+\end{prob}
+\begin{proof}
+    We have 
+    \[
+        A = q^{-1}(q(A)). 
+    \]
+    By the property of the quotient map, 
+    $B \subseteq Y$ is open if and only if 
+    $q^{-1}(B) \subseteq X$ is open. 
+
+    Set $B := q(A)$. 
+    We have 
+    \[
+        q^{-1}(q(A)) = A, 
+    \]
+    which is open in $X$, 
+    hence 
+    \[
+        q(A) 
+    \]
+    is open in $Y$.
+\end{proof}
+
+\begin{prob}
+    Let $q : X \to Y$ be a quotient map. 
+
+    Suppose $C \subseteq Y$ is closed. 
+    Prove that 
+    \[
+        q^{-1}(C)
+    \]
+    is closed in $X$. 
+
+    Then determine if the converse is always true, 
+    \[
+        q^{-1}(C) \ \text{closed in} \ X 
+        \overset{\text{?}}\Rightarrow C \ \text{closed in} \ Y. 
+    \]
+\end{prob}
+\begin{proof}
+    Suppose $C \subseteq Y$ is closed. 
+    Then $C = Y \setminus A$ for some open set 
+    $A \subseteq Y$. 
+
+    Then 
+    \[
+        q^{-1}(A) \subseteq X 
+    \]
+    is open, but then 
+    \[
+        q^{-1}(C) = q^{-1}(Y \setminus A) 
+        = X \setminus q^{-1}(A)  
+    \]
+    which is closed in $X$. 
+
+    Suppose $q^{-1}(C)$ is some closed set. 
+    Then 
+    \[
+        X \setminus q^{-1}(C)
+    \]
+    is open, 
+    but 
+    \[
+        X \setminus q^{-1}(C) 
+        = q^{-1}(Y \setminus C). 
+    \]
+    Therefore $q^{-1}(Y \setminus C)$ is 
+    open in $X$. Since $q$ is a quotient map, 
+    \[
+        Y \setminus C
+    \] 
+    is open, making $C$ closed. 
     
-
 \end{proof}
 
 \end{document}
