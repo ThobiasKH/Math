@@ -6351,6 +6351,131 @@ where $P_i$ are its maximal ideals.
     
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        R = \frac{k[x,y]}{(xy)}, \ \mathfrak m = 
+        (\overline x, \overline y) \triangleleft R, 
+    \]
+    and let 
+    \[
+        I = (\overline x^2, \overline y^3) \triangleleft R. 
+    \]
+    Set 
+    \[
+        M = R/I. 
+    \]
+    Prove the following, 
+    \begin{enumerate}
+        \item $R$ is Noetherian and $\mathfrak m$ is a maximal 
+            ideal. 
+        \item Starting with the short exact sequence 
+            \[
+                0 \to I \to R \to M \to 0
+            \]
+            localize at $\mathfrak m$ and deduce that 
+            \[
+                M_{\mathfrak m} \cong 
+                \frac{R_{\mathfrak m}}{I_{\mathfrak m}}.
+            \]
+        \item Rewrite this entirely upstairs in $k[x,y]$, 
+            and show that 
+            \[
+                M_{\mathfrak m}
+                \cong
+                \frac{k[x,y]_{(x,y)}}{(x^2,xy,y^3)k[x,y]_{(x,y)}}.
+            \]
+        \item Now prove that 
+            \[
+                M_{\mathfrak m} 
+                \cong \frac{k[x,y]}{(x^2,xy,y^3)}. 
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}
+    We have that $k$ is Noetherian, since it is 
+    a field. Apply Hilbert's basis theorem to 
+    get that $k[x,y]$ is Noetherian before 
+    lastly deducing that 
+    \[
+        R = \frac{k[x,y]}{(xy)}
+    \]
+    is Noetherian, since quotienting 
+    preserves Noetherianity. 
+
+    We have that 
+    $(xy) \subseteq (x,y)$ as ideals of $k[x,y]$. 
+    Thus 
+    \[
+        \mathfrak m = \frac{(x, y)}{(xy)} 
+    \]
+    so we can apply the third isomorphism theorem to 
+    get that 
+    \[
+        R/\mathfrak m \cong \frac{k[x,y]}{(x,y)} 
+        \cong k 
+    \]
+    which is a field. Thus $(\overline x, \overline y)$ 
+    is maximal. 
+
+    We have a short exact sequence 
+    \[
+        0 \to I \overset\iota\to R \overset\pi\to M = R/I \to 0. 
+    \]
+    Since localizing preserves exact short sequences we 
+    get a short exact sequence 
+    \[
+        0 \to I_{\mathfrak m} \to R_{\mathfrak m} 
+        \to M_{\mathfrak m} \to 0.  
+    \]
+    The induced maps $\iota_{\mathfrak m} : I_{\mathfrak m} 
+    \to R_{\mathfrak m}$ and $\pi_{\mathfrak m} : 
+    R_{\mathfrak m} \to M_{\mathfrak m}$ are still 
+    injective, and surjective, respectively. 
+
+    To see this we note that 
+    \[
+        \iota_{\mathfrak m}(x/s) = \iota(x)/s 
+    \]
+    and 
+    \[
+        \pi_{\mathfrak m}(x/s) = \pi(x)/s.
+    \]
+
+    Thus 
+    \[
+        M_{\mathfrak m} \cong 
+        \frac{R_{\mathfrak m}}{I_{\mathfrak m}}. 
+    \]
+
+    We have that 
+    \[
+        R_{\mathfrak m} = S^{-1}R = S^{-1}\frac{k[x,y]}{(xy)} 
+        = \left\{\frac{r}{s} \biggm| \overline x \nmid 
+        s, \ y \nmid s\right\}
+    \]
+    with $S = R \setminus \mathfrak m$, 
+    meaning we make all elements not divisible 
+    by $xy$ invertible. 
+    Since $k[x,y]/(xy)$ contains precisely 
+    \[
+        \sum_{i=1}^n \alpha_i x^i + \sum_{j=1}^m \beta_j y^j + c, 
+    \]
+    we get that 
+    all elements in $R_{\mathfrak m}$ are expressible as 
+
+    Then 
+    \[
+        I_{\mathfrak m} 
+        = S^{-1}I = S^{-1}(\overline x^2, \overline y^3) 
+        = \left\{ \frac{a}{s} \biggm| a = \alpha \overline x^2 
+        + \beta \overline y^3, \ \overline x \nmid 
+    s, \ \overline y \nmid s\right\}.
+    \]
+
+    I give up atp.
+\end{proof}
+
 
 \end{document}
 
