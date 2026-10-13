@@ -6230,6 +6230,60 @@ where $P_i$ are its maximal ideals.
     By Jordan-Holder, the length $n$ is unique and finite. 
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        R = \frac{k[x]}{(x^2(x-1)^3)}, 
+    \]
+    where $k$ is a field. Write $\overline x$ for the 
+    class of $x$ in $R$. 
+
+    Prove that 
+    \begin{enumerate}
+        \item $R$ is Artinian. 
+        \item The prime ideals of $R$ are 
+            \[
+                P_0 = (\overline x), \ P_1 = (\overline{x-1}), 
+            \]
+            and both are maximal. 
+        \item Localize at $P_0$. Show that 
+            \[
+                R_{P_0} \cong k[x]/(x^2). 
+            \]
+        \item Similarly, show that 
+            \[
+                R_{P_1} \cong k[x]/((x-1)^3). 
+            \]
+        \item Finally, show that 
+            \[
+                R \cong R_{P_0} \times R_{P_1} 
+                \cong k[x]/(x^2) \times k[x]/((x-1)^3). 
+            \]
+    \end{enumerate}
+\end{prob}
+\begin{proof}
+    We will show that every prime ideal is 
+    maximal, and conclude that the 
+    ring is Artinian. 
+
+    We can do this since $R$ is Noetherian. 
+    Observe that $k$ is Noetherian since it is a field. 
+    Therefore $k[x]$ is Noetherian. Lastly, 
+    quotienting by any ideal is 
+    then Noetherian. 
+
+    Thus $R$ is Artinian if and only if 
+    every prime ideal is maximal. 
+
+    Take $P \subseteq R$ to be prime. 
+    Since $R$ is Noetherian, $P$ is finitely generated 
+    \[
+        P = (\overline{f_1},\ldots,\overline{f_n}). 
+    \]
+    For every
+\end{proof}
+
+
 \end{document}
 
 
