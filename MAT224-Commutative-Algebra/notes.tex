@@ -6038,6 +6038,198 @@ where $P_i$ are its maximal ideals.
     $M$ is Noetherian. 
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        A = \frac{k[x,y]}{(x^2y-y^3)},  
+    \]
+    where $k$ is a field, and let 
+    \[
+        \pi : k[x,y] \to A
+    \]
+    be the quotient/projection map.  
+
+    Prove directly that every ideal of 
+    $A$ is finitely generated, and 
+    hence that $A$ is Noetherian. 
+\end{prob}
+
+\begin{proof}
+    Take $J$ to be an ideal of $A$. 
+
+    Then,  
+    \[
+        \pi^{-1}(J) 
+    \]
+    is an ideal of $k[x,y]$ (this is generally 
+    true for the preimage of any ideal under some 
+    homomorphism, and it is not that hard to prove). 
+
+    Now, since 
+    \[
+        k[x,y] \cong (k[x])[y] \cong ((k)[x])[y]
+    \]
+    we can apply Hilbert's basis theorem twice 
+    to see that  
+    \[
+        k[x,y]
+    \]
+    is Noetherian. 
+
+    Thus, for the ideal 
+    \[
+        \pi^{-1}(J), 
+    \]
+    there exist some 
+    \[
+        f_1,\ldots,f_n \in \pi^{-1}(J) 
+    \]
+    such that 
+    \[
+        \pi^{-1}(J) = (f_1,\ldots,f_n) 
+    \]
+    since all ideals of a Noetherian 
+    ring are finitely generated. 
+
+    Then 
+    \[
+        \pi(\pi^{-1}(J)) = J, 
+    \]
+    but 
+    \[
+        \pi(\pi^{-1})(J) = \pi((f_1,\ldots,f_n)). 
+    \]
+    However 
+    \[
+        \pi((f_1,\ldots,f_n)) = (\pi(f_1),\ldots,\pi(f_n)). 
+    \]
+    Suppose $x \in \pi((f_1,\ldots,f_n))$. 
+    Then 
+    \[
+        x = \pi\left(\sum_{i=1}^n a_if_i\right)
+        = \sum_{i=1}^n \pi(a_i)\pi(f_i) \in 
+        (\pi(f_1), \ldots, \pi(f_n)). 
+    \]
+    Suppose $x \in (\pi(f_1),\ldots,\pi(f_n))$. 
+    Then 
+    \[
+        x = \sum_{i=1}^n \pi(a_i)\pi(f_i) 
+        = \pi\left(\sum_{i=1}^n a_if_i\right) 
+        \in \pi((f_1,\ldots,f_n)). 
+    \]
+
+    Note here that we are implicitly using the surjectivity 
+    of $\pi$, since that is required for 
+    the backward inclusion. 
+
+    Thus, setting $m_i = \pi(f_i)$, 
+    \[
+        J = (m_1,\ldots,m_n)
+    \]
+    is finitely generated. 
+    As $J$ was arbitrary, all 
+    ideals of $A$ are finitely generated, hence 
+    $A$ is Noetherian. 
+\end{proof}
+
+\begin{prob}
+    Let $M$ be an $R$-module. 
+
+    Prove that $M$ has finite lengh if and only if 
+    $M$ is both Noetherian and Artinian. 
+\end{prob}
+\begin{proof}
+    For the forward direction, suppose 
+    $M$ has a composition series 
+    \[
+        0 = M_0 \subsetneq M_1 \subsetneq \cdots 
+        \subsetneq M_n = M.
+    \]
+
+    We begin with the Noetherian property. 
+
+    Suppose 
+    \[
+        M_1 \subseteq M_2 \subseteq M_3 \subseteq \cdots 
+    \]
+    is some ascending chain of submodules. 
+
+    By observing that, for submodules $N \subseteq M$, 
+    the sequence 
+    \[
+        0 \to N \to M \to M/N \to 0 
+    \]
+    is exact, we deduce $\ell(M) = \ell(N) + \ell(M/N)$.  
+
+    Thus 
+    \[
+        M_1 \subseteq M_2 \subseteq M_3 \subseteq \cdots 
+    \]
+    gives an ascending sequence 
+    \[
+        \ell(M_1) \leq \ell(M_2) \leq \ell(M_3) \leq 
+        \cdots 
+    \]
+    bounded above by $\ell(M) = n$. 
+
+    Since $\mathbb N$ as a poset satisfies $ACC$, 
+    we guarantee that this sequence must eventually stabilize, 
+    \[
+        \ell(M_{m}) = \ell_{M_{m+1}}
+    \]
+    so this chain must be finite. As it was arbitrary, all 
+    ascending chains stabilize, meaning 
+    $M$ is Noetherian. 
+
+    For Artinian suppose 
+    \[
+        M_1 \supseteq M_2 \supseteq M_3 \supseteq \cdots 
+    \]
+    is a descending chain. 
+
+    Again we note that $\ell(M_1) \leq n$ 
+    with the sequence
+    \[
+        0 \geq \ell(M_1) \geq \ell(M_2) 
+        \geq \ell(M_3) \geq \cdots 
+    \]
+    being bounded below by $0$, so 
+    stabilizes, from 
+    which we deduce 
+    \[
+        M_{m} = M_{m+1}
+    \]
+    eventually. 
+
+    Now suppose $M$ is both Noetherian 
+    and Artinian. 
+
+    Since $M$ is Noetherian, 
+    the collection of proper submodules 
+    has some maximal element $M_1$, assuming $M \neq 0$. 
+
+    Submodules are still Noetherian, so 
+    $M_1$ has some maximal $M_2 \subseteq M_1$. 
+    Repeat this process to get a chain 
+    \[
+        M = M_0 \supset M_1 \supset M_2 \supset \cdots. 
+    \]
+    Since $M$ is Artinian, this chain 
+    eventually stabilizes, so 
+    \[
+        M_n = M_{n+1}
+    \]
+    for some $n$. 
+
+    The factors $M_{i-1}/M$ can be refined if necessary. 
+    Since the chain cannot descend infinitely, and 
+    cannot lack maximal steps due to the Noetherian 
+    property, the process terminates 
+    in a finite number of steps $n$. 
+
+    By Jordan-Holder, the length $n$ is unique and finite. 
+\end{proof}
+
 \end{document}
 
 
