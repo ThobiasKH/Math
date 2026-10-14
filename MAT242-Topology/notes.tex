@@ -4641,4 +4641,180 @@ algebraic topology}
     
 \end{proof}
 
+\section{\S 32, \S 33, and \S 34}
+Under Munkres' convention, 
+$X$ is normal if it is $T_1$ and 
+any two disjoint closed sets $A,B$ have 
+disjoint open neighborhoods. 
+
+The point of \S$32$ is mostly to 
+establish large classes of normal spaces. 
+The important theorems we cover here are 
+\[
+    \text{regular + countable basis} \ \Rightarrow \ 
+    \text{normal}, 
+\]
+\[
+    \text{metrizable} \ \Rightarrow \ \text{normal}, 
+\]
+\[
+    \text{compact Hausdorff} \ \Rightarrow \ \text{normal}.
+\]
+
+Munkres also proves normality for 
+well-ordered sets in the order topology. 
+
+These have been proven in problems earlier 
+so yeah, that's why I largely skip it here.  
+
+\subsection{\S 33 - Urysohn's lemma} 
+\begin{thm}
+    If $X$ is normal and $A,B\subseteq X$ are 
+    disjoint closed sets, then there exists 
+    a continuous 
+    \[
+        f : X \to [0,1]
+    \]
+    such that 
+    \[
+        f(A) = \{0\}, \ \text{and} \ f(B) = \{1\}. 
+    \]
+\end{thm}
+
+Geometrically, we may interpret normality  
+as $A$ and $B$ being able to be pulled 
+apart by open sets. 
+
+Urysohn is stronger, saying there 
+is an entire continuous 
+numerical coordinate that distinguishes them by 
+\[
+    A \mapsto 0, \ B \mapsto 1. 
+\] 
+
+We should think of $f(x)$ as measuring, topologically 
+rather than metrically, "how far through the 
+transition from $A$ to $B$" $x$ lies. 
+
+This is quite nice, because normality gives 
+\[
+    A \subseteq U \subseteq \overline U \subseteq 
+    X \setminus B, 
+\]
+while a continuous 
+function into $[0,1]$ requires infinitely 
+many intermediate levels. 
+
+So Urysohn's idea is to repeatedly 
+insert more open sets between 
+existing ones. 
+
+Start with something corresponding to 
+$0 < 1$. 
+
+Normality lets us choose open $U_0, U_1$ so that 
+\[
+    A \subseteq U_0, \ \overline{U_0} \subseteq U_1 
+    = X \setminus B. 
+\]
+Now insert a set at $1/2$ so that 
+\[
+    \overline{U_0} \subseteq U_{1/2} 
+    \subseteq \overline{U_{1/2}} \subseteq U_1. 
+\]
+
+Then insert $1/4$ and $3/4$ to get 
+\[
+    U\overline{U_0} \subseteq U_{1/4} 
+    \subseteq \overline{U_{1/4}} \subseteq U_{1/2} 
+\]
+and 
+\[
+    \overline{U_{1/2}} \subseteq U_{3/4} 
+    \subseteq \overline{U_{3/4}} 
+    \subseteq U_1. 
+\]
+Continue recursively over the dyadic rationals 
+\[
+    0, \frac{1}{2},
+    \frac{1}{1},\frac{1}{4},\frac{3}{4},\frac{1}{8}, 
+    \ldots
+\]
+until you have an open set $U_r$ satisftying the 
+crucial property 
+\[
+    r < s \Rightarrow \overline{U_r} \subseteq U_s. 
+\]
+
+That closure is the important part since 
+mere nesting $U_r \subseteq U_s$ is not strong 
+enough to force continuity later. 
+
+\subsubsection{Construction of the function}
+
+Once all $U_r$ exist, define roughly 
+\[
+    f(x) = \inf\{r \bigm| x \in U_r\},
+\]
+with the value $1$ for points belonging 
+to none of the relevant $U_r$'s. 
+
+The nesting means that 
+points deep toward $A$ enter $U_r$ early, so 
+$f(x)$ is small, and points toward $B$ enter 
+late or never so $f(x)$ is large. 
+
+In particular, 
+\[
+    f(a) = 0 \ (a \in A)
+\]
+and 
+\[
+    f(b) = 1 \ (b \in B). 
+\]
+
+The clever bit is proving continuity from 
+\[
+    \overline{U_r} \subseteq U_s, \ (r < s). 
+\]
+For instance if 
+\[
+    f(x) < a 
+\]
+you can choose a dydadic rational 
+$r < a$ with $x \in U_r$ and the entire open 
+neighborhood $U_r$ consists of points whose 
+$f$ values stay below $a$. 
+
+Similarly, if $f(x) > a$, 
+you choose an appropriate rational level 
+below $f(x)$ and use the complement of a 
+closure 
+\[
+    X \setminus \overline{U_r}
+\]
+as an open neighborhood on which $f$ stays 
+above $a$. 
+
+\subsubsection{Reformulating normality}
+
+Urysohn gives 
+\[
+    X \ \text{normal} 
+    \Rightarrow \ \text{disjoint 
+    closed sets can be separated by} \ f : X \to [0,1]. 
+\]
+The converse is nearly immediate. 
+Suppose every pair of closed sets $A,B$ admit $f$ 
+with $f(A) = 0$ and $f(B) = 1$.
+Then, e.g. 
+\[
+    U = f^{-1}([0,1/3)), 
+\]
+and 
+\[
+    V = f^{-1}((2/3,1])
+\]
+work. 
+
 \end{document}
