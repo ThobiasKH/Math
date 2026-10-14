@@ -4565,14 +4565,80 @@ algebraic topology}
     the function $\widetilde f$ is a homeomorphism. 
 \end{proof}
 
-% \begin{prob}
-    % Let $X$ be a locally connected space, and 
-    % let $C$ be a connected component of $X$. 
-% 
-    % Prove that $C$ is open in $X$. 
-% \end{prob}
-% \begin{proof}
-    % 
-% \end{proof}
+\begin{prob}
+    Let $X$ be a locally connected space, and 
+    let $C$ be a connected component of $X$. 
+
+    Prove that $C$ is open in $X$. 
+\end{prob}
+\begin{proof}
+    We suppose $C$ is a maximal connected 
+    subset $C \subseteq X$. 
+
+    Since the space is locally connected, 
+    we can, for every neighborhood $U$ of $x \in X$, 
+    find a connected open neighborhood $V$
+    such that 
+    \[
+        x \in V \subseteq U. 
+    \]
+
+    Since $X$ is open we can find, for each 
+    $x \in C$, 
+    \[
+        U_x \subseteq X 
+    \] 
+    open, and connected.  
+
+    Now $x \in C \cap U_x$ so 
+    \[
+        U_x \cup C 
+    \]
+    is connected, but 
+    $C$ is a maximal connected set so 
+    \[
+        U_x \subset C. 
+    \]
+    Since this holds for all $x \in C$, we have 
+    \[
+        C = \bigcup_{x \in C} U_x  
+    \]
+    which is open.
+
+
+\end{proof}
+
+\begin{prob}
+    Let $X$ be \keyterm{locally path connected}. 
+
+    Prove that every connected component of $X$ 
+    is path connected. 
+
+    Equivalently, prove that in a locally path connected space, 
+    connected components $=$ path components. 
+\end{prob}
+\begin{proof}
+    Suppose $C \subseteq X$ is some 
+    connected component. 
+
+    Fix $x \in C$. 
+
+    Since $X$ is path connected 
+    there exists a path-connected open neighborhood $U$ of 
+    $x$ such that 
+    \[
+        x \in U \subseteq X. 
+    \]
+
+    Since $U$ is path connected and contains $x$ 
+    we must have that every point in $U$ can 
+    be joined by a path to $x$. Since $x \in C$ it 
+    follows that 
+    \[
+        U \subseteq C 
+    \]
+    since $U$ must lie entirely in the same component as $x$.
+    
+\end{proof}
 
 \end{document}
