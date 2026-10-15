@@ -4817,4 +4817,156 @@ and
 \]
 work. 
 
+\section{Urysohn metrization}
+
+Now we get to the punchline of these sections, 
+that being that, 
+\begin{thm}[Urysohn Metrization Theorem]
+    Every regular space with countable 
+    basis is metrizable. 
+\end{thm}
+
+This looks quite surprising since 
+a metric $d : X \times X \to \mathbb R$ 
+seems like extra structure, while 
+Urysohn's theorem simply asks for 
+two purely topological conditions. 
+
+WE already knew that 
+\[
+    \text{metric} \ \Rightarrow \ \text{regular}, 
+\]
+but not every metric space is 
+second countable. 
+
+\subsection{How do we get a metric?}
+
+The procedure seems a bit nonconstructive, as we 
+do not try to come up with a $d(x,y)$ 
+first. 
+
+Instead, we make lots of continuous functions 
+\[
+    f_n : X \to [0,1]
+\]
+which collectively distinguish points and then send 
+\[
+    x \mapsto (f_1(x), f_2(x), \ldots)
+\]
+giving a map 
+\[
+    F : X \to [0,1]^{\mathbb N}, 
+\]
+but we already know that the countable 
+product of $[0,1]$ with the product topology 
+is metrizable. 
+
+Therefore, if $F$ is an embedding, 
+\[
+    X \cong F(X) \subseteq [0,1]^{\omega}
+\]
+and as a subspace of a metric space, $X$ is 
+metrizable.
+
+We get the family $f_1,f_2,\ldots$ as follows. 
+
+Let 
+\[
+    \mathcal B = \{B_1,B_2,\ldots\}
+\]
+be a countable basis and look at pairs 
+$(B_m,B_n)$ such that 
+\[
+    \overline{B_m} \subseteq B_n. 
+\]
+There are only countably many pairs 
+since $\mathbb N^2$ is countable. 
+For each appropriate pair, consider 
+the closed disjoint sets 
+\[
+    \overline {B_m}
+\]
+and 
+\[
+    X \setminus B_n.
+\]
+Since the space is regular and second countable, 
+it is normal. 
+Then Urysohn gives a continuous function 
+\[
+    f_{m,n} : X \to [0,1]
+\]
+such that, say 
+\[
+    f_{m,n} = 1 \ \text{on} \ \overline{B_m},
+\]
+and 
+\[
+    f_{m,n} = 0 \ \text{on} \ X \setminus B_n. 
+\]
+
+
+\subsection{Some problems}
+
+\begin{prob}
+    Let $(X,d)$ be a metric space and 
+    let $A,B \subseteq X$ be disjoint closed sets. 
+    Prove that $X$ is normal. 
+\end{prob}
+\begin{proof}
+    We first note that 
+    $X$ is $T_1$ Hausdorff since all 
+    metric spaces are $T_1$ Hausdorff. 
+
+    We will use the new Urysohn approach to 
+    show normality. 
+
+    We will construct a function 
+    $f : X \to [0,1]$ continuous for which 
+    \[
+        f(A) = 0
+    \]
+    and 
+    \[
+        f(B) = 1. 
+    \]
+
+    Set 
+    \[
+        f(x) = \frac{d(x,A)}{d(x,A) + d(x,B)} 
+    \]
+    with 
+    \[
+        d(x,A) := \inf_{a \in A} d(x,a). 
+    \]
+
+    Then, for any $x \in A$, 
+    \[
+        f(x) = \frac{0}{0 + d(x,B)} = 0 
+    \]
+    and, for any $x \in B$, 
+    \[
+        f(x) = \frac{d(x,A)}{d(x,A) + 0} = 1. 
+    \]
+    This function is continuous since 
+    the distance-to-set function is continuous 
+    and $f + g$ as well as $h/j$ are 
+    continuous for continuous $f,g,h,j$. 
+
+    We have not proven well-definedness, but 
+    it should be clear that 
+    $f(x) \in \{0,1\}$ only if 
+    $x \in A$ or $x \in B$ and otherwise, for 
+    $x \not\in A\cup B$ we have 
+    $d(x,A) > 0$ and 
+    $d(x,A) + d(x,B) > d(x,A)$ with 
+    both sides nonzero so 
+    \[
+        f(x) < 1.
+    \]
+
+    Thus the space is normal. 
+\end{proof}
+    
+
 \end{document}

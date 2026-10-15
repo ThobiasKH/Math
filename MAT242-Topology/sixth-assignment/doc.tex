@@ -1,0 +1,180 @@
+% Keep styling.sty beside this file. Compile with:
+% latexmk -xelatex -synctex=1 template.tex (or, 
+% for my purposes, compile to preview with VimtexCompile in neovim)
+% if youre using VSC with some built in plugin you'll probably need to add 
+% {
+%   "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+%   "latex-workshop.latex.autoBuild.run": "onSave",
+%   "latex-workshop.view.pdf.viewer": "tab",
+%   "latex-workshop.view.pdf.invertMode.enabled": "never"
+% }
+% also it is necessary to download the right fonts. Just look 
+% at error messages to find which ones or something
+
+\documentclass[11pt]{article}
+\usepackage{styling} % Dark by default, with the clickable THEME switch.
+% \usepackage{graphicx} % Uncomment if adding external images.
+
+\title{Assignment six}
+\author{Thobias K. H\o ivik | Remote Group}
+\date{For October 20, 2026} % Use \date{} to hide the date.
+
+\begin{document}
+\maketitle
+Yippe, new preamble. 
+
+\begin{prob*}[Munkres 30.5(a)]
+    Show that every metrizable space with a countable 
+    dense subset has a countable basis. 
+\end{prob*}
+
+\begin{lem*}
+    Every separable metric space is 
+    second-countable. 
+\end{lem*}
+\begin{proof}
+    Let $(Y,d)$ be a separable metric space. 
+
+    Meaning there exists $D \subseteq Y$, countable, 
+    for which 
+    \[
+        \overline D = Y. 
+    \]
+    Recall that $\overline D$ is the set of all 
+    points $x \in Y$ such that every open 
+    neighborhood of $x$ intersects 
+    $D$: 
+    \[
+        U \cap D \neq \emptyset   
+    \]
+    for every open neighborhood $U$ of $x$. 
+
+    We have 
+    \[
+        D = \{x_1,x_2,\ldots\}. 
+    \]
+    Take 
+    \[
+        \mathcal B = \{B_{q}(x_i) \bigm| i = 1,2,\ldots, \ 
+        q \in \mathbb Q_{>0}\}. 
+    \]
+    These are open sets and the 
+    set is countable since we are indexing over 
+    $\mathbb N \times \mathbb Q_{>0}$ which is 
+    countable. 
+
+    It is not hard to see that this covers the space. 
+
+    Suppose $x \in Y$. 
+    Fix $x_i \in D$ and choose $q \in \mathbb Q_{>0}$ such that 
+    \[
+        q > d(x,x_i). 
+    \]
+    Then 
+    \[
+        x \in B_{q}(x_i). 
+    \]
+
+    Now suppose $V$ is an open set. 
+
+    Then, for $x \in V$, there exists $\varepsilon > 0$ 
+    so that 
+    \[
+        B_{\varepsilon}(x) \subseteq V. 
+    \]
+
+    Since $D$ is dense, there exists 
+    $x_i \in D$ such that 
+    \[
+        d(x,x_i) < \varepsilon/3. 
+    \]
+    Choose $r \in \mathbb Q_{>0}$ such that 
+    \[
+        d(x,x_i) < r < \varepsilon - d(x,x_i). 
+    \]
+    Such a rational exists since 
+    \[
+        2d(x,x_i) < \frac{2\varepsilon}{3} < \varepsilon. 
+    \]
+    Then $x \in B_r(x_i)$, and for every $y \in B_r(x_i)$ 
+    the triangle inequality gives 
+    \[
+        d(x,y) \leq d(x,x_i) + d(x_i,y) < d(x,x_i) + r < 
+        \varepsilon. 
+    \]
+    Thus 
+    \[
+        x \in B_r(x_i) \subseteq B_{\varepsilon}(x) 
+        \subseteq V. 
+    \]
+
+    So $\mathcal B$ is a countable basis for $Y$, making 
+    $Y$ second-countable. 
+
+\end{proof}
+
+\begin{proof}[Proof of 30.5(a)]
+    Suppose $X$ is a metrizable space with a countable dense 
+    subset. That is, 
+    \[
+        X \cong Y
+    \]
+    for some metric space $(Y,d)$ and there exists 
+    $D\subseteq X$ such that 
+    \[
+        \overline D = X
+    \]
+    with $|D| \leq \aleph_0$. 
+
+    Let $\varphi : X \to Y$ denote 
+    the homeomorphism between them. 
+    Then 
+    \begin{align*}
+        \varphi(\overline D) &= \overline{\varphi(D)} \\ 
+        \varphi(X) &= \overline{\varphi(D)} \\ 
+        Y &= \overline{\varphi(D)} 
+    \end{align*}
+    so $\varphi(D)$ 
+    is dense in $Y$ and, since $\varphi$ is bijective, 
+    $|\varphi(D)| \leq \aleph_0$, so 
+    $\varphi(D)$ is a countable dense subset of $Y$. 
+
+    Hence $Y$ is separable.
+
+    By the lemma above, 
+    $Y$ is second-countable. 
+
+    Thus there exists a countable basis 
+    \[
+        \mathcal B_Y = \{B_1,B_2,\ldots\}
+    \]
+    of $Y$. 
+
+    Then, for any open set $U$ in 
+    $X$, since $X \cong Y$, we have 
+    \[
+        U = \varphi^{-1}(V)
+    \]
+    for open $V\subseteq Y$. 
+    But 
+    \[
+        V = \bigcup_{i\in I} B_i 
+    \]
+    for some $I \subseteq \mathbb N$ 
+    so 
+    \begin{align*}
+        U &= \varphi^{-1}\left(\bigcup_{i=1}^\infty B_i\right) \\ 
+          &= \bigcup_{i=1}^\infty \varphi^{-1}(B_i). 
+    \end{align*}
+    Thus 
+    \[
+        \mathcal B = \{\varphi^{-1}(B_1), \varphi^{-1}(B_2), 
+        \ldots\}
+    \]
+    is a countable basis of $X$, hence 
+    $X$ is second-countable. 
+
+\end{proof}
+
+
+\end{document}
