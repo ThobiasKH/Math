@@ -121,32 +121,7 @@
 \RequirePackage{bookmark}
 \RequirePackage[nameinlink,noabbrev]{cleveref}
 
-% ---- Optional Content Group: one-click, full-page inversion ------
-% The document's actual colors are compiled dark. PDF's Difference blend mode
-% with an optional white layer inverts all pixels, including figures.
-% Requires a PDF viewer that supports layers and transparency blend modes.
-\ifcn@light
-  \newcommand{\ThemeSwitch}{{\sffamily\footnotesize\color{cnmuted}LIGHT EDITION}}
-\else
-  \ifcn@toggle
-    \RequirePackage{ocgx2}
-    \AddToHook{shipout/foreground}{%
-      \begin{ocg}{Light mode — click to toggle}{cn-light-overlay}{0}%
-        \begin{tikzpicture}[overlay]
-          \begin{scope}[blend mode=difference]
-            % At the shipout origin, y=0 is the top of the page.
-            \fill[white] (0,-\paperheight) rectangle (\paperwidth,0);
-          \end{scope}
-        \end{tikzpicture}%
-      \end{ocg}%
-    }
-    \newcommand{\ThemeSwitch}{%
-      \switchocg{cn-light-overlay}{{\sffamily\footnotesize\color{cnaccent}\textbf{\ensuremath{\circ}}\, THEME}}%
-    }
-  \else
-    \newcommand{\ThemeSwitch}{{\sffamily\footnotesize\color{cnmuted}DARK EDITION}}
-  \fi
-\fi
+
 \pagestyle{fancy}
 \renewcommand{\sectionmark}[1]{\markright{\thesection\quad #1}}
 \fancyhf{}
@@ -154,7 +129,6 @@
 \renewcommand{\footrulewidth}{0pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\color{cnrule}\leaders\hrule height \headrulewidth\hfill}}
 \fancyhead[L]{{\small\sffamily\color{cnmuted}\nouppercase{\rightmark}}}
-\fancyhead[R]{\ThemeSwitch}
 \fancyfoot[L]{{\footnotesize\sffamily\color{cnmuted}MATHEMATICAL NOTES}}
 \fancyfoot[R]{{\small\sffamily\bfseries\color{cnaccent}\thepage}}
 \apptocmd{\maketitle}{\thispagestyle{fancy}}{}{}

@@ -1,0 +1,438 @@
+% Keep styling.sty beside this file. Compile with:
+% latexmk -xelatex -synctex=1 template.tex (or, 
+% for my purposes, compile to preview with VimtexCompile in neovim)
+% if youre using VSC with some built in plugin you'll probably need to add 
+% {
+%   "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+%   "latex-workshop.latex.autoBuild.run": "onSave",
+%   "latex-workshop.view.pdf.viewer": "tab",
+%   "latex-workshop.view.pdf.invertMode.enabled": "never"
+% }
+% also it is necessary to download the right fonts. Just look 
+% at error messages to find which ones or something
+
+\documentclass[11pt]{article}
+\usepackage{styling}
+% \usepackage{graphicx} % Uncomment if adding external images.
+
+
+
+\usepackage[table]{xcolor}
+
+\providecommand{\GridYes}[1]{\cellcolor{green!30}\textcolor{black}{#1}}
+\providecommand{\GridNo}[1]{\cellcolor{red!27}\textcolor{black}{#1}}
+\providecommand{\GridWork}[1]{\cellcolor{yellow!25}\textcolor{black}{#1}}
+\providecommand{\GridNA}{\cellcolor{black!22}\textcolor{black}{\textsf{N/A}}}
+\providecommand{\GridHint}[1]{\textit{#1}}
+\providecommand{\GridHead}[1]{\rotatebox{90}{\strut #1}}
+
+
+\title{Hand in 2}
+\author{Thobias K. H\o ivik}
+\date{For October 23, 2026} % Use \date{} to hide the date.
+
+\begin{document}
+\maketitle
+% \tableofcontents
+% \newpage
+
+Sorry for the miniuscule text, the tables overflowed 
+when I tried to make it bigger. 
+Also, the links to propositions and such 
+do not provide much contrast to the cell colors, but 
+they should be clickable in most PDF readers. 
+
+\begingroup
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.45}
+\begin{center}
+\textbf{Exercise 1(d--j): Properties of particular spaces}
+
+\medskip
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|l|*{7}{c|}}
+\hline
+ & $I_o^2$ & $\mathbb R_\ell$ & $\mathbb R_\ell^2$
+ & $\mathbb R^\omega$ product & $\mathbb R^\omega$ uniform
+ & $\mathbb R^\omega$ box & $\mathbb R^{[0,1]}$ product \\
+\hline
+Connected
+ & \GridYes{Example 6, \S24} & \GridNo{$[0,\infty)$}
+ & \GridNo{$[0,\infty)\times\mathbb R_\ell$}
+ & \GridYes{Exercise 10, \S23} & \GridNo{See \cref{prop:omega_uniform_connectedness}}
+ & \GridNo{Example 6, \S23} & \GridYes{Exercise 10, \S23} \\
+\hline
+Path connected
+ & \GridNo{Example 6, \S24} & \GridNo{$\uparrow$}
+ & \GridNo{$\uparrow$} & \GridYes{Interpolation}
+ & \GridWork{\GridNo{Implied by above}} & \GridNo{$\uparrow$}
+ & \GridWork{\GridHint{prove}} \\
+\hline
+Locally connected
+ & \GridYes{Exercise 3, \S25} & \GridNo{$[y,\infty)$}
+ & \GridNo{$\prod_i[y_i,\infty)$} & \GridYes{$\downarrow$}
+ & \GridYes{See \cref{prop:omega_uniform_local_connectedness}} & \GridWork{\GridHint{prove}}
+ & \GridWork{\GridHint{prove}} \\
+\hline
+Locally path connected
+ & \GridNo{Exercise 3, \S25} & \GridNo{$\uparrow$}
+ & \GridNo{$\uparrow$} & \GridYes{Interpolation}
+ & \GridWork{\GridHint{prove}} & \GridWork{\GridHint{prove}}
+ & \GridWork{\GridHint{prove}} \\
+\hline
+Compact
+ & \GridWork{\GridHint{Thm 27.1?}} & \GridNo{$\{[n,n+1)\}_{n\in\mathbb Z}$}
+ & \GridNo{$\leftarrow$} & \GridNo{$\pi_i$ onto $\mathbb R$}
+ & \GridNo{$\pi_i$ onto $\mathbb R$} & \GridNo{$\pi_i$ onto $\mathbb R$}
+ & \GridNo{$\pi_i$ onto $\mathbb R$} \\
+\hline
+\shortstack[l]{Locally compact\\Hausdorff}
+ & \GridYes{Example 3, \S29} & \GridNo{\GridHint{prove}}
+ & \GridNo{\GridHint{prove}} & \GridNo{Example 2, \S29}
+ & \GridNo{Exercise 4, \S29} & \GridNo{\GridHint{prove}}
+ & \GridNo{Example 2, \S29 (adapt)} \\
+\hline
+Hausdorff
+ & \GridYes{Order topology} & \GridYes{\GridHint{prove}}
+ & \GridYes{Thm 31.2(a)} & \GridYes{Thm 31.2(a)}
+ & \GridYes{Metrizable} & \GridYes{Refinement of product}
+ & \GridYes{Thm 31.2(a)} \\
+\hline
+Regular
+ & \GridYes{$\downarrow$} & \GridYes{$\downarrow$}
+ & \GridYes{$\downarrow$} & \GridYes{$\downarrow$}
+ & \GridYes{$\downarrow$} & & \GridYes{Thm 31.2(b)} \\
+\hline
+Completely regular
+ & \GridYes{$\downarrow$} & \GridYes{$\downarrow$}
+ & \GridYes{Example 1, \S33} & \GridYes{$\downarrow$}
+ & \GridYes{$\downarrow$} & & \GridYes{Thm 33.2} \\
+\hline
+Normal
+ & \GridYes{Thm 32.3} & \GridYes{Example 2, \S31}
+ & \GridNo{Example 3, \S31} & \GridYes{Thm 32.2}
+ & \GridYes{Thm 32.2} & \GridNA
+ & \GridNo{Example 1, \S32} \\
+\hline
+Metrizable
+ & \GridWork{\GridNo{See \cref{prop:ordered-square-metrizability}}} & \GridNo{\GridHint{see Exercise 5(a), \S30}}
+ & \GridNo{$\leftarrow$} & \GridYes{Thm 20.5}
+ & \GridYes{Uniform metric} & \GridNo{\GridHint{prove}}
+ & \GridWork{\GridHint{prove no}} \\
+\hline
+Second-countable
+ & \GridNo{See \cref{prop:ordered_square_second_countability}} & \GridNo{\GridHint{prove}}
+ & \GridNo{$\leftarrow$} & \GridYes{Thm 30.2}
+ & \GridNo{Example 2, \S30} & \GridNo{Example 2, \S30 (adapt)}
+ & \GridWork{\GridHint{$\{0,1\}^{[0,1]}$?}} \\
+\hline
+\end{tabular}%
+}
+\end{center}
+\endgroup
+
+\bigskip
+
+\begingroup
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{center}
+\textbf{Exercises 2--6: General preservation properties}
+
+\medskip
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|l|*{9}{c|}}
+\hline
+ & \GridHead{Metric space}
+ & \GridHead{Compact Hausdorff}
+ & \GridHead{Arbitrary subspace}
+ & \GridHead{Open subspace}
+ & \GridHead{Closed subspace}
+ & \GridHead{Finite products}
+ & \GridHead{Countable products}
+ & \GridHead{Arbitrary products}
+ & \GridHead{Continuous image} \\
+\hline
+Connected
+ & \GridNo{$\{0,1\}_{\mathrm{disc}}$} & \GridNo{$\{0,1\}_{\mathrm{disc}}$}
+ & \GridNo{$X\cup Y$} & \GridNo{$X\cup Y$}
+ & \GridNo{$\{0,1\}\subset[0,1]$}
+ & \GridYes{Thm 23.6} & \GridYes{Exercise 10, \S23}
+ & \GridYes{Exercise 10, \S23} & \GridYes{Thm 23.5} \\
+\hline
+Path connected
+ & \GridNo{$\uparrow$} & \GridNo{$\uparrow$}
+ & \GridNo{\GridHint{counterexample}} & \GridNo{\GridHint{counterexample}}
+ & \GridNo{\GridHint{counterexample}} & \GridYes{Coordinate paths}
+ & & & \GridYes{$f\circ p$} \\
+\hline
+Locally connected
+ & & & & & & & & & \\
+\hline
+Locally path connected
+ & & & & & & & & & \\
+\hline
+Compact
+ & \GridNo{$\mathbb R$} & \GridYes{By hypothesis}
+ & \GridNo{$(0,1)\subset[0,1]$} & \GridNo{$(0,1)\subset[0,1]$}
+ & \GridYes{Thm 26.2} & \GridYes{Tychonoff}
+ & \GridYes{Tychonoff} & \GridYes{Tychonoff}
+ & \GridYes{Thm 26.5} \\
+\hline
+Locally compact Hausdorff
+ & & & & & & & & & \\
+\hline
+Hausdorff
+ & \GridYes{Metric} & \GridYes{By hypothesis}
+ & \GridYes{Thm 31.2(a)} & \GridYes{Thm 31.2(a)}
+ & \GridYes{Thm 31.2(a)} & \GridYes{Thm 31.2(a)}
+ & \GridYes{Thm 31.2(a)} & \GridYes{Thm 31.2(a)}
+ & \GridNo{\GridHint{counterexample}} \\
+\hline
+Regular
+ & \GridYes{$\downarrow$} & \GridYes{$\downarrow$}
+ & \GridYes{Thm 31.2(b)} & \GridYes{Thm 31.2(b)}
+ & \GridYes{Thm 31.2(b)} & \GridYes{Thm 31.2(b)}
+ & \GridYes{Thm 31.2(b)} & \GridYes{Thm 31.2(b)} & \\
+\hline
+Completely regular
+ & \GridYes{$\downarrow$} & \GridYes{$\downarrow$}
+ & \GridYes{Thm 33.2} & \GridYes{Thm 33.2}
+ & \GridYes{Thm 33.2} & \GridYes{Thm 33.2}
+ & \GridYes{Thm 33.2} & \GridYes{Thm 33.2} & \\
+\hline
+Normal
+ & \GridYes{Thm 32.2} & \GridYes{Thm 32.3}
+ & & & & & & \GridNo{Example 1, \S32} & \\
+\hline
+Second-countable
+ & \GridNo{$\mathbb R^\omega$ uniform} &
+ & \GridYes{Thm 30.2} & \GridYes{Thm 30.2}
+ & \GridYes{Thm 30.2} & &
+ & \GridNo{$\mathbb R^{[0,1]}$} & \\
+\hline
+Metrizable
+ & \GridYes{By definition} &
+ & \GridYes{Restriction of metric} & \GridYes{Restriction of metric}
+ & \GridYes{Restriction of metric} & & & & \\
+\hline
+\end{tabular}%
+}
+\end{center}
+\endgroup
+
+\newpage 
+
+\section{Proofs}
+
+\begin{prop}\label{prop:omega_uniform_connectedness}
+    $\mathbb R^\omega$ with the uniform topology 
+    is \keyterm{not connected}. 
+\end{prop}
+
+\begin{proof}
+    The countably infinite product 
+    of the real line $\mathbb R^\omega$ with 
+    the uniform topology is the 
+    space induced by the uniform metric 
+    \[
+        \overline d(x,y) = \sup_{n\in \mathbb N} 
+        \min(|x_n-y_n|, 1)
+    \]
+    where $x = (x_n)$ and $y=(y_n)$ are 
+    sequences of real numbers. 
+
+    We claim this space is \keyterm{not connected}. 
+
+    Let $B$ be the set of all bounded sequences, 
+    and let $U$ be the set of all unbounded sequences, 
+    \begin{enumerate}
+        \item $B = \{x\in\mathbb R^\omega \bigm| \exists 
+        M > 0 \ \text{s.t.} \ |x_n| \leq M \ \forall n \in 
+        \mathbb N\}$
+        \item $U = \mathbb R^\omega \setminus B$. 
+    \end{enumerate}
+    Clearly, these are nonempty since 
+    \[
+        (0,0,0,\ldots) \in B 
+    \]
+    while 
+    \[
+        (1,2,3,\ldots) \in U. 
+    \]
+
+    \textbf{$B$ is open.}
+
+    Let $x = (x_n) \in B$. Then there exists 
+    some $M_x > 0$ such that $|x_n| \leq M_x$ for all 
+    $ n \in \mathbb N$. 
+
+    Consider the ball of radius $1$ around $x$ 
+    \[
+        B_{\overline d}(x,1) = \{y\in \mathbb R^\omega 
+        \bigm| \overline d(x,y) < 1\}.  
+    \]
+    If $y\in B_{\overline d}(x,1)$, then 
+    \[
+        \sup_{n\in\mathbb N}\min(|x_n-y_n|,1) < 1
+    \]
+    implying that for every $n$, $|x_n - y_n| < 1$ for 
+    all $n$. 
+    Using the triangle inequality we can 
+    attain the following bound: 
+    \[
+        |y_n| \leq |y_n - x_n| + |x_n| < 1 + M_x.
+    \]
+    Thus the sequence $y$ is bounded, meaning 
+    \[
+        B_{\overline d}(x,1) \subseteq B. 
+    \]
+    Since every point of $B$ has an open neighborhood 
+    completely contained in $B$, $B$ is open. 
+    
+    \textbf{$U$ is open.}
+
+    Let $(x_n)$ be undounded. 
+    Consider the same open ball $B_{\overline d}(x,1)$. 
+    If $y\in B_{\overline d}(x,1)$ then 
+    \[
+        |y_n| \geq |x_n| - |x_n - y_n| > |x_n| - 1
+    \]
+    so $y$ is unbounded since $|x_n|$ can be arbitrarily 
+    large. 
+
+    Therefore, $B_{\overline d}(x,1) \subseteq U$ is open. 
+
+    Then 
+    \[
+        \mathbb R^\omega = B \cup U. 
+    \]
+\end{proof}
+
+\begin{prop}\label{prop:omega_uniform_local_connectedness}
+    $\mathbb R^\omega$ with the uniform topology 
+    is \keyterm{locally connected}. 
+    In fact, it is \keyterm{locally path connected}. 
+\end{prop}
+\begin{proof}
+    We claim the space is 
+    \keyterm{locally path connected}. 
+
+    For any point $x = (x_n) \in \mathbb R^\omega$ 
+    and any radius $\varepsilon > 0$ the open $\varepsilon$-ball 
+    centered at $x$ is 
+    \[
+        B_{\overline d}(x,\varepsilon)=\{y \in \mathbb R^\omega 
+        \bigm| \overline d(x,y) < \varepsilon\}. 
+    \]
+    If we choose $\varepsilon < 1$, the uniform metric 
+    forces every coordinate to be within 
+    $\varepsilon$ of $x_n$. 
+    Therefore, the open $\varepsilon$-ball 
+    is 
+    \[
+        B_{\overline d}(x,\varepsilon) = 
+        \prod_{n\in\mathbb N} (x_n - \varepsilon, 
+        x_n + \varepsilon). 
+    \]
+
+    Take any point $y \in B_{\overline d}(x,\varepsilon)$. 
+    Construct a linear path 
+    $f : [0,1] \to B_{\overline d}(x,\varepsilon)$ 
+    from the center point $x$ to $y$ by setting 
+    \[
+        f(t) = (1-t)x+ty. 
+    \]
+    Since each interval $(x_n - \varepsilon, 
+    x_n + \varepsilon)$ is convex, 
+    every point remains inside the ball 
+    for all $t \in [0,1]$. 
+
+    Since every point has a neighborhood basis 
+    consisting of these path-connected open balls, 
+    the space is locally path-connected which makes 
+    it locally connected. 
+
+\end{proof}
+
+\begin{prop}\label{prop:ordered-square-metrizability}
+    The ordered square $I^2_o$ is 
+    \keyterm{not metrizable}. 
+\end{prop}
+\begin{proof}[Proof sketch]
+    We invoke the following theorem: 
+    \begin{thm*}
+        If a topological space is \keyterm{compact} 
+        and \keyterm{metrizable}, 
+        then it must be separable. 
+    \end{thm*}
+
+    So it will suffice to elucidate that the space 
+    is compact and not separable. 
+
+    The Heine-Borel theorem for ordered spaces says that 
+    a linearly ordered topological space is compact if 
+    and only if it has a least element, a greatest 
+    element, and satisfies the least upper 
+    bound properrty. 
+
+    The ordered square has minimum $(0,0)$, 
+    maximum $(1,1)$. 
+    Because the standard unit interval has 
+    the least upper bound property, the lexicographic 
+    order preserves this completeness. 
+    Thus $I_o^2$ is compact. 
+
+    The space is not separable. 
+    We will find an uncountable 
+    collection of open sets that are completely 
+    isolated from each other. 
+    For every real $x \in (0,1)$ consider the 
+    vertical segment at $x$, excluding endpoints, 
+    \[
+        V_x = \{x\} \times (0,1). 
+    \]
+    In the dictionary order, $V_x$ is the 
+    open interval $((x,0), (x,1))$. Because it is an 
+    open interval, $V_x$ is an open set in the dictionary 
+    order topology. 
+    Notice that if $x \neq y$ the vertical segments 
+    $V_x$ and $V_y$ are disjoint, 
+    \[
+        V_x \cap V_y = \emptyset. 
+    \]
+    Since there are uncountably many choices 
+    of $x \in (0,1)$ we have an uncountable 
+    collection of pairwise disjoint non-empty 
+    open sets. 
+
+    Suppose then that some 
+    dense $D \subseteq I_o^2$ exists. 
+    By definition the set must intersect 
+    all non-empty open sets, but there are uncountably 
+    many so this cannot be the case. 
+
+\end{proof}
+
+\begin{prop}\label{prop:ordered_square_second_countability}
+    The ordered square $I_o^2$ is 
+    \keyterm{not second-countable}.
+\end{prop}
+\begin{proof}[Proof sketch]
+    As we saw in the proof of 
+    \cref{prop:ordered-square-metrizability}, 
+    we can construct an uncountable 
+    collection of pairwise disjoint, non-empty 
+    open sets. 
+    By definition, each of these 
+    sets must contain at least 
+    one basic open set from the basis. 
+
+    Since the vertical intervals are disjoint 
+    from one another, a basic open set 
+    in one cannot be shared by any other, 
+    meaning we must have uncountably many basis elements. 
+\end{proof}
+
+
+\end{document}
