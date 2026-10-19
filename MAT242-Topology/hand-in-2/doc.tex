@@ -163,15 +163,26 @@ Connected
 \hline
 Path connected
  & \GridNo{$\uparrow$} & \GridNo{$\uparrow$}
- & \GridNo{\GridHint{counterexample}} & \GridNo{\GridHint{counterexample}}
- & \GridNo{\GridHint{counterexample}} & \GridYes{Coordinate paths}
- & & & \GridYes{$f\circ p$} \\
+ & \GridNo{$\mathbb Q \subseteq \mathbb R$} & 
+ &  & \GridYes{$\rightarrow$}
+ & \GridYes{$\rightarrow$} & \GridYes{See \cref{prop:product_space_path_connected}}& \GridYes{$f\circ p$} \\
 \hline
 Locally connected
- & & & & & & & & & \\
+ & \GridNo{$\mathbb Q$} & 
+ \GridNo{Topologists sine curve}
+ & \GridNo{$\mathbb Q \subseteq \mathbb R$} & & & 
+ \GridYes{$\downarrow$} & 
+  \GridNo{See \cref{prop:product_local_connected}}
+ & \GridNo{$\leftarrow$} & 
+ \GridNo{$\mathbb R$ discrete $\to$ 
+ $\mathbb R$ canonical} \\
 \hline
 Locally path connected
- & & & & & & & & & \\
+ & \GridNo{$\uparrow$} & 
+ \GridNo{$\uparrow$} & \GridNo{$\mathbb Q \subseteq \mathbb R$} & & &
+ \GridWork{\GridYes{See \cref{prop:product_local_connected}}}
+ & \GridNo{$\uparrow$}
+ & \GridNo{$\uparrow$} & \GridNo{$\uparrow$} \\
 \hline
 Compact
  & \GridNo{$\mathbb R$} & \GridYes{By hypothesis}
@@ -181,41 +192,56 @@ Compact
  & \GridYes{Thm 26.5} \\
 \hline
 Locally compact Hausdorff
- & & & & & & & & & \\
+ & \GridNo{$\uparrow$} & 
+ \GridYes{Compact $\rightarrow$ locally compact}
+ & & & &
+ \GridYes{See \cref{prop:product_local_compact}} & 
+ \GridNo{$\mathbb R^\omega$ not 
+ locally compact} & \GridNo{$\leftarrow$} & \GridNo{$\downarrow$} \\
 \hline
 Hausdorff
  & \GridYes{Metric} & \GridYes{By hypothesis}
  & \GridYes{Thm 31.2(a)} & \GridYes{Thm 31.2(a)}
  & \GridYes{Thm 31.2(a)} & \GridYes{Thm 31.2(a)}
  & \GridYes{Thm 31.2(a)} & \GridYes{Thm 31.2(a)}
- & \GridNo{\GridHint{counterexample}} \\
+ & \GridNo{$\{0,1\}$ discrete $\to$ 
+ $\{0,1\}$ indiscrete} \\
 \hline
 Regular
  & \GridYes{$\downarrow$} & \GridYes{$\downarrow$}
  & \GridYes{Thm 31.2(b)} & \GridYes{Thm 31.2(b)}
  & \GridYes{Thm 31.2(b)} & \GridYes{Thm 31.2(b)}
- & \GridYes{Thm 31.2(b)} & \GridYes{Thm 31.2(b)} & \\
+ & \GridYes{Thm 31.2(b)} & \GridYes{Thm 31.2(b)} & 
+ \GridNo{See \cref{ex:image_regular}}\\
 \hline
 Completely regular
  & \GridYes{$\downarrow$} & \GridYes{$\downarrow$}
  & \GridYes{Thm 33.2} & \GridYes{Thm 33.2}
  & \GridYes{Thm 33.2} & \GridYes{Thm 33.2}
- & \GridYes{Thm 33.2} & \GridYes{Thm 33.2} & \\
+ & \GridYes{Thm 33.2} & \GridYes{Thm 33.2} & 
+ \GridNo{$\uparrow$} \\
 \hline
 Normal
  & \GridYes{Thm 32.2} & \GridYes{Thm 32.3}
- & & & & & & \GridNo{Example 1, \S32} & \\
+ & & & & & & \GridNo{Example 1, \S32} & 
+ \GridNo{Discrete space $\to$ 
+ non-normal space} \\
 \hline
 Second-countable
- & \GridNo{$\mathbb R^\omega$ uniform} &
+ & \GridNo{$\mathbb R^\omega$ uniform} & 
+ \GridNo{Any uncountable discrete space}
  & \GridYes{Thm 30.2} & \GridYes{Thm 30.2}
  & \GridYes{Thm 30.2} & &
- & \GridNo{$\mathbb R^{[0,1]}$} & \\
+ & \GridNo{$\mathbb R^{[0,1]}$} &  
+ \GridNo{$\mathbb R \to \mathbb R/\mathbb Z$ quotient} \\
 \hline
 Metrizable
- & \GridYes{By definition} &
+ & \GridYes{By definition} & 
+ \GridNo{Urysohn Metrization Thm.}
  & \GridYes{Restriction of metric} & \GridYes{Restriction of metric}
- & \GridYes{Restriction of metric} & & & & \\
+ & \GridYes{Restriction of metric} & & & 
+ \GridNo{$\mathbb R^{\mathbb R}$ not first countable} & 
+ \GridNo{See \cref{ex:image_regular}} \\
 \hline
 \end{tabular}%
 }
@@ -599,6 +625,208 @@ Metrizable
     \[
         \left|\frac{1}{4n} - y_n\right| \geq \varepsilon_n.
     \]
+\end{proof}
+
+\begin{prop}\label{prop:product_space_path_connected}
+    If $X_i$, ranging 
+    over indices $i \in I$ are all path connected. 
+    Then 
+    \[
+        X := \prod_{i\in I} X_i 
+    \]
+    \keyterm{is path connected} (with the product topology). 
+
+    Note: This fails quite spectacularly if we 
+    assume the box topology. 
+\end{prop}
+\begin{proof}[Proof sketch]
+    Recall that the basis is 
+    \[
+        \mathcal B = \left\{
+            \prod_{i \in I} U_i \Biggm| 
+            U_i \ \text{open} \ \text{in} \ X_i \ \text{and} \ 
+            U_i \neq X_i \ \text{for finitely many} \ i \in I
+        \right\}.
+    \]
+
+    Take some $x = (x_i)_{i\in I}, \ y = 
+    (y_i)_{i \in I} \in X$. 
+
+    Then, since $X_i$ is path connected 
+    for each $i \in I$, we have 
+    some continuous 
+    $f_{i} : [0,1] \to X_i$ with 
+    \[
+        f(0) = x_i, \ \text{and} \ f(1) = y_i. 
+    \]
+
+    Construct the path $f : [0,1] \to X$ by 
+    \[
+        f(t) = (f_i(t))_{i \in I}.   
+    \]
+
+    This is nice and well-defined because I say so and we have 
+    \[
+        f(0) = (f_i(0))_{i \in I} 
+        = (x_i)_{i\in I}
+    \]
+    and 
+    \[
+        f(1) = (f_i(1))_{i \in I} 
+        = (y_i)_{i \in I}. 
+    \]
+
+    By the universal property of the 
+    product topology, $f$ is continuous if and only if 
+    $\pi_i \circ f = f_i$ is continuous for all 
+    $i \in I$. 
+    
+    Therefore $f$ is continuous.
+\end{proof}
+
+\begin{prop}\label{prop:product_local_connected}
+    Finite products of locally connected spaces 
+    \keyterm{are locally path connected}, 
+    whereas countably infinite products, and thus 
+    arbitrary products, of locally connected spaces 
+    fail to be even locally connected.  
+\end{prop}
+\begin{proof}
+    Suppose $X_i$, with $i \in [n] := \{1,2,\ldots,n\}$, are 
+    locally path connected. 
+
+    Set 
+    \[
+        X = \prod_{i\in[n]} X_i.
+    \]
+
+    A sub-basis can be written as 
+    $\pi_i^{-1}(U_i)$ where $u_i \subseteq X_i$ is open. 
+    
+    A basic open set $W \subset X$ containing 
+    some point $x = (x_1,x_2,\ldots)$ can be written 
+    as 
+    \[
+        W = \prod_{i\in[n]} U_i
+    \]
+    where $U_i$ is an open neighborhood of $x_i$. 
+
+    Since $X_i$ is locally path connected, 
+    for each $x_i \in U_i$ we can find 
+    a path connected open neighborhood $V_i \subset X_i$ 
+    such that 
+    \[
+        x_i \in V_i \subseteq U_i. 
+    \]
+    Then 
+    \[
+        V = V_1\times V_2 \times \cdots \times V_n 
+    \]
+    is an open subset of $X$ in the product topology. 
+
+    It is path connected since, as has been established, 
+    the product of path connected spaces is path connected. 
+
+    Thus $X$ is locally path connected.
+
+    \keyterm{Counterexample for countably infinite product.}
+
+    Take $X = \{0,1\}^{\mathbb N}$, i.e. the Cantor space 
+    with the product topology. 
+
+    Each $X_n = \{0,1\}$ are trivially locally path connected 
+    and thus locally connected. 
+
+    Let $C \subseteq X$ be connected. 
+
+    For each $n \in \mathbb N$ consider the 
+    restriction 
+    \[
+        \pi_n\bigm|_C : C \to \{0,1\}. 
+    \]
+    Since $\pi_n$ is continuous and 
+    $C$ is connected, the image must be, but 
+    $\{0,1\}$ is discrete so its onoly nonempty 
+    connected subsets are singletons.- 
+
+    Consequently, for each $n$, there exists 
+    $c_n = 0,1$ such that 
+    \[
+        \pi_n(C) = \{c_n\}. 
+    \]
+
+    Thus every element of $C$ has the 
+    same coordinates, so 
+    \[
+        C = \{(c_n)_{n\in \mathbb N}\}. 
+    \]
+    Thus $X$ is totally disconnected. 
+
+\end{proof}
+
+\begin{ex}\label{ex:image_regular}
+    \medskip 
+    \ 
+    
+    \keyterm{regular $\not\rightarrow$ regular \& 
+    metrizable $\not\rightarrow$ metrizable}
+
+    Let $X = \mathbb R$ with the 
+    standard topology, a metric space 
+    and thus regular. Furtheremore the space is metrizable.
+
+    Let $Y = \{0,1\}$ with the trivial topology. 
+
+    Let $f : \mathbb R \to \{0,1\}$ with 
+    \[
+        f(x) = 
+        \begin{cases}
+            0 & \text{if} \ x \in \mathbb Q \\ 
+            1 & \text{if} \ x \in \mathbb R \setminus 
+            \mathbb Q. 
+        \end{cases}
+    \]
+
+    We have $f^{-1}(Y) = \mathbb R$, open, and 
+    $f^{-1}(\emptyset) = \emptyset$, open. 
+
+    $Y$ is not regular since it is not $T-1$, 
+    $\{0\} = Y \setminus \{1\}$ and $\{1\}$ is not 
+    open. 
+
+    Furthermore, $Y$ is not metrizable since it is not 
+    Hausdorff.
+
+\end{ex}
+
+\begin{prop}\label{prop:product_local_compact}
+    The finite product of \keyterm{locally compact} spaces
+    is \keyterm{locally compact}.
+\end{prop}
+\begin{proof}[Proof sketch]
+    Let $X_i$ for $i = 1,2,3,\ldots,n$ be 
+    locally compact. 
+
+    Then every point in each $X_i$ has a compact 
+    neighborhood. 
+
+    Take any point $x = (x_1,x_2,\ldots)$. 
+    For each $x_i \in X_i$ choose compact neighborhood 
+    $K_i \subseteq X_i$. 
+
+    The cartesian product 
+    \[
+        K = \prod_{i\in[n]} K_i 
+    \]
+    is compact (apply Tychonoff's theorem or 
+    go directly from the fact that the product is 
+    finite). 
+
+    Moreover, $K$ is a neighborhood of $x$ in the 
+    product topology. 
+
+    Thus, every point has a compact neighborhood, making 
+    the finite product locally compact. 
 \end{proof}
 
 
