@@ -1,0 +1,158 @@
+% Keep styling.sty beside this file. Compile with:
+% latexmk -xelatex -synctex=1 template.tex (or, 
+% for my purposes, compile to preview with VimtexCompile in neovim)
+% if youre using VSC with some built in plugin you'll probably need to add 
+% {
+%   "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+%   "latex-workshop.latex.autoBuild.run": "onSave",
+%   "latex-workshop.view.pdf.viewer": "tab",
+%   "latex-workshop.view.pdf.invertMode.enabled": "never"
+% }
+% also it is necessary to download the right fonts. Just look 
+% at error messages to find which ones or something
+
+\documentclass[11pt]{article}
+\usepackage{styling} % Dark by default, with the clickable THEME switch.
+% \usepackage{graphicx} % Uncomment if adding external images.
+
+\DeclareMathOperator{\Ass}{\operatorname{Ass}}
+
+\title{Assignment 2}
+\author{Thobias K. H\o ivik}
+\date{For October 27, 2026} % Use \date{} to hide the date.
+
+\begin{document}
+\maketitle
+\begin{prob*}[1]
+    Give in detail the proof of 
+    Proposition $8.27$. You must 
+    explain every step in detail, 
+    including doing Lemma 1.7(b) and 
+    Exercise $2.10(a)$. 
+    You may take Lemma $2.4$ as given. 
+\end{prob*}
+\begin{proof}[L{\o}sning]
+    Vi ønsker å bevise 
+    f{\o}lgende proposisjon, 
+    \begin{prop*}[Gathmann Proposition 8.27]
+        La $Q_1,\ldots,Q_n$ forme 
+        en minimal prim{\ae}r 
+        dekomposisjon for 
+        et ideal $I$ i en ring $R$, 
+        og la $P_i = \sqrt{Q_i}$ for 
+        $i = 1,\ldots,n$. 
+
+        Da har vi $\{P_1,\ldots,P_n\} 
+        = \Ass(I)$. Spesielt har vi at 
+        antall kompnenter i en minimal prim{\ae}r 
+        dekomposisjon og deres radikaler 
+        ikke er avhengige av den valgte dekomposisjonen. 
+    \end{prop*}
+
+    La $R$ v{\ae}re en ring og $I$ et ideal av 
+    $R$. 
+
+    Vi antar at $Q_1,\ldots,Q_n$ former en 
+    minimal prim{\ae}rdekomposisjon for $I$,
+    alts{\aa}
+    \[
+        I = \bigcap_{i=1}^n Q_i. 
+    \]
+    Vi setter $P_i = \sqrt{Q_i}$. 
+
+    Siden hver $Q_i$ er prim{\ae}r er hver 
+    $P_i$ prim.  
+    
+    Vi begynner med $P_1,\ldots,P_n \in \Ass(I)$. 
+
+    Fastsett $i$. Vi vil bevise at 
+    \[
+        P_i \in \Ass(I). 
+    \]
+    Per definisjon betyr dette at vi m{\aa} finne 
+    en $a \in R$ slik at 
+    \[
+        \sqrt{\{r \in R \bigm| ra \in I\}} 
+        = \sqrt{I:a} = P_i. 
+    \]
+
+    Minimalitet sier at $Q_i$ ikke er redundant, alts{\aa}
+    \[
+        \bigcap_{j\neq i} Q_j \neq Q_i. 
+    \]
+    Derfore finst det 
+    \[
+        a \in \bigcap_{j\neq i} Q_j, \ \text{men} \ 
+        a \not\in Q_i. 
+    \] 
+
+    Siden 
+    \[
+        I = \bigcap_{j=1}^n Q_j, 
+    \]
+    trenger vi å bevis at 
+    \[
+        I : a = \bigcap_{j=1}^n (Q_j : a). 
+    \]
+    
+    Vi observerer at 
+    \begin{align*}
+        r \in I : a 
+        &\Leftrightarrow ra \in I \\ 
+        &\Leftrightarrow ra \in Q_j \ \forall j \\ 
+        &\Leftrightarrow r \in Q_j : a \ \forall j, 
+    \end{align*}
+    så dette stemmer. 
+
+    N{\aa} ta radikalene, 
+    \[
+        \sqrt{I:a} = \sqrt{\bigcap_j (Q_j : a)}. 
+    \]
+    Lemma $1.7(b)$ gir 
+    \[
+        \sqrt{\bigcap_j (Q_j : a)} = 
+        \bigcap_j \sqrt{Q_j : a}. 
+    \]
+
+    \begin{proof}{Bevis av Lemma 1.7(b)}
+        Vi vil vise at 
+        \[
+            \sqrt{\bigcap_{j=1}^n  I_j} = 
+            \bigcap_{j=1}^n \sqrt{I_j}. 
+        \]
+
+        Det holder {\aa} bevise at 
+        \[
+            \sqrt{I \cap J} = \sqrt I \cap \sqrt J 
+        \]
+        og konkludere induktivt med noe som
+        \begin{align*}
+            \sqrt{\bigcap_{j=1}^n I_j} 
+            &= \sqrt{
+            \underbrace{\left(\bigcap_{j=1}^{n-1} I_j \right)}_{\text{ideal}}
+            \cap I_n} \\ 
+            &= \sqrt{\bigcap_{j=1}^{n-1} I_j} \cap 
+            \sqrt{I_n} \\ 
+            &= \sqrt{\bigcap_{j=1}^{n-2}I_j} \cap 
+            \sqrt{I_{n-1}} \cap I_n \\ 
+            &\vdots \\ 
+            &= \bigcap_{j=1}^n \sqrt{I_j}. 
+        \end{align*}
+
+        Viss $a \in \sqrt{I \cap J}$ s{\aa} 
+        har vi $a^n \in I \cap J$ for en 
+        $n \in \mathbb N$, s{\aa} 
+        $a^n \in I$ og $a^n \in J$ og dermed 
+        har vi $a \in \sqrt{I} \cap \sqrt{J}$. 
+
+        Anta deretter at $a \in \sqrt{I} \cap \sqrt{J}$. 
+        Da har vi $a^n \in I$ og $a^m$ for 
+        $n,m \in \mathbb N$ s{\aa} 
+        $a^{n+m} = (\underbrace{a^n}_{\in I})^m \in I$
+        og $(\underbrace{a^m}_{\in J})^n \in J$ s{\aa} 
+        $a^{n+m} \in I \cap J$ og dermed 
+        $a \in \sqrt{I \cap J}$. 
+    \end{proof}
+\end{proof}
+
+\end{document}
