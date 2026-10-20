@@ -164,13 +164,16 @@ Connected
 Path connected
  & \GridNo{$\uparrow$} & \GridNo{$\uparrow$}
  & \GridNo{$\mathbb Q \subseteq \mathbb R$} & 
- &  & \GridYes{$\rightarrow$}
+\GridNo{$U \cap V = \emptyset 
+\Rightarrow U \cup V$ not connected }
+ & \GridNo{Topologists sine curve}  & \GridYes{$\rightarrow$}
  & \GridYes{$\rightarrow$} & \GridYes{See \cref{prop:product_space_path_connected}}& \GridYes{$f\circ p$} \\
 \hline
 Locally connected
  & \GridNo{$\mathbb Q$} & 
  \GridNo{Topologists sine curve}
- & \GridNo{$\mathbb Q \subseteq \mathbb R$} & & & 
+ & \GridNo{$\mathbb Q \subseteq \mathbb R$} & 
+    \GridYes{$\downarrow$}& \GridNo{Topologists sine curve} & 
  \GridYes{$\downarrow$} & 
   \GridNo{See \cref{prop:product_local_connected}}
  & \GridNo{$\leftarrow$} & 
@@ -179,7 +182,9 @@ Locally connected
 \hline
 Locally path connected
  & \GridNo{$\uparrow$} & 
- \GridNo{$\uparrow$} & \GridNo{$\mathbb Q \subseteq \mathbb R$} & & &
+ \GridNo{$\uparrow$} & \GridNo{$\mathbb Q \subseteq \mathbb R$} & 
+  \GridYes{See \cref{prop:open_subspace_locally_path}}& 
+  \GridNo{$\uparrow$}&
  \GridWork{\GridYes{See \cref{prop:product_local_connected}}}
  & \GridNo{$\uparrow$}
  & \GridNo{$\uparrow$} & \GridNo{$\uparrow$} \\
@@ -223,7 +228,11 @@ Completely regular
 \hline
 Normal
  & \GridYes{Thm 32.2} & \GridYes{Thm 32.3}
- & & & & & & \GridNo{Example 1, \S32} & 
+ & \GridNo{$\rightarrow$} & \GridNo{See 
+\cref{ex:open_subspace_normal}}  & 
+ \GridYes{Closed in subspace $\Rightarrow$ 
+closed in ambient}& \GridNo{$\mathbb R_\ell^2$} & 
+ \GridNo{$\leftarrow$}& \GridNo{Example 1, \S32} & 
  \GridNo{Discrete space $\to$ 
  non-normal space} \\
 \hline
@@ -828,6 +837,49 @@ Metrizable
     Thus, every point has a compact neighborhood, making 
     the finite product locally compact. 
 \end{proof}
+
+\begin{prop}\label{prop:open_subspace_locally_path}
+    An open subspace of a locally path connected space is locally path 
+    connected. 
+\end{prop}
+\begin{proof}[Proof sketch]
+    Let $X$ be locally path connected and 
+    $Y \subseteq Y$ open. 
+
+    Let $x \in Y$ and $U \subseteq Y$ and open neighborhood of 
+    $x$. Then, since $Y$ is open, $U$ is open in $X$. 
+    Thus there exists $W_U \subseteq U$ path connected such that 
+    \[
+        x \in W_U \subseteq U, 
+    \]
+    but 
+    \[
+        U \subseteq Y 
+    \]
+    so 
+    \[
+        W_U \subseteq Y 
+    \]
+    is open path connected in $Y$. 
+\end{proof}
+
+\begin{ex}\label{ex:open_subspace_normal}
+    Let $X = \{a,b,c,d\}$ with 
+    $\mathcal T = \{\emptyset, X, \{d\}, \{b,d\}, 
+    \{c,d\}, \{b,c,d\}\}$. 
+    $X$ is normal as there 
+    exist no disjoint nonempty closed sets (they all 
+    have $a$ in common). 
+
+    The space is normal, but 
+    $Y = \{b,c,d\}$ (open) is not 
+    since $\{b\}, \{d\}$ cannot be separated 
+    into disjoint open sets, 
+    \[
+        \mathcal T_Y \setminus \{\emptyset, Y\} = \{
+        \{d\}, \{b,d\}, \{c,d\}\}. 
+    \]
+\end{ex}
 
 
 \end{document}
