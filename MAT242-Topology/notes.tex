@@ -4967,6 +4967,431 @@ and
 
     Thus the space is normal. 
 \end{proof}
-    
+
+\section{\S 51, Moving towards Algebraic Topology}
+Finally, we begin some algebraic topology. 
+
+\subsection{Homotopy of paths}
+
+Let $f,g : X \to Y$ be continuous. 
+
+We say $f$ and $g$ are \keyterm{homotopic}, 
+usually writing $f \simeq g$ if 
+if there exists a continuous map 
+\[
+    F : X \times I \to Y, \ I = [0,1],
+\]
+such that 
+\[
+    F(x,0) = f(x), \ F(x,1) = g(x), \ \forall x \in X.  
+\]
+The parameter $t \in I$ may be thought of as 
+a time parameter. 
+
+For each fixed $t$, 
+\[
+    F_t(x) = F(x,t)
+\]
+is an intermediate map $X \to Y$, so 
+we can picture 
+\[
+    f = F_0 \rightsquigarrow F_{0.1} \rightsquigarrow 
+     F_{0.2} \rightsquigarrow 
+    \cdots \rightsquigarrow  F_{1} = g. 
+\]
+The requirement that $F : X \times I \to Y$ is 
+continuous is what formalizes "continuous deformation".
+
+\subsection{Staright-line homotopies}
+
+The easiest example is when $Y \subseteq \mathbb R^n$ 
+is convex. 
+
+Given 
+\[
+    f,g : X \to Y, 
+\]
+define 
+\[
+    F(x,t) = (1-t)f(x) + tg(x). 
+\]
+At $t = 0$, 
+\[
+    F(x,0) = f(x),
+\]
+and at $t = 1$, 
+\[
+    F(x,1) = g(x). 
+\]
+Convexity just gurantees 
+\[
+    (1-t)f(x) + tg(x) \in Y.
+\]
+So any continuous functions into a convex 
+space are homotopic by a straight-line 
+homotopy. 
+
+So the shape of the codomain is important since something like 
+$\mathbb R^2 \setminus \{0\}$ causes issues. 
+A straight-line deformation through the origin would 
+not be well-defined. 
+
+\subsection{Paths are maps}
+
+A path from $x_0$ to $x_1$ is simply a continuous map 
+\[
+    f : I \to X
+\]
+such that 
+\[
+    f(0) = x_0, \ f(1) = x_1. 
+\]
+So homotopy lets us take this a level up and ask 
+whether two paths are essentially the same by 
+asking about path homotopy. 
+
+\subsection{Path homotopy}
+Suppose $f,g : I \to X$ are 
+both paths. 
+They are \keyterm{path homotopic}, written 
+\[
+    f \simeq_p g, 
+\]
+if there exists continuous 
+\[
+    F : I \times I \to X 
+\]
+such that 
+\[
+    F(s,0) = f(x), \ f(s,1) = g(s),
+\]
+and crucially, 
+\[
+    F(0,t) = x_0, \ F(1,t) = x_1 
+\]
+for every $t \in I$. 
+
+This distinguishes path homotopy from arbitrary 
+homotopy as we can picture the square 
+$I \times I$ with the bottom edge mapping to 
+$f$, 
+\[
+    F(s,0) = f(s) 
+\]
+and the top edge mapping to $g$, 
+\[
+    F(s,1) = g(s)
+\]
+with the left and right edges remaining frozen, 
+\[
+    F(0,t) = x_0, \ F(1, t) = x_1. 
+\]
+
+\subsection{Fixing endpoints}
+
+Suppose we did not fix the endpoints. 
+
+Then two paths could be called equivalent while 
+their endpoints wander all over $X$ 
+which would be disasterous for concatenating paths 
+later, because the endpoint information is what tells 
+us whether one path can follow another.
+
+Path homotopy preserves source $x_0$ and 
+target $x_1$, indicative of 
+category/groupid-esque ideas. 
+
+\subsection{Path homotopy is an equivalence relation} 
+
+Munkres proves both ordinary and path homotopy to 
+be equivalence relations.
+
+\keyterm{Reflexivity.}
+
+For a path $f$, define 
+\[
+    F(s,t) = f(s).
+\]
+Nothing changes with $t$ so 
+\[
+    f \simeq_p f. 
+\]
+
+\keyterm{Symmetry.}
+
+If $F$ deforms $f$ into $g$, define 
+\[
+    G(s,t) = F(s,1-t).
+\]
+This runs the homotopy backwards so 
+\[
+    G(s,t) = F(s,1-t). 
+\]
+Thus 
+\[
+    g \simeq_p f. 
+\]
+
+\keyterm{Reflexivity.}
+
+Suppose 
+\[
+    f \simeq_p g
+\]
+via $F$, and 
+\[
+    g \simeq_p h
+\]
+via $G$. 
+
+Run $F$ during the first half and $G$ during the 
+second to get 
+\[
+    H(s,t) = 
+    \begin{cases}
+        F(s,2t), & 0 \leq t \leq \frac{1}{2}, \\  
+        G(s,2t-1), & \frac{1}{2} \leq t \leq 1. 
+    \end{cases}
+\]
+At $t = 1/2$, both pieces give $g(s)$. 
+
+Applying the \keyterm{pasting lemma} gives continuity. 
+
+\subsection{Equivalence classes of paths}
+
+Because $\simeq_p$ is an equivalence relation, we can form 
+classes 
+\[
+    [f]. 
+\]
+Instead of caring about a specific parameterized 
+path $f$ we care about its homotopy class, 
+hinting at the first big algebraic topology esque 
+idea, replacing geometric objects by 
+equivalence classes. 
+
+\subsection{Trivial case with convex spaces}
+
+Suppose $X \subseteq \mathbb R^n$ is convex, 
+and $f,g$ are two paths from $x_0$ to $x_1$. 
+
+Then 
+\[
+    F(s,t) = (1-t)f(s) + tg(s)
+\]
+is a path homotopy. 
+
+So in a convex space, any two paths 
+with the same endpoints are homotopic. 
+
+Contrast that with the puncutred plane 
+$\mathbb R^n \setminus \{0\}$. 
+
+Intuitively, a path going above the hole cannot be 
+continuously deformed to a path going below due to 
+intermediate value theorem type behavior. There 
+would have to be a continuous path going through the 
+origin which would not be well defined. 
+
+This is getting at homotopys ability to detect holes in the 
+space. 
+
+\subsection{Multiplying paths} 
+
+Suppose $f : I \to X$ goes from $x_0$ to $x_1$ and 
+$g: I \to X$ goes from $x_1$ to $x_2$. 
+
+We want to travel along $f$ then $g$. 
+
+Define 
+\[
+    f * g : I \to X
+\]
+by 
+\[
+    (f*g)(s) 
+    = 
+    \begin{cases}
+        f(2s), & 0 \leq s \leq \frac{1}{2}, \\ 
+        g(2s-1), & \frac{1}{2} \leq s \leq 1. 
+    \end{cases}
+\]
+This is called the path product. 
+
+At the joining point we have 
+\[
+    f(1) = x_1 = g(0)
+\]
+so this is well defined. 
+
+\subsection{Why we multiply classes instead of paths}
+
+We would like 
+\[
+    [f] * [g] = [f * g] 
+\]
+but we have to check well-definedness. 
+
+Suppose 
+\[
+    f\simeq_p f'
+\]
+and 
+\[
+    g \simeq_p g'.  
+\]
+We need 
+\[
+    f * g \simeq_p f' * g'. 
+\]
+If $F$ is a homotopy from $f$ to $f'$ and 
+$G$ from $g$ to $g'$, define 
+\[
+    H(s,t) = 
+    \begin{cases}
+        F(2s,t), & 0 \leq s \leq \frac 1 2 \\ 
+        G(2s - 1,t) & \frac 1 2 \leq s \leq 1. 
+    \end{cases}
+\]
+Then $H$ is the required homotopy. 
+SO 
+\[
+    [f] * [g]
+\]
+depends only on the classes, not the chosen representatives. 
+
+\subsection{Subtelty with associativity}
+
+We might expect 
+\[
+    (f*g) * h = f * (g * h), 
+\]
+but as actual functions $I \to X$, this is generally 
+false. 
+
+We roughly get 
+\[
+    \underbrace{(f*g)}_{\text{first half}} * 
+    \underbrace{h}_{\text{second half}}
+\]
+so $f$ is the first quarter while $g$ is the second quarter, while 
+\[
+    \underbrace{f}_{\text{first half}} * 
+    \underbrace{(g * h)}_{\text{second half}}
+\]
+so $h$, in this context, is the last quarter. 
+
+So they trace the same route, geometrically, but with 
+different parameterizations. 
+
+However, they are path homotopic, meaning 
+\[
+    ([f] * [g]) * [h] = [f] * ([g] * [h]).
+\]
+
+\subsection{Indetify paths}
+
+For $x\in X$, define the constant path 
+\[
+    e_x(s) = x. 
+\]
+If $f$ goes from $x_0$ to $x_1$, then 
+\[
+    e_{x_0} * f
+\]
+can be interpreted as standing still at 
+$x_0$ for half the alloted time before running along 
+$f$ which is not literally the same parameterized path as 
+$f$, but it is path homotopic to $f$. 
+
+Similarly, 
+\[
+    f * e_{x_1} \simeq_p f. 
+\]
+Thus on equivalence classes, 
+\[
+    [e_{x_0}] * [f] \simeq [f] 
+    \simeq [f] * [e_{x_1}]
+\]
+which is starting to smell very much \keyterm{"like a group"}. 
+
+\subsection{Reverse paths}
+
+Given $f : I \to X$, define the reverse path 
+\[
+    \overline f(s) = f(1-s). 
+\]
+If $f$ goes $x_0 \to x_1$, then 
+$\overline f$ goes $x_1 \to x_0$. Going out and 
+back should be the same as doing nothing so 
+\[
+    f * \overline f \simeq_p e_{x_0}
+\]
+with 
+\[
+    \overline f * f \simeq_p e_{x_1}.
+\]
+Therefore 
+\[
+    [f] * [\overline f] = [e_{x_0}] 
+\]
+and 
+\[
+    [\overline f] * [f] = [e_{x_1}].
+\]
+
+\subsection{Not quite a group}
+
+We now have 
+\begin{itemize}
+    \item objects: points of $X$, 
+    \item arrows $x\to y$: path-homotopy classes of paths 
+        from $x$ to $y$, 
+    \item composition: 
+        \[
+            [f] * [g], 
+        \]
+    \item identifies: 
+        \[
+            [e_{x}], 
+        \]
+    \item with every arrow having an inverse $[\overline f]$,
+\end{itemize}
+but composition is only defined when 
+endpoints match. 
+
+This structure is not quite a group, but rather a 
+so-called \keyterm{groupoid}, giving 
+a very natural viewpoint, 
+\[
+    \Pi_1(X) = \text{fundamental groupoid of} \ X. 
+\]
+
+\subsection{The group in \S52}
+Choose a basepoint $x_0 \in X$. 
+Now consider only paths satisfying 
+$f(0) = f(1) = x_0$. 
+
+These are \keyterm{loops based at $x_0$}.
+
+If $f,g$ are both loops based at $x_0$ then 
+\[
+    f(1) = x_0 g(0)
+\]
+so $f * g$ is always defined. 
+
+Thus on path-homotopy classes of based loops we have 
+\begin{itemize}
+    \item everywhere based binary operation, 
+    \item associativity, 
+    \item identity $[e_{x_0}]$, 
+    \item inverse $[\overline f]$, 
+\end{itemize}
+i.e. we get a group!
+
+In $\S52$ we will discuss \keyterm{the fundamental group} 
+\[
+    \pi_1(X,x_0).
+\]
 
 \end{document}
