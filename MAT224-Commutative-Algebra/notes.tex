@@ -6732,6 +6732,251 @@ where $P_i$ are its maximal ideals.
     \]
 \end{proof}
 
+\section{Plugging some gaps I had from Chapter $8$}
+
+A \keyterm{primary ideal} $Q \neq R$ satisfies 
+\[
+    ab \in Q, \ a \not \in Q \Rightarrow 
+    b^n \in Q 
+\]
+for some $n$. 
+A more useful characterization may be 
+\[
+    ab \in Q \Rightarrow a \in Q \ \text{or} 
+    b \in \sqrt Q. 
+\]
+If $Q$ is primary then 
+\[
+    P = \sqrt Q 
+\]
+is prime, and we say $Q$ is $P$-primary. 
+Intuitively, 
+\[
+    \text{primary ideal} \ = \ 
+    \text{prime ideal plus multiplicity/nilpotent thickness.}
+\]
+For example, 
+\[
+    (x^3) \subset k[x]
+\]
+is $(x)$-primary. 
+
+A useful shortcut is the following 
+quotient characterization 
+\[
+    Q \ \text{primary} \Leftrightarrow \text{every zero-divisor 
+    in} \ R/Q \ \text{is nilpotent}. 
+\]
+An even more useful criterion is 
+\[
+    P \ \text{maximal}, 
+    \ P^n \subseteq Q \subseteq P \Rightarrow 
+    Q \ \text{is} \ P-\text{primary}. 
+\]
+
+A \keyterm{primary decomposition} 
+is 
+\[
+    I = \bigcap_{j=1}^n Q_j 
+\]
+with each $Q_i$ primary. 
+In a Noetherian ring every ideal 
+has one. Conceptually it 
+generalizes something like 
+\[
+    60 = 2^2 \cdot 3 \cdot 5 
+\]
+to 
+\[
+    (60) = (4) \cap (3) \cap (5). 
+\]
+
+We should read 
+\[
+    I = Q_1 \cap \cdots \cap Q_n 
+\]
+as "$I$ consits of several prime-like components, 
+possibly with thickness". 
+
+A decompsotion is \keyterm{minimal} 
+if no $Q_i$ is redundant and the radicals 
+\[
+    P_i = \sqrt{Q_i} 
+\]
+are all distinct. 
+
+Proposition $8.27$ in Gathmann tells us the 
+$P_i$'s can be recovered from $I$ as 
+its \keyterm{associated primes}. 
+$P$ is associated to $I$ when 
+\[
+    P = \sqrt{I : a}
+\]
+for some $a \in R$, where 
+\[
+    I : a = \{r \in R \bigm| ra \in I\}. 
+\]
+
+\begin{prob}
+    In $k[x,y]$ show that 
+    \[
+        Q = (x,y^2)
+    \]
+    is $(x,y)$-primary. 
+\end{prob}
+\begin{proof}
+    We have 
+    \[
+        (x,y)^2 = (x,y)\cdot (x,y) = (x^2,xy,y^2) 
+        \subseteq (x,y^2). 
+    \]
+    So 
+    \[
+        (x,y)^2 \subseteq (x,y^2) \subseteq (x,y)
+    \]
+    and thus $(x,y^2)$ is $(x,y)$-primary 
+    since $(x,y)$ is maximal. 
+\end{proof}
+\begin{prob}
+    Find a primary decomposition of 
+    \[
+        (x^3y^2) \subset k[x,y]. 
+    \]
+\end{prob}
+\begin{proof}
+    We have that $(x^3)$ and 
+    $(y^2)$ are $(x)-$, and $(y)$-primary, respectively. 
+
+    We have that 
+    \[
+        (x^3y^2) = (x^3) \cap (y^2). 
+    \]
+
+    The forward inclusion is 
+    always true in any commutative ring. 
+
+    For the reverse suppose 
+    $f \in (x^3) \cap (y^2)$. Then 
+    $x^3$ divides $f$ and 
+    $y^2$ divides $f$. 
+    
+    Then $x^3y^2$ certainly divides $f$ so 
+    we get equality. 
+\end{proof}
+
+\begin{prob}
+    Let $I = (xy, xz) = x(y,z) \subseteq k[x,y,z]$. 
+
+    Guess a decomposition of $I$ 
+    as an intersection involving 
+    $(x)$ and $(y,z)$ then verify it. 
+\end{prob}
+\begin{proof}
+    I guess 
+    \[
+        (xy,xz) = (x) \cap (y,z). 
+    \]
+
+    We have 
+    \[
+        k[x,y,z]/(x) \cong k[y,z],
+    \]
+    and integral domain, so $(x)$ is prime. 
+    We also have 
+    \[
+        k[x,y,z]/(y,z) \cong k[x]
+    \]
+    so $(y,z)$ is prime. 
+    Thus both are primary. 
+
+    Now suppose $f \in (xy,xz)$. 
+    
+    Then 
+    \[
+        f = a(xy) + b(xz) = x(ay+bz)
+    \]
+    so $x$ divides $f$. 
+
+    Furthermore $ay+bz \in (y,z)$ so 
+    $f \in (y,z)$ 
+    so 
+    \[
+        f \in (y,z).
+    \]
+
+    Thus 
+    \[
+        (xy,xz) \subseteq (x) \cap (y,z). 
+    \]
+
+    The backward inclusion is trivial since 
+    \[
+        (x) \subseteq (xy,xz). 
+    \]    
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        R = k[x,y,z], \ Q = (y,z^2). 
+    \]
+    Prove that $Q$ is primary. 
+
+    First find $\sqrt Q$. 
+\end{prob}
+\begin{proof}
+    We have 
+    \[
+        \sqrt Q = (y,z). 
+    \]
+
+    Suppose $f = ay + bz \in (y,z)$. 
+    Then 
+    \[
+        f^2 = a^2y^2 + 2abyz + b^2z^2 
+        = y(a^2y + 2abz) + b^2(z^2) \in (x,y^2). 
+    \]
+
+    Suppose $f \in \sqrt Q$. Then 
+    $f^n$ for some $n \geq 1$ is in $Q$. 
+    
+    Considr $\pi : k[x,y,z] \to k[x,y,z]/(y,z) 
+    \cong k[x]$. 
+
+    Under this map, both $y$ and $z$ are 
+    sent to $0$, meaning $(y,z^2)$ is sent 
+    to $0$. 
+
+    Since $f^n \in Q$ we have 
+    \[
+        \pi(f^n) = (\pi(f))^n = 0 
+    \]
+    so $\pi(f) = 0 (x,y)$ since $k[x]$ is an integral domain
+    so $f \in (x,y)$.
+
+    Thus we have 
+    \[
+        \sqrt Q = (y,z). 
+    \]
+
+    For being primary 
+    we use that every zero-divisor of 
+    $R/Q \cong k[x,z]/(z^2)$ is nilpotent. 
+
+    Every element in $R/Q$ has the form 
+    $f(x) + zg(x)$. 
+
+    Suppose 
+    \[
+        (f+zg)(h+z\ell) = 0 
+    \]
+    in $k[x,z]/(z^2)$. 
+
+    Assuming $f\neq 0$, every 
+    zero divisor is of the form $zg(x)$ 
+    with $zg(x)^2 = 0$. 
+\end{proof}
+
 
 \end{document}
 
