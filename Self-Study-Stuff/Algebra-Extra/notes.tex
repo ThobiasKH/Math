@@ -876,56 +876,430 @@ Basically, there will probably not be any pedagogical value here.
     \]
 \end{proof}
 
-\newpage
+
+\section{Switching over to more ideal-centric stuff and ties to algebraic geometry}
 
 \begin{prob}
-    Let $f:M\to N$ be an $R$-module homomorphism, and let
-    $A\le M$ and $B\le N$ be submodules.
-    Consider the candidate map
+    Let 
     \[
-        \overline f : M/A \to N/B,
-        \qquad
-        \overline f(m+A)=f(m)+B.
+        R = k[x,y,z], 
+    \]    
+    and consider 
+    \[
+        I = (x^2y, x^2z^2), \ Q_1 = (x^2), \ Q_2 = (y,z^2). 
     \]
-    \begin{enumerate}
-        \item Determine a necessary and sufficient condition on
-        $A$, $B$, and $f$ for $\overline f$ to be well-defined.
-    
-        \item Assume that condition holds. Prove that
-        $\overline f$ is an $R$-module homomorphism.
-    
-        Determine
-        \[
-            \ker \overline f
-        \]
-        as a quotient involving $f^{-1}(B)$ and $A$, and determine
-        \[
-            \im \overline f
-        \]
-        as a quotient involving $f(M)$ and $B$.
-    
-        \item Specialize to the case
-        \[
-            A=\ker f,
-            \qquad
-            B=0.
-        \]
-        Recover the first isomorphism theorem from the formulas above.
-    
-        \item Specialize instead to
-        \[
-            A=f^{-1}(B).
-        \]
-        Analyze the induced map
-        \[
-            M/f^{-1}(B)\to N/B.
-        \]
-        Determine whether it is injective and describe its image.
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Compute 
+            \[
+                \sqrt{Q_1} \ \text{and} \ \sqrt{Q_2}. 
+            \]
+        \item Prove that both $Q_1$ and $Q_2$ are 
+            primary ideals. 
+            You may use the characterization 
+            that $Q$ is primary if and only if 
+            every zero divisor of $R/Q$ is Nilpotent. 
+            
+        \item Prove that 
+            \[
+                I = Q_1 \cap Q_2. 
+            \]
+            You may \keyterm{not} simply 
+            cite a general formula for intersections 
+            of monomial ideals. Use an algebraic argument. 
+
+        \item Deduce that 
+            \[
+                I = Q_1 \cap Q_2
+            \]
+            is a primary decomposition. 
+            Determine whether it is irredundant 
+            and identify the corresponding prime ideals. 
+        \item Let 
+            \[
+                \mathfrak p = (x), \ \mathfrak q = (y,z).
+            \]
+            Compute $I_{\mathfrak p}$ and 
+            $I_{\mathfrak q}$. 
+            Explain algebraically why 
+            one of the primary coponents 
+            dissappears under each localization. 
+        \item Finally, translate the decomposition 
+            into geometry by describing 
+            \[
+                V(I) \subseteq k^3. 
+            \]
+            Explain how the irreducible 
+            pieces you see are reflected 
+            in $\sqrt{Q_1}$ and $\sqrt{Q_2}$. 
     \end{enumerate}
 \end{prob}
-\begin{proof}[Proof of 1]
-    
+\begin{proof}[Solution to (a)]
+    We claim the radicals are 
+    \[
+        \sqrt{Q_1} = (x) 
+    \]
+    and 
+    \[
+        \sqrt{Q_2} = (y,z). 
+    \]
+
+    The backward inclusion $(x) \subseteq 
+    \sqrt{Q_1}$ is straightforward.
+
+    For $f \in (x)$ we have $f = ax$. 
+    Then $f^2 = a^2x^2 \in Q_1$ so 
+    $f \in \sqrt{Q_1}$. 
+
+    Now suppose $f \in \sqrt{Q_1}$. 
+    For simplicity assume $f$ is nonzero. 
+
+    Then there exists $n \in \mathbb N$ such that 
+    \[
+        f^n = ax^2 \in Q_1 \subseteq (x), 
+    \]
+    Since $(x)$ is prime we have that 
+    $f$ must be in $(x)$. 
+
+    Thus $\sqrt{Q_1} = (x)$. 
+
+    Similarly, we obviously have 
+    \[
+        (y,z) \subseteq \sqrt{Q_2}  
+    \]
+    since for $f = ay + bz \in (y,z)$ we can 
+    pick $n=2$ and get 
+    \begin{align*}
+        f^2 &= (ay+bz)(ay+bz) \\ 
+        &= a^2y^2 + 2ab(yz) + b^2z^2 \\ 
+        &= (a^2y + 2abz)y + (b^2)z^2 \in (y,z^2) = Q_2.  
+    \end{align*}
+
+    Now suppose $f \in \sqrt{Q_2}$ so there 
+    exists $n \in \mathbb N$ such that 
+    \[
+        f^n = ay + bz^2 = ay + (bz)z \in (y,z). 
+    \]
 \end{proof}
+\begin{proof}[Proof of (b)]
+    For
+    \[
+        \frac{R}{Q_1} 
+        = \frac{k[x,y,z]}{(x^2)}
+    \]
+    we have that any $x$ term 
+    with degree $\geq 2$ is $0$. 
+    
+    Now suppose 
+    \[
+        \overline f \overline g = 0, 
+    \]
+    with both nonzero. 
+    Equivalently, 
+    suppose 
+    $f,g \in k[x,y,z]$ with $f,g \not\in (x^2)$. 
+
+    Then we have 
+    \[
+        f(x,y,z)g(x,y,z) = ax^2. 
+    \]
+    Both polynomials must 
+    be a multiple of $x$, i.e.  
+    \[
+        f(x,y,z) = x(q(x,y,z)). 
+    \] 
+    Then 
+    \[
+        f^2 \in (ax^2). 
+    \]
+
+    Now for 
+    \[
+        \frac{R}{Q_2} 
+        = \frac{k[x,y,z]}{(y,z^2)} 
+        \cong \frac{k[x,z]}{(z^2)},
+    \]    
+    the argument here is entirely analogous. 
+
+    Since $R/Q_i$ for $i = 1,2$ has that 
+    all zero divisors are nilpotent, 
+    we have that $Q_1,Q_2$ are primary. 
+\end{proof}
+
+\begin{proof}[Proof of (c) and (d)]
+    Suppose $f \in (x^2y,x^2z^2)$. 
+    Then 
+    \[
+        f = ax^2y + bx^2z^2.
+    \]
+    Then 
+    \begin{align*}
+        f &= ax^2y + bx^2z^2 \\ 
+        &= x^2(ay+(bx)z^2)
+    \end{align*}
+    which is in $x^2$ since it is divisible 
+    by $x^2$. Furthermore 
+    the term $ay + (bx)z^2$ is in 
+    $(y,z^2)$. 
+
+    Now suppose $f \in Q_1 \cap Q_2$. 
+    Then 
+    \[
+        f = ax^2 
+    \]
+    and 
+    \[
+        f = by + cz^2. 
+    \]
+
+    It is not hard to see that if 
+    \[
+        ax^2 = by+cz^2  
+    \]
+    then we require $a \in (y,z^2)$ 
+    and $b,c \in (x^2)$ so 
+    \[
+        a = a_1 y + a_2 z^2,   
+    \]
+    and 
+    \[
+        b = b_1 x^2, \ c = c_1 x^2. 
+    \]
+
+    Then it clearly follows that 
+    \begin{align*}
+        f &= 
+        (a_1y + a_2z^2)x^2 + (b_1x^2)y + (c_1x^2)z^2 \\ 
+        &= (a_1b_1)x^2y + (a_2c_1)z^2x^2 \in (x^2y, x^2z^2). 
+    \end{align*}
+
+    Thus 
+    \[
+        Q_1 \cap Q_2 \subseteq I 
+    \]
+    and 
+    \[
+        I = Q_1 \cap Q_2. 
+    \]
+
+    Thus, since $Q_1,Q_2$ are primary, 
+    \[
+        I = Q_1 \cap Q_2 
+    \]
+    is a primary decomposition, 
+    with $\sqrt{Q_1} = (x)$ and 
+    $\sqrt{Q_2} = (y,z^2)$. 
+\end{proof}
+\begin{proof}[Solution of (e)]
+    We set 
+    \[
+        \mathfrak p = (x), \ \mathfrak q = (y,z). 
+    \]
+
+    We then get 
+    \[
+        I_{\mathfrak p} 
+        = 
+        \left\{
+            \frac{r}{s} \biggm| 
+            r \in I, \ s \not\in \mathfrak p 
+            = (x)
+        \right\},
+    \]
+    and 
+    \[
+        I_{\mathfrak q} 
+        = 
+        \left\{
+            \frac{r}s \biggm| 
+            r \in I, \ s \not\in \mathfrak q 
+            = (y,z). 
+        \right\}  
+    \]
+
+    What we get is that 
+    \[
+        I_{\mathfrak p} 
+        = (x^2)R_{\mathfrak p} 
+    \]
+    and 
+    \[
+        I_{\mathfrak q} 
+        = (y,z^2)R_{\mathfrak q}. 
+    \]
+
+    Since $y\not\in \mathfrak p$ we have 
+    \[
+        x^2yy^{-1} = x^2 \in I_{\mathfrak p} 
+    \]
+    so 
+    \[
+        (x^2)R_{\mathfrak p} \subseteq I_{\mathfrak p}. 
+    \]
+
+    For the reverse inclusion 
+    notice that, as both generators 
+    of $I$ are multiples of $x^2$, 
+    after localization every element generated 
+    by them is still in $(x^2)R_{\mathfrak p}$. 
+
+    Together, 
+    \[
+        I_{\mathfrak p} = (x^2)R_{\mathfrak p}. 
+    \]
+
+    Then, similarly, 
+    \[
+        x^2z^2x^{-2} = z^2 \in I_{\mathfrak q}        
+    \]
+    and 
+    \[
+        x^{2}yx^{-2} = y \in I_{\mathfrak q}
+    \]
+    so the forward inclusion holds. 
+
+    As before, we can see that it works out, or something. 
+
+\end{proof}
+\begin{proof}[Solution to (f)]
+    A point $p = (a,b,c) \in k^3$ lies 
+    in the affine variety $V(I)$ if and only 
+    if the generators are $0$ on them,
+    \[
+        a^2b = 0, \ a^2c^2 = 0. 
+    \]
+
+    If $a = 0$ both of these are $0$ for 
+    any $b,c \in k$. 
+    If $a \neq 0$ we have that 
+    $b = 0$ and $c^2 = 0$ (and thus $c=0$) since 
+    $k$ is a field. 
+
+    Thus 
+    \[
+        V(I) = \{(0,b,c) \bigm| b,c \in k\} 
+        \cup \{(a,0,0) \bigm| a \in k\}. 
+    \]
+
+    As $V(I) = V(\sqrt I)$ and 
+    \[
+        I = Q_1 \cap Q_2 
+    \]
+    we have that 
+    \[
+        V(Q_1) = V(x)
+    \]
+    and 
+    \[
+        V(Q_2) = V(y,z) 
+    \]
+    and these are reflected in what 
+    we have above since 
+    \[
+        V(x) = 0 \times k^2 
+    \]
+    and 
+    \[
+        V(y,z) = k \times 0 \times 0 
+    \]
+    as subsets of $k^3$. 
+\end{proof}
+
+\newpage
+\begin{prob}
+    Let 
+    \[
+        R = k[x,y], \ I = (x^2,xy), 
+    \]
+    and set 
+    \[
+        A = R/I. 
+    \]
+
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that $A$ is Noetherian. 
+            Determine whether $A$ is Artinian. 
+            Give a useful normal form for elements 
+            of $A$. 
+        \item Find a primary decomposition of $I$. 
+            For every primary component $Q_i$, 
+            find $\sqrt{Q_i}$, determine 
+            whether $Q_i$ is actually prime, 
+            and prove primaryness when it is not 
+            prime. 
+            Determine whether the decomposition 
+            is irredundant. 
+            Finally, determine whether the 
+            prime radicals occuring in the decompositio 
+            are comparable under inclusion. 
+        \item Compute $V(I) \subseteq k^2$ 
+            directly from generators. 
+            Then compute the varieties corresponding 
+            to the radicals from part (b).
+
+            Explain why the primary decomposition 
+            has more algebraic information than 
+            is visible from the irreducible compontents 
+            of $V(K)$. 
+
+        \item Let 
+            \[
+                \mathfrak p = (x), \ \mathfrak m = (x,y). 
+            \]
+            Compute $I_{\mathfrak p}$ and 
+            $I_{\mathfrak m}$. 
+
+            For each primary component $Q_i$, determine 
+            whether $(Q_i)_{\mathfrak p}$ and 
+            $(Q_i)_{\mathfrak m}$ remain 
+            proper ideals or become the entire 
+            localized ring. 
+        \item Then consider the $R$-module $A = R/I$. 
+        \item Determine, for an arbitrary prime ideal 
+            $\mathfrak q\subseteq R$, exactly when 
+            $A_{\mathfrak q} = 0$. 
+
+            Compare with $V(I)$. 
+        \item Suppose $I = Q_1 \cap Q_2$. 
+            Construct the maps and prove exactness of 
+            \[
+                0 \to R/I \to R/Q_1 \oplus 
+                R/Q_2 \to R/(Q_1 + Q_2) \to 0. 
+            \]
+
+            Then identify each of 
+            \[
+                R/Q_1, \ R/Q_2, \ R/(Q_1+Q_2) 
+            \]
+            with familiar $k$-algebras and 
+            rewrite the sequence using those 
+            identifications. 
+        \item Inside 
+            \[
+                A = k[x,y]/(x^2,xy), 
+            \]
+            compute 
+            \[
+                \Ann_A(\overline x) 
+                \ \text{and} \ \Ann_A(\overline y). 
+            \]
+            Take the inverse images of these 
+            annihilator ideals under 
+            $R \to A$. 
+
+            Compare with the prime ideals in (b). 
+            Then use multiplication by $\overline x$, 
+            \[
+                \mu_x : A \to A, 
+                \ a \overset{\mu_x}\mapsto \overline xa, 
+            \]
+            to construct an exact sequence involving 
+            \[
+                \Ann_A(\overline x), \ A, \ A, \ A/(\overline x).
+            \]
+            Identify $A/(\overline x)$. 
+    \end{enumerate}
+\end{prob}
 
 
 
