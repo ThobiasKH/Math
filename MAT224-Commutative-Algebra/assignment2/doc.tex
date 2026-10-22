@@ -78,9 +78,9 @@
 
     Minimalitet sier at $Q_i$ ikke er redundant, alts{\aa}
     \[
-        \bigcap_{j\neq i} Q_j \neq Q_i. 
+        \bigcap_{j\neq i} Q_j \not\subseteq Q_i. 
     \]
-    Derfore finst det 
+    Derfor finst det 
     \[
         a \in \bigcap_{j\neq i} Q_j, \ \text{men} \ 
         a \not\in Q_i. 
@@ -97,7 +97,7 @@
     
     Vi observerer at 
     \begin{align*}
-        r \in I : a 
+        r \in (I : a) 
         &\Leftrightarrow ra \in I \\ 
         &\Leftrightarrow ra \in Q_j \ \forall j \\ 
         &\Leftrightarrow r \in Q_j : a \ \forall j, 
@@ -114,7 +114,7 @@
         \bigcap_j \sqrt{Q_j : a}. 
     \]
 
-    \begin{proof}{Bevis av Lemma 1.7(b)}
+    \begin{proof}[Bevis av Lemma 1.7(b)]
         Vi vil vise at 
         \[
             \sqrt{\bigcap_{j=1}^n  I_j} = 
@@ -134,7 +134,7 @@
             &= \sqrt{\bigcap_{j=1}^{n-1} I_j} \cap 
             \sqrt{I_n} \\ 
             &= \sqrt{\bigcap_{j=1}^{n-2}I_j} \cap 
-            \sqrt{I_{n-1}} \cap I_n \\ 
+            \sqrt{I_{n-1}} \cap \sqrt{I_n} \\ 
             &\vdots \\ 
             &= \bigcap_{j=1}^n \sqrt{I_j}. 
         \end{align*}
@@ -146,13 +146,209 @@
         har vi $a \in \sqrt{I} \cap \sqrt{J}$. 
 
         Anta deretter at $a \in \sqrt{I} \cap \sqrt{J}$. 
-        Da har vi $a^n \in I$ og $a^m$ for 
+        Da har vi $a^n \in I$ og $a^m \in J$ for 
         $n,m \in \mathbb N$ s{\aa} 
-        $a^{n+m} = (\underbrace{a^n}_{\in I})^m \in I$
-        og $(\underbrace{a^m}_{\in J})^n \in J$ s{\aa} 
+        $a^{n+m} = (\underbrace{a^n}_{\in I})(a^m) \in I$
+        og $(\underbrace{a^m}_{\in J})(a^n) \in J$ s{\aa} 
         $a^{n+m} \in I \cap J$ og dermed 
         $a \in \sqrt{I \cap J}$. 
     \end{proof}
+
+    N{\aa} gjenst{\aa}r det {\aa} vise at 
+    \[
+        \bigcap_{j=1}^n \sqrt{Q_j : a} = P_i.
+    \]
+    Vi valgte $a$ slik at $a \in Q_j$ for $j \neq i$ og 
+    $a\neq \in Q_j$ ellers. 
+
+    For $j \neq i$, siden $a \in Q_j$ har vi 
+    \[
+        Q_j : a = R 
+    \]
+    siden 
+    \[
+        Q_j : a = \{r \in R \bigm| ra \in Q_j\}. 
+    \]
+
+    For $j = i$, siden $a\not\in Q_j$, 
+    har vi at 
+    \[
+        \sqrt{Q_i : a} = P_i.
+    \]
+
+    Vi kan se dette 
+    gjennom {\aa} observere at 
+    \[
+        Q_i \subseteq Q_i : a \subseteq P_i
+    \]
+    og deretter ta 
+    \[
+        \sqrt{Q_i} = P_i \subseteq \sqrt{Q_i : a} 
+        \subseteq \sqrt{P_i} = P_i. 
+    \]
+
+    Da har vi 
+    \[
+        \sqrt{I:a} = P_i, 
+    \]
+    og dermed 
+    \[
+        \{P_1,\ldots,P_n\} \subseteq \Ass(I).
+    \]
+
+    N{\aa} mangler det {\aa} bevise at 
+    \[
+        \Ass(I) \subseteq \{P_1,\ldots,P_n\}. 
+    \]
+
+    La $P \in \Ass(I)$ v{\ae}re vilk{\aa}rlig. 
+    Per definisjon finnes det $a \in R$ slik at 
+    \[
+        P = \sqrt{I:a} = \bigcap_{j=1}^n \sqrt{Q_j : a}.
+    \]
+
+    Vi beviser n{\aa}  
+    Exercise $2.10(a)$ fra Gathmann, 
+    \begin{prob*}[Exercise 2.10(a), Gathmann]
+        La $J_1,\ldots,J_n$ er idealer og 
+        $P$ er prim med 
+        \[
+            \bigcap_{i=1}^n J_i \subseteq P, 
+        \]
+        s{\aa} finnes det $i \in [n]$ slik at 
+        \[
+            J_i \subseteq P. 
+        \]
+    \end{prob*}
+    \begin{proof}[Bevis for $2.10(a)$]
+        Anta, for en kontradiksjon, at slik en 
+        $i$ ikke finnes, alts{\aa} 
+        \[
+            J_i \not\subseteq P 
+        \]
+        for alle $i$. 
+
+        La $a_i \in J_i\setminus P$. 
+        Da har vi 
+        \[
+            \prod_{i=1}^n a_i \in 
+            \bigcap{i=1}^n J_i \subseteq P,  
+        \]
+        og $P$ er prim, s{\aa} 
+        for en minst $i$ har vi 
+        $a_i \in P$, men vi har antatt 
+        $a_i \not\in P$, en kontradiskjon. 
+    \end{proof}
+
+    Annvend dette for {\aa} f{\aa} 
+    \[
+        J_i = \sqrt{Q_i : a} \subseteq P 
+    \]
+    for minst en $i$. 
+
+    Vi har ogs{\aa} $P \subseteq J_i$ for all 
+    $i$ siden $P$ er snittet deres. 
+
+    Dermed har vi 
+    \[
+        P = J_i = \sqrt{Q_i : a} = P_i 
+    \] 
+    s{\aa} 
+    \[
+        \Ass(I) \subseteq \{P_1,\ldots,P_n\}. 
+    \]
+
+    $\Ass(I)$ er definert helt med hensyn 
+    p{\aa} I, uavhengig av noen dekomposisjon. 
+
+    Definisjonen av en minimal prim{\ae}rdekomposisjon 
+    krever at $P_i \neq P_j, \ i \neq j$ som 
+    sikrer at ingen ulike prim{\ae}rdekomposisjoner 
+    deler samme radikal. 
+
+    Vi f{\aa}r en en-til-en korrespondans mellom 
+    $\Ass(I)$ og $P_i$-er. 
+
+\end{proof}
+
+\begin{prob*}[3]
+    Skriv den Artinske ringen 
+    $k[x,y]/((x-1)^2x,y^2)$ som 
+    et produkt av lokale Artinske ringer. 
+\end{prob*}
+\begin{proof}[Løsning]
+    Vi finner de maksimale 
+    idealene av $R = k[x,y]/((x-1)^2x, y^2)$. 
+
+    De maksimale idealene av en kvotient ring 
+    $R/I$ korresponderer til de maksimale idealene 
+    av ringen som inneholder $I$. 
+
+    I dette tilfellet finner vi 
+    $\mathfrak m$ maksimale idealer av 
+    $k[x,y]$ som inneholder $((x-1)^2x,y^2)$. 
+
+    Viss $(x-1)^2x \in \mathfrak m$ har 
+    vi $x \in \mathfrak m$ eller $(x-1)^2 \in \mathfrak m$ 
+    som igjen tilsier at $(x-1)\in \mathfrak m$ siden 
+    $\mathfrak m$ er prim. 
+
+    Vi har også $y^2 \in \mathfrak m$ så 
+    $y \in \mathfrak m$. 
+
+    Da har vi 
+    \[
+        \mathfrak m_1 = (x,y), \ 
+        \mathfrak m_2 = (x-1,y). 
+    \]
+
+    Note: Scrap alt som komemr her. 
+
+    Skriv $I = ((x-1)^2x, y^2)$. 
+
+    Vi har 
+    \[
+        \overline{\mathfrak m_1} 
+        \cong \frac{\mathfrak m_1}{I} \ \text{og} \ 
+        \overline{\mathfrak m_2} 
+        \cong \frac{\mathfrak m_2}{I} 
+        \cong k \times k.
+    \]
+    så vi kan 
+    anvende det tredje isomorfi teoremet 
+    for å få 
+    \[
+        R/\overline{\mathfrak m_1} 
+        \cong \frac{k[x,y]/I}{\mathfrak m_1/I} 
+        \cong \frac{k[x,y]}{(x,y)} \cong k 
+    \]
+    så $\mathfrak m_1 = (x,y)$ er maksimal. 
+    Deretter 
+    \[
+        R/\overline{\mathfrak m_2} 
+        \cong \frac{k[x,y]/I}{\mathfrak m_2/I} 
+        \cong \frac{k[x,y]}{(x-1,y)} \cong k 
+    \]
+    så $\mathfrak m_2 = (x-1,y)$ er maksimal. 
+
+    Vi kan anvende det kinesiske restteoremet for å få 
+    \[
+        R/\left(\overline{\mathfrak m_1} \cap 
+        \overline{\mathfrak m_2}\right) 
+        \cong R/(\overline{\mathfrak m_1} \cdot 
+        \overline{\mathfrak m_2}) 
+        \cong \frac{R}{\overline{\mathfrak m_1}} 
+        \cdot \frac{R}{\overline{\mathfrak m_2}} 
+    \]
+    via den surjektive homomorfien 
+    $\varphi : R \to R/\left(\overline{\mathfrak m_1} 
+    \cap \overline{\mathfrak m_2}\right)$.  
+
+    Det gjennstår å vise at 
+    \[
+        \ker \varphi = 0. 
+    \]
+
 \end{proof}
 
 \end{document}
