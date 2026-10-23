@@ -271,6 +271,99 @@
 
 \end{proof}
 
+\begin{prob*}[2]
+    \medskip 
+    \
+    
+    \begin{enumerate}[label=(\alph*)]
+        \item Give in detail the proof of Lemma $8.33$. 
+            You should in particular do Exercise 
+            $1.19(a)$. 
+        \item Give in detail the proof of 
+            Proposition $8.34$. You should in particular 
+            do Exercise $6.24(b)$ and Exercise 
+            $1.19(d)$ in detail. 
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Bevis av (a)]
+    Vi ønsker å bevise følgende, 
+    \begin{lem*}[Gathmann Lemma 8.33]
+        La $S$ være en multiplikativt lukket 
+        undermengde av en ring $R$, og la 
+        $Q$ være et $P$-primært ideal i $R$. 
+        Med hensyn til ringhomomorfien 
+        $\varphi : R \to S^{-1}R$, $a \mapsto \frac{a}1$, 
+        har vi at 
+        \[
+            (Q^e)^c = 
+            \begin{cases}
+                R & \text{viss} \ S \cap P \neq \emptyset, \\ 
+                Q \ \text{viss} \ S \cap P = \emptyset.
+            \end{cases}
+        \]
+    \end{lem*}
+
+    Vi begynner med å gjøre følgende problem,
+    \begin{prob*}[Gathmann Problem 1.19(a)]
+        La $\varphi : R \to R'$ være en 
+        ringhomomorfi. Bevis at 
+        \[
+            I \subset (I^e)^c, \ \forall I \trianglelefteq R.
+        \]
+    \end{prob*}
+
+    \begin{proof}[Bevis av problem 1.19(a)]
+        La $\varphi \in \Hom_R(R,R')$. 
+        
+        La $I$ være et ideal av $R$. 
+
+        La $x \in I$. 
+        Vi har $\varphi(x) \in \varphi(I)$. 
+        Per definisjon, har vi at 
+        utvidelsen $I^e$ er idealet i $R'$ generert 
+        av $\varphi(I)$ så 
+        \[
+            \varphi(I) \subseteq I^e. 
+        \]
+        Siden $\varphi(x) \in \varphi(I)$ har vi 
+        $\varphi(x) \in I^e$. 
+
+        Siden $(I^e)^c = \varphi^{-1}(I^e)$ har vi 
+        at et hvert element $x \in I$ som har 
+        bilde $\varphi(x) \in I^c$ må 
+        ligge i prebildet 
+        \[
+            x \in \varphi^{-1}(I^e) = (I^e)^c.
+        \]
+    \end{proof} 
+
+    Nå viss $S \cap P \neq \emptyset$ finnes 
+    det $s \in S$med $s \in P = \sqrt Q$ så 
+    $s^n \in Q, \ (n \in \mathbb N)$. 
+
+    Da har vi 
+    \[
+        \frac11 = \frac{s^n}{s^n} \in S^{-1}Q = Q^e.
+    \]
+    Dermed har vi $Q^e = S^{-1}R$og $(Q^e)^c = R$. 
+
+    Viss vi antar $S \cap Q = \emptyset$ holder det, 
+    ifølge det som står ovenfor, å vise at 
+    $(Q^e)^c \subseteq Q$.
+    
+    Viss $a \in (Q^e)^c$ har vi $a/1 \in Q^e$ med 
+    \[
+        \frac a 1 = \frac q s, \ q \in Q, \ s \in S. 
+    \]
+    Så $u(q-as) = 0$ for en $u \in S$ og dermed 
+    \[
+        a \cdot us = uq \in Q. 
+    \]
+    $Q$ er $P$-primær så $a \in Q$ eller $us \in Q$, men 
+    vi antar at $P \cap S = \emptyset$ så 
+    vi konkluderer at $a \in Q$.  
+\end{proof}
+
 \begin{prob*}[3]
     Skriv den Artinske ringen 
     $k[x,y]/((x-1)^2x,y^2)$ som 
@@ -285,7 +378,7 @@
     av ringen som inneholder $I$. 
 
     I dette tilfellet finner vi 
-    $\mathfrak m$ maksimale idealer av 
+    maksimale idealer $\mathfrak m$ av 
     $k[x,y]$ som inneholder $((x-1)^2x,y^2)$. 
 
     Viss $(x-1)^2x \in \mathfrak m$ har 
@@ -302,53 +395,59 @@
         \mathfrak m_2 = (x-1,y). 
     \]
 
-    Note: Scrap alt som komemr her. 
-
-    Skriv $I = ((x-1)^2x, y^2)$. 
-
-    Vi har 
+    Så 
     \[
-        \overline{\mathfrak m_1} 
-        \cong \frac{\mathfrak m_1}{I} \ \text{og} \ 
-        \overline{\mathfrak m_2} 
-        \cong \frac{\mathfrak m_2}{I} 
-        \cong k \times k.
+        \overline{\mathfrak m_1}, 
+        \ \overline{\mathfrak m_2}
     \]
-    så vi kan 
-    anvende det tredje isomorfi teoremet 
-    for å få 
-    \[
-        R/\overline{\mathfrak m_1} 
-        \cong \frac{k[x,y]/I}{\mathfrak m_1/I} 
-        \cong \frac{k[x,y]}{(x,y)} \cong k 
-    \]
-    så $\mathfrak m_1 = (x,y)$ er maksimal. 
-    Deretter 
-    \[
-        R/\overline{\mathfrak m_2} 
-        \cong \frac{k[x,y]/I}{\mathfrak m_2/I} 
-        \cong \frac{k[x,y]}{(x-1,y)} \cong k 
-    \]
-    så $\mathfrak m_2 = (x-1,y)$ er maksimal. 
+    er maksimale idealer av $R$. 
 
-    Vi kan anvende det kinesiske restteoremet for å få 
+    Vi ser no på ideala
     \[
-        R/\left(\overline{\mathfrak m_1} \cap 
-        \overline{\mathfrak m_2}\right) 
-        \cong R/(\overline{\mathfrak m_1} \cdot 
-        \overline{\mathfrak m_2}) 
-        \cong \frac{R}{\overline{\mathfrak m_1}} 
-        \cdot \frac{R}{\overline{\mathfrak m_2}} 
+        I_1=(x,y^2), \qquad
+        I_2=((x-1)^2,y^2).
     \]
-    via den surjektive homomorfien 
-    $\varphi : R \to R/\left(\overline{\mathfrak m_1} 
-    \cap \overline{\mathfrak m_2}\right)$.  
-
-    Det gjennstår å vise at 
+    Desse er komaksimale siden
     \[
-        \ker \varphi = 0. 
+        1=(x-1)^2+x(2-x)\in I_1+I_2.
     \]
+    Dermed har vi
+    \[
+        I_1\cap I_2=I_1I_2
+        =(x(x-1)^2,y^2).
+    \]
+    Ved det kinesiske restteoremet får vi
+    \begin{align*}
+        R
+        &\cong k[x,y]/I_1
+        \times k[x,y]/I_2\\
+        &\cong k[y]/(y^2)
+        \times k[u,y]/(u^2,y^2),
+    \end{align*}
+    der $u=x-1$.
 
+    Den første faktoren har det eneste
+    maksimale idealet $(\bar y)$, og den
+    andre har det einaste maksimale
+    idealet $(\bar u,\bar y)$, sidan
+    alle desse generatorane er nilpotente.
+
+    Begge faktorane er endelegdimensjonelle
+    $k$-vektorrom, og dermed Artinske.
+    Vi har altså skrive $R$ som et produkt
+    av lokale Artinske ringar.
 \end{proof}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{print1.png}
+    \caption{Figur 1 for oppgave 4!}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{print2.png}
+    \caption{Figur 2 for oppgave 4!}
+\end{figure}
 
 \end{document}
