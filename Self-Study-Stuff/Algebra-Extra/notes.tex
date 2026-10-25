@@ -1240,7 +1240,7 @@ Basically, there will probably not be any pedagogical value here.
             Explain why the primary decomposition 
             has more algebraic information than 
             is visible from the irreducible compontents 
-            of $V(K)$. 
+            of $V(I)$. 
 
         \item Let 
             \[
@@ -1317,6 +1317,71 @@ Basically, there will probably not be any pedagogical value here.
         A = R/I 
     \]
     is Noetherian. 
+
+    However, $A$ is not Artinian. 
+    Take 
+    \[
+        \overline y 
+        \supsetneq \overline{y^2} \supsetneq 
+        \overline{y^4} \supsetneq \cdots. 
+    \]
+
+    All elements of $I$ are of the form 
+    \[
+        ax^2 + bxy = x(ax+by)
+    \]
+    with
+    \[
+        \overline f = q + x(ax+by) \in R. 
+    \]
+    Notice that if $f$ is a multiple of $x$ it 
+    is absorbed. 
+\end{proof}
+\begin{proof}[Solution of (b)]
+    We have 
+    \[
+        I = x(x,y) = (x) \cap (x,y)^2. 
+    \]
+    Then $(x)$ is prime and thus primary while 
+    \[
+        \sqrt{(x,y)^2} = (x,y). 
+    \]
+    Then $(x,y)$ is maximal since $k[x,y]/(x,y) \cong k$ 
+    and 
+    \[
+        (x,y)^2 \subseteq (x,y)^2 \subseteq (x,y) 
+    \]
+    so $(x,y)^2$ is primary. 
+    The decomposition is indeed irredundant since 
+    $x \not\in (x,y)^2$ and $y^2\not\in (x)$.
+
+    The prime radicals are indeed comparable since 
+    $(x) \subseteq (x,y)$. 
+\end{proof}
+\begin{proof}[Solution of (c)]
+    We have 
+    \[
+        V(I) = 
+        V((x) \cap (x,y)^2) = 
+        V(x) \cup V((x,y)^2) = 
+        V(x) \cup V(x,y). 
+    \]
+    We have 
+    \[
+        V(x) = 0 \times k 
+    \]
+    and 
+    \[
+        V(x,y) = 0 \times 0
+    \]
+    so 
+    \[
+        V(I) = 0 \times k. 
+    \]
+
+    With $I = (x) \cap (x,y)^2$ it is 
+    easier to see that $V(I) = 0 \times k$ than 
+    when working with $(x^2,xy)$. 
 \end{proof}
 
 
