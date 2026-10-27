@@ -347,7 +347,7 @@
     \]
     Dermed har vi $Q^e = S^{-1}R$og $(Q^e)^c = R$. 
 
-    Viss vi antar $S \cap Q = \emptyset$ holder det, 
+    Viss vi antar $S \cap P = \emptyset$ holder det, 
     ifølge det som står ovenfor, å vise at 
     $(Q^e)^c \subseteq Q$.
     
@@ -359,9 +359,180 @@
     \[
         a \cdot us = uq \in Q. 
     \]
-    $Q$ er $P$-primær så $a \in Q$ eller $us \in Q$, men 
-    vi antar at $P \cap S = \emptyset$ så 
-    vi konkluderer at $a \in Q$.  
+    Sidan $Q$ er $P$-primært og
+    \[
+        a\cdot us\in Q,
+    \]
+    har vi anten $a\in Q$ eller
+    \[
+        us\in\sqrt Q=P.
+    \]
+    Men $u,s\in S$, så $us\in S$, og sidan
+    $S\cap P=\emptyset$ kan vi ikkje ha $us\in P$.
+    Dermed må $a\in Q$.
+\end{proof}
+
+\begin{proof}[Bevis av 2(b)]
+Vi skal bevise Proposition 8.34. La
+\[
+I=Q_1\cap\cdots\cap Q_n
+\]
+vere ein minimal primærdekomposisjon, og sett
+\[
+P_j=\sqrt{Q_j}.
+\]
+Anta at $P_i$ er minimal over $I$. Vi skal vise at
+\[
+(I^e)^c=Q_i,
+\]
+der utviding og kontraksjon er med omsyn på
+lokaliseringa
+\[
+\varphi:R\to R_{P_i}.
+\]
+
+Vi treng først Exercise 6.24(b). La $S$ vere ei
+multiplikativt lukka mengd og $M_1,M_2\leq M$.
+Vi viser
+\[
+S^{-1}(M_1\cap M_2)
+=
+S^{-1}M_1\cap S^{-1}M_2.
+\]
+
+Inklusjonen
+\[
+S^{-1}(M_1\cap M_2)
+\subseteq
+S^{-1}M_1\cap S^{-1}M_2
+\]
+er direkte sidan $M_1\cap M_2\subseteq M_i$.
+
+For den andre inklusjonen, la
+\[
+\frac ms\in S^{-1}M_1\cap S^{-1}M_2.
+\]
+Då finst $t_1,t_2\in S$ slik at
+\[
+t_1m\in M_1,
+\qquad
+t_2m\in M_2.
+\]
+Dermed
+\[
+t_1t_2m\in M_1\cap M_2,
+\]
+og
+\[
+\frac ms
+=
+\frac{t_1t_2m}{t_1t_2s}
+\in
+S^{-1}(M_1\cap M_2).
+\]
+Dette viser likskapen.
+
+For ei vilkårleg familie $(M_j)_{j\in J}$ har vi alltid
+\[
+S^{-1}\left(\bigcap_{j\in J}M_j\right)
+\subseteq
+\bigcap_{j\in J}S^{-1}M_j,
+\]
+men likskap treng ikkje halde for uendelege snitt.
+
+Vi treng også Exercise 1.19(d). For ein ringhomomorfi
+$\varphi:R\to R'$ og ideal $J_1,J_2\trianglelefteq R'$
+har vi
+\[
+(J_1\cap J_2)^c
+=
+J_1^c\cap J_2^c.
+\]
+For
+\[
+x\in (J_1\cap J_2)^c
+\]
+har vi
+\[
+\varphi(x)\in J_1\cap J_2
+\]
+viss og berre viss
+\[
+\varphi(x)\in J_1
+\quad\text{og}\quad
+\varphi(x)\in J_2,
+\]
+som er ekvivalent med
+\[
+x\in J_1^c\cap J_2^c.
+\]
+Ved induksjon gjeld det same for endeleg mange ideal.
+
+No set vi
+\[
+S=R\setminus P_i.
+\]
+Ved Exercise 6.24(b) får vi
+\[
+I^e
+=
+S^{-1}I
+=
+S^{-1}Q_1\cap\cdots\cap S^{-1}Q_n
+=
+Q_1^e\cap\cdots\cap Q_n^e.
+\]
+Ved Exercise 1.19(d) får vi derfor
+\[
+(I^e)^c
+=
+(Q_1^e)^c\cap\cdots\cap(Q_n^e)^c.
+\]
+
+For $j=i$ har vi
+\[
+S\cap P_i=\emptyset,
+\]
+så Lemma 8.33 gir
+\[
+(Q_i^e)^c=Q_i.
+\]
+
+La no $j\neq i$. Vi påstår at
+\[
+P_j\not\subseteq P_i.
+\]
+Viss $P_j\subseteq P_i$, så sidan både $P_j$ og $P_i$
+inneheld $I$, og $P_i$ er minimal over $I$, måtte
+\[
+P_j=P_i.
+\]
+Dette strir mot minimaliteten til primærdekomposisjonen,
+som krev at radikala $P_1,\ldots,P_n$ er ulike.
+
+Dermed finst
+\[
+s\in P_j\setminus P_i.
+\]
+Sidan $s\notin P_i$ har vi $s\in S$, og dermed
+\[
+S\cap P_j\neq\emptyset.
+\]
+Lemma 8.33 gir då
+\[
+(Q_j^e)^c=R
+\qquad (j\neq i).
+\]
+
+Vi får så
+\[
+(I^e)^c
+=
+R\cap\cdots\cap Q_i\cap\cdots\cap R
+=
+Q_i.
+\]
+Dette beviser Proposition 8.34.
 \end{proof}
 
 \begin{prob*}[3]
@@ -449,5 +620,143 @@
     \includegraphics[width=0.8\textwidth]{print2.png}
     \caption{Figur 2 for oppgave 4!}
 \end{figure}
+
+Oppgave 4(a)
+
+Ut frå Macaulay2-utskrifta har vi primærdekomposisjonen
+\[
+\begin{aligned}
+I
+={}&(z,x,y^2)
+\cap(x,y^2,(x-1)^2)\
+&\cap(z-2,x,y^2)
+\cap(z-2,y^2,(x-1)^2).
+\end{aligned}
+\]
+
+Dei assosierte prima er
+\[
+(z,y,x),\qquad
+(z,y,x-1),\qquad
+(z-2,y,x),\qquad
+(z-2,y,x-1).
+\]
+
+Macaulay2 gir dei same fire ideala som minimalPrimes,
+så alle dei assosierte prima er isolerte. Det finst ingen
+innebygde (embedded) primideal.
+
+Oppgave 4(b)
+
+\[
+(y,x^2)
+\cap(z,y^3)
+\cap(z,x,y^4).
+\]
+
+Dei assosierte prima er
+\[
+(x,y),\qquad
+(y,z),\qquad
+(x,y,z).
+\]
+
+Dei minimale prima er
+\[
+(x,y),\qquad(y,z).
+\]
+
+Dermed er $(x,y)$ og $(y,z)$ dei isolerte prima, medan
+\[
+(x,y,z)
+\]
+er eit innebygd primideal.
+
+Oppgave 4(c)
+
+\[
+(x,y)\cap
+(z^2-y,\ yz-x,\ y^2-xz).
+\]
+
+Dette samsvarer med beskrivinga av $V(K)$ frå Mandatory 1.
+Frå likningane
+\[
+x=yz,\qquad xz=y^2
+\]
+får vi
+\[
+y(z^2-y)=0.
+\]
+
+Viss $y=0$, får vi $x=0$, medan $z$ er fri. Dette gir
+linja
+\[
+V(x,y)={(0,0,t)\in k}.
+\]
+
+Viss $y\neq0$, får vi
+\[
+y=z^2,\qquad x=yz=z^3,
+\]
+så vi får den parametriserte kurva
+\[
+(t^3,t^2,t).
+\]
+
+\[V(x,y)
+\cup
+V(z^2-y,\ yz-x,\ y^2-xz).
+\]
+
+Oppgave 4(d)
+\[
+k[x,y,z]/(x,y)
+\cong k[z],
+\]
+som er eit integritetsområde. Dermed er $Q_1$ prim.
+
+La så
+\[
+Q_2=(z^2-y,\ yz-x,\ y^2-xz).
+\]
+I $S/Q_2$ har vi
+\[
+y=z^2
+\qquad\text{og}\qquad
+x=yz=z^3.
+\]
+Dermed kan alle klassar skrivast som polynom i $\bar z$.
+
+Definer
+\[
+\psi/Q_2\longrightarrow k[z]
+\]
+ved
+\[
+\bar x\mapsto z^3,\qquad
+\bar y\mapsto z^2,\qquad
+\bar z\mapsto z.
+\]
+Dette er veldefinert, sidan
+\[
+z^2-y,\qquad yz-x,\qquad y^2-xz
+\]
+alle blir sende til $0$.
+
+Omvendt har vi homomorfien
+\[
+k[z]\longrightarrow S/Q_2,
+\qquad
+z\mapsto\bar z.
+\]
+Desse homomorfiane er inverse til kvarandre, og dermed
+\[
+S/Q_2\cong k[z].
+\]
+Sidan $k[z]$ er eit integritetsområde, er $Q_2$ prim.
+
+Dermed er begge dei primære komponentane i
+primærdekomposisjonen av $K$ faktisk primideal.
 
 \end{document}
