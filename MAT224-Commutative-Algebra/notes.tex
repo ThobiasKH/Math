@@ -7325,6 +7325,93 @@ Thus algebraic sets correspond to radical ideals.
     $p(x,y)$ has $z$-degree $0$. 
 \end{proof}
 
+\begin{prob}
+    Let $R = \mathbb C[x]$ with 
+    \[
+        A = \frac{\mathbb C[x,y,z]}{y^2 - x, yz - x^2}. 
+    \]
+    Regard $R$ as the copy of $\mathbb C[x]$ in 
+    $A$. 
+    Decide whether $A$ is integral inside $A$. 
+\end{prob}
+\begin{proof}
+    We regard 
+    \[
+        A = R[\bar y,\bar z] 
+    \]
+    and 
+    \[
+        R[\bar y]
+    \]
+    integral over $R$ with monic polynomial 
+    \[
+        f(t) = t^2 - \bar x 
+    \]
+    since $\bar y$ is a zero of this polynomial. 
+
+    Take $J = (\bar x, \bar y)$. 
+    Then $(y^2 - x, yz - x^2) \subseteq (x,y)$ is a 
+    subideal in $\mathbb C[x,y,z]$. 
+    We can show this by identifying that 
+    $x, y \in (x,y)$ so $y^2 - x \in (x,y)$. 
+    Next $y \in (x,y)$ so $yz \in (x,y)$ meaning 
+    $yz - x^2 \in (x,y)$. 
+
+    Thus 
+    \[
+        (\bar x, \bar y) = 
+        \frac{(x,y)}{(y^2 - x, yz - x^2)}. 
+    \]
+    From this we can invoke the third isomorphism theorem to 
+    get 
+    \[
+        A/(\bar x, \bar y) 
+        = \frac{\mathbb C[x,y,z]/(y^2 - x, yz - x^2)}{(x,y)/(y^2 - x, yz - x^2)}
+        \cong \frac{\mathbb C[x,y,z]}{(x,y)} \cong \mathbb C[z], 
+    \]
+    with $J \cap R = (x)$ so 
+    \[
+        R/(J \cap R) = \mathbb C[x]/(x) \cong \mathbb C 
+    \]
+    so integrality would require 
+    $\mathbb C[z]$ integral over $\mathbb C$, which is 
+    not true since $z$ is transcendental over $\mathbb C$. 
+
+    Thus $A$ is not integral over $R$. 
+\end{proof}
+
+\begin{prob}
+    Let $R = \mathbb C[x]$ 
+    with $A = \mathbb C[t]$ 
+    where $R$ is embedded into $A$ by 
+    $x \mapsto t^2$. 
+
+    So really think 
+    \[
+        R = \mathbb C[t^2] \subseteq 
+        \mathbb C[t] = A. 
+    \]
+
+    First show $A$ is integral and finite over 
+    $R$. 
+
+    Then, for $P_a = (x-a) \triangleleft R$, 
+    determine all prime ideals 
+    $Q \triangleleft A$ lying over $P_a$, i.e. 
+    satisfying 
+    \[
+        Q \cap R = P_a. 
+    \]
+    Treat separately 
+    \[
+        a \neq 0 \ \text{and} \ a = 0. 
+    \]
+    For concreteness you may take $a = 1$ first. 
+\end{prob}
+\begin{proof}
+    TODO
+\end{proof}
+
 
 \end{document}
 
