@@ -7163,6 +7163,129 @@ And the familiar Nullstellensatz statement is
 
 Thus algebraic sets correspond to radical ideals. 
 
+\begin{prob}
+    Let
+
+    $$R=k[x], \qquad A=\frac{k[x,y]}{(y^2-x^3)}.$$
+
+    Regard $R$ as the subring $k[\bar x]\subseteq A$.
+
+    Prove that $A$ is integral over $R$, and prove that it is finite as an $R$\-module. Give an explicit finite set of $R$\-module generators.
+\end{prob}
+\begin{proof}
+    With the observation that 
+    $A = R[\overline y]$ it will suffice to 
+    show that $\overline y$ is integral over $R$. 
+
+    Let $f(T) = T^2 - x^3$. 
+    Then at $T = y$ we have 
+    \[
+        f(y) = \overline y^2 - x^3 = 0
+    \]
+    in $A$. This is a monic polynomial and  
+    $x^3 \in R$ as required. 
+
+    By the earlier proposition (9.5 of Gathmann), 
+    $A$ is finite if and only if $A = R[a_1,\ldots,a_n]$ 
+    with $a_i$ integral over $R$. Thus $A$ is finite over 
+    $R$ since $A$ is $R[y]$. 
+
+    Explicitly the generators are 
+    $\{1,y\}$. 
+\end{proof}
+
+\begin{prob}
+    Let
+
+    $$R=k[x],\qquad A=\frac{k[x,y,z]}{(y^2-x,\ z^3-y)}.$$
+
+    Prove that $A$ is integral and finite over $R$, and give an explicit finite generating set for $A$ as an $R$\-module.
+\end{prob}
+\begin{proof}
+    We have 
+    \[
+        A = \frac{R[y,z]}{(y^2-x, z^3-y)}, 
+    \]
+    and we can write 
+    \[
+        A = R[\bar y, \bar z]
+    \]
+    taking the residue classes of $y,z$ modulo 
+    $(y^2 - x, z^3 -y)$. 
+
+    Now notice that $\bar y$ is the $0$ of the monic 
+    \[
+        f(t) = t^2 - x 
+    \]
+    and $\bar z$ the $0$ of the monic 
+    \[
+        g(t) = t^3 - y, 
+    \]
+    but $y\not \in R$, however we use the viewpoint that 
+    $A$ can be seen as an extension of an extension: 
+    \[
+        R \subseteq R[\bar y] \subseteq R[\bar y,\bar z] = A 
+    \]
+    with the middle integral over $R$ by the 
+    argument with the first monic we introduced and 
+    $A$ integral over the middle by 
+    $g(t)$ and then use that integrality is transitive. 
+
+    We get the generating set 
+    $\{1,\bar z,\bar z^2,\bar y,\bar y\bar z,\bar y\bar z^2\}$.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        R = k[x], \ A = \frac{k[x,y,z]}{(z^2-xy, y^3-x^2)}.
+    \]
+    Regard $R$ as the copy of $k[x]$ in $A$. 
+
+    Show that $A$ is integral over $R$, hence finite over 
+    $R$. Find an explicit generating set. 
+\end{prob}
+\begin{proof}
+    We have 
+    \[
+        A = R[\bar y, \bar z]
+    \]
+    taking the residue classes of $y,z$ modulo 
+    $(z^2-xy, y^3 - x^2)$. 
+    Then 
+    \[
+        k[\bar x] \cong k[x] = R 
+        \subseteq R[\bar y] \subset R[\bar y, \bar z].   
+    \]
+    Notice that for $R[\bar y]$ we have a monic 
+    \[
+        f(t) = t^3 - \bar x^2 
+    \]
+    with the constant term $\in R$ for which $\bar y$ is 
+    a zero. 
+    Next 
+    \[
+        g(t) = t^2 - \overline{xy} 
+    \]
+    is a monic with constant term $\in R[\bar y]$ for 
+    which $\bar z$ is a zero. Thus 
+    $R[\bar y]$ is integral over $R$, $R[\bar y, \bar z]$ 
+    is integral over $R[\bar y]$ and thus, since 
+    integrality is transitive, $R[\bar y, \bar z]$ is integral over 
+    $R$. 
+
+    Now we find the generating set. 
+    We obviously need $1$ in the generating set 
+    and $\bar z, \bar x, \bar y$. 
+    We notice that $\bar z^2 = \overline{xy}$, 
+    $\bar x^2 = \bar y^3$ so we get the generating set 
+    \[
+        \{1,y,y^2,z,yz,y^2z\}. 
+    \]
+    
+\end{proof}
+
+
 \end{document}
 
 
