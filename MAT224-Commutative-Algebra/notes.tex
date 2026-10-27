@@ -7285,6 +7285,46 @@ Thus algebraic sets correspond to radical ideals.
     
 \end{proof}
 
+\begin{prob}
+    Let 
+    \[
+        R = \mathbb C[x], \ A = 
+        \frac{\mathbb C[x,y,z]}{(z^2-xz)}. 
+    \]
+    Regard $R$ as the copy of $\mathbb C[x]$ inside $A$. 
+    
+    Decide whether $A$ is integrable over $R$. 
+\end{prob}
+\begin{proof}
+    We may view 
+    \[
+        A = (\mathbb C[x,y])[\bar z]
+    \]
+    via the monic 
+    \[
+        f(t) = t^2 - \overline{xy}
+    \]
+    since $\overline{xy} 
+    \in \mathbb C[x,y] = \mathbb C[x][\bar y]$.
+    
+    By the transitive property, this is integral if 
+    and only if 
+    \[
+        \mathbb C[x][\bar y] 
+    \]
+    is integrable over $\mathbb C[x] = R$. 
+
+    This cannot be the case since if $\bar y$ 
+    were integral over $\mathbb C[x]$, 
+    there would be a nonzero monic $p(x,y) \in 
+    \mathbb C[x,y]$ with 
+    $p(x,y) \in (z^2 - xz)$. 
+
+    But any nonzero multiple $h(x,y,z)(z^2-xz)$ 
+    has positive $z$ degree, whereas 
+    $p(x,y)$ has $z$-degree $0$. 
+\end{proof}
+
 
 \end{document}
 
