@@ -5394,4 +5394,255 @@ In $\S52$ we will discuss \keyterm{the fundamental group}
     \pi_1(X,x_0).
 \]
 
+\section{\S 52}
+
+Yippe, finally the fundamental group.
+Recall from $\S 51$ that if $f,g$ are paths, then 
+$f * g$ is defined only if $f(1) = g(0)$. 
+That gave a groupoid rather than a group.
+
+Now, fix one point $x_0 \in X$ and consider only 
+paths that begin and end there.
+
+Such a path
+\[
+    f : I \to X, \ f(0) = f(1) = x_0 
+\]
+is a \keyterm{loop} based at $x_0$.
+
+We then quotient the loops by path homotopy relative 
+to the endpoints.
+
+The resulting set is 
+\[
+    \pi_1(X,x_0) = \{\text{path homotopy classes of 
+    loops based at $x_0$}\}.
+\]
+The operation is 
+$[f][g] = [f*g]$. 
+From $\S 51$ this is well defined and satisfies 
+\[
+    ([f][g])[h] = [f]([g][h]),
+\]
+\[
+    [e_{x_0}][f] = f = [f][e_{x_0}], 
+\]
+and 
+\[
+    [f][\bar f] = [e_{x_0}]
+    = [\bar f][f].
+\]
+Therefore 
+\[
+    \pi_{1}(X,x_0) \ \text{is a group},
+\]
+the \keyterm{fundamental group of X} (at $x_0$).
+
+For a noninteresting example, we have if $X \subseteq \mathbb R^n$ 
+is convex, then 
+\[
+    \pi_1(X,x_0) = 0
+\]
+since straight line-homotopy contracts every loop to $x_0$.
+The interesting examples will be things like 
+\[
+    S^1, \ \mathbb R^2\{0\}, \ T^2
+\]
+where holes prevent certain contractions.
+
+\subsection{Base point is irrelevant}
+
+At first sight, $\pi_1(X,x_0)$ is dependent 
+on the choice of $x_0$. 
+Suppose $x_0,x_1 \in X$, and let 
+\[
+    \alpha : I \to X
+\]
+be a path from $x_0$ to $x_1$. 
+Given a loop $f$ based at $x_0$, we can transport the 
+loop to $x_1$ by 
+\[
+    \bar \alpha * f * \alpha, 
+\]
+where we should picture 
+\[
+    x_1 \overset{\bar \alpha}\longrightarrow 
+    x_0 \overset f \longrightarrow x_0 
+    \overset \alpha \longrightarrow x_1.
+\]
+Thus define 
+\[
+    \widehat \alpha : \pi_1(X,x_0) \to \pi_1(X,x_1)
+\]
+by 
+\[
+    \widehat \alpha([f]) 
+    = [\bar \alpha * f * \alpha], 
+\]
+getting an isomorphism. Thus if $X$ is 
+path-connected, 
+\[
+    \pi_1(X,x_0) \cong \pi_1(X,x_1)
+\]
+for any two basepoints. 
+
+Notice however that, while the groups 
+are isomorphic, the isomorphism is dependent on the 
+chosen path $\alpha$. So it is in general sloppy 
+to say "the fundamental group of $X$" without a basepoint, 
+even if people often do so in the context of where the choice 
+is harmless.
+
+\subsection{Simply connected space}
+
+\begin{defn}
+    A space is \keyterm{simply connected} if 
+    \begin{enumerate}
+        \item $X$ is path connected, and 
+        \item its fundamental group is trivial, i.e. 
+            \[
+                \pi_1(X,x_0) = 0. 
+            \]
+    \end{enumerate}
+\end{defn}
+Notice here that we don't care to talk about the base 
+point since something like $\pi_1(X,x_0) = 0$ for 
+some $x_0 \in X$ collapses to $\pi_1(X,x) = 0, \ \forall x \in X$ 
+since the space is path connected. 
+
+Some nice examples are $\mathbb R^n$, convex sets, 
+$D^n$. 
+
+However, $S^1$ is not simply connected. 
+
+A nice formulation used later will be 
+$X$ simply connected $\Rightarrow$ any two paths with the 
+same endpoints are homotopic.
+
+Intuitively, this should be true because if we suppose 
+$f,g : x_0 \to x_1$, then 
+\[
+    f * \bar g
+\]
+is a loop at $x_0$. If $X$ is simply connected, 
+\[
+    [f*\bar g] = [e_{x_0}].
+\]
+Algebraically cancelling $g$ gives 
+\[
+    [f] = [g].
+\]
+
+\subsection{Continuous maps induce homomorphisms}
+
+Suppose $h : (X,x_0) \to (Y,y_0)$ is continuous, meaning 
+$h(x_0) = y_0$. 
+
+A loop $f : I \to X$ at $x_0$ gives a loop 
+\[
+    h \circ f : I \to Y
+\]
+at $y_0$. 
+So define 
+\[
+    h_* : \pi_1(X,x_0) \to \pi_1(Y,y_0)
+\]
+by 
+\[
+    h_*([f]) = [h \circ f]. 
+\]
+This is well-defined as 
+\[
+    f \simeq_p g \Rightarrow h \circ f \simeq_p h \circ g. 
+\]
+If 
+\[
+    F : I \times I \to X
+\]
+is the path homotopy, then 
+\[
+    h \circ F : I \times I \to Y
+\]
+is the required path homotopy.
+
+Second, 
+\[
+    h_*([f][g]) = h_*([f*g]) = [h \circ (f * g)].
+\]
+But 
+\[
+    h \circ (f * g) = (h \circ f) * (h \circ g), 
+\]
+so 
+\[
+    h_*([f][g])
+=
+h_*([f])h_*([g]).
+\]
+Thus $h_*$ is a group homomorphism.
+
+\subsection{Functoriality}
+
+If 
+\[
+    X \overset h \longrightarrow 
+    Y \overset k \longrightarrow Z
+\]
+then 
+\[
+    (k \circ h)_* = k_* \circ h_*, 
+\]
+and 
+\[
+    (\id_X)_* = \id_{\pi_1(X,x_0)}. 
+\]
+So we send 
+\[
+    (X,x_0) \longrightarrow \pi_1(X,x_0)
+\]
+preserving composition and identities. 
+Smells \keyterm{functorial}. 
+In modern language, 
+\[
+    \pi_1 : \textbf{Top}_* \to \textbf{Grp} 
+\]
+is a functor from \textbf{based} topological spaces 
+to groups.
+
+\subsection{Fundamental group is a topological invariant}
+
+Suppose $h : X \to Y$ is a homeomorphism.
+
+Then $h^{-1}$ exists and is continuous. 
+Functoriality gives 
+\[
+    (h^{-1} \circ h)_* = (h^{-1})_* \circ h_* = 
+    (\id_X)_*. 
+\]
+
+Thus 
+\[
+    (h^{-1})_* \circ h_* = \id. 
+\]
+Similarly 
+\[
+    h_* \circ (h^{-1})_* = \id.
+\]
+Hence 
+\[
+    h_* : \pi_1(X,x_0) \overset \sim \longrightarrow 
+    \pi_1(Y,h(x_0))
+\]
+is an isomorphism.
+
+Therefore 
+\[
+    X \cong Y \Rightarrow \pi_1(X) \cong \pi_1(Y).
+\]
+The contrapositive is especially useful, 
+\[
+    \pi_1(X) \not\cong \pi_1(Y) 
+    \Rightarrow X \not\cong Y.
+\]
+
 \end{document}
