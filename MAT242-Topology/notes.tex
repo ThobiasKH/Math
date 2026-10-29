@@ -5645,4 +5645,376 @@ The contrapositive is especially useful,
     \Rightarrow X \not\cong Y.
 \]
 
+\section{\S 53 Covering Spaces}
+
+At this point an issue arises. 
+$\pi_1$ is elegant, but how do we calculate it? 
+In contrast to homology groups, homotopy groups 
+are in general uncomputable, even for arbitrary simplicial complexes.
+
+\subsection{Evenly covered neighborhoods}
+Let 
+\[
+    p : E \to B
+\]
+be continuous and surjective. 
+
+An open set $U \subseteq B$ is 
+\keyterm{evenly covered} by $p$ if 
+\[
+    p^{-1}(U)
+\]
+can be written as a disjoint union of open sets 
+\[
+    p^{-1}(U) 
+    = \bigsqcup_\alpha V_\alpha
+\]
+such that each restriction 
+\[
+    p\bigm|_{V_\alpha} : V \to U
+\]
+is a homeomorphism.
+
+We call the $V_\alpha$'s \keyterm{slices} over $U$.
+
+A map 
+\[
+    p : E \to U
+\]
+is a \keyterm{covering map} if every $b \in B$ 
+has some open neighborhood $U \ni b$ that is evenly covered. 
+Then $E$ is called a \keyterm{covering space} of $B$.
+
+Locally, $E$ looks like several disjoint copies of $B$. 
+Over a sufficiently small $U$, 
+\[
+    p^{-1}(U) = V_1 \sqcup V_2 \sqcup \cdots 
+\]
+and each 
+\[
+    V_i \cong U. 
+\]
+So locally the picture is 
+\begin{align*}
+    V_3 &\cong U \\ 
+    V_2 &\cong U \\ 
+    V_1 &\cong U \\ 
+        &\downarrow p \\ 
+        & \  U
+\end{align*}
+
+\subsection{The canonical example}
+
+Define 
+\[
+    p : \mathbb R \to S^1
+\]
+by 
+\[
+    p(t) = (\cos 2\pi t, \sin 2\pi t).
+\]
+This wraps the real line around the circle 
+infinitely many times.
+
+For example, take the open right semicircular region 
+\[
+    U = \{(x,y) \in S^1 \bigm| x > 0\}.
+\]
+The inverse image is 
+\[
+    p^{-1}(U)
+=
+\bigsqcup_{n\in\mathbb Z}
+\left(n-\frac14,n+\frac14\right).
+\]
+For every $n$, 
+\[
+    p:
+\left(n-\frac14,n+\frac14\right)
+\longrightarrow U
+\]
+is a homeomorphism.
+Therefore $U$ is evenly covered. 
+
+Similar neighborhoods cover the whole circle, so 
+\[
+    p : \mathbb R \to S^1
+\]
+is a covering map.
+
+\subsection{WHy this should let us compute the fundamental group}
+
+The line $\mathbb R$ has no holes, 
+\[
+    \pi_1(\mathbb R) = 0,
+\]
+while the circle does. 
+The covering map lets us study paths in $S^1$ by looking 
+at corresponding paths upstairs in $\mathbb R$. 
+The machinery for this, \keyterm{lifting paths}, 
+comes in $\S 54$. 
+
+So the eventual picture will be 
+\begin{itemize}
+    \item start a loop at $1\in S^1$, 
+    \item lift it to a path in $\mathbb R$ starting at $0$, 
+    \item because the original path ends where it began, 
+        the lifted path ends at some integer $n\in\mathbb Z$, 
+    \item that integer counts how many times the loop wound 
+        the circle,  
+\end{itemize}
+yielding 
+\[
+    \pi_1(S^1) \cong \mathbb Z.
+\]
+
+\subsection{Covering map vs. local homeomorphism}
+
+Every covering map is locally a homeomorphism.
+
+Given $e \in E$, choose an evenly covered neighborhood 
+$U$ of $p(e)$. The point $e$ lies in one slice 
+$V_\alpha$, and 
+\[
+    p\bigm|_{V_\alpha} : V_\alpha \to U
+\]
+is a homeomorphism.
+
+So 
+\[
+    \text{covering map} \ \Rightarrow \ \text{local homeomorphism}.
+\]
+The converse, however, is false.
+
+Munkres gives 
+\[
+    p:\mathbb R^+ \to S^1 
+\]
+by 
+\[
+    x \mapsto (\cos2\pi x, \sin2\pi x).
+\]
+Locally, this is a homeomorphism, but near $(1,0)$ the 
+sheet at the endpoint of $\mathbb R^+$ is incomplete, 
+so no neighborhood there is evenly covered. 
+
+\subsection{Trivial coverings}
+
+If $X$ is any space and $D$ is discrete, 
+consider 
+\[
+    p : X \times D \to X, \ p(x,d) = x. 
+\]
+Then, for all open $U \subseteq X$, 
+\[
+    p^{-1}(U) = \bigsqcup_{d\in D}U \times \{d\}. 
+\]
+Each slice maps homeomorphically to $U$.
+
+Thus $X \times D$ is essentially a stack of separate 
+copies of $X$.
+
+\subsection{Some structural facts}
+
+If $p : E \to B$ is a covering map, then 
+$p$ is an \keyterm{open map}.
+Locally this is immediate since $p$ is locally a homeomorphism.
+
+Also if 
+\[
+    B_0 \subseteq B
+\]
+and 
+\[
+    E_0 = p^{-1}(B_0), 
+\]
+then the restriction 
+\[
+    p\bigm|_{E_0} : E_0 \to B_0
+\]
+is again a covering map.
+
+Products behave nicely, 
+\[
+    p : E \to B, \ p' : E' \to B', 
+\]
+covering maps implies 
+\[
+    p \times p' : E \times E' \to B \times B' 
+\]
+is a covering map.
+
+Later this gives $\mathbb R^2 \to S^1 \times S^1$, the 
+Torus.
+
+\subsection{Some problems}
+
+\begin{prob}
+    Let $X$ be path connected and let $x_0, x_1 \in X$. Let 
+    $\alpha$ be a path from $x_0$ to $x_1$. Define 
+    \[
+        \widehat \alpha : \pi_1(X,x_0) \to \pi_1(X,x_1)
+    \]
+    by 
+    \[
+        \widehat \alpha([f]) = [\bar \alpha * f * 
+        \alpha].
+    \]
+    Prove that $\widehat \alpha$ is an isomrophism.
+\end{prob}
+\begin{proof}
+    We begin by showing it is a homomorphism. 
+
+    Suppose $[f],[g] \in \pi_1(X,x_0)$. 
+    Then 
+    \begin{align*}
+        \widehat \alpha([f][g]) 
+        &= \widehat \alpha([f * g]) \\  
+        &= [\bar \alpha * (f * g) * 
+        \alpha] \\ 
+        &= [(\bar \alpha * f) * e_{x_0} * (g * \alpha)] \\ 
+        &= [(\bar \alpha * f) * \alpha * \bar \alpha * 
+        (g * \alpha)] \\ 
+        &= [(\bar \alpha * f * \alpha) * (\bar \alpha * g 
+        * \alpha)] \\ 
+        &= [\bar \alpha * f * \alpha][\bar \alpha * g * \alpha] \\ 
+        &= \widehat \alpha([f])\widehat \alpha([g]). 
+    \end{align*}
+
+    Now for injectivity, suppose 
+    $\widehat \alpha([f]) = \widehat \alpha([g])$. 
+
+    Then 
+    \begin{align*}
+        [\bar \alpha * 
+        f * \alpha] &= [\bar \alpha * g * \alpha] \\ 
+        [\bar \alpha * f * \alpha] 
+                    &= [\bar \alpha][g][\alpha] \\
+        \Rightarrow [\bar \alpha * f * \alpha][\bar \alpha]
+        [\bar g][\alpha] &= [e_{x_1}] \\ 
+        [\bar \alpha * f * \alpha *
+        \bar \alpha * \bar g * \alpha] 
+                         &= [e_{x_1}] \\ 
+        [\bar \alpha * f * \bar g * \alpha] 
+                         &= [e_{x_1}] \\ 
+        [\alpha][\bar \alpha * f * g * \alpha]
+        [\bar \alpha] 
+                         &= [\alpha][e_{x_1}][\bar \alpha] 
+                         = [e_{x_0}] \\ 
+        [f] [\bar g] &= [e_{x_0}] \\ 
+        \Rightarrow [f] &= [\bar g]. 
+    \end{align*}
+
+    For surjectivity, take some 
+    $[g] \in \pi_1(X, x_1)$.
+    Then $[\alpha * g * \bar \alpha]$ 
+    is a loop at $x_0$ and thus in $\pi_1(X,x_0)$ 
+    with 
+    \[
+        \widehat \alpha([\alpha * g \bar \alpha])
+        = [\bar \alpha * \alpha * g * \bar \alpha * \alpha] 
+        = [g]. 
+    \]
+    Therefore $\widehat \alpha$ is a group isomorphism. 
+\end{proof}
+\begin{prob}
+    Let 
+    \[
+        h : (X, x_0) \to (Y, y_0)
+    \]
+    be continuous. Define 
+    \[
+        h_*([f]) = [h \circ f]. 
+    \]
+    Prove from the definitions that $h_*$ is 
+    well-defined and is a group homomorphism.
+    Then prove 
+    \[
+        (h \circ k)_* = k_* \circ h_*
+    \]
+    for a second based continuous map $k : Y \to Z$.
+\end{prob}
+\begin{proof}
+    For $[f]$ we have that 
+    it is the class of all loops at $x_0$ that are homotopic.
+
+    So two $f_1,f_2$ are in $[f]$ means that 
+    there exists a continuous 
+    \[
+        \varphi : I \times I \to X 
+    \]
+    such that for every $s,t\in I$, 
+    \[
+        \varphi(s,0) = f_1(s), \ 
+        \varphi(s,1) = f_2(s),
+    \]
+    and 
+    \[
+        \varphi(0,t) = x_0, \ \varphi(1,t) = x_0.
+    \]
+
+    Consider 
+    \[
+        H = h \circ \varphi : I \times I \to Y.  
+    \]
+    It is continuous. Moreover, 
+    \[
+        H(s,0)
+        =
+        h(\varphi(s,0))
+        =
+        h(f_1(s))
+        =
+        (h\circ f_1)(s),
+    \]
+    and similarly, 
+    \[
+        H(s,1)=(h\circ f_2)(s).
+    \]
+    At the endpoints 
+    \[
+        H(0,t)=h(x_0)=y_0,
+        \qquad
+        H(1,t)=h(x_0)=y_0.
+    \]
+    Therefore, 
+    \[
+        h\circ f_1\simeq_p h\circ f_2.
+    \]
+    Hence 
+    \[
+        [f_1]=[f_2]
+        \Longrightarrow
+        [h\circ f_1]=[h\circ f_2],
+    \]
+    so 
+    \[
+        h_*([f]) = [h \circ f]
+    \]
+    is well-defined.
+
+    For the homomorphism property take 
+    $[f],[g] \in \pi_1(X,x_0)$.
+    Then 
+    \[
+        h_*([f][g]) 
+        = h_*([f * g]) 
+        = [h \circ (f*g)]. 
+    \]
+    Use path concatenation to get 
+    \[
+        h \circ (f * g) = (h\circ f) * (h \circ g) 
+        = h_*([f])h_*([g]).
+    \]
+    Finally, functoriality is immediate. 
+    For $[f] \in \pi_1(X,x_0)$, 
+    \begin{align*}
+        (k\circ h)_*([f])
+        &=[(k\circ h)\circ f]\\
+        &=[k\circ(h\circ f)]\\
+        &=k_*([h\circ f])\\
+        &=(k_*\circ h_*)([f]).
+    \end{align*}
+\end{proof}
+
 \end{document}
