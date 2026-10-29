@@ -1,0 +1,139 @@
+% Keep styling.sty beside this file. Compile with:
+% latexmk -xelatex -synctex=1 template.tex (or, 
+% for my purposes, compile to preview with VimtexCompile in neovim)
+% if youre using VSC with some built in plugin you'll probably need to add 
+% {
+%   "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+%   "latex-workshop.latex.autoBuild.run": "onSave",
+%   "latex-workshop.view.pdf.viewer": "tab",
+%   "latex-workshop.view.pdf.invertMode.enabled": "never"
+% }
+% also it is necessary to download the right fonts. Just look 
+% at error messages to find which ones or something
+
+\documentclass[11pt]{article}
+\usepackage{styling} % Dark by default, with the clickable THEME switch.
+% \usepackage{graphicx} % Uncomment if adding external images.
+
+\title{Algorithms assignment 2}
+\author{Thobias K. H\o ivik}
+\date{For November 13, 2026} % Use \date{} to hide the date.
+
+\begin{document}
+\maketitle
+
+
+\begin{prob*}[2 Problem 5]
+    Given $7$ jobs with corresponding 
+    processing times, 
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c|c|c|c|c| } 
+            \hline
+            Job $j$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\ 
+            Processing Time $p_j$ & 4 & 7 & 2 & 9 & 12 & 5 & 3 \\ 
+            \hline
+        \end{tabular}
+    \end{center}
+
+    The jobs will be processed on $3$ identical machines 
+    without interruption. All jobs are avliable at 
+    time $0$. (Model on slide 13, Chapter 2)
+    
+    \begin{enumerate}[label=\alph*)]
+        \item Use the local search algorithm where we have 
+            all jobs on machine $1$ in the beginning (in the 
+            same order as they are given). When you move 
+            a job, move it to the machine it can start 
+            earliest. I there is a tie, use the machine with the lowest number. What is the result, both
+            time when the last job finish and the actual schedule?
+        \item Use the Greedy algorithm on the same data. When have all jobs finished?
+        \item Use the Longest processing time rule. When have all jobs finished?
+        \item Give a lower bound on the best solution and give a short explanation?
+        \item Is it possible to achieve the answer in d) (Explain)?
+    \end{enumerate}
+\end{prob*}
+
+This is the classical identical parallel-machine makespan 
+minimization problem, denoted 
+\[
+    P_3 \| \ \| C_{\max}. 
+\]
+We want to find a schedule minimizing 
+\[
+    C_{\max} = \max_{i\in[3]} L_i,  
+\]
+where 
+\[
+    L_i := \sum_{j \ \text{assigned to machine} \ i} p_j
+\]
+is the total processing time on machine $i$.
+
+There are two obvious immediate lower bounds on 
+$C^*_{\max}$, the optimal makespan. 
+
+First, no machine can finish before the longest job assigned 
+to it is done, 
+\[
+    C^*_{\max} \geq \max_{j} p_j,  
+\]
+and the machines must collectively finish 
+all the jobs so 
+\[
+    C_{\max}^* \geq \frac 1 3 \sum_{j=1}^7 p_j.
+\]
+
+\begin{proof}[Solution to (a)]
+    The initial schedule gives all seven jobs to 
+    machine $1$ in the described order by 
+    \[
+        M_1 = \underbrace{1}_{4}
+        \qquad 
+        \underbrace{1}_{4}
+        \qquad 
+        \underbrace{2}_{7}
+        \qquad 
+        \underbrace{3}_{2}
+        \qquad 
+        \underbrace{4}_{9}
+        \qquad 
+        \underbrace{5}_{12}
+        \qquad 
+        \underbrace{6}_{5}
+        \qquad 
+        \underbrace{7}_{3}.
+    \]
+    Note: This accidentally looks a lot like fractions, but 
+    I am just illustrating the processing times $p_j$. 
+
+    We get initial loads 
+    \[
+        (L_1,L_2,L_3) = (42,0,0)
+    \]
+    with $C_{\max} = 42$. 
+
+    We can identify that it is advantegous, 
+    or at least not deleterious, 
+    to swap a job with 
+    processing time $c$ from $M_i$ to $M_{\iota}$ if 
+    \[
+        \max\left(\{L_k \bigm| k \neq i,\iota\} \cup 
+        \{L_i - c, L_\iota + c\} \right)
+    \]
+    is less than or equal to 
+    \[
+        \max_{i}L_i.
+    \]
+    If $M_i$ is the unique machine for which 
+    $L_i = C_{\max}$ we find that it is advantageous 
+    to swap if 
+    \[
+        L_j - c < C_{\max}. 
+    \]
+
+    So we begin by looking at 
+    $j = 1$. 
+    $M_2$
+\end{proof}
+
+
+\end{document}
