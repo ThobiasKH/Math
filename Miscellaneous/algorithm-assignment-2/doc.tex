@@ -15,6 +15,8 @@
 \usepackage{styling} % Dark by default, with the clickable THEME switch.
 % \usepackage{graphicx} % Uncomment if adding external images.
 
+\usepackage{algpseudocode}
+
 \title{Algorithms assignment 2}
 \author{Thobias K. H\o ivik}
 \date{For November 13, 2026} % Use \date{} to hide the date.
@@ -68,19 +70,6 @@ where
 \]
 is the total processing time on machine $i$.
 
-There are two obvious immediate lower bounds on 
-$C^*_{\max}$, the optimal makespan. 
-
-First, no machine can finish before the longest job assigned 
-to it is done, 
-\[
-    C^*_{\max} \geq \max_{j} p_j,  
-\]
-and the machines must collectively finish 
-all the jobs so 
-\[
-    C_{\max}^* \geq \frac 1 3 \sum_{j=1}^7 p_j.
-\]
 
 \begin{proof}[Solution to (a)]
     The initial schedule gives all seven jobs to 
@@ -111,29 +100,282 @@ all the jobs so
     \]
     with $C_{\max} = 42$. 
 
-    We can identify that it is advantegous, 
-    or at least not deleterious, 
-    to swap a job with 
-    processing time $c$ from $M_i$ to $M_{\iota}$ if 
-    \[
-        \max\left(\{L_k \bigm| k \neq i,\iota\} \cup 
-        \{L_i - c, L_\iota + c\} \right)
-    \]
-    is less than or equal to 
-    \[
-        \max_{i}L_i.
-    \]
-    If $M_i$ is the unique machine for which 
-    $L_i = C_{\max}$ we find that it is advantageous 
+    If $M_j$ is the unique machine for which 
+    $L_j = C_{\max}$ we find that it is advantageous 
     to swap if 
     \[
-        L_j - c < C_{\max}. 
+        L_j + c < L_i, 
+    \]
+    or equivalently 
+    \[
+        c < L_i - L_j.
     \]
 
-    So we begin by looking at 
-    $j = 1$. 
-    $M_2$
+    We perform the following procedure. 
+
+    \begin{algorithmic}[1]
+        \Require Jobs $J$ with processing times $p_j$,
+                 machines $M_1,\ldots,M_m$
+        \Ensure A locally optimal schedule
+
+        \State Assign all jobs to $M_1$ in their given order
+        \State $L_i \gets \sum_{j \in M_i} p_j$
+               for each $i \in \{1,\ldots,m\}$
+
+        \While{true}
+            \State $i \gets \arg\max_{k} L_k$
+            \State $\ell \gets$ last job on $M_i$
+            \State $j \gets \arg\min_{k \neq i} L_k$
+
+            \If{$L_j + p_\ell \geq L_i$}
+                \State \Return $(M_1,\ldots,M_m)$
+            \EndIf
+
+            \State Remove $\ell$ from $M_i$
+            \State Append $\ell$ to $M_j$
+            \State $L_i \gets L_i - p_\ell$
+            \State $L_j \gets L_j + p_\ell$
+        \EndWhile
+    \end{algorithmic}
+
+    So here we begin with 
+    \[
+        (42,0,0). 
+    \]
+    The job which finishes last is $j = 7$ so we get 
+    \[
+        (42,0,0) \mapsto (39,3,0). 
+    \]
+    Now $M_1$ still is the machine with maximum load 
+    so we take $j = 6$, and move 
+    \[
+        (39,3,0) \mapsto (34, 3, 5). 
+    \]
+    Repeat to get 
+    \[
+        (34,3,5) \mapsto (22,15,5) 
+        \mapsto (15,15,14). 
+    \]
+    Now we look at $M_1$ again and see that 
+    for $j = 3$ we have $p_j = 3 < L_3 = 14$ so 
+    the algorithm halts with 
+    \[
+        C_{\max} = 14 \leq 2C^*_{\max} = 
+        14 \cdot 2 = 28
+    \]
+    as expected. 
+
+    Running time is $O(nm)$.
+
 \end{proof}
 
+\begin{proof}[Solution to (b)]
+    We perform 
+    \begin{algorithmic}[1]
+        \Require Jobs with processing times
+                 $p_1,\ldots,p_n$ and $m$ machines
+        \State $L_i \gets 0$ for all $i=1,\ldots,m$
+        \For{$j=1,\ldots,n$}
+            \State $i^* \gets \arg\min_i L_i$
+            \State Assign job $j$ to machine $M_{i^*}$
+            \State $L_{i^*} \gets L_{i^*}+p_j$
+        \EndFor
+        \State \Return $\max_i L_i$
+    \end{algorithmic}
+
+    We begin at $j = 1$ and since all $M_i$ have 
+    $L_i = 0$ we get $L_i$'s 
+    \[
+        (4,0,0). 
+    \]
+    Next 
+    \[
+        (4,7,0), 
+    \]
+    then 
+    \[
+        (4,7,2).
+    \]
+    Once again $L_3$ is the minimum so next pass gives 
+    \[
+        (4,7,11). 
+    \]
+    Now $L_1$ is smallest so we get 
+    \[
+        (16,7,11). 
+    \]
+    Now $L_2$ is smallest so we get 
+    \[
+        (16,12,11). 
+    \]
+    Now $L_3$ is smallest so we get 
+    \[
+        (16,12,14). 
+    \]
+    We obtain $C_{\max} = 16$ with 
+    the algorithm running in time $O(nm)$. 
+\end{proof}
+
+\begin{proof}[Solution to (c)]
+    We perform 
+    \begin{algorithmic}[1]
+        \Require Jobs $J$ with processing times $p_j$,
+                 $m$ identical machines
+        \State Sort jobs by nonincreasing processing time
+        \State $L_i \gets 0$ for all $i=1,\ldots,m$
+        \For{each job $j$ in sorted order}
+            \State $i^* \gets \arg\min_i L_i$
+            \State Assign job $j$ to machine $M_{i^*}$
+            \State $L_{i^*} \gets L_{i^*}+p_j$
+        \EndFor
+        \State \Return $\max_i L_i$
+    \end{algorithmic}
+
+    Performiing the algorithm we get 
+    \begin{align*}
+        (12,0,0) &\mapsto (12,9,0) \\ 
+        &\mapsto (12,9,7) \\ 
+        &\mapsto (12,9,12) \\ 
+        &\mapsto (12,13,12) \\ 
+        &\mapsto (15,13,12) \\ 
+        &\mapsto (15,13,12)
+    \end{align*}
+    attaining a maximum of $15$. 
+
+    Running time is 
+    $O(n\log n + mn)$ since we sort first. 
+\end{proof}
+
+\begin{proof}[Solutioin and proof sketch for (d)]
+    Let $C_{\max}^*$ denote the optimal makespan, and 
+    let $L_i$ be the total processing time assigned 
+    to machine $M_i$. 
+
+    Since every job must be processed, we have 
+    \[
+        \sum_{i=1}^m L_i = \sum_{j=1}^n p_j. 
+    \]
+    Moreover, since each machine processes jobs 
+    sequentially, 
+    \[
+        C_{\max}^* \geq \max_i L_i \geq \frac 1 m 
+        \sum_{i=1}^m L_i = \frac 1 m \sum_{j=1}^n p_j. 
+    \]
+    We also necessarily have 
+    \[
+        C_{\max}^* \geq \max_j p_j, 
+    \]
+    since every job must finish before the 
+    schedule is complete. 
+
+    Combining we get 
+    \[
+        C_{\max}^* \geq 
+        \max \left\{
+            \frac 1 m \sum_{j=1}^m p_j, \ \max_j p_j
+        \right\}.
+    \]
+\end{proof}
+
+\begin{proof}[Solution to (e)]
+    Consider the following schedule, 
+    \begin{align*}
+        M_1 : \{5,3\},  & L_1 = 12 + 2 = 14 \\ 
+        M_2 : \{4,6\},  & L_2 = 9+5 = 14, \\ 
+        M_3 : \{2,1,7\} & L_3 = 7+4+3 = 14.
+    \end{align*}
+
+    This is a feasible schedule with 
+    \[
+        C_{\max} = \max\{14,14,14\} = 14 = C_{\max}^*. 
+    \]
+\end{proof}
+
+\begin{prob*}[2, Problem 6]
+    The adjacency matrix of a graph on $6$ vertices 
+    is given below. The triangle inequality holds for the 
+    whole graph. 
+    \[
+        \begin{bmatrix}
+            0 & 4 & 5 &10&11& 7 \\ 
+            4 & 0 & 9 & 6& 7& 9 \\ 
+            5 & 9 & 0 & 9& 6& 2 \\ 
+           10 & 6 & 9 & 0& 3& 9 \\ 
+           11 & 7 & 6 & 3& 0& 6 \\ 
+            7 & 9 & 2 & 9& 6& 0 
+        \end{bmatrix}
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Verify that the triangle inquality 
+            holds when going from vertex $1$ to $5$. 
+        \item Run the nearest addition algorithm on 
+            the graph. If there are more than 
+            one candidate to add in a step, use the vertex 
+            with the smallest number. It is sufficient to 
+            have fours nodes in the tour (skipping the 
+            last two iterations through the loop).
+        \item Run the Double tree algorithm on the graph. 
+            If there are more than one minimum spanning 
+            tree, you should run it on every tree. 
+        \item Run Christofides' algorithm on the graph. 
+            If there are more than one minimum spanning 
+            tree, you should run it on every tree. 
+    \end{enumerate}
+\end{prob*}
+
+Let $G = ([6], E) \cong K_6$ be the complete 
+graph (undirected) on $6$ vertices with edge weights given 
+in the adjacency matrix in the problem description.
+
+Denote the weights $c_{ij}$. I.e. 
+$c_{12} = 4, \ c_{15} = 11$ and so forth. 
+
+\begin{proof}[Solution for (a)]
+    We have $c_{15} = 11$. 
+    The possibilities are 
+    \[
+        \begin{aligned}
+        c_{12}+c_{25}&=4+7=11,\\
+        c_{13}+c_{35}&=5+6=11,\\
+        c_{14}+c_{45}&=10+3=13,\\
+        c_{16}+c_{65}&=7+6=13.
+        \end{aligned}
+    \]
+    Thus 
+    \[
+        c_{15} = 11 \leq \min\{11,11,13,13\} = 11 
+    \]
+    so were good.
+\end{proof}
+
+\begin{proof}[Solution to (b)]
+    We wish to find a permutation $\pi$ of the 
+    vertices minimizing 
+    \[
+        c_{\pi(1)\pi(2)} + 
+        c_{\pi(2)\pi(3)} + \cdots + 
+        c_{\pi(6)\pi(1)}. 
+    \]
+
+    I.e. we want to find 
+    a minimum-weight Hamiltonian cycle. 
+    The additional assumption is that the weights 
+    satisfy the triangle inequality 
+    \[
+        c_{ij} \leq c_{ik} + c_{ki}, \ \forall i,j,k \in V = [6].
+    \]
+
+    We begin with the two closest vertices 
+    and repeatedly add the vertex outside 
+    the tour that is closest to any vertex 
+    already in the tour. 
+
+    When inserting a new vertex $j$ between 
+    two consecutive vertices $u,v$, the increase in 
+    tour cose is 
+    \[
+        \Delta = c_{uj} + c_{jv} - c_{uv}.
+    \]
+\end{proof}
 
 \end{document}
