@@ -1,5 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage{styling}
+\usepackage{tikz-cd}
 
 \title{\huge{MAT242 - Topology}}
 \author{\LARGE{Thobias Høivik}}
@@ -6015,6 +6016,84 @@ Torus.
         &=k_*([h\circ f])\\
         &=(k_*\circ h_*)([f]).
     \end{align*}
+\end{proof}
+
+\begin{prob}
+    Consider the covering map 
+    \[
+        p : \mathbb R \to S^1, \ p(t) 
+        = (\cos 2\pi t, \sin 2\pi t), 
+    \]
+    with basepoints $0 \in \mathbb R$ and 
+    $(1,0) \in S^1$. 
+
+    A \keyterm{lift} of a path 
+    $f : I \to S^1$ is a path 
+    \[
+        \widehat f : I \to \mathbb R 
+    \]
+    such that 
+    \[
+        p \circ \widehat f = f. 
+    \]
+    Compute $\pi_1(S^1)$. 
+\end{prob}
+\begin{proof}[Proof start]
+    Given $\gamma : [0,1] \to S^1$ based 
+    at $(1,0)$, meaning $\gamma(1) = (1,0)$, 
+    there exists a unique lifted path 
+    \[
+        \hat \gamma : [0,1] \to \mathbb R
+    \]
+    such that $\hat \gamma(0) = 0$ and 
+    $p \circ \hat \gamma = \gamma$. 
+
+    SInce $\gamma(1) = (1,0)$, we have 
+    \[
+        p(\hat \gamma(1)) 
+        = (\cos(2\pi \hat \gamma(1)), 
+        \sin(2\pi\hat\gamma(1))) 
+        = (1,0). 
+    \]
+    The fiber over $(1,0)$ under $p$ is 
+    $\mathbb Z$. Therefore, the endpoint $\hat \gamma(1)$ 
+    must be an integer 
+    \[
+        \hat \gamma (1) = n \in \mathbb Z. 
+    \]
+    We define a map 
+    \[
+        \phi : \pi_1(S^1, (1,0))
+        \to \mathbb Z, \ [\gamma] 
+        \mapsto \hat \gamma(1). 
+    \]
+
+    Suppose $\gamma_0 \simeq \gamma_1$ are 
+    path homotopic loops in $S^1$ relative to 
+    endpoints. Let $H : [0,1] \times [0,1] 
+    \to \mathbb R$ be a homotopy between 
+    the two loops. 
+    There exists a unique lifted homotopy $\hat H$ with 
+    codomain $\mathbb R$ such that 
+    \begin{enumerate}
+        \item $\widehat H(s,0) = 0$ for all $s \in [0,1]$, 
+        \item $p \circ \widehat H = H$.
+    \end{enumerate}
+    Since $H(s,1) = (1,0)$ for all $s \in [0,1]$, 
+    the path $s \mapsto \hat H(s,1)$ lies entirely 
+    within the fiber $\mathbb Z$. 
+
+    Because $[0,1]$ is connected and 
+    $\mathbb Z$ is discrete, the function 
+    $s \mapsto \hat H(s,1)$ must be constant. 
+    Thus 
+    \[
+        \hat \gamma_0(1) = \hat H(0,1) 
+        = \hat H(1,1) = \hat \gamma_1(1).
+    \]
+    Thus $\phi$ is well-defined. 
+
+    And so on...
 \end{proof}
 
 \end{document}
