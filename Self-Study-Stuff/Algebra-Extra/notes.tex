@@ -1384,6 +1384,101 @@ Basically, there will probably not be any pedagogical value here.
     when working with $(x^2,xy)$. 
 \end{proof}
 
+\section{Exam style stuff}
+I have to practice for MAT224 Commutative Algebra 
+oral examiniation so these problems are more 
+about intuition, allowing less rigor. 
+
+\begin{prob}
+    Let 
+    \[
+        R = k[x,y] , \ I = (x^2, xy, y^2), \ A = R/I. 
+    \]
+    What can you say about $A$? 
+    In particular, is it Noetherian or Artinian? 
+    Can you give a $k$-basis or normal form for its elements?
+
+    Compute $\sqrt I$. Then describe $V(I) \subseteq k^2$. 
+    What information about $I$ is visible from $V(I)$? 
+
+    Is $I$ prime? Is $I$ primary? Give the 
+    quickest convincing argument you can. 
+
+    Determine the maximal ideals of $A$. 
+    Is $A$ local? 
+    If so, identify the maximal ideal 
+    $\mathfrak m$, and compute enough powers of 
+    $\mathfrak m$ to see what happens. 
+
+
+\end{prob}
+
+\begin{proof}[Solution]
+    We have $I = (x,y)^2$. We can then say that 
+    the ring is Noetherian by using Hilbert's 
+    Nullstellensatz twice $k \rightarrow k[x] 
+    \rightarrow k[x][y] = k[x,y]$ with Noetherian 
+    preserved. Then $I \subseteq R$ is 
+    Noetherian so $R/I = A$ is Noetherian. 
+
+    Artinian does not hold for $R$ since 
+    $(x) \supsetneq (x^2) \supsetneq (x^4) \supsetneq \cdots$ never 
+    stabilizes. We have an exact sequence 
+    \[
+        0 \to (x,y)(x,y) \to R = k[x,y] \to A \to 0.  
+    \]
+    We have that $R$ is Artinian if 
+    and only if $(x,y)^2$ and $A$ are Artinian. 
+    We know that $R$ is not Artinian, and 
+    $(x,y)^2$ is not Artinian either so we 
+    can't conclude anything about $A$ using this. 
+
+    What we can notice is that 
+    any polynomials with $x$ degree 
+    $\geq 2$ vanish, same for $y$, while 
+    terms in both $x$ and $y$ vanish also. Thus 
+    all polynomials have only constant terms, terms in $x$ and 
+    terms in $y$. 
+    Thus $A$ is an $R$-algebra, more specifically a 
+    $k$-vector space with basis $\{1,\bar x,\bar y\}$.
+
+    The root $\sqrt I$ is $(x,y)$. 
+    We obviously have $(x,y) \subseteq \sqrt I$. 
+    For $ax + by \in (x,y)$ we have 
+    \[
+        (ax + by)^2 = a^2x^2 + (2ab)xy + b^2y^2  
+    \] 
+    which is in $I$. 
+    Now, all generators of $I$ are divisible by by either 
+    $x$ or $y$ so $I \subseteq (x,y)$. We have $(x,y)$ prime 
+    (and even maximal) so $\sqrt I \subseteq (x,y)$ (since 
+    $f^n \in I \subseteq J$ implies $f \in J$ due to 
+    primality).
+
+    We do not have that $I$ is prime, since 
+    $x^2$ is in $I$, but $x$ is not. It is, however, 
+    maximal. We have already established that 
+    $(x,y)$ is maximal and $I = (x,y)^2$ so 
+    \[
+        (x,y)^2 \subseteq I \subseteq (x,y). 
+    \]
+    Thus $I$ is $(x,y)$-primal. 
+
+    The maximal ideals of $A$ map one to one with the 
+    maximal ideals of $R$ containing $I$. 
+
+    As mentioned we have $(x,y) \supseteq (x^2,xy,y^2)$ and 
+    $(x,y)$ is maximal so 
+    \[
+        (\bar x, \bar y) = \frac{(x,y)}{(x^2,xy,y^2)}. 
+    \]
+    We can use the third isomorphism theorem 
+    to prove that $A/(\bar x, \bar y) \cong k$. 
+
+     
+    
+\end{proof}
+
 
 
 
