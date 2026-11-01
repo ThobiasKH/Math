@@ -1410,13 +1410,24 @@ about intuition, allowing less rigor.
     $\mathfrak m$, and compute enough powers of 
     $\mathfrak m$ to see what happens. 
 
+    Compute $\Ann_A(\bar x)$ and 
+    $\Ann_A(\bar y)$. 
+    Are either of these prime ideals? 
+
+    Consider mutliplication by $\bar x$, 
+    \[
+        \mu_{\bar x} : A \to A, \ a \mapsto \bar x a. 
+    \]
+    Without being given a sequence, identify 
+    $\ker \mu_{\bar x},  \ \im \mu_{\bar x}, \ \coker 
+    \mu_{\bar x}$. 
 
 \end{prob}
 
 \begin{proof}[Solution]
     We have $I = (x,y)^2$. We can then say that 
     the ring is Noetherian by using Hilbert's 
-    Nullstellensatz twice $k \rightarrow k[x] 
+    Basis Theorem twice $k \rightarrow k[x] 
     \rightarrow k[x][y] = k[x,y]$ with Noetherian 
     preserved. Then $I \subseteq R$ is 
     Noetherian so $R/I = A$ is Noetherian. 
@@ -1475,7 +1486,65 @@ about intuition, allowing less rigor.
     We can use the third isomorphism theorem 
     to prove that $A/(\bar x, \bar y) \cong k$. 
 
-     
+    For uniqueness, 
+    suppose $f \in A$. 
+    Then $f = a + bx + cy$. 
+    The ideal $\mathfrak m = (\bar x,\bar y)$ 
+    consists of all elements 
+    where the constant term is zero, $a = 0$, 
+    so an element $f$ not in 
+    $(\bar x,\bar y)$ is just $f = a \in k \setminus \{0\}$, 
+    which is 
+    invertible since $k$ is a field. 
+
+    As we glimpsed earlier, 
+    $\mathfrak m^2 = (\bar x, \bar y)(\bar x,\bar y) 
+    = (\bar x^2, \bar x \bar y, \bar y^2) = 0$. 
+
+    We have 
+    \[
+        \Ann_A(\bar x) = \left\{
+            a \in A \bigm| a\bar x = 0. 
+        \right\}
+    \]
+    Equivalently, in $A = R/I$ we have that 
+    the annihilator of $\bar x$ are 
+    all $a = \alpha + \beta \bar x + \delta \bar y$ such that 
+    \[
+        a \bar x 
+        = \alpha \bar x + \underbrace{\beta \bar x^2}_{0} 
+        + \underbrace{\delta \bar y \bar x}_0 = 0. 
+    \]
+    We have that $\bar x$ is a basiselement of 
+    the space, requiring $\alpha = 0$. 
+    $\beta, \ \delta$ can be any elements at 
+    all so 
+    \[
+        a = 0 + \beta \bar x + \delta \bar y 
+        \in (\bar x, \bar y) = \mathfrak m. 
+    \]
+    It is not terribly surprising that $\Ann_A(\bar x)$ 
+    is contained in $\mathfrak m$, since 
+    it is maximal, but actually $\Ann_A(\bar x) = \mathfrak m$. 
+
+    We can see this since, for 
+    $a\bar x + b \bar y \in (\bar x, \bar y)$ we have 
+    \[
+        (a \bar x + b \bar y) \bar x 
+        = a \bar x^2 + b \bar y^2 = 0. 
+    \]
+    Thus $\Ann_A(\bar x) = \mathfrak m$, the maximal ideal. 
+
+    Now, the exact same holds for $\bar y$, for 
+    the same reasons, and it is not hard to see. 
+
+    Now for multiplication at $\bar x$ we 
+    get a natural short exact sequence 
+    \[
+        0 \to A
+        \overset{\mu_{\bar x}}\to A \overset\pi\to 
+        \Ann_A(\bar x) \to 0 
+    \]
     
 \end{proof}
 
