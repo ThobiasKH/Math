@@ -6155,4 +6155,410 @@ $B^2$ is convex, hence simply connected so
 There does not exist an injection from the integers to 
 $0$ so we cannot have that $S^1$ is a retract of $B^2$.
 
+\subsection{Nullhomotopy and 
+extension over the disk}
+
+A map 
+\[
+    h : S^1 \to X 
+\]
+is \keyterm{nullhomotopic} if it 
+is homotopic to a constant map. 
+
+Munkres proves the following useful 
+equivalence 
+\[
+    h \ \text{nullhomotopic} 
+    \Leftrightarrow h \ \text{extends continuously to} 
+    \ B^2 \Leftrightarrow h_* : \pi_1(S^1) 
+    \to \pi_1(X) \ \text{is trivial.}
+\]
+
+Geometrically, a loop can be contracted 
+to a point exactly when you can fill the loop 
+with a disk, which is a lot more intuitive. 
+
+\subsection{Brouwer fixed point theorem}
+
+The famous payoff is 
+\[
+    f : B^2 \to B^2 \ \text{continuous} 
+    \Rightarrow \exists x \in B^2 \ \text{s.t.} \ f(x) = x. 
+\]
+
+This is the \keyterm{Brouwer Fixed Point Theorem 
+for the disk}. 
+
+Conceptually, the contradiction is, suppose 
+$f(x) \neq x$ for every $x$. Then the displacement 
+$v(x) = f(x) - x$ is a continuous nonvanishing 
+vector field (what the fuck). 
+Munkres proves that such a field must point 
+directly outward somewhere on the boundary, 
+but if $x \in S^1$ and 
+\[
+    v(x) = ax, \ a > 0,
+\]
+then 
+\[
+    f(x) = x + ax = (1+a)x, 
+\]
+which lies outside $B^2$, contradiction. 
+
+There is a common equivalent geometric proof, in that 
+if there were no fixed point, draw the ray from 
+$f(x)$ through $x$ and intersect with $S^1$, this 
+constructs a forbidden retraction $B^2 \to S^1$. 
+
+\section{\S57 Borsuk-Ulam}
+
+Now we move from fixed points to \keyterm{anitpodal points}. 
+
+If $x \in S^n$ its antipode is $-x$. 
+A map 
+\[
+    h : S^n \to S^m 
+\]
+is \keyterm{antipode-preserving} if 
+\[
+    h(-x) = -h(x).
+\]
+
+Munkres builds towards 
+\[
+    f : S^2 \to \mathbb R^2 
+    \ \text{continuous} 
+    \Rightarrow \exists x \in S^2 
+    : f(x) = f(-x). 
+\]
+This is the $S^2$ Borsuk-Ulam theorem. 
+
+\subsection{The idea}
+
+Munkres proves that there is no continuous 
+antipode-preserving map from $S^2 \to S^1$. 
+
+Suppose $g : S^2 \to S^1$ were antipode-preserving. 
+
+Restrict to the equator by 
+\[
+    h = g \bigm|_{S^1} : S^1 \to S^1. 
+\]
+Then $h$ is antipode-preserving. 
+Munkres proves such an $h$ cannot be nullhomotopic. 
+
+However the equator bounds the upper hemisphere 
+\[
+    E \cong B^2. 
+\]
+Since $g$ is defined on all of $S^2$, $h$ extends over 
+$E \cong B^2$. By $\S55$, $h$ extends over 
+$B^2$ implies that $h$ is nullhomotopic, a 
+contradiction. 
+
+Note: This makes more sense if one sees some 
+3b1b video on the topic imo. 
+
+\subsection{Deriving Borsuk-Ulam}
+
+Suppose that $f(x) \neq f(-x)$ for 
+all $x \in S^2$. 
+
+Then 
+\[
+    f(x) - f(-x) \neq 0. 
+\]
+
+Normalize it 
+\[
+    g(x) = \frac{f(x) - f(-x)}{\|f(x) - f(-x)\|}. 
+\]
+Then 
+\[
+    g : S^2 \to S^1 
+\]
+is continuous. 
+But 
+\[
+    g(-x) = \frac{f(-x) - f(x)}{\|f(-x) - f(x)\|} 
+    = -g(x).
+\]
+So $g$ is antipode-preserving. 
+
+We just proved no such map exists, a contradiction. 
+
+Thus 
+\[
+    f(x) = f(-x). 
+\]
+
+\section{\S58 Deformation retracts and homotopy type}
+
+A retraction $r : X \to A$ only 
+says that $X$ can be mapped onto $A$ while fixing $A$. 
+
+A \keyterm{deformation retraction} says that $X$ 
+can be continuously deformed onto $A$. 
+
+Formally, $A \subseteq X$ is deformation retract if 
+there exists 
+\[
+    H : X \times I \to X 
+\]
+such that 
+\[
+    H(x,0) = x, 
+\]
+and 
+\[
+    H(x,1) \in A, 
+\]
+and crucially, 
+\[
+    H(a,t) = a \ (a \in A, t \in I). 
+\]
+So throughout the deformation, $A$ is fixed.  
+
+At time $1$, define 
+\[
+    r(x) = H(x,1). 
+\]
+Then $r : X \to A$ is a retraction. 
+
+Deformation retract is a lot stronger as it gives 
+\[
+    j \circ r \simeq \id_X, 
+\]
+while 
+\[
+    r \circ j = \id_A. 
+\]
+Applying $\pi_1$ we get 
+\[
+    r_* \circ j_* = \id, 
+\]
+and because the homotopy fixes the basepoint, 
+\[
+    j_* \circ r_* = \id. 
+\]
+Therefore 
+\[
+    j_* : \pi_1(A) \overset\sim\longrightarrow 
+    \pi_1(X). 
+\]
+So deformation retracts preserve the fundamental group. 
+
+For a canonical example take 
+\[
+    X = \mathbb R^{n+1} \setminus \{0\}, 
+    \ A = S^n. 
+\]
+Radially push every point onto the sphere 
+\[
+    r(x) = \frac{x}{\|x\|}. 
+\]
+One possible homotopy is 
+\[
+    H(x,t) = (1-t)x + t \frac{x}{\|x\|}. 
+\]
+This never hits $0$, and if $x \in S^n$, then 
+\[
+    H(x,t) = x. 
+\]
+Thus $S^n$ is a deformation retract of 
+\[
+    \mathbb R^{n+1}\setminus\{0\}. 
+\]
+Therefore, 
+\[
+    \pi_1(\mathbb R^{n+1}\setminus \{0\})
+    \cong \pi_1(S^n). 
+\]
+
+\subsection{Homotopy equivalence}
+
+Now comes a really important abstraction. 
+
+SPaces $X$ and $Y$ need not be homeomorphic 
+for algebraic topology to consider them essentially 
+the same. 
+
+Suppose there are maps $f : X \to Y$ and $g : Y \to X$ 
+such that 
+\[
+    g \circ f \simeq \id_X 
+\]
+and 
+\[
+    f \circ g \simeq \id_Y. 
+\]
+Then $f,g$ are \keyterm{homotopy equivalences}, 
+and 
+\[
+    X \simeq Y 
+\]
+in the sense of having the same \keyterm{homotopy type}. 
+
+Comparatively, 
+\[
+    g \circ f = \id_X, \ f \circ g = \id_Y
+\]
+for homeomorphisms and 
+\[
+    g \circ f \simeq \id_X, \ f \circ g \simeq 
+    \id_Y 
+\] 
+for homotopy equivalence. 
+
+So we have weakened equality of maps to 
+equality up to continuous deformation. 
+
+Every homeomorphism is obviously a 
+homotopy equivalence, while 
+the converse is wildly false. 
+
+\subsection{Some problems}
+
+\begin{prob}
+    Let $X = \mathbb R^2 \setminus \{(0,0)\}$ and let 
+    \[
+        A = S^1 = 
+        \{(x,y) \in \mathbb R^2 \bigm| 
+        x^2 + y^2 = 1\}. 
+    \]
+    Define $r : X \to A$ by 
+    \[
+        r(x,y) = \frac{(x,y)}{\sqrt{x^2 + y^2}}. 
+    \]
+    Prove that $r$ is a retraction of 
+    $X$ onto $S^1$. 
+\end{prob}
+\begin{proof}
+    For all $(x,y) \neq (0,0)$ we have that 
+    $\|(x,y)\| \neq 0$ so there are no division by 
+    zero issues. 
+    Furthermore, when we normalize we necessarily have 
+    $\|(x,y)\| = 1$ so $x^2 + y^2 = 1^2 = 1$. 
+    Thus $r(x,y) \in S^1$.
+
+    For $(x,y) \in S^1$ we have 
+    \[
+        r(x,y) = \frac{(x,y)}{\sqrt{x^2 + y^2}}. 
+    \]
+    By definition, $x^2 + y^2 = 1$ so 
+    \[
+        r(x,y) = (x,y). 
+    \]
+
+    For continuity, notice that 
+    $(x,y) \mapsto x^2 + y^2$ is continuous with 
+    strictly positive value so 
+    $(x,y) \mapsto \sqrt{x^2 + y^2}$ is continuous. 
+    Thus $r$ is continuous.
+\end{proof}
+
+\begin{prob}
+    Let 
+    \[
+        D^2 = \{(x,y) \in \mathbb R^2 \bigm| 
+        x^2 + y^2 \leq 1\} 
+    \]
+    and let 
+    \[
+        S^1 = \partial D^2. 
+    \]
+    Prove that there is no retraction 
+    \[
+        r : D^2 \to S^1. 
+    \]
+    You may use 
+    \[
+        \pi_1(S^1) \cong \mathbb Z, 
+    \]
+    and 
+    \[
+        \pi_1(D^2) \cong 0. 
+    \]
+    Try to prove it using the inclusion $i : 
+    S^1 \hookrightarrow D^2$ and functoriality of 
+    $\pi_1$. 
+\end{prob}
+\begin{proof}
+    Suppose $r : D^2 \to S^1$ is a retraction. 
+    Then $r \circ i = \id_{S^1}$, where $i: S^1 
+    \to D^2$ is the 
+    inclusion. 
+    By functoriality of $\pi_1$ we have 
+    \[
+        r_* \circ i_* 
+        = (r \circ i)_* = (\id_{S^1})_* 
+        = \id_{\pi_1(S^1)}. 
+    \]  
+    Thus $i_*$ has a left inverse, so 
+    $i_* : \pi_1(S^1) \to \pi_1(D^2)$ is injective, 
+    implying $\mathbb Z \subseteq 0$, which of course 
+    is nonsense.
+\end{proof}
+
+\begin{prob}
+    Let $A \subseteq X$, and suppose $A$ is 
+    a \keyterm{deformation retract} of $X$. 
+
+    Prove that the inclusion 
+    \[
+        i : A \hookrightarrow X 
+    \]
+    induces an isomorphism 
+    \[
+        i_* : \pi_1(A,a_0)
+        \overset\sim\longrightarrow \pi_1(X,a_0). 
+    \]
+\end{prob}
+\begin{proof}
+    Since $A$ is deformation retract of $X$, there is 
+    a map 
+    \[
+        H : X \times I \to X 
+    \]
+    such that 
+    \[
+        H(x,0) = x, 
+    \]
+    and 
+    \[
+        H(x,1) \in A,  
+    \]
+    and 
+    \[
+        H(a,t) = a, \ a \in A. 
+    \]
+
+    Fixing time at $t = 1$ to define 
+    \[
+        r(x) = H(x,1) 
+    \]
+    we get that $r$ is a retraction. 
+    We get that 
+    \[
+        i \circ r \simeq \id_X, 
+    \]
+    and 
+    \[
+        r \circ i = \id_A. 
+    \]
+    Using functoriality of $\pi_1$ we get 
+    \[
+        r_* \circ i_* = \id, 
+    \]
+    and since the homotopy fixes the basepoint 
+    \[
+        i_* \circ r_* = \id.  
+    \]
+    This gives 
+    \[
+        i_* : \pi_1(A) \to \pi_1(X), 
+    \]
+    an isomorphism. 
+\end{proof}
+
 \end{document}
