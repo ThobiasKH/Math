@@ -6096,4 +6096,63 @@ Torus.
     And so on...
 \end{proof}
 
+\section{\S55 Retractions and Fixed Points}
+Let $A \subseteq X$. A \keyterm{retraction} is a 
+continuous map $r : X \to A$ such that 
+\[
+    r(a) = a, \ \forall a \in A. 
+\]
+Equivalently, if 
+\[
+    j : A \hookrightarrow X
+\]
+is inclusion, then 
+\[
+    r \circ j = \id_A.
+\]
+
+Intuitively, we are saying that $X$ can be 
+collapsed onto $A$ without moving points already on $A$.  
+
+A canonical example is 
+\[
+    r : \mathbb R^2 \setminus \{0\} 
+    \to S^1, \ r(x) = \frac{x}{\|x\|}.
+\]
+Every nonzero points is pushed onto the unit circle. 
+
+\subsection{Fundamental group obstruction}
+Suppose $A$ is a retract of $X$. Then 
+\[
+    r \circ j = \id_A. 
+\]
+Apply $\pi_1$, 
+\[
+    r_* \circ j_* = (r \circ j) 
+    = (\id_A)_* = \id_{\pi_1(A)}.
+\]
+Thus $j_*$ has a left inverse, so 
+\[
+    j_* : \pi_1(A) \to \pi_1(X) 
+\]
+is injective. 
+
+Now take e.g. $S^1 \subseteq B^2$ where 
+$B^2$ is the closed disk. 
+If there was a retraction 
+\[
+    r : B^2 \to S^1, 
+\]
+then inclusion would induce an injection 
+\[
+    \pi_1(S^1) \hookrightarrow \pi_1(B^2).
+\]
+However, $\pi(S^1) \cong \mathbb Z$ while 
+$B^2$ is convex, hence simply connected so 
+\[
+    \pi_1(B^2) = 0.
+\]
+There does not exist an injection from the integers to 
+$0$ so we cannot have that $S^1$ is a retract of $B^2$.
+
 \end{document}
