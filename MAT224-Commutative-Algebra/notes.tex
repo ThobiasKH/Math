@@ -1,6 +1,8 @@
 \documentclass[11pt]{article}
 \usepackage{styling}
 
+\DeclareMathOperator{\Ass}{\operatorname{Ass}}
+
 
 \title{\huge{MAT224 - Commutative Algebra}}
 \author{\LARGE{Thobias Høivik}}
@@ -7521,6 +7523,208 @@ Thus algebraic sets correspond to radical ideals.
     SInce $\mathfrak m_a$ is maximal, we get 
     $(t - a) \cap R = \mathfrak m_a$. Thus $(t-a)$ lies over 
     $\mathfrak m_a$. 
+\end{proof}
+
+\begin{prob}
+    Show that the field extension 
+    $k[x] \subseteq k[x,y]/(x(x-1)y+1)$ 
+    does not fulfill Lying Over. Can you find a polynomial 
+    ring in one variable inside of $k[x,y]/(x(x-1)y+1)$ 
+    such that the extension becomes integral. 
+\end{prob}
+\begin{proof}
+    We will show that there is a prime 
+    $P \trianglelefteq k[x]$ such that there is no 
+    $P' \trianglelefteq k[x,y]/(x(x-1)y+1)$ for which 
+    \[
+        P' \cap R = P.
+    \]
+    We first indenftify the elements whithin 
+    $k[x,y]/(x(x-1)y+1)$. 
+    We have $(x(x-1)y+1) = (x^2y - xy + 1)$. Thus, 
+    elements in $R' = k[x,y]/(x^2y - xy + 1)$ have terms in 
+    $x^2y - xy + 1$ vanish. Take the ideal 
+    $(\bar x)$. Notice that $\bar{x^2y - xy = -1}$. 
+    Then $\bar x, (\bar x -1), \bar y$ are units.
+    Take $(x) \subseteq k[x]$. Suppose there was a prime 
+    $P' \subset A$ so that 
+    \[
+        P' \cap A = (x). 
+    \]
+    Then $\bar x \in P'$, but $\bar x$ is a unit above. 
+    No proper ideal, and thus no prime ideal, can contain 
+    a unit, giving a contradiction.
+
+    Set $z = \bar x + \bar y$. Then 
+    \[
+        k[z] \subseteq A = k[x,y]/(x(x-1)y + 1)
+    \]
+    is integral. Since $z = x +y$ we can write 
+    $y = z - x$.
+    Then $x(x-1)y + 1=0 \Rightarrow x(x-1)(z-x) + 1 = 0$. 
+    Expand to get 
+    \[
+        -x^3 + (z+1)x^2 - zx + 1 = 0.
+    \]
+    Multiply by $-1$ to get 
+    \[
+        x^3 - (z+1)x^2 +zx - 1 = 0. 
+    \]
+    Regarding this as a polynomial 
+    \[
+        f(T) = T^3-(z+1)T^2+zT-1\in k[z][T], 
+    \]
+    we have a monic for which $\bar x$ is a root.
+\end{proof}
+
+\section{Chapter 10 - Noether Normalization \& 
+Hilbert's Nullstellesatz}
+
+Suppose $A$ is a finitely generated $k$-algebra. 
+So perhaps 
+\[
+    A = k[\bar x_1, \ldots, \bar x_n].
+\]
+\keyterm{Noether normalization} 
+says that somewhere inside $A$ there is 
+a polynomial subring $k[z_1,\ldots,z_r] \subseteq A$ 
+such that $A$ is finite, and hence integral, over 
+$k[z_1,\ldots,z_r]$.
+
+Moreover, over an infinite field like $\mathbb C$, the 
+$z_i$ can be chosen as linear combinations of the 
+original generators. 
+
+\subsection{Working towards the result}
+
+Suppose $A = k[x_1,\ldots,x_n]$. There are only 
+two possibilities. If the $x_i$ satisfy no 
+algebraic relation, then we already have a polynomial ring 
+\[
+    A \cong k[T_1,\ldots,T_n]. 
+\]
+
+Otherwise there is some 
+\[
+    f(x_1,\ldots,x_n) = 0. 
+\]
+The problem being that $f$ might not be monic in 
+any particular variable, so it does not immediately 
+prove that one generator is integral over the others. 
+
+The trick then is to change coordinates until the 
+relation becomes monic in one variable. 
+
+Gathmann proves that after a linear substitution such as 
+\[
+    x_i = y_i + a_iy_n, 
+\]
+one can arrange the relation such that it is monic in $y_n$. 
+
+Then $y_n$ is integral over $k[y_1,\ldots,y_{n-1}]$. 
+
+For a concrete example, take 
+\[
+    A = \frac{k[x,y]}{(xy - 1)}.
+\]
+The naiive choice is 
+\[
+    k[x] \subseteq A, 
+\]
+but this is not a \keyterm{Noether normalization}, because 
+\[
+    \bar y = \bar x^{-1}
+\]
+is not integral over $k[\bar x]$, 
+but we can change coordinates by setting 
+\[
+    z = \bar x + \bar y. 
+\]
+Since 
+\[
+    \bar y = z - \bar x, 
+\]
+the relation 
+\[
+    \bar x \bar y = 1
+\]
+becomes 
+\[
+    \bar x(z - \bar x) = 1. 
+\]
+Thus 
+\[
+    \bar x^2 - z \bar x + 1 = 0. 
+\]
+So $\bar x$ is a root of a monic polynomial 
+\[
+    T^2 - zT + 1 \in k[z][T].
+\]
+Therefore $\bar x$ is integral over $k[z]$ with 
+\[
+    A = k[z][\bar x]. 
+\]
+
+\subsection{Difference from normal subrings}
+Suppose we prove 
+\[
+    k[z_1,\ldots,z_r] \subseteq A. 
+\]
+We need that this is actually a polynomial ring, i.e. 
+$z_i$'s are algebraically independent over $k$, and that 
+$A$ must be finite/integral over it. 
+
+If there is only one $z_i$ it is quick to check.
+
+For coordinate rings of positive-dimensional varieties this is 
+frequently obvious or follows because an algebraic $z$ 
+over a field makes $k[z]$ finite-dimensional over $k$. 
+
+Geometrically, Gathmann describes normalization as choosing a 
+sufficiently general projection 
+\[
+    X \longrightarrow \mathbb A^r 
+\]
+with finite fibers. 
+
+\begin{prob}[A little problem]
+    Let 
+    \[
+        A = \frac{\mathbb C[x,y]}{(x^2y + y - x)}. 
+    \]
+    Find a Noether normalization of $A$. 
+\end{prob}
+\begin{proof}[Sol]
+    We want to find $z \in A$ such that 
+    \[
+        \mathbb C[z] \subseteq A 
+    \]
+    with $A$ finite over $\mathbb C[z]$. 
+
+    Setting 
+    \[
+        z = \bar x + \bar y 
+    \]
+    we have 
+    \[
+        \bar y = z - \bar x. 
+    \]
+    Then 
+    \begin{align*}
+        \bar x^2\bar y + \bar y - \bar x &= 0 \\ 
+        \bar x^2(z - \bar x) + z - \bar x - \bar x &= 0 \\ 
+        \bar x^2z - \bar x^3 + z - 2\bar x &= 0 \\ 
+        \bar x^3 - \bar x^2z + 2\bar x - z &= 0. 
+    \end{align*}
+    Now this, as the polynomial 
+    \[
+        f(T) = T^3 - zT^2 + 2T - z \in \mathbb C[z][T]
+    \] 
+    is monic with zero $\bar x$, making 
+    \[
+        A = \mathbb C[z][\bar x] 
+    \]
+    with generating set $\{1,\bar x, \bar x^2\}$.
 \end{proof}
 
 
