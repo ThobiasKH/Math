@@ -17,6 +17,20 @@
 
 \usepackage{algpseudocode}
 
+\usepackage{minted}
+
+\definecolor{codebg}{HTML}{272822}
+
+\setminted{
+    style=monokai,
+    bgcolor=codebg,
+    fontsize=\small,
+    breaklines=true,
+    linenos=true,
+    frame=single,
+    framesep=3mm
+}
+
 \title{Algorithms assignment 2}
 \author{Thobias K. H\o ivik}
 \date{For November 13, 2026} % Use \date{} to hide the date.
@@ -858,6 +872,216 @@ We denote
         |A(i)| \leq V + 1. 
     \]
 \end{proof}
+
+\begin{prob*}[3, Problem 6]
+    Consider the problem of minimizing the 
+    sum of completion times on a 
+    single machine given the data below: 
+    \[
+        \text{\keyterm{imagine the table here}}
+    \]
+
+    Use the approximation algorithm based on 
+    the Shortest Remaining Processing Time for preemptive 
+    scheduling to find an approximate solution 
+    to the nonpreemptive problem. 
+\end{prob*}
+\begin{proof}[Solution]
+    At $t = 0$, only jobs $1,2$ are avaliable and 
+    $p_2 = 5 < p_1 = 6$ so execuite job $2$. 
+    At $t=1$, job $3$ arrives. Job $2$ has 
+    $4$ units left, while job $3$ requires $3$ so 
+    we interrupt job $2$ to execute job $3$. 
+
+    Repeat as such to get 
+    \[
+        \begin{tabular}{|c|c|} 
+            \keyterm{Time interval} & 
+            \keyterm{ executed job} \\ 
+            $[0,1]$   & 2 \\ 
+            $[1,2]$   & 3 \\ 
+            $[2,3]$   & 4 \\ 
+            $[3,5]$   & 3 \\ 
+            $[5,7]$   & 6 \\ 
+            $[7,11]$  & 2 \\ 
+            $[11,15]$ & 5 \\ 
+            $[15,21]$ & 1 \\ 
+            $[21,23]$ & 7
+        \end{tabular}
+    \]
+    Reading of the last time $j$ appears we get 
+    completion times 
+    \[
+        \begin{aligned}
+            &C_1 = 21, \ C_2 = 11, \ C_3 = 5, \\ 
+            &C_4 = 3, \ C_5 = 15, \ C_6 = 7, \ C_7 = 23.     
+        \end{aligned}
+    \]
+
+    Then 
+    \[
+        \sum_{j=1}^7 C_j = 85.
+    \]
+\end{proof}
+
+\begin{prob*}[4, Problem 2]
+    \medskip 
+    \
+    
+    \begin{enumerate}[label=\alph*)]
+        \item Implement the randomized algorithm 
+            for MAX SAT where we set each 
+            $x_i$ to true independently with probability 
+            $1/2$. 
+        \item Assign values to $x_1,\ldots,x_n$ by 
+            the derandomized version of the 
+            algorithm based on methods of computational 
+            expectations to the following clauses 
+            \[
+                \begin{aligned}
+                C_1 &= 3(x_1 \lor \overline{x_2} \lor x_3) \\ 
+                C_2 &= 4(x_1 \lor \overline{x_3} ) \\ 
+                C_3 &= 1(\overline{x_1} \lor x_2 \lor \overline{x_5}) \\ 
+                C_4 &= 3(\overline{x_1} \lor x_3) \\ 
+                C_5 &= 2(x_2 \lor \overline{x_4}) \\ 
+                C_6 &= 7(\overline{x_2} \lor x_5 \lor x_9) \\ 
+                C_7 &= 2(x_3 \lor \overline{x_4}) \\ 
+                C_8 &= 3(\overline{x_1} \lor \overline{x_5} \lor x_{21}) \\ 
+                C_9 &= 5(x_5 \lor \overline{x_{12}}) \\ 
+                & \ \vdots 
+                \end{aligned}
+            \]
+            The clauses $C_1,\ldots,C_9$ are the only clauses containing 
+            the variables $x_1,\ldots,x_5$.
+    \end{enumerate}
+\end{prob*}
+
+
+
+
+\begin{proof}[Solution to (a)]
+    We implement the randomized MAX-SAT algorithm by
+    independently assigning each variable the value
+    $\mathrm{True}$ with probability $1/2$.
+
+    \begin{minted}{python}
+import random
+
+def randomized_max_sat(clauses):
+    variables = {
+        abs(lit)
+        for weight, clause in clauses
+        for lit in clause
+    }
+
+    assignment = {
+        i: bool(random.getrandbits(1))
+        for i in variables
+    }
+
+    score = sum(
+        weight
+        for weight, clause in clauses
+        if any(
+            assignment[abs(lit)] == (lit > 0)
+            for lit in clause
+        )
+    )
+
+    return assignment, score
+    \end{minted}
+\end{proof}
+
+
+\begin{proof}[Solution to (b)]
+    Let $Z=\sum_{j=1}^{9}w_jI_j$, where $I_j$
+    indicates whether clause $C_j$ is satisfied.
+
+    We assign $x_1,\ldots,x_5$ sequentially using
+    the method of conditional expectations.
+    At each step, all unassigned variables remain
+    independently true with probability $1/2$.
+
+    Initially, the expected satisfied weight is
+    \[
+        \begin{aligned}
+            \mathbb E[Z]
+            &= \frac78(3+1+7+3)
+               +\frac34(4+3+2+2+5)\\
+            &=\frac{97}{4}.
+        \end{aligned}
+    \]
+
+    Suppose $x_1=a_1,\ldots,x_{i-1}=a_{i-1}$
+    have already been assigned. Define
+    \[
+        E_b^{(i)}
+        =\mathbb E[Z\mid
+            x_1=a_1,\ldots,x_{i-1}=a_{i-1},x_i=b]
+    \]
+    for $b\in\{0,1\}$. We choose
+    \[
+        a_i\in\arg\max_{b\in\{0,1\}}E_b^{(i)}.
+    \]
+
+    For $x_1$, only clauses $C_1,\ldots,C_4$
+    are affected. The remaining clauses contribute
+    $31/2$ in expectation. Therefore,
+    \[
+        \begin{aligned}
+            E_0^{(1)}
+            &=\frac{31}{2}
+                +3\cdot\frac34
+                +4\cdot\frac12+1+3
+              =\frac{95}{4},\\
+            E_1^{(1)}
+            &=\frac{31}{2}
+                +3+4+\frac34+3\cdot\frac12
+              =\frac{99}{4}.
+        \end{aligned}
+    \]
+    Thus $a_1=1$.
+
+    Repeating this calculation for each variable,
+    conditioned on the preceding choices, gives
+    \[
+    \begin{array}{c|c|c|c}
+        \text{Variable} & E_0^{(i)}
+            & E_1^{(i)} & a_i\\ \hline
+        x_1 & 95/4  & 99/4  & 1\\
+        x_2 & 199/8 & 197/8 & 0\\
+        x_3 & 183/8 & 215/8 & 1\\
+        x_4 & 113/4 & 51/2  & 0\\
+        x_5 & 55/2  & 29    & 1
+    \end{array}
+    \]
+
+    Hence the algorithm produces
+    \[
+        (a_1,a_2,a_3,a_4,a_5)=(1,0,1,0,1).
+    \]
+
+    Under this assignment, all nine displayed
+    clauses except $C_3$ are satisfied.
+    Their total weight is $30$, so the satisfied
+    weight is
+    \[
+        \boxed{Z=30-w_3=29}.
+    \]
+
+    Finally, at each step the law of total
+    expectation gives
+    \[
+        \mathbb E[Z\mid a_1,\ldots,a_{i-1}]
+        =\frac12 E_0^{(i)}+\frac12 E_1^{(i)}
+        \leq \max\{E_0^{(i)},E_1^{(i)}\}.
+    \]
+    Therefore, every choice preserves or increases
+    the conditional expectation. In particular,
+    the final satisfied weight is at least the
+    initial expectation $97/4$.
+\end{proof}
+
 
 
 \end{document}
