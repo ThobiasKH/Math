@@ -32,11 +32,14 @@
 }
 
 \title{Algorithms assignment 2}
-\author{Thobias K. H\o ivik}
+\author{Thobias H\o ivik, Holly Stor\o y}
 \date{For November 13, 2026} % Use \date{} to hide the date.
 
 \begin{document}
 \maketitle
+
+Appologies for the tangents and resulting length 
+of this write-up. 
 
 
 \begin{prob*}[2 Problem 5]
@@ -45,8 +48,8 @@
     \begin{center}
         \begin{tabular}{ |c|c|c|c|c|c|c|c| } 
             \hline
-            Job $j$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\ 
-            Processing Time $p_j$ & 4 & 7 & 2 & 9 & 12 & 5 & 3 \\ 
+            \keyterm{Job} $j$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\ 
+            \keyterm{Processing Time} $p_j$ & 4 & 7 & 2 & 9 & 12 & 5 & 3 \\ 
             \hline
         \end{tabular}
     \end{center}
@@ -168,13 +171,13 @@ is the total processing time on machine $i$.
     Repeat to get 
     \[
         (34,3,5) \mapsto (22,15,5) 
-        \mapsto (15,15,14). 
+        \mapsto (13,15,14). 
     \]
     Now we look at $M_1$ again and see that 
     for $j = 3$ we have $p_j = 3 < L_3 = 14$ so 
     the algorithm halts with 
     \[
-        C_{\max} = 14 \leq 2C^*_{\max} = 
+        C_{\max} = 15 \leq 2C^*_{\max} = 
         14 \cdot 2 = 28
     \]
     as expected. 
@@ -286,7 +289,7 @@ is the total processing time on machine $i$.
     \[
         C_{\max}^* \geq 
         \max \left\{
-            \frac 1 m \sum_{j=1}^m p_j, \ \max_j p_j
+            \frac 1 m \sum_{j=1}^n p_j, \ \max_j p_j
         \right\}.
     \]
 \end{proof}
@@ -496,7 +499,7 @@ $c_{12} = 4, \ c_{15} = 11$ and so forth.
     \]
     Shortcutting repeated vertices yields 
     \[
-        H_A = (1,2,4,5,3,5,1). 
+        H_A = (1,2,4,5,3,6,1). 
     \]
     Its cost is 
     \[
@@ -504,7 +507,7 @@ $c_{12} = 4, \ c_{15} = 11$ and so forth.
     \]
     For $T_B$ take 
     \[
-        W_B = (1,2,1,4,5,4,5,3,6,3,1). 
+        W_B = (1,2,1,3,5,4,5,3,6,3,1). 
     \]
     Shortcutting gives 
     \[
@@ -746,8 +749,11 @@ We denote
     \]
     leaving 
     \[
-        A(5) = \{(0,0), (2,3), (3,5), (5,8), (7,10), 
-        (6,9), (8,12), (10,14)\}. 
+        \begin{aligned}
+        A(5)=\{&
+        (0,0),(2,3),(3,5),(5,8),\\
+        &(6,9),(7,10),(8,12),(9,13),(10,14)\}.
+        \end{aligned}
     \]
 
     \textbf{Iteration 6.}
@@ -784,6 +790,16 @@ We denote
             (6,10) \ \text{dominates} \ (7,10) \\ 
             (9,14) \ \text{dominates} \ (10,14) \\ 
             (6,10) \ \text{dominates} \ (6,9). 
+        \end{aligned}
+    \]
+
+    We have 
+    \[
+        \begin{aligned}
+        A(6)=\{&
+        (0,0),(1,2),(2,3),(3,5),\\
+        &(4,7),(5,8),(6,10),(7,11),\\
+        &(8,12),(9,14),(10,15)\}.
         \end{aligned}
     \]
 
@@ -918,9 +934,19 @@ We denote
         \end{aligned}
     \]
 
-    Then 
+    Using the standard completion-order conversion 
+    we have a possible nonpreemptive schedule in 
     \[
-        \sum_{j=1}^7 C_j = 85.
+        4 \to 3 \to 6 \to 2 \to 5 \to 1 \to 7 
+    \]
+    with 
+    completion times 
+    \[
+        (3,6,8,13,17,23,25)
+    \]
+    with total time for this nonpreemptive schedule being 
+    \[
+        3 + 6 + 8+13 + 17+23 + 25 = 95. 
     \]
 \end{proof}
 
@@ -1080,6 +1106,524 @@ def randomized_max_sat(clauses):
     the conditional expectation. In particular,
     the final satisfied weight is at least the
     initial expectation $97/4$.
+\end{proof}
+
+\begin{prob*}[4, Problem 3]
+    We have the following MAX SAT problem 
+    \[
+        C_1 = 4(x_1\lor \overline{x_3}), \ C_2 
+        = 3(\overline{x_1} \lor x_4), \ C_3 = 
+        2(\overline{x_2} \lor x_4), \ 
+        C_4 = 1(\overline{x_2} \lor \overline{x_3} 
+        \lor x_4). 
+    \]
+    \begin{enumerate}[label=\alph*)]
+        \item Find the ILP (IP) formulation 
+            of the problem above. 
+        \item Find the LP formulation for the problem 
+            above. 
+    \end{enumerate}
+\end{prob*}
+
+\begin{proof}[Statement and proof sketch of (a/b)]
+
+    Intuitively,  
+    we'd want something like: 
+    
+    Maximize 
+    \[
+        \sum_{i=1}^4 w_i\left(\bigoplus_{\ell \in C_i} \ell\right), 
+    \]
+    subject to 
+    \[
+        x_1,x_2,x_3,x_4 \in \{0,1\},  
+    \]
+    but this isn't a valid ILP, of course. 
+
+    So instead let $x_1,x_2,x_3,x_4 \in \{0,1\}$ 
+    and introduce $y_1,y_2,y_3,y_4 \in \{0,1\}$ 
+    where $y_i = 1$ indicates that $C_i$ is satisfied. 
+
+    We maximize 
+    \[
+        4y_1 + 3y_2 + 2y_3 + y_4, 
+    \]
+    subject to 
+    \[
+        \begin{aligned}
+            x_1 + (1 - x_3) &\geq y_1, \\ 
+            (1-x_1) + x_4   &\geq y_2, \\ 
+            (1-x_2) + x_4   &\geq y_3, \\ 
+        (1-x_2) + (1 - x_3) &\geq y_4.  
+        \end{aligned}
+    \]
+
+    This is a valid ILP formulation and we claim 
+    that it corresponds one-to-one with the MAX SAT instance. 
+
+    \textbf{$\operatorname{OPT}_{\text{ILP}} 
+    \geq \operatorname{OPT}_{\text{MAXSAT}}$.}
+
+    Let $x^*$ be an optimal truth assignment 
+    for the MAX-SAT instance. 
+    
+    Construct an ILP solution by choosing 
+    the same values for the variables $x_j$ and 
+    setting 
+    \[
+        y_i = 
+        \begin{cases}
+            1 & \text{if} \ C_i \ \text{is satisfied by} \ x^* \\ 
+            0 & \text{otherwise}. 
+        \end{cases}
+    \]
+    We claim this solution is feasible. 
+
+    Indeed, if $C_i$ is satisfied, at least on 
+    literal evaluates to $1$, and therefore 
+    \[
+        \sum_{i\in C_i}v(\ell) \geq 1 = y_i, 
+    \]
+    where we denote 
+    \[
+        v(\ell) 
+        = \begin{cases}
+            x_j & \text{if} \ \ell = x_j \\ 
+            1 - x_j & \text{if} \ \ell = \bar x_j. 
+        \end{cases}
+    \]
+
+    Otherwise, $y_i = 0$ and the constraint holds 
+    because every literal evaluates to a nonnegative 
+    number. 
+
+    Thus, the constructed solution is feasible, and 
+    its objective value is the total weight of clauses 
+    satisfied by $x^*$. 
+
+    Consequently 
+    \[
+        \operatorname{OPT}_{\text{ILP}} 
+    \geq \operatorname{OPT}_{\text{MAXSAT}}. 
+    \]
+
+    \textbf{$\operatorname{OPT}_{\text{ILP}} 
+    \leq \operatorname{OPT}_{\text{MAXSAT}}$.}
+
+    Now let $(x^*, y^*)$ be an optimal ILP 
+    solution. 
+
+    Consider the truth assignment obtained by 
+    interpreting $x_j^* = 1$ as true and 
+    $0$ as false. 
+
+    For every clause $C_i$ with $y^*_i = 1$, 
+    the corresponding constraint gives 
+    \[
+        \sum_{\ell \in C_i} v(\ell) \geq 1. 
+    \]
+
+    Sinc eterms are binary, at least 
+    one literal must evaluate to $1$. Hence $C_i$ is 
+    satisfied. 
+
+    Therefore, the assignment satisfies at 
+    least all clauses for which $y^* = 1$. 
+    Since weights are positive, its total weight is 
+    at least 
+    \[
+        \sum_{i=1}^4 w_iy^*_i = \operatorname{OPT}_{\text{ILP}}.
+    \]
+    But the optimal MAX-SAT assignment cannot have 
+    a smaller value than any particular assignment. Thus 
+    \[
+        \operatorname{OPT}_{\text{ILp}} 
+        \leq 
+        \operatorname{OPT}_{\text{MAXSAT}}. 
+    \]  
+
+    For the LP relaxation we simply replace the constraints 
+    by contiuous bounds 
+    \[
+        x_i \in [0,1], \ y_i \in [0,1]. 
+    \]
+
+    \textbf{Asside.}
+
+    Also, for fun, here is MAX-SAT encoded as a 
+    maximisation problem in a  
+    a quotient ring, because that's funny. 
+
+    For the polynomial ring 
+    \[
+        \mathbb Q[x_1,x_2,x_3,x_4] \qquad (\text{nice 
+        and computable}),  
+    \]
+    notice that 
+    \[
+        x_i \in \{0,1\} \Leftrightarrow 
+        x_i^2 - x_i = 0. 
+    \]
+    Define the ideal 
+    \[
+        I = (x^2_1 - x_1, \ldots, x_4^2 - x_4) 
+    \]
+    and quotient to get 
+    \[
+        R = \mathbb Q[x_1,x_2,x_3,x_4]/I. 
+    \]
+    The affine variety $V(I)$ is 
+    \[
+        V(I) = \{0,1\}^4. 
+    \]
+    By the Chinese remainder theorem, 
+    \[
+        R \cong \prod_{a \in \{0,1\}} 
+        \mathbb Q \cong \mathbb Q^{16}. 
+    \]
+
+    We want a polynomial $s_i$ evaluating to $1$ 
+    when $C_i$ is satisfied. 
+
+    For our clauses the following  
+    \[
+        \begin{aligned}
+          s_1&=1-(1-x_1)x_3,\\
+          s_2&=1-x_1(1-x_4),\\
+          s_3&=1-x_2(1-x_4),\\
+          s_4&=1-x_2x_3(1-x_4)
+        \end{aligned}
+    \]
+    work. 
+
+    For each $s_i$ we have 
+    \[
+        s_i(a)=
+        \begin{cases}
+        1&\text{if }a\models C_i,\\
+        0&\text{otherwise}.
+        \end{cases}
+    \]
+    Setting $F = 4s_1 + 3s_2 + 2s_3 + s_4$ gives 
+    our objective function and we can reformulate the 
+    problem as 
+    \[
+        \max_{a \in V(I)} F(a).
+    \]
+
+    Since all weights are integers we have 
+    \[
+        F(a) \in \{0,1,\ldots,10\}. 
+    \]
+    So 
+    \[
+        F(a) \geq k 
+    \]
+    iff 
+    \[
+        \prod_{r = k}^{10} (F(a) - r) = 0, 
+    \]
+    letting us define an ideal 
+    \[
+        J_k = I + \left( \prod_{r=k}(F-r)\right), 
+    \]
+    giving way to 
+    \[
+        \operatorname{OPT}_{\mathrm{MAXSAT}}\ge k
+        \iff
+        V(J_k)\ne\varnothing
+        \iff
+        S/J_k\ne 0.
+    \]
+
+    If wee consider the 
+    $\mathbb Q$-subalgebra generated by $F$, 
+    \[
+        \mathbb Q[F] \subseteq R, 
+    \] 
+    we can, by the first isomorphism theorem, say 
+    that the evaluation homomorphism 
+    \[
+        \varphi : \mathbb Q[t] \to R, \ t \mapsto F, 
+    \]
+    gives 
+    \[
+        \mathbb Q[F] \cong \mathbb Q[t]/\ker \varphi. 
+    \]
+    This gives 
+    \[
+        \ker \varphi 
+        = \left(\prod_{9 \neq i=3}^{10} (t - i)\right),
+    \]
+    so 
+    \[
+        \mathbb Q[F] = 
+        \frac{\mathbb Q[t]}{\prod_{i \neq i=3}^{10} (t-i)}.
+    \]
+    Then the largest root is the optimal MAX-SAT value. 
+
+    We have $R \cong \mathbb Q^{2^n}$ so this would 
+    probably be ridiculously inefficient for 
+    large MAX-SAT instances, but its way 
+    cooler than integer programming.     
+\end{proof}
+
+\begin{prob*}[5, Problem 1]
+    The graph below is $3$-colorable. Use 
+    the algorithm that colors a $3$-colorable graph 
+    with $O(\sqrt n)$ colors, 
+    Chapter $6$ to color the graph. 
+    Every time you have a choice between 
+    nodes, choose the lowered number one. 
+    Notice, it is important to understand 
+    the algorithm, not find the best coloring. 
+\end{prob*}
+\begin{proof}[Solution]
+    I believe we are meant to use Avi Widgerson's 
+    algorithm as it is a 
+    famous (promised-$3$-colorable) 
+    coloring algorithm giving $O(\sqrt n)$ colors. 
+
+    We remind ourselves how the algorithm goes. 
+
+    Let $n = |V|$ throughout the algorithm. 
+    While $\Delta(G) > \sqrt n$, choose a vertex $v$ 
+    of maximum degree. Color its induced neighborhood 
+    $G[N(v)]$ using two colors, give $v$ a 
+    third color, and remove $N[v]$. 
+
+    Once $\Delta(G) \leq \sqrt n$, greedily color 
+    the remaining graph. 
+
+    Simple enough! 
+
+    At iteration $1$ we have 
+    $\Delta(G) = 4 > 3 = \sqrt n$. 
+    Both $1$ and $6$ have maximum degree. By the 
+    tie-breaking rule we choose the first. 
+
+    The neighborhood is 
+    \[
+        N(1) = \{3,4,6,8\}. 
+    \]
+    The induced subgraph is the path 
+    $4$--$3$--$6$--$8$. 
+
+    We $2$-color by 
+    \[
+        \begin{aligned}
+        \text{Color 1}:&\quad \{3,8\},\\
+        \text{Color 2}:&\quad \{4,6\}.
+        \end{aligned}
+    \]
+
+    Give vertex $1$ color $3$. 
+
+    Remove 
+    \[
+        N[1]=\{1,3,4,6,8\}
+    \]
+    to get 
+    \[
+        V'=\{2,5,7,9\}.
+    \]
+
+
+    The remaining edges are 
+    \[
+        E'=\{\{2,7\},\{2,9\},\{5,9\},\{7,9\}\}.
+    \]
+
+    Now $\Delta(G)$ is small enough that we 
+    go to phase $2$. 
+
+    We now greedily color in numerical order. 
+    Using Wigderson's formulation, the 
+    next avaliable color is color $3$. 
+
+    Then 
+    \[
+        \begin{tabular}{|c|c|c|}
+            \keyterm{Vertex} & 
+            \keyterm{Previosuly colored neighbors 
+            in $G'$} & \keyterm{Assigned color} \\ 
+            2 & None & 3 \\ 
+            5 & None & 3 \\ 
+            7 & 2 (color 3) & 4 \\ 
+            9 & 2,5,7 (colors 3,3,4) & 5.
+        \end{tabular}
+    \]
+    Thus the final coloring is 
+    \[
+        \begin{aligned}
+        V_1&=\{3,8\},\\
+        V_2&=\{4,6\},\\
+        V_3&=\{1,2,5\},\\
+        V_4&=\{7\},\\
+        V_5&=\{9\}.
+        \end{aligned}
+    \]
+
+    If we don't employ Wigderson's formulation 
+    allowing color $3$ to be valid, since $1$ had 
+    no neighbors among the remaining vertices, 
+    then we might end up with $7$ colors instead. 
+
+    A cool observation is that, while 
+    this algorithm runs in $O((n+m)\sqrt n)$ (where 
+    $m = |E|$, also, running time can be improved) time 
+    with a guarantee of $O(\sqrt n)$ colors, 
+    it was conjectured that $k$-colorability of 
+    $3$-colorable graphs is NP-hard for all $k$, 
+    only that it was really hard to prove. 
+
+    This algorithm gives some insight as to why, since 
+    for $k = O(\sqrt n)$ we (given all reasonable assumptions)
+    cannot have hardness, making 
+    the difficulty of proving the difficulty 
+    harder for increasing $k$. 
+    
+    However, as Fei, Minzer, and Wang proved 
+    the $4$-to-$1$ Games Conjecture back in september, 
+    we have that $k$-coloring of promised-$3$-colorable 
+    graphs is NP-hard $\forall k \geq 3$.  
+
+    Very cool!
+    
+\end{proof}
+
+\begin{prob*}
+    A vertex cover of a graph is a subset 
+    $C \subseteq V$ such that every edge has 
+    at least one endpoint in $C$, 
+    that is $\forall \{i,j\} \in E$ either 
+    $i \in C$or $j \in C$. We want to find a 
+    minimum vertex cover.
+
+    \[
+        \text{\keyterm{imagine the graph here}}
+    \]
+    
+    \begin{enumerate}[label=\alph*)]
+        \item Formulate the problem above as an ILP.
+        \item Formulate the LP relaxation of the ILP.
+        \item Formulate the Dual version of the LP problem. 
+        \item We have a large graph with $10.000$ vertices. 
+            We solve the LP-problem and get 
+            the solution $500$ (number of vertices in the 
+            cover). What can we say about the solution 
+            to the original problem in a)?
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Solution with no proof this time to (a/b/c)]
+    We assert that the below formulation works. 
+
+    Minimize 
+    \[
+        \sum_{v \in V} x_v,
+    \]
+    subject to 
+    \[
+        x_u + x_v \geq 1, \ \forall \{u,v\} \in E, 
+    \]
+    and 
+    \[
+        x_v \in \{0,1\}, \ \forall v \in V. 
+    \]
+
+    For the LP relaxation we simply allow 
+    \[
+        x_v \in [0,1]. 
+    \]    
+
+    For the primal LP 
+    \[
+        \begin{aligned}
+            \min c^T x \\ 
+            Ax \geq b \\ 
+            x \geq 0 
+        \end{aligned}
+    \]
+    we have that the dual is 
+    \[
+        \begin{aligned}
+        \max b^Ty \\ 
+        A^Ty \leq c \\ 
+        y \geq 0
+        \end{aligned}
+    \]
+    So we introduce one dual variable 
+    $y_e, \ \forall e \in E$. 
+
+    Since the right-hand side of every primal edge 
+    constraint is $1$, the dual objective is 
+    \[
+        \max \sum_{e \in E} y_e. 
+    \]
+    Meanwhile, each primal $x_v$ appears in 
+    the constraints corresponding to edges 
+    with $v$. 
+    Consequently, the corresponding dual 
+    constraint is 
+    \[
+        \sum_{e\ni v} y_e \leq 1, 
+    \]
+    obtaining 
+    \[
+        \begin{aligned}
+        \text{maximize}\quad
+        &\sum_{e\in E}y_e\\
+        \text{subject to}\quad
+        &\sum_{e\ni v}y_e\leq1
+        &&\forall v\in V,\\
+        &y_e\geq0
+        &&\forall e\in E.
+        \end{aligned}
+    \]
+    This encodes maximum fractional matching, representative 
+    of the dual relationship between minimal vertex 
+    covers and maximal matchings. Very cool!
+\end{proof}
+\begin{proof}[Solution to (d)]
+    Let $\operatorname{OPT}_{\text{LP}} = 500$. 
+    Since every feasible integer solution is 
+    also feasible in the relaxation we have 
+    \[
+        500 \leq \operatorname{OPT}_{ILP}. 
+    \]
+    Helpful, but trivial. 
+
+    Suppose $x^*$ is an optimal fractional 
+    solutiion. Define 
+    \[
+        C = \{v\in V \bigm| x^*_v \geq \frac12\}. 
+    \]
+
+    We claim that this is a vertex cover. 
+
+    Indeed, for every $\{u,v\} \in E$, we have 
+    \[
+        x^*_u + x^*_v \geq 1. 
+    \]
+    Consequently, at least on of $x^*_u, x^*_v$ 
+    must be at least $1/2$ so 
+    at least one endpoint belongs to $C$. 
+
+    Moreover 
+    \[
+        \begin{aligned}
+        |C|
+        &=\sum_{v\in V}\mathbf1[x_v^*\geq\tfrac12]\\
+        &\leq2\sum_{v\in V}x_v^*\\
+        &=2\cdot500=1000.
+        \end{aligned}
+    \]
+
+    Thus we have a vertex cover of size at most $1000$, 
+    letting us conclude 
+    \[
+        500\leq\mathrm{OPT}_{ILP}\leq1000.
+    \]
 \end{proof}
 
 
