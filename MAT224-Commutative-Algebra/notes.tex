@@ -7728,6 +7728,221 @@ with finite fibers.
 \end{proof}
 
 
+\subsection{Starting Nullstellensatz}
+
+\textbf{Version 1, Finitely generated algebras that are fields.}
+
+Suppose $A$ is both a finitely generated $K$-algebra and 
+a field. 
+Then the Nullstellensatz says that 
+\[
+    A/K \ \text{is a finite field extension}, 
+\]
+and if $K$ is algebraically closed, then 
+\[
+    A = K.
+\]
+
+By Noether normalization, 
+\[
+    K[z_1,\ldots,z_r] \subseteq A 
+\]
+with $A$ finite, hence integral, over the polynomial ring. 
+
+Since $A$ is a field, we have that 
+$k[x_1,\ldots,x_r]$ must be a field (integral extensions being 
+a field implies ring below is a field), 
+but a polynomial ring is a field only if there are no variables, 
+i.e. $r = 0$. 
+Hence 
+\[
+    K[z_1,\ldots,z_r] = K
+\]
+with $A$ finite over $K$. 
+
+Intuitively, we cannot construct some enormous new field 
+by taking finitely many elements and allowing 
+polynomial equations over $K$, unless those 
+elements are algebraic. 
+In particular, for $K = \mathbb C$, we cannot construct a 
+new field at all.
+
+\textbf{Version 2, Maximal ideals are points.}
+
+Now let $K$ be algebraically closed. Take 
+\[
+    K[x_1,\ldots,x_n]. 
+\]
+Then \keyterm{every maximal ideal} is 
+\[
+    (x_1 - a_1,\ldots,x_n - a_n)
+\]
+for some point 
+\[
+    (a_1,\ldots,a_n) \in \mathbb A_K^n.
+\]
+
+Let $\mathfrak m$ be maximal. Then 
+\[
+    A = K[x_1,\ldots,x_n]/\mathfrak m
+\]
+is a field. 
+
+However, it is also a finitely generated $K$-algebra. By 
+Version $1$, $A = K$. 
+
+If we look at the images of the variables, 
+\[
+    \bar x_i \in A = K. 
+\]
+So there are scalars 
+\[
+    \bar x_i = a_i.
+\]
+Therefore 
+\[
+    x_i - a_i \in \mathfrak m 
+\]
+for every $i$. 
+Hence 
+\[
+    (x_1-a_1, \ldots,x_n-a_n) \subseteq \mathfrak m,
+\]
+but the left side is maximal so 
+we get equality. 
+
+\textbf{Version 3, radicals are intersections of maximal ideals.}
+
+For a finitely generated $K$-algebra $A$, 
+\[
+    \sqrt I
+    =
+    \bigcap_{\substack{\mathfrak m\supseteq I\\
+    \mathfrak m\text{ maximal}}}
+    \mathfrak m.
+\]
+Earlier in the course we saw that 
+\[
+    \sqrt I
+    =
+    \bigcap_{\substack{P\supseteq I\\P\text{ prime}}}P.
+\]
+
+The Nullstellensatz says that for finitely generated 
+algebras over fields, we do not even need all primes. 
+The maximal ones are already enough.
+
+Geometrically, maximal ideals are points so to know whether 
+$f$ belongs to $\sqrt I$, it is enough to test whether 
+$f$ vanishes at every point satisfying $I$. 
+
+\textbf{Version 4, strong Nullstellensatz.}
+
+For 
+\[
+    I \subseteq K[x_1,\ldots,x_n]
+\]
+over algebraically closed $K$, 
+\[
+    I(V(I)) = \sqrt I.
+\]
+
+Now, it is prudent to think about why we get the radical back. 
+
+We begin with polynomials in $I$, look at their common zeros, and 
+take polynomials vanishing on those points. 
+
+This happens because points cannot detect nilpotent multiplicity. 
+For instance, 
+\[
+    I = (x^2) \subseteq \mathbb C[x]. 
+\]
+Then 
+\[
+    V(x^2) = \{0\}. 
+\]
+The polynomials vanishing at $0$ are 
+\[
+    (x), 
+\]
+not $(x^2)$. 
+
+This gives a correspondance between algebraic sets in 
+$\mathbb A_K^n$ and radical ideals in $K[x_1,\ldots,x_n]$. 
+
+\begin{prob}[A little problem]
+    Take 
+    \[
+        I = (x^2,xy) \subseteq \mathbb C[x,y]. 
+    \]
+    Determine 
+    \[
+        V(I), 
+    \]
+    then determine 
+    \[
+        I(V(I)). 
+    \]
+    Finally verify that 
+    \[
+        I(V(I)) = \sqrt I. 
+    \]
+\end{prob}
+\begin{proof}
+    The affine variety $V(I)$ is 
+    \[
+        (a, b) \in \mathbb A_{\mathbb C}^2 
+    \]
+    such that 
+    \[
+        f(a,b) = \alpha(a,b) x^2 + \beta(a,b) xy = 0 
+    \]
+    for arbitrary $f \in I$. 
+
+    Notice that for $(0,b)$ this is always $0$. 
+    The variety is then 
+    \[
+        V(I) = \{(0,y) \bigm| y \in \mathbb C\}. 
+    \]
+
+    Now we ask, for which polynomials, are these points always 
+    $0$? We notice that for $f(x,y) \in (x)$, this is always $0$.  
+    Thus 
+    \[
+        I(V(I)) = (x). 
+    \]
+
+    To verify this, suppose $f \in I(V(I)) = (x)$. 
+    Then $f(x,y) = \alpha x$, with 
+    \[
+        f(x,y)^2 = \alpha^2 x^2 \in (x^2) \subseteq 
+        (x^2,xy) = I. 
+    \]
+    Thus $f \in \sqrt I$. 
+
+    Now suppose $f \in \sqrt I$. Then, for 
+    some $n$, 
+    \[
+        f^n = \alpha x^2 + \beta xy \in I.  
+    \]
+    We have 
+    \[
+        f^n = x(\alpha x + \beta y). 
+    \]
+    So we have that $f^n$ is a multiple of $x$. 
+    We conclude that $f$ must be a multiple of $x$. 
+    Otherwise, if we look at $\bar{f}^n \in 
+    \mathbb C[x,y] / (x) \cong \mathbb C[y]$, we would have that 
+    $\bar f$ is nonzero, but $\bar f^n$ is zero for some $n$, 
+    contradicting $\mathbb C[y]$ being an integral domain.
+
+    Thus $f \in (x)$, giving 
+    \[
+        \sqrt I = (x) = I(V(I)).
+    \]
+    
+\end{proof}
+
 \end{document}
 
 
