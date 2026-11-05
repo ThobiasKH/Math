@@ -342,4 +342,177 @@ about intuition, allowing less rigor.
     = \widehat \beta$. 
 \end{proof}
 
+
+\begin{prob*}[Compactness and separation axioms]
+    Let \(X\) be a compact Hausdorff space.
+
+    \begin{enumerate}[label=\alph*)]
+        \item Let \(x\in X\), and let \(F\subseteq X\)
+        be closed with \(x\notin F\).
+        Prove that there exist disjoint open sets
+        \(U,V\subseteq X\) such that
+        \[
+            x\in U,\qquad F\subseteq V.
+        \]
+
+        \item Prove that every compact Hausdorff
+        space is normal. That is, if \(A,B\subseteq X\)
+        are disjoint closed sets, there exist
+        disjoint open sets \(U,V\subseteq X\) with
+        \[
+            A\subseteq U,\qquad B\subseteq V.
+        \]
+
+        \item Let \(X\) be an infinite set equipped
+        with the cofinite topology
+        \[
+            \mathcal T=\{\varnothing\}\cup
+            \{U\subseteq X:
+                X\setminus U\text{ is finite}\}.
+        \]
+        Determine, with proofs, whether \(X\) is
+        compact, \(T_1\), Hausdorff, and normal.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of a)]
+    This follows from compact Hausdorff 
+    $\Rightarrow$ normal. $\{x\}$ is closed, since $X$ 
+    is Hausdorff, so since $X$ is normal, we can separate 
+    \[
+        \{x\},\ F
+    \]
+    into disjoint open sets containing them. 
+
+    Below will be a proof from first principles. 
+
+    For $y \in F$ we can, by Hausdorffness find 
+    \[
+        U_y \ni x 
+    \]
+    and 
+    \[
+        V_y \ni y
+    \]
+    disjoint and open. 
+
+    We have 
+    \[
+        F \subseteq \bigcup_{y\in F} V_y. 
+    \]
+    Since $X$ is compact we have 
+    \[
+        F \subseteq \bigcup_{i=1}^n V_{y_i}. 
+    \]
+    Set 
+    \[
+        V = \bigcup_{i=1}^n V_{y_i}
+    \]
+    is open. 
+    For $x$, let $U$ be 
+    \[
+        U = \bigcap_{i=1}^n U_{y_i}.
+    \]
+    This is a finite intersection of open sets so open. 
+
+    Now 
+    \[
+        U \cap V = \bigcup_{j=1}^n \left( 
+        \left( \bigcap_{i=1}^n U_{y_i} \right) \cap V_{y_j} \right).
+    \]
+    We have 
+    \[
+        \left( \bigcap_{i=1}^n U_{y_i} \right) 
+        \cap V_{y_j} \subseteq U_{y_j} \cap V_{y_j}
+    \]
+    so each term is empty. 
+
+    Thus $U\cap V = \emptyset$.
+
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We proceed as above. 
+    If $X$ is Hausdorff it is $T_1$. 
+
+    For fixed $x \in A$ construct 
+    \[
+        V_x = \bigcup_{j=1}^n V_{y_i}
+    \]
+    and 
+    \[
+        U_x = \bigcap_{i=1}^n U_{y_i}
+    \]
+    as in (a) with the property that $U_x \cap V_x$ 
+
+    We do this for all $x \in A$.  
+    Then 
+    \[
+        \bigcup_{x\in A} U_x
+    \]
+    covers $A$ and can be reduced to 
+    \[
+        \bigcup_{i=1}^n U_{x_i}. 
+    \]
+    Corresponding $V_{x_i}$'s independently cover $B$, 
+    so their intersection also does, and it is disjoint to 
+    each $U_{x_i}$ and thus disjoint to their union. 
+
+\end{proof}
+\begin{proof}[Proof of (c)]
+    It is indeed $T_1$ since 
+    \[
+        \{x\} = X \setminus (X \setminus \{x\})
+    \]
+    meaning
+    \[
+        X \setminus \{x\}
+    \]
+    is open. 
+    
+    Take two distinct $x,y \in X$. 
+    Suppose $x \in U, \ y \in V$ are disjoint open sets. 
+
+    Then 
+    \[
+        |X \setminus U| = n, \ |X \setminus V| = m 
+    \]
+    for nonzero integers $m,n$.
+
+    Since $U \cap V =\emptyset$ we have 
+    \[
+        U^c \cup V^c = X. 
+    \]
+    Then 
+    \[
+        X \cap (U^c \cup V^c) = X, 
+    \]
+    but then 
+    \[
+        |X| = |X \cap (U^c \cup V^c)| 
+        = |X \cap (U^c) \cup X \cap (V^c)| 
+        \leq n + m, 
+    \]
+    giving 
+    \[
+        n+m \geq |X| \geq \aleph_0, 
+    \]
+    a clear contradiction.
+
+    Thus $X$ is not Hausdorff. 
+
+    Let $\mathcal U = \{U_\alpha\}$ be a cover of some 
+    $U$. 
+    Pick some $U_1 \in \mathcal U$. 
+    Then $X \setminus U_1 = \{x_1,\ldots,x_n\}$. 
+    For each $x_i$, if $x_i \in U$, take one of the 
+    $U_\alpha$ which contains it. Repeat until all $x_i$ 
+    are accounted for. Then we have a cover with at most 
+    $n + 1$ elements. 
+
+    The space is not Hausdorff and thus not normal. 
+    Suppse it was normal. We know the space is $T_1$ so 
+    $\{x\}, \{y\}$ are closed. Then we can partition them into 
+    open disjoint sets, implying Hausdorffness. No good. 
+\end{proof}
+
+
 \end{document}
