@@ -189,4 +189,157 @@ about intuition, allowing less rigor.
     
 \end{proof}
 
+
+\begin{prob*}[Tensor products and quotient modules]
+    Let \(R=k[x,y]\), \(I=(x^2,xy)\), and \(J=(y)\).
+    Put \(M=R/I\) and \(N=R/J\).
+
+    Consider the \(R\)-linear map
+    \[
+        \begin{aligned}
+            \varphi:R&\longrightarrow M\otimes_R N,\\
+            r&\longmapsto (r+I)\otimes(1+J).
+        \end{aligned}
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Prove that \(\varphi\) is surjective.
+        \item Prove that \(I+J\subseteq\ker\varphi\).
+        \item Determine whether the induced map
+        \[
+            \bar\varphi:R/(I+J)
+                \longrightarrow M\otimes_R N
+        \]
+        is an isomorphism.
+        \item Determine \(M\otimes_R N\) explicitly
+        and exhibit a \(k\)-vector-space basis.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of a)]
+    Take $\bar m \otimes \bar n \in M \otimes_R N$. 
+    Then there is at least one each of 
+    $m_0,n_0$ such that $\bar m = m_0 + I$ and 
+    $\bar n = n_0 + J$. 
+
+    Take $m_0n_0 \in R$. Then 
+    \[
+        m_0n_0 \mapsto (m_0n_0) + I \otimes 1 + J 
+        = m_0 + I \otimes n_0 + J 
+        = \bar m \otimes \bar n. 
+    \]
+\end{proof}
+\begin{proof}[Proof of b)]
+    Let $f \in I + J$. 
+    Then 
+    \[
+        f = ax^2 + bxy + cy, \ a,b,c \in k[x,y].  
+    \]
+    Then 
+    \[
+        f \mapsto 
+        (ax^2 + bxy + cy) + I \otimes 1 + J. 
+    \]
+    Then 
+    \[
+        (\underbrace{ax^2 + bxy}_{\bar 0} + cy) + I \otimes 1 + J 
+        = cy + I \otimes 1 + J 
+        = I \otimes J = 0.  
+    \]
+\end{proof}  
+\begin{proof}[Proof of c)]
+    Intuitively, $\varphi$ is surjective with 
+    $\ker \varphi = I + J$ (I think) so we know, by the 
+    first isomorphism theorem, that 
+    \[
+        R/(I + J) \cong M \otimes_R N. 
+    \]
+
+    The induced map $\bar \varphi$ sends 
+    $\bar r = r + (I + J)$ to 
+    \[
+        \bar r \mapsto \bar r + I \otimes 1 + J.  
+    \]
+    As mentioned, $\ker \varphi = I + J$ which corresponds to 
+    $0$ in $R/(I + J)$. The induced map retains surjectivity 
+    as we simply take 
+    \[
+        \bar m \bar n \mapsto \bar m \otimes \bar n. 
+    \]
+\end{proof}
+\begin{proof}[Solution to d)]
+    We have 
+    \[
+        M \otimes_R N \cong R/(I + J) 
+        = R/((x^2,xy) + (y)). 
+    \]
+    We have 
+    \[
+        (x^2,xy) + (y) = (x^2,xy,y) 
+    \]
+    so 
+    \[
+        R/(I + J) \cong k[x]/(x^2). 
+    \]
+    We then have a basis $\{1,x\}$ for $k[x]/(x^2)$ which corresponds 
+    to the basis 
+    \[
+        \{\bar 1, \bar x\}. 
+    \]
+\end{proof}
+\begin{proof}[Extra]
+    \medskip 
+    \ 
+
+    \textbf{1.}
+
+    Let 
+    \[
+        \begin{aligned}
+            \beta:(R/I)\times(R/J)&\longrightarrow R/(I+J),\\
+            (r+I,s+J)&\longmapsto rs+(I+J).
+        \end{aligned}
+    \]
+    We show that $\beta$ is well-defined. 
+
+    Suppose $\bar r = r_0 + I = r_1 + I$ with 
+    $r_0 \neq r_1$. 
+
+    Then 
+    \begin{align*}
+        \beta(r_0 + I, s + J) 
+        &= (r_0s) + (I + J) \\ 
+        &= \overline{r_0s} \\ 
+        &= \bar{r_0} \bar s \\ 
+        &= \bar{r_1} \bar s \\ 
+        &= (r_1s) + (I + J) \\ 
+        &= \beta(r_1 + I, s + J). 
+    \end{align*}
+    The point is that 
+    \[
+        \bar x \bar y = \overline{xy}. 
+    \]
+    The argument is analogous for $\bar s$. 
+
+    \textbf{2.}
+
+    For bilinearity, fix first $s$, supressing the 
+    equivalence class notation for now.
+
+    Then 
+    \begin{align*}
+        \beta(r_0(r_1+r_2), s) 
+        &= ((r_0(r_1+r_2))s) \\ 
+        &= r_0(r_0s + r_1s) \\ 
+        &= r_0(\beta(r_0,s) + \beta(r_1,s)).  
+    \end{align*}
+    We could also be more rigorous than this.
+    The argument for fixed $r$ is the same. 
+
+    Since $\beta$ is an $R$-bilinear function we invoke the 
+    tensor products unviersal property, giving 
+    a map $\widehat \beta : R/I \otimes_R R/J \to R/(I + J)$ 
+    such that $\beta \circ ((r,s) \mapsto r \otimes s) 
+    = \widehat \beta$. 
+\end{proof}
+
 \end{document}
