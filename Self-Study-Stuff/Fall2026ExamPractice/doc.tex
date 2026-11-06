@@ -514,5 +514,219 @@ about intuition, allowing less rigor.
     open disjoint sets, implying Hausdorffness. No good. 
 \end{proof}
 
+\begin{prob*}[Noetherian and Artinian modules]
+    Let \(k\) be a field, and let
+    \[
+        R=k[x,y]/(xy).
+    \]
+    Write \(\bar x,\bar y\) for the residue classes
+    of \(x,y\) in \(R\).
+
+    \begin{enumerate}[label=\alph*)]
+        \item Prove that \(R\) is Noetherian.
+
+        \item For \(n\geq 1\), let
+        \[
+            I_n=(\bar x,\bar y^n).
+        \]
+        Prove that
+        \[
+            I_1\supsetneq I_2
+            \supsetneq I_3\supsetneq\cdots.
+        \]
+        Deduce whether \(R\) is Artinian.
+
+        \item Let
+        \[
+            M=R/(\bar x,\bar y^3).
+        \]
+        Construct a composition series for \(M\),
+        identify its simple factors up to
+        isomorphism, and determine \(\ell_R(M)\).
+
+        \item Let
+        \[
+            N=R/(\bar x).
+        \]
+        Determine whether \(N\) is Noetherian
+        and whether it is Artinian.
+        Justify why the conclusions of (c) and
+        (d) are compatible with finite generation
+        over a Noetherian ring.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    All fields $k$ are Noetherian. By 
+    repeated use of Hilbert's basis theorem, 
+    $k[x,y]$ is Noetherian. 
+    Then $(xy) \subseteq k[x,y]$ is Noetherian, which is 
+    preserved when quotienting so 
+    \[
+        R = k[x,y]/(xy)
+    \]
+    is Noetherian. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    For $n$ we have that 
+    \[
+        (\bar x, \bar y^n) \supseteq (\bar x, \bar y^{n+1}), 
+    \]
+    but inclusion the other way would require 
+    \[
+        \bar y^n \in (\bar x, \bar y^{n+1}), 
+    \]
+    but this cannot be the case.  
+
+    Since we have an infinitely descending strict chain of 
+    ideals we cannot have that $R$ is Artinian.
+\end{proof}
+\begin{proof}[Proof of (c)]
+    We have $x \in (x,y^3)$ so 
+    $(xy) \subseteq (x,y^3)$ as $k[x,y]$ ideals. 
+
+    Then 
+    \[
+        (\bar x, \bar y^3) = 
+        (x,y^3)/(xy)
+    \]
+    letting us invoke the third isomorphims theorem to get 
+    \[
+        R/(\bar x, \bar y^3) 
+        = \frac{k[x,y]/(xy)}{(x,y^3)/(xy)} 
+        \cong k[y]/(y^3). 
+    \]
+    Consider $(\bar y) = (y)/(y^3)$. 
+    Then 
+    \[
+        M/(\bar y) = 
+        \frac{k[y]/(y^3)}{(y)/y^3} 
+        \cong k[y]/(y) \cong k 
+    \]
+    so $(\bar y)$ is maximal.  
+    Now taking $(\bar y^2)$ we have a series 
+    \[
+        0 \subsetneq (\bar y^2) 
+        \subsetneq (\bar y) \subsetneq M. 
+    \]
+\end{proof}
+\begin{proof}[Proof of (d)]
+    We have 
+    \[
+        N = R/(\bar x) 
+        = \frac{k[x,y]/(xy)}{(x)/(xy)} 
+        \cong \frac{k[x,y]}{(x)} \cong k[y]
+    \]
+    which is certainly Noetherian from the same argument as 
+    in (a), but not Artinian given that 
+    \[
+        (y) \supsetneq (y^2) \supsetneq (y^3) 
+        \supsetneq \cdots 
+    \]
+    does not stabilize. 
+\end{proof}
+  
+
+
+\begin{prob*}[Primary ideals and decomposition]
+    Let \(k\) be a field, \(R=k[x,y]\), and
+    \[
+        I=(x^2,xy).
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Determine \(\sqrt I\) and prove
+        your claim.
+
+        \item Determine whether \(I\) is primary,
+        justifying your answer from the definition.
+
+        \item Prove that
+        \[
+            I=(x)\cap(x^2,y).
+        \]
+
+        \item Show that \((x)\) and \((x^2,y)\)
+        are primary ideals and determine their
+        radicals. Conclude that the expression
+        in (c) is a primary decomposition.
+
+        \item Identify the minimal prime over \(I\).
+        Is there an embedded prime in this
+        primary decomposition?
+    \end{enumerate}
+\end{prob*}
+
+\begin{proof}[Proof of (a)]
+    We have $\sqrt I = (x,y)$.
+
+    We clearly have $(x,y) \subseteq \sqrt I$.  
+
+    We have $xy = x(y) \in (x,y)$. 
+    Then, we also have $x^2 = x(x + 0y)\in (x,y)$ so 
+    \[
+        (x,y) \subseteq \sqrt I.
+    \]
+
+    Now for the other way, suppose 
+    \[
+        f^n = ax^2 + bxy = 
+        x(ax + by) \in (x,y). 
+    \]
+    We have $k[x,y]/(x,y) \cong k$, so $(x,y)$ is maximal and 
+    hence prime so $f \in (x,y)$. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We have $\sqrt I = (x,y)$ is maximal so 
+    $I$ is $(x,y)$-primary. 
+
+    We can also prove it with the nilpotency 
+    argument. 
+
+    $I$ is primary if and only if every zero divisor in 
+    $R/I$ is nilpotent. 
+
+    Suppose, for nonzero $f$, 
+    \[
+        fg = 0. 
+    \]
+    So 
+    \[
+        fg \in (x^2,xy)
+    \]
+    with $f$ not in $(x^2,xy)$. 
+    If $f$ is a constant polynomial, 
+    then $g$ must obviously be in $I$. Otherwise, 
+    it is not hard to see that if $y \bigm| f$ then 
+    $x \bigm| g$ so $x^2 \bigm| g^2$. 
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Suppose $f \in I$. Then 
+    \[
+        f = ax^2 + bxy = x(ax + by) 
+    \]
+    so $f \in (x)$. Furthermore, 
+    \[
+        f = ax^2 + \underbrace{(bx)}_{\in R}(y) 
+        \in (x^2,y)
+    \]
+    so 
+    \[
+        I \subseteq (x) \cap (x^2,y). 
+    \]
+    Now suppose $f \in (x) \cap (x^2, y)$. Then 
+    \[
+        f = ax 
+    \]
+    and 
+    \[
+        f = bx^2 + cy,  
+    \]
+    meaning 
+    \begin{align*}
+        ax &= bx^2 + cy, \\ 
+    \end{align*}
+\end{proof}
+
+  
 
 \end{document}
