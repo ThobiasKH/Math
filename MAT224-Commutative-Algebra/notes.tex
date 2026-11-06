@@ -7943,6 +7943,84 @@ $\mathbb A_K^n$ and radical ideals in $K[x_1,\ldots,x_n]$.
     
 \end{proof}
 
+\section{Chapter 11 Krull Dimension}
+For a ring $R$, the \keyterm{Krull dimension} is the 
+largest possible length $n$ of a chain of prime ideals 
+\[
+    P_0 \subsetneq P_1 \subsetneq \cdots \subsetneq P_n.
+\]
+The chain has $n+1$ prime ideals, but \keyterm{length} n. 
+The \keyterm{height} of a prime $P$ is the largest length 
+of a chain of prime ideals ending in $P$. 
+
+Immediately, 
+\[
+    \dim k = 0
+\]
+for a field $k$, since $(0)$ is the only prime ideal.  
+
+Next, for $k[x]$,
+\[
+    0 \subsetneq (x-a)
+\]
+is a prime chain of length $1$, so 
+$\dim k[x] \geq 1$. Since $k[x]$ is a PID, every nonzero prime 
+ideal is maximal, so no longer chain exists. Hence 
+\[
+    \dim k[x] = 1. 
+\]
+For $k[x,y]$, 
+\[
+    0 \subsetneq (x) \subsetneq (x,y)
+\]
+is a chain of length $2$ so $\dim k[x,y] \geq 2$. 
+We later prove that generally 
+\[
+    k[x_1,\ldots,x_n] = n. 
+\]
+
+Geometrically, inclusions reverse, so 
+\[
+    P_0 \subsetneq P_1 \subsetneq P_2 
+\]
+becomes 
+\[
+    V(P_0) \supsetneq V(P_1) \supsetneq V(P_2). 
+\]
+So, for instance, 
+\[
+    0 \subsetneq (x) \subsetneq (x,y)
+\]
+corresponds to 
+\[
+    \mathbb A_k^2 \supsetneq \text{y-axis} \supsetneq 
+    \{0,0\}. 
+\]
+
+\begin{prob}
+    Let 
+    \[
+        R = \frac{\mathbb C[x,y]}{(xy)}. 
+    \]
+    Find a chain of prime ideals in $R$ as long as possible, 
+    and determine $\dim R$. 
+\end{prob}
+\begin{proof}
+    The prime ideals in $R$ correspond to the prime ideals 
+    in $\mathbb C[x,y]$ containing $(xy)$. 
+    We notice that $(x),(y) \supsetneq (xy)$ with both 
+    prime. Furthermore, we have $(x,y) \supsetneq (x),(y) 
+    \supseteq (xy)$.  
+    Then $(x,y)$ is maximal, so 
+    $(\bar x, \bar y)$ is a maximal ideal of 
+    $R = \mathbb C[\bar x, \bar y]$ thus giving us a chain 
+    \[
+        (\bar x) \cong (\bar y) \subsetneq 
+        (\bar x, \bar y)  
+    \]
+    with length $1$. 
+\end{proof} 
+
 \end{document}
 
 
