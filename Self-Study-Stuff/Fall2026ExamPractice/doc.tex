@@ -514,56 +514,5 @@ about intuition, allowing less rigor.
     open disjoint sets, implying Hausdorffness. No good. 
 \end{proof}
 
-\begin{prob*}
-    Let 
-    \[
-        A = k[x]/(x^2). 
-    \]
-    \begin{enumerate}[label=\alph*)]
-        \item Prove that every element $a + b \bar x$ with 
-            $a \neq 0$ is invertible. Construct the inverse 
-            explicitly. 
-        \item Deduce that every zero divisor is nilpotent. 
-        \item Recall that an ideal $Q$ is primary 
-            if and only if every divisor in $R/Q$ is 
-            nilpotent. Use this to conclude that 
-            \[
-                (x^2,y) \subseteq k[x,y] 
-            \]
-            is primary. 
-    \end{enumerate}
-\end{prob*}
-\begin{proof}[Proof of (a/b)]
-    We see that 
-    \[
-        (a + b \bar x)(a - b \bar x) 
-        = a^2 + b^2 \bar x^2 = a^2.
-    \]
-    $a$ is nonzero, so $a^2$ is nonzero in $k$, making 
-    it invertible. 
-
-    Taking 
-    \[
-        (a + b\bar x)(a - b\bar x)a^{-2} 
-    \]
-    we get 
-    \[
-        a^2a^{-2} = 1. 
-    \]
-    Thus, for nonzero $a$, the inverse is 
-    $(a + b \bar x)^{-1} = a^{-2}(a-b \bar x)$. 
-
-    Suppose $a + b \bar x \not\in (x^2)$ is nonzero with 
-    \[
-        (a + b \bar x)c = \bar x^2. 
-    \]
-    Then, clearly $\bar x \bigm| c$ so 
-    $\bar x^2 | c^2$.   
-\end{proof}
-\begin{proof}[Proof of (c)]
-    From (b) we have that all zero divisor in 
-    $k[x]/(x^2) \cong k[x,y]/(x^2,y)$ is nilpotent, 
-    making $Q = (x^2,y)$ primary. 
-\end{proof}
 
 \end{document}
