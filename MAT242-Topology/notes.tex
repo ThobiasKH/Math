@@ -6561,4 +6561,167 @@ the converse is wildly false.
     an isomorphism. 
 \end{proof}
 
+\section{The last part of the course}
+
+We repear homotopy equivalence in some more detail. 
+
+We have already covered deformation retracts. 
+We upgrade to \keyterm{homotopy equivalence}. 
+
+Two spaces $X,Y$ have the same homotopy 
+type if there exists continuous maps 
+\[
+    f : X \to Y, \ g : Y \to X 
+\]
+such that 
+\[
+    g \circ f \simeq \id_X, \ f\circ g \simeq \id_Y. 
+\]
+Comparing this with homeomorphisms, where 
+these equations must hold, whereas here 
+they only need to hold up to deformation. 
+
+The most important part is that 
+\[
+    X \simeq Y \Rightarrow \pi_1(X) \cong \pi_1(Y)
+\]
+with the usual basepoint qualifications. 
+
+Homotopic based maps induce the same map on $\pi_1$ so 
+\[
+    g_* \circ f_* = (f \circ f)_* = (\id_X)_* 
+    = \id, 
+\]
+and similarly, 
+\[
+    f_* \circ g_* = \id. 
+\]
+
+Hence $f_*$ and $g_*$ are group isomorphisms. 
+
+The canonical example is 
+\[
+    S^N \subseteq \mathbb R^{n+1} \setminus 0. 
+\]
+The radial map 
+\[
+    r(x) = \frac{x}{\|x\|}
+\]
+is part of a deformation retraction 
+\[
+    H(x,t) = (1-t)x + t \frac{x}{\|x\|}. 
+\]
+Thus 
+\[
+    S^n \simeq \mathbb R^{n+1} \setminus 0
+\]
+and consequently their fundamental groups agree. 
+
+\subsection{\S59 The n dimensionmal sphere is simply connected (for n greater than 1)}
+\begin{thm}
+    \[
+        \pi_1(S^n) = 0, \ (n \geq 2). 
+    \]
+\end{thm}
+Equivalently, $S^n$ is simply connected for $n \geq 2$. 
+
+Munkres proves this using a special case 
+of the Seifert-van Kampen idea. The useful result is 
+that if 
+\[
+    X = U \cup V 
+\]
+where $U,V$ are open simply connected, and 
+\[
+    U \cap V 
+\]
+is nonempty path connected, then $X$ is simply connected. 
+
+Choose two distinct $p,q \in S^n$ and put 
+\[
+    U = S^n \setminus \{p\}, \ V = S^n \setminus \{q\}. 
+\]
+
+By sterographic projection, 
+\[
+    U \cong \mathbb R^n, \ V \cong \mathbb R^n. 
+\]
+
+Hence both are simply connected. 
+
+The intersection is 
+\[
+    U \cap V = S^n \setminus \{p,q\}. 
+\]
+Under stereographic projection, this is homeomorphic to 
+\[
+    \mathbb R^n \setminus 0. 
+\]
+For $n \geq 2$, this is path connected, letting 
+us conclude that $S^n$ is simply connected for $n \geq 2$.
+
+So $\pi_1(S^1) \cong \mathbb Z$ but 
+for $S^2,S^3,\ldots$ the fundamental group is trivial. 
+
+\subsection{\S60 Computing some surfaces}
+
+\subsubsection{Products}
+
+We have 
+\[
+    \pi_1(X\times Y, (x_0,y_0)) 
+    \cong \pi_1(X, x_0) \times \pi_1(Y,y_0). 
+\]
+The isomorphism is the obvious choice of 
+\[
+    [f] \mapsto ([\pi_X \circ f], [\pi_Y \circ f]).
+\]
+
+Conversely, given loops 
+\[
+    \alpha : I \to X, \ \beta : I \to Y, 
+\]
+combine them to 
+\[
+    t \mapsto (\alpha(t), \beta(t)). 
+\]
+Therefore the torus 
+\[
+    T^2 = S^1 \times S^1 
+\]
+we get 
+\[
+    \pi_1(T^2) \cong \mathbb Z \times \mathbb Z. 
+\]
+
+\subsubsection{The projective plane}
+
+Define 
+\[
+    \mathbb R \mathbb P^2 
+    = S^2/(x \sim -x). 
+\]
+So antipodal points are identified. 
+The quotient map 
+\[
+    p : S^2 \to \mathbb R \mathbb P^2, \ p(x) = \{x,-x\}, 
+\]
+is a two-sheeted covering map. Munkres proves this in 
+$\S60$. 
+
+Since $S^2$ is simply connected, this covering detects 
+the fundamental group downstairs. The result is 
+\[
+    \pi_1(\mathbb R\mathbb P^2) 
+    \cong \mathbb Z/2\mathbb Z. 
+\]
+Intuitively, there is one nontrivial loop 
+class $a$, but traversing it twice becomes 
+contractible 
+\[
+    a^2 = e. 
+\]
+
+
+
 \end{document}
