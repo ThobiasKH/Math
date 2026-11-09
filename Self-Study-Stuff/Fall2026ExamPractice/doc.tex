@@ -514,5 +514,355 @@ about intuition, allowing less rigor.
     open disjoint sets, implying Hausdorffness. No good. 
 \end{proof}
 
+\begin{prob*}[Integral extensions]
+    Let \(k\) be a field, and consider
+    \[
+        A=k[t^2,t^3]\subseteq B=k[t].
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item State the definition of integrality
+        and determine whether \(t\) is integral
+        over \(A\).
+
+        \item Show that every element of \(B\)
+        has the form \(a+bt\), where \(a,b\in A\).
+        Deduce that \(B\) is a finite \(A\)-module.
+
+        \item Prove that
+        \[
+            \operatorname{Frac}(A)
+            =\operatorname{Frac}(B)=k(t).
+        \]
+
+        \item Determine whether \(A\) is
+        integrally closed in its fraction field.
+
+        \item Determine whether every element
+        of \(B\) is integral over \(A\), and
+        justify your conclusion.
+    \end{enumerate}
+\end{prob*}
+
+\begin{proof}[Proof of (a)]
+    Suppose $R \subseteq R'$. $a \in R'$ 
+    is integral over $R$ if it is the zero of a monic 
+    polynomial 
+    \[
+        x^n + a_{n-1}x^{n-1} + \cdots + 
+        a_0 x^0, \ a_i \in R. 
+    \]
+    If all elements in $R'$ are monic over $R$, then 
+    $R'$ is integral over $R$. More precisely, if 
+    $R' = R[c_1,c_2,\ldots,c_n]$ then $R'$ is an integral 
+    extension of $R$ if all $c_i$ are integral over $R$. 
+    The previous is also true since all elements of 
+    $R$ are integral over $R$, take 
+    \[
+        x - a 
+    \]
+    for $a \in R$. 
+
+    Take 
+    \[
+        f(T) = T^3 - t^3. 
+    \]
+    Then $f(t) = 0$ and 
+    \[
+        f(T) \in k[t^2,t^3][T]
+    \]
+    so $B$ is integral over $A$ with generating set 
+    $\{1,t\}$. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    We want to show 
+    \[
+        B = A + At. 
+    \]
+    We have $t^2,t^3 \in A$ so we have 
+    \[
+        t^n \in A 
+    \]
+    for every $n \geq 2$. 
+    We could prove this inductively. The base 
+    case is trivial. Thereon out, even powers are easy to 
+    see. For $n = 2k$ we have 
+    \[
+        (t^2)^k = t^{2k} = t^n \in A
+    \]
+    For $n = 2k+1$ notice that $2k + 1 - 3 = 2(k-1)$. 
+    If $k \geq 4$, then $t^{2k-2}$ exists and 
+    thus 
+    \[
+        t^{2k-2}t^3 = t^{2k+1} = t^n \in A 
+    \]
+    exists. So after observing that $t^4 = (t^2)^2 \in A$ 
+    this follows.
+    
+\end{proof}
+\begin{proof}[Proof of (c)]
+    The forward inclusion 
+    $k[t^2,t^3] \subseteq k[t] \subseteq k(t)$ is 
+    trivial. 
+
+    We have that 
+    \[
+        \frac{t^3}{t^2} 
+        \frac{t^2}{t^3} = 1, 
+    \]
+    but 
+    \[
+        \frac{t^2}{t^3} 
+        = \frac{1}{t} 
+    \]
+    so $(t^3/t^2)^{-1} = t^{-1}$, hence 
+    $t^3/t^2 = t$, meaning 
+    $k(t) \subseteq \operatorname{Frac}(k[t^2,t^3])$. 
+\end{proof}
+
+\begin{prob*}[Ring, ideal, and module operations]
+    Let \(A=k[t^2,t^3]\subseteq B=k[t]\).
+
+    \begin{enumerate}[label=\alph*)]
+        \item Determine whether \(t^5,t^7,t\)
+        belong to \(A\).
+
+        \item Describe explicitly the ideals
+        \[
+            I=(t^2,t^3)_A,\qquad
+            J=(t^2,t^3)_B.
+        \]
+        Explain why they are different.
+
+        \item Determine \(A/I\) and \(B/J\),
+        up to ring isomorphism.
+
+        \item Prove that \(B\) is finitely generated
+        as an \(A\)-module, but that \(\{1,t\}\)
+        is not an \(A\)-module basis.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    We have that $t^n \in A$ for all $n \geq 2$, so 
+    $t^5,t^7 \in A$. 
+    
+    We can prove this inductively by observing that 
+    $t^2, t^3, t^4 = (t^2)^2 \in A$. 
+
+    For even $n = 2k$ it is trivial as 
+    \[
+        (t^2)^k = t^n \in A.     
+    \]
+    By assumption, supposing $n = 2k + 1 - 3 \in A$, which 
+    we know since $t^4 \in A$, we can take 
+    \[
+        t^{2k-2}t^3 = t^n \in A. 
+    \]
+
+    We do not, however, have $t \in A$ 
+    as 
+    \[
+        A = k \oplus kt^2 \oplus kt^3 \oplus 
+        \cdots
+    \]
+    
+\end{proof}
+\begin{proof}[Proof of (b/c)]
+    The ideal $(t^2,t^3)$ as an ideal of $A$ is the set of 
+    \[
+        at^2 + bt^3, \ a,b \in A. 
+    \]
+    Furthermore, 
+    \[
+        k[t^2,t^3]/(t^2,t^3) \cong k 
+    \]
+    making it maximal. 
+
+    As an ideal of $B$ we get that 
+    \[
+        B/(t^2,t^3) \cong B/(t^2)
+    \]
+    where $\bar t^2 = 0$ vanishing terms with $t$-degree 
+    greater than or equal to $2$.
+
+    Explcitly 
+    \[
+        (t^2,t^3) = (t^2).  
+    \]
+    The inclusion $(t^2,t^3) \supseteq (t^2)$ is trivial. 
+
+    For the other direction, since the ideal 
+    absorbs multiplication, 
+    \[
+        t \cdot t^2 = t^3 \in (t^2). 
+    \]
+    So the presence of $t$ kills $t^3$. When quotienting 
+    we see that $\bar t^3 = 0$ is redundant since 
+    $\bar t^2 = 0$ anyways. 
+\end{proof}
+\begin{proof}[Proof of (d)]
+    We have $t$ integral over $A$, and since 
+    \[
+        B = A[t] 
+    \]
+    we have that $B$ is integral over $A$ with 
+    generating set $\{1,t\}$. 
+
+    The generating set is not a basis because it is 
+    not linearly independent. 
+
+    We have 
+    \[
+        t\cdot t^2 - 1 \cdot t^3 = 0 
+    \] 
+    so it is not linearly independent over $A$. 
+\end{proof}
+
+\begin{prob*}[Product and subspace topologies]
+    Let \(X=\mathbb R\times\mathbb R\) have the
+    product topology, and let
+    \[
+        P=\{(x,x^2):x\in\mathbb R\}
+    \]
+    have the subspace topology.
+
+    \begin{enumerate}[label=\alph*)]
+        \item State the definition of the product
+        topology and describe its basic open sets.
+
+        \item Let
+        \[
+            U=\{(x,x^2)\in P:-1<x<1\}.
+        \]
+        Prove that \(U\) is open in \(P\).
+        Is \(U\) open in \(X\)?
+
+        \item Prove that
+        \[
+            f:\mathbb R\to P,\qquad
+            f(t)=(t,t^2)
+        \]
+        is continuous, using the universal
+        property of the product topology and
+        the subspace topology.
+
+        \item Construct the inverse of \(f\)
+        and prove that \(f\) is a homeomorphism.
+
+        \item Determine whether \(P\) is closed
+        in \(X\), and justify your conclusion.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    The product topology, is the coarsest 
+    topology for which the universal property holds. 
+
+    In particular, for continuous $f$ 
+    on some space to a cartesian product, $f$ is continuous 
+    if and only if 
+    \[
+        \pi_i \circ f 
+    \]
+    is continuous, where $\pi_i$ denotes the $i$-th projection. 
+
+    In the finite case, the basiselements are 
+    \[
+        \prod_{i=1}^n U_i, 
+    \]
+    where $U_i$ is open in $X_i$. 
+    
+    In the infinite case the elements are 
+    \[
+        \prod_\alpha U_\alpha 
+    \]
+    where $U_\alpha = X_\alpha$ for all, but finitely many 
+    $\alpha$. In the infinite case this differs from the 
+    box topology as the universal property can fail 
+    for the box topology. Take for instance 
+    $\mathbb R^\omega$ with the box topology. 
+    Define $f : \mathbb R \to \mathbb R^\omega$ by 
+    \[
+        t\mapsto (t,t,t,\ldots).
+    \] 
+    For each projection, this is simply the identity map 
+    which is continuous. However, 
+    \[
+        \prod_{n=1}^\infty (-1/n, 1/n) 
+    \]
+    is open in $\mathbb R^\omega$, but 
+    the inverse image is just $\{0\}$, which is not 
+    open. 
+
+\end{proof} 
+\begin{proof}[Proof of (b)]
+    We have 
+    \[
+        U = P \cap (-1,1) \times \mathbb R. 
+    \]
+\end{proof}
+\begin{proof}[Proof of (c)]
+    I do not recall a universal property for the 
+    subspace topology. 
+
+    Some open set in $P$ is of the form 
+    \[
+        P \cap U 
+    \]
+    for open $U \subseteq X$. 
+
+    Then 
+    \[
+        f^{-1}(P \cap U) 
+        = f^{-1}(P) \cap f^{-1}(U) 
+        = \mathbb R \cap f^{-1}(U) 
+        = f^{-1}(U).
+    \]
+    We have 
+    \begin{align*}
+        f^{-1}(U) 
+        &= f^{-1}\left(\bigcup_\alpha V_\alpha \times 
+        W \alpha\right) \\ 
+        &= \bigcup_\alpha f^{-1}(V_\alpha \times W_\alpha) \\ 
+        &= \bigcup_{\alpha} f_1^{-1}(V_\alpha) 
+        \cap f_2^{-1}(W_\alpha),  
+    \end{align*}
+    where $f_i = \pi_i \circ f$. 
+
+    We have $f_1(t) = t$ and 
+    $f_2(t) = t^2$. 
+    Thus these are continuous so the preimages 
+    are continuous. So we take the union of 
+    finite intersections of open sets which is open. 
+    This is slightly different from what is asked. 
+    We want to take basiselements 
+    $\bigcup_\alpha (-\varepsilon_\alpha, \varepsilon_\alpha) 
+    \times (-\delta_\alpha, \delta_\alpha)$ and 
+    from this clearly see that the inverse image is 
+    \[
+        \bigcup_\alpha (-\varepsilon_\alpha, 
+        \varepsilon_\alpha) \cap (-\sqrt{\delta_\alpha}, 
+        \sqrt{\delta_\alpha})
+    \]
+    which clearly is open. 
+\end{proof}
+\begin{proof}[Proof of (d)]
+    All elements in $P$ are of the 
+    form $(t,t^2)$ so 
+    \[
+        f(t,t^2) = t 
+    \]
+    is clearly well-defined. 
+
+    It is not hard to see that this is continuous either. 
+\end{proof}
+\begin{proof}[Proof of (e)]
+    The set is closed. Take the continuous 
+    $f(x,y) = y - x^2$. We have 
+    \[
+        f^{-1}(\{0\}) = P. 
+    \] 
+\end{proof}
+
+
 
 \end{document}
