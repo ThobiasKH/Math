@@ -863,6 +863,216 @@ about intuition, allowing less rigor.
     \] 
 \end{proof}
 
+\begin{prob*}
+    Let 
+    \[
+        X = \mathbb R^2, \ Q = \{(x,|x|) \bigm| x \in 
+        \mathbb R\}
+    \]
+    with $Q$ carrying the subspace topology. 
 
+    \begin{enumerate}
+        \item Is 
+            \[
+                W = \{(x,|x|) \bigm| x > 0\}
+            \]
+            open in $Q$? Is it open in $X$? 
+        \item Is $Q$ closed in $X$? Prove your answer. 
+        \item Is $Q$ homeomorphic to $\mathbb R$? Given 
+            an explicit homeomorphism and justify 
+            continuity in both directions.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of 1]
+    We begin by checking whether $W$ is open in 
+    $X$. 
+    
+    We observe that, for any $\varepsilon > 0$, the ball 
+    $B_{\varepsilon}(1,1)$ contains 
+    \[
+        q = (1, 1 + \varepsilon / 2),  
+    \]
+    but $q \not \in W$ so $W$ is not open. 
+
+    We do however have that 
+    $W$ is open in $Q$. 
+
+    We have 
+    \[
+        W = Q \cap ((0,\infty) \times \mathbb R)
+    \]
+    with the latter being open in $X$. 
+\end{proof}
+\begin{proof}[Proof of (2)]
+    Define $f : \mathbb R^2 \to \mathbb R$ by 
+    \[
+        f(x,y) = |x| - y. 
+    \]
+    This is obviously a continuous function, and the fiber of 
+    $0$ is 
+    \[
+        f^{-1}(\{0\}) = \text{all} \  
+        (x,y), \ \text{s.t.} \ |x| - y = 0. 
+    \]
+    Setting 
+    \[
+        |x| = y 
+    \]
+    it is clear that 
+    \[
+        f^{-1}(\{0\}) = Q. 
+    \]
+    Thus $Q$ is closed since it is the preimage of a 
+    closed set under a continuous function. 
+\end{proof}
+\begin{proof}[Proof of (c)]
+    Define the continuous $f : \mathbb R \to Q$ by 
+    \[
+        f(x) = (x,|x|). 
+    \]
+    This map is clearly continuous and well-defined.  
+    Now $g : Q \to \mathbb R$ by 
+    \[
+        g(x,y) = x 
+    \]
+    is also perfectly well-defined. 
+
+    Then 
+    \[
+        (g \circ f)(x) = g(x,|x|) = x 
+    \]
+    and 
+    \[
+        (f \circ g)(x,|x|) = f(x) = (x,|x|).
+    \]
+\end{proof}
+
+\begin{prob*}
+    Let 
+    \[
+        X = \{0\} \cup \left\{\frac 1 n \biggm| n \in 
+        \mathbb N_{\ge 1}\right\} \subseteq \mathbb R 
+    \]
+    carry the subspace topology induced by the usual metric 
+    on $\mathbb R$. 
+
+    Define 
+    \[
+        A = \left\{\frac{1}{2n} \biggm| n \in \mathbb 
+        N_{\geq 1}\right\}.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Show that every singleton $\{1/n\}$ is open 
+            in $X$. Is $\{0\}$ open in $X$? 
+        \item Determine whether $A$ is open and whether 
+            it is closed in $X$. Justify both. 
+        \item Prove that $X$ is compact, directly from the 
+            open-cover definition.
+        \item Define $h : X \to \mathbb R$ by 
+            \[
+                h(0) = 0, \ h(1/n) = (-1)^n.
+            \]
+            Determine where $h$ is continuous.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    Consider $(1/n -\varepsilon, 1/n + \varepsilon)$, 
+    the open ball around $1/n$, in $\mathbb R$. 
+    This is open for all $\varepsilon > 0$. Choose 
+    $\varepsilon$ small enough so that 
+    $1/(n+1), 1/(n-1) \not\in (1/n - \varepsilon, 1/n + \varepsilon)$.
+    Then 
+    \[
+        X \cap (1/n-\varepsilon, 1/n + \varepsilon) 
+        = \{1/n\} 
+    \]
+    so $\{1/n\}$ is open due to the subspace topology. 
+
+    The $0$ set however is not open. 
+    Suppose $(-\varepsilon,\varepsilon) \cap X = \{0\}$. 
+    We can always choose $n$ such that $1/n < \varepsilon$ for 
+    any choice of $\varepsilon$, making 
+    \[
+        X \cap (-\varepsilon, \varepsilon) 
+        = \{0, 1/n, 1/(n+1), 1(n+2), \ldots\}.
+    \]
+    This can be made more rigorous, but it should be the 
+    right idea. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    Once again, take $\varepsilon_n > 0$ such that 
+    \[
+        2(n+1) > 2n + \varepsilon_n > 2n > 2n - \varepsilon_n 
+        > 2(n-1).
+    \]
+    Then 
+    \[
+        X \cap \bigcup_{n\in \mathbb N_{\geq 1}} 
+        \left(\frac{1}{2n + \varepsilon}, \frac{1}{2n - 
+        \varepsilon}\right) 
+        = A,
+    \]
+    so $A$ is open. 
+
+    It is also closed. 
+    We have 
+    \[
+        B := X \cap \bigcup_{n\in \mathbb N_{\geq 1}} 
+        \left(\frac{1}{n+1}, \frac{1}{n}\right)
+    \]
+    open and 
+    \[
+        A = X \setminus B,  
+    \]
+    hence $A$ is closed. 
+\end{proof}
+\begin{proof}
+    Suppose $\{U_\alpha\} \subseteq 2^X$ is a covering of 
+    $X$. 
+    The open sets are 
+    \[
+        U_\alpha = X \cap U 
+    \]
+    where 
+    \[
+        U = \bigcup_{\beta} U_{\alpha,\beta}
+    \]
+    where $U_{\alpha,\beta}$ is an interval around some 
+    $x \in [0,1]$. 
+
+    It would be easier to prove that $X$ is a closed 
+    subspace of $[0,1]$ which is compact implying $X$ is compact,  
+    by observing that 
+    \[
+        X = [0,1] \setminus \bigcup (1/(n+1), 
+        1/n).
+    \]
+    There must be some open set $U_\alpha$ in the 
+    cover containing $0$. We can simplify this by thinking 
+    of it as 
+    \[
+        X \cap (-\delta, \delta). 
+    \]
+    Then, there exists some $N \in \mathbb N_{\geq 1}$ for which 
+    \[
+        1/n \in X \cap (-\delta, \delta)
+    \]
+    for all $n > N$. 
+    For the remaining $N$ $1/n$'s, there must be at least one 
+    $U_{\alpha(n)}$ containing it. 
+    Thus 
+    \[
+        (X \cap (-\delta, \delta)) 
+        \bigcup_{n=1}^N U_{\alpha(n)}
+    \]
+    makes a finite cover. 
+\end{proof}
+\begin{proof}[Proof of (d)]
+    We have 
+    $h$ continuous at every $1/n$, but 
+    $h(1/n) \not\to h(0)$ even when 
+    $1/n \to 0$ so there is a discontinuity at $0$. 
+\end{proof}
 
 \end{document}
