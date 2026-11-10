@@ -1,0 +1,145 @@
+% Keep styling.sty beside this file. Compile with:
+% latexmk -xelatex -synctex=1 template.tex (or, 
+% for my purposes, compile to preview with VimtexCompile in neovim)
+% if youre using VSC with some built in plugin you'll probably need to add 
+% {
+%   "latex-workshop.latex.recipe.default": "latexmk (xelatex)",
+%   "latex-workshop.latex.autoBuild.run": "onSave",
+%   "latex-workshop.view.pdf.viewer": "tab",
+%   "latex-workshop.view.pdf.invertMode.enabled": "never"
+% }
+% also it is necessary to download the right fonts. Just look 
+% at error messages to find which ones or something
+
+\documentclass[11pt]{article}
+\usepackage{styling} % Dark by default, with the clickable THEME switch.
+% \usepackage{graphicx} % Uncomment if adding external images.
+
+\title{Title of the Notes}
+\author{Remote Group}
+\date{For November 15th} % Use \date{} to hide the date.
+
+\begin{document}
+\maketitle
+% \tableofcontents
+% \newpage
+
+\begin{prob*}[Munkres 55.4]
+    Suppose you are given the fact that 
+    for each $n$, there is no retraction 
+    $r : B^{n+1} \to S^n$. Prove the following: 
+    \begin{enumerate}[label=(\alph*)]
+        \item The identity map $i : S^n \to S^n$ is not
+            nullhomotopic. 
+        \item The inclusion map $j : S^n \to 
+            \mathbb R^{n+1} - 0$ is not nullhomotopic. 
+        \item Every nonvanishing vector field 
+            on $B^{n+1}$ points directly outward at 
+            some point of $S^n$, and directly inward 
+            at some point of $S^n$. 
+        \item Every continuous map $f : B^{n+1} \to B^{n+1}$ 
+            has a fixed point. 
+        \item Every $n + 1$ by $n+1$ matrix with 
+            positive real entries has a positive 
+            eigenvalue. 
+        \item If $h : S^n \to S^n$ is nullhomotopic, then 
+            $h$ has a fixed point and $h$ maps 
+            some point $x$ to its antipode $-x$.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    We will prove by contrapositive. 
+
+    Apologies if there are some slips in the rigor here, 
+    this was hard. 
+
+    Suppose the identity $i : S^n \to S^n$ 
+    is nullhomotopic. 
+
+    Then there is a continuous map 
+    \[
+        H : S^n \times I \to S^n 
+    \]
+    such that 
+    \[
+        H(x,0) = x, \ H(x,1) = p 
+    \]
+    for some fixed $p \in S^n$. 
+
+    Starting with $S^n \times I$ we can impose 
+    $(x,1) \sim (y,1)$ for all 
+    $x,y \in S^n$. $H$ is then constant on all 
+    equivalence classes, letting us factor 
+    \[
+        \begin{tikzcd}
+            S^n \times I \ar[r, "H"] \ar[dr, "q"] & S^n \\ 
+            & (S^n \times I)/(\sim) \ar[u, "\varphi"']
+        \end{tikzcd}
+    \]
+    giving a continuous map $\varphi$ for which the 
+    diagram commutes ($q$ is $q(x,t) = [(x,t)]$). 
+    
+    For this map we have that 
+    \[
+        \varphi \bigm|_{S^n \times 0} 
+        = H\bigm|_{S^n} = \id_S^n.  
+    \]
+
+    Now it remains to show that 
+    \[
+        (S^n \times I)/\sim 
+        \ \cong B^{n+1}. 
+    \]
+    Take $f : (S^n \times I)/\sim \ \longrightarrow 
+    B^{n+1}$ by 
+    \[
+        f([(x_1,x_2,\ldots,x_{n+1}),t]) = 
+        (1-t)(x_1,x_2,\ldots,x_{n+1}).  
+    \]
+    Then the point $p$ corresponding to the 
+    nontrivial equivalence class is the origin. 
+
+    The map is a well-defined homeomorphism (I swear!).
+
+    This gives a retraction map from $B^{n+1} \to S^n$ 
+    which we were told wasn't possible! 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    I'm sure one could argue this from the fact that 
+    $S^n \simeq \mathbb R^{n+1} \setminus 0$, but instead,
+    take the retraction 
+    \[
+        r : \mathbb R^{n+1} \setminus 0 
+        \to S^n, \ r(x) = \frac{x}{\|x\|}. 
+    \]
+    Observe that 
+    \[
+        r \circ j = \id_{S^n}. 
+    \]
+    Suppose, for contradiction, that $j$ is nullhomotopic. 
+    Then 
+    \[
+        j \simeq c_p
+    \]
+    for some constant map $c_p : S^n \to \mathbb R^{n+1} 
+    \setminus 0$. 
+
+    Composing with $r$, we get 
+    \[
+        \id_{S^n} = r \circ j \simeq r \circ c_p, 
+    \]
+    where $r \circ c_p$ is constant, contradicting (a).    
+\end{proof}
+\begin{prob*}
+    A nonvanishing vector field on 
+    $B^{n+1}$ is a continuous map 
+    \[
+        v : B^{n+1} \to \mathbb R^{n+1}
+    \]
+    such that 
+    \[
+        v(x) \neq 0 \ \forall x \in B^{n+1}. 
+    \]
+\end{prob*}
+
+\end{document}
