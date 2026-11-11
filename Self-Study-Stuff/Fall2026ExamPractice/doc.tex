@@ -1075,4 +1075,290 @@ about intuition, allowing less rigor.
     $1/n \to 0$ so there is a discontinuity at $0$. 
 \end{proof}
 
+\begin{prob*}[Localization and quotient modules]
+    Let \(k\) be a field and define
+    \[
+        R=k[x,y]/(xy),\qquad
+        M=R/(\bar x^2).
+    \]
+    Let
+    \[
+        S=\{1,\bar y,\bar y^2,\ldots\}
+        \subseteq R.
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Describe \(M\) as a \(k\)-vector
+        space and determine \(S^{-1}M\)
+        up to \(S^{-1}R\)-module isomorphism.
+
+        \item Determine the kernel of
+        \[
+            \lambda:M\longrightarrow S^{-1}M,
+            \qquad m\longmapsto m/1.
+        \]
+        Determine whether \(\lambda\) is injective
+        or surjective, with proofs.
+
+        \item Let
+        \[
+            T=\{1,\bar x,\bar x^2,\ldots\}
+            \subseteq R.
+        \]
+        Determine \(T^{-1}M\), and explain
+        what happens to the relation
+        \(\bar x^2=0\) after localization.
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    As we don't have $(xy) \subseteq (x^2)$ we 
+    cannot use the third isomorphism theorem. 
+
+    In $M$ we have that terms 
+    in $xy$ vanish and higher terms of $x$ vanish. 
+
+    For $R$ we can write elements as 
+    \[
+        c + \sum_i a_i\bar x^i + \sum_{j} b_j\bar y^j. 
+    \]
+    Quotienting by $\bar x^2$ kills higher terms 
+    of $x$ giving 
+    \[
+        c + a\bar x + \sum_{j} b_j\bar y^j, 
+    \]
+    giving a natural generating set 
+    \[
+        \{1,\bar x, \bar y, \bar y^2, \ldots\}. 
+    \]  
+    These are indeed linearly independent since, 
+    while $\bar x \bar y = 0$ seems troubling, 
+    we have no problems with sums. 
+    \[
+        a_0 + a_1 \bar x + b_1 \bar y 
+        + b_2 \bar y^2 + \cdots = 0
+    \]
+    has no nontrivial solution. 
+
+    For $S^{-1}M$ we make all $\{1,\bar y, \bar y^2, 
+    \cdots\}$ invertbile. 
+
+    For elements of $M$ notice that 
+    \[
+        a_0 + a_1 \bar x + 
+        \underbrace{\sum_{j} b_j\bar y^j}_{\text{each} \ \bar y^j \ \text{becomes invertible}}.  
+    \]
+    This leaves the coefficients $b_j$ which themselves 
+    are invertible when nonzero. 
+
+    We identify that 
+    \[
+        \frac{\bar x}{1} 
+        = \frac{\bar x}{1} \cdot 
+        \frac{\bar y}{1} \cdot \frac{1}{\bar y} 
+        = \frac{\bar x \bar y}{\bar y} 
+        = 0. 
+    \]
+
+    Thus $\bar x$ is killed. 
+
+    Thus 
+    \[
+        S^{-1}M \cong k[\bar y, \bar y^{-1}]. 
+    \]
+
+\end{proof}
+\begin{proof}[Proof of (b)]
+    An element in the localization is $0$ 
+    if and only if there exists 
+    $t \in S$ such that $t \cdot m = 0$ for 
+    \[
+        \frac{m}s \in S^{-1}M.
+    \] 
+
+    We know that $\bar x / 1 = 0$ so 
+    \[
+        (\bar x) \subseteq \ker \lambda. 
+    \]
+
+    We claim that we also have 
+    \[
+        \ker \lambda \subseteq (\bar x). 
+    \]
+
+    Suppose 
+    \[
+        m \mapsto m/1 = 0.  
+    \]
+    Then there is $a \in S$ such that 
+    $a \cdot m = 0$. 
+    Elements of $M$ are of the form 
+    \[
+        m = a_0 + a_1 \bar x + b_1 \bar y + 
+        b_2 \bar y + \cdots = 0. 
+    \]
+    The only elements in $S$ are powers of 
+    $\bar y$. 
+
+    So if 
+    \[
+        \bar y^k a_0 + \bar y^k a_1 \bar x + 
+        b_1 \bar y^{k+1} + 
+        b_2 \bar y^{k+2} + \cdots = 0, 
+    \]
+    then the term with $\bar x$ vanishes, requiring 
+    \[
+        a_0 \bar y^k + \sum_j b_j \bar y^{k+1} 
+        = 0 
+    \]
+    which we have established have no nontrivial 
+    solution in $M$ so $m$ lies in $(\bar x)$. 
+
+    Since $S^{-1}M \cong k[y, y^{-1}]$ we 
+    cannot have surjectivity. The image is $k[y]$ as 
+    there is no element mapping to $1/y$.  
+\end{proof}
+\begin{proof}[Proof of (c)]
+    We make all $\bar x$ invertible so 
+    \[
+        \frac{m}{1} 
+        = \frac{1}{\bar x^2} \cdot \frac{\bar x^2m}{1} 
+        = \frac{0}{\bar x^2} = 0 
+    \]
+    so $T^{-1}M = 0$. 
+
+
+\end{proof}
+
+\begin{prob*}[Deformation retractions and fundamental groups]
+    Let
+    \[
+        X=\mathbb R^2\setminus\{(0,0)\},
+        \qquad A=S^1,
+        \qquad p=(1,0).
+    \]
+
+    \begin{enumerate}[label=\alph*)]
+        \item Construct a continuous map
+        \[
+            H:X\times[0,1]\to X
+        \]
+        such that
+        \[
+            H(x,0)=x,\qquad H(x,1)\in A,
+        \]
+        and \(H(a,t)=a\) for all
+        \(a\in A\), \(t\in[0,1]\).
+        Verify the required properties.
+
+        \item Prove that
+        \[
+            \pi_1(X,p)\cong\mathbb Z.
+        \]
+        You may assume
+        \(\pi_1(S^1,p)\cong\mathbb Z\).
+        Identify a generator.
+
+        \item Identify \(\mathbb R^2\) with
+        \(\mathbb C\), and let
+        \[
+            f:X\to X,\qquad f(z)=z^2.
+        \]
+        Determine the induced homomorphism
+        \(f_*:\pi_1(X,p)\to\pi_1(X,p)\).
+        Determine whether it is injective
+        and surjective.
+
+        \item Let \(j:X\hookrightarrow\mathbb R^2\)
+        be the inclusion. Determine
+        \[
+            j_*:\pi_1(X,p)\to
+            \pi_1(\mathbb R^2,p).
+        \]
+        Explain why this is compatible
+        with the result of part (b).
+    \end{enumerate}
+\end{prob*}
+\begin{proof}[Proof of (a)]
+    The map 
+    \[
+        H(x,t) = (1-t)x + t \frac{x}{\|x\|}
+    \]
+    works. 
+
+    For $t = 0$ we have 
+    \[
+        H(x,0) = x 
+    \]
+    and for $t = 1$ we have 
+    \[
+        H(x,1) 
+        = \frac{x}{\|x\|}. 
+    \]
+    For $x \in S^1$, we have 
+    $\|x\| = 1$ so this is the identity map here. 
+
+    Furthermore if $x \in S^1$ then 
+    \[
+        H(x,t) = (1-t)x + t \frac{x}{\|x\|} 
+        = x -tx + t\frac{x}{|} 
+        = x. 
+    \]
+
+    For well-definedness notice that $\mathbb R^2 
+    \setminus \{(0,0)\}$ is closed under multiplication 
+    and addition, 
+    $\|x\|$ is nonzero so there are no division by 
+    zero issues.
+    
+    For continuity notice that we are 
+    simply doing scalar-multiplication and 
+    addition which is 
+    continuous. 
+\end{proof}
+\begin{proof}[Proof of (b)]
+    The existence of $H$ means that 
+    $S^1$ is deformation retract of $X$, 
+    which preserves fundamental group up to 
+    usual basepoint shenanigans. 
+
+    Suppose $A$ is deformation retract of $X$, meaning 
+    $H : X \times I \to X$ exists with the required 
+    properties. 
+
+    Define $r : X \to A$ by $r(x) = H(x,1)$. 
+    Then $r(a) = a$ for all $a \in A$ so 
+    \[
+        r \circ i = \id_A 
+    \]
+    for the inclusion $i : A \to X$. 
+
+    Then 
+    \[
+        (\id_A)_* = (r\circ i)_* 
+        = [r * i] = \id_{\pi_1(A)}, 
+    \]
+    but 
+    \[
+        r_* \circ i_* = (r \circ i)_* = \id_{\pi_1(A)}.
+    \]
+    $r_*, i_*$ are induced homomorphisms 
+    \[
+        r_* : \pi_1(X) \to \pi_1(A), 
+    \]
+    and 
+    \[
+        i_* : \pi_1(A) \to \pi_1(X)
+    \]
+    whose composition are identity maps. 
+    Thus they are mutually inverse isomorphisms letting 
+    us conclude that 
+    \[
+        \pi_1(A) \cong \pi_1(X).
+    \]
+\end{proof}
+
+\begin{proof}[Proof of (c)]
+    
+\end{proof}
+
 \end{document}
