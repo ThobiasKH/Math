@@ -24,6 +24,10 @@
 % \tableofcontents
 % \newpage
 
+Most of the following meerely qualify as proof sketches, 
+and (e) is missing. As I will be away from now 
+until the deadline on sunday I leave it as is. 
+
 \begin{prob*}[Munkres 55.4]
     Suppose you are given the fact that 
     for each $n$, there is no retraction 
@@ -200,17 +204,10 @@
     for which $r\bigm|_{S^n} = \id_{S^n}$ 
     which we have been told is impossible!   
     
-    I think (d) follows from Brouwer's fixed point theorem 
-    also?
 \end{proof}
 
-\begin{proof}[Proof of (e)]
-
-\end{proof}
 \begin{proof}[Proof of (f)]
     Suppose $h$ is nullhomotopic. 
-
-    Browuer's fixed point theorem follows. 
 
     We have that there is a map 
     \[
@@ -221,6 +218,37 @@
         H(x,0) = h(x), \ H(x,1) = p 
     \]
     for some $p \in S^n$.  
+
+    We obtain, as in (a), an 
+    extension $\widetilde h : B^{n+1} \to S^n$ such that 
+    \[
+        \widetilde h \bigm|_{S^n} = h. 
+    \]
+
+    Regard $\widetilde h$ as a self-map of 
+    $B^{n+1}$ with $\im \widetilde h = S^n$, whcih 
+    is perfectly ok since $B^{n+1} \supseteq S^n$. 
+
+    By (d) there is $x \in B^{n+1}$ such that 
+    $\widetilde h(x) = x$, but 
+    $\widetilde h(x) \in S^n$ so necessarily 
+    $x \in S^n$, meaninig 
+    \[
+        h(x) = \widetilde h(x) = x. 
+    \]
+
+    Now $- \widetilde h$ is a continuous 
+    self map and again there is 
+    $y \in B^{n+1}$ such that 
+    \[
+        -\widetilde h(y) = y 
+    \]
+    and since $-\widetilde h(y) \in S^n$ we 
+    have $y \in S^n$ so 
+    \[
+        h(y) = \widetilde(y) = -y. 
+    \]
+    
 \end{proof}
 
 \end{document}
