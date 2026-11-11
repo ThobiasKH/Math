@@ -130,7 +130,7 @@
     \]
     where $r \circ c_p$ is constant, contradicting (a).    
 \end{proof}
-\begin{prob*}
+\begin{proof}[Proof of (c)]
     A nonvanishing vector field on 
     $B^{n+1}$ is a continuous map 
     \[
@@ -140,6 +140,87 @@
     \[
         v(x) \neq 0 \ \forall x \in B^{n+1}. 
     \]
-\end{prob*}
+   
+    Since $v$ is nonvanishing, 
+    \[
+        u(x) = \frac{v(x)}{\|v(x)\|} : 
+        B^{n+1} \to S^n 
+    \]
+    is well-defined and continuous. 
+
+    Suppose $v$ never points directly outward. 
+    Then 
+    \[
+        u(x) \neq x \ \text{for all} \ x\in S^n. 
+    \]
+    Something something... 
+\end{proof}
+\begin{proof}[Proof of (d)]
+    Suppose $f : B^{n+1} \to B^{n+1}$ has no fixed point, 
+    meaning 
+    \[
+        f(x) \neq x, \ \forall x \in B^{n+1}. 
+    \]
+    Intuitively, if we draw a ray from $f(x)$ to $x$ 
+    and extend in far enough we reach the boundary 
+    $S^n$. Such a map is well-defined since 
+    $f(x) \neq x$. 
+
+    Specifically we can formalize a ray
+    \[
+        \gamma_x(t) x + t(x - f(x)), \ t \geq 0. 
+    \]
+    Since $x - f(x)$ is nonzero, 
+    there is some $t$ such that 
+    \[
+        \|\gamma(t)\| = 1. 
+    \]
+    We find $t$ by 
+    \begin{align*}
+        1^2 &= \|x + t_x(x-f(x))\|^2 \\ 
+        &= \|x\|^2 + 2t_x\langle x, x - f(x)\rangle 
+        + t^2_x \|x - f(x)\|^2. 
+    \end{align*}
+    Set $y = t_x$ to get 
+    \[
+        \|x-f(x)\|^2 \cdot y^2 + 
+        2\langle x, x-f(x) \rangle \cdot y 
+        + \|x\|^2
+    \]
+    which we can solve by the quadratic formula (and 
+    get some nonnegative answer since the 
+    root will be nonnegative, I think). 
+    Call the value we get $\tau_x$. 
+
+    The point being that we get a continuous map 
+    \[
+        r : B^{n+1} \to S^n, \ r(x) 
+        = x + \tau_x(x - f(x))
+    \]
+    for which $r\bigm|_{S^n} = \id_{S^n}$ 
+    which we have been told is impossible!   
+    
+    I think (d) follows from Brouwer's fixed point theorem 
+    also?
+\end{proof}
+
+\begin{proof}[Proof of (e)]
+
+\end{proof}
+\begin{proof}[Proof of (f)]
+    Suppose $h$ is nullhomotopic. 
+
+    Browuer's fixed point theorem follows. 
+
+    We have that there is a map 
+    \[
+        H : S^n \times I \to S^n 
+    \]
+    for which 
+    \[
+        H(x,0) = h(x), \ H(x,1) = p 
+    \]
+    for some $p \in S^n$.  
+\end{proof}
 
 \end{document}
